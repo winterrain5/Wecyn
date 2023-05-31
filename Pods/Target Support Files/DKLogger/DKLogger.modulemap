@@ -1,0 +1,6 @@
+framework module DKLogger {
+  umbrella header "DKLogger-umbrella.h"
+
+  export *
+  module * { export * }
+}
