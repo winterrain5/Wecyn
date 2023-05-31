@@ -1,0 +1,67 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '12.0'
+
+target 'Wecyn' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+#Rx
+  pod 'RxSwift','5.1.2'
+  pod 'RxGesture'
+  pod 'RxSwiftExt'
+  pod 'RxCocoa'
+  pod 'RxMoyaCache'
+  pod 'Cache', '~> 6.0.0'
+  
+  
+  #other
+  pod 'Then'
+  pod 'SnapKit'
+  pod 'SwiftyJSON'
+  pod 'PromiseKit'
+  pod 'SwifterSwift'
+  pod 'HandyJSON'
+  pod 'MJRefresh'
+  pod 'R.swift'
+
+  #UI
+  pod 'IQKeyboardManagerSwift'
+  pod 'DZNEmptyDataSet'
+  pod 'EachNavigationBar'
+  pod 'JXSegmentedView'
+  pod 'SkeletonView'
+  pod 'SVProgressHUD'
+  pod 'JXPagingView/Paging'
+  pod 'KMPlaceholderTextView'
+  pod 'MarqueeLabel'
+  
+  pod 'Permission/Camera'
+  pod 'Permission/Microphone'
+  pod 'Permission/Photos'
+  pod 'Permission/Notifications'
+  
+  pod 'LookinServer', :configurations => ['Debug']
+  pod 'CocoaDebug', :configurations => ['Debug']
+  
+  pod 'DKLogger'
+  pod 'ImagePickerSwift'
+  pod 'EntryKit'
+  pod 'DKEmptyDataSet'
+  pod 'SwiftDate'
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'CocoaHTTPServer'
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', 'DD_LEGACY_MACROS=1']
+      end
+    end
+    target.build_configurations.each do |config|
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+      end
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+  end
+end

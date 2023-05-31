@@ -1,0 +1,6 @@
+framework module DKEmptyDataSet {
+  umbrella header "DKEmptyDataSet-umbrella.h"
+
+  export *
+  module * { export * }
+}

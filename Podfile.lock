@@ -1,0 +1,207 @@
+PODS:
+  - Alamofire (5.7.1)
+  - Cache (6.0.0)
+  - CocoaDebug (1.7.7)
+  - DKEmptyDataSet (0.1.0)
+  - DKLogger (0.4.0)
+  - DZNEmptyDataSet (1.8.1)
+  - EachNavigationBar (1.17.0)
+  - EntryKit (0.8.0)
+  - HandyJSON (5.0.2)
+  - ImagePickerSwift (0.3.1)
+  - IQKeyboardManagerSwift (6.5.11)
+  - JXPagingView/Paging (2.1.2)
+  - JXSegmentedView (1.3.0)
+  - KMPlaceholderTextView (1.4.0)
+  - LookinServer (1.1.7):
+    - LookinServer/Core (= 1.1.7)
+  - LookinServer/Core (1.1.7)
+  - MarqueeLabel (4.3.0)
+  - MJRefresh (3.7.5)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
+    - Moya/Core
+    - RxSwift (~> 5.0)
+  - Permission/Camera (3.1.2):
+    - Permission/Core
+  - Permission/Core (3.1.2)
+  - Permission/Microphone (3.1.2):
+    - Permission/Core
+  - Permission/Notifications (3.1.2):
+    - Permission/Core
+  - Permission/Photos (3.1.2):
+    - Permission/Core
+  - PromiseKit (6.18.1):
+    - PromiseKit/CorePromise (= 6.18.1)
+    - PromiseKit/Foundation (= 6.18.1)
+    - PromiseKit/UIKit (= 6.18.1)
+  - PromiseKit/CorePromise (6.18.1)
+  - PromiseKit/Foundation (6.18.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.18.1):
+    - PromiseKit/CorePromise
+  - R.swift (7.3.2)
+  - RxCocoa (5.1.3):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxGesture (3.0.2):
+    - RxCocoa (~> 5.1)
+    - RxSwift (~> 5.1)
+  - RxMoyaCache (0.2.1):
+    - Moya/RxSwift
+  - RxRelay (5.1.3):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.2)
+  - RxSwiftExt (5.2.0):
+    - RxSwiftExt/Core (= 5.2.0)
+    - RxSwiftExt/RxCocoa (= 5.2.0)
+  - RxSwiftExt/Core (5.2.0):
+    - RxSwift (~> 5.0)
+  - RxSwiftExt/RxCocoa (5.2.0):
+    - RxCocoa (~> 5.0)
+    - RxSwiftExt/Core
+  - SkeletonView (1.30.4)
+  - SnapKit (5.6.0)
+  - SVProgressHUD (2.2.5)
+  - SwiftDate (6.3.1)
+  - SwifterSwift (5.2.0):
+    - SwifterSwift/AppKit (= 5.2.0)
+    - SwifterSwift/CoreAnimation (= 5.2.0)
+    - SwifterSwift/CoreGraphics (= 5.2.0)
+    - SwifterSwift/CoreLocation (= 5.2.0)
+    - SwifterSwift/Dispatch (= 5.2.0)
+    - SwifterSwift/Foundation (= 5.2.0)
+    - SwifterSwift/MapKit (= 5.2.0)
+    - SwifterSwift/SceneKit (= 5.2.0)
+    - SwifterSwift/SpriteKit (= 5.2.0)
+    - SwifterSwift/StoreKit (= 5.2.0)
+    - SwifterSwift/SwiftStdlib (= 5.2.0)
+    - SwifterSwift/UIKit (= 5.2.0)
+  - SwifterSwift/AppKit (5.2.0)
+  - SwifterSwift/CoreAnimation (5.2.0)
+  - SwifterSwift/CoreGraphics (5.2.0)
+  - SwifterSwift/CoreLocation (5.2.0)
+  - SwifterSwift/Dispatch (5.2.0)
+  - SwifterSwift/Foundation (5.2.0)
+  - SwifterSwift/MapKit (5.2.0)
+  - SwifterSwift/SceneKit (5.2.0)
+  - SwifterSwift/SpriteKit (5.2.0)
+  - SwifterSwift/StoreKit (5.2.0)
+  - SwifterSwift/SwiftStdlib (5.2.0)
+  - SwifterSwift/UIKit (5.2.0)
+  - SwiftyJSON (5.0.1)
+  - Then (3.0.0)
+
+DEPENDENCIES:
+  - Cache (~> 6.0.0)
+  - CocoaDebug
+  - DKEmptyDataSet
+  - DKLogger
+  - DZNEmptyDataSet
+  - EachNavigationBar
+  - EntryKit
+  - HandyJSON
+  - ImagePickerSwift
+  - IQKeyboardManagerSwift
+  - JXPagingView/Paging
+  - JXSegmentedView
+  - KMPlaceholderTextView
+  - LookinServer
+  - MarqueeLabel
+  - MJRefresh
+  - Permission/Camera
+  - Permission/Microphone
+  - Permission/Notifications
+  - Permission/Photos
+  - PromiseKit
+  - R.swift
+  - RxCocoa
+  - RxGesture
+  - RxMoyaCache
+  - RxSwift (= 5.1.2)
+  - RxSwiftExt
+  - SkeletonView
+  - SnapKit
+  - SVProgressHUD
+  - SwiftDate
+  - SwifterSwift
+  - SwiftyJSON
+  - Then
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Cache
+    - CocoaDebug
+    - DKEmptyDataSet
+    - DKLogger
+    - DZNEmptyDataSet
+    - EachNavigationBar
+    - EntryKit
+    - HandyJSON
+    - ImagePickerSwift
+    - IQKeyboardManagerSwift
+    - JXPagingView
+    - JXSegmentedView
+    - KMPlaceholderTextView
+    - LookinServer
+    - MarqueeLabel
+    - MJRefresh
+    - Moya
+    - Permission
+    - PromiseKit
+    - R.swift
+    - RxCocoa
+    - RxGesture
+    - RxMoyaCache
+    - RxRelay
+    - RxSwift
+    - RxSwiftExt
+    - SkeletonView
+    - SnapKit
+    - SVProgressHUD
+    - SwiftDate
+    - SwifterSwift
+    - SwiftyJSON
+    - Then
+
+SPEC CHECKSUMS:
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
+  CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
+  DKEmptyDataSet: 3cca8b2435bec8a8265d238012f0f99ab112c91f
+  DKLogger: 4db2407d09a97241fbb81ea2f2b7f3190f032769
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  EachNavigationBar: 87430187ca1f898e6d9d8bb95c35e49749e5a0a2
+  EntryKit: eca0306497a948fa9c81ff665bf6895309c7d67e
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  ImagePickerSwift: 0328d670660823ff33529b58be08c7a13b686758
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
+  JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
+  KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
+  LookinServer: 4ce0469b066871525611d009d8d16a7a50c23491
+  MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
+  PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
+  R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
+  RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
+  RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
+  RxMoyaCache: 38823d584cdfbea48d2ffdae32676f81e0dd06a6
+  RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
+  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
+  RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+
+PODFILE CHECKSUM: 3d208b01ef7e9160bc166bb9a5f2c607be642fbc
+
+COCOAPODS: 1.11.2
