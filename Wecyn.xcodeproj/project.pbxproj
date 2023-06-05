@@ -61,6 +61,8 @@
 		45920AFD2A26E045005871ED /* BaseCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920AC52A26E045005871ED /* BaseCollectionController.swift */; };
 		45920AFE2A26E045005871ED /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920AC72A26E045005871ED /* BaseModel.swift */; };
 		45920AFF2A26E045005871ED /* DataLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920AC82A26E045005871ED /* DataLoadable.swift */; };
+		45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45920B2F2A2DB3A2005871ED /* InfoPlist.strings */; };
+		45920B332A2DB43D005871ED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45920B352A2DB43D005871ED /* Localizable.strings */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +123,12 @@
 		45920AC52A26E045005871ED /* BaseCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionController.swift; sourceTree = "<group>"; };
 		45920AC72A26E045005871ED /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		45920AC82A26E045005871ED /* DataLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoadable.swift; sourceTree = "<group>"; };
+		45920B272A2DB242005871ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		45920B282A2DB242005871ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		45920B2E2A2DB3A2005871ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45920B302A2DB3E9005871ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		45920B342A2DB43D005871ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		45920B362A2DB43E005871ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85753C0B8E9CA6B5BCF3B27A /* Pods-Wecyn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wecyn.release.xcconfig"; path = "Target Support Files/Pods-Wecyn/Pods-Wecyn.release.xcconfig"; sourceTree = "<group>"; };
 		F6737696186A89881164CB5A /* Pods-Wecyn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wecyn.debug.xcconfig"; path = "Target Support Files/Pods-Wecyn/Pods-Wecyn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -368,6 +376,8 @@
 				45920ABB2A26E045005871ED /* Main.storyboard */,
 				45920ABD2A26E045005871ED /* AppDelegate.swift */,
 				45920ABE2A26E045005871ED /* Info.plist */,
+				45920B2F2A2DB3A2005871ED /* InfoPlist.strings */,
+				45920B352A2DB43D005871ED /* Localizable.strings */,
 			);
 			path = SupportFile;
 			sourceTree = "<group>";
@@ -463,6 +473,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 459209C32A26D5F4005871ED;
 			productRefGroup = 459209CD2A26D5F4005871ED /* Products */;
@@ -479,7 +490,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				45920AF62A26E045005871ED /* Main.storyboard in Resources */,
+				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				45920AF52A26E045005871ED /* LaunchScreen.storyboard in Resources */,
 			);
@@ -595,6 +608,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				45920ABA2A26E045005871ED /* Base */,
+				45920B272A2DB242005871ED /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -603,8 +617,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				45920ABC2A26E045005871ED /* Base */,
+				45920B282A2DB242005871ED /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		45920B2F2A2DB3A2005871ED /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45920B2E2A2DB3A2005871ED /* en */,
+				45920B302A2DB3E9005871ED /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		45920B352A2DB43D005871ED /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45920B342A2DB43D005871ED /* en */,
+				45920B362A2DB43E005871ED /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -614,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -674,6 +708,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
