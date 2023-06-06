@@ -24,3 +24,4 @@ import Foundation
 @_exported import MJRefresh
 @_exported import DKLogger
 @_exported import MarqueeLabel
+@_exported import RxLocalizer
