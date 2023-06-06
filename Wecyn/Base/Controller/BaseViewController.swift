@@ -32,8 +32,7 @@ class BaseViewController: UIViewController {
         self.becomeFirstResponder()
     
         IQKeyboardManager.shared.enableAutoToolbar = true
-        
-        
+    
     }
     
     func addLeftBarButtonItem(_ image:UIImage? = nil) {

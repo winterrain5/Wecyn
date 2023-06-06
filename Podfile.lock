@@ -48,6 +48,9 @@ PODS:
   - RxGesture (3.0.2):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
+  - RxLocalizer (1.5.0):
+    - RxCocoa (~> 5.1.1)
+    - RxSwift (~> 5.1.1)
   - RxMoyaCache (0.2.1):
     - Moya/RxSwift
   - RxRelay (5.1.3):
@@ -118,6 +121,7 @@ DEPENDENCIES:
   - R.swift
   - RxCocoa
   - RxGesture
+  - RxLocalizer
   - RxMoyaCache
   - RxSwift (= 5.1.2)
   - RxSwiftExt
@@ -154,6 +158,7 @@ SPEC REPOS:
     - R.swift
     - RxCocoa
     - RxGesture
+    - RxLocalizer
     - RxMoyaCache
     - RxRelay
     - RxSwift
@@ -190,6 +195,7 @@ SPEC CHECKSUMS:
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
+  RxLocalizer: 7db2f964848a885d996d36f47f0e88a477cd627a
   RxMoyaCache: 38823d584cdfbea48d2ffdae32676f81e0dd06a6
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
@@ -202,6 +208,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 3d208b01ef7e9160bc166bb9a5f2c607be642fbc
+PODFILE CHECKSUM: d355a5f078b0c4dc0f8a2c58d58a14c471ec3df7
 
 COCOAPODS: 1.11.2

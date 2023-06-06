@@ -10,6 +10,7 @@ target 'Wecyn' do
   pod 'RxSwiftExt'
   pod 'RxCocoa'
   pod 'RxMoyaCache'
+  pod 'RxLocalizer'
   pod 'Cache', '~> 6.0.0'
   
   
