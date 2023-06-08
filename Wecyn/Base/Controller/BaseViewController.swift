@@ -78,6 +78,6 @@ class BaseViewController: UIViewController {
     
     deinit {
         Toast.dismiss()
-        Logger.info("\(self.className)销毁" )
+        Logger.info("\(self.sk.className)销毁" )
     }
 }

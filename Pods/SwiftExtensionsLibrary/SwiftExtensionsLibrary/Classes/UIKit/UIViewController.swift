@@ -1,12 +1,13 @@
 //
-//  UIViewControlle+Extension.swift
-//  VictorCRM
+//  UIViewController.swift
+//  SwiftExtensionsLibrary
 //
-//  Created by VICTOR03 on 2021/6/28.
+//  Created by Derrick on 2023/6/8.
 //
 
 import Foundation
-extension UIViewController {
+
+public extension ExtensionBase where Base: UIViewController {
     // MARK: - 查找顶层控制器、
     // 获取顶层控制器 根据window
     static func getTopVC() -> UIViewController? {
@@ -44,7 +45,7 @@ extension UIViewController {
     ///根据控制器获取 顶层控制器
     private static func getTopVC(withCurrentVC VC :UIViewController?) -> UIViewController? {
         if VC == nil {
-            Logger.debug("🌶： 找不到顶层控制器")
+            print("🌶： 找不到顶层控制器")
             return nil
         }
         if let presentVC = VC?.presentedViewController {
@@ -68,7 +69,7 @@ extension UIViewController {
  
 }
 
-extension UIViewController {
+public extension UIViewController {
     @discardableResult
     func showAlertController(title: String?,
                              message: String?,
@@ -91,13 +92,13 @@ extension UIViewController {
                     completion?(index)
                 }
             }else {
-                alertController.addAction(image: nil, title: buttonTitle, color: UIColor(hexString: "505050"), style: .default, isEnabled: true) { (action) in
+                alertController.addAction(image: nil, title: buttonTitle, color: UIColor.gray, style: .default, isEnabled: true) { (action) in
                     completion?(index)
                 }
             }
         }
-        alertController.setTitle(font: UIFont(PingFangSCBold: 14), color: .black)
-        alertController.setMessage(font: UIFont(PingFangSCRegular: 14), color: .lightGray)
+        alertController.setTitle(font: UIFont.boldSystemFont(ofSize: 14), color: .black)
+        alertController.setMessage(font: UIFont.systemFont(ofSize: 14), color: .lightGray)
         present(alertController, animated: true, completion: nil)
         return alertController
     }

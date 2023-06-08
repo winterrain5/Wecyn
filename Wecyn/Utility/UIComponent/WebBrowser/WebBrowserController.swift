@@ -35,13 +35,13 @@ class WebBrowserController: BaseViewController,WKUIDelegate, WKNavigationDelegat
     private lazy var closeBtn: UIButton = {
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 28, height: 44)
-        button.setTitleColor(UIColor(hexString: "333333"), for: .normal)
+        button.setTitleColor(UIColor.hexStringColor(hexString: "#333333"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.setTitle("关闭", for: .normal)
         button.addTarget(self, action: #selector(closeItemAction), for: .touchUpInside)
         return button
     }()
-    private  var backBtn: UIButton = {
+    private lazy var backBtn: UIButton = {
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 28, height: 44)
 //        button.setImage(R.image.nav_return(), for: .normal)
