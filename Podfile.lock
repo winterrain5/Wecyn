@@ -93,6 +93,7 @@ PODS:
   - SwifterSwift/StoreKit (5.2.0)
   - SwifterSwift/SwiftStdlib (5.2.0)
   - SwifterSwift/UIKit (5.2.0)
+  - SwiftExtensionsLibrary (0.2.3)
   - SwiftyJSON (5.0.1)
   - Then (3.0.0)
 
@@ -130,6 +131,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftDate
   - SwifterSwift
+  - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
   - Then
 
@@ -171,6 +173,15 @@ SPEC REPOS:
     - SwiftyJSON
     - Then
 
+EXTERNAL SOURCES:
+  SwiftExtensionsLibrary:
+    :git: https://github.com/winterrain5/SwiftExtensionsLibrary.git
+
+CHECKOUT OPTIONS:
+  SwiftExtensionsLibrary:
+    :commit: 432df1b7fd75201014ab3bcb274b9a2e2a38e66d
+    :git: https://github.com/winterrain5/SwiftExtensionsLibrary.git
+
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
@@ -205,9 +216,10 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
+  SwiftExtensionsLibrary: 0c5ec63cca73f68570ab188bf2fa319a39694058
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: d355a5f078b0c4dc0f8a2c58d58a14c471ec3df7
+PODFILE CHECKSUM: 1a6db1377dc6d149ffa8278d8e31b63a22756793
 
 COCOAPODS: 1.11.2

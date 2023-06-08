@@ -23,6 +23,7 @@ target 'Wecyn' do
   pod 'HandyJSON'
   pod 'MJRefresh'
   pod 'R.swift'
+  pod 'SwiftDate'
 
   #UI
   pod 'IQKeyboardManagerSwift'
@@ -47,7 +48,7 @@ target 'Wecyn' do
   pod 'ImagePickerSwift'
   pod 'EntryKit'
   pod 'DKEmptyDataSet'
-  pod 'SwiftDate'
+  pod 'SwiftExtensionsLibrary', :git => 'https://github.com/winterrain5/SwiftExtensionsLibrary.git'
 
 end
 
