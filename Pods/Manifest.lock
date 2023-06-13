@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.7.1)
   - Cache (6.0.0)
   - CocoaDebug (1.7.7)
+  - CodeTextField (0.4.0)
   - DKEmptyDataSet (0.1.0)
   - DKLogger (0.4.0)
   - DZNEmptyDataSet (1.8.1)
@@ -93,13 +94,15 @@ PODS:
   - SwifterSwift/StoreKit (5.2.0)
   - SwifterSwift/SwiftStdlib (5.2.0)
   - SwifterSwift/UIKit (5.2.0)
-  - SwiftExtensionsLibrary (0.2.3)
+  - SwiftExtensionsLibrary (0.2.4)
   - SwiftyJSON (5.0.1)
   - Then (3.0.0)
+  - TTGTagCollectionView (2.4.2)
 
 DEPENDENCIES:
   - Cache (~> 6.0.0)
   - CocoaDebug
+  - CodeTextField (~> 0.4.0)
   - DKEmptyDataSet
   - DKLogger
   - DZNEmptyDataSet
@@ -134,12 +137,14 @@ DEPENDENCIES:
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
   - Then
+  - TTGTagCollectionView
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Cache
     - CocoaDebug
+    - CodeTextField
     - DKEmptyDataSet
     - DKLogger
     - DZNEmptyDataSet
@@ -172,6 +177,7 @@ SPEC REPOS:
     - SwifterSwift
     - SwiftyJSON
     - Then
+    - TTGTagCollectionView
 
 EXTERNAL SOURCES:
   SwiftExtensionsLibrary:
@@ -179,13 +185,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftExtensionsLibrary:
-    :commit: 432df1b7fd75201014ab3bcb274b9a2e2a38e66d
+    :commit: b84c428c73b9a31cc3306a34c63c0a4cd388d5de
     :git: https://github.com/winterrain5/SwiftExtensionsLibrary.git
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
+  CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
   DKEmptyDataSet: 3cca8b2435bec8a8265d238012f0f99ab112c91f
   DKLogger: 4db2407d09a97241fbb81ea2f2b7f3190f032769
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -216,10 +223,11 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
-  SwiftExtensionsLibrary: 0c5ec63cca73f68570ab188bf2fa319a39694058
+  SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  TTGTagCollectionView: 0d4625aaf7ee3ad755c39d549368a4ce69bd17d1
 
-PODFILE CHECKSUM: 1a6db1377dc6d149ffa8278d8e31b63a22756793
+PODFILE CHECKSUM: 299d2cc6258ef7b30b761419fc5a5b73bbf04eeb
 
 COCOAPODS: 1.11.2

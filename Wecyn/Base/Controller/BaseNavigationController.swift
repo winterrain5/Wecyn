@@ -18,11 +18,11 @@ class BaseNavigationController: UINavigationController {
         self.navigation.configuration.isShadowHidden = true
         self.navigation.configuration.isTranslucent = true
         self.navigation.configuration.barTintColor = .white
-        self.navigation.configuration.backItem = UINavigationController.Configuration.BackItem(style: .image(UIImage(named: "nav_return")))
+//        self.navigation.configuration.backItem = UINavigationController.Configuration.BackItem(style: .image(UIImage(named: "nav_return")))
         self.navigation.configuration.tintColor = .black
     }
     /// 拦截push
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool = true) {
         if self.viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
         }

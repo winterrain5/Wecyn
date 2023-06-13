@@ -2,6 +2,7 @@ ${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/Cache/Cache.framework
 ${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework
+${BUILT_PRODUCTS_DIR}/CodeTextField/CodeTextField.framework
 ${BUILT_PRODUCTS_DIR}/DKEmptyDataSet/DKEmptyDataSet.framework
 ${BUILT_PRODUCTS_DIR}/DKLogger/DKLogger.framework
 ${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework
@@ -34,4 +35,5 @@ ${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework
 ${BUILT_PRODUCTS_DIR}/SwiftExtensionsLibrary/SwiftExtensionsLibrary.framework
 ${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTags.framework
 ${BUILT_PRODUCTS_DIR}/Then/Then.framework
