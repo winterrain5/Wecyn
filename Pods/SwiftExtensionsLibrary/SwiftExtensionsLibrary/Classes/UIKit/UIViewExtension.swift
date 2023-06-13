@@ -573,9 +573,9 @@ public extension ExtensionBase where Base: UIView {
 }
 
 // MARK:-Nibloadable
-extension ExtensionBase where Base: UIView {
+public extension UIView {
     static var NibName: String {
-        return String(self.className)
+        return String(self.sk.className)
     }
     static func loadViewFromNib() -> Self {
         return Bundle.main.loadNibNamed("\(self)", owner: nil, options: nil)?.last as! Self

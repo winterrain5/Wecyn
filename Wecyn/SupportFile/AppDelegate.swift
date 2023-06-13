@@ -6,19 +6,33 @@
 //
 
 import UIKit
-
+import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let manager = IQKeyboardManager.shared
+        manager.enable = true
+        manager.shouldResignOnTouchOutside = true
+        manager.shouldShowToolbarPlaceholder = true
+        manager.enableAutoToolbar = true
+        
+        SwiftyFitsize.shared.referenceW = 375
+        
+        Localizer.shared.changeLanguage.accept("en")
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = ViewController()
-        vc.view.backgroundColor = .white
-        window?.rootViewController = vc
+//        let vc = LoginController()
+//        let nav = BaseNavigationController(rootViewController: vc)
+        let main = MainController()
+        main.setSelectedIndex(at: 3)
+        window?.rootViewController = main
         window?.makeKeyAndVisible()
-        Logger.debug(APIHost.share.buildType.currentBuildType)
+        
+        
         return true
     }
 

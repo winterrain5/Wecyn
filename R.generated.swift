@@ -12,16 +12,35 @@ let R = _R(bundle: Bundle(for: BundleFinder.self))
 
 struct _R {
   let bundle: Foundation.Bundle
+  var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
   var color: color { .init(bundle: bundle) }
+  var image: image { .init(bundle: bundle) }
+  var nib: nib { .init(bundle: bundle) }
   var storyboard: storyboard { .init(bundle: bundle) }
 
+  func string(bundle: Foundation.Bundle) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: nil)
+  }
+  func string(locale: Foundation.Locale) -> string {
+    .init(bundle: bundle, preferredLanguages: nil, locale: locale)
+  }
+  func string(preferredLanguages: [String], locale: Locale? = nil) -> string {
+    .init(bundle: bundle, preferredLanguages: preferredLanguages, locale: locale)
+  }
   func color(bundle: Foundation.Bundle) -> color {
+    .init(bundle: bundle)
+  }
+  func image(bundle: Foundation.Bundle) -> image {
+    .init(bundle: bundle)
+  }
+  func nib(bundle: Foundation.Bundle) -> nib {
     .init(bundle: bundle)
   }
   func storyboard(bundle: Foundation.Bundle) -> storyboard {
     .init(bundle: bundle)
   }
   func validate() throws {
+    try self.nib.validate()
     try self.storyboard.validate()
   }
 
@@ -29,29 +48,213 @@ struct _R {
     let developmentRegion = "en"
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 1 colors.
+  /// This `_R.string` struct is generated, and contains static references to 3 localization tables.
+  struct string {
+    let bundle: Foundation.Bundle
+    let preferredLanguages: [String]?
+    let locale: Locale?
+    var infoPlist: infoPlist { .init(source: .init(bundle: bundle, tableName: "InfoPlist", preferredLanguages: preferredLanguages, locale: locale)) }
+    var launchScreen: launchScreen { .init(source: .init(bundle: bundle, tableName: "LaunchScreen", preferredLanguages: preferredLanguages, locale: locale)) }
+    var localizable: localizable { .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale)) }
+
+    func infoPlist(preferredLanguages: [String]) -> infoPlist {
+      .init(source: .init(bundle: bundle, tableName: "InfoPlist", preferredLanguages: preferredLanguages, locale: locale))
+    }
+    func launchScreen(preferredLanguages: [String]) -> launchScreen {
+      .init(source: .init(bundle: bundle, tableName: "LaunchScreen", preferredLanguages: preferredLanguages, locale: locale))
+    }
+    func localizable(preferredLanguages: [String]) -> localizable {
+      .init(source: .init(bundle: bundle, tableName: "Localizable", preferredLanguages: preferredLanguages, locale: locale))
+    }
+
+
+    /// This `_R.string.infoPlist` struct is generated, and contains static references to 1 localization keys.
+    struct infoPlist {
+      let source: RswiftResources.StringResource.Source
+
+      /// en translation: Wecyn
+      ///
+      /// Key: CFBundleDisplayName
+      ///
+      /// Locales: en, zh-Hans
+      var cfBundleDisplayName: RswiftResources.StringResource { .init(key: "CFBundleDisplayName", tableName: "InfoPlist", source: source, developmentValue: "Wecyn", comment: nil) }
+    }
+
+    /// This `_R.string.launchScreen` struct is generated, and contains static references to 0 localization keys.
+    struct launchScreen {
+      let source: RswiftResources.StringResource.Source
+    }
+
+    /// This `_R.string.localizable` struct is generated, and contains static references to 8 localization keys.
+    struct localizable {
+      let source: RswiftResources.StringResource.Source
+
+      /// en translation: Activity
+      ///
+      /// Key: Activity
+      ///
+      /// Locales: en
+      var activity: RswiftResources.StringResource { .init(key: "Activity", tableName: "Localizable", source: source, developmentValue: "Activity", comment: nil) }
+
+      /// en translation: Education
+      ///
+      /// Key: Education
+      ///
+      /// Locales: en
+      var education: RswiftResources.StringResource { .init(key: "Education", tableName: "Localizable", source: source, developmentValue: "Education", comment: nil) }
+
+      /// en translation: Experience
+      ///
+      /// Key: Experience
+      ///
+      /// Locales: en
+      var experience: RswiftResources.StringResource { .init(key: "Experience", tableName: "Localizable", source: source, developmentValue: "Experience", comment: nil) }
+
+      /// en translation: Interests
+      ///
+      /// Key: Interests
+      ///
+      /// Locales: en
+      var interests: RswiftResources.StringResource { .init(key: "Interests", tableName: "Localizable", source: source, developmentValue: "Interests", comment: nil) }
+
+      /// en translation: Skills
+      ///
+      /// Key: Skills
+      ///
+      /// Locales: en
+      var skills: RswiftResources.StringResource { .init(key: "Skills", tableName: "Localizable", source: source, developmentValue: "Skills", comment: nil) }
+
+      /// en translation: Add new section
+      ///
+      /// Key: add_new_section
+      ///
+      /// Locales: en, zh-Hans
+      var add_new_section: RswiftResources.StringResource { .init(key: "add_new_section", tableName: "Localizable", source: source, developmentValue: "Add new section", comment: nil) }
+
+      /// en translation: View Calendar
+      ///
+      /// Key: view_calendar
+      ///
+      /// Locales: en, zh-Hans
+      var view_calendar: RswiftResources.StringResource { .init(key: "view_calendar", tableName: "Localizable", source: source, developmentValue: "View Calendar", comment: nil) }
+
+      /// en translation: View NameCard
+      ///
+      /// Key: view_namecard
+      ///
+      /// Locales: en, zh-Hans
+      var view_namecard: RswiftResources.StringResource { .init(key: "view_namecard", tableName: "Localizable", source: source, developmentValue: "View NameCard", comment: nil) }
+    }
+  }
+
+  /// This `_R.color` struct is generated, and contains static references to 5 colors.
   struct color {
     let bundle: Foundation.Bundle
 
     /// Color `AccentColor`.
     var accentColor: RswiftResources.ColorResource { .init(name: "AccentColor", path: [], bundle: bundle) }
+
+    /// Color `BackgroundColor`.
+    var backgroundColor: RswiftResources.ColorResource { .init(name: "BackgroundColor", path: [], bundle: bundle) }
+
+    /// Color `EnableColor`.
+    var enableColor: RswiftResources.ColorResource { .init(name: "EnableColor", path: [], bundle: bundle) }
+
+    /// Color `TextColor52`.
+    var textColor52: RswiftResources.ColorResource { .init(name: "TextColor52", path: [], bundle: bundle) }
+
+    /// Color `TheamColor`.
+    var theamColor: RswiftResources.ColorResource { .init(name: "TheamColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `_R.image` struct is generated, and contains static references to 7 images.
+  struct image {
+    let bundle: Foundation.Bundle
+
+    /// Image `google`.
+    var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `namecard_background`.
+    var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `navbar_bell`.
+    var navbar_bell: RswiftResources.ImageResource { .init(name: "navbar_bell", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `navbar_message`.
+    var navbar_message: RswiftResources.ImageResource { .init(name: "navbar_message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `placeholder`.
+    var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `profile_edit_userinfo`.
+    var profile_edit_userinfo: RswiftResources.ImageResource { .init(name: "profile_edit_userinfo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `proile_user`.
+    var proile_user: RswiftResources.ImageResource { .init(name: "proile_user", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+  }
+
+  /// This `_R.nib` struct is generated, and contains static references to 9 nibs.
+  struct nib {
+    let bundle: Foundation.Bundle
+
+    /// Nib `LoginView`.
+    var loginView: RswiftResources.NibReference<LoginView> { .init(name: "LoginView", bundle: bundle) }
+
+    /// Nib `NameCardContentView`.
+    var nameCardContentView: RswiftResources.NibReference<NameCardContentView> { .init(name: "NameCardContentView", bundle: bundle) }
+
+    /// Nib `NameCardEditView`.
+    var nameCardEditView: RswiftResources.NibReference<NameCardEditView> { .init(name: "NameCardEditView", bundle: bundle) }
+
+    /// Nib `NameCardQRCodeView`.
+    var nameCardQRCodeView: RswiftResources.NibReference<NameCardQRCodeView> { .init(name: "NameCardQRCodeView", bundle: bundle) }
+
+    /// Nib `ProfileHeaderView`.
+    var profileHeaderView: RswiftResources.NibReference<ProfileHeaderView> { .init(name: "ProfileHeaderView", bundle: bundle) }
+
+    /// Nib `RegistAddAvatarView`.
+    var registAddAvatarView: RswiftResources.NibReference<RegistAddAvatarView> { .init(name: "RegistAddAvatarView", bundle: bundle) }
+
+    /// Nib `RegistConfirmView`.
+    var registConfirmView: RswiftResources.NibReference<RegistConfirmView> { .init(name: "RegistConfirmView", bundle: bundle) }
+
+    /// Nib `RegistInfoView`.
+    var registInfoView: RswiftResources.NibReference<RegistInfoView> { .init(name: "RegistInfoView", bundle: bundle) }
+
+    /// Nib `RegistProfileView`.
+    var registProfileView: RswiftResources.NibReference<RegistProfileView> { .init(name: "RegistProfileView", bundle: bundle) }
+
+    func validate() throws {
+      if UIKit.UIImage(named: "google", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'google' is used in nib 'LoginView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'LoginView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "namecard_background", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'namecard_background' is used in nib 'NameCardContentView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "profile_edit_userinfo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'profile_edit_userinfo' is used in nib 'NameCardContentView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'NameCardContentView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'NameCardEditView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'NameCardEditView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'NameCardQRCodeView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'NameCardQRCodeView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "profile_edit_userinfo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'profile_edit_userinfo' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'RegistAddAvatarView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistAddAvatarView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistConfirmView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistInfoView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistProfileView', but couldn't be loaded.") }
+    }
+  }
+
+  /// This `_R.storyboard` struct is generated, and contains static references to 1 storyboards.
   struct storyboard {
     let bundle: Foundation.Bundle
     var launchScreen: launchScreen { .init(bundle: bundle) }
-    var main: main { .init(bundle: bundle) }
 
     func launchScreen(bundle: Foundation.Bundle) -> launchScreen {
       .init(bundle: bundle)
     }
-    func main(bundle: Foundation.Bundle) -> main {
-      .init(bundle: bundle)
-    }
     func validate() throws {
       try self.launchScreen.validate()
-      try self.main.validate()
     }
 
 
@@ -62,18 +265,6 @@ struct _R {
       let bundle: Foundation.Bundle
 
       let name = "LaunchScreen"
-      func validate() throws {
-
-      }
-    }
-
-    /// Storyboard `Main`.
-    struct main: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {
-      typealias InitialController = ViewController
-
-      let bundle: Foundation.Bundle
-
-      let name = "Main"
       func validate() throws {
 
       }

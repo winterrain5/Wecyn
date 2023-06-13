@@ -5,4 +5,11 @@
   Created by chengquan zhou on 2023/6/5.
   
 */
-"device" = "插座";
+
+/****Profile*****/
+
+"view_namecard" = "名片";
+"view_calendar" = "日历";
+"add_new_section" = "添加新分区";
+
+/****Profile*****/

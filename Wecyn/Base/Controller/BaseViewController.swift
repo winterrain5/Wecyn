@@ -30,9 +30,7 @@ class BaseViewController: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = true
         interactivePopGestureRecognizerEnable = true
         self.becomeFirstResponder()
-    
-        IQKeyboardManager.shared.enableAutoToolbar = true
-    
+
     }
     
     func addLeftBarButtonItem(_ image:UIImage? = nil) {
@@ -78,6 +76,6 @@ class BaseViewController: UIViewController {
     
     deinit {
         Toast.dismiss()
-        Logger.info("\(self.sk.className)销毁" )
+        Logger.info("\(self.className)销毁" )
     }
 }

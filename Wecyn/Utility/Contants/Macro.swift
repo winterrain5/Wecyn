@@ -26,7 +26,7 @@ let kScreenWidth:CGFloat = UIScreen.main.bounds.size.width
 
 let kPageSize:Int = 18
 
-/// 判断是否是iPhone
+/// 判断是否是iPhoneX
 func iPhoneX() -> Bool {
     if #available(iOS 11, *) {
         guard let w = UIApplication.shared.delegate?.window, let unwrapedWindow = w else {

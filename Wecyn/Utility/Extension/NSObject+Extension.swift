@@ -40,3 +40,19 @@ public extension Reactive where Base: AnyObject {
     }
 }
 
+extension String {
+    var isValidPassword:Bool {
+        count >= 6
+    }
+}
+
+
+extension NSObject {
+    var className: String {
+        return String(describing: type(of: self))
+    }
+    
+    static var className: String {
+        return String(describing: self)
+    }
+}
