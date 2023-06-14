@@ -21,7 +21,7 @@ class ProfileController: BaseTableController {
     private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        addRightBarItems()
     }
     
     override func createListView() {

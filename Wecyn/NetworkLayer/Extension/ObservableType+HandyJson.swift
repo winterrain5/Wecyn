@@ -11,7 +11,8 @@ import Moya
 import RxSwift
 import HandyJSON
 class ResponseStatus: BaseModel {
-    var code: Int   = 1
+    var success: Int   = 1
+    var error_type: String = ""
     var message: String = ""
 }
 //解析路径
@@ -35,9 +36,9 @@ extension ObservableType where Element == Moya.Response {
                 guard let status = ResponseStatus.deserialize(from: res) else {
                     throw APIError.serviceError(.notContainErrorCodeAndMessage)
                 }
-                guard status.code == 0 else {
-                    APIError.errorCodeHandler(status.code,status.message,toast)
-                    throw APIError.requestError(code: status.code, message: status.message)
+                guard status.success == 1 else {
+                    APIError.errorCodeHandler(status.success,status.message,toast)
+                    throw APIError.requestError(code: status.success, message: status.message)
                 }
                 return res
             })
@@ -84,12 +85,11 @@ extension ObservableType where Element == Moya.Response {
     /// 解析数组模型
     /// - Parameters:
     ///   - type: 模型类型
-    ///   - designatedPath: 解析路径 默认 list
     /// - Returns: 数组模型
-    func mapArray<T: HandyJSON>(_ type: T.Type, designatedPath: String = ListKey,toast:Bool = true) -> Observable<[T]> {
+    func mapArray<T: HandyJSON>(_ type: T.Type,toast:Bool = true) -> Observable<[T]> {
         return filterNetworkErrorAndMapJSON(toast:toast)
             .map({ (response)  in
-                let jsonArray = JSON(response)[DataKey][designatedPath].arrayObject
+                let jsonArray = JSON(response)[DataKey].arrayObject
                 guard let array = Array<T>.deserialize(from: jsonArray) as? [T] else {
                     throw APIError.serviceError(.unableHandyJsonNotArray)
                 }
@@ -103,11 +103,10 @@ extension ObservableType where Element == Moya.Response {
     ///   - type: 数组里的数据类型
     ///   - designatedPath: 解析的路径 默认 list
     /// - Returns: 数组
-    func mapArray<T>(_ type: T.Type, designatedPath: String = ListKey,toast:Bool = true) -> Observable<[T]> {
+    func mapArray<T>(_ type: T.Type,toast:Bool = true) -> Observable<[T]> {
         return filterNetworkErrorAndMapJSON(toast:toast)
             .map({ (response)  in
-                
-                guard let jsonArray = response[designatedPath] as? [T] else {
+                guard let jsonArray = response[DataKey] as? [T] else {
                     throw APIError.serviceError(.unableHandyJsonNotArray)
                 }
                 return jsonArray

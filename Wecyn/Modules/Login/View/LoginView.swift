@@ -38,7 +38,8 @@ class LoginView: UIView {
             
         }).disposed(by: rx.disposeBag)
         
-        signInButton.rx.tap.subscribe(onNext:{
+        signInButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
             let main = MainController()
             UIApplication.shared.keyWindow?.rootViewController = main
         }).disposed(by: rx.disposeBag)

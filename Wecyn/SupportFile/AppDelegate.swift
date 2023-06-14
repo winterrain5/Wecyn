@@ -25,10 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Localizer.shared.changeLanguage.accept("en")
         
         window = UIWindow(frame: UIScreen.main.bounds)
-//        let vc = LoginController()
-//        let nav = BaseNavigationController(rootViewController: vc)
-        let main = MainController()
-        main.setSelectedIndex(at: 3)
+        let vc = LoginController()
+        let main = BaseNavigationController(rootViewController: vc)
+//        let main = MainController()
+//        main.setSelectedIndex(at: 2)
         window?.rootViewController = main
         window?.makeKeyAndVisible()
         

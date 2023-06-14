@@ -17,6 +17,5 @@ class RegistProfileView: UIView {
     
     @IBOutlet weak var nextButton: UIButton!
     
-    
     @IBOutlet weak var studentLabel: UILabel!
 }
