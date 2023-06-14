@@ -97,7 +97,6 @@ PODS:
   - SwiftExtensionsLibrary (0.2.4)
   - SwiftyJSON (5.0.1)
   - Then (3.0.0)
-  - TTGTagCollectionView (2.4.2)
 
 DEPENDENCIES:
   - Cache (~> 6.0.0)
@@ -137,7 +136,6 @@ DEPENDENCIES:
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
   - Then
-  - TTGTagCollectionView
 
 SPEC REPOS:
   trunk:
@@ -177,7 +175,6 @@ SPEC REPOS:
     - SwifterSwift
     - SwiftyJSON
     - Then
-    - TTGTagCollectionView
 
 EXTERNAL SOURCES:
   SwiftExtensionsLibrary:
@@ -226,8 +223,7 @@ SPEC CHECKSUMS:
   SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
-  TTGTagCollectionView: 0d4625aaf7ee3ad755c39d549368a4ce69bd17d1
 
-PODFILE CHECKSUM: 299d2cc6258ef7b30b761419fc5a5b73bbf04eeb
+PODFILE CHECKSUM: ea7bbb26fa6cb365431eac69672d75fb26230b7f
 
 COCOAPODS: 1.11.2

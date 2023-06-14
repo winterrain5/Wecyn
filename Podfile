@@ -35,7 +35,6 @@ target 'Wecyn' do
   pod 'JXPagingView/Paging'
   pod 'KMPlaceholderTextView'
   pod 'MarqueeLabel'
-  pod "TTGTagCollectionView"
   pod 'CodeTextField', '~> 0.4.0'
   
   pod 'Permission/Camera'

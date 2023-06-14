@@ -40,6 +40,7 @@ public extension Reactive where Base: AnyObject {
     }
 }
 
+
 extension String {
     var isValidPassword:Bool {
         count >= 6

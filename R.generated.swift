@@ -147,7 +147,7 @@ struct _R {
     }
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 5 colors.
+  /// This `_R.color` struct is generated, and contains static references to 6 colors.
   struct color {
     let bundle: Foundation.Bundle
 
@@ -160,6 +160,9 @@ struct _R {
     /// Color `EnableColor`.
     var enableColor: RswiftResources.ColorResource { .init(name: "EnableColor", path: [], bundle: bundle) }
 
+    /// Color `TextColor162C46`.
+    var textColor162C46: RswiftResources.ColorResource { .init(name: "TextColor162C46", path: [], bundle: bundle) }
+
     /// Color `TextColor52`.
     var textColor52: RswiftResources.ColorResource { .init(name: "TextColor52", path: [], bundle: bundle) }
 
@@ -167,12 +170,27 @@ struct _R {
     var theamColor: RswiftResources.ColorResource { .init(name: "TheamColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 7 images.
+  /// This `_R.image` struct is generated, and contains static references to 15 images.
   struct image {
     let bundle: Foundation.Bundle
 
+    /// Image `comment`.
+    var comment: RswiftResources.ImageResource { .init(name: "comment", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `google`.
     var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `job_location`.
+    var job_location: RswiftResources.ImageResource { .init(name: "job_location", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `job_mark`.
+    var job_mark: RswiftResources.ImageResource { .init(name: "job_mark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `job_marked`.
+    var job_marked: RswiftResources.ImageResource { .init(name: "job_marked", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `like`.
+    var like: RswiftResources.ImageResource { .init(name: "like", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -191,11 +209,32 @@ struct _R {
 
     /// Image `proile_user`.
     var proile_user: RswiftResources.ImageResource { .init(name: "proile_user", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `retweet`.
+    var retweet: RswiftResources.ImageResource { .init(name: "retweet", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `search_icon`.
+    var search_icon: RswiftResources.ImageResource { .init(name: "search_icon", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `send`.
+    var send: RswiftResources.ImageResource { .init(name: "send", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 9 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 13 nibs.
   struct nib {
     let bundle: Foundation.Bundle
+
+    /// Nib `HomeHeaderJobItemCell`.
+    var homeHeaderJobItemCell: RswiftResources.NibReference<HomeHeaderJobItemCell> { .init(name: "HomeHeaderJobItemCell", bundle: bundle) }
+
+    /// Nib `HomeHeaderView`.
+    var homeHeaderView: RswiftResources.NibReference<HomeHeaderView> { .init(name: "HomeHeaderView", bundle: bundle) }
+
+    /// Nib `HomeItemCell`.
+    var homeItemCell: RswiftResources.NibReference<HomeItemCell> { .init(name: "HomeItemCell", bundle: bundle) }
+
+    /// Nib `JobItemCell`.
+    var jobItemCell: RswiftResources.NibReference<JobItemCell> { .init(name: "JobItemCell", bundle: bundle) }
 
     /// Nib `LoginView`.
     var loginView: RswiftResources.NibReference<LoginView> { .init(name: "LoginView", bundle: bundle) }
@@ -225,6 +264,26 @@ struct _R {
     var registProfileView: RswiftResources.NibReference<RegistProfileView> { .init(name: "RegistProfileView", bundle: bundle) }
 
     func validate() throws {
+      if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "search_icon", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'search_icon' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor162C46", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor162C46' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "comment", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'comment' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "like", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'like' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "retweet", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'retweet' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "send", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'send' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "job_location", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_location' is used in nib 'JobItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'JobItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'JobItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'JobItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "google", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'google' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "namecard_background", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'namecard_background' is used in nib 'NameCardContentView', but couldn't be loaded.") }

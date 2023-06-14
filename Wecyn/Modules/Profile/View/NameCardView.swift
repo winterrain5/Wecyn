@@ -73,9 +73,7 @@ class NameCardView: UIView {
        namecardEditView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 550)
        bottomView.contentSize = CGSize(width: kScreenWidth, height: 550)
        
-       
        namecardEditView.nameTf.rx.text.bind(to: self.namecardContentView.nameLabel.rx.text).disposed(by: rx.disposeBag)
-       
        namecardEditView.companyTf.rx.text.orEmpty.asDriver().drive(namecardContentView.companyLabel.rx.text).disposed(by: rx.disposeBag)
        namecardEditView.emailTf.rx.text.orEmpty.asDriver().drive(namecardContentView.emailLabel.rx.text).disposed(by: rx.disposeBag)
        namecardEditView.mobileNoTf.rx.text.orEmpty.asDriver().drive(namecardContentView.mobileNoLabel.rx.text).disposed(by: rx.disposeBag)

@@ -6,9 +6,8 @@
 //
 
 import UIKit
-
 class RegistInfoView: UIView {
-
+    
     @IBOutlet weak var emailTf: UITextField!
     
     @IBOutlet weak var firstNameTf: UITextField!
@@ -25,12 +24,16 @@ class RegistInfoView: UIView {
     
     @IBOutlet weak var nextButton: LoadingButton!
     
+    @IBOutlet weak var selectCountryButton: UIButton!
     
+    @IBOutlet weak var selectLocationButton: UIButton!
+    
+    var registModel = RegistRequestModel()
     
     override func awakeFromNib() {
-     
+        
         super.awakeFromNib()
-     
+        
         emailTf.keyboardType = .emailAddress
         
         nextButton.addShadow(cornerRadius: 20)
@@ -44,19 +47,22 @@ class RegistInfoView: UIView {
         let code = codeTf.rx.text.orEmpty
         let location = locationTf.rx.text.orEmpty
         
-        let isEmpty = Observable.combineLatest(email,firstName,lastName,password,country,code,location).map({
-            return !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty && !$0.4.isEmpty && !$0.5.isEmpty && !$0.6.isEmpty
-        })
+        passwordTf.rx.controlEvent(.editingDidEnd).subscribe { [weak self] _ in
+            guard let `self` = self else { return }
+            if !(self.passwordTf.text?.isValidPassword ?? false) {
+                Toast.showMessage("Password length must be greater than six characters")
+            }
+        }.disposed(by: rx.disposeBag)
         
+        let isEmpty = Observable.combineLatest(email,firstName,lastName,password,code).map({
+            return !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty && !$0.4.isEmpty
+        })
         let emailValid = email.asObservable().map({ $0.isValidEmail })
         let passwordValid = password.asObservable().map({ $0.isValidPassword })
-        
         let result = Observable.combineLatest(isEmpty,emailValid,passwordValid).map({
             return $0.0 && $0.1 && $0.2
         })
-        
-//        result.asDriver(onErrorJustReturn: false).drive(nextButton.rx.isEnabled).disposed(by: rx.disposeBag)
-        
+        result.asDriver(onErrorJustReturn: false).drive(nextButton.rx.isEnabled).disposed(by: rx.disposeBag)
         result.subscribe(onNext: { [weak self] in
             guard let `self` = self else { return }
             if $0 {
@@ -66,9 +72,55 @@ class RegistInfoView: UIView {
             }
         }).disposed(by: rx.disposeBag)
         
+        Observable.combineLatest(email,firstName,lastName,password,code).subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            
+            self.registModel.email = $0.0
+            self.registModel.first_name = $0.1
+            self.registModel.last_name = $0.2
+            self.registModel.password = $0.3
+            self.registModel.postal_code = $0.4
+            
+        }).disposed(by: rx.disposeBag)
         
-        nextButton.rx.tap.subscribe(onNext:{
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(RegistConfirmController(), animated: true)
+        selectCountryButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            let vc = CountryListController(dataType: .Country)
+            vc.selectedCountry.subscribe(onNext:{
+                
+                self.contryTf.text = $0?.country_name
+                self.registModel.country_region_id = $0?.country_id
+                
+                self.registModel.location_id = nil
+                self.locationTf.text = ""
+                
+                
+            }).disposed(by: self.rx.disposeBag)
+            let nav = BaseNavigationController(rootViewController: vc)
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        selectLocationButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            guard let countryID = self.registModel.country_region_id else {
+                Toast.showMessage("Please select a country first")
+                return
+            }
+            let vc = CountryListController(dataType: .City, countryID: countryID)
+            vc.selectedCity.subscribe(onNext:{
+                self.locationTf.text = $0?.city_name
+                self.registModel.location_id = $0?.city_id ?? 0
+            }).disposed(by: self.rx.disposeBag)
+            let nav = BaseNavigationController(rootViewController: vc)
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        
+        nextButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            print(self.registModel.toJSON())
+//            let vc = RegistConfirmController(registModel: self.registModel)
+//            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
     }
     
@@ -78,5 +130,5 @@ class RegistInfoView: UIView {
         
     }
     
-
+    
 }

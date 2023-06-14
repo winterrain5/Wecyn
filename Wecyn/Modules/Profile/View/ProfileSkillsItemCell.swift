@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import TTGTags
+
 class ProfileSkillsItemCell: UITableViewCell {
 
     let tagView = UIView()

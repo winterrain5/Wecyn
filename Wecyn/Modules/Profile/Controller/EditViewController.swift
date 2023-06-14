@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import IQKeyboardManagerSwift
 class EditViewController: BaseViewController {
     
     private let container = NameCardView()
@@ -17,6 +17,7 @@ class EditViewController: BaseViewController {
         container.frame = self.view.bounds
         view.backgroundColor = R.color.backgroundColor()
         
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 5
         
     }
     

@@ -21,6 +21,8 @@ class RegistConfirmView: UIView {
     
     @IBOutlet weak var confirmButton: UIButton!
     
+    var registModel = RegistRequestModel()
+    
     private lazy var codeTf: CodeTextField = {
         let spacing = (kScreenWidth - 48 - 48 * 6) / 5
         let temTextField = CodeTextField(codeLength: 6,

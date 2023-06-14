@@ -47,10 +47,7 @@ extension TargetType {
         return  [
             "versionDevice":"ios",
             "versionNumber":Device.appVersion,
-            "versionApp":"crm",
             "versionDeviceNumber":Device.sysVersion,
-            "deviceModel":Device.deviceModel,
-            "token-type":"5"
         ]
     }
     
@@ -66,6 +63,9 @@ extension TargetType {
     func requestParameters(_ parameters:[String:Any]) -> Task {
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
-
+    
+    func requestURLParameters(_ parameter:[String: Any]) -> Task {
+        return .requestParameters(parameters: parameter, encoding: URLEncoding(destination: .queryString))
+    }
 }
 
