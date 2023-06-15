@@ -9,11 +9,11 @@
 import Foundation
 
 enum PKError:Error {
-    case some(message:String = "")
+    case reject(_ message:String = "")
     
     var message:String {
         switch self {
-        case .some(let message):
+        case .reject(let message):
             return message
         }
     }

@@ -49,16 +49,22 @@ class RegistInfoView: UIView {
         
         passwordTf.rx.controlEvent(.editingDidEnd).subscribe { [weak self] _ in
             guard let `self` = self else { return }
-            if !(self.passwordTf.text?.isValidPassword ?? false) {
-                Toast.showMessage("Password length must be greater than six characters")
+            guard let result = self.passwordTf.text?.valiatePassword() else { return }
+            if result.flag{
+                Toast.showMessage(result.message)
             }
         }.disposed(by: rx.disposeBag)
         
         let isEmpty = Observable.combineLatest(email,firstName,lastName,password,code).map({
+            self.registModel.email = $0.0
+            self.registModel.first_name = $0.1
+            self.registModel.last_name = $0.2
+            self.registModel.password = $0.3
+            self.registModel.postal_code = $0.4
             return !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty && !$0.4.isEmpty
         })
         let emailValid = email.asObservable().map({ $0.isValidEmail })
-        let passwordValid = password.asObservable().map({ $0.isValidPassword })
+        let passwordValid = password.asObservable().map({ $0.isPasswordRuler() })
         let result = Observable.combineLatest(isEmpty,emailValid,passwordValid).map({
             return $0.0 && $0.1 && $0.2
         })
@@ -72,16 +78,7 @@ class RegistInfoView: UIView {
             }
         }).disposed(by: rx.disposeBag)
         
-        Observable.combineLatest(email,firstName,lastName,password,code).subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            
-            self.registModel.email = $0.0
-            self.registModel.first_name = $0.1
-            self.registModel.last_name = $0.2
-            self.registModel.password = $0.3
-            self.registModel.postal_code = $0.4
-            
-        }).disposed(by: rx.disposeBag)
+     
         
         selectCountryButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
@@ -118,9 +115,8 @@ class RegistInfoView: UIView {
         
         nextButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            print(self.registModel.toJSON())
-//            let vc = RegistConfirmController(registModel: self.registModel)
-//            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
+            let vc = RegistConfirmController(registModel: self.registModel)
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
     }
     

@@ -14,6 +14,12 @@ class RegistService {
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
+    /// 邮箱验证
+    static func emailVerification(email:String,code:String) -> Observable<ResponseStatus> {
+        let target = MultiTarget(RegistApi.emailVerification(email: email, code: code))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
     /// 国家信息
     static func getAllCountry() -> Observable<[CountryModel]> {
         let target = RegistApi.getCountryList
@@ -26,5 +32,11 @@ class RegistService {
 //        return RegistProvider.rx.cache.request(target).asObservable().mapArray(CityModel.self)
         let target = MultiTarget(RegistApi.getCityList(countryId: countryID))
         return APIProvider.rx.request(target).asObservable().mapArray(CityModel.self)
+    }
+    
+    /// 注册
+    static func signup(model:RegistRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(RegistApi.signup(model: model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
     }
 }

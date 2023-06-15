@@ -7,6 +7,7 @@
 
 import UIKit
 import CodeTextField
+import PromiseKit
 class RegistConfirmView: UIView {
     
     @IBOutlet weak var emailLabel: UILabel!
@@ -19,9 +20,15 @@ class RegistConfirmView: UIView {
     
     @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var confirmButton: LoadingButton!
     
-    var registModel = RegistRequestModel()
+    var registModel:RegistRequestModel? {
+        didSet {
+            emailLabel.text = "Type in the code we sent to\n\(registModel?.email ?? ""). Edit Email"
+            emailLabel.sk.setSpecificTextColor("Edit Email", color: R.color.theamColor()!)
+            emailLabel.sk.setSpecificTextUnderLine("Edit Email", color: R.color.theamColor()!)
+        }
+    }
     
     private lazy var codeTf: CodeTextField = {
         let spacing = (kScreenWidth - 48 - 48 * 6) / 5
@@ -40,8 +47,7 @@ class RegistConfirmView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        emailLabel.sk.setSpecificTextColor("Edit Email", color: R.color.theamColor()!)
-        emailLabel.sk.setSpecificTextUnderLine("Edit Email", color: R.color.theamColor()!)
+        
         
         resendLabel.sk.setSpecificTextColor("Send again", color: R.color.theamColor()!)
         resendLabel.sk.setSpecificTextUnderLine("Send again", color: R.color.theamColor()!)
@@ -59,14 +65,62 @@ class RegistConfirmView: UIView {
         }).disposed(by: rx.disposeBag)
         
         resendLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
-            
+            self.sendEmail()
         }).disposed(by: rx.disposeBag)
         
         confirmButton.rx.tap.subscribe(onNext:{
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(RegistAddAvatarController())
+            
+            self.signup().done { _ in
+                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(RegistProfileController(), animated: true)
+            }.catch { e in
+                Toast.showMessage((e as! PKError).message)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        
+        
+    }
+    
+    func sendEmail() {
+        guard let email = self.registModel?.email else { return }
+        RegistService.emailSendVertificationCode(email: email).subscribe(onNext:{ status in
+            if status.success != 1 {
+                Toast.showMessage(status.message)
+            }
         }).disposed(by: rx.disposeBag)
     }
     
+    func verificationCode() -> Promise<Void> {
+        Promise.init { resolver in
+            guard let code = self.codeTf.text,let email = self.registModel?.email else {
+                resolver.reject(PKError.reject("code or email can not be empty"))
+                return
+            }
+            RegistService.emailVerification(email: email, code: code).subscribe(onNext:{  status in
+                if status.success == 1{
+                    resolver.fulfill_()
+                } else {
+                    resolver.reject(PKError.reject(status.message))
+                }
+            }).disposed(by: self.rx.disposeBag)
+        }
+    }
+    
+    func signup() -> Promise<Void> {
+        Promise.init { resolver in
+            guard let model = self.registModel else {
+                resolver.reject(PKError.reject("registModel is nil"))
+                return
+            }
+            RegistService.signup(model: model).subscribe(onNext:{ status in
+                if status.success == 1 {
+                    resolver.fulfill_()
+                }else {
+                    resolver.reject(PKError.reject(status.message))
+                }
+            }).disposed(by: rx.disposeBag)
+        }
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
