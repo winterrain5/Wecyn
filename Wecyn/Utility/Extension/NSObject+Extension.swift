@@ -42,8 +42,69 @@ public extension Reactive where Base: AnyObject {
 
 
 extension String {
-    var isValidPassword:Bool {
-        count >= 6
+    func isPasswordRuler() -> Bool {
+      let passwordRule = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$"
+      let regexPassword = NSPredicate(format: "SELF MATCHES %@",passwordRule)
+      if regexPassword.evaluate(with: self) == true {
+        return true
+      }else
+      {
+        return false
+      }
+    }
+    
+    func isHasLowercaseCharacter() -> Bool {
+      let rule = "(?s)[^a-z]*[a-z].*"
+      let regex = NSPredicate(format: "SELF MATCHES %@",rule)
+      if regex.evaluate(with: self) {
+        return true
+      }else
+      {
+        return false
+      }
+    }
+    func isHasUppercaseCharacter() -> Bool {
+      let rule = "(?s)[^A-Z]*[A-Z].*"
+      let regex = NSPredicate(format: "SELF MATCHES %@",rule)
+      if regex.evaluate(with: self) {
+        return true
+      }else
+      {
+        return false
+      }
+    }
+    func isHasSpecialSymbol() -> Bool {
+      let rule = "#@!~%^&*"
+      var result = false
+      for c in self.charactersArray {
+        if rule.charactersArray.contains(c) {
+          result = true
+          break
+        }
+      }
+      return result
+    }
+    
+    func valiatePassword() -> (flag:Bool,message:String){
+        var errorMessage = ""
+        if self.count < 6 {
+          /// ・Passwords need to be at least 6 characters ・At least one lowercase character ・At lease one uppercase character ・Must have numerical number
+          errorMessage += "・Passwords need to be at least 6 characters\n"
+        }
+        if !self.isHasLowercaseCharacter() {
+          errorMessage += "・At least one lowercase character \n"
+        }
+        if !self.isHasUppercaseCharacter() {
+          errorMessage += "・At lease one uppercase character \n"
+        }
+        if !self.hasNumbers {
+          errorMessage += "・Must have numerical number\n"
+        }
+        if self.isHasSpecialSymbol() {
+          errorMessage += "・Password cannot contain special characters such as \"#@!~%^&*\"\n"
+        }
+        let result = errorMessage.isEmpty ? (flag: false,message: "") : (flag:true,message: errorMessage)
+        return result
     }
 }
 

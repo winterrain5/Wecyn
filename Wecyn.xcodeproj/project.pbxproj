@@ -290,9 +290,9 @@
 			children = (
 				450BA6C62A32B9BD00764828 /* LoginController.swift */,
 				450BA6D42A32F05B00764828 /* RegistInfoController.swift */,
-				450BA6DA2A330A2300764828 /* RegistProfileController.swift */,
 				450BA6E02A3312D500764828 /* RegistConfirmController.swift */,
 				450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */,
+				450BA6DA2A330A2300764828 /* RegistProfileController.swift */,
 				457C509E2A3949E400FCE8D0 /* CountryListController.swift */,
 			);
 			path = Controller;

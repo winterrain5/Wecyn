@@ -26,9 +26,10 @@ class RegistConfirmController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        container.registModel = registModel
         self.view.addSubview(container)
         container.frame = self.view.bounds
-        container.registModel = registModel
+        
     }
     
 

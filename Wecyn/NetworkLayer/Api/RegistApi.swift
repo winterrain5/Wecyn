@@ -28,7 +28,7 @@ extension RegistApi:  TargetType, Cacheable  {
             return "/wecyn/auth/emailVerification/"
         case .getCountryList:
             return "/wecyn/local-geo/country/"
-        case .getCityList(let countryID):
+        case .getCityList:
             return "/wecyn/local-geo/city/"
         case .signup:
             return "/wecyn/auth/signUp/"

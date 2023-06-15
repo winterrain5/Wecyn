@@ -94,7 +94,7 @@ username1234@gmail.com. Edit Email</string>
                         <constraint firstItem="PIC-lr-Mi0" firstAttribute="top" secondItem="wNv-UK-Y1i" secondAttribute="top" constant="12" id="bA9-kx-Gq2"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSw-xb-AJW">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSw-xb-AJW" customClass="LoadingButton" customModule="Wecyn" customModuleProvider="target">
                     <rect key="frame" x="22" y="513" width="370" height="40"/>
                     <color key="backgroundColor" name="TheamColor"/>
                     <constraints>
