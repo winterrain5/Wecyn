@@ -78,7 +78,7 @@ class CountryListController: BaseTableController {
     
     func getCountryList() {
         self.navigation.item.title = "Select Country"
-        RegistService.getAllCountry().subscribe(onNext:{ countrys in
+        UserService.getAllCountry().subscribe(onNext:{ countrys in
             self.dataArray = countrys.sorted(by: { ($0.country_name.first ?? Character("")) < ($1.country_name.first  ?? Character("")) })
             self.endRefresh(countrys.count)
         }).disposed(by: self.rx.disposeBag)
@@ -87,7 +87,7 @@ class CountryListController: BaseTableController {
     func getCityList() {
         self.navigation.item.title = "Select City"
         guard let countryID = countryID else { return }
-        RegistService.getAllCity(by: countryID).subscribe(onNext:{ citys in
+        UserService.getAllCity(by: countryID).subscribe(onNext:{ citys in
             self.dataArray = citys.sorted(by: { ($0.city_name.first ?? Character("")) < ($1.city_name.first  ?? Character("")) })
             self.endRefresh(citys.count)
         }).disposed(by: self.rx.disposeBag)

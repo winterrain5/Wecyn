@@ -32,7 +32,7 @@ recognise you</string>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6a-lZ-LoF">
                     <rect key="frame" x="70" y="183" width="274" height="311"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proile_user" translatesAutoresizingMaskIntoConstraints="NO" id="bZG-xx-pac">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proile_user" translatesAutoresizingMaskIntoConstraints="NO" id="bZG-xx-pac">
                             <rect key="frame" x="75" y="30" width="124" height="124"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="124" id="D1X-Fn-2o2"/>
@@ -91,7 +91,7 @@ recognise you</string>
                         <constraint firstAttribute="width" secondItem="B6a-lZ-LoF" secondAttribute="height" multiplier="237:270" constant="1" id="rxa-QE-EIi"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fu-yP-WJx">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fu-yP-WJx" customClass="LoadingButton" customModule="Wecyn" customModuleProvider="target">
                     <rect key="frame" x="21" y="536" width="372" height="40"/>
                     <color key="backgroundColor" name="TheamColor"/>
                     <constraints>

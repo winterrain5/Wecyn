@@ -96,7 +96,7 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9u0-PL-ToJ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9u0-PL-ToJ" customClass="LoadingButton" customModule="Wecyn" customModuleProvider="target">
                     <rect key="frame" x="21" y="379" width="372" height="40"/>
                     <color key="backgroundColor" name="TheamColor"/>
                     <constraints>

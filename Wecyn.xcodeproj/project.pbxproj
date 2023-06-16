@@ -40,10 +40,9 @@
 		457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C508A2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib */; };
 		457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C508D2A384B5F00FCE8D0 /* HomeItemCell.swift */; };
 		457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C508E2A384B5F00FCE8D0 /* HomeItemCell.xib */; };
-		457C50932A38577200FCE8D0 /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50922A38577200FCE8D0 /* LoginApi.swift */; };
 		457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50952A38582A00FCE8D0 /* RegistRequestModel.swift */; };
-		457C50982A38589200FCE8D0 /* RegistApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50972A38589200FCE8D0 /* RegistApi.swift */; };
-		457C509A2A38598100FCE8D0 /* RegistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50992A38598100FCE8D0 /* RegistService.swift */; };
+		457C50982A38589200FCE8D0 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50972A38589200FCE8D0 /* UserApi.swift */; };
+		457C509A2A38598100FCE8D0 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50992A38598100FCE8D0 /* UserService.swift */; };
 		457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509C2A38648300FCE8D0 /* CountryModel.swift */; };
 		457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509E2A3949E400FCE8D0 /* CountryListController.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
@@ -109,6 +108,15 @@
 		45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765BA2A31A9FD00BF6EEC /* JobController.swift */; };
 		45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765BD2A31ABA200BF6EEC /* MainController.swift */; };
 		45E85B112A398EBA00B820CD /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B102A398EBA00B820CD /* CityModel.swift */; };
+		45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B122A3AB4FA00B820CD /* TokenModel.swift */; };
+		45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B182A3AE23500B820CD /* CalendarController.swift */; };
+		45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B1A2A3AE25B00B820CD /* CalendarView.swift */; };
+		45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B1C2A3AE26500B820CD /* CalendarView.xib */; };
+		45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */; };
+		45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B202A3AFC4800B820CD /* CalendarSectionView.swift */; };
+		45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */; };
+		45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */; };
+		45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
 /* End PBXBuildFile section */
 
@@ -146,10 +154,9 @@
 		457C508A2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderJobItemCell.xib; sourceTree = "<group>"; };
 		457C508D2A384B5F00FCE8D0 /* HomeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemCell.swift; sourceTree = "<group>"; };
 		457C508E2A384B5F00FCE8D0 /* HomeItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeItemCell.xib; sourceTree = "<group>"; };
-		457C50922A38577200FCE8D0 /* LoginApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = "<group>"; };
 		457C50952A38582A00FCE8D0 /* RegistRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistRequestModel.swift; sourceTree = "<group>"; };
-		457C50972A38589200FCE8D0 /* RegistApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistApi.swift; sourceTree = "<group>"; };
-		457C50992A38598100FCE8D0 /* RegistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistService.swift; sourceTree = "<group>"; };
+		457C50972A38589200FCE8D0 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
+		457C50992A38598100FCE8D0 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		457C509C2A38648300FCE8D0 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		457C509E2A3949E400FCE8D0 /* CountryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListController.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +227,15 @@
 		45E765BA2A31A9FD00BF6EEC /* JobController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobController.swift; sourceTree = "<group>"; };
 		45E765BD2A31ABA200BF6EEC /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		45E85B102A398EBA00B820CD /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		45E85B122A3AB4FA00B820CD /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		45E85B182A3AE23500B820CD /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		45E85B1A2A3AE25B00B820CD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		45E85B1C2A3AE26500B820CD /* CalendarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
+		45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		45E85B202A3AFC4800B820CD /* CalendarSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSectionView.swift; sourceTree = "<group>"; };
+		45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarSectionView.xib; sourceTree = "<group>"; };
+		45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaledarItemCell.swift; sourceTree = "<group>"; };
+		45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaledarItemCell.xib; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85753C0B8E9CA6B5BCF3B27A /* Pods-Wecyn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wecyn.release.xcconfig"; path = "Target Support Files/Pods-Wecyn/Pods-Wecyn.release.xcconfig"; sourceTree = "<group>"; };
 		F6737696186A89881164CB5A /* Pods-Wecyn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wecyn.debug.xcconfig"; path = "Target Support Files/Pods-Wecyn/Pods-Wecyn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -318,7 +334,7 @@
 		457C50912A38576200FCE8D0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				457C50992A38598100FCE8D0 /* RegistService.swift */,
+				457C50992A38598100FCE8D0 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -336,6 +352,7 @@
 			children = (
 				457C509C2A38648300FCE8D0 /* CountryModel.swift */,
 				45E85B102A398EBA00B820CD /* CityModel.swift */,
+				45E85B122A3AB4FA00B820CD /* TokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -408,8 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				45920A862A26E045005871ED /* MainApi.swift */,
-				457C50922A38577200FCE8D0 /* LoginApi.swift */,
-				457C50972A38589200FCE8D0 /* RegistApi.swift */,
+				457C50972A38589200FCE8D0 /* UserApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -417,6 +433,7 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				45E85B152A3AE1ED00B820CD /* Calendar */,
 				450BA6C02A32B8D000764828 /* Login */,
 				45E765BC2A31AB1B00BF6EEC /* Main */,
 				45E765B92A31A9F000BF6EEC /* Job */,
@@ -685,6 +702,37 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		45E85B152A3AE1ED00B820CD /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				45E85B172A3AE1F800B820CD /* View */,
+				45E85B162A3AE1F400B820CD /* Controller */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		45E85B162A3AE1F400B820CD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45E85B182A3AE23500B820CD /* CalendarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45E85B172A3AE1F800B820CD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45E85B1A2A3AE25B00B820CD /* CalendarView.swift */,
+				45E85B1C2A3AE26500B820CD /* CalendarView.xib */,
+				45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */,
+				45E85B202A3AFC4800B820CD /* CalendarSectionView.swift */,
+				45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */,
+				45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */,
+				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		58E99C64972A237AA00869D0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -771,11 +819,14 @@
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
 				459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
+				45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */,
 				45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */,
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
+				45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
+				45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
 				450BA6CB2A32B9D800764828 /* LoginView.xib in Resources */,
@@ -866,12 +917,12 @@
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
-				457C509A2A38598100FCE8D0 /* RegistService.swift in Sources */,
+				457C509A2A38598100FCE8D0 /* UserService.swift in Sources */,
 				450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
-				457C50982A38589200FCE8D0 /* RegistApi.swift in Sources */,
+				457C50982A38589200FCE8D0 /* UserApi.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
@@ -900,8 +951,11 @@
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,
 				45920AF92A26E045005871ED /* BaseViewController+Extension.swift in Sources */,
+				45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */,
+				45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
+				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45920AFE2A26E045005871ED /* BaseModel.swift in Sources */,
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
@@ -910,12 +964,12 @@
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
-				457C50932A38577200FCE8D0 /* LoginApi.swift in Sources */,
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
 				45920AEA2A26E045005871ED /* ZoomImageScrollView.swift in Sources */,
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
+				45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
@@ -928,6 +982,8 @@
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
+				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
+				45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,

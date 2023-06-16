@@ -157,9 +157,6 @@ struct _R {
     /// Color `BackgroundColor`.
     var backgroundColor: RswiftResources.ColorResource { .init(name: "BackgroundColor", path: [], bundle: bundle) }
 
-    /// Color `EnableColor`.
-    var enableColor: RswiftResources.ColorResource { .init(name: "EnableColor", path: [], bundle: bundle) }
-
     /// Color `TextColor162C46`.
     var textColor162C46: RswiftResources.ColorResource { .init(name: "TextColor162C46", path: [], bundle: bundle) }
 
@@ -168,11 +165,32 @@ struct _R {
 
     /// Color `TheamColor`.
     var theamColor: RswiftResources.ColorResource { .init(name: "TheamColor", path: [], bundle: bundle) }
+
+    /// Color `disableColor`.
+    var disableColor: RswiftResources.ColorResource { .init(name: "disableColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 15 images.
+  /// This `_R.image` struct is generated, and contains static references to 21 images.
   struct image {
     let bundle: Foundation.Bundle
+
+    /// Image `calendar_calendar`.
+    var calendar_calendar: RswiftResources.ImageResource { .init(name: "calendar_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar_item_arrow_down`.
+    var calendar_item_arrow_down: RswiftResources.ImageResource { .init(name: "calendar_item_arrow_down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar_item_arrow_right`.
+    var calendar_item_arrow_right: RswiftResources.ImageResource { .init(name: "calendar_item_arrow_right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar_left_arrow`.
+    var calendar_left_arrow: RswiftResources.ImageResource { .init(name: "calendar_left_arrow", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar_right_arrow`.
+    var calendar_right_arrow: RswiftResources.ImageResource { .init(name: "calendar_right_arrow", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar_share`.
+    var calendar_share: RswiftResources.ImageResource { .init(name: "calendar_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `comment`.
     var comment: RswiftResources.ImageResource { .init(name: "comment", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -220,9 +238,18 @@ struct _R {
     var send: RswiftResources.ImageResource { .init(name: "send", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 13 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 16 nibs.
   struct nib {
     let bundle: Foundation.Bundle
+
+    /// Nib `CaledarItemCell`.
+    var caledarItemCell: RswiftResources.NibReference<CaledarItemCell> { .init(name: "CaledarItemCell", bundle: bundle) }
+
+    /// Nib `CalendarSectionView`.
+    var calendarSectionView: RswiftResources.NibReference<CalendarSectionView> { .init(name: "CalendarSectionView", bundle: bundle) }
+
+    /// Nib `CalendarView`.
+    var calendarView: RswiftResources.NibReference<CalendarView> { .init(name: "CalendarView", bundle: bundle) }
 
     /// Nib `HomeHeaderJobItemCell`.
     var homeHeaderJobItemCell: RswiftResources.NibReference<HomeHeaderJobItemCell> { .init(name: "HomeHeaderJobItemCell", bundle: bundle) }
@@ -264,6 +291,16 @@ struct _R {
     var registProfileView: RswiftResources.NibReference<RegistProfileView> { .init(name: "RegistProfileView", bundle: bundle) }
 
     func validate() throws {
+      if UIKit.UIImage(named: "calendar_item_arrow_right", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_item_arrow_right' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "profile_edit_userinfo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'profile_edit_userinfo' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "calendar_calendar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_calendar' is used in nib 'CalendarSectionView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "search_icon", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'search_icon' is used in nib 'CalendarSectionView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CalendarSectionView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "calendar_left_arrow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_left_arrow' is used in nib 'CalendarView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "calendar_right_arrow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_right_arrow' is used in nib 'CalendarView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "calendar_share", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_share' is used in nib 'CalendarView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CalendarView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }

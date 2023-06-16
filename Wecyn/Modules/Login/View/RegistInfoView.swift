@@ -71,11 +71,7 @@ class RegistInfoView: UIView {
         result.asDriver(onErrorJustReturn: false).drive(nextButton.rx.isEnabled).disposed(by: rx.disposeBag)
         result.subscribe(onNext: { [weak self] in
             guard let `self` = self else { return }
-            if $0 {
-                self.nextButton.backgroundColor = R.color.theamColor()
-            } else {
-                self.nextButton.backgroundColor = R.color.enableColor()
-            }
+            self.nextButton.backgroundColor = $0 ? R.color.theamColor()! : R.color.disableColor()!
         }).disposed(by: rx.disposeBag)
         
      
@@ -115,8 +111,20 @@ class RegistInfoView: UIView {
         
         nextButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            let vc = RegistConfirmController(registModel: self.registModel)
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
+            self.nextButton.startAnimation()
+            UserService.signup(model: self.registModel).subscribe(onNext:{ status in
+                self.nextButton.stopAnimation()
+                if status.success == 1 {
+                    let vc = RegistConfirmController(registModel: self.registModel)
+                    UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
+                }else {
+                    Toast.showMessage(status.message)
+                }
+            },onError: { e in
+                self.nextButton.stopAnimation()
+            }).disposed(by: self.rx.disposeBag)
+            
+            
         }).disposed(by: rx.disposeBag)
     }
     
