@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CalendarView" customModule="Wecyn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="355"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rh-Dn-L8R">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="May 2023" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfT-K9-OQj">
+                            <rect key="frame" x="22" y="18.5" width="77" height="21"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" name="TextColor52"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSs-pH-Mnf">
+                            <rect key="frame" x="107" y="0.0" width="30" height="58"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="J8T-YV-p6Q"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="calendar_left_arrow"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euf-mh-Pax">
+                            <rect key="frame" x="143" y="0.0" width="30" height="58"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="bnv-Ol-UDY"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="calendar_right_arrow"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Llg-bB-FFB">
+                            <rect key="frame" x="362" y="0.0" width="30" height="58"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="Ra9-Bf-wRq"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="calendar_share"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="euf-mh-Pax" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="AOd-cL-n4B"/>
+                        <constraint firstItem="lSs-pH-Mnf" firstAttribute="centerY" secondItem="6rh-Dn-L8R" secondAttribute="centerY" id="ChO-61-PGr"/>
+                        <constraint firstAttribute="height" constant="58" id="DLv-8Q-FsV"/>
+                        <constraint firstItem="tfT-K9-OQj" firstAttribute="leading" secondItem="6rh-Dn-L8R" secondAttribute="leading" constant="22" id="FC2-PB-kE1"/>
+                        <constraint firstAttribute="bottom" secondItem="lSs-pH-Mnf" secondAttribute="bottom" id="OMV-fW-p5j"/>
+                        <constraint firstItem="lSs-pH-Mnf" firstAttribute="leading" secondItem="tfT-K9-OQj" secondAttribute="trailing" constant="8" id="QH3-hz-W61"/>
+                        <constraint firstItem="lSs-pH-Mnf" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="Sdo-ZW-RGt"/>
+                        <constraint firstItem="Llg-bB-FFB" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="aVH-q6-3sA"/>
+                        <constraint firstItem="tfT-K9-OQj" firstAttribute="centerY" secondItem="6rh-Dn-L8R" secondAttribute="centerY" id="dnq-vT-XlF"/>
+                        <constraint firstAttribute="bottom" secondItem="euf-mh-Pax" secondAttribute="bottom" id="nXs-6h-BGv"/>
+                        <constraint firstAttribute="bottom" secondItem="Llg-bB-FFB" secondAttribute="bottom" id="qqT-4x-m34"/>
+                        <constraint firstAttribute="trailing" secondItem="Llg-bB-FFB" secondAttribute="trailing" constant="22" id="sJ0-og-QYj"/>
+                        <constraint firstItem="euf-mh-Pax" firstAttribute="leading" secondItem="lSs-pH-Mnf" secondAttribute="trailing" constant="6" id="vnc-e8-13E"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="22"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Oh-tl-AFU" customClass="FSCalendar">
+                    <rect key="frame" x="12" y="58" width="390" height="297"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="22"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="7Oh-tl-AFU" secondAttribute="bottom" id="2yZ-Z3-YHa"/>
+                <constraint firstAttribute="trailing" secondItem="7Oh-tl-AFU" secondAttribute="trailing" constant="12" id="EBZ-Ao-Ytz"/>
+                <constraint firstItem="7Oh-tl-AFU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="cNg-xM-j8z"/>
+                <constraint firstItem="6rh-Dn-L8R" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fVx-xC-zA7"/>
+                <constraint firstItem="7Oh-tl-AFU" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="bottom" id="pHI-8y-Eag"/>
+                <constraint firstItem="6rh-Dn-L8R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vZF-aD-OtK"/>
+                <constraint firstItem="6rh-Dn-L8R" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="yxK-Ka-skV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="calendar" destination="7Oh-tl-AFU" id="2dn-YQ-uV1"/>
+                <outlet property="dateLabel" destination="tfT-K9-OQj" id="zfo-31-Pts"/>
+                <outlet property="nextButton" destination="euf-mh-Pax" id="oZV-XC-pAj"/>
+                <outlet property="preButton" destination="lSs-pH-Mnf" id="nbk-Jf-3Te"/>
+                <outlet property="shareButton" destination="Llg-bB-FFB" id="le9-aj-xja"/>
+            </connections>
+            <point key="canvasLocation" x="130.43478260869566" y="169.75446428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="calendar_left_arrow" width="8.5" height="14"/>
+        <image name="calendar_right_arrow" width="9" height="14.5"/>
+        <image name="calendar_share" width="18.5" height="16"/>
+        <namedColor name="TextColor52">
+            <color red="0.32199999690055847" green="0.32199999690055847" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -36,12 +36,10 @@ class JobController: BaseTableController {
         tableView?.rowHeight = 200
         
         let headView = TitleHeaderView(fontSize: 14,title:"Jobs Recommended for you")
-        headView.size = CGSize(width: kScreenWidth, height: 82)
+        headView.size = CGSize(width: kScreenWidth, height: 60)
         tableView?.tableHeaderView = headView
         
     }
-    
-  
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: JobItemCell.self)

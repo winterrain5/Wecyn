@@ -7,6 +7,7 @@
 
 import UIKit
 import ImagePickerSwift
+import RxRelay
 class RegistAddAvatarView: UIView {
 
     @IBOutlet weak var avatarContainer: UIView!
@@ -18,10 +19,9 @@ class RegistAddAvatarView: UIView {
     
     @IBOutlet weak var locationlLabel: UILabel!
     
-    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var addPhotoButton: LoadingButton!
   
     @IBOutlet weak var skipLabel: UILabel!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +31,7 @@ class RegistAddAvatarView: UIView {
         addPhotoButton.addShadow(cornerRadius: 20)
         
         skipLabel.sk.setSpecificTextUnderLine("Skip", color: R.color.textColor52()!)
+      
         
         addPhotoButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
@@ -38,7 +39,9 @@ class RegistAddAvatarView: UIView {
             option.resizeWidth = 128
             option.resizeScale = 1
             ImagePicker.show(type: .selectPhoto, with: option) { image, path in
+                guard let image = image else { return }
                 self.avatarImageView.image = image
+                self.upload(image)
             }
         }).disposed(by: rx.disposeBag)
         
@@ -49,6 +52,18 @@ class RegistAddAvatarView: UIView {
         
     }
     
+    func upload(_ image:UIImage) {
+        addPhotoButton.startAnimation()
+        guard let base64 = image.pngBase64String() else { return }
+        UserService.updateAvatar(photo: base64).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showSuccess(withStatus: "Upload Success")
+            }
+            self.addPhotoButton.stopAnimation()
+        },onError: { e in
+            self.addPhotoButton.stopAnimation()
+        }).disposed(by: rx.disposeBag)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

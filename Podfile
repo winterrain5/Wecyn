@@ -36,6 +36,8 @@ target 'Wecyn' do
   pod 'KMPlaceholderTextView'
   pod 'MarqueeLabel'
   pod 'CodeTextField', '~> 0.4.0'
+  pod 'SwiftMessages'
+  pod 'FSCalendar'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

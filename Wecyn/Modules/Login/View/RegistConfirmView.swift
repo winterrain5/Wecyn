@@ -40,13 +40,11 @@ class RegistConfirmView: UIView {
             label.style = Style.border(nomal: UIColor(hexString: "#c3c1c1")!, selected: R.color.theamColor()!)
             return label
         })
-        temTextField.keyboardType = .numberPad
         return temTextField
     }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         
         
         resendLabel.sk.setSpecificTextColor("Send again", color: R.color.theamColor()!)
@@ -68,11 +66,14 @@ class RegistConfirmView: UIView {
             self.sendEmail()
         }).disposed(by: rx.disposeBag)
         
-        confirmButton.rx.tap.subscribe(onNext:{
-            
-            self.signup().done { _ in
+        confirmButton.rx.tap.subscribe(onNext:{[weak self] in
+            guard let `self` = self else { return }
+            self.confirmButton.startAnimation()
+            self.verificationCode().done { _ in
+                self.confirmButton.stopAnimation()
                 UIViewController.sk.getTopVC()?.navigationController?.pushViewController(RegistProfileController(), animated: true)
             }.catch { e in
+                self.confirmButton.stopAnimation()
                 Toast.showMessage((e as! PKError).message)
             }
             
@@ -83,7 +84,7 @@ class RegistConfirmView: UIView {
     
     func sendEmail() {
         guard let email = self.registModel?.email else { return }
-        RegistService.emailSendVertificationCode(email: email).subscribe(onNext:{ status in
+        UserService.emailSendVertificationCode(email: email).subscribe(onNext:{ status in
             if status.success != 1 {
                 Toast.showMessage(status.message)
             }
@@ -96,31 +97,15 @@ class RegistConfirmView: UIView {
                 resolver.reject(PKError.reject("code or email can not be empty"))
                 return
             }
-            RegistService.emailVerification(email: email, code: code).subscribe(onNext:{  status in
-                if status.success == 1{
-                    resolver.fulfill_()
-                } else {
-                    resolver.reject(PKError.reject(status.message))
-                }
+            UserService.emailVerification(email: email, code: code).subscribe(onNext:{ model in
+                UserDefaults.sk.set(object: model, for: "token")
+                resolver.fulfill_()
+            },onError: { e in
+                resolver.reject(PKError.reject(e.localizedDescription))
             }).disposed(by: self.rx.disposeBag)
         }
     }
     
-    func signup() -> Promise<Void> {
-        Promise.init { resolver in
-            guard let model = self.registModel else {
-                resolver.reject(PKError.reject("registModel is nil"))
-                return
-            }
-            RegistService.signup(model: model).subscribe(onNext:{ status in
-                if status.success == 1 {
-                    resolver.fulfill_()
-                }else {
-                    resolver.reject(PKError.reject(status.message))
-                }
-            }).disposed(by: rx.disposeBag)
-        }
-    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

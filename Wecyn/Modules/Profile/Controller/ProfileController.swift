@@ -32,7 +32,6 @@ class ProfileController: BaseTableController {
         headerView.size = CGSize(width: kScreenWidth, height: 320)
 
         self.tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
-        self.tableView?.sectionFooterHeight = 0
         self.tableView?.register(cellWithClass: ProfileSkillsItemCell.self)
         self.tableView?.register(cellWithClass: ProfileExperienceItemCell.self)
         self.tableView?.register(cellWithClass: ProfileInterestsItemsCell.self)

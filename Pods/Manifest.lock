@@ -8,6 +8,7 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - EachNavigationBar (1.17.0)
   - EntryKit (0.8.0)
+  - FSCalendar (2.8.4)
   - HandyJSON (5.0.2)
   - ImagePickerSwift (0.3.1)
   - IQKeyboardManagerSwift (6.5.11)
@@ -95,6 +96,9 @@ PODS:
   - SwifterSwift/SwiftStdlib (5.2.0)
   - SwifterSwift/UIKit (5.2.0)
   - SwiftExtensionsLibrary (0.2.4)
+  - SwiftMessages (9.0.6):
+    - SwiftMessages/App (= 9.0.6)
+  - SwiftMessages/App (9.0.6)
   - SwiftyJSON (5.0.1)
   - Then (3.0.0)
 
@@ -107,6 +111,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - EachNavigationBar
   - EntryKit
+  - FSCalendar
   - HandyJSON
   - ImagePickerSwift
   - IQKeyboardManagerSwift
@@ -134,6 +139,7 @@ DEPENDENCIES:
   - SwiftDate
   - SwifterSwift
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
+  - SwiftMessages
   - SwiftyJSON
   - Then
 
@@ -148,6 +154,7 @@ SPEC REPOS:
     - DZNEmptyDataSet
     - EachNavigationBar
     - EntryKit
+    - FSCalendar
     - HandyJSON
     - ImagePickerSwift
     - IQKeyboardManagerSwift
@@ -173,6 +180,7 @@ SPEC REPOS:
     - SVProgressHUD
     - SwiftDate
     - SwifterSwift
+    - SwiftMessages
     - SwiftyJSON
     - Then
 
@@ -195,6 +203,7 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EachNavigationBar: 87430187ca1f898e6d9d8bb95c35e49749e5a0a2
   EntryKit: eca0306497a948fa9c81ff665bf6895309c7d67e
+  FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   ImagePickerSwift: 0328d670660823ff33529b58be08c7a13b686758
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
@@ -221,9 +230,10 @@ SPEC CHECKSUMS:
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
+  SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: ea7bbb26fa6cb365431eac69672d75fb26230b7f
+PODFILE CHECKSUM: 87b97e332738d0624eb4edcdbe4b12444666482a
 
 COCOAPODS: 1.11.2

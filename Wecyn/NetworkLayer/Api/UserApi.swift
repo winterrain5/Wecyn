@@ -9,29 +9,35 @@ import Foundation
 import Moya
 import RxMoyaCache
 
-let RegistProvider = MoyaProvider<RegistApi>()
-enum RegistApi {
+let UserProvider = MoyaProvider<UserApi>()
+enum UserApi {
     case emailSendeVerificationCode(email:String)
     case emailVerification(email:String,code:String)
     case getCountryList
     case getCityList(countryId:Int)
+    case uploadAvatar(photo:String)
     case signup(model:RegistRequestModel)
+    case signin(username:String,password:String)
 }
 
-extension RegistApi:  TargetType, Cacheable  {
+extension UserApi:  TargetType, Cacheable  {
     
     var path: String {
         switch self {
         case .emailSendeVerificationCode:
-            return "/wecyn/auth/emailSendVerificationCode/"
+            return "/auth/emailSendVerificationCode/"
         case .emailVerification:
-            return "/wecyn/auth/emailVerification/"
+            return "/auth/emailVerification/"
         case .getCountryList:
-            return "/wecyn/local-geo/country/"
+            return "/local-geo/country/"
         case .getCityList:
-            return "/wecyn/local-geo/city/"
+            return "/local-geo/city/"
+        case .uploadAvatar:
+            return "/user/uploadAvatar/"
         case .signup:
-            return "/wecyn/auth/signUp/"
+            return "/auth/signUp/"
+        case .signin:
+            return "/auth/signIn/"
         }
     }
     var method: Moya.Method {
@@ -54,14 +60,13 @@ extension RegistApi:  TargetType, Cacheable  {
             return .requestPlain
         case .getCityList(let countryID):
             return requestURLParameters(["country_id":countryID])
+        case .uploadAvatar(let photo):
+            return requestParameters(["photo":photo])
         case .signup(let model):
             return requestToTask(model)
+        case .signin(let username,let password):
+            return requestParameters(["username":username,"password":password])
         }
     }
     
-}
-extension String {
-    var urlEscaped: String {
-        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-    }
 }

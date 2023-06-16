@@ -15,7 +15,7 @@ class LoginView: UIView {
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var passwordTf: UITextField!
     @IBOutlet weak var regitLabel: UILabel!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signInButton: LoadingButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -34,14 +34,33 @@ class LoginView: UIView {
         regitLabel.sk.setSpecificTextColor("Join now!", color: R.color.theamColor()!)
         regitLabel.sk.setSpecificTextColor("New to Wecyn?", color: UIColor(hexString: "#525252")!)
         
+        let username = userNameTf.rx.text.orEmpty
+        let password = passwordTf.rx.text.orEmpty
+        let isEmpty = Observable.combineLatest(username,password).map({ !$0.0.isEmpty && !$0.1.isEmpty})
+        isEmpty.asDriver(onErrorJustReturn: false).drive(signInButton.rx.isEnabled).disposed(by: rx.disposeBag)
+        isEmpty.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.signInButton.backgroundColor = $0 ? R.color.theamColor()! : R.color.disableColor()!
+        }).disposed(by: rx.disposeBag)
+        
         forgetPwdLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{_ in
             
         }).disposed(by: rx.disposeBag)
         
         signInButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            let main = MainController()
-            UIApplication.shared.keyWindow?.rootViewController = main
+            guard let username = self.userNameTf.text,let password = self.passwordTf.text else { return }
+            self.signInButton.startAnimation()
+            UserService.signin(username: username, password: password).subscribe(onNext:{ model in
+                self.signInButton.stopAnimation()
+                UserDefaults.sk.set(object: model, for: TokenModel.className)
+                let main = MainController()
+                UIApplication.shared.keyWindow?.rootViewController = main
+            },onError: { e in
+                self.signInButton.stopAnimation()
+                print(e.localizedDescription)
+            }).disposed(by: self.rx.disposeBag)
+
         }).disposed(by: rx.disposeBag)
         
         googleLoginButton.rx.tap.subscribe(onNext:{

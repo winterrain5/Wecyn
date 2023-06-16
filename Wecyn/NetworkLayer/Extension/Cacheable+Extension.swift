@@ -58,7 +58,7 @@ extension MoyaCache {
     
     struct DiskStorageName {
         
-        static let response = "com.victor.cache.response"
+        static let response = "com.wecyn.cache.response"
         static let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
                                                        appropriateFor: nil, create: true).appendingPathComponent("HTTPCache")
     }

@@ -48,6 +48,7 @@ extension TargetType {
             "versionDevice":"ios",
             "versionNumber":Device.appVersion,
             "versionDeviceNumber":Device.sysVersion,
+            "Bearer-Token": UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)?.token ?? ""
         ]
     }
     

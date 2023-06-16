@@ -23,7 +23,7 @@ class APIHost: NSObject {
     enum BackgroundServerType: Int {
         case BaseClient
     }
-     var BaseClients = ["Dev": "http://10.1.3.18:826",
+     var BaseClients = ["Dev": "http://10.1.3.18:826/wecyn",
                         "Uat": "https://Uat-admin-api.victor.vip",
                     "Release": "https://admin-api.victor.vip"]
     
