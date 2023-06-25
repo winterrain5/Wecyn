@@ -23,9 +23,9 @@ class APIHost: NSObject {
     enum BackgroundServerType: Int {
         case BaseClient
     }
-     var BaseClients = ["Dev": "http://10.1.3.18:826/wecyn",
-                        "Uat": "https://Uat-admin-api.victor.vip",
-                    "Release": "https://admin-api.victor.vip"]
+     var BaseClients = ["Dev": "http://10.1.3.22:826",
+                        "Uat": "",
+                    "Release": ""]
     
     
      func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {

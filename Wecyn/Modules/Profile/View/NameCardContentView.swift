@@ -32,12 +32,14 @@ class NameCardContentView: UIView {
         editButton.rx.tap.subscribe(onNext:{
             NotificationCenter.default.post(name: NSNotification.Name.init("Profile_Change_NameCard_To_Edit"), object: nil)
         }).disposed(by: rx.disposeBag)
+        
+        cornerRadius = 8
     }
     
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        cornerRadius = 8
+        
     }
 
 }

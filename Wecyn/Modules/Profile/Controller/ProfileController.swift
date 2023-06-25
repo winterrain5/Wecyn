@@ -19,9 +19,11 @@ class ProfileController: BaseTableController {
 
     private var headerView = ProfileHeaderView.loadViewFromNib()
     private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addRightBarItems()
+        getUserInfo()
     }
     
     override func createListView() {
@@ -38,6 +40,11 @@ class ProfileController: BaseTableController {
         self.tableView?.register(cellWithClass: ProfileEducationItemCell.self)
     }
 
+    func getUserInfo() {
+        UserService.getUserInfo().subscribe(onNext:{ model in
+            self.headerView.userInfoModel = model
+        }).disposed(by: rx.disposeBag)
+    }
  
 
     override func numberOfSections(in tableView: UITableView) -> Int {

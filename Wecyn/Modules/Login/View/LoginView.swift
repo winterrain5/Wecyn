@@ -36,9 +36,9 @@ class LoginView: UIView {
         
         let username = userNameTf.rx.text.orEmpty
         let password = passwordTf.rx.text.orEmpty
-        let isEmpty = Observable.combineLatest(username,password).map({ !$0.0.isEmpty && !$0.1.isEmpty})
-        isEmpty.asDriver(onErrorJustReturn: false).drive(signInButton.rx.isEnabled).disposed(by: rx.disposeBag)
-        isEmpty.subscribe(onNext:{ [weak self] in
+        let isNotEmpty = Observable.combineLatest(username,password).map({ !$0.0.isEmpty && !$0.1.isEmpty})
+        isNotEmpty.asDriver(onErrorJustReturn: false).drive(signInButton.rx.isEnabled).disposed(by: rx.disposeBag)
+        isNotEmpty.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.signInButton.backgroundColor = $0 ? R.color.theamColor()! : R.color.disableColor()!
         }).disposed(by: rx.disposeBag)
@@ -51,14 +51,14 @@ class LoginView: UIView {
             guard let `self` = self else { return }
             guard let username = self.userNameTf.text,let password = self.passwordTf.text else { return }
             self.signInButton.startAnimation()
-            UserService.signin(username: username, password: password).subscribe(onNext:{ model in
+            AuthService.signin(username: username, password: password).subscribe(onNext:{ model in
                 self.signInButton.stopAnimation()
                 UserDefaults.sk.set(object: model, for: TokenModel.className)
                 let main = MainController()
                 UIApplication.shared.keyWindow?.rootViewController = main
             },onError: { e in
                 self.signInButton.stopAnimation()
-                print(e.localizedDescription)
+                Toast.showMessage((e as! APIError).errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
 
         }).disposed(by: rx.disposeBag)

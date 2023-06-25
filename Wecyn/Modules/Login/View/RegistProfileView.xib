@@ -87,7 +87,7 @@ and opportunities with your profile</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recent Job Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1GY-BN-jcO">
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recent Job Title*" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1GY-BN-jcO">
                     <rect key="frame" x="21" y="176" width="372" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Ybh-6F-uUh">
@@ -127,7 +127,7 @@ and opportunities with your profile</string>
                         <constraint firstAttribute="height" constant="1" id="FCu-JP-9iT"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recent Company" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-8u-c8j">
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recent Company*" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-8u-c8j">
                     <rect key="frame" x="21" y="296" width="372" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="rdk-MS-AOh">

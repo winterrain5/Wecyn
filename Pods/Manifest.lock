@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.7.1)
+  - AlertsAndPickers (0.3.0)
   - Cache (6.0.0)
   - CocoaDebug (1.7.7)
   - CodeTextField (0.4.0)
@@ -14,6 +15,7 @@ PODS:
   - IQKeyboardManagerSwift (6.5.11)
   - JXPagingView/Paging (2.1.2)
   - JXSegmentedView (1.3.0)
+  - Kingfisher (7.8.0)
   - KMPlaceholderTextView (1.4.0)
   - LookinServer (1.1.7):
     - LookinServer/Core (= 1.1.7)
@@ -103,6 +105,7 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
+  - AlertsAndPickers (from `https://github.com/winterrain5/AlertsAndPickers.git`)
   - Cache (~> 6.0.0)
   - CocoaDebug
   - CodeTextField (~> 0.4.0)
@@ -117,6 +120,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JXPagingView/Paging
   - JXSegmentedView
+  - Kingfisher
   - KMPlaceholderTextView
   - LookinServer
   - MarqueeLabel
@@ -160,6 +164,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JXPagingView
     - JXSegmentedView
+    - Kingfisher
     - KMPlaceholderTextView
     - LookinServer
     - MarqueeLabel
@@ -185,16 +190,22 @@ SPEC REPOS:
     - Then
 
 EXTERNAL SOURCES:
+  AlertsAndPickers:
+    :git: https://github.com/winterrain5/AlertsAndPickers.git
   SwiftExtensionsLibrary:
     :git: https://github.com/winterrain5/SwiftExtensionsLibrary.git
 
 CHECKOUT OPTIONS:
+  AlertsAndPickers:
+    :commit: 412aa7664d9c8ca5d88251606878b3d08b4ce8ca
+    :git: https://github.com/winterrain5/AlertsAndPickers.git
   SwiftExtensionsLibrary:
     :commit: b84c428c73b9a31cc3306a34c63c0a4cd388d5de
     :git: https://github.com/winterrain5/SwiftExtensionsLibrary.git
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  AlertsAndPickers: 30dc7a4a121a4379fe4f6487f8f1b7ac2779ce2f
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
@@ -209,6 +220,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
   JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
+  Kingfisher: 0656e1b064bfc1ca1cd04e033f617a86559696e9
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   LookinServer: 4ce0469b066871525611d009d8d16a7a50c23491
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
@@ -234,6 +246,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 87b97e332738d0624eb4edcdbe4b12444666482a
+PODFILE CHECKSUM: 75270c17639664720d1a06b6f365b1bd265989e7
 
 COCOAPODS: 1.11.2

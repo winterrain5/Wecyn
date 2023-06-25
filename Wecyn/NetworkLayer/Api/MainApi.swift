@@ -44,14 +44,23 @@ extension TargetType {
     }
     
     var headers: [String : String]? {
-        return  [
-            "versionDevice":"ios",
-            "versionNumber":Device.appVersion,
-            "versionDeviceNumber":Device.sysVersion,
-            "Bearer-Token": UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)?.token ?? ""
-        ]
+        if let token = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)?.token {
+            return  [
+                "versionDevice":"ios",
+                "versionNumber":Device.appVersion,
+                "versionDeviceNumber":Device.sysVersion,
+                "Authorization": "Bearer " + token
+            ]
+        } else {
+            return  [
+                "versionDevice":"ios",
+                "versionNumber":Device.appVersion,
+                "versionDeviceNumber":Device.sysVersion,
+                    ]
+        }
+        
     }
-    
+
     func requestToTask<T:HandyJSON>(_ request: T?) -> Task {
         guard let parameters = request?.toJSON() else { return .requestPlain }
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)

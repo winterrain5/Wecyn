@@ -22,6 +22,7 @@ class RegistConfirmView: UIView {
     
     @IBOutlet weak var confirmButton: LoadingButton!
     
+    
     var registModel:RegistRequestModel? {
         didSet {
             emailLabel.text = "Type in the code we sent to\n\(registModel?.email ?? ""). Edit Email"
@@ -34,12 +35,14 @@ class RegistConfirmView: UIView {
         let spacing = (kScreenWidth - 48 - 48 * 6) / 5
         let temTextField = CodeTextField(codeLength: 6,
                                          characterSpacing: spacing.ceil,
-                                         validCharacterSet: CharacterSet(charactersIn: "0123456789"),
+                                         validCharacterSet: CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"),
                                          characterLabelGenerator: { (_) -> LableRenderable in
             let label = StyleLabel(size: CGSize(width: 48, height: 52))
             label.style = Style.border(nomal: UIColor(hexString: "#c3c1c1")!, selected: R.color.theamColor()!)
             return label
         })
+        temTextField.keyboardType = .asciiCapable
+        temTextField.autocorrectionType = .no
         return temTextField
     }()
     
@@ -84,9 +87,11 @@ class RegistConfirmView: UIView {
     
     func sendEmail() {
         guard let email = self.registModel?.email else { return }
-        UserService.emailSendVertificationCode(email: email).subscribe(onNext:{ status in
+        AuthService.emailSendVertificationCode(email: email).subscribe(onNext:{ status in
             if status.success != 1 {
                 Toast.showMessage(status.message)
+            } else {
+                
             }
         }).disposed(by: rx.disposeBag)
     }
@@ -97,8 +102,8 @@ class RegistConfirmView: UIView {
                 resolver.reject(PKError.reject("code or email can not be empty"))
                 return
             }
-            UserService.emailVerification(email: email, code: code).subscribe(onNext:{ model in
-                UserDefaults.sk.set(object: model, for: "token")
+            AuthService.emailVerification(email: email, code: code).subscribe(onNext:{ model in
+                UserDefaults.sk.set(object: model, for: TokenModel.className)
                 resolver.fulfill_()
             },onError: { e in
                 resolver.reject(PKError.reject(e.localizedDescription))
