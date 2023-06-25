@@ -35,14 +35,20 @@
 		450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */; };
 		450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */; };
 		450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */; };
+		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
+		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
+		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
+		453653402A47E8AD0026EC8D /* ConnectAuditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533F2A47E8AD0026EC8D /* ConnectAuditController.swift */; };
+		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
+		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
 		457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */; };
 		457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */; };
 		457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C508A2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib */; };
 		457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C508D2A384B5F00FCE8D0 /* HomeItemCell.swift */; };
 		457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C508E2A384B5F00FCE8D0 /* HomeItemCell.xib */; };
 		457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50952A38582A00FCE8D0 /* RegistRequestModel.swift */; };
-		457C50982A38589200FCE8D0 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50972A38589200FCE8D0 /* UserApi.swift */; };
-		457C509A2A38598100FCE8D0 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50992A38598100FCE8D0 /* UserService.swift */; };
+		457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50972A38589200FCE8D0 /* AuthApi.swift */; };
+		457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50992A38598100FCE8D0 /* AuthService.swift */; };
 		457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509C2A38648300FCE8D0 /* CountryModel.swift */; };
 		457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509E2A3949E400FCE8D0 /* CountryListController.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
@@ -102,6 +108,17 @@
 		459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459C066C2A3700DF0066F85A /* NameCardEditView.xib */; };
 		45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A10A482A31B02500726B66 /* ProfileHeaderView.swift */; };
 		45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */; };
+		45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB28E2A3FF00E00745F6F /* UserApi.swift */; };
+		45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2902A3FF0AD00745F6F /* UserService.swift */; };
+		45ADB2932A3FF72D00745F6F /* CalendarAddEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */; };
+		45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */; };
+		45ADB2972A3FFCF800745F6F /* CalendarAddEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */; };
+		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
+		45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */; };
+		45ADB29D2A40390100745F6F /* ConnectionOfMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */; };
+		45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */; };
+		45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */; };
+		45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */; };
 		45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B12A31A97F00BF6EEC /* ProfileController.swift */; };
 		45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B42A31A99400BF6EEC /* SettingController.swift */; };
 		45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */; };
@@ -149,14 +166,20 @@
 		450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistAddAvatarController.swift; sourceTree = "<group>"; };
 		450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistAddAvatarView.swift; sourceTree = "<group>"; };
 		450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistAddAvatarView.xib; sourceTree = "<group>"; };
+		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
+		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
+		4536533F2A47E8AD0026EC8D /* ConnectAuditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditController.swift; sourceTree = "<group>"; };
+		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
+		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
 		457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExperienceItemCell.swift; sourceTree = "<group>"; };
 		457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderJobItemCell.swift; sourceTree = "<group>"; };
 		457C508A2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderJobItemCell.xib; sourceTree = "<group>"; };
 		457C508D2A384B5F00FCE8D0 /* HomeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemCell.swift; sourceTree = "<group>"; };
 		457C508E2A384B5F00FCE8D0 /* HomeItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeItemCell.xib; sourceTree = "<group>"; };
 		457C50952A38582A00FCE8D0 /* RegistRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistRequestModel.swift; sourceTree = "<group>"; };
-		457C50972A38589200FCE8D0 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
-		457C50992A38598100FCE8D0 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		457C50972A38589200FCE8D0 /* AuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthApi.swift; sourceTree = "<group>"; };
+		457C50992A38598100FCE8D0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		457C509C2A38648300FCE8D0 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		457C509E2A3949E400FCE8D0 /* CountryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListController.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +244,17 @@
 		459C066C2A3700DF0066F85A /* NameCardEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameCardEditView.xib; sourceTree = "<group>"; };
 		45A10A482A31B02500726B66 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		45ADB28E2A3FF00E00745F6F /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
+		45ADB2902A3FF0AD00745F6F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddEventController.swift; sourceTree = "<group>"; };
+		45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddEventView.swift; sourceTree = "<group>"; };
+		45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarAddEventView.xib; sourceTree = "<group>"; };
+		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
+		45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyCell.swift; sourceTree = "<group>"; };
+		45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionOfMyCell.xib; sourceTree = "<group>"; };
+		45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemCell.swift; sourceTree = "<group>"; };
+		45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionItemCell.xib; sourceTree = "<group>"; };
+		45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRecommendController.swift; sourceTree = "<group>"; };
 		45E765B12A31A97F00BF6EEC /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		45E765B42A31A99400BF6EEC /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
@@ -331,10 +365,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		453653382A41369D0026EC8D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				453653392A4136BA0026EC8D /* UserInfoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		457C50912A38576200FCE8D0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				457C50992A38598100FCE8D0 /* UserService.swift */,
+				457C50992A38598100FCE8D0 /* AuthService.swift */,
+				45ADB2902A3FF0AD00745F6F /* UserService.swift */,
+				4536533D2A413F270026EC8D /* FriendService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -391,9 +435,9 @@
 			isa = PBXGroup;
 			children = (
 				457C50942A38581200FCE8D0 /* RequestModel */,
-				457C50912A38576200FCE8D0 /* Service */,
 				45920A7A2A26E045005871ED /* Extension */,
 				45920A7E2A26E045005871ED /* Util */,
+				457C50912A38576200FCE8D0 /* Service */,
 				45920A852A26E045005871ED /* Api */,
 			);
 			path = NetworkLayer;
@@ -425,7 +469,9 @@
 			isa = PBXGroup;
 			children = (
 				45920A862A26E045005871ED /* MainApi.swift */,
-				457C50972A38589200FCE8D0 /* UserApi.swift */,
+				457C50972A38589200FCE8D0 /* AuthApi.swift */,
+				45ADB28E2A3FF00E00745F6F /* UserApi.swift */,
+				4536533B2A413DF70026EC8D /* FriendApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -660,9 +706,34 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		45D4D9AF2A3C2B0000D7ED04 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */,
+				45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */,
+				45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */,
+				4536533F2A47E8AD0026EC8D /* ConnectAuditController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45D4D9B02A3C2B0600D7ED04 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */,
+				45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */,
+				45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */,
+				45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */,
+				453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */,
+				453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		45E765B02A31A94D00BF6EEC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				453653382A41369D0026EC8D /* Model */,
 				45A10A472A31B01500726B66 /* View */,
 				45A10A462A31B00F00726B66 /* Controller */,
 			);
@@ -680,7 +751,8 @@
 		45E765B62A31A9DC00BF6EEC /* Connection */ = {
 			isa = PBXGroup;
 			children = (
-				45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */,
+				45D4D9B02A3C2B0600D7ED04 /* View */,
+				45D4D9AF2A3C2B0000D7ED04 /* Controller */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
@@ -715,6 +787,7 @@
 			isa = PBXGroup;
 			children = (
 				45E85B182A3AE23500B820CD /* CalendarController.swift */,
+				45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -729,6 +802,8 @@
 				45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */,
 				45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */,
 				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
+				45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */,
+				45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -813,10 +888,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				450BA6DF2A330B8400764828 /* RegistProfileView.xib in Resources */,
+				453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */,
 				459C06692A36F73F0066F85A /* NameCardContentView.xib in Resources */,
 				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
+				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
 				459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
 				45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */,
@@ -824,8 +901,10 @@
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
 				45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */,
+				45ADB29D2A40390100745F6F /* ConnectionOfMyCell.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
+				45ADB2972A3FFCF800745F6F /* CalendarAddEventView.xib in Resources */,
 				45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
@@ -903,6 +982,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453653402A47E8AD0026EC8D /* ConnectAuditController.swift in Sources */,
+				4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */,
 				45920AF72A26E045005871ED /* AppDelegate.swift in Sources */,
 				459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
@@ -917,17 +998,18 @@
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
-				457C509A2A38598100FCE8D0 /* UserService.swift in Sources */,
+				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
 				450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
-				457C50982A38589200FCE8D0 /* UserApi.swift in Sources */,
+				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
 				457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */,
+				453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */,
 				45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */,
 				45920AE62A26E045005871ED /* RefreshAnimationFooter.swift in Sources */,
 				459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */,
@@ -938,6 +1020,7 @@
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
 				45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */,
+				45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */,
 				45E85B112A398EBA00B820CD /* CityModel.swift in Sources */,
 				450BA6CF2A32C62D00764828 /* SwiftFitSize.swift in Sources */,
 				45920AFF2A26E045005871ED /* DataLoadable.swift in Sources */,
@@ -947,6 +1030,7 @@
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
 				45920AE82A26E045005871ED /* LoaddingButton.swift in Sources */,
+				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,
@@ -955,11 +1039,14 @@
 				45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
+				45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */,
+				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
 				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45920AFE2A26E045005871ED /* BaseModel.swift in Sources */,
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
 				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
+				45ADB2932A3FF72D00745F6F /* CalendarAddEventController.swift in Sources */,
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
@@ -972,8 +1059,10 @@
 				45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
+				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
 				450BA6E12A3312D500764828 /* RegistConfirmController.swift in Sources */,
+				45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */,
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,
 				457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */,
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
@@ -981,7 +1070,9 @@
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
+				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
+				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
 				45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
@@ -992,6 +1083,7 @@
 				45920AFD2A26E045005871ED /* BaseCollectionController.swift in Sources */,
 				45920AD62A26E045005871ED /* PKError.swift in Sources */,
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
+				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1164,6 +1256,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1199,6 +1292,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

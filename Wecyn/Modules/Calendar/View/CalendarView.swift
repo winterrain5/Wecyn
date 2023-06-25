@@ -14,6 +14,7 @@ class CalendarView: UIView {
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     
     
     @IBOutlet weak var calendar: FSCalendar!
@@ -48,7 +49,9 @@ class CalendarView: UIView {
         dateFormatter.locale = Locale(identifier: "en")
         dateLabel.text = dateFormatter.string(from: currentDate)
         
-        print(currentDate.string(withFormat: "MMMM yyyy"))
+        addButton.rx.tap.subscribe(onNext:{
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(CalendarAddEventController())
+        }).disposed(by: rx.disposeBag)
         
     }
     

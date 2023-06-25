@@ -24,6 +24,7 @@ target 'Wecyn' do
   pod 'MJRefresh'
   pod 'R.swift'
   pod 'SwiftDate'
+  pod 'Kingfisher'
 
   #UI
   pod 'IQKeyboardManagerSwift'
@@ -52,6 +53,7 @@ target 'Wecyn' do
   pod 'EntryKit'
   pod 'DKEmptyDataSet'
   pod 'SwiftExtensionsLibrary', :git => 'https://github.com/winterrain5/SwiftExtensionsLibrary.git'
+  pod 'AlertsAndPickers', :git => 'https://github.com/winterrain5/AlertsAndPickers.git'
 
 end
 

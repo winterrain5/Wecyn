@@ -11,5 +11,4 @@ class BaseModel: NSObject, HandyJSON {
         super.init()
     }
     func mapping(mapper: HelpingMapper) {}
-    
 }

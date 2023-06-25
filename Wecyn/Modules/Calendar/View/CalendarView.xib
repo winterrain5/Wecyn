@@ -49,6 +49,14 @@
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="calendar_share"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scL-KV-KjA">
+                            <rect key="frame" x="324" y="0.0" width="30" height="58"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="SnB-17-26g"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="calendar_add"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -56,8 +64,10 @@
                         <constraint firstItem="lSs-pH-Mnf" firstAttribute="centerY" secondItem="6rh-Dn-L8R" secondAttribute="centerY" id="ChO-61-PGr"/>
                         <constraint firstAttribute="height" constant="58" id="DLv-8Q-FsV"/>
                         <constraint firstItem="tfT-K9-OQj" firstAttribute="leading" secondItem="6rh-Dn-L8R" secondAttribute="leading" constant="22" id="FC2-PB-kE1"/>
+                        <constraint firstItem="Llg-bB-FFB" firstAttribute="leading" secondItem="scL-KV-KjA" secondAttribute="trailing" constant="8" id="FM2-IC-zmQ"/>
                         <constraint firstAttribute="bottom" secondItem="lSs-pH-Mnf" secondAttribute="bottom" id="OMV-fW-p5j"/>
                         <constraint firstItem="lSs-pH-Mnf" firstAttribute="leading" secondItem="tfT-K9-OQj" secondAttribute="trailing" constant="8" id="QH3-hz-W61"/>
+                        <constraint firstItem="scL-KV-KjA" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="RUB-1t-PNy"/>
                         <constraint firstItem="lSs-pH-Mnf" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="Sdo-ZW-RGt"/>
                         <constraint firstItem="Llg-bB-FFB" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="aVH-q6-3sA"/>
                         <constraint firstItem="tfT-K9-OQj" firstAttribute="centerY" secondItem="6rh-Dn-L8R" secondAttribute="centerY" id="dnq-vT-XlF"/>
@@ -65,6 +75,7 @@
                         <constraint firstAttribute="bottom" secondItem="Llg-bB-FFB" secondAttribute="bottom" id="qqT-4x-m34"/>
                         <constraint firstAttribute="trailing" secondItem="Llg-bB-FFB" secondAttribute="trailing" constant="22" id="sJ0-og-QYj"/>
                         <constraint firstItem="euf-mh-Pax" firstAttribute="leading" secondItem="lSs-pH-Mnf" secondAttribute="trailing" constant="6" id="vnc-e8-13E"/>
+                        <constraint firstAttribute="bottom" secondItem="scL-KV-KjA" secondAttribute="bottom" id="xYH-93-fRC"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -95,16 +106,18 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addButton" destination="scL-KV-KjA" id="Ep2-3i-dfZ"/>
                 <outlet property="calendar" destination="7Oh-tl-AFU" id="2dn-YQ-uV1"/>
                 <outlet property="dateLabel" destination="tfT-K9-OQj" id="zfo-31-Pts"/>
                 <outlet property="nextButton" destination="euf-mh-Pax" id="oZV-XC-pAj"/>
                 <outlet property="preButton" destination="lSs-pH-Mnf" id="nbk-Jf-3Te"/>
                 <outlet property="shareButton" destination="Llg-bB-FFB" id="le9-aj-xja"/>
             </connections>
-            <point key="canvasLocation" x="130.43478260869566" y="169.75446428571428"/>
+            <point key="canvasLocation" x="-88" y="4"/>
         </view>
     </objects>
     <resources>
+        <image name="calendar_add" width="24" height="24"/>
         <image name="calendar_left_arrow" width="8.5" height="14"/>
         <image name="calendar_right_arrow" width="9" height="14.5"/>
         <image name="calendar_share" width="18.5" height="16"/>

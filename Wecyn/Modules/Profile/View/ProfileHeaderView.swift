@@ -21,6 +21,15 @@ class ProfileHeaderView: UIView {
     
     @IBOutlet weak var stackView: UIStackView!
     
+    var userInfoModel: UserInfoModel? {
+        didSet {
+            guard let userInfoModel = userInfoModel else { return }
+            
+            nameLabel.text = userInfoModel.first_name + " " + userInfoModel.last_name
+            userAvatarImageView.kf.setImage(with: userInfoModel.avatar.imageUrl,placeholder: R.image.proile_user()!)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         viewNamecardButton.titleForNormal = Localizer.localized(for: .view_namecard)
@@ -28,7 +37,6 @@ class ProfileHeaderView: UIView {
         addNewSectionButton.titleForNormal = Localizer.localized(for: .add_new_section)
         
         viewNamecardButton.rx.tap.subscribe(onNext: {
-//            NameCardView.showNameCard()
             let vc = EditViewController()
             vc.modalPresentationStyle = .fullScreen
             UIViewController.sk.getTopVC()?.present(vc, animated: true)

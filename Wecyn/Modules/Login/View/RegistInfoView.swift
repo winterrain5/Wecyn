@@ -54,7 +54,6 @@ class RegistInfoView: UIView {
                 Toast.showMessage(result.message)
             }
         }.disposed(by: rx.disposeBag)
-        
         let isEmpty = Observable.combineLatest(email,firstName,lastName,password,code).map({
             self.registModel.email = $0.0
             self.registModel.first_name = $0.1
@@ -83,6 +82,7 @@ class RegistInfoView: UIView {
                 
                 self.contryTf.text = $0?.country_name
                 self.registModel.country_region_id = $0?.country_id
+                self.registModel.country = $0?.country_name ?? ""
                 
                 self.registModel.location_id = nil
                 self.locationTf.text = ""
@@ -101,8 +101,11 @@ class RegistInfoView: UIView {
             }
             let vc = CountryListController(dataType: .City, countryID: countryID)
             vc.selectedCity.subscribe(onNext:{
+                
                 self.locationTf.text = $0?.city_name
                 self.registModel.location_id = $0?.city_id ?? 0
+                self.registModel.city = $0?.city_name ?? ""
+                
             }).disposed(by: self.rx.disposeBag)
             let nav = BaseNavigationController(rootViewController: vc)
             UIViewController.sk.getTopVC()?.present(nav, animated: true)
@@ -112,14 +115,14 @@ class RegistInfoView: UIView {
         nextButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.nextButton.startAnimation()
-            UserService.signup(model: self.registModel).subscribe(onNext:{ status in
+            AuthService.signup(model: self.registModel).subscribe(onNext:{ model in
                 self.nextButton.stopAnimation()
-                if status.success == 1 {
-                    let vc = RegistConfirmController(registModel: self.registModel)
-                    UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
-                }else {
-                    Toast.showMessage(status.message)
-                }
+                
+                UserDefaults.sk.set(object: self.registModel, for: RegistRequestModel.className)
+                
+                let vc = RegistConfirmController(registModel: self.registModel)
+                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
+                
             },onError: { e in
                 self.nextButton.stopAnimation()
             }).disposed(by: self.rx.disposeBag)

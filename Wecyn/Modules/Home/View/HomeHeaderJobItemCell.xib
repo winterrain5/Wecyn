@@ -30,7 +30,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI/UX Designer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8z-cC-HnF">
-                                <rect key="frame" x="70" y="69.666666666666671" width="431" height="17"/>
+                                <rect key="frame" x="70" y="69.666666666666671" width="387" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" name="TextColor52"/>
                                 <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                         <constraints>
                             <constraint firstItem="WC0-oD-rby" firstAttribute="centerY" secondItem="FwL-G6-dEk" secondAttribute="centerY" id="1xr-Xe-1Pf"/>
                             <constraint firstItem="k8z-cC-HnF" firstAttribute="top" secondItem="Gld-4P-nXn" secondAttribute="top" id="6rJ-lA-Z4c"/>
-                            <constraint firstAttribute="trailing" secondItem="k8z-cC-HnF" secondAttribute="trailing" constant="16" id="GcZ-dV-LcP"/>
+                            <constraint firstAttribute="trailing" secondItem="k8z-cC-HnF" secondAttribute="trailing" constant="60" id="GcZ-dV-LcP"/>
                             <constraint firstItem="r0v-5s-2ct" firstAttribute="top" secondItem="bBO-38-tTV" secondAttribute="bottom" constant="2" id="Hj6-xG-XO4"/>
                             <constraint firstAttribute="trailing" secondItem="bBO-38-tTV" secondAttribute="trailing" constant="80" id="JM8-8g-mz1"/>
                             <constraint firstItem="k8z-cC-HnF" firstAttribute="leading" secondItem="Gld-4P-nXn" secondAttribute="trailing" constant="8" id="Ou1-EK-IG1"/>

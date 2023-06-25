@@ -108,6 +108,17 @@ extension String {
     }
 }
 
+extension String {
+    var imageUrl: URL? {
+        let host = APIHost.share.BaseUrl
+        return URL(string: host.appending("/media/avatar/" + self))
+    }
+   static func fullName(first: String, last: String) -> String{
+        let full = first + " " + last
+        return full
+    }
+}
+
 
 extension NSObject {
     var className: String {

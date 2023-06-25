@@ -14,7 +14,6 @@ class JobSavedController: BaseTableController {
 
         setupNavigationBar()
         
-        addRightBarItems()
     }
     
     func setupNavigationBar() {
@@ -26,6 +25,7 @@ class JobSavedController: BaseTableController {
     override func createListView() {
         super.createListView()
         
+        tableView?.contentInset = UIEdgeInsets(top: 62, left: 0, bottom: 0, right: 0)
         tableView?.register(nibWithCellClass: JobItemCell.self)
         tableView?.rowHeight = 200
     

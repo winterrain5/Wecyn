@@ -26,3 +26,4 @@ import Foundation
 @_exported import MarqueeLabel
 @_exported import RxLocalizer
 @_exported import SwiftExtensionsLibrary
+@_exported import Kingfisher

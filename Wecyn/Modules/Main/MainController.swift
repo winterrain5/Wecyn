@@ -31,31 +31,35 @@ class MainController: UITabBarController {
         let connection = BaseNavigationController(rootViewController: ConnectionController())
         let job = BaseNavigationController(rootViewController: JobController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
-        let setting = BaseNavigationController(rootViewController: CalendarController())
+        let setting = BaseNavigationController(rootViewController: SettingController())
+        
+        func selectedImage(_ image: UIImage?) -> UIImage? {
+            image?.withTintColor(R.color.theamColor()!).withRenderingMode(.alwaysOriginal)
+        }
         
         home.tabBarItem = UITabBarItem.init(
             title: "Home",
-            image: nil,
-            selectedImage: nil)
+            image: R.image.tab_home(),
+            selectedImage: selectedImage(R.image.tab_home()))
         connection.tabBarItem = UITabBarItem.init(
             title: "Connection",
-            image: nil,
-            selectedImage: nil)
+            image: R.image.tab_connection(),
+            selectedImage: selectedImage(R.image.tab_connection()))
         
         job.tabBarItem = UITabBarItem.init(
             title: "Job",
-            image: nil,
-            selectedImage: nil)
+            image: R.image.tab_job(),
+            selectedImage: selectedImage(R.image.tab_job()))
         
         profile.tabBarItem = UITabBarItem.init(
             title: "Profile",
-            image: nil,
-            selectedImage: nil)
+            image: R.image.tab_profile(),
+            selectedImage: selectedImage(R.image.tab_profile()))
         
         setting.tabBarItem = UITabBarItem.init(
             title: "Setting",
-            image: nil,
-            selectedImage: nil)
+            image: R.image.tab_setting(),
+            selectedImage: selectedImage(R.image.tab_setting()))
         
         self.viewControllers = [home,connection,job,profile,setting]
         configAppearance()
@@ -65,7 +69,7 @@ class MainController: UITabBarController {
     func configAppearance() {
         
         let normalFont: UIFont = UIFont.sk.pingFangMedium(10)
-        let selectFont: UIFont = UIFont.sk.pingFangSemibold(13)
+        let selectFont: UIFont = UIFont.sk.pingFangSemibold(10)
         
         let normalColor = UIColor.gray
         let selectedColro = UIColor.hexStringColor(hexString: "#288B85")
