@@ -64,7 +64,7 @@ extension FriendApi:TargetType {
             
         case .deleteFriend(let friendId):
             
-            return requestParameters(["id":friendId])
+            return requestNoneNilParameters(["id":friendId])
         
         case .friendList, .friendReceiveList, .friendSendList:
             return .requestPlain

@@ -26,7 +26,7 @@ class CalendarHeaderView: UIView {
         calendarView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(12)
             make.top.equalToSuperview().inset(15)
-            make.bottom.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(10)
         }
         
     }

@@ -12,6 +12,18 @@ class HomeController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        let logout = UIButton()
+        logout.titleForNormal = "logout"
+        logout.titleColorForNormal = .black
+        let logoutItem = UIBarButtonItem(customView: logout)
+        logout.rx.tap.subscribe(onNext:{
+            UserDefaults.sk.removeAllKeyValue()
+            let nav = BaseNavigationController(rootViewController: LoginController())
+            UIApplication.shared.keyWindow?.rootViewController = nav
+        }).disposed(by: rx.disposeBag)
+        self.navigation.item.leftBarButtonItems = [logoutItem]
+        
         addRightBarItems()
     }
     

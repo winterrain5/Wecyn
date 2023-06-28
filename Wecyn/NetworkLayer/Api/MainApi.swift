@@ -69,13 +69,10 @@ extension TargetType {
     func requestNoneNilParameters(_ parameters:[String:Any?]) -> Task {
         return .requestParameters(parameters: parameters.compactMapValues{ $0 }, encoding: JSONEncoding.default)
     }
+
     
-    func requestParameters(_ parameters:[String:Any]) -> Task {
-        return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-    }
-    
-    func requestURLParameters(_ parameter:[String: Any]) -> Task {
-        return .requestParameters(parameters: parameter, encoding: URLEncoding(destination: .queryString))
+    func requestURLParameters(_ parameter:[String: Any?]) -> Task {
+        return .requestParameters(parameters: parameter.compactMapValues{ $0 }, encoding: URLEncoding(destination: .queryString))
     }
 }
 

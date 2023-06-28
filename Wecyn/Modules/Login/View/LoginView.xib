@@ -46,7 +46,7 @@ of your professional life</string>
                     </constraints>
                     <color key="textColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" textContentType="username"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="0.0"/>
@@ -72,7 +72,7 @@ of your professional life</string>
                     </constraints>
                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="11"/>
@@ -259,6 +259,11 @@ of your professional life</string>
             <point key="canvasLocation" x="-133.33333333333334" y="-15.401785714285714"/>
         </view>
     </objects>
+    <designables>
+        <designable name="9u0-PL-ToJ">
+            <size key="intrinsicContentSize" width="58" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="google" width="15.5" height="18"/>
         <namedColor name="TheamColor">

@@ -20,7 +20,7 @@ class CalendarView: UIView {
     @IBOutlet weak var calendar: FSCalendar!
     var gregorian = NSCalendar(identifier: .gregorian)
     let dateFormatter = DateFormatter()
-    
+    var dateSelected:((Date)->())!
     override func awakeFromNib() {
         super.awakeFromNib()
         let currentDate = Date()
@@ -93,7 +93,7 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        
+        dateSelected(date)
     }
     
 }

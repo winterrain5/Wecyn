@@ -20,7 +20,7 @@ class FriendService {
         let target = MultiTarget(FriendApi.addFriend(userId, reason))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
-
+    
     
     /// 好友审核（同意/拒绝好友请求)
     /// - Parameters:
@@ -28,7 +28,7 @@ class FriendService {
     ///   - audit_status: 审核状态。默认0。0 待审核，1 已通过，2 未通过
     ///   - is_delete: 删除好友请求信息。默认0。0 不删除，1 删除
     /// - Returns: ResponseStatus
-    static func auditFriend(from_user_id: Int, audit_status: Int = 0, is_delete: Int? = 0) -> Observable<ResponseStatus> {
+    static func auditFriend(from_user_id: Int, audit_status: Int = 0, is_delete: Int? = nil) -> Observable<ResponseStatus> {
         let target = MultiTarget(FriendApi.auditFriend(from_user_id, audit_status, is_delete))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
@@ -94,15 +94,16 @@ class FriendListModel: BaseModel {
     var fn:  String = ""
     var ln: String = ""
     var avt: String = ""
+    var isSelected: Bool = false
 }
 
 class FriendRecieveModel: BaseModel {
     /*
      "from_user_id": int # 申请者的user_id
-            "first_name": string # 申请者的first_name
-            "last_name": string # 申请者的last_name
-            "avatar": string # 头像
-            "reason": string # 申请理由
+     "first_name": string # 申请者的first_name
+     "last_name": string # 申请者的last_name
+     "avatar": string # 头像
+     "reason": string # 申请理由
      */
     var from_user_id: Int = 0
     var first_name: String = ""
@@ -115,13 +116,13 @@ class FriendRecieveModel: BaseModel {
 class FriendSendModel: BaseModel {
     /*
      "to_user_id": int # 被添加用户的user_id
-            "first_name": string # 被添加用户的first_name
-            "last_name": string # 被添加用户的last_name
-            "avatar": string # 头像
-            "apply_time": %Y-%m-%d %H:%M:%S # 申请时间
-            "reason": string # 申请理由
-            "audit_status": int # 审核状态。0 待审核，1 已通过，2 未通过
-            "operate_time": %Y-%m-%d %H:%M:%S # 操作时间
+     "first_name": string # 被添加用户的first_name
+     "last_name": string # 被添加用户的last_name
+     "avatar": string # 头像
+     "apply_time": %Y-%m-%d %H:%M:%S # 申请时间
+     "reason": string # 申请理由
+     "audit_status": int # 审核状态。0 待审核，1 已通过，2 未通过
+     "operate_time": %Y-%m-%d %H:%M:%S # 操作时间
      */
     
     var to_user_id: Int = 0
@@ -137,7 +138,7 @@ class FriendSendModel: BaseModel {
 class FriendUserInfoModel: BaseModel {
     /*
      "id": int # 用户的user_id
-            "wid": string # Wecyn ID。类似QQ号和微信号
+     "wid": string # Wecyn ID。类似QQ号和微信号
      */
     var id: Int = 0
     var first_name: String = ""

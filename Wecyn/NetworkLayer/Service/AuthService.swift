@@ -22,10 +22,10 @@ class AuthService {
     
     /// 国家信息
     static func getAllCountry() -> Observable<[CountryModel]> {
-//        let target = AuthApi.getCountryList
-//        return UserProvider.rx.cache.request(target).asObservable().mapArray(CountryModel.self)
-        let target = MultiTarget(AuthApi.getCountryList)
-        return APIProvider.rx.request(target).asObservable().mapArray(CountryModel.self)
+        let target = AuthApi.getCountryList
+        return UserProvider.rx.cache.request(target).asObservable().mapArray(CountryModel.self)
+//        let target = MultiTarget(AuthApi.getCountryList)
+//        return APIProvider.rx.request(target).asObservable().mapArray(CountryModel.self)
     }
     
     /// 城市信息

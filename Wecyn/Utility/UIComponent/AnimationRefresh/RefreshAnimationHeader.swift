@@ -13,16 +13,15 @@ enum RefreshColorStyle {
 }
 class RefreshAnimationHeader: MJRefreshHeader {
     
-    lazy private var activity:UIActivityIndicatorView = UIActivityIndicatorView.init(style: .gray)
+    lazy private var activity:UIActivityIndicatorView = UIActivityIndicatorView.init(style: .medium)
     lazy private var messageLabel:UILabel = UILabel()
     var colorStyle:RefreshColorStyle = .gray {
         didSet {
             if colorStyle == .gray {
                 messageLabel.textColor = .darkGray
-                activity.style = .gray
+                
             }else {
                 messageLabel.textColor = .white
-                activity.style = .white
             }
         }
     }
@@ -31,7 +30,7 @@ class RefreshAnimationHeader: MJRefreshHeader {
         self.backgroundColor = .clear
         self.mj_h = iPhoneX() ? 80 : 60
         
-        activity = UIActivityIndicatorView.init(style: .gray)
+        activity = UIActivityIndicatorView.init(style: .medium)
         activity.isHidden = true
         activity.hidesWhenStopped = true
         addSubview(activity)

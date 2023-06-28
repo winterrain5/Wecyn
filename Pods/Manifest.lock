@@ -27,6 +27,7 @@ PODS:
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
+  - NewPopMenu (2.1.2)
   - Permission/Camera (3.1.2):
     - Permission/Core
   - Permission/Core (3.1.2)
@@ -125,6 +126,7 @@ DEPENDENCIES:
   - LookinServer
   - MarqueeLabel
   - MJRefresh
+  - NewPopMenu (~> 2.0)
   - Permission/Camera
   - Permission/Microphone
   - Permission/Notifications
@@ -170,6 +172,7 @@ SPEC REPOS:
     - MarqueeLabel
     - MJRefresh
     - Moya
+    - NewPopMenu
     - Permission
     - PromiseKit
     - R.swift
@@ -197,10 +200,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AlertsAndPickers:
-    :commit: 412aa7664d9c8ca5d88251606878b3d08b4ce8ca
+    :commit: ba058df55313eabb07c707f1bfb06d4ea2d3694f
     :git: https://github.com/winterrain5/AlertsAndPickers.git
   SwiftExtensionsLibrary:
-    :commit: b84c428c73b9a31cc3306a34c63c0a4cd388d5de
+    :commit: 9793954331b1a0e8f3a7dcb65bcede65ae3c125f
     :git: https://github.com/winterrain5/SwiftExtensionsLibrary.git
 
 SPEC CHECKSUMS:
@@ -226,6 +229,7 @@ SPEC CHECKSUMS:
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
   Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
@@ -246,6 +250,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 75270c17639664720d1a06b6f365b1bd265989e7
+PODFILE CHECKSUM: 338d3157df0f526850eac7bd10b04e9b859b6cec
 
 COCOAPODS: 1.11.2
