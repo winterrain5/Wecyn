@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let _ = AuthService.getAllCountry()
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let manager = IQKeyboardManager.shared
@@ -31,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
             let main = MainController()
             window?.rootViewController = main
+            main.setSelectedIndex(at: 4)
         } else {
             let vc = LoginController()
             let main = BaseNavigationController(rootViewController: vc)

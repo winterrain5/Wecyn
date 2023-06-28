@@ -48,9 +48,9 @@ extension AuthApi:  TargetType, Cacheable  {
     var task: Task {
         switch self {
         case .emailSendeVerificationCode(let email):
-            return requestParameters(["email":email])
+            return requestNoneNilParameters(["email":email])
         case .emailVerification(let email,let code):
-            return requestParameters(["email":email,"code":code])
+            return requestNoneNilParameters(["email":email,"code":code])
         case .getCountryList:
             return .requestPlain
         case .getCityList(let countryID):
@@ -58,7 +58,7 @@ extension AuthApi:  TargetType, Cacheable  {
         case .signup(let model):
             return requestToTask(model)
         case .signin(let username,let password):
-            return requestParameters(["username":username,"password":password])
+            return requestNoneNilParameters(["username":username,"password":password])
         }
     }
     

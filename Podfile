@@ -39,6 +39,7 @@ target 'Wecyn' do
   pod 'CodeTextField', '~> 0.4.0'
   pod 'SwiftMessages'
   pod 'FSCalendar'
+  pod 'NewPopMenu', '~> 2.0'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

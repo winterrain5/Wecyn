@@ -6,13 +6,37 @@
 //
 
 import UIKit
-
+import PopMenu
 class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlowLayout {
     var sectionTitle = ["People in IT services you may know ","People you may know from Company209","People you may know from Nanyang Polytechnic"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addRightBarItems()
+        
+        let more = UIButton()
+        more.imageForNormal = R.image.navbar_more()
+        let moreItem = UIBarButtonItem(customView: more)
+        more.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            
+            let action1 = PopMenuDefaultAction(title: "My Connections") { action in
+                self.navigationController?.pushViewController(ConnectionOfMyController())
+            }
+            
+            let action2 = PopMenuDefaultAction(title: "My Groups") { action in
+                
+            }
+            
+            let menuViewController = PopMenuViewController(sourceView: more,actions: [
+                action1,action2
+            ])
+
+            self.present(menuViewController, animated: true, completion: nil)
+
+            
+        }).disposed(by: rx.disposeBag)
+        self.navigation.item.leftBarButtonItems = [moreItem]
        
         refreshData()
     }
@@ -30,18 +54,13 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
     override func createListView() {
         super.createListView()
         
-//        registRefreshHeader(colorStyle: .gray)
-        
-        let headerView = ConnectionHeaderView()
-        collectionView?.addSubview(headerView)
-        headerView.frame = CGRect(x: 0, y: -80, width: kScreenWidth, height: 80)
-
+        registRefreshHeader(colorStyle: .gray)
         collectionView?.register(nibWithCellClass: ConnectionItemCell.self)
         
         collectionView?.register(ConnectionSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:ConnectionSectionHeaderView.className)
         collectionView?.register(ConnectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier:ConnectionFooterView.className)
         
-        collectionView?.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: kTabBarHeight + 10, right: 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
         collectionView?.showsVerticalScrollIndicator = false
         
     }
@@ -104,53 +123,6 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
     
 }
 
-class ConnectionHeaderView:UIView {
-    let label1 = UILabel().text("My Connections(52)")
-        .color(R.color.textColor162C46()!)
-        .font(UIFont.sk.pingFangSemibold(16))
-    
-    let label2 = UILabel().text("Groups(52)")
-        .color(R.color.textColor162C46()!)
-        .font(UIFont.sk.pingFangSemibold(16))
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-       
-        label1.sk.setSpecificTextUnderLine("My Connections", color: R.color.textColor162C46()!)
-        label1.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
-            guard let `self` = self else { return }
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(ConnectionOfMyController())
-        }).disposed(by: rx.disposeBag)
-        addSubview(label1)
-       
-        
-       
-        label2.sk.setSpecificTextUnderLine("Groups", color: R.color.textColor162C46()!)
-        label2.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
-            guard let `self` = self else { return }
-            //            self.navigationController?.pushViewController(JobSavedController())
-        }).disposed(by: rx.disposeBag)
-        addSubview(label2)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        label1.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(30)
-            make.top.equalToSuperview().offset(16)
-        }
-        label2.snp.makeConstraints { make in
-            make.left.equalTo(label1.snp.left)
-            make.top.equalTo(label1.snp.bottom).offset(8)
-        }
-    }
-    
-}
 
 
 class ConnectionSectionHeaderView: UICollectionReusableView {

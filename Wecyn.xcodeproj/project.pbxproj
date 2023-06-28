@@ -35,10 +35,13 @@
 		450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */; };
 		450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */; };
 		450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */; };
+		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
+		4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A48A2A4AB716007481A6 /* EventDetailView.swift */; };
+		4519A48D2A4AB71E007481A6 /* EventDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4519A48C2A4AB71E007481A6 /* EventDetailView.xib */; };
+		4519A48F2A4AC69C007481A6 /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A48E2A4AC69C007481A6 /* EventDetailController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
 		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
-		453653402A47E8AD0026EC8D /* ConnectAuditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533F2A47E8AD0026EC8D /* ConnectAuditController.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
 		457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */; };
@@ -116,6 +119,10 @@
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
 		45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */; };
 		45ADB29D2A40390100745F6F /* ConnectionOfMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */; };
+		45BBF5262A48328D0018992C /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5252A48328D0018992C /* MessageController.swift */; };
+		45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5272A4832EC0018992C /* ScheduleApi.swift */; };
+		45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5292A4833B00018992C /* AddEventRequestModel.swift */; };
+		45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF52B2A4835440018992C /* ScheduleService.swift */; };
 		45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */; };
 		45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */; };
 		45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */; };
@@ -166,10 +173,13 @@
 		450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistAddAvatarController.swift; sourceTree = "<group>"; };
 		450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistAddAvatarView.swift; sourceTree = "<group>"; };
 		450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistAddAvatarView.xib; sourceTree = "<group>"; };
+		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
+		4519A48A2A4AB716007481A6 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		4519A48C2A4AB71E007481A6 /* EventDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailView.xib; sourceTree = "<group>"; };
+		4519A48E2A4AC69C007481A6 /* EventDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
 		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
-		4536533F2A47E8AD0026EC8D /* ConnectAuditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditController.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
 		457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExperienceItemCell.swift; sourceTree = "<group>"; };
@@ -252,6 +262,10 @@
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
 		45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyCell.swift; sourceTree = "<group>"; };
 		45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionOfMyCell.xib; sourceTree = "<group>"; };
+		45BBF5252A48328D0018992C /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
+		45BBF5272A4832EC0018992C /* ScheduleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleApi.swift; sourceTree = "<group>"; };
+		45BBF5292A4833B00018992C /* AddEventRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventRequestModel.swift; sourceTree = "<group>"; };
+		45BBF52B2A4835440018992C /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
 		45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemCell.swift; sourceTree = "<group>"; };
 		45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionItemCell.xib; sourceTree = "<group>"; };
 		45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRecommendController.swift; sourceTree = "<group>"; };
@@ -379,6 +393,7 @@
 				457C50992A38598100FCE8D0 /* AuthService.swift */,
 				45ADB2902A3FF0AD00745F6F /* UserService.swift */,
 				4536533D2A413F270026EC8D /* FriendService.swift */,
+				45BBF52B2A4835440018992C /* ScheduleService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -387,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				457C50952A38582A00FCE8D0 /* RegistRequestModel.swift */,
+				45BBF5292A4833B00018992C /* AddEventRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -472,6 +488,7 @@
 				457C50972A38589200FCE8D0 /* AuthApi.swift */,
 				45ADB28E2A3FF00E00745F6F /* UserApi.swift */,
 				4536533B2A413DF70026EC8D /* FriendApi.swift */,
+				45BBF5272A4832EC0018992C /* ScheduleApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -479,6 +496,7 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				45BBF5222A4832590018992C /* Message */,
 				45E85B152A3AE1ED00B820CD /* Calendar */,
 				450BA6C02A32B8D000764828 /* Login */,
 				45E765BC2A31AB1B00BF6EEC /* Main */,
@@ -706,13 +724,36 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		45BBF5222A4832590018992C /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				45BBF5242A4832630018992C /* View */,
+				45BBF5232A48325D0018992C /* Controller */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		45BBF5232A48325D0018992C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45BBF5252A48328D0018992C /* MessageController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45BBF5242A4832630018992C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		45D4D9AF2A3C2B0000D7ED04 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */,
 				45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */,
 				45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */,
-				4536533F2A47E8AD0026EC8D /* ConnectAuditController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -788,6 +829,8 @@
 			children = (
 				45E85B182A3AE23500B820CD /* CalendarController.swift */,
 				45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */,
+				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
+				4519A48E2A4AC69C007481A6 /* EventDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -804,6 +847,8 @@
 				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
 				45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */,
 				45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */,
+				4519A48A2A4AB716007481A6 /* EventDetailView.swift */,
+				4519A48C2A4AB71E007481A6 /* EventDetailView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -893,6 +938,7 @@
 				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
+				4519A48D2A4AB71E007481A6 /* EventDetailView.xib in Resources */,
 				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
 				459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
@@ -982,7 +1028,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453653402A47E8AD0026EC8D /* ConnectAuditController.swift in Sources */,
 				4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */,
 				45920AF72A26E045005871ED /* AppDelegate.swift in Sources */,
 				459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */,
@@ -993,6 +1038,8 @@
 				45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */,
 				45920ACE2A26E045005871ED /* APIHost.swift in Sources */,
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
+				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
+				4519A48F2A4AC69C007481A6 /* EventDetailController.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
@@ -1050,6 +1097,7 @@
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
+				4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
 				45920AEA2A26E045005871ED /* ZoomImageScrollView.swift in Sources */,
@@ -1062,10 +1110,12 @@
 				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
 				450BA6E12A3312D500764828 /* RegistConfirmController.swift in Sources */,
+				45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */,
 				45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */,
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,
 				457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */,
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
+				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,
 				459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */,
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
@@ -1079,8 +1129,10 @@
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,
 				45920ACD2A26E045005871ED /* NetworkLogPlugin.swift in Sources */,
+				45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */,
 				450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */,
 				45920AFD2A26E045005871ED /* BaseCollectionController.swift in Sources */,
+				45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */,
 				45920AD62A26E045005871ED /* PKError.swift in Sources */,
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
 				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,

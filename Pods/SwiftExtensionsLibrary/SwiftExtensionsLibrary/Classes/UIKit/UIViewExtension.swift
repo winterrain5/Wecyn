@@ -172,6 +172,44 @@ public extension ExtensionBase where Base: UIView {
             base.frame.origin = tempOrigin
         }
     }
+    
+    /// Border color of view; also inspectable from Storyboard.
+    var borderColor: UIColor? {
+        get {
+            guard let color = base.layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+        set {
+            guard let color = newValue else {
+                base.layer.borderColor = nil
+                return
+            }
+            // Fix React-Native conflict issue
+            guard String(describing: type(of: color)) != "__NSCFType" else { return }
+            base.layer.borderColor = color.cgColor
+        }
+    }
+
+    ///  Border width of view; also inspectable from Storyboard.
+    var borderWidth: CGFloat {
+        get {
+            return base.layer.borderWidth
+        }
+        set {
+            base.layer.borderWidth = newValue
+        }
+    }
+
+    /// Corner radius of view; also inspectable from Storyboard.
+    var cornerRadius: CGFloat {
+        get {
+            return base.layer.cornerRadius
+        }
+        set {
+            base.layer.masksToBounds = true
+            base.layer.cornerRadius = abs(CGFloat(Int(newValue * 100)) / 100)
+        }
+    }
 }
 
 

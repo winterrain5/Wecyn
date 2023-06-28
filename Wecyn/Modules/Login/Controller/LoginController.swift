@@ -12,7 +12,9 @@ class LoginController: BaseViewController {
     private let container = LoginView.loadViewFromNib()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        AuthService.getAllCountry().subscribe(onNext:{ _ in }).disposed(by: rx.disposeBag)
+        
         self.view.addSubview(container)
         container.frame = self.view.bounds
     }
