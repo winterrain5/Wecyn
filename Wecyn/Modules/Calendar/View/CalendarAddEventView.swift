@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AlertsAndPickers
 class CalendarAddEventView: UIView {
     @IBOutlet weak var titleTf: UITextField!
     
@@ -38,9 +37,56 @@ class CalendarAddEventView: UIView {
     @IBOutlet weak var atteneesContainer: UIView!
     @IBOutlet weak var addAttendanceLabel: UILabel!
     var requestModel = AddEventRequestModel()
+    var isEdit = false
+    var editEventModel: EventInfoModel? = nil {
+        didSet {
+            guard let event = editEventModel else { return }
+            
+            titleTf.text = event.title
+            startTime.text = event.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm")
+            endTime.text = event.end_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm")
+            
+            descTf.text = event.desc
+            eventTypeSwitch.isOn = event.is_online == 1
+            addressOrUrlTf.text = event.is_online == 1 ? event.url : event.location
+            attendeesTf.text = event.is_public == 1 ? event.attendance_limit : ""
+            attendeesTf.isHidden = event.is_public == 0
+            addAttendanceLabel.isHidden = event.is_public == 1
+            publicStateSegment.isEnabled = false
+            publicStateSegment.selectedSegmentIndex = event.is_public
+            
+            
+            attendees = event.attendees.map({
+                let attance = FriendListModel()
+                attance.id = $0.id
+                attance.fn = String($0.name.split(separator: " ").first ?? "")
+                attance.ln = String($0.name.split(separator: " ").last ?? "")
+                attance.status = $0.status
+                return attance
+            })
+            attendeesClv.reloadData()
+            
+            layoutWithAnimation()
+            
+            requestModel.title = editEventModel?.title
+            requestModel.start_time = editEventModel?.start_time
+            requestModel.end_time = editEventModel?.end_time
+            requestModel.id = editEventModel?.id
+            requestModel.url = editEventModel?.url
+            requestModel.location = editEventModel?.location
+            requestModel.attendees = editEventModel?.attendees
+            requestModel.is_online = editEventModel?.is_online ?? 0
+            requestModel.is_public = editEventModel?.is_public ?? 0
+            requestModel.attendance_limit = editEventModel?.attendance_count ?? 0
+            
+            isEdit = true
+        }
+    }
     var attendees:[FriendListModel] = []
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        attendeesTf.keyboardType = .numberPad
         
         attendeesClv.register(cellWithClass: CalendarHasAddedAttendanceCell.self)
         
@@ -63,35 +109,44 @@ class CalendarAddEventView: UIView {
         
         titleTf.rx.text.orEmpty.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.requestModel.title = $0
+            self.requestModel.title = $0.trimmed
+        }).disposed(by: rx.disposeBag)
+        
+        titleTf.rx.controlEvent(.editingChanged).subscribe(onNext:{[weak self] in
+            guard let `self` = self else { return }
+            if (self.titleTf.text?.count ?? 0) > 50 {
+                Toast.showMessage("Event title length must less than 50")
+            }
         }).disposed(by: rx.disposeBag)
         
         startContainer.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
-            let alert = UIAlertController.init(style: .actionSheet, title: "Start Time")
             let maxmumDate = (self.requestModel.end_time?.date(withFormat: "yyyy-MM-dd HH:mm:ss"))?.adding(.minute, value: -5)
-            alert.addDatePicker(mode: .dateAndTime, date: Date(), minimumDate: Date(), maximumDate: maxmumDate) { date in
-                
+            DatePickerView(title:"Start Time",
+                           mode: .date,
+                           date: Date(),
+                           minimumDate: Date(),
+                           maximumDate: maxmumDate) { date in
                 self.startTime.text = date.string(withFormat: "dd/MM/yyyy HH:mm")
                 let dateStr = date.string(withFormat: "yyyy-MM-dd HH:mm:ss")
                 self.requestModel.start_time = dateStr
-            }
-            alert.addAction(title: "Done", style: .cancel)
-            alert.show()
+            }.show()
+            
         }).disposed(by: rx.disposeBag)
         
         endContainer.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
-            let alert = UIAlertController.init(style: .actionSheet, title: "End Time")
             let minimunDate = (self.requestModel.start_time?.date(withFormat: "yyyy-MM-dd HH:mm:ss") ?? Date()).adding(.minute, value: 5)
-            alert.addDatePicker(mode: .dateAndTime, date: Date(), minimumDate: minimunDate, maximumDate: nil) { date in
+            DatePickerView(title:"End Time",
+                           mode: .date,
+                           date: Date(),
+                           minimumDate: minimunDate,
+                           maximumDate: nil) { date in
                 self.endTime.text = date.string(withFormat: "dd/MM/yyyy HH:mm")
-                
                 let dateStr = date.string(withFormat: "yyyy-MM-dd HH:mm:ss")
                 self.requestModel.end_time = dateStr
-            }
-            alert.addAction(title: "Done", style: .cancel)
-            alert.show()
+            }.show()
+            
         }).disposed(by: rx.disposeBag)
         
         descTf.rx.text.orEmpty.subscribe(onNext:{ [weak self] in
@@ -104,6 +159,9 @@ class CalendarAddEventView: UIView {
             self.eventTypeLabel.text = $0 ? "Online Event" : "Offline Event"
             self.requestModel.is_online = $0.int
             self.addressOrUrlTf.placeholder = $0 ? "Link" : "Location"
+            self.addressOrUrlTf.text = ""
+            self.requestModel.location = nil
+            self.requestModel.url = nil
             
         }).disposed(by: rx.disposeBag)
         
@@ -117,18 +175,16 @@ class CalendarAddEventView: UIView {
             self.layoutIfNeeded()
             if idx == 0 {//  private
                 self.attendeesOrLimitLabel.text = "Attendees"
-                self.attendeesTf.keyboardType = .default
                 self.requestModel.attendance_limit = nil
             } else {
                 self.attendeesOrLimitLabel.text = "Attendance Limit"
                 self.attendeesTf.placeholder = "Include the creator,must be a positive integer"
-                self.attendeesTf.keyboardType = .numberPad
                 self.requestModel.attendees = nil
                 self.attendees.removeAll()
             }
             
         }).disposed(by: rx.disposeBag)
-    
+        
         
         atteneesContainer.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
@@ -138,9 +194,9 @@ class CalendarAddEventView: UIView {
             vc.selectUsers.subscribe(onNext:{ models in
                 self.attendees = models
                 // status，是否接受邀请。默认传0。0 未知，1 同意，2 拒绝
-                var results:[Attendance] = []
+                var results:[Attendees] = []
                 results = models.map({
-                    let model = Attendance()
+                    let model = Attendees()
                     model.id = $0.id
                     model.status = 0
                     return model
@@ -176,28 +232,49 @@ class CalendarAddEventView: UIView {
             self.requestModel.remarks = $0
         }).disposed(by: rx.disposeBag)
         
-
+        
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.saveButton.startAnimation()
-            ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
-                if $0.success == 1 {
-                    Toast.showMessage("Event Add Success", after: 1) {
-                        UIViewController.sk.getTopVC()?.navigationController?.popViewController()
-                    }
-                } else {
-                    Toast.showMessage($0.message)
-                }
-                self.saveButton.stopAnimation()
-                
-            },onError: { e in
-                self.saveButton.stopAnimation()
-                Toast.showMessage(e.asAPIError.errorInfo().message)
-            }).disposed(by: self.rx.disposeBag)
+            Logger.info(self.requestModel.toJSONString(prettyPrint: true))
+            self.isEdit ? self.editEvent() : self.addEvent()
         }).disposed(by: rx.disposeBag)
         
     }
     
+    func addEvent() {
+        ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showMessage("Event Add Success", after: 1) {
+                    UIViewController.sk.getTopVC()?.navigationController?.popViewController()
+                }
+            } else {
+                Toast.showMessage($0.message)
+            }
+            self.saveButton.stopAnimation()
+            
+        },onError: { e in
+            self.saveButton.stopAnimation()
+            Toast.showMessage(e.asAPIError.errorInfo().message)
+        }).disposed(by: self.rx.disposeBag)
+    }
+    
+    func editEvent() {
+        ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showMessage("Event Update Success", after: 1) {
+                    UIViewController.sk.getTopVC()?.navigationController?.popViewController()
+                }
+            } else {
+                Toast.showMessage($0.message)
+            }
+            self.saveButton.stopAnimation()
+            
+        },onError: { e in
+            self.saveButton.stopAnimation()
+            Toast.showMessage(e.asAPIError.errorInfo().message)
+        }).disposed(by: self.rx.disposeBag)
+    }
     
     func layoutWithAnimation() {
         
@@ -230,6 +307,7 @@ extension CalendarAddEventView: UICollectionViewDataSource,UICollectionViewDeleg
             cell.model = attendees[indexPath.row]
             cell.deleteItemHandler = { item in
                 self.attendees.removeFirst(where: { $0.id == item.id })
+                self.requestModel.attendees?.removeFirst(where: { $0.id == item.id })
                 self.layoutWithAnimation()
             }
         }
@@ -250,15 +328,27 @@ class CalendarHasAddedAttendanceCell: UICollectionViewCell {
     var model: FriendListModel =  FriendListModel() {
         didSet {
             btn.titleForNormal = String.fullName(first: model.fn, last: model.ln) + " "
+            
+            switch model.status {
+            case 0: // 未知
+                contentView.backgroundColor = UIColor(hexString: "#ed8c00")
+            case 1: // 同意
+                contentView.backgroundColor = UIColor(hexString: "#21a93c")
+            case 2: // 拒绝
+                contentView.backgroundColor = UIColor(hexString: "#d82739")
+            default:
+                contentView.backgroundColor = UIColor(hexString: "#ed8c00")
+            }
+            
         }
     }
     var deleteItemHandler:((FriendListModel)->())?
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(btn)
-        contentView.backgroundColor = R.color.disableColor()
+        
         btn.titleLabel?.font = UIFont.sk.pingFangRegular(12)
-        btn.titleColorForNormal = R.color.textColor52()
+        btn.titleColorForNormal = .white
         btn.imageForNormal = R.image.attendace_delete()
         btn.sk.setImageTitleLayout(.imgRight)
         contentView.layer.cornerRadius = 3

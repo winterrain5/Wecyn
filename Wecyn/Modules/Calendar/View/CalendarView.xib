@@ -26,7 +26,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSs-pH-Mnf">
-                            <rect key="frame" x="107" y="0.0" width="30" height="58"/>
+                            <rect key="frame" x="110" y="0.0" width="30" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="J8T-YV-p6Q"/>
                             </constraints>
@@ -34,7 +34,7 @@
                             <state key="normal" image="calendar_left_arrow"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euf-mh-Pax">
-                            <rect key="frame" x="143" y="0.0" width="30" height="58"/>
+                            <rect key="frame" x="146" y="0.0" width="30" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="bnv-Ol-UDY"/>
                             </constraints>
@@ -66,9 +66,9 @@
                         <constraint firstItem="tfT-K9-OQj" firstAttribute="leading" secondItem="6rh-Dn-L8R" secondAttribute="leading" constant="22" id="FC2-PB-kE1"/>
                         <constraint firstItem="Llg-bB-FFB" firstAttribute="leading" secondItem="scL-KV-KjA" secondAttribute="trailing" constant="8" id="FM2-IC-zmQ"/>
                         <constraint firstAttribute="bottom" secondItem="lSs-pH-Mnf" secondAttribute="bottom" id="OMV-fW-p5j"/>
-                        <constraint firstItem="lSs-pH-Mnf" firstAttribute="leading" secondItem="tfT-K9-OQj" secondAttribute="trailing" constant="8" id="QH3-hz-W61"/>
                         <constraint firstItem="scL-KV-KjA" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="RUB-1t-PNy"/>
                         <constraint firstItem="lSs-pH-Mnf" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="Sdo-ZW-RGt"/>
+                        <constraint firstItem="lSs-pH-Mnf" firstAttribute="leading" secondItem="6rh-Dn-L8R" secondAttribute="leading" constant="110" id="aM2-wb-m2V"/>
                         <constraint firstItem="Llg-bB-FFB" firstAttribute="top" secondItem="6rh-Dn-L8R" secondAttribute="top" id="aVH-q6-3sA"/>
                         <constraint firstItem="tfT-K9-OQj" firstAttribute="centerY" secondItem="6rh-Dn-L8R" secondAttribute="centerY" id="dnq-vT-XlF"/>
                         <constraint firstAttribute="bottom" secondItem="euf-mh-Pax" secondAttribute="bottom" id="nXs-6h-BGv"/>
@@ -113,7 +113,7 @@
                 <outlet property="preButton" destination="lSs-pH-Mnf" id="nbk-Jf-3Te"/>
                 <outlet property="shareButton" destination="Llg-bB-FFB" id="le9-aj-xja"/>
             </connections>
-            <point key="canvasLocation" x="-88" y="4"/>
+            <point key="canvasLocation" x="87" y="2"/>
         </view>
     </objects>
     <resources>

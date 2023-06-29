@@ -10,13 +10,10 @@ import UIKit
 class EventDetailController: BaseViewController {
 
     var container = EventDetailView.loadViewFromNib()
-    var eventId:Int
-    var status:Int
-    init(eventId:Int,status:Int) {
-        self.eventId = eventId
-        self.status = status
+    var eventModel:EventListModel
+    init(eventModel:EventListModel) {
+        self.eventModel = eventModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -29,13 +26,25 @@ class EventDetailController: BaseViewController {
         self.view.addSubview(container)
         container.frame = self.view.bounds
         
-        ScheduleService.eventInfo(eventId).subscribe(onNext:{
+        ScheduleService.eventInfo(eventModel.id).subscribe(onNext:{
+            
+            self.container.eventModel = self.eventModel
             self.container.model = $0
-            self.container.status = self.status
-            self.container.eventId = self.eventId
+            
         }).disposed(by: rx.disposeBag)
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigation.bar.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigation.bar.isHidden = false
+    }
+    
 
 }

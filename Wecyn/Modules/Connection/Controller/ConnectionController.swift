@@ -9,6 +9,7 @@ import UIKit
 import PopMenu
 class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlowLayout {
     var sectionTitle = ["People in IT services you may know ","People you may know from Company209","People you may know from Nanyang Polytechnic"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +39,7 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
         }).disposed(by: rx.disposeBag)
         self.navigation.item.leftBarButtonItems = [moreItem]
        
-        refreshData()
+        loadNewData()
     }
     
     override func refreshData() {
@@ -46,6 +47,8 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
         FriendService.searchUserList().subscribe(onNext:{ models in
             self.dataArray.append(contentsOf: models)
             self.endRefresh(models.count,emptyString: "No Data")
+        },onError: { e in
+            self.endRefresh(e.asAPIError.emptyDatatype)
         }).disposed(by: rx.disposeBag)
         
     }

@@ -17,6 +17,15 @@ class ScheduleService {
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
+    /// 修改事件
+    /// - Parameter model: AddEventRequestModel
+    /// - Returns: ResponseStatus
+    static func updateEvent(_ model:AddEventRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(ScheduleApi.updateEvent(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+
+    
     
     /// 事件详情
     /// - Parameter id: id
@@ -48,6 +57,17 @@ class ScheduleService {
         let target = MultiTarget(ScheduleApi.auditPrivitaEvent(id,status))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
+    
+    
+    /// 删除事件
+    /// - Parameter id: id
+    /// - Returns: ResponseStatus
+    static func deleteEvent(_ id: Int) -> Observable<ResponseStatus> {
+        let target = MultiTarget(ScheduleApi.deleteEvent(id))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
     
 }
 
@@ -112,4 +132,8 @@ class EventListModel: BaseModel {
     var is_public = 0
     var status = 0
     var is_creator = 0
+    var creator_id = 0
+    
+    var creator_name = ""
+    var creator_avatar = ""
 }

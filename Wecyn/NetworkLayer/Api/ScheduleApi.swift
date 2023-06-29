@@ -12,6 +12,8 @@ enum ScheduleApi {
     case eventInfo(_ id: Int)
     case eventList(_ keyword:String? = nil,_ startDate:String? = nil, _ endDate:String? = nil)
     case auditPrivitaEvent(_ id:Int,_ status:Int? = nil)
+    case updateEvent(_ model:AddEventRequestModel)
+    case deleteEvent(_ id:Int)
 }
 
 extension ScheduleApi: TargetType {
@@ -25,13 +27,19 @@ extension ScheduleApi: TargetType {
             return "/api/schedule/searchList/"
         case .auditPrivitaEvent:
             return "/api/schedule/auditPrivateEvent/"
+        case .updateEvent:
+            return "/api/schedule/updateEvent/"
+        case .deleteEvent:
+            return "/api/schedule/deleteEvent/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .addEvent, .auditPrivitaEvent:
+        case .addEvent, .auditPrivitaEvent, .deleteEvent:
             return Moya.Method.post
+        case .updateEvent:
+            return Moya.Method.put
         default:
             return Moya.Method.get
         }
@@ -47,6 +55,10 @@ extension ScheduleApi: TargetType {
             return requestURLParameters(["keyword":keyword,"start_date":startDate,"end_date":endDate])
         case .auditPrivitaEvent(let id,let status):
             return requestNoneNilParameters(["id":id,"status":status])
+        case .updateEvent(let model):
+            return requestToTask(model)
+        case .deleteEvent(let id):
+            return requestNoneNilParameters(["id":id])
         }
     }
 }

@@ -10,16 +10,24 @@ import UIKit
 class CaledarItemCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var creatorLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var shadowView: UIView!
+    
+    var searchingText = ""
     var model: EventListModel? {
         didSet {
             guard let model = model else { return }
             titleLabel.text = model.title
-            let starTime = model.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.timeString(ofStyle: .short) ?? ""
-            let endTime = model.end_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.timeString(ofStyle: .short) ?? ""
-            timeLabel.text = starTime + "-" + endTime
+            if !searchingText.isEmpty {
+                titleLabel.sk.setSpecificTextColor(searchingText, color: UIColor(hexString: "#21a93c")!)
+            }
+            
+            
+            let starTime = model.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
+            let endTime = model.end_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
+            timeLabel.text = starTime + " - " + endTime
             
             switch model.status {
             case 0: // 未知
@@ -31,6 +39,8 @@ class CaledarItemCell: UITableViewCell {
             default:
                 statusView.backgroundColor = UIColor(hexString: "#ed8c00")
             }
+            
+            creatorLabel.text = model.is_creator == 1 ? "created by yourself" : "created by: \(model.creator_name)"
 //            locationLabel.text = "Location:\(model)"
         }
     }

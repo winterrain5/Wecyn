@@ -45,8 +45,7 @@ class FriendService {
     /// 好友列表
     /// - Returns: FriendListModel
     static func friendList() -> Observable<[FriendListModel]> {
-        let target = MultiTarget(FriendApi.friendList)
-        return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
+        return FriendProvider.rx.cache.request(FriendApi.friendList).asObservable().mapArray(FriendListModel.self)
     }
     
     /// 获取收到的好友申请列表
@@ -94,7 +93,10 @@ class FriendListModel: BaseModel {
     var fn:  String = ""
     var ln: String = ""
     var avt: String = ""
+    
+    // 本地字段
     var isSelected: Bool = false
+    var status = 0
 }
 
 class FriendRecieveModel: BaseModel {

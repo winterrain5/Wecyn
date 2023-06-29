@@ -8,6 +8,7 @@
 
 import Foundation
 import JXSegmentedView
+
 extension BaseViewController: JXSegmentedListContainerViewListDelegate {
     func listView() -> UIView {
         return view
@@ -17,13 +18,21 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
         let notification = UIButton()
         notification.imageForNormal = R.image.navbar_bell()
         let notificationItem = UIBarButtonItem(customView: notification)
+        notification.rx.tap.subscribe(onNext:{
+          
+        }).disposed(by: rx.disposeBag)
+        
+        let fixItem = UIBarButtonItem.fixedSpace(width: 12)
         
         let message = UIButton()
         message.imageForNormal = R.image.navbar_message()
         let messageItem = UIBarButtonItem(customView: message)
+        message.rx.tap.subscribe(onNext:{
+            
+        }).disposed(by: rx.disposeBag)
                 
         
-        self.navigation.item.rightBarButtonItems = [notificationItem,messageItem]
+        self.navigation.item.rightBarButtonItems = [notificationItem,fixItem,messageItem]
   
     }
 }

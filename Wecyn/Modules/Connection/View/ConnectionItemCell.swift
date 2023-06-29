@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AlertsAndPickers
 class ConnectionItemCell: UICollectionViewCell {
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var avatarImgView: UIImageView!
