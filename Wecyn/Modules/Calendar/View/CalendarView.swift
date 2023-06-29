@@ -45,12 +45,25 @@ class CalendarView: UIView {
         self.calendar.locale = NSLocale.init(localeIdentifier: "en") as Locale
         
        
-        dateFormatter.dateFormat = "MMMM yyyy"
+        dateFormatter.dateFormat = "MMM yyyy"
         dateFormatter.locale = Locale(identifier: "en")
         dateLabel.text = dateFormatter.string(from: currentDate)
         
         addButton.rx.tap.subscribe(onNext:{
             UIViewController.sk.getTopVC()?.navigationController?.pushViewController(CalendarAddEventController())
+        }).disposed(by: rx.disposeBag)
+        
+        preButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            let pre = self.calendar.currentPage.adding(.month, value: -1)
+            self.calendar.setCurrentPage(pre, animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        nextButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            let next = self.calendar.currentPage.adding(.month, value: 1)
+            self.calendar.setCurrentPage(next, animated: true)
+            
         }).disposed(by: rx.disposeBag)
         
     }

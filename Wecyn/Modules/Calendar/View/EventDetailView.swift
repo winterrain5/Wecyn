@@ -6,38 +6,45 @@
 //
 
 import UIKit
+import SafariServices
 import DKLogger
+import SwiftAlertView
 class EventDetailView: UIView {
-
+    
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var closeBtn: UIButton!
     
+    @IBOutlet weak var attendeesHeadLabel: UILabel!
     @IBOutlet weak var segment: UISegmentedControl!
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var createUserLabel: UILabel!
     
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var locOrUrlLabel: UILabel!
     @IBOutlet weak var locOrUrlImgView: UIImageView!
     @IBOutlet weak var clv: UICollectionView!
-    var eventId:Int = 0
-    // 0 未知，1 同意，2 拒绝
-    var status:Int = 0
+    var eventModel:EventListModel!
+    var operateCompleteHandler:(()->())!
     var model:EventInfoModel? {
         didSet {
             
+            self.hideSkeleton()
             guard let model = model else { return }
             Logger.debug(model.start_time)
             titleLabel.text = model.title
             let start = model.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
             let end = model.end_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
             dateLabel.text = start + " - " + end
-           
+            
             if model.is_online == 1{
                 locOrUrlImgView.image = R.image.event_link()
                 locOrUrlLabel.text = model.url
+                locOrUrlLabel.textColor = .blue
             } else {
                 locOrUrlImgView.image = R.image.event_location()
                 locOrUrlLabel.text = model.location
@@ -46,13 +53,18 @@ class EventDetailView: UIView {
             if let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className), tokenModel.user_id == model.creator_id {
                 segment.isHidden = true
             } else {
-                segment.selectedSegmentIndex = status
+                segment.selectedSegmentIndex = eventModel.status
+                editButton.isHidden = true
+                deleteButton.isHidden = true
             }
             
-           
+            createUserLabel.text = eventModel.is_creator == 1 ? "created by yourself" : "create by: \(eventModel.creator_name)"
+            
+            attendeesHeadLabel.isHidden = model.is_public == 1
+            descLabel.text = "Description \n\n \(model.desc)"
             
             clv.reloadData()
-         
+            
             
         }
     }
@@ -60,6 +72,11 @@ class EventDetailView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.isSkeletonable = true
+        self.showSkeleton()
+        
+        locOrUrlLabel.isCopyingEnabled = true
+        locOrUrlLabel.isUserInteractionEnabled = true
+        
         clv.delegate = self
         clv.dataSource = self
         clv.register(cellWithClass: EventDetaiAttendeesCell.self)
@@ -75,20 +92,53 @@ class EventDetailView: UIView {
         closeBtn.rx.tap.subscribe(onNext:{
             UIViewController.sk.getTopVC()?.dismiss(animated: true)
         }).disposed(by: rx.disposeBag)
-    
+        
         segment.selectedSegmentTintColor = .white
         segment.addTarget(self, action: #selector(segmentDidSelected), for: .valueChanged)
-       
+        
+        editButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            UIViewController.sk.getTopVC()?.dismiss(animated: true,completion: {
+                
+                let vc = CalendarAddEventController(editEventMode: self.model)
+                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+                
+            })
+        }).disposed(by: rx.disposeBag)
+        
+      
+        deleteButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this event?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
+                if buttonIndex == 1 {
+                    ScheduleService.deleteEvent(self.model?.id ?? 0).subscribe(onNext:{
+
+                        if $0.success == 1 {
+                            Toast.showMessage("operate success")
+                        } else {
+                            Toast.showMessage($0.message)
+                        }
+                        UIViewController.sk.getTopVC()?.dismiss(animated: true,completion: {
+                            self.operateCompleteHandler?()
+                        })
+
+                    }).disposed(by: self.rx.disposeBag)
+                }
+            }
+            
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     @objc func segmentDidSelected(_ seg:UISegmentedControl) {
         Toast.showLoading()
-        ScheduleService.auditPrivateEvent(id: self.eventId, status: seg.selectedSegmentIndex).subscribe(onNext:{
+        ScheduleService.auditPrivateEvent(id: eventModel.id, status: seg.selectedSegmentIndex).subscribe(onNext:{
             if $0.success == 1 {
                 Toast.showSuccess(withStatus: "operate success")
             } else {
                 Toast.showMessage($0.message)
             }
+            self.operateCompleteHandler()
         },onError: { e in
             Toast.showMessage(e.asAPIError.errorInfo().message)
         }).disposed(by: self.rx.disposeBag)
@@ -116,7 +166,7 @@ extension EventDetailView: UICollectionViewDataSource,UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.model?.attendees.count ?? 0 > 0 {
             let item = model?.attendees[indexPath.row]
-            let width = (item?.name.widthWithConstrainedWidth(height: 24, font: UIFont.sk.pingFangRegular(12)) ?? 0) + 20
+            let width = (item?.name.widthWithConstrainedWidth(height: 24, font: UIFont.sk.pingFangRegular(12)) ?? 0) + 8
             return CGSize(width: width, height: 30)
         }
         return .zero
@@ -149,9 +199,10 @@ class EventDetaiAttendeesCell: UICollectionViewCell {
         
         label.font = UIFont.sk.pingFangRegular(12)
         label.textColor = .white
+        label.textAlignment = .center
         contentView.layer.cornerRadius = 3
         contentView.layer.masksToBounds = true
-      
+        
     }
     
     override func layoutSubviews() {
@@ -165,3 +216,5 @@ class EventDetaiAttendeesCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

@@ -173,7 +173,7 @@ struct _R {
     var disableColor: RswiftResources.ColorResource { .init(name: "disableColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 35 images.
+  /// This `_R.image` struct is generated, and contains static references to 37 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -216,6 +216,9 @@ struct _R {
     /// Image `event_detail_close`.
     var event_detail_close: RswiftResources.ImageResource { .init(name: "event_detail_close", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `event_detail_delete`.
+    var event_detail_delete: RswiftResources.ImageResource { .init(name: "event_detail_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `event_link`.
     var event_link: RswiftResources.ImageResource { .init(name: "event_link", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -248,6 +251,9 @@ struct _R {
 
     /// Image `navbar_more`.
     var navbar_more: RswiftResources.ImageResource { .init(name: "navbar_more", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `navigation_back_default`.
+    var navigation_back_default: RswiftResources.ImageResource { .init(name: "navigation_back_default", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -357,7 +363,6 @@ struct _R {
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CalendarAddEventView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'CalendarAddEventView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "calendar_calendar", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_calendar' is used in nib 'CalendarSectionView', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "search_icon", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'search_icon' is used in nib 'CalendarSectionView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CalendarSectionView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "calendar_add", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_add' is used in nib 'CalendarView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "calendar_left_arrow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_left_arrow' is used in nib 'CalendarView', but couldn't be loaded.") }

@@ -5,11 +5,11 @@
       "scale" : "1x"
     },
     {
+      "filename" : "event_detail_delete@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "navigation_back_default.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -17,8 +17,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "original"
   }
 }

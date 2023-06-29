@@ -44,6 +44,7 @@
 		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
+		457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457133B82A4D0E81007B783A /* EventSearchViewController.swift */; };
 		457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */; };
 		457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */; };
 		457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C508A2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib */; };
@@ -54,6 +55,7 @@
 		457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50992A38598100FCE8D0 /* AuthService.swift */; };
 		457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509C2A38648300FCE8D0 /* CountryModel.swift */; };
 		457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509E2A3949E400FCE8D0 /* CountryListController.swift */; };
+		457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D912A4D6A47002E50DF /* DatePickerView.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
 		45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */; };
 		45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7D2A26E045005871ED /* CacheProvider+Extension.swift */; };
@@ -182,6 +184,7 @@
 		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
+		457133B82A4D0E81007B783A /* EventSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSearchViewController.swift; sourceTree = "<group>"; };
 		457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExperienceItemCell.swift; sourceTree = "<group>"; };
 		457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderJobItemCell.swift; sourceTree = "<group>"; };
 		457C508A2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderJobItemCell.xib; sourceTree = "<group>"; };
@@ -192,6 +195,7 @@
 		457C50992A38598100FCE8D0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		457C509C2A38648300FCE8D0 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		457C509E2A3949E400FCE8D0 /* CountryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListController.swift; sourceTree = "<group>"; };
+		457C7D912A4D6A47002E50DF /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45920A7B2A26E045005871ED /* Cacheable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cacheable+Extension.swift"; sourceTree = "<group>"; };
 		45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+HandyJson.swift"; sourceTree = "<group>"; };
@@ -417,6 +421,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		457C7D8E2A4D69F8002E50DF /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				457C7D8F2A4D6A0B002E50DF /* DatePicker */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		457C7D8F2A4D6A0B002E50DF /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				457C7D912A4D6A47002E50DF /* DatePickerView.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		459209C32A26D5F4005871ED = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +516,7 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				457C7D8E2A4D69F8002E50DF /* UIComponents */,
 				45BBF5222A4832590018992C /* Message */,
 				45E85B152A3AE1ED00B820CD /* Calendar */,
 				450BA6C02A32B8D000764828 /* Login */,
@@ -831,6 +852,7 @@
 				45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */,
 				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				4519A48E2A4AC69C007481A6 /* EventDetailController.swift */,
+				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1031,6 +1053,7 @@
 				4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */,
 				45920AF72A26E045005871ED /* AppDelegate.swift in Sources */,
 				459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */,
+				457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
 				457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */,
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
@@ -1078,6 +1101,7 @@
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
 				45920AE82A26E045005871ED /* LoaddingButton.swift in Sources */,
 				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
+				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,

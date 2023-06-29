@@ -31,11 +31,10 @@ class AddEventRequestModel: BaseModel {
     var location: String?
     var url: String?
     var attendance_limit: Int?
-    var attendees: [Attendance]?
+    var attendees: [Attendees]?
     var desc: String?
+    // update event 
+    var id: Int?
+    
 }
 
-class Attendance:BaseModel {
-    var id:Int?
-    var status:Int?
-}

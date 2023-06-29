@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '12.0'
+ platform :ios, '13.0'
 
 target 'Wecyn' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -37,9 +37,10 @@ target 'Wecyn' do
   pod 'KMPlaceholderTextView'
   pod 'MarqueeLabel'
   pod 'CodeTextField', '~> 0.4.0'
-  pod 'SwiftMessages'
   pod 'FSCalendar'
   pod 'NewPopMenu', '~> 2.0'
+  pod 'SwiftAlertView'
+
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'
@@ -54,7 +55,7 @@ target 'Wecyn' do
   pod 'EntryKit'
   pod 'DKEmptyDataSet'
   pod 'SwiftExtensionsLibrary', :git => 'https://github.com/winterrain5/SwiftExtensionsLibrary.git'
-  pod 'AlertsAndPickers', :git => 'https://github.com/winterrain5/AlertsAndPickers.git'
+  
 
 end
 

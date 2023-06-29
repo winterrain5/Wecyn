@@ -7,6 +7,8 @@
 
 import Foundation
 import Moya
+import RxMoyaCache
+let FriendProvider = MoyaProvider<FriendApi>()
 enum FriendApi  {
     case addFriend(_ userId: Int,_ reason: String? = nil)
     case auditFriend(_ from_user_id: Int,_ audit_status: Int = 0,_ is_delete: Int? = 0)
@@ -18,7 +20,7 @@ enum FriendApi  {
     case userSearchList(_ keyword: String = "")
 }
 
-extension FriendApi:TargetType {
+extension FriendApi:TargetType, Cacheable {
     var path: String {
         switch self {
         case .addFriend:

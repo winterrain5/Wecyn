@@ -8,8 +8,6 @@
 import UIKit
 
 class CalendarSectionView: UIView {
-    @IBOutlet weak var searchContainer: UIView!
-    
     @IBOutlet weak var eventsLabel: UILabel!
     
     @IBOutlet weak var rangeLabel: UILabel!
@@ -18,11 +16,19 @@ class CalendarSectionView: UIView {
     
     @IBOutlet weak var rightDateContainer: UIView!
     
+    @IBOutlet weak var endTimeLabel: UILabel!
+    @IBOutlet weak var startTimeLabel: UILabel!
+    var startTime:String?
+    var endTime:String?
+    var dateRangeFilter:((_ start:String?,_ end:String?)->())?
+    var dataViewTypeChanged:((DataViewType)->())?
     override func awakeFromNib() {
         super.awakeFromNib()
-        searchContainer.addShadow(cornerRadius: 9)
         leftDateContainer.addShadow(cornerRadius: 7)
         rightDateContainer.addShadow(cornerRadius: 7)
+        
+        leftDateContainer.isHidden = true
+        rightDateContainer.isHidden = true
         
         labelSelected(eventsLabel)
         
@@ -30,12 +36,42 @@ class CalendarSectionView: UIView {
             guard let `self` = self else { return }
             self.labelSelected(self.eventsLabel)
             self.labelDeselected(self.rangeLabel)
+            
+            self.leftDateContainer.isHidden = true
+            self.rightDateContainer.isHidden = true
+            
+            self.dataViewTypeChanged?(.UpComing)
         }).disposed(by: rx.disposeBag)
         
         rangeLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
             self.labelSelected(self.rangeLabel)
             self.labelDeselected(self.eventsLabel)
+            
+            self.leftDateContainer.isHidden = false
+            self.rightDateContainer.isHidden = false
+            
+            self.dataViewTypeChanged?(.Timeline)
+        }).disposed(by: rx.disposeBag)
+        
+        leftDateContainer.rx.tapGesture().subscribe(onNext:{ _ in
+           
+            DatePickerView(title:"Start Time", mode: .date, date: Date()) { date in
+                self.startTimeLabel.text = date.string(withFormat: "dd/MM/yyyy")
+                self.startTime = date.string(withFormat: "yyyy-MM-dd")
+                self.dateRangeFilter?(self.startTime,self.endTime)
+            }.show()
+            
+        }).disposed(by: rx.disposeBag)
+        
+        rightDateContainer.rx.tapGesture().subscribe(onNext:{ _ in
+            
+            DatePickerView(title:"End Time", mode: .date, date: Date()) { date in
+                self.endTimeLabel.text = date.string(withFormat: "dd/MM/yyyy")
+                self.endTime = date.string(withFormat: "yyyy-MM-dd")
+                self.dateRangeFilter?(self.startTime,self.endTime)
+            }.show()
+            
         }).disposed(by: rx.disposeBag)
         
     }
