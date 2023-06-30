@@ -7,6 +7,7 @@
 
 import UIKit
 import Cache
+import SwifterSwift
 class RegistInfoView: UIView {
     
     @IBOutlet weak var emailTf: UITextField!

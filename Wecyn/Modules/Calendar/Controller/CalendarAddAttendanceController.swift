@@ -7,10 +7,13 @@
 
 import UIKit
 import RxRelay
+import IQKeyboardManagerSwift
 class CalendarAddAttendanceController: BaseTableController {
 
     var friends:[FriendListModel] = []
     var selectUsers: BehaviorRelay<[FriendListModel]> =  BehaviorRelay(value: [])
+    var searchResults:[FriendListModel] = []
+    var keyword = ""
     init(selecteds:[FriendListModel]) {
         super.init(nibName: nil, bundle: nil)
         selectUsers.accept(selecteds)
@@ -24,15 +27,48 @@ class CalendarAddAttendanceController: BaseTableController {
         super.viewDidLoad()
         
         let doneButton = UIButton()
-        doneButton.textColor(.blue)
-        doneButton.titleForNormal = "Done"
-        self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
+        doneButton.textColor(.black)
+        let doneItem = UIBarButtonItem(customView: doneButton)
+        
+        let fixItem = UIBarButtonItem.fixedSpace(width: 16)
+        
+        self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.dismiss(animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        selectUsers.map({ !$0.isEmpty }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)
+        
+        let searchView = NavbarSearchView(placeholder: "Search Friend Name",isSearchable: true,isBecomeFirstResponder: false)
+        searchView.size = CGSize(width: kScreenWidth * 0.75, height: 36)
+        self.navigation.item.titleView = searchView
+        searchView.searching = { [weak self] keyword in
+            guard let `self` = self else { return }
+            self.keyword = keyword.trimmed
+            self.searchResults = self.friends.filter({ $0.first_name.contains(keyword.trimmed) || $0.last_name.contains(keyword.trimmed) || $0.full_name.contains(keyword.trimmed)})
+            self.reloadData()
+        }
+        
+        searchView.beginSearch = { [weak self] in
+            guard let `self` = self else { return }
+            self.searchResults = []
+            self.reloadData()
+        }
+        
    
         refreshData()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = true
     }
     
     override func refreshData() {
@@ -61,6 +97,7 @@ class CalendarAddAttendanceController: BaseTableController {
         super.createListView()
         
         registRefreshHeader()
+        tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: kBottomsafeAreaMargin + 10, right: 0)
         tableView?.showsVerticalScrollIndicator = false
         tableView?.register(cellWithClass: CalendarAddAttendanceCell.self)
         tableView?.scrollToTop()
@@ -70,7 +107,7 @@ class CalendarAddAttendanceController: BaseTableController {
   
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        return searchResults.count > 0 ? searchResults.count : friends.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,12 +117,16 @@ class CalendarAddAttendanceController: BaseTableController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withClass: CalendarAddAttendanceCell.self)
-        if friends.count > 0 {
-            let model = friends[indexPath.row]
-            cell.imgView.kf.setImage(with: model.avt.imageUrl,placeholder: R.image.proile_user()!)
-            cell.nameLabel.text = String.fullName(first: model.fn, last: model.ln)
-            cell.accessoryType = model.isSelected ? .checkmark : .none
+        var model:FriendListModel?
+        if searchResults.count > 0 {
+            model = searchResults[indexPath.row]
+        }else if friends.count > 0{
+            model = friends[indexPath.row]
         }
+        guard let model = model else { return cell  }
+        cell.imgView.kf.setImage(with: model.avatar.imageUrl,placeholder: R.image.proile_user()!)
+        cell.nameLabel.text = model.full_name
+        cell.accessoryType = model.isSelected ? .checkmark : .none
         cell.selectionStyle = .none
         return cell
     }

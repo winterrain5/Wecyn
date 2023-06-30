@@ -21,6 +21,11 @@ class CalendarView: UIView {
     var gregorian = NSCalendar(identifier: .gregorian)
     let dateFormatter = DateFormatter()
     var dateSelected:((Date)->())!
+    var eventDates:[String] = [] {
+        didSet {
+            calendar.reloadData()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         let currentDate = Date()
@@ -32,7 +37,7 @@ class CalendarView: UIView {
         calendar.appearance.titleDefaultColor = R.color.textColor52()!
         calendar.appearance.titleFont = UIFont.sk.pingFangSemibold(15)
         calendar.appearance.caseOptions = .weekdayUsesUpperCase
-        calendar.appearance.eventDefaultColor = .clear
+//        calendar.appearance.eventDefaultColor = .clear
         calendar.scope = .month
         calendar.appearance.borderRadius = 0.2
         calendar.rowHeight = (kScreenWidth - 36) / 7
@@ -103,7 +108,19 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     //    return R.color.gray82()
     //  }
     
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        if eventDates.contains(date.string(withFormat: "yyyy-MM-dd")) {
+            return [R.color.textColor52()!]
+        }
+        return [.clear]
+    }
     
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        if eventDates.contains(date.string(withFormat: "yyyy-MM-dd")) {
+            return 1
+        }
+        return 0
+    }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         dateSelected(date)

@@ -61,7 +61,7 @@ class EventDetailView: UIView {
             createUserLabel.text = eventModel.is_creator == 1 ? "created by yourself" : "create by: \(eventModel.creator_name)"
             
             attendeesHeadLabel.isHidden = model.is_public == 1
-            descLabel.text = "Description \n\n \(model.desc)"
+            descLabel.text = model.desc.isEmpty ? "Description" : "Description \n\n \(model.desc)"
             
             clv.reloadData()
             

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SwiftAlertView
 class ConnectionOfMyController: BaseTableController {
     
     var friends:[FriendListModel] = []
@@ -19,6 +19,10 @@ class ConnectionOfMyController: BaseTableController {
         let search = UIButton().image(R.image.connection_search())
         let searchItem = UIBarButtonItem(customView: search)
         self.navigation.item.rightBarButtonItems = [searchItem]
+        search.rx.tap.subscribe(onNext:{
+            let vc = FriendSearchController()
+            self.navigationController?.pushViewController(vc,animated: false)
+        }).disposed(by: rx.disposeBag)
         
         refreshData()
     }
@@ -81,14 +85,15 @@ class ConnectionOfMyController: BaseTableController {
             cell.auditHandler = { [weak self] in
                 self?.refreshData()
             }
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withClass: ConnectionOfMyCell.self)
             cell.model = friends[indexPath.row]
             cell.deleteFriendHandler = { [weak self] item in
                 guard let `self` = self else { return }
-                self.showAlertController(title: "Are you sure want to delete this friend", message: "", buttonTitles: ["Cancel","Confirm"], highlightedButtonIndex: 1, preferredStyle: UIAlertController.Style.alert) { idx in
-                    if idx == 1 {
+                SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this friend?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
+                    if buttonIndex == 1 {
                         FriendService.deleteFriend(friend_id: item.id).subscribe(onNext:{ status in
                             if status.success == 1 {
                                 Toast.showSuccess(withStatus: "Delete Success")

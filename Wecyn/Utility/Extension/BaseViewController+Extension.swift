@@ -15,6 +15,9 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
     }
     
     func addRightBarItems() {
+        
+        let fixItem1 = UIBarButtonItem.fixedSpace(width: 16)
+        
         let notification = UIButton()
         notification.imageForNormal = R.image.navbar_bell()
         let notificationItem = UIBarButtonItem(customView: notification)
@@ -22,7 +25,7 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
           
         }).disposed(by: rx.disposeBag)
         
-        let fixItem = UIBarButtonItem.fixedSpace(width: 12)
+        let fixItem2 = UIBarButtonItem.fixedSpace(width: 16)
         
         let message = UIButton()
         message.imageForNormal = R.image.navbar_message()
@@ -32,7 +35,7 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
         }).disposed(by: rx.disposeBag)
                 
         
-        self.navigation.item.rightBarButtonItems = [notificationItem,fixItem,messageItem]
+        self.navigation.item.rightBarButtonItems = [notificationItem,fixItem1,messageItem,fixItem2]
   
     }
 }

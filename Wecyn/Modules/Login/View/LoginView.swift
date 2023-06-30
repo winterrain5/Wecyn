@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Cache
 class LoginView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -51,7 +51,7 @@ class LoginView: UIView {
             guard let `self` = self else { return }
             guard let username = self.userNameTf.text,let password = self.passwordTf.text else { return }
             self.signInButton.startAnimation()
-            AuthService.signin(username: username, password: password).subscribe(onNext:{ model in
+            AuthService.signin(username: username, password: MD5(password + "wecyn")).subscribe(onNext:{ model in
                 self.signInButton.stopAnimation()
                 UserDefaults.sk.set(object: model, for: TokenModel.className)
                 let main = MainController()

@@ -74,8 +74,8 @@ class FriendService {
     
     /// 搜索用户
     /// - Parameter keyword: 默认空
-    /// - Returns: FriendUserInfoModel
-    static func searchUserList(_ keyword: String = "") -> Observable<[FriendUserInfoModel]> {
+    /// - Returns: FriendListModel
+    static func searchUserList(keyword: String = "") -> Observable<[FriendUserInfoModel]> {
         let target = MultiTarget(FriendApi.userSearchList(keyword))
         return APIProvider.rx.request(target).asObservable().mapArray(FriendUserInfoModel.self)
     }
@@ -90,14 +90,43 @@ class FriendListModel: BaseModel {
      "avt": int # 用户头像
      */
     var id: Int = 0
-    var fn:  String = ""
-    var ln: String = ""
-    var avt: String = ""
+    var first_name: String = ""
+    var last_name: String = ""
+    var avatar = ""
+    var full_name: String {
+        String.fullName(first: first_name, last: last_name)
+    }
+    
+    override func mapping(mapper: HelpingMapper) {
+        mapper <<<
+                    self.first_name <-- "fn"
+        mapper <<<
+                    self.last_name <-- "ln"
+        mapper <<<
+                    self.avatar <-- "avt"
+    }
     
     // 本地字段
     var isSelected: Bool = false
     var status = 0
+    var wid = ""
 }
+
+class FriendUserInfoModel: BaseModel {
+    /*
+     "id": int # 用户的user_id
+     "wid": string # Wecyn ID。类似QQ号和微信号
+     */
+    var id: Int = 0
+    var first_name: String = ""
+    var last_name: String = ""
+    var full_name: String {
+        String.fullName(first: first_name, last: last_name)
+    }
+    var avatar = ""
+    var wid = ""
+}
+
 
 class FriendRecieveModel: BaseModel {
     /*
@@ -110,6 +139,9 @@ class FriendRecieveModel: BaseModel {
     var from_user_id: Int = 0
     var first_name: String = ""
     var last_name: String = ""
+    var full_name: String {
+        String.fullName(first: first_name, last: last_name)
+    }
     var avatar = ""
     var reason = ""
     
@@ -130,6 +162,9 @@ class FriendSendModel: BaseModel {
     var to_user_id: Int = 0
     var first_name: String = ""
     var last_name: String = ""
+    var full_name: String {
+        String.fullName(first: first_name, last: last_name)
+    }
     var avatar = ""
     var reason = ""
     var apply_time: String =  ""
@@ -137,14 +172,3 @@ class FriendSendModel: BaseModel {
     var operate_time = ""
 }
 
-class FriendUserInfoModel: BaseModel {
-    /*
-     "id": int # 用户的user_id
-     "wid": string # Wecyn ID。类似QQ号和微信号
-     */
-    var id: Int = 0
-    var first_name: String = ""
-    var last_name: String = ""
-    var avatar = ""
-    var wid = ""
-}

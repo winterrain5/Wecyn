@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import ImagePickerSwift
+import SwiftAlertView
 class ProfileHeaderView: UIView {
 
     @IBOutlet weak var userAvatarImageView: UIImageView!
@@ -21,6 +22,7 @@ class ProfileHeaderView: UIView {
     
     @IBOutlet weak var stackView: UIStackView!
     
+    var uplodaImageComplete:(()->())?
     var userInfoModel: UserInfoModel? {
         didSet {
             guard let userInfoModel = userInfoModel else { return }
@@ -36,6 +38,36 @@ class ProfileHeaderView: UIView {
         viewCalendarButton.titleForNormal = Localizer.localized(for: .view_calendar)
         addNewSectionButton.titleForNormal = Localizer.localized(for: .add_new_section)
         
+        userAvatarImageView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self else { return }
+            
+            let option = ImagePickerOptions.default
+            option.resizeWidth = 128
+            option.allowsEditing = true
+            
+            let alert = UIAlertController.init(title: "Add a Photo", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
+            alert.addAction(title: "Camera",style: .default) { _ in
+                ImagePicker.show(type: .takePhoto, with: option) { image, path in
+                    guard let image = image else { return }
+                    self.userAvatarImageView.image = image
+                    self.upload(image)
+                }
+            }
+            
+            alert.addAction(title: "PhotoLibrary",style: .default) { _ in
+                ImagePicker.show(type: .selectPhoto, with: option) { image, path in
+                    guard let image = image else { return }
+                    self.userAvatarImageView.image = image
+                    self.upload(image)
+                }
+            }
+            
+            alert.addAction(title: "Cancel",style: .cancel)
+            
+            alert.show()
+           
+        }).disposed(by: rx.disposeBag)
+        
         viewNamecardButton.rx.tap.subscribe(onNext: {
             let vc = EditViewController()
             vc.modalPresentationStyle = .fullScreen
@@ -43,7 +75,8 @@ class ProfileHeaderView: UIView {
         }).disposed(by: rx.disposeBag)
         
         viewCalendarButton.rx.tap.subscribe(onNext:{
-            
+            let vc = CalendarController()
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
         }).disposed(by: rx.disposeBag)
         
         addNewSectionButton.rx.tap.subscribe(onNext:{
@@ -62,6 +95,21 @@ class ProfileHeaderView: UIView {
     
    
     
+    func upload(_ image:UIImage) {
+        Toast.showLoading()
+        guard let base64 = image.jpegBase64String(compressionQuality: 0.4) else { return }
+        print("image.kilobytesSize:\(image.kilobytesSize),base64Size:\(base64.lengthOfBytes(using: .utf8))")
+        UserService.updateAvatar(photo: base64).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showSuccess(withStatus: "Upload Success")
+                self.uplodaImageComplete?()
+            } else {
+                Toast.showError(withStatus: $0.message)
+            }
+        },onError: { e in
+            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+        }).disposed(by: rx.disposeBag)
+    }
    
 }
 

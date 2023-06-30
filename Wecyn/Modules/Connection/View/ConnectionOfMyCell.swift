@@ -20,8 +20,8 @@ class ConnectionOfMyCell: UITableViewCell {
     var model: FriendListModel? {
         didSet {
             guard let model = model else { return }
-            avatarView.kf.setImage(with: model.avt.imageUrl,placeholder: R.image.proile_user()!)
-            nameLabel.text = String.fullName(first: model.fn, last: model.ln)
+            avatarView.kf.setImage(with: model.avatar.imageUrl,placeholder: R.image.proile_user()!)
+            nameLabel.text = model.full_name
         }
     }
     override func awakeFromNib() {

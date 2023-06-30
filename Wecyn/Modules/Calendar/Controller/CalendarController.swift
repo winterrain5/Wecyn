@@ -20,16 +20,14 @@ class CalendarController: BaseTableController {
     var friendList:[FriendListModel] = []
     var dataViewType: DataViewType = .UpComing
     var isSelectCalendar = false
+    var selectDate:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         startDate = currentDate
-        
-        let label = UILabel().text("Calendar").color(R.color.textColor162C46()!).font(UIFont.sk.pingFangSemibold(20))
-        self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: label)
     
         let searchView = NavbarSearchView(placeholder: "Search Event Title")
-        searchView.size = CGSize(width: kScreenWidth * 0.45, height: 36)
+        searchView.size = CGSize(width: kScreenWidth * 0.6, height: 36)
         self.navigation.item.titleView = searchView
         searchView.isSearchable = false
         searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
@@ -40,6 +38,9 @@ class CalendarController: BaseTableController {
         
         addRightBarItems()
         
+        let sd = Date().startOfCurrentMonth()
+        let ed = sd.endOfCurrentMonth()
+        getEventDate(startDate: sd.string(withFormat: "yyyy-MM-dd"), endDate: ed.string(withFormat: "yyyy-MM-dd"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +54,13 @@ class CalendarController: BaseTableController {
                                                     startDate: startDate,
                                                     endDate: endDate)
         let friendList = FriendService.friendList()
-        
+        if isFirstLoad { showSkeleton() }
         Observable.zip(eventList,friendList).subscribe(onNext:{ events,friends in
             events.forEach({ event in
                 
                 let friend = friends.first(where: { $0.id == event.creator_id })
-                event.creator_name = String.fullName(first: friend?.fn ?? "", last: friend?.ln ?? "")
-                event.creator_avatar = friend?.avt ?? ""
+                event.creator_name = friend?.full_name ?? ""
+                event.creator_avatar = friend?.avatar ?? ""
             })
             var datas = events
             
@@ -88,12 +89,20 @@ class CalendarController: BaseTableController {
             }
            
             self.endRefresh(.NoData, emptyString: "No Events")
-            
+            self.hideSkeleton()
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
+            self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
         
      
+    }
+    
+    func getEventDate(startDate:String,endDate:String) {
+        ScheduleService.eventList(keyword: nil,startDate: startDate,endDate: endDate).subscribe(onNext:{ models in
+            let eventDates = models.map({ ($0.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss") ??  Date()).string(withFormat: "yyyy-MM-dd") })
+            self.headerView.calendarView.eventDates = eventDates
+        }).disposed(by: rx.disposeBag)
     }
     
     override func createListView() {
@@ -109,6 +118,7 @@ class CalendarController: BaseTableController {
             self.isSelectCalendar = true
             self.startDate = date.string(withFormat: "yyyy-MM-dd")
             self.endDate = date.string(withFormat: "yyyy-MM-dd")
+            self.selectDate = self.startDate
             self.loadNewData()
         }
         
@@ -127,7 +137,7 @@ class CalendarController: BaseTableController {
                 self.startDate = nil
                 self.endDate = nil
             } else {
-                self.startDate = self.currentDate
+                self.startDate = self.selectDate
                 self.endDate = nil
             }
             self.loadNewData()
@@ -135,7 +145,9 @@ class CalendarController: BaseTableController {
         
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kBottomsafeAreaMargin + kTabBarHeight, right: 0)
         
+        tableView?.isSkeletonable = true
         tableView?.register(nibWithCellClass: CaledarItemCell.self)
+        cellIdentifier = CaledarItemCell.className
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
