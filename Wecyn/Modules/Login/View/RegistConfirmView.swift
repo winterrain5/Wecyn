@@ -41,8 +41,8 @@ class RegistConfirmView: UIView {
             label.style = Style.border(nomal: UIColor(hexString: "#c3c1c1")!, selected: R.color.theamColor()!)
             return label
         })
-        temTextField.keyboardType = .asciiCapable
-        temTextField.autocorrectionType = .no
+        temTextField.keyboardType = .numberPad
+        
         return temTextField
     }()
     

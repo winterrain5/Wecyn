@@ -59,8 +59,8 @@ class CalendarAddEventView: UIView {
             attendees = event.attendees.map({
                 let attance = FriendListModel()
                 attance.id = $0.id
-                attance.fn = String($0.name.split(separator: " ").first ?? "")
-                attance.ln = String($0.name.split(separator: " ").last ?? "")
+                attance.first_name = String($0.name.split(separator: " ").first ?? "")
+                attance.last_name = String($0.name.split(separator: " ").last ?? "")
                 attance.status = $0.status
                 return attance
             })
@@ -316,7 +316,7 @@ extension CalendarAddEventView: UICollectionViewDataSource,UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.attendees.count > 0 {
             let model = attendees[indexPath.row]
-            let width = String.fullName(first: model.fn, last: model.ln).widthWithConstrainedWidth(height: 24, font: UIFont.sk.pingFangRegular(12)) + 30
+            let width = model.full_name.widthWithConstrainedWidth(height: 24, font: UIFont.sk.pingFangRegular(12)) + 30
             return CGSize(width: width, height: 30)
         }
         return .zero
@@ -327,7 +327,7 @@ class CalendarHasAddedAttendanceCell: UICollectionViewCell {
     var btn = UIButton()
     var model: FriendListModel =  FriendListModel() {
         didSet {
-            btn.titleForNormal = String.fullName(first: model.fn, last: model.ln) + " "
+            btn.titleForNormal = model.full_name
             
             switch model.status {
             case 0: // 未知

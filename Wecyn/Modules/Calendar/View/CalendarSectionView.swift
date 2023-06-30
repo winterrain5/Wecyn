@@ -54,7 +54,7 @@ class CalendarSectionView: UIView {
             self.dataViewTypeChanged?(.Timeline)
         }).disposed(by: rx.disposeBag)
         
-        leftDateContainer.rx.tapGesture().subscribe(onNext:{ _ in
+        leftDateContainer.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
            
             DatePickerView(title:"Start Time", mode: .date, date: Date()) { date in
                 self.startTimeLabel.text = date.string(withFormat: "dd/MM/yyyy")
@@ -64,7 +64,7 @@ class CalendarSectionView: UIView {
             
         }).disposed(by: rx.disposeBag)
         
-        rightDateContainer.rx.tapGesture().subscribe(onNext:{ _ in
+        rightDateContainer.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             
             DatePickerView(title:"End Time", mode: .date, date: Date()) { date in
                 self.endTimeLabel.text = date.string(withFormat: "dd/MM/yyyy")

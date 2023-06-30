@@ -91,7 +91,7 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: ConnectionItemCell.self, for: indexPath)
         if self.dataArray.count > 0 {
-            let model = self.dataArray[indexPath.row] as! FriendUserInfoModel
+            let model = self.dataArray[indexPath.row] as? FriendUserInfoModel
             cell.model = model
         }
         return cell

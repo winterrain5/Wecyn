@@ -25,17 +25,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V8K-X5-Qsq">
                                 <rect key="frame" x="0.0" y="0.0" width="435" height="97"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom   Meeting" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrG-ZC-Rqg">
-                                        <rect key="frame" x="15" y="12" width="105" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom   Meeting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrG-ZC-Rqg">
+                                        <rect key="frame" x="15" y="12" width="393" height="17"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" name="TextColor52"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="created by" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a60-gB-22e">
                                         <rect key="frame" x="15" y="69.333333333333329" width="68.666666666666671" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" name="TextColor52"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hg5-iA-Ijn">
                                         <rect key="frame" x="423" y="-3" width="12" height="103"/>
@@ -47,13 +53,18 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenWhenSkeletonIsActive" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00-13:00" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDz-uQ-mnD">
-                                        <rect key="frame" x="15" y="41" width="68" height="16.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30/6/2023 9:00 - 1/7/2023 13:00" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDz-uQ-mnD">
+                                        <rect key="frame" x="15" y="41" width="203.33333333333334" height="16.333333333333329"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" name="TextColor52"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -67,11 +78,13 @@
                                     <constraint firstItem="LDz-uQ-mnD" firstAttribute="top" secondItem="QrG-ZC-Rqg" secondAttribute="bottom" constant="12" id="pcB-oR-rdr"/>
                                     <constraint firstItem="QrG-ZC-Rqg" firstAttribute="top" secondItem="V8K-X5-Qsq" secondAttribute="top" constant="12" id="qN9-gc-aug"/>
                                     <constraint firstItem="QrG-ZC-Rqg" firstAttribute="leading" secondItem="V8K-X5-Qsq" secondAttribute="leading" constant="15" id="sBU-Fe-tos"/>
+                                    <constraint firstItem="hg5-iA-Ijn" firstAttribute="leading" secondItem="QrG-ZC-Rqg" secondAttribute="trailing" constant="15" id="xR3-er-Go5"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -82,6 +95,9 @@
                             <constraint firstAttribute="bottom" secondItem="V8K-X5-Qsq" secondAttribute="bottom" id="MH9-rB-ZDl"/>
                             <constraint firstAttribute="trailing" secondItem="V8K-X5-Qsq" secondAttribute="trailing" id="b5T-sh-cs9"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
@@ -90,8 +106,14 @@
                     <constraint firstItem="i2y-sc-4ew" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="lIq-oz-PQ8"/>
                     <constraint firstAttribute="bottom" secondItem="i2y-sc-4ew" secondAttribute="bottom" constant="12" id="rik-qs-aRX"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="creatorLabel" destination="a60-gB-22e" id="pp6-H1-jDM"/>
                 <outlet property="shadowView" destination="i2y-sc-4ew" id="yqc-Xw-5PP"/>
@@ -99,7 +121,7 @@
                 <outlet property="timeLabel" destination="LDz-uQ-mnD" id="Phm-Bv-W2V"/>
                 <outlet property="titleLabel" destination="QrG-ZC-Rqg" id="4KE-et-hGc"/>
             </connections>
-            <point key="canvasLocation" x="-225.19083969465649" y="-48.943661971830991"/>
+            <point key="canvasLocation" x="156" y="-58"/>
         </tableViewCell>
     </objects>
     <resources>

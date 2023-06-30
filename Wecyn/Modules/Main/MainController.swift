@@ -31,7 +31,7 @@ class MainController: UITabBarController {
         let connection = BaseNavigationController(rootViewController: ConnectionController())
         let job = BaseNavigationController(rootViewController: JobController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
-        let setting = BaseNavigationController(rootViewController: CalendarController())
+        let setting = BaseNavigationController(rootViewController: SettingController())
         
         func selectedImage(_ image: UIImage?) -> UIImage? {
             image?.withTintColor(R.color.theamColor()!).withRenderingMode(.alwaysOriginal)

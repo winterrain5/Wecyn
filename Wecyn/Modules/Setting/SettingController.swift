@@ -17,8 +17,7 @@ class SettingController: BaseTableController {
     
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = RegistAddAvatarController()
-        self.navigationController?.pushViewController(vc)
+        
     }
 
 }

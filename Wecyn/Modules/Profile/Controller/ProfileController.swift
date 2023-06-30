@@ -32,6 +32,10 @@ class ProfileController: BaseTableController {
     
         self.tableView?.tableHeaderView = headerView
         headerView.size = CGSize(width: kScreenWidth, height: 320)
+        headerView.uplodaImageComplete = { [weak self] in
+            guard let `self` = self else { return }
+            self.getUserInfo()
+        }
 
         self.tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
         self.tableView?.register(cellWithClass: ProfileSkillsItemCell.self)

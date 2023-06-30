@@ -87,21 +87,21 @@ extension String {
     
     func valiatePassword() -> (flag:Bool,message:String){
         var errorMessage = ""
-        if self.count < 6 {
+        if self.count < 8 {
           /// ・Passwords need to be at least 6 characters ・At least one lowercase character ・At lease one uppercase character ・Must have numerical number
-          errorMessage += "・Passwords need to be at least 6 characters\n"
+          errorMessage += "Passwords need to be at least 6 characters\n"
         }
         if !self.isHasLowercaseCharacter() {
-          errorMessage += "・At least one lowercase character \n"
+          errorMessage += "At least one lowercase character \n"
         }
         if !self.isHasUppercaseCharacter() {
-          errorMessage += "・At lease one uppercase character \n"
+          errorMessage += "At lease one uppercase character \n"
         }
         if !self.hasNumbers {
-          errorMessage += "・Must have numerical number\n"
+          errorMessage += "Must have numerical number\n"
         }
         if self.isHasSpecialSymbol() {
-          errorMessage += "・Password cannot contain special characters such as \"#@!~%^&*\"\n"
+          errorMessage += "Password cannot contain special characters such as \"#@!~%^&*\"\n"
         }
         let result = errorMessage.isEmpty ? (flag: false,message: "") : (flag:true,message: errorMessage)
         return result
@@ -127,5 +127,25 @@ extension NSObject {
     
     static var className: String {
         return String(describing: self)
+    }
+}
+
+extension Date {
+    func startOfCurrentMonth() -> Date {
+        let calendar = NSCalendar.current
+        let components = calendar.dateComponents(
+            Set<Calendar.Component>([.year, .month]), from: self)
+        let startOfMonth = calendar.date(from: components)!
+        return startOfMonth
+    }
+     
+    //本月结束日期
+    func endOfCurrentMonth() -> Date {
+        let calendar = NSCalendar.current
+        var components = DateComponents()
+        components.month = 1
+        components.day = -1
+        let endOfMonth =  calendar.date(byAdding: components, to: startOfCurrentMonth())!
+        return endOfMonth
     }
 }

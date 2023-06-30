@@ -16,7 +16,7 @@ class EventSearchViewController: BaseTableController {
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
-            self.keword = keyword
+            self.keword = keyword.trimmed
             self.loadNewData()
         }
         
@@ -49,14 +49,14 @@ class EventSearchViewController: BaseTableController {
             events.forEach({ event in
                 
                 let friend = friends.first(where: { $0.id == event.creator_id })
-                event.creator_name = String.fullName(first: friend?.fn ?? "", last: friend?.ln ?? "")
-                event.creator_avatar = friend?.avt ?? ""
+                event.creator_name = friend?.full_name ?? ""
+                event.creator_avatar = friend?.avatar ?? ""
 
             })
             
             self.dataArray = events
             
-            self.endRefresh(.NoData, emptyString: "No Events")
+            self.endRefresh(events.count)
             
         },onError: { e in
             self.endRefresh(.NoData, emptyString: "No Events")
@@ -110,9 +110,11 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
     var leftImgView = UIImageView()
     var rightTf = UITextField()
     var searching:((String)->())?
+    var beginSearch:(()->())?
     var isSearchable = false
     var placeholder:String = ""
-    init(placeholder:String,isSearchable:Bool = false) {
+    var isBecomeFirstResponder = true
+    init(placeholder:String,isSearchable:Bool = false,isBecomeFirstResponder:Bool = true) {
        
         super.init(frame: .zero)
         
@@ -132,9 +134,11 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         rightTf.font = UIFont.sk.pingFangRegular(12)
         rightTf.textColor = R.color.textColor52()
         rightTf.delegate = self
+        rightTf.clearsOnBeginEditing = true
+        rightTf.clearButtonMode = .whileEditing
         
         rightTf.isUserInteractionEnabled = isSearchable
-        if isSearchable { rightTf.becomeFirstResponder() }
+        if isBecomeFirstResponder && isSearchable { rightTf.becomeFirstResponder() }
         
     }
     override init(frame: CGRect) {
@@ -164,5 +168,8 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         self.endEditing(true)
         Logger.debug("search text:\(test)")
         return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        beginSearch?()
     }
 }
