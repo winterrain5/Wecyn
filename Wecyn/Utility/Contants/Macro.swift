@@ -6,6 +6,7 @@
 //  Copyright © 2020 Victor. All rights reserved.
 //
 
+import SwiftExtensionsLibrary
 import Foundation
 
 /// 导航栏高度
@@ -46,5 +47,3 @@ let DocumentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDir
 let CachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! as String
 // 临时目录
 let TempPath = NSTemporaryDirectory() as String
-
-

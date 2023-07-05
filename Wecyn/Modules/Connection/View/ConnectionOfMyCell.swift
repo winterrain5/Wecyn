@@ -20,7 +20,7 @@ class ConnectionOfMyCell: UITableViewCell {
     var model: FriendListModel? {
         didSet {
             guard let model = model else { return }
-            avatarView.kf.setImage(with: model.avatar.imageUrl,placeholder: R.image.proile_user()!)
+            avatarView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
             nameLabel.text = model.full_name
         }
     }

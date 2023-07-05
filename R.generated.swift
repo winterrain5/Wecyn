@@ -173,7 +173,7 @@ struct _R {
     var disableColor: RswiftResources.ColorResource { .init(name: "disableColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 37 images.
+  /// This `_R.image` struct is generated, and contains static references to 39 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -254,6 +254,12 @@ struct _R {
 
     /// Image `navigation_back_default`.
     var navigation_back_default: RswiftResources.ImageResource { .init(name: "navigation_back_default", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `password_invisible`.
+    var password_invisible: RswiftResources.ImageResource { .init(name: "password_invisible", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `password_visible`.
+    var password_visible: RswiftResources.ImageResource { .init(name: "password_visible", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -403,6 +409,8 @@ struct _R {
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "google", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'google' is used in nib 'LoginView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "password_invisible", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'password_invisible' is used in nib 'LoginView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "password_visible", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'password_visible' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "namecard_background", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'namecard_background' is used in nib 'NameCardContentView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "profile_edit_userinfo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'profile_edit_userinfo' is used in nib 'NameCardContentView', but couldn't be loaded.") }

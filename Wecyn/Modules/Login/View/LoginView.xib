@@ -59,7 +59,7 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="erT-Jr-k7b">
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="erT-Jr-k7b">
                     <rect key="frame" x="21" y="265" width="372" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="A8I-Ev-31f">
@@ -167,6 +167,16 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeH-61-DNb">
+                    <rect key="frame" x="357" y="269" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="jqy-bd-QhA"/>
+                        <constraint firstAttribute="width" constant="36" id="qcN-da-xzf"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="password_invisible"/>
+                    <state key="selected" image="password_visible"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -198,6 +208,7 @@ of your professional life</string>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="erT-Jr-k7b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="21" id="OQE-ZI-vkH"/>
+                <constraint firstItem="MeH-61-DNb" firstAttribute="trailing" secondItem="erT-Jr-k7b" secondAttribute="trailing" id="PrP-fa-11I"/>
                 <constraint firstItem="PAw-sM-J7U" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="21" id="Rch-qW-Lgl"/>
                 <constraint firstItem="ZIF-Wc-IkI" firstAttribute="centerY" secondItem="DJd-Xf-16J" secondAttribute="centerY" id="TJ0-yO-UoN"/>
                 <constraint firstItem="DJd-Xf-16J" firstAttribute="top" secondItem="9u0-PL-ToJ" secondAttribute="bottom" constant="26" id="Yzl-KF-Jkm">
@@ -214,6 +225,7 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="MeH-61-DNb" firstAttribute="centerY" secondItem="erT-Jr-k7b" secondAttribute="centerY" id="bgm-L8-xOY"/>
                 <constraint firstItem="ZIF-Wc-IkI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="geH-QG-Ei9"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="erT-Jr-k7b" secondAttribute="trailing" constant="21" id="ifc-lZ-eVq"/>
                 <constraint firstItem="9u0-PL-ToJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="21" id="jck-Sq-T7y"/>
@@ -250,6 +262,7 @@ of your professional life</string>
             <connections>
                 <outlet property="forgetPwdLabel" destination="InB-4A-GUc" id="tCn-65-de6"/>
                 <outlet property="googleLoginButton" destination="ohO-x8-TAI" id="iwa-V9-uYi"/>
+                <outlet property="passwordStateButton" destination="MeH-61-DNb" id="HnY-gM-2VS"/>
                 <outlet property="passwordTf" destination="erT-Jr-k7b" id="6Ww-pB-Nge"/>
                 <outlet property="regitLabel" destination="qou-Ti-EVR" id="Bbg-fl-ogj"/>
                 <outlet property="signInButton" destination="9u0-PL-ToJ" id="bbr-Fs-Nit"/>
@@ -259,13 +272,10 @@ of your professional life</string>
             <point key="canvasLocation" x="-133.33333333333334" y="-15.401785714285714"/>
         </view>
     </objects>
-    <designables>
-        <designable name="9u0-PL-ToJ">
-            <size key="intrinsicContentSize" width="58" height="34"/>
-        </designable>
-    </designables>
     <resources>
         <image name="google" width="15.5" height="18"/>
+        <image name="password_invisible" width="24" height="24"/>
+        <image name="password_visible" width="24" height="24"/>
         <namedColor name="TheamColor">
             <color red="0.15700000524520874" green="0.54500001668930054" blue="0.5220000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

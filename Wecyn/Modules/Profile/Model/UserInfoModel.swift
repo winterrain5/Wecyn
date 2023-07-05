@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserInfoModel: BaseModel {
+class UserInfoModel: BaseModel,Codable {
     var mobile: String = ""
     var avatar: String  = ""
     var id: Int = 0
@@ -15,5 +15,9 @@ class UserInfoModel: BaseModel {
     var wid: String = ""
     var email: String = ""
     var first_name: String = ""
+    
+    var full_name:String {
+        return String.fullName(first: first_name, last: last_name)
+    }
     
 }

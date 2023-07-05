@@ -7,8 +7,10 @@
 
 import UIKit
 import Cache
+import RxSwift
 class LoginView: UIView {
 
+    @IBOutlet weak var passwordStateButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var userNameTf: UITextField!
     @IBOutlet weak var forgetPwdLabel: UILabel!
@@ -70,6 +72,14 @@ class LoginView: UIView {
         regitLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             UIViewController.sk.getTopVC()?.navigationController?.pushViewController(RegistInfoController(), animated: true)
         }).disposed(by: rx.disposeBag)
+        
+        passwordStateButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.passwordStateButton.isSelected.toggle()
+            self.passwordTf.isSecureTextEntry = !self.passwordStateButton.isSelected
+        }).disposed(by: rx.disposeBag)
+        
+        self.passwordTf.rx.text.orEmpty.map({ $0.isEmpty }).asDriver(onErrorJustReturn: false).drive(passwordStateButton.rx.isHidden).disposed(by: rx.disposeBag)
     }
     
     

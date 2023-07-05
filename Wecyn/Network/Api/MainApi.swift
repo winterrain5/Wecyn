@@ -61,17 +61,21 @@ extension TargetType {
         
     }
 
-    func requestToTask<T:HandyJSON>(_ request: T?) -> Task {
+    func requestToTaskByPost<T:HandyJSON>(_ request: T?) -> Task {
         guard let parameters = request?.toJSON() else { return .requestPlain }
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
     
-    func requestNoneNilParameters(_ parameters:[String:Any?]) -> Task {
+    func requestToTaskByGet<T:HandyJSON>(_ request: T?) -> Task {
+        guard let parameters = request?.toJSON() else { return .requestPlain }
+        return .requestParameters(parameters: parameters, encoding: URLEncoding(destination: .queryString))
+    }
+    
+    func requestParametersByPost(_ parameters:[String:Any?]) -> Task {
         return .requestParameters(parameters: parameters.compactMapValues{ $0 }, encoding: JSONEncoding.default)
     }
 
-    
-    func requestURLParameters(_ parameter:[String: Any?]) -> Task {
+    func requestParametersByGet(_ parameter:[String: Any?]) -> Task {
         return .requestParameters(parameters: parameter.compactMapValues{ $0 }, encoding: URLEncoding(destination: .queryString))
     }
 }

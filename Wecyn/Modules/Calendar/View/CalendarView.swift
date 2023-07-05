@@ -21,6 +21,7 @@ class CalendarView: UIView {
     var gregorian = NSCalendar(identifier: .gregorian)
     let dateFormatter = DateFormatter()
     var dateSelected:((Date)->())!
+    var monthChanged:((Date)->())!
     var eventDates:[String] = [] {
         didSet {
             calendar.reloadData()
@@ -53,10 +54,6 @@ class CalendarView: UIView {
         dateFormatter.dateFormat = "MMM yyyy"
         dateFormatter.locale = Locale(identifier: "en")
         dateLabel.text = dateFormatter.string(from: currentDate)
-        
-        addButton.rx.tap.subscribe(onNext:{
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(CalendarAddEventController())
-        }).disposed(by: rx.disposeBag)
         
         preButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
@@ -92,6 +89,7 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let date = calendar.currentPage
         dateLabel.text = dateFormatter.string(from: date)
+        monthChanged(date)
     }
     
     //  func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
@@ -110,7 +108,7 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         if eventDates.contains(date.string(withFormat: "yyyy-MM-dd")) {
-            return [R.color.textColor52()!]
+            return [.red]
         }
         return [.clear]
     }

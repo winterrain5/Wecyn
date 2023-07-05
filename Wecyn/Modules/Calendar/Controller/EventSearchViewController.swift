@@ -8,7 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 class EventSearchViewController: BaseTableController {
-    var keword:String?
+    let requestModel = EventListRequestModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,7 +16,7 @@ class EventSearchViewController: BaseTableController {
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
-            self.keword = keyword.trimmed
+            self.requestModel.keyword = keyword.trimmed
             self.loadNewData()
         }
         
@@ -39,9 +39,7 @@ class EventSearchViewController: BaseTableController {
     }
     
     override func refreshData() {
-        let eventList = ScheduleService.eventList(keyword: keword,
-                                                    startDate: nil,
-                                                    endDate: nil)
+        let eventList = ScheduleService.eventList(model: requestModel)
         let friendList = FriendService.friendList()
         
         Observable.zip(eventList,friendList).subscribe(onNext:{ [weak self]  events,friends in
@@ -80,7 +78,7 @@ class EventSearchViewController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: CaledarItemCell.self)
-        cell.searchingText = keword ?? ""
+        cell.searchingText = self.requestModel.keyword ?? ""
         if self.dataArray.count > 0 {
             cell.model = (self.dataArray as! [EventListModel])[indexPath.row]
         }

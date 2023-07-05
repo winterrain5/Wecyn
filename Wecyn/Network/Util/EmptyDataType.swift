@@ -13,15 +13,17 @@ import Alamofire
 
 public enum EmptyStatus {
     enum Message:String {
-        case NoData = "暂无数据"
-        case Service = "哎呀! 出错了..."
-        case Network = "亲，你的网络不太顺畅哦"
+        case NoData = "No Data"
+        case Service = "Server Error"
+        case Network = "Network Error"
+        case Timeout = "Request Timeout"
     }
     
     enum Image:String {
         case NoData = "empty_nodata_placeholder"
         case Service = "empty_service_error"
         case Network = "empty_network_error"
+        case Timeout = "empty_timeout_error"
     }
 }
 
@@ -42,7 +44,7 @@ public enum EmptyDataType:Equatable {
         case .Network:
             imageName = EmptyStatus.Image.Network.rawValue
         case .TimeOut:
-            imageName = EmptyStatus.Image.Network.rawValue
+            imageName = EmptyStatus.Image.Timeout.rawValue
         case .Service:
             imageName = EmptyStatus.Image.Service.rawValue
         default:
@@ -59,7 +61,7 @@ public enum EmptyDataType:Equatable {
         case .Network:
             text = EmptyStatus.Message.Network.rawValue
         case .TimeOut:
-            text = EmptyStatus.Message.Network.rawValue
+            text = EmptyStatus.Message.Timeout.rawValue
         case .Service:
             text = EmptyStatus.Message.Service.rawValue
         default:

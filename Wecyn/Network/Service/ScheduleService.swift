@@ -25,25 +25,24 @@ class ScheduleService {
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
 
-    
-    
+
     /// 事件详情
-    /// - Parameter id: id
+    /// - Parameters:
+    ///   - id: 当前登录用户的ID
+    ///   - currentUserId: 当前事件所属人的ID
     /// - Returns: ResponseStatus
-    static func eventInfo(_ id: Int) -> Observable<EventInfoModel> {
-        let target = MultiTarget(ScheduleApi.eventInfo(id))
+    static func eventInfo(_ id: Int,currentUserId:Int? = nil) -> Observable<EventInfoModel> {
+        let target = MultiTarget(ScheduleApi.eventInfo(id,currentUserId))
         return APIProvider.rx.request(target).asObservable().mapObject(EventInfoModel.self)
     }
     
     
     /// 事件列表
     /// - Parameters:
-    ///   - keyword: 模糊查询title。默认空字符串
-    ///   - startDate: 开始日期
-    ///   - endDate: 结束日期
+    ///   - model: EventListRequestModel
     /// - Returns: [EventListModel]
-    static func eventList(keyword:String? = nil,startDate:String? = nil,endDate:String? = nil) -> Observable<[EventListModel]> {
-        let target = MultiTarget(ScheduleApi.eventList(keyword, startDate, endDate))
+    static func eventList(model:EventListRequestModel) -> Observable<[EventListModel]> {
+        let target = MultiTarget(ScheduleApi.eventList(model))
         return APIProvider.rx.request(target).asObservable().mapArray(EventListModel.self)
     }
     
@@ -52,23 +51,47 @@ class ScheduleService {
     /// - Parameters:
     ///   - id: 事件ID
     ///   - status: 是否接受邀请。默认0。0 待审核，1 同意，2 拒绝
+    ///   - currentUserId: 当前事件所属人的ID
     /// - Returns: ResponseStatus
-    static func auditPrivateEvent(id:Int,status:Int) -> Observable<ResponseStatus> {
-        let target = MultiTarget(ScheduleApi.auditPrivitaEvent(id,status))
+    static func auditPrivateEvent(id:Int,status:Int,currentUserId:Int? = nil) -> Observable<ResponseStatus> {
+        let target = MultiTarget(ScheduleApi.auditPrivitaEvent(id,status,currentUserId))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
     
     /// 删除事件
-    /// - Parameter id: id
+    /// - Parameters:
+    ///   - id: id
+    ///   - currentUserId: 当前事件所属人的ID
     /// - Returns: ResponseStatus
-    static func deleteEvent(_ id: Int) -> Observable<ResponseStatus> {
-        let target = MultiTarget(ScheduleApi.deleteEvent(id))
+    static func deleteEvent(_ id: Int,currentUserId:Int? = nil) -> Observable<ResponseStatus> {
+        let target = MultiTarget(ScheduleApi.deleteEvent(id,currentUserId))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
     
+    /// 添加助理
+    /// - Parameter model:AddAssitantsRequestModel
+    /// - Returns: ResponseStatus
+    static func addAssistants(model:AddAssitantsRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(ScheduleApi.addAssistants(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
     
+    
+    /// 收到的助理列表
+    /// - Returns: [AssistantInfo]
+    static func recieveAssistantList() -> Observable<[AssistantInfo]> {
+        let target = MultiTarget(ScheduleApi.recieveAssistantsList)
+        return APIProvider.rx.request(target).asObservable().mapArray(AssistantInfo.self)
+    }
+    
+    /// 发送的助理列表
+    /// - Returns: [AssistantInfo]
+    static func sendedAssistantList() -> Observable<[AssistantInfo]> {
+        let target = MultiTarget(ScheduleApi.sendedAssistantsList)
+        return APIProvider.rx.request(target).asObservable().mapArray(AssistantInfo.self)
+    }
 }
 
 class EventInfoModel: BaseModel {
@@ -108,6 +131,10 @@ class EventInfoModel: BaseModel {
     var attendees_public = ""
     var remarks = ""
     
+    
+    var calendar_belong_id:Int = 0
+    var calendar_belong_name:String = ""
+    
 }
 class Attendees: BaseModel {
     var id: Int = 0
@@ -136,4 +163,13 @@ class EventListModel: BaseModel {
     
     var creator_name = ""
     var creator_avatar = ""
+    
+    var calendar_belong_id:Int = 0
+    var calendar_belong_name:String = ""
+}
+
+class AssistantInfo: BaseModel {
+    var id: Int = 0
+    var name: String = ""
+    var avatar: String = ""
 }

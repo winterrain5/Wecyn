@@ -40,7 +40,7 @@ class CaledarItemCell: UITableViewCell {
                 statusView.backgroundColor = UIColor(hexString: "#ed8c00")
             }
             
-            creatorLabel.text = model.is_creator == 1 ? "created by yourself" : "created by: \(model.creator_name)"
+            creatorLabel.text = "created by: \(model.creator_name)"
 //            locationLabel.text = "Location:\(model)"
         }
     }

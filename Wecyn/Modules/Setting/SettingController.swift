@@ -15,9 +15,20 @@ class SettingController: BaseTableController {
         // Do any additional setup after loading the view.
     }
     
-
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "Logout"
+        return cell
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        UserDefaults.sk.removeAllKeyValue()
+        let nav = BaseNavigationController(rootViewController: LoginController())
+        UIApplication.shared.keyWindow?.rootViewController = nav
     }
 
 }

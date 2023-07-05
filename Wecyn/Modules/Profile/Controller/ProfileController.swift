@@ -46,6 +46,7 @@ class ProfileController: BaseTableController {
 
     func getUserInfo() {
         UserService.getUserInfo().subscribe(onNext:{ model in
+            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
             self.headerView.userInfoModel = model
         }).disposed(by: rx.disposeBag)
     }

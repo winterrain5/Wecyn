@@ -109,8 +109,8 @@ extension String {
 }
 
 extension String {
-    var imageUrl: URL? {
-        let host = APIHost.share.BaseUrl
+    var avatarUrl: URL? {
+        let host = APIHost.share.ImageUrl
         return URL(string: host.appending("/media/avatar/" + self))
     }
    static func fullName(first: String, last: String) -> String{
