@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import IQKeyboardManagerSwift
 class LoginController: BaseViewController {
 
     private let container = LoginView.loadViewFromNib()
@@ -19,7 +19,7 @@ class LoginController: BaseViewController {
         container.frame = self.view.bounds
     }
     
-
+  
     /*
     // MARK: - Navigation
 

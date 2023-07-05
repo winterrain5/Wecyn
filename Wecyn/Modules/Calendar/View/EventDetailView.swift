@@ -11,6 +11,7 @@ import DKLogger
 import SwiftAlertView
 class EventDetailView: UIView {
     
+    @IBOutlet weak var calendarBelongLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var closeBtn: UIButton!
     
@@ -35,7 +36,9 @@ class EventDetailView: UIView {
             
             self.hideSkeleton()
             guard let model = model else { return }
-            Logger.debug(model.start_time)
+            
+            calendarBelongLabel.text = "you are viewing \(eventModel.calendar_belong_name)'s calendar"
+            
             titleLabel.text = model.title
             let start = model.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
             let end = model.end_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
@@ -50,7 +53,8 @@ class EventDetailView: UIView {
                 locOrUrlLabel.text = model.location
             }
             
-            if let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className), tokenModel.user_id == model.creator_id {
+            ///
+            if model.creator_id == CalendarBelongUserId {
                 segment.isHidden = true
             } else {
                 segment.selectedSegmentIndex = eventModel.status
@@ -58,7 +62,7 @@ class EventDetailView: UIView {
                 deleteButton.isHidden = true
             }
             
-            createUserLabel.text = eventModel.is_creator == 1 ? "created by yourself" : "create by: \(eventModel.creator_name)"
+            createUserLabel.text = "create by: \(eventModel.creator_name)"
             
             attendeesHeadLabel.isHidden = model.is_public == 1
             descLabel.text = model.desc.isEmpty ? "Description" : "Description \n\n \(model.desc)"
@@ -99,7 +103,8 @@ class EventDetailView: UIView {
         editButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             UIViewController.sk.getTopVC()?.dismiss(animated: true,completion: {
-                
+                self.model?.calendar_belong_name = self.eventModel.calendar_belong_name
+                self.model?.calendar_belong_id = self.eventModel.calendar_belong_id
                 let vc = CalendarAddEventController(editEventMode: self.model)
                 UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
                 
@@ -109,12 +114,12 @@ class EventDetailView: UIView {
       
         deleteButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this event?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
+            SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete \(self.eventModel.calendar_belong_name)'s calendar?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
                 if buttonIndex == 1 {
-                    ScheduleService.deleteEvent(self.model?.id ?? 0).subscribe(onNext:{
+                    ScheduleService.deleteEvent(self.model?.id ?? 0,currentUserId: CalendarBelongUserId).subscribe(onNext:{
 
                         if $0.success == 1 {
-                            Toast.showMessage("operate success")
+                            Toast.showMessage("Successful operation")
                         } else {
                             Toast.showMessage($0.message)
                         }
@@ -132,9 +137,11 @@ class EventDetailView: UIView {
     
     @objc func segmentDidSelected(_ seg:UISegmentedControl) {
         Toast.showLoading()
-        ScheduleService.auditPrivateEvent(id: eventModel.id, status: seg.selectedSegmentIndex).subscribe(onNext:{
+        ScheduleService.auditPrivateEvent(id: eventModel.id, status: seg.selectedSegmentIndex,currentUserId: CalendarBelongUserId).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "operate success")
+                Toast.showSuccess(withStatus: "Successful operation",after: 2, {
+                    UIViewController.sk.getTopVC()?.dismiss(animated: true)
+                })
             } else {
                 Toast.showMessage($0.message)
             }

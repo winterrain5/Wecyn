@@ -18,6 +18,7 @@ import UIKit
  "attendees": string # 选填。对应is_public=0。参与者。格式：[{"user_id": user_id, "status": status}, ...]
  # 注：status，是否接受邀请。默认传0。0 未知，1 同意，2 拒绝
  "attendance_limit": int # 选填。对应is_public=1。限制参与者人数（非负整数）。
+ "current_user_id" # 选填。仅当操作他人Schedule时传此参数
  "remarks": string # 选填
  */
 import HandyJSON
@@ -25,6 +26,7 @@ class AddEventRequestModel: BaseModel {
     var end_time: String?
     var is_online: Int = 0
     var is_public: Int = 0
+    var current_user_id: Int?
     var remarks: String?
     var title: String?
     var start_time: String?

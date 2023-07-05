@@ -24,7 +24,7 @@ class ConnectAuditItemCell: UITableViewCell {
         didSet {
             guard let model = model else { return }
             nameLabel.text = String.fullName(first: model.first_name, last: model.last_name)
-            avatarView.kf.setImage(with: model.avatar.imageUrl,placeholder: R.image.proile_user()!)
+            avatarView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
         }
     }
     
@@ -35,13 +35,12 @@ class ConnectAuditItemCell: UITableViewCell {
             guard let `self` = self else { return }
             FriendService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 1).subscribe(onNext:{ status in
                 if status.success == 1 {
-                    Toast.showSuccess(withStatus: "Agree Successful")
-                    self.rejectButton.isHidden = true
-                    self.agreeButton.titleForNormal = "Agreed"
+                    Toast.showSuccess(withStatus: "Successful operation")
+                    self.auditHandler()
                 } else {
                     Toast.showError(withStatus: status.message)
                 }
-                self.auditHandler()
+                
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)
@@ -51,13 +50,12 @@ class ConnectAuditItemCell: UITableViewCell {
             guard let `self` = self else { return }
             FriendService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 2).subscribe(onNext:{ status in
                 if status.success == 1 {
-                    Toast.showSuccess(withStatus: "Reject Successful")
-                    self.agreeButton.isHidden = true
-                    self.rejectButton.titleForNormal = "Rejected"
+                    Toast.showSuccess(withStatus: "Successful operation")
+                    self.auditHandler()
                 } else {
                     Toast.showError(withStatus: status.message)
                 }
-                self.auditHandler()
+                
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)

@@ -16,7 +16,7 @@ class ConnectionItemCell: UICollectionViewCell {
         didSet {
             guard let model = model else { return }
             
-            avatarImgView.kf.setImage(with: model.avatar.imageUrl,placeholder: R.image.proile_user()!)
+            avatarImgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
             nameLabel.text = model.full_name
         }
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 class CalendarAddEventView: UIView {
+    @IBOutlet weak var calendarBelongLabel: UILabel!
     @IBOutlet weak var titleTf: UITextField!
     
     @IBOutlet weak var attendeesTf: UITextField!
@@ -31,6 +32,7 @@ class CalendarAddEventView: UIView {
     
     @IBOutlet weak var attendeesOrLimitLabel: UILabel!
     
+    @IBOutlet weak var titleTfTopCons: NSLayoutConstraint!
     @IBOutlet weak var attendeesClv: UICollectionView!
     @IBOutlet weak var attendeesClvHCons: NSLayoutConstraint!
     @IBOutlet weak var remarkTopCons: NSLayoutConstraint!
@@ -41,6 +43,10 @@ class CalendarAddEventView: UIView {
     var editEventModel: EventInfoModel? = nil {
         didSet {
             guard let event = editEventModel else { return }
+            
+            calendarBelongLabel.text = "you are editing \(event.calendar_belong_name)'s calendar"
+            titleTfTopCons.constant = 76
+            calendarBelongLabel.isHidden = false
             
             titleTf.text = event.title
             startTime.text = event.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm")
@@ -80,9 +86,24 @@ class CalendarAddEventView: UIView {
             requestModel.attendance_limit = editEventModel?.attendance_count ?? 0
             
             isEdit = true
+
         }
     }
     var attendees:[FriendListModel] = []
+
+    var calendarBelongName:String? {
+        didSet {
+            if calendarBelongName == nil {
+                titleTfTopCons.constant = 20
+                calendarBelongLabel.isHidden = true
+            } else {
+                calendarBelongLabel.text = "you are adding calendar for \(calendarBelongName ?? "")"
+                titleTfTopCons.constant = 76
+                calendarBelongLabel.isHidden = false
+            }
+            layoutIfNeeded()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -104,7 +125,9 @@ class CalendarAddEventView: UIView {
             if v is UILabel { return }
             if v is UISwitch { return }
             if v is UICollectionView { return }
-            v.addShadow(cornerRadius: 7)
+            v.cornerRadius = 5
+            v.borderColor = R.color.disableColor()!
+            v.borderWidth = 1
         }
         
         titleTf.rx.text.orEmpty.subscribe(onNext:{ [weak self] in
@@ -123,7 +146,7 @@ class CalendarAddEventView: UIView {
             guard let `self` = self else { return }
             let maxmumDate = (self.requestModel.end_time?.date(withFormat: "yyyy-MM-dd HH:mm:ss"))?.adding(.minute, value: -5)
             DatePickerView(title:"Start Time",
-                           mode: .date,
+                           mode: .dateAndTime,
                            date: Date(),
                            minimumDate: Date(),
                            maximumDate: maxmumDate) { date in
@@ -138,7 +161,7 @@ class CalendarAddEventView: UIView {
             guard let `self` = self else { return }
             let minimunDate = (self.requestModel.start_time?.date(withFormat: "yyyy-MM-dd HH:mm:ss") ?? Date()).adding(.minute, value: 5)
             DatePickerView(title:"End Time",
-                           mode: .date,
+                           mode: .dateAndTime,
                            date: Date(),
                            minimumDate: minimunDate,
                            maximumDate: nil) { date in
@@ -240,6 +263,7 @@ class CalendarAddEventView: UIView {
             self.isEdit ? self.editEvent() : self.addEvent()
         }).disposed(by: rx.disposeBag)
         
+        requestModel.current_user_id = CalendarBelongUserId
     }
     
     func addEvent() {

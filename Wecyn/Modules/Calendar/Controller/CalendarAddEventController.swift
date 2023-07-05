@@ -12,14 +12,17 @@ class CalendarAddEventController: BaseViewController {
     let scrollView = UIScrollView()
     let container = CalendarAddEventView.loadViewFromNib()
     var editEventModel:EventInfoModel? = nil
-    
+    var calendarBelongName:String? = nil
     init(editEventMode:EventInfoModel? = nil) {
-
-        self.editEventModel = editEventMode
         super.init(nibName: nil, bundle: nil)
-        
+        self.editEventModel = editEventMode
     }
-    
+
+    init(calendarBelongName:String? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        self.calendarBelongName = calendarBelongName
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,7 +44,9 @@ class CalendarAddEventController: BaseViewController {
         } else {
             navigation.item.title = "Add New event"
         }
+        container.calendarBelongName = calendarBelongName
         container.editEventModel = editEventModel
+        
     }
     
 

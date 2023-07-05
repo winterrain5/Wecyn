@@ -10,6 +10,7 @@ import ImagePickerSwift
 import SwiftAlertView
 class ProfileHeaderView: UIView {
 
+    @IBOutlet weak var backImgView: UIImageView!
     @IBOutlet weak var userAvatarImageView: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -28,7 +29,9 @@ class ProfileHeaderView: UIView {
             guard let userInfoModel = userInfoModel else { return }
             
             nameLabel.text = userInfoModel.first_name + " " + userInfoModel.last_name
-            userAvatarImageView.kf.setImage(with: userInfoModel.avatar.imageUrl,placeholder: R.image.proile_user()!)
+            userAvatarImageView.kf.setImage(with: userInfoModel.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            backImgView.kf.setImage(with: userInfoModel.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            
         }
     }
     
@@ -37,6 +40,7 @@ class ProfileHeaderView: UIView {
         viewNamecardButton.titleForNormal = Localizer.localized(for: .view_namecard)
         viewCalendarButton.titleForNormal = Localizer.localized(for: .view_calendar)
         addNewSectionButton.titleForNormal = Localizer.localized(for: .add_new_section)
+        backImgView.blur(withStyle: .light)
         
         userAvatarImageView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }

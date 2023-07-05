@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */; };
+		45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
 		450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7F2A37F85B008B0C4A /* EditViewController.swift */; };
 		450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C832A37FFAB008B0C4A /* JobItemCell.swift */; };
@@ -57,6 +59,8 @@
 		457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C509E2A3949E400FCE8D0 /* CountryListController.swift */; };
 		457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D912A4D6A47002E50DF /* DatePickerView.swift */; };
 		457C7D952A4E6BB1002E50DF /* FriendSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D942A4E6BB1002E50DF /* FriendSearchController.swift */; };
+		457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */; };
+		457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
 		45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */; };
 		45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7D2A26E045005871ED /* CacheProvider+Extension.swift */; };
@@ -148,6 +152,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListRequestModel.swift; sourceTree = "<group>"; };
+		45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSetAssistantsController.swift; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		450B6C7F2A37F85B008B0C4A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 		457C509E2A3949E400FCE8D0 /* CountryListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListController.swift; sourceTree = "<group>"; };
 		457C7D912A4D6A47002E50DF /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		457C7D942A4E6BB1002E50DF /* FriendSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchController.swift; sourceTree = "<group>"; };
+		457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssitantsRequestModel.swift; sourceTree = "<group>"; };
+		457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAssistantMenu.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45920A7B2A26E045005871ED /* Cacheable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cacheable+Extension.swift"; sourceTree = "<group>"; };
 		45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+HandyJson.swift"; sourceTree = "<group>"; };
@@ -409,6 +417,8 @@
 			children = (
 				457C50952A38582A00FCE8D0 /* RegistRequestModel.swift */,
 				45BBF5292A4833B00018992C /* AddEventRequestModel.swift */,
+				457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */,
+				45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -462,14 +472,14 @@
 			children = (
 				45920ABF2A26E045005871ED /* Base */,
 				45920A872A26E045005871ED /* Modules */,
-				45920A792A26E045005871ED /* NetworkLayer */,
+				45920A792A26E045005871ED /* Network */,
 				45920AB72A26E045005871ED /* SupportFile */,
 				45920A8A2A26E045005871ED /* Utility */,
 			);
 			path = Wecyn;
 			sourceTree = "<group>";
 		};
-		45920A792A26E045005871ED /* NetworkLayer */ = {
+		45920A792A26E045005871ED /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				457C50942A38581200FCE8D0 /* RequestModel */,
@@ -478,7 +488,7 @@
 				457C50912A38576200FCE8D0 /* Service */,
 				45920A852A26E045005871ED /* Api */,
 			);
-			path = NetworkLayer;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		45920A7A2A26E045005871ED /* Extension */ = {
@@ -856,6 +866,7 @@
 				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				4519A48E2A4AC69C007481A6 /* EventDetailController.swift */,
 				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
+				45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -874,6 +885,7 @@
 				45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */,
 				4519A48A2A4AB716007481A6 /* EventDetailView.swift */,
 				4519A48C2A4AB71E007481A6 /* EventDetailView.xib */,
+				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1065,6 +1077,7 @@
 				45920ACE2A26E045005871ED /* APIHost.swift in Sources */,
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
+				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
 				4519A48F2A4AC69C007481A6 /* EventDetailController.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
@@ -1113,6 +1126,7 @@
 				457C7D952A4E6BB1002E50DF /* FriendSearchController.swift in Sources */,
 				45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
+				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
 				45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */,
 				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
@@ -1143,6 +1157,7 @@
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,
 				457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */,
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
+				457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */,
 				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,
 				459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */,
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
@@ -1154,6 +1169,7 @@
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
 				45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
+				45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */,
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,
 				45920ACD2A26E045005871ED /* NetworkLogPlugin.swift in Sources */,

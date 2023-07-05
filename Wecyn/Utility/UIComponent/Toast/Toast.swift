@@ -49,6 +49,15 @@ class Toast {
         SVProgressHUD.showSuccess(withStatus: message)
     }
     
+    static func showSuccess(withStatus message: String, after:TimeInterval, _ complete:@escaping ()->()) {
+        defaultStyle()
+        SVProgressHUD.showSuccess(withStatus: message)
+        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
+            complete()
+        }
+       
+    }
+    
     static func showWarning(withStatus message: String) {
         defaultStyle()
         SVProgressHUD.showInfo(withStatus: message)

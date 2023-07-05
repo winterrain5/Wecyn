@@ -48,17 +48,17 @@ extension AuthApi:  TargetType, Cacheable  {
     var task: Task {
         switch self {
         case .emailSendeVerificationCode(let email):
-            return requestNoneNilParameters(["email":email])
+            return requestParametersByPost(["email":email])
         case .emailVerification(let email,let code):
-            return requestNoneNilParameters(["email":email,"code":code])
+            return requestParametersByPost(["email":email,"code":code])
         case .getCountryList:
             return .requestPlain
         case .getCityList(let countryID):
-            return requestURLParameters(["country_id":countryID])
+            return requestParametersByGet(["country_id":countryID])
         case .signup(let model):
-            return requestToTask(model)
+            return requestToTaskByPost(model)
         case .signin(let username,let password):
-            return requestNoneNilParameters(["username":username,"password":password])
+            return requestParametersByPost(["username":username,"password":password])
         }
     }
     

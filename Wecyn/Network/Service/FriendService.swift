@@ -43,9 +43,12 @@ class FriendService {
     }
     
     /// 好友列表
+    /// - Parameter id: id所属的好友列表
     /// - Returns: FriendListModel
-    static func friendList() -> Observable<[FriendListModel]> {
-        return FriendProvider.rx.cache.request(FriendApi.friendList).asObservable().mapArray(FriendListModel.self)
+    static func friendList(id:Int? = nil) -> Observable<[FriendListModel]> {
+        let target = MultiTarget(FriendApi.friendList(id))
+        return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
+//        return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
     }
     
     /// 获取收到的好友申请列表
@@ -94,7 +97,13 @@ class FriendListModel: BaseModel {
     var last_name: String = ""
     var avatar = ""
     var full_name: String {
-        String.fullName(first: first_name, last: last_name)
+        get {
+            String.fullName(first: first_name, last: last_name)
+        }
+        set {
+            first_name =  String(newValue.split(separator: " ").first ?? "")
+            last_name = String(newValue.split(separator: " ").last ?? "")
+        }
     }
     
     override func mapping(mapper: HelpingMapper) {
@@ -144,6 +153,8 @@ class FriendRecieveModel: BaseModel {
     }
     var avatar = ""
     var reason = ""
+    
+    var isAgree:Bool = false
     
 }
 

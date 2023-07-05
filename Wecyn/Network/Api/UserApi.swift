@@ -34,7 +34,7 @@ extension UserApi: TargetType {
     var task: Task {
         switch self {
         case .uploadAvatar(let photo):
-            return requestNoneNilParameters(["photo":photo])
+            return requestParametersByPost(["photo":photo])
         case .userInfo:
             return .requestPlain
         }

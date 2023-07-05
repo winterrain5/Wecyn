@@ -22,11 +22,15 @@ class APIHost: NSObject {
     
     enum BackgroundServerType: Int {
         case BaseClient
+        case ImageClients
     }
      var BaseClients = ["Dev": "http://10.1.3.22:826",
-                        "Uat": "",
+                        "Uat": "http://27.54.57.5:1412",
                     "Release": ""]
     
+    var ImageClients = ["Dev": "http://10.1.3.22:826",
+                        "Uat": "http://27.54.57.5:1412",
+                    "Release": ""]
     
      func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {
         var buildType = "\(buildType)"
@@ -39,12 +43,18 @@ class APIHost: NSObject {
         switch serverType {
         case .BaseClient :
             address = BaseClients[buildType]!
+        case .ImageClients:
+            address = ImageClients[buildType]!
         }
         return address
     }
     
     @objc var BaseUrl: String {
-        return getUrlAddress(buildType: .Dev,serverType: .BaseClient)
+        return getUrlAddress(buildType: buildType,serverType: .BaseClient)
+    }
+   
+    @objc var ImageUrl: String {
+        return getUrlAddress(buildType: buildType,serverType: .ImageClients)
     }
    
      var allBuildTypeCases:[AppBuildType] {
