@@ -16,7 +16,6 @@ class ConnectionOfMyCell: UITableViewCell {
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     var deleteFriendHandler: ((FriendListModel)->())!
-    
     var model: FriendListModel? {
         didSet {
             guard let model = model else { return }

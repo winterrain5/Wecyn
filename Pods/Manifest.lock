@@ -68,6 +68,7 @@ PODS:
   - RxSwiftExt/RxCocoa (5.2.0):
     - RxCocoa (~> 5.0)
     - RxSwiftExt/Core
+  - SectionIndexView (3.0.0)
   - SkeletonView (1.30.4)
   - SnapKit (5.6.0)
   - SVProgressHUD (2.2.5)
@@ -101,6 +102,9 @@ PODS:
   - SwiftExtensionsLibrary (0.2.4)
   - SwiftyJSON (5.0.1)
   - Then (3.0.0)
+  - WordPress-Aztec-iOS (1.19.8)
+  - WordPress-Editor-iOS (1.19.8):
+    - WordPress-Aztec-iOS (= 1.19.8)
 
 DEPENDENCIES:
   - Cache (~> 6.0.0)
@@ -135,6 +139,7 @@ DEPENDENCIES:
   - RxMoyaCache
   - RxSwift (= 5.1.2)
   - RxSwiftExt
+  - SectionIndexView
   - SkeletonView
   - SnapKit
   - SVProgressHUD
@@ -144,6 +149,8 @@ DEPENDENCIES:
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
   - Then
+  - WordPress-Aztec-iOS
+  - WordPress-Editor-iOS
 
 SPEC REPOS:
   trunk:
@@ -179,6 +186,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxSwiftExt
+    - SectionIndexView
     - SkeletonView
     - SnapKit
     - SVProgressHUD
@@ -187,6 +195,8 @@ SPEC REPOS:
     - SwifterSwift
     - SwiftyJSON
     - Then
+    - WordPress-Aztec-iOS
+    - WordPress-Editor-iOS
 
 EXTERNAL SOURCES:
   SwiftExtensionsLibrary:
@@ -230,6 +240,7 @@ SPEC CHECKSUMS:
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
+  SectionIndexView: b5369b14500696aec99531cb9a390773d162929e
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -239,7 +250,9 @@ SPEC CHECKSUMS:
   SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
+  WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: 47080c854da83d7716bb6a72423955b2304a866f
+PODFILE CHECKSUM: ed5f13838417906c7dd090f40414ef800a0c50fa
 
 COCOAPODS: 1.11.2

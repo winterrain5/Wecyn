@@ -8,7 +8,7 @@
 
 import SwiftExtensionsLibrary
 import Foundation
-
+import RxLocalizer
 /// 导航栏高度
 let kNavBarHeight: CGFloat = iPhoneX() ? 88 : 64
 /// tab栏高度
@@ -47,3 +47,4 @@ let DocumentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDir
 let CachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! as String
 // 临时目录
 let TempPath = NSTemporaryDirectory() as String
+let LocaIdentifier = Localizer.shared.currentLanguageCodeValue ?? ""

@@ -115,7 +115,7 @@ extension String {
     }
    static func fullName(first: String, last: String) -> String{
         let full = first + " " + last
-        return full
+        return full.replacingOccurrences(of: "\n", with: "")
     }
 }
 
@@ -147,5 +147,12 @@ extension Date {
         components.day = -1
         let endOfMonth =  calendar.date(byAdding: components, to: startOfCurrentMonth())!
         return endOfMonth
+    }
+    
+    func string(format: String = "dd/MM/yyyy HH:mm", locaIdentifier:String = LocaIdentifier) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: locaIdentifier)
+        return dateFormatter.string(from: self)
     }
 }

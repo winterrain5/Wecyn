@@ -173,9 +173,12 @@ struct _R {
     var disableColor: RswiftResources.ColorResource { .init(name: "disableColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 39 images.
+  /// This `_R.image` struct is generated, and contains static references to 40 images.
   struct image {
     let bundle: Foundation.Bundle
+
+    /// Image `appicon`.
+    var appicon: RswiftResources.ImageResource { .init(name: "appicon", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `attendace_delete`.
     var attendace_delete: RswiftResources.ImageResource { .init(name: "attendace_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -451,7 +454,7 @@ struct _R {
 
       let name = "LaunchScreen"
       func validate() throws {
-
+        if UIKit.UIImage(named: "appicon", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'appicon' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
       }
     }
   }

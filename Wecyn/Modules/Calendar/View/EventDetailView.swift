@@ -24,6 +24,7 @@ class EventDetailView: UIView {
     
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var remarkLabel: UILabel!
     
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var locOrUrlLabel: UILabel!
@@ -66,6 +67,7 @@ class EventDetailView: UIView {
             
             attendeesHeadLabel.isHidden = model.is_public == 1
             descLabel.text = model.desc.isEmpty ? "Description" : "Description \n\n \(model.desc)"
+            remarkLabel.text = model.remarks.isEmpty ? "Remark" : "Remark \n\n \(model.remarks)"
             
             clv.reloadData()
             

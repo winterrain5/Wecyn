@@ -38,7 +38,6 @@ class CalendarView: UIView {
         calendar.appearance.titleDefaultColor = R.color.textColor52()!
         calendar.appearance.titleFont = UIFont.sk.pingFangSemibold(15)
         calendar.appearance.caseOptions = .weekdayUsesUpperCase
-//        calendar.appearance.eventDefaultColor = .clear
         calendar.scope = .month
         calendar.appearance.borderRadius = 0.2
         calendar.rowHeight = (kScreenWidth - 36) / 7
@@ -108,7 +107,7 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         if eventDates.contains(date.string(withFormat: "yyyy-MM-dd")) {
-            return [.red]
+            return [R.color.textColor74()!]
         }
         return [.clear]
     }

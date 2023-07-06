@@ -35,7 +35,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="created by" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a60-gB-22e">
-                                        <rect key="frame" x="15" y="69.333333333333329" width="68.666666666666671" height="17"/>
+                                        <rect key="frame" x="15" y="69.333333333333329" width="400" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" name="TextColor52"/>
                                         <nil key="highlightedColor"/>
@@ -75,6 +75,7 @@
                                     <constraint firstAttribute="trailing" secondItem="hg5-iA-Ijn" secondAttribute="trailing" id="bkI-ly-1hz"/>
                                     <constraint firstAttribute="bottom" secondItem="hg5-iA-Ijn" secondAttribute="bottom" constant="-3" id="gWS-Yc-fEd"/>
                                     <constraint firstItem="LDz-uQ-mnD" firstAttribute="leading" secondItem="V8K-X5-Qsq" secondAttribute="leading" constant="15" id="nJ8-JP-1yI"/>
+                                    <constraint firstItem="hg5-iA-Ijn" firstAttribute="leading" secondItem="a60-gB-22e" secondAttribute="trailing" constant="8" id="nhS-38-k35"/>
                                     <constraint firstItem="LDz-uQ-mnD" firstAttribute="top" secondItem="QrG-ZC-Rqg" secondAttribute="bottom" constant="12" id="pcB-oR-rdr"/>
                                     <constraint firstItem="QrG-ZC-Rqg" firstAttribute="top" secondItem="V8K-X5-Qsq" secondAttribute="top" constant="12" id="qN9-gc-aug"/>
                                     <constraint firstItem="QrG-ZC-Rqg" firstAttribute="leading" secondItem="V8K-X5-Qsq" secondAttribute="leading" constant="15" id="sBU-Fe-tos"/>

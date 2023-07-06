@@ -111,8 +111,8 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
     var beginSearch:(()->())?
     var isSearchable = false
     var placeholder:String = ""
-    var isBecomeFirstResponder = true
-    init(placeholder:String,isSearchable:Bool = false,isBecomeFirstResponder:Bool = true) {
+    var isBecomeFirstResponder = false
+    init(placeholder:String,isSearchable:Bool = false,isBecomeFirstResponder:Bool = false) {
        
         super.init(frame: .zero)
         
@@ -136,7 +136,13 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         rightTf.clearButtonMode = .whileEditing
         
         rightTf.isUserInteractionEnabled = isSearchable
-        if isBecomeFirstResponder && isSearchable { rightTf.becomeFirstResponder() }
+        if isBecomeFirstResponder && isSearchable {
+            let work = DispatchWorkItem { [weak self] in
+                self?.rightTf.becomeFirstResponder()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: work)
+            
+        }
         
     }
     override init(frame: CGRect) {

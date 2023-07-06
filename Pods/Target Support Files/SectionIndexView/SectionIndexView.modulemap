@@ -1,0 +1,6 @@
+framework module SectionIndexView {
+  umbrella header "SectionIndexView-umbrella.h"
+
+  export *
+  module * { export * }
+}

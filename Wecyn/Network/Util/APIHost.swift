@@ -12,7 +12,7 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
-    var buildType: AppBuildType = .Dev
+    var buildType: AppBuildType = .Uat
     
     enum AppBuildType: Int {
         case Dev
@@ -33,12 +33,7 @@ class APIHost: NSObject {
                     "Release": ""]
     
      func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {
-        var buildType = "\(buildType)"
-        if let current = Defaults.shared.get(for: .currentBuildType) {
-            buildType = current
-        }else {
-            buildType = "\(buildType)"
-        }
+        let buildType = "\(buildType)"
         var address: String
         switch serverType {
         case .BaseClient :

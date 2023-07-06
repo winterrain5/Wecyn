@@ -40,6 +40,9 @@ target 'Wecyn' do
   pod 'FSCalendar'
   pod 'NewPopMenu', '~> 2.0'
   pod 'SwiftAlertView'
+  pod 'SectionIndexView'
+  pod "WordPress-Aztec-iOS"
+  pod "WordPress-Editor-iOS"
 
   
   pod 'Permission/Camera'
