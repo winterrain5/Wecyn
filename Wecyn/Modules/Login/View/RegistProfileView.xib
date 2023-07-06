@@ -63,7 +63,7 @@ and opportunities with your profile</string>
                     </constraints>
                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="11"/>
@@ -140,7 +140,7 @@ and opportunities with your profile</string>
                     </constraints>
                     <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="11"/>

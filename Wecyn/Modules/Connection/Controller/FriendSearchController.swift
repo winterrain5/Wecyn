@@ -85,10 +85,11 @@ class FriendSearchController: BaseTableController {
                     FriendService.deleteFriend(friend_id: item.id).subscribe(onNext:{ status in
                         if status.success == 1 {
                             Toast.showSuccess(withStatus: "Delete Success")
+                            self.loadNewData()
                         } else {
                             Toast.showError(withStatus: status.message)
                         }
-                        self.endRefresh()
+                        
                     }).disposed(by: self.rx.disposeBag)
                 }
             }

@@ -32,6 +32,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="36"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dy4-Wj-gXh">
@@ -43,6 +44,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
                                         <real key="value" value="22"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI Designer at Company209" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ve-k8-duQ">
@@ -50,6 +52,9 @@
                                 <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="10"/>
                                 <color key="textColor" name="TextColor52"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pc-XD-0Ga">
                                 <rect key="frame" x="81" y="145" width="70" height="22"/>
@@ -72,6 +77,8 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenWhenSkeletonIsActive" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
@@ -88,6 +95,9 @@
                             <constraint firstItem="3Pc-XD-0Ga" firstAttribute="top" secondItem="6Ve-k8-duQ" secondAttribute="bottom" constant="14" id="qU6-av-XX1"/>
                             <constraint firstAttribute="trailing" secondItem="Dy4-Wj-gXh" secondAttribute="trailing" constant="6" id="uyB-5L-H0R"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>
@@ -100,6 +110,9 @@
                 <constraint firstAttribute="bottom" secondItem="vyP-qK-ZYa" secondAttribute="bottom" constant="8" id="ONR-JF-ENU"/>
             </constraints>
             <size key="customSize" width="242" height="326"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="avatarImgView" destination="MZd-pV-tZr" id="gdz-1N-O7D"/>
                 <outlet property="connectButton" destination="3Pc-XD-0Ga" id="aPH-sI-PuM"/>

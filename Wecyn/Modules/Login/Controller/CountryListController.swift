@@ -7,7 +7,7 @@
 
 import UIKit
 import RxRelay
-
+import IQKeyboardManagerSwift
 class CountryListController: BaseTableController {
 
     enum DataType {
@@ -16,7 +16,8 @@ class CountryListController: BaseTableController {
     }
     var selectedCountry:BehaviorRelay<CountryModel?> = BehaviorRelay(value: nil)
     var selectedCity:BehaviorRelay<CityModel?> = BehaviorRelay(value: nil)
-        
+
+    var searchResult:[Any] = []
     var group:[String] = []
 
     var dataType: DataType = .Country
@@ -32,8 +33,28 @@ class CountryListController: BaseTableController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var keword:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let searchView = NavbarSearchView(placeholder: "Search Name",isSearchable: true,isBecomeFirstResponder: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.72, height: 36))
+        self.navigation.item.titleView = searchView
+        searchView.searching = { [weak self] keyword in
+            guard let `self` = self else { return }
+            self.keword = keyword.trimmed
+            if self.dataType == .City {
+                self.searchResult = (self.dataArray as! [CityModel]).filter({ $0.city_name.contains(keyword.trimmed)})
+            } else {
+                self.searchResult = (self.dataArray as! [CountryModel]).filter({ $0.country_name.contains(keyword.trimmed)})
+            }
+            self.reloadData()
+        }
+        
+        searchView.beginSearch = { [weak self] in
+            guard let `self` = self else { return }
+            self.searchResult = []
+            self.reloadData()
+        }
 
         switch dataType {
         case .Country:
@@ -43,17 +64,14 @@ class CountryListController: BaseTableController {
         }
     
         
-        let cancelButton = UIButton()
-        cancelButton.textColor(.blue)
-        cancelButton.titleForNormal = "Cancel"
-        self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-        cancelButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            self.dismiss(animated: true)
-        }).disposed(by: rx.disposeBag)
+        addLeftBarButtonItem()
+        leftButtonDidClick = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+
         
         let doneButton = UIButton()
-        doneButton.textColor(.blue)
+        doneButton.textColor(.black)
         doneButton.titleForNormal = "Done"
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
@@ -74,6 +92,16 @@ class CountryListController: BaseTableController {
             }
         }).disposed(by: rx.disposeBag)
          
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = true
     }
     
     func getCountryList() {
@@ -102,23 +130,25 @@ class CountryListController: BaseTableController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.dataArray.count
+        return self.searchResult.count == 0 ? self.dataArray.count : self.searchResult.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: UITableViewCell.self)
-        if self.dataArray.count > 0 {
-            switch dataType {
-            case .City:
-                let model = self.dataArray[indexPath.row] as! CityModel
-                cell.textLabel?.text = model.city_name
-                cell.accessoryType = model.isSelected ? .checkmark : .none
-            case .Country:
-                let model = self.dataArray[indexPath.row] as! CountryModel
-                cell.textLabel?.text = model.country_name
-                cell.accessoryType = model.isSelected ? .checkmark : .none
-            }
-           
-            
+        var datas:[Any] = []
+        if self.searchResult.count > 0 {
+            datas = self.searchResult
+        } else {
+            datas = self.dataArray
+        }
+        switch dataType {
+        case .City:
+            let model = datas[indexPath.row] as! CityModel
+            cell.textLabel?.text = model.city_name
+            cell.accessoryType = model.isSelected ? .checkmark : .none
+        case .Country:
+            let model = datas[indexPath.row] as! CountryModel
+            cell.textLabel?.text = model.country_name
+            cell.accessoryType = model.isSelected ? .checkmark : .none
         }
         return cell
     }

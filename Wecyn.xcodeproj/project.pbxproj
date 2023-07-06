@@ -1346,6 +1346,7 @@
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1384,6 +1385,7 @@
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

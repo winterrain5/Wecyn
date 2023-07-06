@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxLocalizer
 enum DataViewType {
     case Timeline
     case UpComing
@@ -25,6 +26,7 @@ class CalendarController: BaseTableController {
     var assistants: [AssistantInfo] = []
     let UserModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
     var calendarChangeDate:Date?
+    let headerHeight = 280.cgFloat
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,9 +71,14 @@ class CalendarController: BaseTableController {
     }
     
     override func refreshData() {
+        
         let eventList = ScheduleService.eventList(model: requestModel)
         let friendList = FriendService.friendList(id: CalendarBelongUserId)
-        if isFirstLoad { showSkeleton() }
+        if isFirstLoad {
+            self.view.showSkeleton()
+        } else {
+            Toast.showLoading()
+        }
         Observable.zip(eventList,friendList).subscribe(onNext:{ events,friends in
             events.forEach({ event in
                 if event.creator_id == self.UserModel?.id {
@@ -115,9 +122,11 @@ class CalendarController: BaseTableController {
             
             self.endRefresh(.NoData, emptyString: "No Events")
             self.hideSkeleton()
+            Toast.dismiss()
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
             self.hideSkeleton()
+            Toast.dismiss()
         }).disposed(by: rx.disposeBag)
         
         
@@ -149,7 +158,7 @@ class CalendarController: BaseTableController {
         
         registRefreshHeader()
         
-        headerView.size = CGSize(width: kScreenWidth, height: 280)
+        headerView.size = CGSize(width: kScreenWidth, height: headerHeight)
         tableView?.tableHeaderView = headerView
         headerView.calendarView.dateSelected = { [weak self] date in
             guard let `self` = self else { return }
@@ -225,8 +234,9 @@ class CalendarController: BaseTableController {
             if self.isSelectCalendar {
                 return self.dataArray.count
             } else {
-                if self.dataArray.count > 0 {
-                    return (self.dataArray as! [[EventListModel]])[section - 1].count
+                let datas = self.dataArray as! [[EventListModel]]
+                if datas.count > 0, datas[section - 1].count > 0 {
+                    return datas[section - 1].count
                 }
             }
         }
@@ -261,7 +271,7 @@ class CalendarController: BaseTableController {
                 let label = UILabel().color(R.color.textColor52()!).font(UIFont.sk.pingFangSemibold(15))
                 view.addSubview(label)
                 label.frame = CGRect(x: 28, y: 0, width: 100, height: 30)
-                label.text = (self.dataArray as! [[EventListModel]])[section - 1].first?.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd MMM yyyy")
+                label.text = (self.dataArray as! [[EventListModel]])[section - 1].first?.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(format: "dd MMM yyyy")
                 return view
             }
             return nil
@@ -298,6 +308,10 @@ class CalendarController: BaseTableController {
     deinit {
         CalendarBelongUserId = nil
     }
+    
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return headerHeight * 0.5
+    }
 }
 
 
@@ -313,7 +327,6 @@ class CalendarNavBarUserView: UIView {
             selfModel.avatar = userModel?.avatar ?? ""
             assistants.insert(selfModel, at: 0)
             
-            arrow.isHidden = assistants.count == 0
         }
     }
     let userModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)

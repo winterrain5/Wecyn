@@ -7,7 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import CocoaDebug
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Localizer.shared.changeLanguage.accept("en")
         
-        CocoaDebug.onlyURLs = [APIHost.share.BaseUrl.appending("/api")]
+//        CocoaDebug.onlyURLs = [APIHost.share.BaseUrl.appending("/api")]
         
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
             let main = MainController()

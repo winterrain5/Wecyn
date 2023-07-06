@@ -60,7 +60,7 @@ class RegistInfoView: UIView {
             self.registModel.email = $0.0
             self.registModel.first_name = $0.1
             self.registModel.last_name = $0.2
-            self.registModel.password = MD5($0.3 + "wecyn")
+            self.registModel.password = MD5($0.3 + "wecyn").lowercased()
             self.registModel.postal_code = $0.4
             return !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty && !$0.4.isEmpty
         })

@@ -7,48 +7,52 @@
 
 import UIKit
 import PopMenu
+import IQKeyboardManagerSwift
 class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlowLayout {
     var sectionTitle = ["People in IT services you may know ","People you may know from Company209","People you may know from Nanyang Polytechnic"]
     
+    var searchResults:[FriendUserInfoModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addRightBarItems()
-        
-        let more = UIButton()
-        more.imageForNormal = R.image.navbar_more()
-        let moreItem = UIBarButtonItem(customView: more)
-        more.rx.tap.subscribe(onNext:{ [weak self] in
+        let searchView = NavbarSearchView(placeholder: "Search by name",isSearchable: true,isBecomeFirstResponder: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+        self.navigation.item.titleView = searchView
+        searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
-            
-            let action1 = PopMenuDefaultAction(title: "My Connections") { action in
-                self.navigationController?.pushViewController(ConnectionOfMyController())
-            }
-            
-            let action2 = PopMenuDefaultAction(title: "My Groups") { action in
-                
-            }
-            
-            let menuViewController = PopMenuViewController(sourceView: more,actions: [
-                action1,action2
-            ])
-
-            self.present(menuViewController, animated: true, completion: nil)
-
-            
-        }).disposed(by: rx.disposeBag)
-        self.navigation.item.leftBarButtonItems = [moreItem]
-       
+            self.searchResults = (self.dataArray as? [FriendUserInfoModel])?.filter({  $0.first_name.lowercased().contains(keyword.trimmed.lowercased()) ||
+                $0.last_name.lowercased().contains(keyword.trimmed.lowercased()) ||
+                $0.full_name.lowercased().contains(keyword.trimmed.lowercased()) }) ?? []
+            self.reloadData()
+        }
+        
+        searchView.beginSearch = { [weak self] in
+            guard let `self` = self else { return }
+            self.searchResults = []
+            self.reloadData()
+        }
+        
         loadNewData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = true
+    }
+    
     override func refreshData() {
-        
+        showSkeleton()
         FriendService.searchUserList().subscribe(onNext:{ models in
             self.dataArray.append(contentsOf: models)
             self.endRefresh(models.count,emptyString: "No Data")
+            self.hideSkeleton()
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
+            self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
         
     }
@@ -57,6 +61,8 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
     override func createListView() {
         super.createListView()
         
+        collectionView?.isSkeletonable = true
+        cellIdentifier = ConnectionItemCell.className
         registRefreshHeader(colorStyle: .gray)
         collectionView?.register(nibWithCellClass: ConnectionItemCell.self)
         
@@ -85,18 +91,26 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dataArray.count
+        return self.searchResults.count == 0 ? self.dataArray.count : self.searchResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: ConnectionItemCell.self, for: indexPath)
-        if self.dataArray.count > 0 {
+        if self.searchResults.count > 0 {
+            let model = self.searchResults[indexPath.row]
+            cell.model = model
+        } else {
             let model = self.dataArray[indexPath.row] as? FriendUserInfoModel
             cell.model = model
         }
+        
         return cell
     }
     
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+    }
     
 //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 //
