@@ -9,4 +9,7 @@
 import UIKit
 
 extension Notification.Name {
+    static let ConnectionAuditDataLoaded = Notification.Name("ConnectionAuditDataLoaded")
+    static let ConnectionAuditUser = Notification.Name("ConnectionAuditUser")
+    static let CreateGroup = Notification.Name("CreateGroup")
 }

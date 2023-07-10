@@ -45,6 +45,14 @@ class BaseViewController: UIViewController {
         self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
     }
     
+    func returnBack() {
+        if self.presentationController != nil {
+            self.dismiss(animated: true)
+        }else {
+            self.navigationController?.popViewController()
+        }
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

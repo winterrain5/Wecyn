@@ -173,7 +173,7 @@ struct _R {
     var disableColor: RswiftResources.ColorResource { .init(name: "disableColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 40 images.
+  /// This `_R.image` struct is generated, and contains static references to 41 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -267,6 +267,9 @@ struct _R {
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `plus.circle`.
+    var plusCircle: RswiftResources.ImageResource { .init(name: "plus.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `profile_edit_userinfo`.
     var profile_edit_userinfo: RswiftResources.ImageResource { .init(name: "profile_edit_userinfo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -298,7 +301,7 @@ struct _R {
     var tab_setting: RswiftResources.ImageResource { .init(name: "tab_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 21 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 22 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -322,6 +325,9 @@ struct _R {
 
     /// Nib `ConnectionOfMyCell`.
     var connectionOfMyCell: RswiftResources.NibReference<ConnectionOfMyCell> { .init(name: "ConnectionOfMyCell", bundle: bundle) }
+
+    /// Nib `CreateGroupHeaderView`.
+    var createGroupHeaderView: RswiftResources.NibReference<CreateGroupHeaderView> { .init(name: "CreateGroupHeaderView", bundle: bundle) }
 
     /// Nib `EventDetailView`.
     var eventDetailView: RswiftResources.NibReference<EventDetailView> { .init(name: "EventDetailView", bundle: bundle) }
@@ -387,6 +393,11 @@ struct _R {
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "plus.circle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'plus.circle' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "event_detail_close", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'event_detail_close' is used in nib 'EventDetailView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "event_location", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'event_location' is used in nib 'EventDetailView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'EventDetailView', but couldn't be loaded.") }

@@ -8,57 +8,37 @@
 import UIKit
 import SwiftAlertView
 import SectionIndexView
-class ConnectionOfMyController: BaseTableController {
+class ConnectionOfMyController: BasePagingTableController {
     
     var friends:[[FriendListModel]] = []
+    var models:[FriendListModel] = [] {
+        didSet {
+            configData(models: models)
+        }
+    }
     var connections:[FriendRecieveModel] = []
     var sectionCharacters:[String] = []
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addRightBarItems()
-        
-        let searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false)
-        searchView.size = CGSize(width: kScreenWidth * 0.7, height: 36)
-        self.navigation.item.titleView = searchView
-        searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
-            self.navigationController?.pushViewController(ConnectionController(),animated: false)
-        }).disposed(by: rx.disposeBag)
-        
-        
-        refreshData()
-    }
-    
-    override func refreshData() {
-        getFriendList()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    func getFriendList() {
-        self.friends.removeAll()
         self.showSkeleton()
-        FriendService.friendList().subscribe(onNext:{ models in
-            self.configData(models: models)
-            self.endRefresh()
-            self.hideSkeleton()
-        },onError: { e in
-            self.endRefresh(e.asAPIError.emptyDatatype)
-            self.hideSkeleton()
-        }).disposed(by: rx.disposeBag)
-        
-        FriendService.friendRecieveList().subscribe(onNext:{ models  in
-            self.connections = models
-            self.endRefresh()
-        },onError: { e in
-            self.endRefresh(e.asAPIError.emptyDatatype)
-        }).disposed(by: rx.disposeBag)
     }
+    
+
+
     
     func configData(models:[FriendListModel]) {
+        self.friends.removeAll()
         if  models.count > 0 {
             var characters = models.map({ String( $0.first_name.first! ).uppercased() })
             self.sectionCharacters = characters.removeDuplicates().sorted(by: { $0 < $1 })
@@ -83,6 +63,9 @@ class ConnectionOfMyController: BaseTableController {
         dict.values.sorted(by: {
             ($0.first?.first_name.first?.uppercased() ?? "") < ($1.first?.first_name.first?.uppercased() ?? "")
         }).forEach({ self.friends.append($0) })
+        
+        self.endRefresh(models.count)
+        self.hideSkeleton()
     }
     
     override func createListView() {
@@ -92,26 +75,24 @@ class ConnectionOfMyController: BaseTableController {
         registRefreshHeader()
         tableView?.showsVerticalScrollIndicator = false
         tableView?.register(nibWithCellClass: ConnectionOfMyCell.self)
-        tableView?.register(nibWithCellClass: ConnectAuditItemCell.self)
-        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
-        tableView?.scrollToTop()
-        
+        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  10, right: 0)
         
     }
     
+    override func listViewFrame() -> CGRect {
+        CGRect(x: 0, y: 2, width: kScreenWidth, height: kScreenHeight - ConnectFriendHeaderInSectionHeight.cgFloat + 2 - kNavBarHeight - kTabBarHeight)
+    }
+    
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.friends.count + 1
+        return self.friends.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return connections.count
-        } else {
-            if friends.count > 0 {
-                return friends[section - 1].count
-            }
-            return 0
+        if friends.count > 0 {
+            return friends[section].count
         }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -120,62 +101,55 @@ class ConnectionOfMyController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withClass: ConnectAuditItemCell.self)
-            let model = connections[indexPath.row]
-            cell.model = model
-            cell.auditHandler = { [weak self] in
-                self?.refreshData()
-            }
-            cell.selectionStyle = .none
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withClass: ConnectionOfMyCell.self)
-            if friends.count > 0,friends[indexPath.section - 1].count > 0 {
-                cell.model = friends[indexPath.section - 1][indexPath.row]
-            }
-            cell.deleteFriendHandler = { [weak self] item in
-                guard let `self` = self else { return }
-                SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this friend?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
-                    if buttonIndex == 1 {
-                        FriendService.deleteFriend(friend_id: item.id).subscribe(onNext:{ status in
-                            if status.success == 1 {
-                                Toast.showSuccess(withStatus: "Delete Success")
-                                self.loadNewData()
-                            } else {
-                                Toast.showError(withStatus: status.message)
-                            }
-                            
-                        }).disposed(by: self.rx.disposeBag)
-                    }
-                }
-                
-            }
-            cell.selectionStyle = .none
-            return cell
+        let cell = tableView.dequeueReusableCell(withClass: ConnectionOfMyCell.self)
+        if friends.count > 0,friends[indexPath.section].count > 0 {
+            cell.model = friends[indexPath.section][indexPath.row]
         }
+        
+        cell.deleteFriendHandler = { [weak self] item in
+            guard let `self` = self else { return }
+            SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this friend?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
+                if buttonIndex == 1 {
+                    Toast.showLoading()
+                    FriendService.deleteFriend(friend_id: item.id).subscribe(onNext:{ status in
+                        Toast.dismiss()
+                        if status.success == 1 {
+                            Toast.showSuccess(withStatus: "Delete Success")
+                            let datas = self.friends.flatMap({
+                                var temp = $0
+                                temp.removeAll(where: { $0.id == item.id })
+                                return temp
+                            })
+                            self.configData(models: datas)
+                        } else {
+                            Toast.showError(withStatus: status.message)
+                        }
+                        
+                    },onError: { e in
+                        Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                    }).disposed(by: self.rx.disposeBag)
+                }
+            }
+            
+        }
+        cell.selectionStyle = .none
+        return cell
     }
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section >= 1 {
-            return 22
-        }
-        return connections.count > 0 ? 36 : 0
+        return 22
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0  {
+        if sectionCharacters.count > 0, section < sectionCharacters.count{
             let view = UIView().backgroundColor(.white)
-            let label = UILabel().text("New connection request(s) from:").color(R.color.textColor52()!).font(UIFont.sk.pingFangSemibold(15))
-            view.addSubview(label)
-            label.frame = CGRect(x: 16, y: 0, width: kScreenWidth, height: 36)
-            return view
-        } else {
-            let view = UIView().backgroundColor(.white)
-            let label = UILabel().text(self.sectionCharacters[section - 1]).color(R.color.textColor52()!).font(UIFont.sk.pingFangSemibold(15))
+            let label = UILabel().text(self.sectionCharacters[section])
+                .color(R.color.textColor52()!)
+                .font(UIFont.sk.pingFangSemibold(15))
             view.addSubview(label)
             label.frame = CGRect(x: 16, y: 0, width: kScreenWidth, height: 22)
             return view
         }
+       return nil
     }
 }
