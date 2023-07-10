@@ -48,7 +48,7 @@ class FriendService {
     static func friendList(id:Int? = nil) -> Observable<[FriendListModel]> {
         let target = MultiTarget(FriendApi.friendList(id))
         return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
-//        return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
+//                return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
     }
     
     /// 获取收到的好友申请列表
@@ -83,6 +83,55 @@ class FriendService {
         return APIProvider.rx.request(target).asObservable().mapArray(FriendUserInfoModel.self)
     }
     
+    
+    /// 添加分组
+    /// - Parameters:
+    ///   - name: 分组名称
+    ///   - friends: 好友id
+    /// - Returns: ResponseStatus
+    static func addGroup(name:String,friends:[Int] = []) -> Observable<ResponseStatus> {
+        let target = MultiTarget(FriendApi.addGroup(name, friends))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
+    /// 删除分组
+    /// - Parameter id: 分组ID
+    /// - Returns: ResponseStatus
+    static func deleteGroup(id:Int) ->  Observable<ResponseStatus> {
+        let target = MultiTarget(FriendApi.deleteGroup(id))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
+    /// 移动好友到分组
+    /// - Parameters:
+    ///   - id: 分组ID
+    ///   - friendId: 好友ID
+    /// - Returns: ResponseStatus
+    static func friendToGroup(id:Int,friendId:Int) -> Observable<ResponseStatus> {
+        let target = MultiTarget(FriendApi.friendToGroup(id, friendId))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
+    /// 查询分组
+    /// - Parameter id: 分组ID
+    /// - Returns: GroupListModel 数组
+    static func selectGroup(id:Int? = nil) -> Observable<[GroupListModel]> {
+        let target = MultiTarget(FriendApi.selectGroup(id))
+        return APIProvider.rx.request(target).asObservable().mapArray(GroupListModel.self)
+    }
+    
+    
+    /// 更新分组
+    /// - Parameter model: GroupUpdateRequestModel
+    /// - Returns: ResponseStatus
+    static func updateGroup(model: GroupUpdateRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(FriendApi.updateGroup(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
 }
 
 class FriendListModel: BaseModel {
@@ -96,6 +145,7 @@ class FriendListModel: BaseModel {
     var first_name: String = ""
     var last_name: String = ""
     var avatar = ""
+    var group_id: Int = 0
     var full_name: String {
         get {
             String.fullName(first: first_name, last: last_name)
@@ -108,11 +158,13 @@ class FriendListModel: BaseModel {
     
     override func mapping(mapper: HelpingMapper) {
         mapper <<<
-                    self.first_name <-- "fn"
+            self.first_name <-- "fn"
         mapper <<<
-                    self.last_name <-- "ln"
+            self.last_name <-- "ln"
         mapper <<<
-                    self.avatar <-- "avt"
+            self.avatar <-- "avt"
+        mapper <<<
+            self.group_id <-- "gid"
     }
     
     // 本地字段
@@ -183,3 +235,14 @@ class FriendSendModel: BaseModel {
     var operate_time = ""
 }
 
+class GroupListModel: BaseModel {
+    /*
+     "id": int # group_id
+     "name": string # 组名
+     "count": int # 好友数量
+     */
+    var id: Int = 0
+    var name = ""
+    var count = 0
+    var isExpand = false
+}

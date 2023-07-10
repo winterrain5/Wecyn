@@ -33,7 +33,9 @@ class ConnectAuditItemCell: UITableViewCell {
         shadowView.addShadow(cornerRadius: 8)
         agreeButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
+            Toast.showLoading()
             FriendService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 1).subscribe(onNext:{ status in
+                Toast.dismiss()
                 if status.success == 1 {
                     Toast.showSuccess(withStatus: "Successful operation")
                     self.auditHandler()
@@ -41,14 +43,18 @@ class ConnectAuditItemCell: UITableViewCell {
                     Toast.showError(withStatus: status.message)
                 }
                 
+            },onError: { e in
+                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)
         
         rejectButton.rx.tap.subscribe(onNext:{  [weak self] in
-            
             guard let `self` = self else { return }
+            
+            Toast.showLoading()
             FriendService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 2).subscribe(onNext:{ status in
+                Toast.dismiss()
                 if status.success == 1 {
                     Toast.showSuccess(withStatus: "Successful operation")
                     self.auditHandler()
@@ -56,6 +62,8 @@ class ConnectAuditItemCell: UITableViewCell {
                     Toast.showError(withStatus: status.message)
                 }
                 
+            },onError: { e in
+                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)

@@ -18,6 +18,11 @@ enum FriendApi  {
     case friendSendList
     case friendUserInfo(_ friendId: Int)
     case userSearchList(_ keyword: String = "")
+    case addGroup(_ name:String, _ friends:[Int] = [])
+    case deleteGroup(_ id:Int)
+    case friendToGroup(_ id:Int, _ friendId: Int)
+    case selectGroup(_ id:Int? = nil)
+    case updateGroup(_ model:GroupUpdateRequestModel)
 }
 
 extension FriendApi:TargetType, Cacheable {
@@ -39,13 +44,30 @@ extension FriendApi:TargetType, Cacheable {
             return "/api/network/networkUserInfo/"
         case .userSearchList:
             return "/api/network/searchList/"
+        case .addGroup:
+            return "/api/network/addGroup/"
+        case .deleteGroup:
+            return "/api/network/deleteGroup/"
+        case .friendToGroup:
+            return "/api/network/friendToGroup/"
+        case .selectGroup:
+            return "/api/network/selectGroup/"
+        case .updateGroup:
+            return "/api/network/updateGroup/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .addFriend, .auditFriend, .deleteFriend:
+        case .addFriend,
+             .auditFriend,
+             .deleteFriend,
+             .addGroup,
+             .deleteGroup,
+             .friendToGroup:
             return Moya.Method.post
+        case .updateGroup:
+            return Moya.Method.put
         default:
             return Moya.Method.get
         }
@@ -74,9 +96,18 @@ extension FriendApi:TargetType, Cacheable {
             return requestParametersByGet(["current_user_id":id])
         case .friendUserInfo(let friendId):
             return requestParametersByGet(["id":friendId])
-            
         case .userSearchList(let keyword):
             return requestParametersByGet(["keyword":keyword])
+        case .addGroup(let name, let friends):
+            return requestParametersByPost(["name":name,"friends":friends])
+        case .deleteGroup(let id):
+            return requestParametersByPost(["id":id])
+        case .friendToGroup(let id, let friendId):
+            return requestParametersByPost(["id":id,"friend_id":friendId])
+        case .selectGroup(let id):
+            return requestParametersByGet(["id":id])
+        case .updateGroup(let model):
+            return requestToTaskByPost(model)
         }
         
     }

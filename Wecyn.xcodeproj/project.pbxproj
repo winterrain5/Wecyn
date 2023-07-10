@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */; };
 		45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */; };
+		45005C532A57D9A200560E21 /* ConnectAuditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C522A57D9A200560E21 /* ConnectAuditController.swift */; };
+		45005C552A57DC5400560E21 /* ConnectionGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C542A57DC5400560E21 /* ConnectionGroupController.swift */; };
+		45005C572A57DC7E00560E21 /* ConnectionFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C562A57DC7E00560E21 /* ConnectionFriendController.swift */; };
+		45005C592A57FB8900560E21 /* GroupUpdateRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C582A57FB8900560E21 /* GroupUpdateRequestModel.swift */; };
+		45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C5A2A57FC8200560E21 /* CreateGroupController.swift */; };
+		45005C5D2A57FEEF00560E21 /* CreateGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C5C2A57FEEF00560E21 /* CreateGroupHeaderView.swift */; };
+		45005C5F2A57FF0100560E21 /* CreateGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */; };
+		45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */; };
+		45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C642A5B94A100560E21 /* GroupItemCell.swift */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
 		450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7F2A37F85B008B0C4A /* EditViewController.swift */; };
 		450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C832A37FFAB008B0C4A /* JobItemCell.swift */; };
@@ -154,6 +163,15 @@
 /* Begin PBXFileReference section */
 		45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListRequestModel.swift; sourceTree = "<group>"; };
 		45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSetAssistantsController.swift; sourceTree = "<group>"; };
+		45005C522A57D9A200560E21 /* ConnectAuditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditController.swift; sourceTree = "<group>"; };
+		45005C542A57DC5400560E21 /* ConnectionGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionGroupController.swift; sourceTree = "<group>"; };
+		45005C562A57DC7E00560E21 /* ConnectionFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFriendController.swift; sourceTree = "<group>"; };
+		45005C582A57FB8900560E21 /* GroupUpdateRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupUpdateRequestModel.swift; sourceTree = "<group>"; };
+		45005C5A2A57FC8200560E21 /* CreateGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupController.swift; sourceTree = "<group>"; };
+		45005C5C2A57FEEF00560E21 /* CreateGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupHeaderView.swift; sourceTree = "<group>"; };
+		45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupHeaderView.xib; sourceTree = "<group>"; };
+		45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHeadeCell.swift; sourceTree = "<group>"; };
+		45005C642A5B94A100560E21 /* GroupItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItemCell.swift; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		450B6C7F2A37F85B008B0C4A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
@@ -419,6 +437,7 @@
 				45BBF5292A4833B00018992C /* AddEventRequestModel.swift */,
 				457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */,
 				45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */,
+				45005C582A57FB8900560E21 /* GroupUpdateRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -494,9 +513,9 @@
 		45920A7A2A26E045005871ED /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				45920A7B2A26E045005871ED /* Cacheable+Extension.swift */,
 				45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */,
 				45920A7D2A26E045005871ED /* CacheProvider+Extension.swift */,
+				45920A7B2A26E045005871ED /* Cacheable+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -786,8 +805,12 @@
 			children = (
 				45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */,
 				45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */,
-				45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */,
 				457C7D942A4E6BB1002E50DF /* FriendSearchController.swift */,
+				45005C522A57D9A200560E21 /* ConnectAuditController.swift */,
+				45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */,
+				45005C542A57DC5400560E21 /* ConnectionGroupController.swift */,
+				45005C562A57DC7E00560E21 /* ConnectionFriendController.swift */,
+				45005C5A2A57FC8200560E21 /* CreateGroupController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -801,6 +824,10 @@
 				45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */,
 				453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */,
 				453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */,
+				45005C5C2A57FEEF00560E21 /* CreateGroupHeaderView.swift */,
+				45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */,
+				45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */,
+				45005C642A5B94A100560E21 /* GroupItemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -972,6 +999,7 @@
 				450BA6DF2A330B8400764828 /* RegistProfileView.xib in Resources */,
 				453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */,
 				459C06692A36F73F0066F85A /* NameCardContentView.xib in Resources */,
+				45005C5F2A57FF0100560E21 /* CreateGroupHeaderView.xib in Resources */,
 				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
@@ -1069,6 +1097,7 @@
 				45920AF72A26E045005871ED /* AppDelegate.swift in Sources */,
 				459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */,
 				457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */,
+				45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
 				457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */,
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
@@ -1094,6 +1123,7 @@
 				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
+				45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */,
 				457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */,
 				453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */,
 				45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */,
@@ -1102,6 +1132,7 @@
 				45920AEB2A26E045005871ED /* WebBrowser+MessageHandler.swift in Sources */,
 				450BA6B62A31B9B000764828 /* Localizer.swift in Sources */,
 				459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */,
+				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
@@ -1115,7 +1146,9 @@
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
+				45005C592A57FB8900560E21 /* GroupUpdateRequestModel.swift in Sources */,
 				45920AE82A26E045005871ED /* LoaddingButton.swift in Sources */,
+				45005C552A57DC5400560E21 /* ConnectionGroupController.swift in Sources */,
 				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
@@ -1136,12 +1169,14 @@
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
 				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
 				45ADB2932A3FF72D00745F6F /* CalendarAddEventController.swift in Sources */,
+				45005C572A57DC7E00560E21 /* ConnectionFriendController.swift in Sources */,
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
 				4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
+				45005C5D2A57FEEF00560E21 /* CreateGroupHeaderView.swift in Sources */,
 				45920AEA2A26E045005871ED /* ZoomImageScrollView.swift in Sources */,
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
@@ -1152,6 +1187,7 @@
 				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
 				450BA6E12A3312D500764828 /* RegistConfirmController.swift in Sources */,
+				45005C532A57D9A200560E21 /* ConnectAuditController.swift in Sources */,
 				45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */,
 				45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */,
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,

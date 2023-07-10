@@ -12,7 +12,7 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
-    var buildType: AppBuildType = .Uat
+    var buildType: AppBuildType = .Dev
     
     enum AppBuildType: Int {
         case Dev
@@ -24,11 +24,11 @@ class APIHost: NSObject {
         case BaseClient
         case ImageClients
     }
-     var BaseClients = ["Dev": "http://10.1.3.22:826",
+     var BaseClients = ["Dev": "http://10.1.3.23:826",
                         "Uat": "http://27.54.57.5:1412",
                     "Release": ""]
     
-    var ImageClients = ["Dev": "http://10.1.3.22:826",
+    var ImageClients = ["Dev": "http://10.1.3.23:826",
                         "Uat": "http://27.54.57.5:1412",
                     "Release": ""]
     

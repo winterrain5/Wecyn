@@ -35,7 +35,7 @@ class CalendarAddAttendanceController: BaseTableController {
         self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.dismiss(animated: true)
+            self.returnBack()
         }).disposed(by: rx.disposeBag)
         
         selectUsers.map({ !$0.isEmpty }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)
@@ -104,8 +104,7 @@ class CalendarAddAttendanceController: BaseTableController {
         tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: kBottomsafeAreaMargin + 10, right: 0)
         tableView?.showsVerticalScrollIndicator = false
         tableView?.register(cellWithClass: CalendarAddAttendanceCell.self)
-        tableView?.scrollToTop()
-        
+ 
     }
     
   

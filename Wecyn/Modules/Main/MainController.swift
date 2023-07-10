@@ -28,7 +28,7 @@ class MainController: UITabBarController {
     
     func setupChildController() {
         let home = BaseNavigationController(rootViewController: HomeController())
-        let friend = BaseNavigationController(rootViewController: ConnectionOfMyController())
+        let connection = BaseNavigationController(rootViewController: ConnectionFriendController())
         let job = BaseNavigationController(rootViewController: JobController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
         let setting = BaseNavigationController(rootViewController: SettingController())
@@ -41,8 +41,8 @@ class MainController: UITabBarController {
             title: "Home",
             image: R.image.tab_home(),
             selectedImage: selectedImage(R.image.tab_home()))
-        friend.tabBarItem = UITabBarItem.init(
-            title: "Friend",
+        connection.tabBarItem = UITabBarItem.init(
+            title: "Connection",
             image: R.image.tab_connection(),
             selectedImage: selectedImage(R.image.tab_connection()))
         
@@ -61,7 +61,7 @@ class MainController: UITabBarController {
             image: R.image.tab_setting(),
             selectedImage: selectedImage(R.image.tab_setting()))
         
-        self.viewControllers = [friend,profile,setting]
+        self.viewControllers = [connection,profile,setting]
         configAppearance()
     }
     
