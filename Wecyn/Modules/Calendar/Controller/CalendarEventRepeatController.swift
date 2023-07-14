@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import EventKit
 enum CalendarFrequencyType: String {
     case Not
     case Daily
@@ -57,7 +58,7 @@ class CalendarEventRepeatController: BaseTableController {
     
     var models:[[EventRepeatModel]] = []
     var selectFrequencyModel:EventRepeatModel!
-    var rrule:RWMRecurrenceRule?
+    var rrule:RecurrenceRule?
     let sectionView = CalendarEventSectionView()
     var untilSelectIndex:Int = -1
     override func viewDidLoad() {
@@ -79,16 +80,19 @@ class CalendarEventRepeatController: BaseTableController {
         let saveButton = UIButton()
         saveButton.imageForNormal = R.image.checkmark()
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
-            // DTSTART 改为rrule数组中的第一个
+            
             guard let `self` = self,let rule = self.rrule else { return }
-            let scheduler = RWMRuleScheduler()
-            let start = Date()
-        
-            scheduler.enumerateDates(with: rule, startingFrom: start, using: { (date, stop) in
-                if let date = date {
-                    print(date)
-                }
-            })
+//            let occurrences = rule.allOccurrences()
+//
+//            print("\nRRule Occurrences:")
+//            occurrences.forEach { (occurrence) in
+//                print(occurrence.string())
+//            }
+            
+            print("\nlast Occurrence:")
+            let last = rule.lastOccurrence(before: "2035 11 24".date(withFormat: "yyyy MM dd")!)
+            print(last?.string())
+            
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
@@ -110,7 +114,7 @@ class CalendarEventRepeatController: BaseTableController {
     
     func addWeekSection() -> [EventRepeatModel]{
         var section: [EventRepeatModel]  = []
-       
+        
         let interval = EventRepeatModel(title: "Interval", cellType: .Interval, value: "1")
         let until = EventRepeatModel(title: "Until", cellType: .Until)
         let byweekday = EventRepeatModel(title: "ByWeekday", cellType: .Byweekday)
@@ -123,7 +127,7 @@ class CalendarEventRepeatController: BaseTableController {
     
     func addMonthSection() -> [EventRepeatModel]{
         var section: [EventRepeatModel]  = []
-       
+        
         let interval = EventRepeatModel(title: "Interval", cellType: .Interval, value: "1")
         let until = EventRepeatModel(title: "Until", cellType: .Until)
         let byweekday = EventRepeatModel(title: "ByWeekday", cellType: .Byweekday)
@@ -182,7 +186,7 @@ class CalendarEventRepeatController: BaseTableController {
                 if item.cellType == .Interval {
                     self.rrule?.interval = value
                 }
-            
+                
                 self.repeatDescription()
             }
             return cell
@@ -216,23 +220,24 @@ class CalendarEventRepeatController: BaseTableController {
             case .Daily:
                 removeLast()
                 models.append(addDaySection())
-                rrule = RWMRecurrenceRule(recurrenceWith: .daily, interval: 1)
+                rrule = RecurrenceRule(frequency: .daily)
             case .Weekly:
                 removeLast()
                 models.append(addWeekSection())
-                rrule = RWMRecurrenceRule(recurrenceWith: .weekly, interval: 1)
+                rrule = RecurrenceRule(frequency: .weekly)
             case .Monthly:
                 removeLast()
                 models.append(addMonthSection())
-                rrule = RWMRecurrenceRule(recurrenceWith: .monthly, interval: 1)
+                rrule = RecurrenceRule(frequency: .monthly)
             case .Yearly:
                 removeLast()
                 models.append(addYearSection())
-                rrule = RWMRecurrenceRule(recurrenceWith: .yearly, interval: 1)
+                rrule = RecurrenceRule(frequency: .yearly)
             case .none:
                 Logger.debug("none")
             }
-            rrule?.recurrenceEnd = RWMRecurrenceEnd(occurrenceCount: 1)
+            rrule?.interval = 1
+            rrule?.recurrenceEnd = EKRecurrenceEnd(occurrenceCount: 1)
             tableView.reloadData()
             repeatDescription()
         }
@@ -247,17 +252,20 @@ class CalendarEventRepeatController: BaseTableController {
             vc.selectComplete = { [weak self] weekIdx in
                 guard let `self` = self else { return }
                 
-                let weekdays = weekIdx.map {
-                    return RWMRecurrenceDayOfWeek(RWMWeekday(rawValue: $0 + 1)!)
-                }
-                self.rrule?.daysOfTheWeek = weekdays.count == 0 ? nil : weekdays
+                let weekdays = weekIdx.map({
+                    EKWeekday(rawValue: $0 + 1)!
+                })
+                
+                self.rrule?.byweekday = weekdays.count == 0 ? [] : weekdays
                 
                 let value = weekIdx.map({ $0.string }).joined(separator: ",")
                 self.models[1][1].value = value
                 
                 self.repeatDescription()
                 self.tableView?.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .none)
+                
             }
+            
             self.navigationController?.pushViewController(vc)
         }
         
@@ -269,8 +277,8 @@ class CalendarEventRepeatController: BaseTableController {
             let vc = CalendarEventRepeatWeekOrMonthController(type: .Month, selectIndexs: selectIndexs)
             vc.selectComplete = { [weak self] monthIdx in
                 guard let `self` = self else { return }
-         
-                self.rrule?.monthsOfTheYear = monthIdx.count == 0 ? nil : monthIdx
+                
+                self.rrule?.bymonth = monthIdx.map({ $0 + 1 })
                 
                 let value = monthIdx.map({ $0.string }).joined(separator: ",")
                 self.models[1][2].value = value
@@ -280,7 +288,7 @@ class CalendarEventRepeatController: BaseTableController {
             }
             self.navigationController?.pushViewController(vc)
         }
-
+        
         if model.cellType == .Until {
             let vc = CalendarEventRepeatUntilController(selectIndex: self.untilSelectIndex, end: self.rrule?.recurrenceEnd)
             vc.selectComplete = { idx, end in
@@ -288,15 +296,15 @@ class CalendarEventRepeatController: BaseTableController {
                 if end?.endDate != nil {
                     self.models[1].last?.value = end?.endDate?.string(format: "dd MMM yyyy") ?? ""
                 } else {
-                    if (end?.count ?? 0) > 1 {
-                        let unit = (end?.count ?? 0) > 0 ? "times" : "time"
-                        self.models[1].last?.value = (end?.count.string ?? "") + " \(unit)"
+                    if (end?.occurrenceCount ?? 0) > 1 {
+                        let unit = (end?.occurrenceCount ?? 0) > 0 ? "times" : "time"
+                        self.models[1].last?.value = (end?.occurrenceCount.string ?? "") + " \(unit)"
                     } else {
                         self.models[1].last?.value = "Forever"
                     }
                 }
                 
-               
+                
                 self.rrule?.recurrenceEnd = end
                 
                 self.repeatDescription()
@@ -326,11 +334,12 @@ class CalendarEventRepeatController: BaseTableController {
         /// Repeat every 2 days in January and May on Monday for 10 times
         /// Repeat every 1 day in January and May on Monday, Friday until July 19, 2023
         guard let rrule = rrule else { return }
-        let rule = RWMRuleParser().rule(from: rrule)
+        let rule = rrule.toRRuleString()
+        print("rrule text:\(rule)")
         var description = ""
         
-        let interval = rrule.interval ?? 0
-        let count = rrule.recurrenceEnd?.count ?? 0
+        let interval = rrule.interval
+        let count = rrule.recurrenceEnd?.occurrenceCount ?? 0
         
         let endDate = rrule.recurrenceEnd?.endDate?.string(format: "dd MMM yyyy HH:mm") ?? ""
         let untilStr = endDate.isEmpty ? "" : "until \(endDate)"
@@ -350,6 +359,10 @@ class CalendarEventRepeatController: BaseTableController {
             if !endDate.isEmpty {
                 description = "Repeat every \(interval) \(dayunit) \(untilStr)"
             }
+            
+            if count == 0 && endDate.isEmpty {
+                description = "repeat forever"
+            }
         case .Weekly,.Monthly:
             
             var unit = ""
@@ -364,21 +377,21 @@ class CalendarEventRepeatController: BaseTableController {
             weekday.split(separator: ",").map({ String($0).int ?? 0 }).forEach({
                 weekvalue.append(WeekData[$0])
             })
-            let weekdayStr = weekday.isEmpty ? "" : "on \(weekvalue.joined(separator: ","))"
+            let weekdayStr = weekday.isEmpty ? "" : " on \(weekvalue.joined(separator: ","))"
             
             let month = self.models[1][2].value
             var monthvalue:[String] = []
             month.split(separator: ",").map({ String($0).int ?? 0 }).forEach({
                 monthvalue.append(MonthData[$0])
             })
-            let montStr = month.isEmpty ? "" : "in \(monthvalue.joined(separator: ","))"
+            let montStr = month.isEmpty ? "" : " in \(monthvalue.joined(separator: ","))"
             
             if count > 0 {
                 let countStr = count > 0 ? "for \(count) \(countunit)" : ""
-                description = "Repeat every \(interval) \(unit) \(montStr) \(weekdayStr) \(untilStr) \(countStr)"
+                description = "Repeat every \(interval) \(unit)\(montStr)\(weekdayStr) \(untilStr) \(countStr)"
             }
             if !endDate.isEmpty {
-                description = "Repeat every \(interval) \(unit) \(montStr) \(weekdayStr) \(untilStr)"
+                description = "Repeat every \(interval) \(unit)\(montStr)\(weekdayStr) \(untilStr)"
             }
             
         case .Yearly:
@@ -505,7 +518,7 @@ class CalendarEventStepperCell: UITableViewCell {
     }
 }
 class CalendarEventArrowCell: UITableViewCell {
-
+    
     var detailLabel = UILabel()
     var model: EventRepeatModel! {
         didSet  {
@@ -562,7 +575,7 @@ class CalendarEventArrowCell: UITableViewCell {
             make.top.bottom.equalToSuperview()
         }
         
-      
+        
     }
 }
 class CalendarEventSectionView: UIView {

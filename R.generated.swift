@@ -15,6 +15,7 @@ struct _R {
   var string: string { .init(bundle: bundle, preferredLanguages: nil, locale: nil) }
   var color: color { .init(bundle: bundle) }
   var image: image { .init(bundle: bundle) }
+  var file: file { .init(bundle: bundle) }
   var nib: nib { .init(bundle: bundle) }
   var storyboard: storyboard { .init(bundle: bundle) }
 
@@ -31,6 +32,9 @@ struct _R {
     .init(bundle: bundle)
   }
   func image(bundle: Foundation.Bundle) -> image {
+    .init(bundle: bundle)
+  }
+  func file(bundle: Foundation.Bundle) -> file {
     .init(bundle: bundle)
   }
   func nib(bundle: Foundation.Bundle) -> nib {
@@ -377,6 +381,17 @@ struct _R {
 
     /// Image `xmark`.
     var xmark: RswiftResources.ImageResource { .init(name: "xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+  }
+
+  /// This `_R.file` struct is generated, and contains static references to 2 resource files.
+  struct file {
+    let bundle: Foundation.Bundle
+
+    /// Resource file `nlp.js`.
+    var nlpJs: RswiftResources.FileResource { .init(name: "nlp", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `rrule.js`.
+    var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
   /// This `_R.nib` struct is generated, and contains static references to 21 nibs.
