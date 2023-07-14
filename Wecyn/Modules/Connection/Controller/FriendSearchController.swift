@@ -24,7 +24,7 @@ class FriendSearchController: BaseTableController {
         
         self.addLeftBarButtonItem(image: R.image.navigation_back_default()!.withTintColor(.black))
         self.leftButtonDidClick = {
-            self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -61,7 +61,7 @@ class FriendSearchController: BaseTableController {
         
         registRefreshHeader()
         tableView?.showsVerticalScrollIndicator = false
-        tableView?.register(nibWithCellClass: ConnectionOfMyCell.self)
+        tableView?.register(cellWithClass: ConnectionOfMyCell.self)
         tableView?.scrollToTop()
         
     }
@@ -71,29 +71,16 @@ class FriendSearchController: BaseTableController {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 116
+        return 52
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withClass: ConnectionOfMyCell.self)
-        cell.model = dataArray[indexPath.row] as? FriendListModel
-        cell.deleteFriendHandler = { [weak self] item in
-            guard let `self` = self else { return }
-            SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this friend?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
-                if buttonIndex == 1 {
-                    FriendService.deleteFriend(friend_id: item.id).subscribe(onNext:{ status in
-                        if status.success == 1 {
-                            Toast.showSuccess(withStatus: "Delete Success")
-                            self.loadNewData()
-                        } else {
-                            Toast.showError(withStatus: status.message)
-                        }
-                        
-                    }).disposed(by: self.rx.disposeBag)
-                }
-            }
+        if  dataArray.count > 0 {
+            cell.model = dataArray[indexPath.row] as? FriendListModel
         }
+        
         cell.selectionStyle = .none
         return cell
     }

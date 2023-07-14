@@ -46,7 +46,7 @@ class BaseViewController: UIViewController {
     }
     
     func returnBack() {
-        if self.presentationController != nil {
+        if self.presentingViewController != nil {
             self.dismiss(animated: true)
         }else {
             self.navigationController?.popViewController()

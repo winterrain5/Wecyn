@@ -12,7 +12,14 @@ class GroupItemCell: UITableViewCell {
     var imgView = UIImageView()
     var nameLabel = UILabel()
     var deletebutton = UIButton()
-    
+    var model: FriendListModel? {
+        didSet {
+            guard let model = model else { return }
+            imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            nameLabel.text = model.full_name
+        }
+    }
+    var deleteUserFromGroup:((FriendListModel)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(imgView)
@@ -23,6 +30,10 @@ class GroupItemCell: UITableViewCell {
         nameLabel.textColor = R.color.textColor52()
         nameLabel.font = UIFont.sk.pingFangRegular(15)
         deletebutton.imageForNormal = R.image.connection_delete()
+        
+        deletebutton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.deleteUserFromGroup?((self?.model)!)
+        }).disposed(by: rx.disposeBag)
     }
     
     required init?(coder: NSCoder) {

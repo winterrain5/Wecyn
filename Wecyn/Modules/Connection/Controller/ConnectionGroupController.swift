@@ -16,7 +16,9 @@ class ConnectionGroupController: BasePagingTableController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.CreateGroup, object: nil, queue: .main) { _ in
-            
+            self.loadNewData()
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.ConnectionRefreshing, object: nil, queue: .main) { _ in
             self.loadNewData()
         }
     }
@@ -72,7 +74,7 @@ class ConnectionGroupController: BasePagingTableController {
     }
     
     override func listViewFrame() -> CGRect {
-        CGRect(x: 0, y: 2, width: kScreenWidth, height: kScreenHeight - ConnectFriendHeaderInSectionHeight.cgFloat + 2 - kNavBarHeight - kTabBarHeight)
+        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - ConnectFriendHeaderInSectionHeight.cgFloat - kNavBarHeight - kTabBarHeight)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,8 +111,8 @@ class ConnectionGroupController: BasePagingTableController {
             cell.arrowButtonDidClickHandler = { [weak self] idx in
                 self?.tableView?.reloadSections(IndexSet(integer: idx.section), with: .none)
             }
-            cell.deleteButtonDidClickHandler = { [weak self] item in
-                self?.deleteGroup(id: item.id)
+            cell.deleteButtonDidClickHandler = { [weak self] model in
+                self?.deleteGroup(id: model.id)
             }
             cell.editButtonDidClickHandler = {  [weak self] idx in
                 let vc = CreateGroupController(groupModel: self?.datas[idx.section])
@@ -121,8 +123,10 @@ class ConnectionGroupController: BasePagingTableController {
             let cell = tableView.dequeueReusableCell(withClass: GroupItemCell.self)
             if datas.count > 0,indexPath.section < datas.count, datas[indexPath.section].groups.count > 0, (indexPath.row - 1) < datas[indexPath.section].groups.count{
                 let model = datas[indexPath.section].groups[indexPath.row  - 1]
-                cell.imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
-                cell.nameLabel.text = model.full_name
+                cell.model = model
+            }
+            cell.deleteUserFromGroup = { [weak self] model in
+                self?.deleteUserFromGroup(id: model.id)
             }
             return cell
         }
@@ -130,16 +134,40 @@ class ConnectionGroupController: BasePagingTableController {
     
     
     func deleteGroup(id:Int) {
-        Toast.showLoading()
-        FriendService.deleteGroup(id: id).subscribe(onNext:{
-            if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Successful operation")
-                self.loadNewData()
-            } else {
-                Toast.showError(withStatus: $0.message)
+        SwiftAlertView.show(title:"Are you sure you want to delete this group",buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
+            if buttonIndex == 1 {
+                Toast.showLoading()
+                FriendService.deleteGroup(id: id).subscribe(onNext:{
+                    if $0.success == 1 {
+                        Toast.showSuccess(withStatus: "Successful operation")
+                        self.loadNewData()
+                    } else {
+                        Toast.showError(withStatus: $0.message)
+                    }
+                },onError: { e in
+                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                }).disposed(by: self.rx.disposeBag)
             }
-        },onError: { e in
-            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
-        }).disposed(by: rx.disposeBag)
+        }
+      
+    }
+    
+    func deleteUserFromGroup(id:Int) {
+        SwiftAlertView.show(title:"Are you sure you want to remove this friend from the group",buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
+            if buttonIndex == 1 {
+                Toast.showLoading()
+                FriendService.friendToGroup(id: 0, friendIds: [id]).subscribe(onNext:{
+                    if $0.success == 1 {
+                        Toast.showSuccess(withStatus: "Successful operation")
+                        self.loadNewData()
+                    } else {
+                        Toast.showError(withStatus: $0.message)
+                    }
+                },onError: { e in
+                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                }).disposed(by: self.rx.disposeBag)
+            }
+        }
+        
     }
 }

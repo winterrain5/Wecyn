@@ -147,7 +147,7 @@ struct _R {
     }
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 7 colors.
+  /// This `_R.color` struct is generated, and contains static references to 11 colors.
   struct color {
     let bundle: Foundation.Bundle
 
@@ -156,6 +156,9 @@ struct _R {
 
     /// Color `BackgroundColor`.
     var backgroundColor: RswiftResources.ColorResource { .init(name: "BackgroundColor", path: [], bundle: bundle) }
+
+    /// Color `SeperatorColor`.
+    var seperatorColor: RswiftResources.ColorResource { .init(name: "SeperatorColor", path: [], bundle: bundle) }
 
     /// Color `TextColor162C46`.
     var textColor162C46: RswiftResources.ColorResource { .init(name: "TextColor162C46", path: [], bundle: bundle) }
@@ -169,13 +172,25 @@ struct _R {
     /// Color `TheamColor`.
     var theamColor: RswiftResources.ColorResource { .init(name: "TheamColor", path: [], bundle: bundle) }
 
+    /// Color `agreeColor`.
+    var agreeColor: RswiftResources.ColorResource { .init(name: "agreeColor", path: [], bundle: bundle) }
+
     /// Color `disableColor`.
     var disableColor: RswiftResources.ColorResource { .init(name: "disableColor", path: [], bundle: bundle) }
+
+    /// Color `rejectColor`.
+    var rejectColor: RswiftResources.ColorResource { .init(name: "rejectColor", path: [], bundle: bundle) }
+
+    /// Color `unknownColor`.
+    var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 41 images.
+  /// This `_R.image` struct is generated, and contains static references to 63 images.
   struct image {
     let bundle: Foundation.Bundle
+
+    /// Image `alarm`.
+    var alarm: RswiftResources.ImageResource { .init(name: "alarm", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `appicon`.
     var appicon: RswiftResources.ImageResource { .init(name: "appicon", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -204,6 +219,18 @@ struct _R {
     /// Image `calendar_share`.
     var calendar_share: RswiftResources.ImageResource { .init(name: "calendar_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `checkmark`.
+    var checkmark: RswiftResources.ImageResource { .init(name: "checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `circle.fill`.
+    var circleFill: RswiftResources.ImageResource { .init(name: "circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `clock`.
+    var clock: RswiftResources.ImageResource { .init(name: "clock", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `clock.arrow.circlepath`.
+    var clockArrowCirclepath: RswiftResources.ImageResource { .init(name: "clock.arrow.circlepath", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `comment`.
     var comment: RswiftResources.ImageResource { .init(name: "comment", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -228,6 +255,9 @@ struct _R {
     /// Image `event_location`.
     var event_location: RswiftResources.ImageResource { .init(name: "event_location", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `gear.circle`.
+    var gearCircle: RswiftResources.ImageResource { .init(name: "gear.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `google`.
     var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -242,6 +272,15 @@ struct _R {
 
     /// Image `like`.
     var like: RswiftResources.ImageResource { .init(name: "like", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `line.3.horizontal`.
+    var line3Horizontal: RswiftResources.ImageResource { .init(name: "line.3.horizontal", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `link`.
+    var link: RswiftResources.ImageResource { .init(name: "link", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `location`.
+    var location: RswiftResources.ImageResource { .init(name: "location", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -264,6 +303,15 @@ struct _R {
     /// Image `password_visible`.
     var password_visible: RswiftResources.ImageResource { .init(name: "password_visible", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `pencil.line`.
+    var pencilLine: RswiftResources.ImageResource { .init(name: "pencil.line", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.2`.
+    var person2: RswiftResources.ImageResource { .init(name: "person.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.circle`.
+    var personCircle: RswiftResources.ImageResource { .init(name: "person.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -276,6 +324,9 @@ struct _R {
     /// Image `proile_user`.
     var proile_user: RswiftResources.ImageResource { .init(name: "proile_user", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `repeat`.
+    var `repeat`: RswiftResources.ImageResource { .init(name: "repeat", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `retweet`.
     var retweet: RswiftResources.ImageResource { .init(name: "retweet", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -284,6 +335,9 @@ struct _R {
 
     /// Image `send`.
     var send: RswiftResources.ImageResource { .init(name: "send", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `switch.2`.
+    var switch2: RswiftResources.ImageResource { .init(name: "switch.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `tab_connection`.
     var tab_connection: RswiftResources.ImageResource { .init(name: "tab_connection", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -299,9 +353,33 @@ struct _R {
 
     /// Image `tab_setting`.
     var tab_setting: RswiftResources.ImageResource { .init(name: "tab_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `tag`.
+    var tag: RswiftResources.ImageResource { .init(name: "tag", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `tag.fill.1`.
+    var tagFill1: RswiftResources.ImageResource { .init(name: "tag.fill.1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `tag.fill.2`.
+    var tagFill2: RswiftResources.ImageResource { .init(name: "tag.fill.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `tag.fill.3`.
+    var tagFill3: RswiftResources.ImageResource { .init(name: "tag.fill.3", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `tag.fill.4`.
+    var tagFill4: RswiftResources.ImageResource { .init(name: "tag.fill.4", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `tag.fill.5`.
+    var tagFill5: RswiftResources.ImageResource { .init(name: "tag.fill.5", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `text.quote`.
+    var textQuote: RswiftResources.ImageResource { .init(name: "text.quote", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `xmark`.
+    var xmark: RswiftResources.ImageResource { .init(name: "xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 22 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 21 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -322,9 +400,6 @@ struct _R {
 
     /// Nib `ConnectionItemCell`.
     var connectionItemCell: RswiftResources.NibReference<ConnectionItemCell> { .init(name: "ConnectionItemCell", bundle: bundle) }
-
-    /// Nib `ConnectionOfMyCell`.
-    var connectionOfMyCell: RswiftResources.NibReference<ConnectionOfMyCell> { .init(name: "ConnectionOfMyCell", bundle: bundle) }
 
     /// Nib `CreateGroupHeaderView`.
     var createGroupHeaderView: RswiftResources.NibReference<CreateGroupHeaderView> { .init(name: "CreateGroupHeaderView", bundle: bundle) }
@@ -388,11 +463,6 @@ struct _R {
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "connection_delete", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'connection_delete' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "connection_message", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'connection_message' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ConnectionOfMyCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "plus.circle", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'plus.circle' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
@@ -444,18 +514,36 @@ struct _R {
     }
   }
 
-  /// This `_R.storyboard` struct is generated, and contains static references to 1 storyboards.
+  /// This `_R.storyboard` struct is generated, and contains static references to 2 storyboards.
   struct storyboard {
     let bundle: Foundation.Bundle
+    var attachmentDetailsViewController: attachmentDetailsViewController { .init(bundle: bundle) }
     var launchScreen: launchScreen { .init(bundle: bundle) }
 
+    func attachmentDetailsViewController(bundle: Foundation.Bundle) -> attachmentDetailsViewController {
+      .init(bundle: bundle)
+    }
     func launchScreen(bundle: Foundation.Bundle) -> launchScreen {
       .init(bundle: bundle)
     }
     func validate() throws {
+      try self.attachmentDetailsViewController.validate()
       try self.launchScreen.validate()
     }
 
+
+    /// Storyboard `AttachmentDetailsViewController`.
+    struct attachmentDetailsViewController: RswiftResources.StoryboardReference {
+      let bundle: Foundation.Bundle
+
+      let name = "AttachmentDetailsViewController"
+
+      var attachmentDetailsViewController: RswiftResources.StoryboardViewControllerIdentifier<AttachmentDetailsViewController> { .init(identifier: "AttachmentDetailsViewController", storyboard: name, bundle: bundle) }
+
+      func validate() throws {
+        if attachmentDetailsViewController() == nil { throw RswiftResources.ValidationError("[R.swift] ViewController with identifier 'attachmentDetailsViewController' could not be loaded from storyboard 'AttachmentDetailsViewController' as 'AttachmentDetailsViewController'.") }
+      }
+    }
 
     /// Storyboard `LaunchScreen`.
     struct launchScreen: RswiftResources.StoryboardReference, RswiftResources.InitialControllerContainer {

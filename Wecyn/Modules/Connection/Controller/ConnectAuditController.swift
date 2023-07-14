@@ -17,7 +17,7 @@ class ConnectAuditController: BaseTableController {
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.ConnectionAuditDataLoaded, object: nil, queue: OperationQueue.main) { noti in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.ConnectionRefreshing, object: nil, queue: OperationQueue.main) { noti in
             let headerHeight = noti.object as? CGFloat ?? 0
             self.tableView?.height = headerHeight
         }

@@ -328,12 +328,12 @@ extension CalendarAddEventView: UICollectionViewDataSource,UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: CalendarHasAddedAttendanceCell.self, for: indexPath)
         if self.attendees.count > 0 {
-            cell.model = attendees[indexPath.row]
-            cell.deleteItemHandler = { item in
-                self.attendees.removeFirst(where: { $0.id == item.id })
-                self.requestModel.attendees?.removeFirst(where: { $0.id == item.id })
-                self.layoutWithAnimation()
-            }
+//            cell.model = attendees[indexPath.row]
+//            cell.deleteItemHandler = { item in
+//                self.attendees.removeFirst(where: { $0.id == item.id })
+//                self.requestModel.attendees?.removeFirst(where: { $0.id == item.id })
+//                self.layoutWithAnimation()
+//            }
         }
         return cell
     }
@@ -347,51 +347,3 @@ extension CalendarAddEventView: UICollectionViewDataSource,UICollectionViewDeleg
     }
 }
 
-class CalendarHasAddedAttendanceCell: UICollectionViewCell {
-    var btn = UIButton()
-    var model: FriendListModel =  FriendListModel() {
-        didSet {
-            btn.titleForNormal = model.full_name
-            
-            switch model.status {
-            case 0: // 未知
-                contentView.backgroundColor = UIColor(hexString: "#ed8c00")
-            case 1: // 同意
-                contentView.backgroundColor = UIColor(hexString: "#21a93c")
-            case 2: // 拒绝
-                contentView.backgroundColor = UIColor(hexString: "#d82739")
-            default:
-                contentView.backgroundColor = UIColor(hexString: "#ed8c00")
-            }
-            
-        }
-    }
-    var deleteItemHandler:((FriendListModel)->())?
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.addSubview(btn)
-        
-        btn.titleLabel?.font = UIFont.sk.pingFangRegular(12)
-        btn.titleColorForNormal = .white
-        btn.imageForNormal = R.image.attendace_delete()
-        btn.sk.setImageTitleLayout(.imgRight)
-        contentView.layer.cornerRadius = 3
-        contentView.layer.masksToBounds = true
-        btn.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            self.deleteItemHandler?(self.model)
-            
-        }).disposed(by: rx.disposeBag)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        btn.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(3)
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
