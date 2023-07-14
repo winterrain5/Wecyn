@@ -34,9 +34,6 @@ class ConnectionOfMyController: BasePagingTableController {
         self.showSkeleton()
     }
     
-
-
-    
     func configData(models:[FriendListModel]) {
         self.friends.removeAll()
         if  models.count > 0 {
@@ -74,13 +71,13 @@ class ConnectionOfMyController: BasePagingTableController {
         tableView?.isSkeletonable = true
         registRefreshHeader()
         tableView?.showsVerticalScrollIndicator = false
-        tableView?.register(nibWithCellClass: ConnectionOfMyCell.self)
+        tableView?.register(cellWithClass: ConnectionOfMyCell.self)
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  10, right: 0)
         
     }
     
     override func listViewFrame() -> CGRect {
-        CGRect(x: 0, y: 2, width: kScreenWidth, height: kScreenHeight - ConnectFriendHeaderInSectionHeight.cgFloat + 2 - kNavBarHeight - kTabBarHeight)
+        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - ConnectFriendHeaderInSectionHeight.cgFloat - kNavBarHeight - kTabBarHeight)
     }
     
     
@@ -96,7 +93,7 @@ class ConnectionOfMyController: BasePagingTableController {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 52
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,34 +102,6 @@ class ConnectionOfMyController: BasePagingTableController {
         if friends.count > 0,friends[indexPath.section].count > 0 {
             cell.model = friends[indexPath.section][indexPath.row]
         }
-        
-        cell.deleteFriendHandler = { [weak self] item in
-            guard let `self` = self else { return }
-            SwiftAlertView.show(title:"Danger Operation",message: "Are you sure you want to delete this friend?", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
-                if buttonIndex == 1 {
-                    Toast.showLoading()
-                    FriendService.deleteFriend(friend_id: item.id).subscribe(onNext:{ status in
-                        Toast.dismiss()
-                        if status.success == 1 {
-                            Toast.showSuccess(withStatus: "Delete Success")
-                            let datas = self.friends.flatMap({
-                                var temp = $0
-                                temp.removeAll(where: { $0.id == item.id })
-                                return temp
-                            })
-                            self.configData(models: datas)
-                        } else {
-                            Toast.showError(withStatus: status.message)
-                        }
-                        
-                    },onError: { e in
-                        Toast.showError(withStatus: e.asAPIError.errorInfo().message)
-                    }).disposed(by: self.rx.disposeBag)
-                }
-            }
-            
-        }
-        cell.selectionStyle = .none
         return cell
     }
     
@@ -142,14 +111,29 @@ class ConnectionOfMyController: BasePagingTableController {
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if sectionCharacters.count > 0, section < sectionCharacters.count{
-            let view = UIView().backgroundColor(.white)
+            let view = UIView().backgroundColor(R.color.backgroundColor()!)
             let label = UILabel().text(self.sectionCharacters[section])
-                .color(R.color.textColor52()!)
-                .font(UIFont.sk.pingFangSemibold(15))
+                .color(R.color.textColor74()!)
+                .font(UIFont.sk.pingFangSemibold(12))
             view.addSubview(label)
             label.frame = CGRect(x: 16, y: 0, width: kScreenWidth, height: 22)
             return view
         }
        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if friends.count > 0,friends[indexPath.section].count > 0 {
+            let model = friends[indexPath.section][indexPath.row]
+            let vc = FriendDetailController(id: model.id)
+            vc.deleteUserComplete = { [weak self] id in
+                guard let `self` = self else { return }
+                self.models.removeAll(where: { $0.id == id  })
+                self.configData(models: self.models)
+            }
+            self.navigationController?.pushViewController(vc)
+        }
+       
     }
 }

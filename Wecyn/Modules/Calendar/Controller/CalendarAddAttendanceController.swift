@@ -26,6 +26,8 @@ class CalendarAddAttendanceController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        IQKeyboardManager.shared.enableAutoToolbar  = false
+        
         let doneButton = UIButton()
         doneButton.textColor(.black)
         let doneItem = UIBarButtonItem(customView: doneButton)
@@ -62,18 +64,9 @@ class CalendarAddAttendanceController: BaseTableController {
         }
    
         refreshData()
+        
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar  = false
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar  = true
-    }
     
     override func refreshData() {
         getFriendList()

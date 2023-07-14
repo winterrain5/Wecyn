@@ -55,8 +55,8 @@ class ConnectionFriendController: BaseViewController {
       segment.defaultSelectedIndex = 0
     }
     
-    lazy var createGroupButton = UIButton().then { btn in
-        btn.imageForNormal = R.image.calendar_add()
+    lazy var rightButton = UIButton().then { btn in
+        btn.imageForNormal = R.image.connection_search()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -94,16 +94,21 @@ class ConnectionFriendController: BaseViewController {
         segmentedView.layer.addSublayer(bottomLayer)
         bottomLayer.frame = CGRect(x: 0, y: ConnectFriendHeaderInSectionHeight.cgFloat, width: kScreenWidth, height: 1)
         
-        segmentedView.addSubview(createGroupButton)
-        createGroupButton.isHidden = true
-        createGroupButton.snp.makeConstraints { make in
+        segmentedView.addSubview(rightButton)
+        rightButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-16)
             make.width.height.equalTo(36)
             make.centerY.equalToSuperview()
         }
-        createGroupButton.rx.tap.subscribe(onNext:{ [weak self] in
-            let vc = CreateGroupController()
-            self?.navigationController?.pushViewController(vc, animated: true)
+        rightButton.rx.tap.subscribe(onNext:{ [weak self] in
+            if self?.segmentedView.selectedIndex == 0  {
+                let vc = FriendSearchController()
+                self?.navigationController?.pushViewController(vc)
+            } else {
+                let vc = CreateGroupController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+           
         }).disposed(by: rx.disposeBag)
         
         paggingView.mainTableView.gestureDelegate = self
@@ -137,11 +142,11 @@ class ConnectionFriendController: BaseViewController {
             
             self.paggingView.reloadData()
             self.paggingView.mainTableView.mj_header?.endRefreshing()
-            NotificationCenter.default.post(name: Notification.Name.ConnectionAuditDataLoaded, object: self.tableHeaderViewHeight)
+            NotificationCenter.default.post(name: Notification.Name.ConnectionRefreshing, object: self.tableHeaderViewHeight)
         }) { e in
             self.paggingView.mainTableView.mj_header?.endRefreshing()
             self.tableHeaderViewHeight = 0
-            NotificationCenter.default.post(name: Notification.Name.ConnectionAuditDataLoaded, object: self.tableHeaderViewHeight)
+            NotificationCenter.default.post(name: Notification.Name.ConnectionRefreshing, object: self.tableHeaderViewHeight)
             (
                 self.controllers[0] as! ConnectionOfMyController
             ).models = []
@@ -165,7 +170,7 @@ extension ConnectionFriendController:JXPagingMainTableViewGestureDelegate {
 extension ConnectionFriendController:JXSegmentedViewDelegate {
   func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = (index == 0)
-    self.createGroupButton.isHidden = index == 0
+      rightButton.imageForNormal = index == 0 ? R.image.connection_search()! : R.image.calendar_add()!
   }
 }
 

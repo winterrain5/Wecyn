@@ -20,7 +20,7 @@ enum FriendApi  {
     case userSearchList(_ keyword: String = "")
     case addGroup(_ name:String, _ friends:[Int] = [])
     case deleteGroup(_ id:Int)
-    case friendToGroup(_ id:Int, _ friendId: Int)
+    case friendToGroup(_ id:Int, _ friendIds: [Int])
     case selectGroup(_ id:Int? = nil)
     case updateGroup(_ model:GroupUpdateRequestModel)
 }
@@ -102,8 +102,8 @@ extension FriendApi:TargetType, Cacheable {
             return requestParametersByPost(["name":name,"friends":friends])
         case .deleteGroup(let id):
             return requestParametersByPost(["id":id])
-        case .friendToGroup(let id, let friendId):
-            return requestParametersByPost(["id":id,"friend_id":friendId])
+        case .friendToGroup(let id, let friendIds):
+            return requestParametersByPost(["id":id,"friends":friendIds])
         case .selectGroup(let id):
             return requestParametersByGet(["id":id])
         case .updateGroup(let model):

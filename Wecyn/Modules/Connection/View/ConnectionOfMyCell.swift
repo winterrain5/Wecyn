@@ -8,34 +8,40 @@
 import UIKit
 
 class ConnectionOfMyCell: UITableViewCell {
-    @IBOutlet weak var avatarView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet var shadowView: UIView!
-    @IBOutlet weak var jobTitleLabel: UILabel!
-    @IBOutlet weak var connectDurationLabel: UILabel!
-    @IBOutlet weak var connectButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
-    var deleteFriendHandler: ((FriendListModel)->())!
+   
+    var imgView = UIImageView()
+    var nameLabel = UILabel()
     var model: FriendListModel? {
         didSet {
             guard let model = model else { return }
-            avatarView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
             nameLabel.text = model.full_name
         }
     }
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        shadowView.addShadow(cornerRadius: 12)
-        deleteButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            self.deleteFriendHandler(self.model!)
-        }).disposed(by: rx.disposeBag)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(imgView)
+        contentView.addSubview(nameLabel)
+        imgView.sk.cornerRadius = 18
+        imgView.contentMode = .scaleAspectFill
+        nameLabel.textColor = R.color.textColor52()
+        nameLabel.font = UIFont.sk.pingFangRegular(15)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imgView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(36)
+        }
+        nameLabel.snp.makeConstraints { make in
+            make.left.equalTo(imgView.snp.right).offset(16)
+            make.centerY.equalToSuperview()
+        }
+    }
 }

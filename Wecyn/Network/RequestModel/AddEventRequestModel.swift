@@ -11,6 +11,7 @@ import UIKit
  "start_time": "%Y-%m-%d %H:%M:%S" # 必填
  "end_time": "%Y-%m-%d %H:%M:%S" # 选填
  "description": string # 选填
+ "is_repeat": int # 选填。是否为重复事件。0 非重复事件，1 重复事件
  "is_online": int # 选填。默认：0。0 非线上事件（线下事件），1 线上事件
  "location": string # 选填。位置
  "url": string # 选填。链接
@@ -35,6 +36,8 @@ class AddEventRequestModel: BaseModel {
     var attendance_limit: Int?
     var attendees: [Attendees]?
     var desc: String?
+    var is_repeat: Int?
+    var color: String?
     // update event 
     var id: Int?
     

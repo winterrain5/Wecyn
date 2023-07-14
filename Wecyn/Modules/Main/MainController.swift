@@ -53,13 +53,13 @@ class MainController: UITabBarController {
         
         profile.tabBarItem = UITabBarItem.init(
             title: "Profile",
-            image: R.image.tab_profile(),
-            selectedImage: selectedImage(R.image.tab_profile()))
+            image: R.image.personCircle(),
+            selectedImage: selectedImage(R.image.personCircle()))
         
         setting.tabBarItem = UITabBarItem.init(
             title: "Setting",
-            image: R.image.tab_setting(),
-            selectedImage: selectedImage(R.image.tab_setting()))
+            image: R.image.gearCircle(),
+            selectedImage: selectedImage(R.image.gearCircle()))
         
         self.viewControllers = [connection,profile,setting]
         configAppearance()

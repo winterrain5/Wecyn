@@ -109,8 +109,8 @@ class FriendService {
     ///   - id: 分组ID
     ///   - friendId: 好友ID
     /// - Returns: ResponseStatus
-    static func friendToGroup(id:Int,friendId:Int) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.friendToGroup(id, friendId))
+    static func friendToGroup(id:Int,friendIds:[Int]) -> Observable<ResponseStatus> {
+        let target = MultiTarget(FriendApi.friendToGroup(id, friendIds))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     

@@ -16,7 +16,7 @@ import HandyJSON
 let requestClosure = { (endpoint: Endpoint, done: MoyaProvider.RequestResultClosure) in
     do {
         var request = try endpoint.urlRequest()
-        request.timeoutInterval = 30
+        request.timeoutInterval = 8
         done(.success(request))
     } catch {
         done(.failure(MoyaError.underlying(error, nil)))

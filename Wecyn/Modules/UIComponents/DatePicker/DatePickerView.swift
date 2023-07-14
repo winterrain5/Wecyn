@@ -39,7 +39,8 @@ class DatePickerView: UIView {
         confirmButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         confirmButton.cornerRadius = 16
         confirmButton.backgroundColor = .white
-        confirmButton.rx.tap.subscribe(onNext:{
+        confirmButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
             self.action?(self.datePicker.date)
             EntryKit.dismiss()
         }).disposed(by: rx.disposeBag)

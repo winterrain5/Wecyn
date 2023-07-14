@@ -73,27 +73,13 @@ class CalendarController: BaseTableController {
     override func refreshData() {
         
         let eventList = ScheduleService.eventList(model: requestModel)
-        let friendList = FriendService.friendList(id: CalendarBelongUserId)
         if isFirstLoad {
             self.view.showSkeleton()
         } else {
             Toast.showLoading()
         }
-        Observable.zip(eventList,friendList).subscribe(onNext:{ events,friends in
-            events.forEach({ event in
-                if event.creator_id == self.UserModel?.id {
-                    event.creator_name = self.UserModel?.full_name ?? ""
-                    event.creator_avatar = self.UserModel?.avatar ?? ""
-                } else if event.creator_id == CalendarBelongUserId {
-                    event.creator_name = self.selectAssistant.name
-                    event.creator_avatar = self.selectAssistant.avatar
-                } else {
-                    let friend = friends.first(where: { $0.id == event.creator_id })
-                    event.creator_name = friend?.full_name ?? ""
-                    event.creator_avatar = friend?.avatar ?? ""
-                }
-               
-            })
+        eventList.subscribe(onNext:{ events in
+            
             var datas = events
             
             if self.isSelectCalendar {
@@ -171,13 +157,14 @@ class CalendarController: BaseTableController {
         
         headerView.calendarView.addButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            let vc:CalendarAddEventController!
-            if self.selectAssistant.id == self.UserModel?.id {
-                vc = CalendarAddEventController(calendarBelongName: nil)
-            } else {
-                vc = CalendarAddEventController(calendarBelongName: self.selectAssistant.name)
-            }
+//            let vc:CalendarAddEventController!
+//            if self.selectAssistant.id == self.UserModel?.id {
+//                vc = CalendarAddEventController(calendarBelongName: nil)
+//            } else {
+//                vc = CalendarAddEventController(calendarBelongName: self.selectAssistant.name)
+//            }
             
+            let vc = CalendarAddNewEventController()
             self.navigationController?.pushViewController(vc)
         }).disposed(by: rx.disposeBag)
         

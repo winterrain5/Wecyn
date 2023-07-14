@@ -18,6 +18,25 @@
 		45005C5F2A57FF0100560E21 /* CreateGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */; };
 		45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */; };
 		45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C642A5B94A100560E21 /* GroupItemCell.swift */; };
+		45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C662A5BCF9B00560E21 /* FriendDetailController.swift */; };
+		45005C732A5D027D00560E21 /* CalendarAddNewEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */; };
+		45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C772A5E384600560E21 /* EditorDemoController.swift */; };
+		45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C792A5E388100560E21 /* MediaInserter.swift */; };
+		45005C7C2A5E388200560E21 /* TextViewAttachmentDelegateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C7A2A5E388100560E21 /* TextViewAttachmentDelegateProvider.swift */; };
+		45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C7D2A5E38B400560E21 /* UIImage+SaveTo.swift */; };
+		45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45005C7F2A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard */; };
+		45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */; };
+		45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */; };
+		45005C892A5E4AAF00560E21 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C882A5E4AAF00560E21 /* ColorPickerView.swift */; };
+		45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */; };
+		45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */; };
+		45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */; };
+		45005CB32A5FDEE300560E21 /* RWMRuleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CAC2A5FDEE300560E21 /* RWMRuleParser.swift */; };
+		45005CB42A5FDEE300560E21 /* RWMRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CAD2A5FDEE300560E21 /* RWMRecurrenceRule.swift */; };
+		45005CB52A5FDEE300560E21 /* RWMRuleScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CAE2A5FDEE300560E21 /* RWMRuleScheduler.swift */; };
+		45005CB62A5FDEE300560E21 /* EKEvent+RWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CB02A5FDEE300560E21 /* EKEvent+RWM.swift */; };
+		45005CB72A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CB12A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift */; };
+		45005CB82A5FDEE300560E21 /* Calendar+RWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CB22A5FDEE300560E21 /* Calendar+RWM.swift */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
 		450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7F2A37F85B008B0C4A /* EditViewController.swift */; };
 		450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C832A37FFAB008B0C4A /* JobItemCell.swift */; };
@@ -134,7 +153,6 @@
 		45ADB2972A3FFCF800745F6F /* CalendarAddEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */; };
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
 		45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */; };
-		45ADB29D2A40390100745F6F /* ConnectionOfMyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */; };
 		45BBF5262A48328D0018992C /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5252A48328D0018992C /* MessageController.swift */; };
 		45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5272A4832EC0018992C /* ScheduleApi.swift */; };
 		45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5292A4833B00018992C /* AddEventRequestModel.swift */; };
@@ -172,6 +190,26 @@
 		45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupHeaderView.xib; sourceTree = "<group>"; };
 		45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHeadeCell.swift; sourceTree = "<group>"; };
 		45005C642A5B94A100560E21 /* GroupItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItemCell.swift; sourceTree = "<group>"; };
+		45005C662A5BCF9B00560E21 /* FriendDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailController.swift; sourceTree = "<group>"; };
+		45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddNewEventController.swift; sourceTree = "<group>"; };
+		45005C772A5E384600560E21 /* EditorDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorDemoController.swift; sourceTree = "<group>"; };
+		45005C792A5E388100560E21 /* MediaInserter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaInserter.swift; sourceTree = "<group>"; };
+		45005C7A2A5E388100560E21 /* TextViewAttachmentDelegateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewAttachmentDelegateProvider.swift; sourceTree = "<group>"; };
+		45005C7D2A5E38B400560E21 /* UIImage+SaveTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SaveTo.swift"; sourceTree = "<group>"; };
+		45005C7F2A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AttachmentDetailsViewController.storyboard; sourceTree = "<group>"; };
+		45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentDetailsViewController.swift; sourceTree = "<group>"; };
+		45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownEditorViewController.swift; sourceTree = "<group>"; };
+		45005C882A5E4AAF00560E21 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatController.swift; sourceTree = "<group>"; };
+		45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatWeekOrMonthController.swift; sourceTree = "<group>"; };
+		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
+		45005CAC2A5FDEE300560E21 /* RWMRuleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWMRuleParser.swift; sourceTree = "<group>"; };
+		45005CAD2A5FDEE300560E21 /* RWMRecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWMRecurrenceRule.swift; sourceTree = "<group>"; };
+		45005CAE2A5FDEE300560E21 /* RWMRuleScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWMRuleScheduler.swift; sourceTree = "<group>"; };
+		45005CAF2A5FDEE300560E21 /* RWMRecurrenceRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWMRecurrenceRule.h; sourceTree = "<group>"; };
+		45005CB02A5FDEE300560E21 /* EKEvent+RWM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEvent+RWM.swift"; sourceTree = "<group>"; };
+		45005CB12A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKRecurrenceRule+RWM.swift"; sourceTree = "<group>"; };
+		45005CB22A5FDEE300560E21 /* Calendar+RWM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+RWM.swift"; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		450B6C7F2A37F85B008B0C4A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
@@ -293,7 +331,6 @@
 		45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarAddEventView.xib; sourceTree = "<group>"; };
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
 		45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyCell.swift; sourceTree = "<group>"; };
-		45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionOfMyCell.xib; sourceTree = "<group>"; };
 		45BBF5252A48328D0018992C /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		45BBF5272A4832EC0018992C /* ScheduleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleApi.swift; sourceTree = "<group>"; };
 		45BBF5292A4833B00018992C /* AddEventRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventRequestModel.swift; sourceTree = "<group>"; };
@@ -333,6 +370,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45005C852A5E395100560E21 /* RichText */ = {
+			isa = PBXGroup;
+			children = (
+				45005C7F2A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard */,
+				45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */,
+				45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */,
+				45005C7D2A5E38B400560E21 /* UIImage+SaveTo.swift */,
+				45005C772A5E384600560E21 /* EditorDemoController.swift */,
+				45005C792A5E388100560E21 /* MediaInserter.swift */,
+				45005C7A2A5E388100560E21 /* TextViewAttachmentDelegateProvider.swift */,
+			);
+			path = RichText;
+			sourceTree = "<group>";
+		};
+		45005C872A5E4A9F00560E21 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				45005C882A5E4AAF00560E21 /* ColorPickerView.swift */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
+			isa = PBXGroup;
+			children = (
+				45005CAB2A5FDEE300560E21 /* RWMRecurrenceRule */,
+			);
+			path = 3rdDepandence;
+			sourceTree = "<group>";
+		};
+		45005CAB2A5FDEE300560E21 /* RWMRecurrenceRule */ = {
+			isa = PBXGroup;
+			children = (
+				45005CAC2A5FDEE300560E21 /* RWMRuleParser.swift */,
+				45005CAD2A5FDEE300560E21 /* RWMRecurrenceRule.swift */,
+				45005CAE2A5FDEE300560E21 /* RWMRuleScheduler.swift */,
+				45005CAF2A5FDEE300560E21 /* RWMRecurrenceRule.h */,
+				45005CB02A5FDEE300560E21 /* EKEvent+RWM.swift */,
+				45005CB12A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift */,
+				45005CB22A5FDEE300560E21 /* Calendar+RWM.swift */,
+			);
+			path = RWMRecurrenceRule;
+			sourceTree = "<group>";
+		};
 		450B6C812A37FF7E008B0C4A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +536,7 @@
 		457C7D8E2A4D69F8002E50DF /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				45005C872A5E4A9F00560E21 /* ColorPicker */,
 				457C7D8F2A4D6A0B002E50DF /* DatePicker */,
 			);
 			path = UIComponents;
@@ -489,6 +571,7 @@
 		459209CE2A26D5F4005871ED /* Wecyn */ = {
 			isa = PBXGroup;
 			children = (
+				45005C8C2A5E87FF00560E21 /* 3rdDepandence */,
 				45920ABF2A26E045005871ED /* Base */,
 				45920A872A26E045005871ED /* Modules */,
 				45920A792A26E045005871ED /* Network */,
@@ -811,6 +894,7 @@
 				45005C542A57DC5400560E21 /* ConnectionGroupController.swift */,
 				45005C562A57DC7E00560E21 /* ConnectionFriendController.swift */,
 				45005C5A2A57FC8200560E21 /* CreateGroupController.swift */,
+				45005C662A5BCF9B00560E21 /* FriendDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -821,7 +905,6 @@
 				45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */,
 				45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */,
 				45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */,
-				45ADB29B2A40390100745F6F /* ConnectionOfMyCell.xib */,
 				453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */,
 				453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */,
 				45005C5C2A57FEEF00560E21 /* CreateGroupHeaderView.swift */,
@@ -888,12 +971,17 @@
 		45E85B162A3AE1F400B820CD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45005C852A5E395100560E21 /* RichText */,
 				45E85B182A3AE23500B820CD /* CalendarController.swift */,
 				45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */,
 				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				4519A48E2A4AC69C007481A6 /* EventDetailController.swift */,
 				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
 				45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */,
+				45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */,
+				45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */,
+				45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */,
+				45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1012,10 +1100,10 @@
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
 				45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */,
-				45ADB29D2A40390100745F6F /* ConnectionOfMyCell.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
 				45ADB2972A3FFCF800745F6F /* CalendarAddEventView.xib in Resources */,
+				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
 				45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
@@ -1100,9 +1188,11 @@
 				45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
 				457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */,
+				45005CB62A5FDEE300560E21 /* EKEvent+RWM.swift in Sources */,
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
 				450BA6D52A32F05B00764828 /* RegistInfoController.swift in Sources */,
 				45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */,
+				45005C892A5E4AAF00560E21 /* ColorPickerView.swift in Sources */,
 				45920ACE2A26E045005871ED /* APIHost.swift in Sources */,
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
@@ -1112,29 +1202,38 @@
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
+				45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
 				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
 				450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
+				45005CB32A5FDEE300560E21 /* RWMRuleParser.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
+				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
+				45005CB42A5FDEE300560E21 /* RWMRecurrenceRule.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
 				45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */,
+				45005CB52A5FDEE300560E21 /* RWMRuleScheduler.swift in Sources */,
 				457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */,
 				453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */,
 				45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */,
 				45920AE62A26E045005871ED /* RefreshAnimationFooter.swift in Sources */,
 				459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */,
 				45920AEB2A26E045005871ED /* WebBrowser+MessageHandler.swift in Sources */,
+				45005C732A5D027D00560E21 /* CalendarAddNewEventController.swift in Sources */,
 				450BA6B62A31B9B000764828 /* Localizer.swift in Sources */,
 				459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */,
 				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
+				45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */,
+				45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */,
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
+				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
 				45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */,
 				45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */,
@@ -1160,12 +1259,15 @@
 				45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
 				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
+				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
+				45005CB82A5FDEE300560E21 /* Calendar+RWM.swift in Sources */,
 				45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */,
 				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
 				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45920AFE2A26E045005871ED /* BaseModel.swift in Sources */,
+				45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */,
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
 				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
 				45ADB2932A3FF72D00745F6F /* CalendarAddEventController.swift in Sources */,
@@ -1181,6 +1283,7 @@
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
+				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
 				45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
@@ -1193,6 +1296,7 @@
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,
 				457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */,
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
+				45005CB72A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift in Sources */,
 				457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */,
 				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,
 				459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */,
@@ -1215,8 +1319,10 @@
 				45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */,
 				45920AD62A26E045005871ED /* PKError.swift in Sources */,
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
+				45005C7C2A5E388200560E21 /* TextViewAttachmentDelegateProvider.swift in Sources */,
 				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
+				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
