@@ -65,6 +65,17 @@
 		450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */; };
 		450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */; };
 		450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */; };
+		450F6CBE2A613AFC0001AA1B /* NSDate+Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB22A613AFC0001AA1B /* NSDate+Comparison.swift */; };
+		450F6CBF2A613AFC0001AA1B /* ExclusionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB32A613AFC0001AA1B /* ExclusionDate.swift */; };
+		450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB42A613AFC0001AA1B /* InclusionDate.swift */; };
+		450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB52A613AFC0001AA1B /* RecurrenceFrequency.swift */; };
+		450F6CC22A613AFC0001AA1B /* RRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB62A613AFC0001AA1B /* RRule.swift */; };
+		450F6CC32A613AFC0001AA1B /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB72A613AFC0001AA1B /* RecurrenceRule.swift */; };
+		450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB82A613AFC0001AA1B /* Iterators.swift */; };
+		450F6CC52A613AFC0001AA1B /* EKWeekday+RRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CB92A613AFC0001AA1B /* EKWeekday+RRule.swift */; };
+		450F6CC62A613AFC0001AA1B /* rrule.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CBB2A613AFC0001AA1B /* rrule.js */; };
+		450F6CC72A613AFC0001AA1B /* nlp.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CBC2A613AFC0001AA1B /* nlp.js */; };
+		450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
 		4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A48A2A4AB716007481A6 /* EventDetailView.swift */; };
 		4519A48D2A4AB71E007481A6 /* EventDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4519A48C2A4AB71E007481A6 /* EventDetailView.xib */; };
@@ -238,6 +249,17 @@
 		450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistAddAvatarController.swift; sourceTree = "<group>"; };
 		450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistAddAvatarView.swift; sourceTree = "<group>"; };
 		450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistAddAvatarView.xib; sourceTree = "<group>"; };
+		450F6CB22A613AFC0001AA1B /* NSDate+Comparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Comparison.swift"; sourceTree = "<group>"; };
+		450F6CB32A613AFC0001AA1B /* ExclusionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExclusionDate.swift; sourceTree = "<group>"; };
+		450F6CB42A613AFC0001AA1B /* InclusionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InclusionDate.swift; sourceTree = "<group>"; };
+		450F6CB52A613AFC0001AA1B /* RecurrenceFrequency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceFrequency.swift; sourceTree = "<group>"; };
+		450F6CB62A613AFC0001AA1B /* RRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRule.swift; sourceTree = "<group>"; };
+		450F6CB72A613AFC0001AA1B /* RecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		450F6CB82A613AFC0001AA1B /* Iterators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iterators.swift; sourceTree = "<group>"; };
+		450F6CB92A613AFC0001AA1B /* EKWeekday+RRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKWeekday+RRule.swift"; sourceTree = "<group>"; };
+		450F6CBB2A613AFC0001AA1B /* rrule.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rrule.js; sourceTree = "<group>"; };
+		450F6CBC2A613AFC0001AA1B /* nlp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = nlp.js; sourceTree = "<group>"; };
+		450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaScriptBridge.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
 		4519A48A2A4AB716007481A6 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		4519A48C2A4AB71E007481A6 /* EventDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailView.xib; sourceTree = "<group>"; };
@@ -395,6 +417,7 @@
 		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
 			isa = PBXGroup;
 			children = (
+				450F6CB12A613AFC0001AA1B /* RRuleSwif */,
 				45005CAB2A5FDEE300560E21 /* RWMRecurrenceRule */,
 			);
 			path = 3rdDepandence;
@@ -490,6 +513,32 @@
 				450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		450F6CB12A613AFC0001AA1B /* RRuleSwif */ = {
+			isa = PBXGroup;
+			children = (
+				450F6CB22A613AFC0001AA1B /* NSDate+Comparison.swift */,
+				450F6CB32A613AFC0001AA1B /* ExclusionDate.swift */,
+				450F6CB42A613AFC0001AA1B /* InclusionDate.swift */,
+				450F6CB52A613AFC0001AA1B /* RecurrenceFrequency.swift */,
+				450F6CB62A613AFC0001AA1B /* RRule.swift */,
+				450F6CB72A613AFC0001AA1B /* RecurrenceRule.swift */,
+				450F6CB82A613AFC0001AA1B /* Iterators.swift */,
+				450F6CB92A613AFC0001AA1B /* EKWeekday+RRule.swift */,
+				450F6CBA2A613AFC0001AA1B /* lib */,
+				450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */,
+			);
+			path = RRuleSwif;
+			sourceTree = "<group>";
+		};
+		450F6CBA2A613AFC0001AA1B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				450F6CBB2A613AFC0001AA1B /* rrule.js */,
+				450F6CBC2A613AFC0001AA1B /* nlp.js */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 		453653382A41369D0026EC8D /* Model */ = {
@@ -1098,6 +1147,8 @@
 				45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */,
 				45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */,
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
+				450F6CC62A613AFC0001AA1B /* rrule.js in Resources */,
+				450F6CC72A613AFC0001AA1B /* nlp.js in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
 				45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
@@ -1197,6 +1248,7 @@
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
+				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
 				4519A48F2A4AC69C007481A6 /* EventDetailController.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
@@ -1245,9 +1297,12 @@
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
+				450F6CC22A613AFC0001AA1B /* RRule.swift in Sources */,
 				45005C592A57FB8900560E21 /* GroupUpdateRequestModel.swift in Sources */,
 				45920AE82A26E045005871ED /* LoaddingButton.swift in Sources */,
 				45005C552A57DC5400560E21 /* ConnectionGroupController.swift in Sources */,
+				450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */,
+				450F6CC32A613AFC0001AA1B /* RecurrenceRule.swift in Sources */,
 				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
@@ -1267,6 +1322,7 @@
 				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45920AFE2A26E045005871ED /* BaseModel.swift in Sources */,
+				450F6CC52A613AFC0001AA1B /* EKWeekday+RRule.swift in Sources */,
 				45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */,
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
 				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
@@ -1301,10 +1357,12 @@
 				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,
 				459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */,
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
+				450F6CBE2A613AFC0001AA1B /* NSDate+Comparison.swift in Sources */,
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
+				450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */,
 				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
 				45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */,
@@ -1314,12 +1372,14 @@
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,
 				45920ACD2A26E045005871ED /* NetworkLogPlugin.swift in Sources */,
 				45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */,
+				450F6CBF2A613AFC0001AA1B /* ExclusionDate.swift in Sources */,
 				450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */,
 				45920AFD2A26E045005871ED /* BaseCollectionController.swift in Sources */,
 				45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */,
 				45920AD62A26E045005871ED /* PKError.swift in Sources */,
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
 				45005C7C2A5E388200560E21 /* TextViewAttachmentDelegateProvider.swift in Sources */,
+				450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */,
 				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,

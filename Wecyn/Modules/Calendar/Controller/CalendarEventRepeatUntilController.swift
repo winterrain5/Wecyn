@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import EventKit
 class CalendarEventRepeatUntilModel {
     var title:String
     var value:String
@@ -20,13 +20,13 @@ class CalendarEventRepeatUntilModel {
 
 class CalendarEventRepeatUntilController: BaseTableController {
     
-    var selectComplete:((Int,RWMRecurrenceEnd?)->())?
+    var selectComplete:((Int,EKRecurrenceEnd?)->())?
     var datas:[[CalendarEventRepeatUntilModel]] = []
     var selectIndex:Int = -1
     var selectDate: Date?
-    var end:RWMRecurrenceEnd?
+    var end:EKRecurrenceEnd?
     
-    init(selectIndex:Int, end:RWMRecurrenceEnd?) {
+    init(selectIndex:Int, end:EKRecurrenceEnd?) {
         self.selectIndex = selectIndex
         self.end = end
         super.init(nibName: nil, bundle: nil)
@@ -61,8 +61,8 @@ class CalendarEventRepeatUntilController: BaseTableController {
         self.navigation.item.title = "Repeat Until"
         
         guard let end = end else { return }
-        if end.count > 0 && self.selectIndex == 2 {
-            datas[0][2].value = end.count.string
+        if end.occurrenceCount > 0 && self.selectIndex == 2 {
+            datas[0][2].value = end.occurrenceCount.string
         }
         
         if let date = end.endDate, self.selectIndex == 1{
@@ -128,7 +128,8 @@ class CalendarEventRepeatUntilController: BaseTableController {
                     
                     self.selectIndex = 2
                     self.datas.flatMap({ $0 }).forEach({ $0.isSelect = false })
-                    self.end = RWMRecurrenceEnd(occurrenceCount: value, end: nil)
+                    self.end = EKRecurrenceEnd(occurrenceCount: value)
+                    
                     self.tableView?.reloadData()
                     
                 }
@@ -152,7 +153,7 @@ class CalendarEventRepeatUntilController: BaseTableController {
                 // count 置为0
                 self.datas[0][2].value = "0"
                 
-                self.end = RWMRecurrenceEnd(occurrenceCount: 1, end: date)
+                self.end = EKRecurrenceEnd(end: date)
                 
                 self.tableView?.reloadData()
             }
