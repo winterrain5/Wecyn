@@ -10,3 +10,9 @@ import Foundation
 extension DefaultsKey {
     static let currentBuildType = Key<String>("currentBuildType")
 }
+
+extension UserDefaults {
+    static var userModel:UserInfoModel? {
+        UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
+    }
+}

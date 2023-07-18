@@ -55,7 +55,7 @@ class CalendarAddEventView: UIView {
             descTf.text = event.desc
             eventTypeSwitch.isOn = event.is_online == 1
             addressOrUrlTf.text = event.is_online == 1 ? event.url : event.location
-            attendeesTf.text = event.is_public == 1 ? event.attendance_limit : ""
+            attendeesTf.text = event.is_public == 1 ? event.attendance_limit.string : ""
             attendeesTf.isHidden = event.is_public == 0
             addAttendanceLabel.isHidden = event.is_public == 1
             publicStateSegment.isEnabled = false

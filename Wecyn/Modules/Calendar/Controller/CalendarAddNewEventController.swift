@@ -52,10 +52,9 @@ class AddEventModel {
     var placeholder: String
     var type: AddEventType
     
-    var isOnline = false
-    var loctionOrLink = ""
+    var location: String?
+    var url: String?
     
-    var isPublic = false
     
     var attendees: [Attendees] = []
     
@@ -70,8 +69,7 @@ class AddEventModel {
     var current_user_id: Int?
     var remarks: String?
     var title: String?
-    var location: String?
-    var url: String?
+    
     var attendance_limit: Int?
     var desc: String?
     // update event
@@ -91,25 +89,25 @@ class CalendarAddNewEventController: BaseTableController {
     var models:[[AddEventModel]] = []
     let Title = AddEventModel(img: R.image.circleFill()?.withTintColor(UIColor(hexString: EventColor.Red.rawValue)!), placeholder: "Title",type: .Title)
     
-    let isPublic = AddEventModel(img: R.image.switch2(), placeholder: "Private Event", type: .IsPublic)
-    let people = AddEventModel(img: R.image.person2(), placeholder: "Attendees", type: .People)
+    let IsPublic = AddEventModel(img: R.image.switch2(), placeholder: "Private Event", type: .IsPublic)
+    let People = AddEventModel(img: R.image.person2(), placeholder: "Attendees", type: .People)
     //
-    let peopleLimit = AddEventModel(img: R.image.person2(), placeholder: "Attendance Limit", type: .PeopleLimit)
+    let PeopleLimit = AddEventModel(img: R.image.person2(), placeholder: "Attendance Limit", type: .PeopleLimit)
     
-    let start = AddEventModel(img: R.image.clock(), placeholder: "Start Time", type: .Start)
-    let end = AddEventModel(img: R.image.clockArrowCirclepath(), placeholder: "End Time", type: .End)
-    let duplicate = AddEventModel(img: R.image.repeat(), placeholder: "Repeat", type: .Repeat)
-    let alarm = AddEventModel(img: R.image.alarm(), placeholder: "Remind me", type: .Alarm)
+    let Start = AddEventModel(img: R.image.clock(), placeholder: "Start Time", type: .Start)
+    let End = AddEventModel(img: R.image.clockArrowCirclepath(), placeholder: "End Time", type: .End)
+    let Duplicate = AddEventModel(img: R.image.repeat(), placeholder: "Repeat", type: .Repeat)
+    let Alarm = AddEventModel(img: R.image.alarm(), placeholder: "Remind me", type: .Alarm)
     
-    let desc = AddEventModel(img: R.image.textQuote(), placeholder: "Description", type: .Description)
-    let remark = AddEventModel(img: R.image.line3Horizontal(), placeholder: "Remark", type: .Remark)
+    let Desc = AddEventModel(img: R.image.textQuote(), placeholder: "Description", type: .Description)
+    let Remark = AddEventModel(img: R.image.line3Horizontal(), placeholder: "Remark", type: .Remark)
     
-    let isOnline = AddEventModel(img: R.image.switch2(), placeholder: "Offline", type: .IsOnline)
-    let location = AddEventModel(img: R.image.location(), placeholder: "Location", type: .Location)
-    let link = AddEventModel(img: R.image.link(), placeholder: "Link", type: .Link)
+    let IsOnline = AddEventModel(img: R.image.switch2(), placeholder: "Offline", type: .IsOnline)
+    let Location = AddEventModel(img: R.image.location(), placeholder: "Location", type: .Location)
+    let Link = AddEventModel(img: R.image.link(), placeholder: "Link", type: .Link)
     
     
-    let color = AddEventModel(img: R.image.tag(), placeholder: "Color", type: .Color)
+    let Color = AddEventModel(img: R.image.tag(), placeholder: "Color", type: .Color)
     
     
     var requestModel = AddEventRequestModel()
@@ -117,29 +115,48 @@ class CalendarAddNewEventController: BaseTableController {
     
     var rrule:RecurrenceRule?
     
+    var editEventModel: EventInfoModel?
+    var isEdit = false
+    init(editEventModel: EventInfoModel? = nil) {
+        self.editEventModel = editEventModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        
-        self.navigation.item.title = "New Event"
         let saveButton = UIButton()
         saveButton.imageForNormal = R.image.checkmark()
         saveButton.size = CGSize(width: 30, height: 30)
         saveButton.contentMode = .right
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
-            self?.addEvent()
+            guard let `self` = self else { return }
+            if self.isEdit {
+                self.editEvent()
+            } else {
+                self.addEvent()
+            }
+            
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
         self.addLeftBarButtonItem(image: R.image.xmark()!)
         self.leftButtonDidClick = { [weak self] in
             if self?.requestModel.title?.isEmpty == false {
-                SwiftAlertView.show(title:"abandon event?", buttonTitles: ["cancel","confirm"]).onActionButtonClicked { alertView, buttonIndex in
-                    if buttonIndex == 1 {
-                        self?.returnBack()
-                    }
+                let alert = UIAlertController(title:nil ,message: nil, preferredStyle: .actionSheet)
+                alert.addAction(title: "abandon event?", style: .destructive) { _ in
+                    self?.returnBack()
                 }
+                
+                alert.addAction(title: "cancel", style: .cancel)
+                
+                alert.show()
+               
             } else {
                 self?.returnBack()
             }
@@ -147,36 +164,120 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         createAddEventModels()
+        updateEditEventData()
         
+        if self.isEdit {
+            self.navigation.item.title = "New Event"
+        } else {
+            self.navigation.item.title = "Edit Event"
+        }
+    }
+    func updateEditEventData() {
+        guard let event = editEventModel else { return }
+
+        
+        attendees = event.attendees.map({
+            let attance = FriendListModel()
+            attance.id = $0.id
+            attance.first_name = String($0.name.split(separator: " ").first ?? "")
+            attance.last_name = String($0.name.split(separator: " ").last ?? "")
+            attance.status = $0.status
+            return attance
+        })
+        
+        requestModel.title = event.title
+        requestModel.is_public = event.is_public
+        requestModel.attendees = event.attendees
+        requestModel.attendance_limit = event.attendance_limit
+        requestModel.start_time = event.start_time
+        requestModel.end_time = event.end_time
+        requestModel.is_repeat = event.is_repeat
+        requestModel.rrule = event.rrule
+        requestModel.desc = event.desc
+        requestModel.remarks = event.remarks
+        requestModel.is_online = event.is_online
+        requestModel.url = event.url
+        requestModel.location = event.location
+        requestModel.color = event.color
+        requestModel.id = event.id
+        
+        Title.title = event.title
+        if event.color < EventColor.allColor.count   {
+            if let color = UIColor(hexString: EventColor.allColor[event.color]), let titleImage = R.image.circleFill()?.withTintColor(color) {
+                Title.img = titleImage
+            }
+        }
+        IsPublic.is_public =  event.is_public
+        People.attendees = event.attendees
+        PeopleLimit.attendance_limit = event.attendance_limit
+        Start.start_time = event.start_time
+        End.end_time = event.end_time
+        Duplicate.duplicate = event.recurrenceType
+        Desc.desc = event.desc.htmlToString
+        Remark.remarks = event.remarks
+        IsOnline.is_online = event.is_online
+        Location.location = event.location
+        Link.url = event.url
+        Color.color = EventColor.allColor[event.color]
+        
+        isEdit = true
+        rrule = event.rruleObject
+
+        reloadData()
     }
     
     func createAddEventModels() {
         let titleSection = [Title]
         models.append(titleSection)
         
-        
-        let peopelSection = [isPublic,people]
+        var peopelSection:[AddEventModel] = []
+        if editEventModel ==  nil {
+            peopelSection = [IsPublic,People]
+        } else {
+            if (editEventModel?.is_public ?? 0) == 1 {
+                IsPublic.is_public = 1
+                IsPublic.placeholder = "Public Event"
+                peopelSection = [IsPublic,PeopleLimit]
+            } else {
+                IsPublic.is_public = 0
+                IsPublic.placeholder = "Private Event"
+                peopelSection = [IsPublic,People]
+            }
+        }
         models.append(peopelSection)
         
     
-        duplicate.duplicate = "none"
-        let timeSection = [start,end,duplicate,alarm]
+        Duplicate.duplicate = "none"
+        let timeSection = [Start,End,Duplicate]
         models.append(timeSection)
         
         
-        let descSection = [desc,remark]
+        let descSection = [Desc,Remark]
         models.append(descSection)
         
-        
-        let isOnlineSection = [isOnline,location]
+        var isOnlineSection:[AddEventModel] = []
+        if editEventModel ==  nil {
+            isOnlineSection = [IsOnline,Location]
+        } else {
+            if (editEventModel?.is_online ?? 0) == 1 {
+                IsOnline.is_online = 1
+                IsOnline.placeholder = "Online"
+                isOnlineSection = [IsOnline,Link]
+            } else {
+                IsOnline.is_online = 0
+                IsOnline.placeholder = "Offline"
+                isOnlineSection = [IsOnline,Location]
+            }
+        }
         models.append(isOnlineSection)
         
-        color.color = EventColor.Red.rawValue
-        let tagSection = [color]
+        Color.color = EventColor.Red.rawValue
+        let tagSection = [Color]
         models.append(tagSection)
         
-        requestModel.color = EventColor.allColor.firstIndex(of: EventColor.Red.rawValue)
-        
+        if editEventModel == nil  {
+            requestModel.color = EventColor.allColor.firstIndex(of: EventColor.Red.rawValue)
+        }
         
     }
     
@@ -259,7 +360,7 @@ class CalendarAddNewEventController: BaseTableController {
         
         switch model.type {
         case .Title, .PeopleLimit, .Location, .Link:
-            let cell = tableView.dequeueReusableCell(withClass: AddEventInputCell.self)
+            let cell = AddEventInputCell()
             cell.model = model
             cell.inputDidComplete = { [weak self] in
                 guard let `self` = self else { return }
@@ -285,34 +386,36 @@ class CalendarAddNewEventController: BaseTableController {
             }
             return cell
         case .IsOnline,.IsPublic:
-            let cell = tableView.dequeueReusableCell(withClass: AddEventSwitchCell.self)
+            let cell = AddEventSwitchCell()
             cell.model = model
             cell.switchChangeHandler = {  [weak self] in
                 guard let `self` = self else { return }
                 if $0.type == .IsOnline {
-                    self.isOnline.isOnline = $1
-                    self.isOnline.placeholder = $1 ? "Online" : "Offline"
+                    self.IsOnline.is_online = $1.int
+                    self.IsOnline.placeholder = $1 ? "Online" : "Offline"
+                    self.requestModel.is_online = $1.int
                     
                     if $1 {
                         self.models[4].remove(at: 1)
-                        self.models[4].append(self.link)
+                        self.models[4].append(self.Link)
                     } else {
                         self.models[4].remove(at: 1)
-                        self.models[4].append(self.location)
+                        self.models[4].append(self.Location)
                     }
                     
                     self.reloadData()
                 }
                 if $0.type == .IsPublic {
-                    self.isPublic.isPublic = $1
-                    self.isPublic.placeholder = $1 ? "Public Event" : "Private Event"
+                    self.IsPublic.is_public = $1.int
+                    self.IsPublic.placeholder = $1 ? "Public Event" : "Private Event"
+                    self.requestModel.is_public = $1.int
                     
                     if $1 {
                         self.models[1].remove(at: 1)
-                        self.models[1].append(self.peopleLimit)
+                        self.models[1].append(self.PeopleLimit)
                     } else {
                         self.models[1].remove(at: 1)
-                        self.models[1].append(self.people)
+                        self.models[1].append(self.People)
                     }
                     
                     self.reloadData()
@@ -332,7 +435,7 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self.attendees.removeAll(where: { $0.id == item.id })
                 self.requestModel.attendees?.removeAll(where: { $0.id == item.id })
-                self.people.attendees.removeAll(where: { $0.id == item.id })
+                self.People.attendees.removeAll(where: { $0.id == item.id })
                 self.reloadData()
                 
             }
@@ -363,7 +466,7 @@ class CalendarAddNewEventController: BaseTableController {
                     return model
                 })
                 self.requestModel.attendees = results
-                self.people.attendees = results
+                self.People.attendees = results
                 self.reloadData()
             }).disposed(by: self.rx.disposeBag)
             UIViewController.sk.getTopVC()?.present(nav, animated: true)
@@ -404,14 +507,19 @@ class CalendarAddNewEventController: BaseTableController {
             }.show()
         }
         
-        if model.type == .Description {
+        if model.type == .Description || model.type == .Remark {
             let vc = EditorDemoController(withSampleHTML: self.requestModel.desc, wordPressMode: false)
             vc.editComplete = { [weak self] text,html in
                 Logger.debug(html)
                
-                self?.requestModel.desc = html
+                if model.type == .Description {
+                    self?.requestModel.desc = html
+                    self?.models[3][0].desc = text
+                } else {
+                    self?.requestModel.remarks = html
+                    self?.models[3][1].remarks = text
+                }
                 
-                self?.models[3][0].desc = text
                 self?.reloadData()
             }
             self.navigationController?.pushViewController(vc)
@@ -453,16 +561,26 @@ class CalendarAddNewEventController: BaseTableController {
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 1, models[1][0].isPublic {
+        if section == 1, models[1][0].is_public == 1{
             let sectionView = CalendarEventSectionView()
             sectionView.label.text = "Include the creator,must be a positive integer"
             return sectionView
         }
+        
+        if section == 2, self.rrule != nil {
+            let sectionView = CalendarEventSectionView()
+            sectionView.label.text = self.rrule?.toText()
+            return sectionView
+        }
+        
         return nil
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 1, models[1][0].isPublic {
+        if section == 1, models[1][0].is_public == 1 {
+            return 40
+        }
+        if section == 2, self.rrule != nil {
             return 40
         }
         return 20
@@ -694,10 +812,10 @@ class AddEventSwitchCell: UITableViewCell {
             imgView.image = model.img
             
             if model.type == .IsPublic {
-                switchView.isOn = model.isPublic
+                switchView.isOn = model.is_public == 1
             }
             if model.type == .IsOnline {
-                switchView.isOn = model.isOnline
+                switchView.isOn = model.is_online == 1
             }
         }
     }

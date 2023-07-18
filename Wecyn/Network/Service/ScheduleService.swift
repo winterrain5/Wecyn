@@ -126,7 +126,7 @@ class EventInfoModel: BaseModel {
     var creator_id: Int = 0
     var creator_name: String = ""
     var end_time: String = ""
-    var attendance_limit: String = ""
+    var attendance_limit: Int = 0
     
     var attendance_count = 0
     var attendees_public = ""
@@ -140,21 +140,26 @@ class EventInfoModel: BaseModel {
         CalendarBelongUserId == creator_id
     }
     
+    var rruleObject:RecurrenceRule? {
+        let dtStart = rrule.split(separator: "\n").first?.split(separator: ":").joined(separator: "=") ?? ""
+        let rruleString = (rrule.split(separator: "\n").last ?? "") + ";" + dtStart
+        let rrule = RecurrenceRule(rruleString: rruleString)
+        return rrule
+    }
     var recurrenceDescription:String {
         var desc = ""
         if is_repeat == 1 {
             // DTSTART:20230717T062741Z\nRRULE:FREQ=DAILY;INTERVAL=1;WKST=MO;COUNT=4
-            let dtStart = rrule.split(separator: "\n").first?.split(separator: ":").joined(separator: "=") ?? ""
-            let rruleString = (rrule.split(separator: "\n").last ?? "") + ";" + dtStart
-            let rrule = RecurrenceRule(rruleString: rruleString)
-           
-            let repeatStr = "repeat " + (rrule?.toText() ?? "")
+            let repeatStr = "repeat " + (rruleObject?.toText() ?? "")
 
             desc = start_time + "\n" + end_time + "\n\n" + repeatStr
         } else {
             desc = start_time + "\n" + end_time
         }
         return desc
+    }
+    var recurrenceType: String {
+        return  "repeat " + (rruleObject?.frequency.toString().lowercased() ?? "")
     }
     
 }
