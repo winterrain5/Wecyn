@@ -166,7 +166,7 @@ class FriendDetailNomalCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
         label.textAlignment = .center
-        label.font = UIFont.sk.pingFangRegular(15)
+        label.font = UIFont.sk.pingFangRegular(16)
         
         contentView.backgroundColor = .white
     }

@@ -25,7 +25,7 @@ class ConnectionOfMyCell: UITableViewCell {
         imgView.sk.cornerRadius = 18
         imgView.contentMode = .scaleAspectFill
         nameLabel.textColor = R.color.textColor52()
-        nameLabel.font = UIFont.sk.pingFangRegular(15)
+        nameLabel.font = UIFont.sk.pingFangRegular(16)
     }
     
     required init?(coder: NSCoder) {

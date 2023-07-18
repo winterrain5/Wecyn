@@ -117,7 +117,34 @@ extension String {
         let full = first + " " + last
         return full.replacingOccurrences(of: "\n", with: "")
     }
+    
+    var htmlToAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else { return NSAttributedString() }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            return NSAttributedString()
+        }
+    }
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
+   
+    func filterHTML() -> String {
+
+        let scanner = Scanner(string: self)
+        var text:NSString?
+        var result:String = self
+        
+        while scanner.isAtEnd == false {
+            scanner.scanUpTo("<", into: nil)
+            scanner.scanUpTo(">", into: &text)
+            result = result.replacingOccurrences(of: "\(text ?? "")>", with: "")
+        }
+        return result
+    }
 }
+
 
 
 extension NSObject {

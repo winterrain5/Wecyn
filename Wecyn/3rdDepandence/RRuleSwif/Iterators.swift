@@ -22,6 +22,18 @@ public struct Iterator {
         let _ = context?.evaluateScript(rrulejs)
         return context
     }()
+    
+    internal static let bundleContext: JSContext? = {
+        guard let rrulejs = JavaScriptBridge.bundlejs() else {
+            return nil
+        }
+        let context = JSContext()
+        context?.exceptionHandler = { context, exception in
+            print("[RRuleSwift] bundle.js error: \(String(describing: exception))")
+        }
+        let _ = context?.evaluateScript(rrulejs)
+        return context
+    }()
 }
 
 public extension RecurrenceRule {
@@ -74,6 +86,33 @@ public extension RecurrenceRule {
         
     }
     
+    func toText() -> String? {
+        guard let _ = JavaScriptBridge.bundlejs() else {
+            return nil
+        }
+        
+        let ruleJSONString = toJSONString(endless: 0)
+        
+        let _ = Iterator.bundleContext?.evaluateScript("var {RRule} = require('rrule');var rule = new RRule({ \(ruleJSONString) })")
+        guard let text = Iterator.bundleContext?.evaluateScript("rule.toText()").toString() else {
+            return nil
+        }
+        return text
+    }
+    
+    func toString() ->  String? {
+        guard let _ = JavaScriptBridge.bundlejs() else {
+            return nil
+        }
+        
+        let ruleJSONString = toJSONString(endless: 0)
+        
+        let _ = Iterator.bundleContext?.evaluateScript("var {RRule} = require('rrule');var rule = new RRule({ \(ruleJSONString) })")
+        guard let text = Iterator.bundleContext?.evaluateScript("rule.toString()").toString() else {
+            return nil
+        }
+        return text
+    }
     
 
     func occurrences(between date: Date, and otherDate: Date, endless endlessRecurrenceCount: Int = Iterator.endlessRecurrenceCount) -> [Date] {

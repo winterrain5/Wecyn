@@ -8,13 +8,20 @@
 import UIKit
 import RxSwift
 import RxLocalizer
+import PopMenu
 enum DataViewType {
     case Timeline
     case UpComing
 }
+
+enum DateFormat:String {
+    case ddMMyyyyHHmm = "dd-MM-yyyy HH:mm"
+    case ddMMyyyy = "dd-MM-yyyy"
+}
+
 var CalendarBelongUserId:Int? = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id
 class CalendarController: BaseTableController {
-    let currentDate = Date().string(withFormat: "yyyy-MM-dd")
+    let currentDate = Date().string(withFormat: DateFormat.ddMMyyyy.rawValue)
     let headerView = CalendarHeaderView()
     let sectionView = CalendarSectionView.loadViewFromNib()
     let requestModel = EventListRequestModel()
@@ -38,6 +45,7 @@ class CalendarController: BaseTableController {
         selectAssistant.avatar = UserModel?.avatar ?? ""
         
         let searchView = UIButton()
+        searchView.size = CGSize(width: 36, height: 36)
         searchView.imageForNormal = R.image.connection_search()
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: searchView)
         searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
@@ -85,13 +93,13 @@ class CalendarController: BaseTableController {
             if self.isSelectCalendar {
                 // 删除开始时间不是当天的事件
                 datas.removeAll(where: {
-                    !($0.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.isWithin(0, .day, of: self.requestModel.start_date?.date(withFormat: "yyyy-MM-dd") ?? Date()) ?? false)
+                    !($0.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.isWithin(0, .day, of: self.requestModel.start_date?.date(withFormat: "yyyy-MM-dd") ?? Date()) ?? false)
                 })
                 self.dataArray = datas
             } else {
                 var dict:[String:[EventListModel]] = [:]
                 datas.forEach { model in
-                    let key = model.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "yyyy-MM-dd") ?? ""
+                    let key = model.start_time
                     if dict[key] != nil {
                         dict[key]?.append(model)
                     } else {
@@ -99,7 +107,7 @@ class CalendarController: BaseTableController {
                     }
                 }
                 dict.values.sorted(by: {
-                    guard let start = $0.first?.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss"),let end = $1.first?.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss") else {
+                    guard let start = $0.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue),let end = $1.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
                         return false
                     }
                     return start.compare(end)  ==  .orderedAscending
@@ -129,11 +137,11 @@ class CalendarController: BaseTableController {
         let requsetModel = EventListRequestModel()
         let sd = date.startOfCurrentMonth()
         let ed = sd.endOfCurrentMonth()
-        requsetModel.start_date = sd.string(withFormat: "yyyy-MM-dd")
-        requsetModel.end_date = ed.string(withFormat: "yyyy-MM-dd")
+        requsetModel.start_date = sd.string(withFormat: DateFormat.ddMMyyyy.rawValue)
+        requsetModel.end_date = ed.string(withFormat: DateFormat.ddMMyyyy.rawValue)
         requsetModel.current_user_id = CalendarBelongUserId
         ScheduleService.eventList(model: requsetModel).subscribe(onNext:{ models in
-            let eventDates = models.map({ ($0.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss") ??  Date()).string(withFormat: "yyyy-MM-dd") })
+            let eventDates = models.map({ ($0.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) ??  Date()).string(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) })
             self.headerView.calendarView.eventDates = eventDates
         }).disposed(by: rx.disposeBag)
     }
@@ -150,19 +158,19 @@ class CalendarController: BaseTableController {
             guard let `self` = self else { return }
             
             self.isSelectCalendar = true
-            self.requestModel.start_date = date.string(withFormat: "yyyy-MM-dd")
-            self.requestModel.end_date = date.string(withFormat: "yyyy-MM-dd")
+            self.requestModel.start_date = date.string(withFormat: DateFormat.ddMMyyyy.rawValue)
+            self.requestModel.end_date = date.string(withFormat: DateFormat.ddMMyyyy.rawValue)
             self.loadNewData()
         }
         
         headerView.calendarView.addButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-//            let vc:CalendarAddEventController!
-//            if self.selectAssistant.id == self.UserModel?.id {
-//                vc = CalendarAddEventController(calendarBelongName: nil)
-//            } else {
-//                vc = CalendarAddEventController(calendarBelongName: self.selectAssistant.name)
-//            }
+            //            let vc:CalendarAddEventController!
+            //            if self.selectAssistant.id == self.UserModel?.id {
+            //                vc = CalendarAddEventController(calendarBelongName: nil)
+            //            } else {
+            //                vc = CalendarAddEventController(calendarBelongName: self.selectAssistant.name)
+            //            }
             
             let vc = CalendarAddNewEventController()
             self.navigationController?.pushViewController(vc)
@@ -258,7 +266,7 @@ class CalendarController: BaseTableController {
                 let label = UILabel().color(R.color.textColor52()!).font(UIFont.sk.pingFangSemibold(15))
                 view.addSubview(label)
                 label.frame = CGRect(x: 28, y: 0, width: 100, height: 30)
-                label.text = (self.dataArray as! [[EventListModel]])[section - 1].first?.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(format: "dd MMM yyyy")
+                label.text = (self.dataArray as! [[EventListModel]])[section - 1].first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.string(format: "dd MMM yyyy")
                 return view
             }
             return nil
@@ -281,15 +289,9 @@ class CalendarController: BaseTableController {
         } else {
             model = (dataArray as! [[EventListModel]])[indexPath.section - 1][indexPath.row]
         }
-        model.calendar_belong_id = self.selectAssistant.id
-        model.calendar_belong_name = self.selectAssistant.name
-        let vc = EventDetailController(eventModel:model)
-        let nav = BaseNavigationController(rootViewController: vc)
-        vc.container.operateCompleteHandler = { [weak self] in
-            guard let `self` = self else { return }
-            self.loadNewData()
-        }
-        self.present(nav, animated: true)
+        let vc = CalendarEventDetailController(eventModel:model)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     deinit {
@@ -355,7 +357,7 @@ class CalendarNavBarUserView: UIView {
         arrow.frame = CGRect(x: nameLabel.frame.maxX + 8, y: 0, width: 15, height: 11)
         arrow.center.y = self.center.y
         
-  
+        
     }
     
     func showMenu() {

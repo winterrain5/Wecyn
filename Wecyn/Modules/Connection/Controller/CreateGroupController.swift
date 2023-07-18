@@ -26,11 +26,6 @@ class CreateGroupController: BaseTableController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.addLeftBarButtonItem()
-        self.leftButtonDidClick = { [weak self] in
-            self?.dismiss(animated: true)
-        }
         
         saveButton.titleForNormal = "Save"
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)

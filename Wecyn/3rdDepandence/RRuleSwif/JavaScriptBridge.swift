@@ -22,6 +22,19 @@ internal struct JavaScriptBridge {
             return nil
         }
     }
+    
+    internal static func bundlejs() -> String? {
+        let libPath = Bundle(identifier: "Teambition.RRuleSwift-iOS")?.path(forResource: "bundle", ofType: "js") ?? Bundle.main.path(forResource: "bundle", ofType: "js")
+        guard let bundlePath = libPath else {
+            return nil
+        }
+
+        do {
+            return try String(contentsOfFile: bundlePath)
+        } catch _ {
+            return nil
+        }
+    }
 }
 
 internal extension RecurrenceFrequency {

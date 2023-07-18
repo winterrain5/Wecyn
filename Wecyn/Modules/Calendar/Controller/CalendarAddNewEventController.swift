@@ -19,12 +19,15 @@ import SwiftAlertView
 
  #d82739
  */
-enum EventColor:String {
+enum EventColor:String,CaseIterable {
     case DarkBlue = "149bd0"
     case LightBlue = "1463d0"
     case Green = "21a93c"
     case Yellow = "ed8c00"
     case Red = "d82739"
+    static var allColor:[String] {
+        return ["149bd0","1463d0","21a93c","ed8c00","d82739"]
+    }
 }
 
 enum AddEventType {
@@ -112,6 +115,8 @@ class CalendarAddNewEventController: BaseTableController {
     var requestModel = AddEventRequestModel()
     var attendees:[FriendListModel] = []
     
+    var rrule:RecurrenceRule?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +125,8 @@ class CalendarAddNewEventController: BaseTableController {
         self.navigation.item.title = "New Event"
         let saveButton = UIButton()
         saveButton.imageForNormal = R.image.checkmark()
+        saveButton.size = CGSize(width: 30, height: 30)
+        saveButton.contentMode = .right
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
             self?.addEvent()
         }).disposed(by: rx.disposeBag)
@@ -168,13 +175,18 @@ class CalendarAddNewEventController: BaseTableController {
         let tagSection = [color]
         models.append(tagSection)
         
-        requestModel.color = EventColor.Red.rawValue
+        requestModel.color = EventColor.allColor.firstIndex(of: EventColor.Red.rawValue)
         
         
     }
     
     func addEvent() {
         Toast.showLoading()
+        if let _ = self.rrule {
+            //20230717T020531Z
+            self.rrule?.startDate = self.requestModel.start_time?.date(withFormat:  "yyyyMMdd'T'HHmmss'Z'") ?? Date()
+            self.requestModel.rrule = self.rrule?.toString()
+        }
         ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
             
             if $0.success == 1 {
@@ -192,6 +204,11 @@ class CalendarAddNewEventController: BaseTableController {
     
     func editEvent() {
         Toast.showLoading()
+        if let _ = self.rrule {
+            //20230717T020531Z
+            self.rrule?.startDate = self.requestModel.start_time?.date(withFormat:  "yyyyMMdd'T'HHmmss'Z'") ?? Date()
+            self.requestModel.rrule = self.rrule?.toRRuleString()
+        }
         ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
             if $0.success == 1 {
                 Toast.showMessage("Event Update Success", after: 1) {
@@ -298,7 +315,7 @@ class CalendarAddNewEventController: BaseTableController {
                         self.models[1].append(self.people)
                     }
                     
-                    self.tableView?.reloadSections(IndexSet(integer: 1), with: .none)
+                    self.reloadData()
                 }
                 
                 
@@ -353,24 +370,24 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Start {
-            let maxmumDate = (self.requestModel.end_time?.date(withFormat: "yyyy-MM-dd HH:mm:ss"))?.adding(.minute, value: -5)
+            let maxmumDate = (self.requestModel.end_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue))?.adding(.minute, value: -5)
             DatePickerView(title:"Start Time",
                            mode: .dateAndTime,
                            date: Date(),
                            minimumDate: Date(),
                            maximumDate: maxmumDate) { date in
                 
-                let dateStr = date.string(withFormat: "yyyy-MM-dd HH:mm:ss")
+                let dateStr = date.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
                 self.requestModel.start_time = dateStr
                 
-                self.models[2][0].start_time = date.string(withFormat: "dd/MM/yyyy HH:mm")
+                self.models[2][0].start_time = dateStr
                 self.reloadData()
                 
             }.show()
         }
         
         if model.type == .End {
-            let minimunDate = (self.requestModel.start_time?.date(withFormat: "yyyy-MM-dd HH:mm:ss") ?? Date()).adding(.minute, value: 5)
+            let minimunDate = (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) ?? Date()).adding(.minute, value: 5)
             DatePickerView(title:"End Time",
                            mode: .dateAndTime,
                            date: Date(),
@@ -378,10 +395,10 @@ class CalendarAddNewEventController: BaseTableController {
                            maximumDate: nil) { date in
                 
                 
-                let dateStr = date.string(withFormat: "yyyy-MM-dd HH:mm:ss")
+                let dateStr = date.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
                 self.requestModel.end_time = dateStr
                 
-                self.models[2][1].end_time = date.string(withFormat: "dd/MM/yyyy HH:mm")
+                self.models[2][1].end_time = dateStr
                 self.reloadData()
                 
             }.show()
@@ -402,32 +419,55 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Color {
-            ColorPickerView(selectColor: self.requestModel.color) { [weak self] color in
+            let select = EventColor.allColor[self.requestModel.color ?? 0]
+            ColorPickerView(selectColor: select) { [weak self] color in
+                guard let color = color else { return }
+                self?.requestModel.color = EventColor.allColor.firstIndex(of: color)
                 
-                self?.requestModel.color = color
-                
-                self?.models.last?.first?.color = color ?? ""
-                self?.models.first?.first?.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color ?? "d82739")!)
+                self?.models.last?.first?.color = color
+                self?.models.first?.first?.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color)!)
                 self?.reloadData()
                 
             }.show()
         }
         
         if model.type == .Repeat {
-            let vc = CalendarEventRepeatController()
+            let vc = CalendarEventRepeatController(rrule: self.rrule)
+            vc.repeatSelectComplete = { [weak self] rrule in
+                guard let `self` = self else { return }
+                
+                self.rrule = rrule
+                guard let rrule = rrule else {
+                    self.requestModel.is_repeat = 0
+                    self.requestModel.rrule = nil
+                    return
+                }
+                self.requestModel.is_repeat = 1
+                self.requestModel.rrule = rrule.toRRuleString()
+                self.models[2][2].duplicate = "repeat " + rrule.frequency.toString().lowercased()
+                self.reloadData()
+            }
             let nav = BaseNavigationController(rootViewController: vc)
             self.present(nav, animated: true)
         }
     }
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let model = models[section]
-//        
-//        //Include the creator, must be a positive integer.
-//        if model.type == .isPublic {
-//            
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 1, models[1][0].isPublic {
+            let sectionView = CalendarEventSectionView()
+            sectionView.label.text = "Include the creator,must be a positive integer"
+            return sectionView
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1, models[1][0].isPublic {
+            return 40
+        }
+        return 20
+    }
+    
 }
 
 class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
@@ -439,12 +479,28 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
             input.text = model.title
             tagImageView.image = model.img
             
-            if model.type == .Title {
+            switch model.type {
+            case .Title:
+                tagImageView.contentMode = .center
+                input.text = model.title
                 input.keyboardType = .default
-            }
-            if model.type == .PeopleLimit {
+            case .PeopleLimit:
+                tagImageView.contentMode = .scaleAspectFit
+                input.text = model.attendance_limit?.string
                 input.keyboardType = .numberPad
+            case .Link:
+                tagImageView.contentMode = .scaleAspectFit
+                input.text = model.url
+                input.keyboardType = .URL
+            case .Location:
+                tagImageView.contentMode = .scaleAspectFit
+                input.text = model.location
+                input.keyboardType = .default
+            default:
+                input.text = ""
             }
+            
+           
         }
     }
     var inputDidComplete:((AddEventModel,String)->())?
@@ -455,7 +511,7 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
         
         input.borderStyle = .none
         input.textColor = R.color.textColor52()
-        input.font = UIFont.sk.pingFangRegular(15)
+        input.font = UIFont.sk.pingFangRegular(16)
         input.setPlaceHolderTextColor(R.color.textColor52()!)
         input.returnKeyType = .done
         input.enablesReturnKeyAutomatically = true
@@ -464,7 +520,7 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
             guard let `self` = self else { return }
             self.inputDidComplete?(self.model,self.input.text ?? "")
         }).disposed(by: rx.disposeBag)
-        tagImageView.contentMode = .center
+        
     }
     
     required init?(coder: NSCoder) {
@@ -539,10 +595,10 @@ class AddEventArrowCell: UITableViewCell {
         contentView.addSubview(detailLabel)
         
         titleLabel.textColor = R.color.textColor52()
-        titleLabel.font = UIFont.sk.pingFangRegular(15)
+        titleLabel.font = UIFont.sk.pingFangRegular(16)
         
         detailLabel.textColor = R.color.textColor74()
-        detailLabel.font = UIFont.sk.pingFangRegular(15)
+        detailLabel.font = UIFont.sk.pingFangRegular(16)
         detailLabel.lineBreakMode = .byTruncatingTail
         detailLabel.textAlignment = .right
         
@@ -582,7 +638,7 @@ class AddEventArrowCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(imgView.snp.right).offset(16)
             make.top.bottom.equalToSuperview()
-            make.width.equalTo(80)
+            make.width.equalTo(88)
         }
         
         detailLabel.snp.makeConstraints { make in
@@ -620,7 +676,7 @@ extension AddEventArrowCell: UICollectionViewDataSource,UICollectionViewDelegate
         if self.model.attendees.count > 0 {
             let model = model.attendees[indexPath.row]
             let width = model.name.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 30
-            return CGSize(width: width, height: 26)
+            return CGSize(width: width, height: 24)
         }
         return .zero
     }
@@ -653,7 +709,7 @@ class AddEventSwitchCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         
         titleLabel.textColor = R.color.textColor74()
-        titleLabel.font = UIFont.sk.pingFangRegular(15)
+        titleLabel.font = UIFont.sk.pingFangRegular(16)
         
         imgView.contentMode = .scaleAspectFit
         
@@ -709,7 +765,7 @@ class AddEventColorCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         
         titleLabel.textColor = R.color.textColor74()
-        titleLabel.font = UIFont.sk.pingFangRegular(15)
+        titleLabel.font = UIFont.sk.pingFangRegular(16)
         
         imgView.contentMode = .scaleAspectFit
         

@@ -189,7 +189,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 63 images.
+  /// This `_R.image` struct is generated, and contains static references to 67 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -316,6 +316,18 @@ struct _R {
     /// Image `person.circle`.
     var personCircle: RswiftResources.ImageResource { .init(name: "person.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `person.fill`.
+    var personFill: RswiftResources.ImageResource { .init(name: "person.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.fill.checkmark`.
+    var personFillCheckmark: RswiftResources.ImageResource { .init(name: "person.fill.checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.fill.questionmark`.
+    var personFillQuestionmark: RswiftResources.ImageResource { .init(name: "person.fill.questionmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.fill.xmark`.
+    var personFillXmark: RswiftResources.ImageResource { .init(name: "person.fill.xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -383,9 +395,12 @@ struct _R {
     var xmark: RswiftResources.ImageResource { .init(name: "xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 2 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 3 resource files.
   struct file {
     let bundle: Foundation.Bundle
+
+    /// Resource file `bundle.js`.
+    var bundleJs: RswiftResources.FileResource { .init(name: "bundle", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `nlp.js`.
     var nlpJs: RswiftResources.FileResource { .init(name: "nlp", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
