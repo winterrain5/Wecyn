@@ -91,7 +91,7 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
         let cell = tableView.dequeueReusableCell(withClass: UITableViewCell.self)
         let model = datas[indexPath.row]
         cell.textLabel?.text = model.title
-        cell.textLabel?.font = UIFont.sk.pingFangRegular(15)
+        cell.textLabel?.font = UIFont.sk.pingFangRegular(16)
         cell.textLabel?.textColor = R.color.textColor52()!
         
         cell.accessoryType = model.isSelect ? .checkmark : .none

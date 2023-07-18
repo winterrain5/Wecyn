@@ -12,7 +12,7 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
-    var buildType: AppBuildType = .Dev
+    var buildType: AppBuildType = .Uat
     
     enum AppBuildType: Int {
         case Dev
@@ -25,11 +25,11 @@ class APIHost: NSObject {
         case ImageClients
     }
      var BaseClients = ["Dev": "http://10.1.3.23:826",
-                        "Uat": "http://27.54.57.5:1412",
+                        "Uat": "http://uat.api.wecyn.com",
                     "Release": ""]
     
     var ImageClients = ["Dev": "http://10.1.3.23:826",
-                        "Uat": "http://27.54.57.5:1412",
+                        "Uat": "http://uat.api.wecyn.com",
                     "Release": ""]
     
      func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {

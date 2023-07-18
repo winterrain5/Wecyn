@@ -979,7 +979,7 @@
       fromText: fromText,
       parseText: parseText,
       isFullyConvertible: ToText.isFullyConvertible,
-      toText: function (rrule, gettext, language) {
+      toText: function (rrule, gettext, languagelanguage) {
         return new ToText(rrule, gettext, language).toString()
       }
     }

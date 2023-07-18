@@ -28,6 +28,16 @@ enum CalendarFrequencyType: String {
             return "year"
         }
     }
+    
+    func toString() -> String {
+        switch self {
+        case .Not: return ""
+        case .Daily: return "DAILY"
+        case .Weekly: return "WEEKLY"
+        case .Monthly: return "MONTHLY"
+        case .Yearly: return "YEARLY"
+        }
+    }
 }
 enum CalendarRepeatCellType {
     case Frequency
@@ -61,6 +71,16 @@ class CalendarEventRepeatController: BaseTableController {
     var rrule:RecurrenceRule?
     let sectionView = CalendarEventSectionView()
     var untilSelectIndex:Int = -1
+    var repeatSelectComplete:((RecurrenceRule?)->())?
+    init(rrule:RecurrenceRule?) {
+        self.rrule = rrule
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,24 +95,31 @@ class CalendarEventRepeatController: BaseTableController {
         let freSection = [none,daily,weekly,monthly,yearly]
         models.append(freSection)
         
-        self.selectFrequencyModel = none
+        if let rrule = self.rrule {
+            models.flatMap({ $0 }).forEach({
+                if $0.frequencyType?.toString() == rrule.frequency.toString()  {
+                    $0.isSelect = true
+                    self.selectFrequencyModel = $0
+                } else {
+                    $0.isSelect = false
+                }
+            })
+            addOtherSection(self.selectFrequencyModel)
+            repeatDescription()
+        } else {
+            
+            self.selectFrequencyModel = none
+        }
+        
+        
         
         let saveButton = UIButton()
+        saveButton.size = CGSize(width: 30, height: 30)
+        saveButton.contentMode = .right
         saveButton.imageForNormal = R.image.checkmark()
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
-            
-            guard let `self` = self,let rule = self.rrule else { return }
-//            let occurrences = rule.allOccurrences()
-//
-//            print("\nRRule Occurrences:")
-//            occurrences.forEach { (occurrence) in
-//                print(occurrence.string())
-//            }
-            
-            print("\nlast Occurrence:")
-            let last = rule.lastOccurrence(before: "2035 11 24".date(withFormat: "yyyy MM dd")!)
-            print(last?.string())
-            
+            self?.repeatSelectComplete?(self?.rrule)
+            self?.returnBack()
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
@@ -205,40 +232,16 @@ class CalendarEventRepeatController: BaseTableController {
         
         let model = models[indexPath.section][indexPath.row]
         
-        func removeLast() {
-            if models.count == 2 {
-                models.removeLast()
-            }
-        }
+       
         if model.cellType == .Frequency {
             model.isSelect.toggle()
             self.selectFrequencyModel = models.flatMap({ $0 }).filter({ $0.isSelect }).first
-            switch model.frequencyType {
-            case .Not:
-                removeLast()
-                rrule = nil
-            case .Daily:
-                removeLast()
-                models.append(addDaySection())
-                rrule = RecurrenceRule(frequency: .daily)
-            case .Weekly:
-                removeLast()
-                models.append(addWeekSection())
-                rrule = RecurrenceRule(frequency: .weekly)
-            case .Monthly:
-                removeLast()
-                models.append(addMonthSection())
-                rrule = RecurrenceRule(frequency: .monthly)
-            case .Yearly:
-                removeLast()
-                models.append(addYearSection())
-                rrule = RecurrenceRule(frequency: .yearly)
-            case .none:
-                Logger.debug("none")
-            }
+           
+            addOtherSection(model)
+            
             rrule?.interval = 1
             rrule?.recurrenceEnd = EKRecurrenceEnd(occurrenceCount: 1)
-            tableView.reloadData()
+            
             repeatDescription()
         }
         
@@ -314,6 +317,38 @@ class CalendarEventRepeatController: BaseTableController {
         }
     }
     
+    func addOtherSection(_ model:EventRepeatModel) {
+        func removeLast() {
+            if models.count == 2 {
+                models.removeLast()
+            }
+        }
+        switch model.frequencyType {
+        case .Not:
+            removeLast()
+            rrule = nil
+        case .Daily:
+            removeLast()
+            models.append(addDaySection())
+            rrule = RecurrenceRule(frequency: .daily)
+        case .Weekly:
+            removeLast()
+            models.append(addWeekSection())
+            rrule = RecurrenceRule(frequency: .weekly)
+        case .Monthly:
+            removeLast()
+            models.append(addMonthSection())
+            rrule = RecurrenceRule(frequency: .monthly)
+        case .Yearly:
+            removeLast()
+            models.append(addYearSection())
+            rrule = RecurrenceRule(frequency: .yearly)
+        case .none:
+            Logger.debug("none")
+        }
+        tableView?.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 { return nil }
         if selectFrequencyModel.frequencyType == .Not {
@@ -336,70 +371,8 @@ class CalendarEventRepeatController: BaseTableController {
         guard let rrule = rrule else { return }
         let rule = rrule.toRRuleString()
         print("rrule text:\(rule)")
-        var description = ""
+        sectionView.label.text = rrule.toText()
         
-        let interval = rrule.interval
-        let count = rrule.recurrenceEnd?.occurrenceCount ?? 0
-        
-        let endDate = rrule.recurrenceEnd?.endDate?.string(format: "dd MMM yyyy HH:mm") ?? ""
-        let untilStr = endDate.isEmpty ? "" : "until \(endDate)"
-        
-        let countunit = count > 1 ? "times" : "time"
-        
-        switch self.selectFrequencyModel.frequencyType {
-        case .Not:
-            description = ""
-        case .Daily:
-            let dayunit = interval > 1 ? "days" : "day"
-            
-            if count > 0 {
-                let countStr = count > 0 ? "for \(count) \(countunit)" : ""
-                description = "Repeat every \(interval) \(dayunit) \(countStr)"
-            }
-            if !endDate.isEmpty {
-                description = "Repeat every \(interval) \(dayunit) \(untilStr)"
-            }
-            
-            if count == 0 && endDate.isEmpty {
-                description = "repeat forever"
-            }
-        case .Weekly,.Monthly:
-            
-            var unit = ""
-            if self.selectFrequencyModel.frequencyType == .Weekly {
-                unit = interval > 1 ? "weeks" : "week"
-            } else {
-                unit = interval > 1 ? "months" : "month"
-            }
-            
-            let weekday = self.models[1][1].value
-            var weekvalue:[String] = []
-            weekday.split(separator: ",").map({ String($0).int ?? 0 }).forEach({
-                weekvalue.append(WeekData[$0])
-            })
-            let weekdayStr = weekday.isEmpty ? "" : " on \(weekvalue.joined(separator: ","))"
-            
-            let month = self.models[1][2].value
-            var monthvalue:[String] = []
-            month.split(separator: ",").map({ String($0).int ?? 0 }).forEach({
-                monthvalue.append(MonthData[$0])
-            })
-            let montStr = month.isEmpty ? "" : " in \(monthvalue.joined(separator: ","))"
-            
-            if count > 0 {
-                let countStr = count > 0 ? "for \(count) \(countunit)" : ""
-                description = "Repeat every \(interval) \(unit)\(montStr)\(weekdayStr) \(untilStr) \(countStr)"
-            }
-            if !endDate.isEmpty {
-                description = "Repeat every \(interval) \(unit)\(montStr)\(weekdayStr) \(untilStr)"
-            }
-            
-        case .Yearly:
-            description = ""
-        case .none:
-            Logger.debug("none")
-        }
-        sectionView.label.text = rule + "\n\(description)"
     }
 }
 
@@ -415,7 +388,7 @@ class CalendarEventFrequencyCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         textLabel?.textColor = R.color.textColor52()
-        self.textLabel?.font = UIFont.sk.pingFangRegular(15)
+        self.textLabel?.font = UIFont.sk.pingFangRegular(16)
     }
     
     required init?(coder: NSCoder) {
@@ -452,12 +425,12 @@ class CalendarEventStepperCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         textLabel?.textColor = R.color.textColor52()
-        self.textLabel?.font = UIFont.sk.pingFangRegular(15)
+        self.textLabel?.font = UIFont.sk.pingFangRegular(16)
         
         contentView.addSubview(stepper)
         contentView.addSubview(detailLabel)
         detailLabel.textColor = R.color.textColor74()
-        detailLabel.font = UIFont.sk.pingFangRegular(15)
+        detailLabel.font = UIFont.sk.pingFangRegular(16)
         stepper.value = 1
         stepper.minimumValue = 1
         stepper.maximumValue = 999
@@ -553,10 +526,10 @@ class CalendarEventArrowCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.textLabel?.textColor = R.color.textColor52()
-        self.textLabel?.font = UIFont.sk.pingFangRegular(15)
+        self.textLabel?.font = UIFont.sk.pingFangRegular(16)
         
         detailLabel.textColor = R.color.textColor74()
-        detailLabel.font = UIFont.sk.pingFangRegular(15)
+        detailLabel.font = UIFont.sk.pingFangRegular(16)
         
         contentView.addSubview(detailLabel)
         accessoryType = .disclosureIndicator

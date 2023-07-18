@@ -31,12 +31,6 @@
 		45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */; };
 		45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */; };
 		45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */; };
-		45005CB32A5FDEE300560E21 /* RWMRuleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CAC2A5FDEE300560E21 /* RWMRuleParser.swift */; };
-		45005CB42A5FDEE300560E21 /* RWMRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CAD2A5FDEE300560E21 /* RWMRecurrenceRule.swift */; };
-		45005CB52A5FDEE300560E21 /* RWMRuleScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CAE2A5FDEE300560E21 /* RWMRuleScheduler.swift */; };
-		45005CB62A5FDEE300560E21 /* EKEvent+RWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CB02A5FDEE300560E21 /* EKEvent+RWM.swift */; };
-		45005CB72A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CB12A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift */; };
-		45005CB82A5FDEE300560E21 /* Calendar+RWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005CB22A5FDEE300560E21 /* Calendar+RWM.swift */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
 		450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7F2A37F85B008B0C4A /* EditViewController.swift */; };
 		450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C832A37FFAB008B0C4A /* JobItemCell.swift */; };
@@ -76,6 +70,8 @@
 		450F6CC62A613AFC0001AA1B /* rrule.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CBB2A613AFC0001AA1B /* rrule.js */; };
 		450F6CC72A613AFC0001AA1B /* nlp.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CBC2A613AFC0001AA1B /* nlp.js */; };
 		450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */; };
+		450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */; };
+		450F6CCF2A6508630001AA1B /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CCE2A6508630001AA1B /* bundle.js */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
 		4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A48A2A4AB716007481A6 /* EventDetailView.swift */; };
 		4519A48D2A4AB71E007481A6 /* EventDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4519A48C2A4AB71E007481A6 /* EventDetailView.xib */; };
@@ -214,13 +210,6 @@
 		45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatController.swift; sourceTree = "<group>"; };
 		45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatWeekOrMonthController.swift; sourceTree = "<group>"; };
 		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
-		45005CAC2A5FDEE300560E21 /* RWMRuleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWMRuleParser.swift; sourceTree = "<group>"; };
-		45005CAD2A5FDEE300560E21 /* RWMRecurrenceRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWMRecurrenceRule.swift; sourceTree = "<group>"; };
-		45005CAE2A5FDEE300560E21 /* RWMRuleScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWMRuleScheduler.swift; sourceTree = "<group>"; };
-		45005CAF2A5FDEE300560E21 /* RWMRecurrenceRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWMRecurrenceRule.h; sourceTree = "<group>"; };
-		45005CB02A5FDEE300560E21 /* EKEvent+RWM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEvent+RWM.swift"; sourceTree = "<group>"; };
-		45005CB12A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKRecurrenceRule+RWM.swift"; sourceTree = "<group>"; };
-		45005CB22A5FDEE300560E21 /* Calendar+RWM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+RWM.swift"; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		450B6C7F2A37F85B008B0C4A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
@@ -260,6 +249,8 @@
 		450F6CBB2A613AFC0001AA1B /* rrule.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rrule.js; sourceTree = "<group>"; };
 		450F6CBC2A613AFC0001AA1B /* nlp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = nlp.js; sourceTree = "<group>"; };
 		450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaScriptBridge.swift; sourceTree = "<group>"; };
+		450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDetailController.swift; sourceTree = "<group>"; };
+		450F6CCE2A6508630001AA1B /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
 		4519A48A2A4AB716007481A6 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		4519A48C2A4AB71E007481A6 /* EventDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailView.xib; sourceTree = "<group>"; };
@@ -418,23 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				450F6CB12A613AFC0001AA1B /* RRuleSwif */,
-				45005CAB2A5FDEE300560E21 /* RWMRecurrenceRule */,
 			);
 			path = 3rdDepandence;
-			sourceTree = "<group>";
-		};
-		45005CAB2A5FDEE300560E21 /* RWMRecurrenceRule */ = {
-			isa = PBXGroup;
-			children = (
-				45005CAC2A5FDEE300560E21 /* RWMRuleParser.swift */,
-				45005CAD2A5FDEE300560E21 /* RWMRecurrenceRule.swift */,
-				45005CAE2A5FDEE300560E21 /* RWMRuleScheduler.swift */,
-				45005CAF2A5FDEE300560E21 /* RWMRecurrenceRule.h */,
-				45005CB02A5FDEE300560E21 /* EKEvent+RWM.swift */,
-				45005CB12A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift */,
-				45005CB22A5FDEE300560E21 /* Calendar+RWM.swift */,
-			);
-			path = RWMRecurrenceRule;
 			sourceTree = "<group>";
 		};
 		450B6C812A37FF7E008B0C4A /* Controller */ = {
@@ -526,8 +502,8 @@
 				450F6CB72A613AFC0001AA1B /* RecurrenceRule.swift */,
 				450F6CB82A613AFC0001AA1B /* Iterators.swift */,
 				450F6CB92A613AFC0001AA1B /* EKWeekday+RRule.swift */,
-				450F6CBA2A613AFC0001AA1B /* lib */,
 				450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */,
+				450F6CBA2A613AFC0001AA1B /* lib */,
 			);
 			path = RRuleSwif;
 			sourceTree = "<group>";
@@ -535,6 +511,7 @@
 		450F6CBA2A613AFC0001AA1B /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				450F6CCE2A6508630001AA1B /* bundle.js */,
 				450F6CBB2A613AFC0001AA1B /* rrule.js */,
 				450F6CBC2A613AFC0001AA1B /* nlp.js */,
 			);
@@ -1031,6 +1008,7 @@
 				45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */,
 				45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */,
 				45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */,
+				450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1149,6 +1127,7 @@
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
 				450F6CC62A613AFC0001AA1B /* rrule.js in Resources */,
 				450F6CC72A613AFC0001AA1B /* nlp.js in Resources */,
+				450F6CCF2A6508630001AA1B /* bundle.js in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
 				45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
@@ -1239,7 +1218,6 @@
 				45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
 				457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */,
-				45005CB62A5FDEE300560E21 /* EKEvent+RWM.swift in Sources */,
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
 				450BA6D52A32F05B00764828 /* RegistInfoController.swift in Sources */,
 				45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */,
@@ -1261,16 +1239,13 @@
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
-				45005CB32A5FDEE300560E21 /* RWMRuleParser.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
-				45005CB42A5FDEE300560E21 /* RWMRecurrenceRule.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
 				45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */,
-				45005CB52A5FDEE300560E21 /* RWMRuleScheduler.swift in Sources */,
 				457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */,
 				453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */,
 				45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */,
@@ -1285,6 +1260,7 @@
 				45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */,
 				45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */,
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
+				450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */,
 				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
 				45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */,
@@ -1316,7 +1292,6 @@
 				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
-				45005CB82A5FDEE300560E21 /* Calendar+RWM.swift in Sources */,
 				45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */,
 				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
 				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
@@ -1352,7 +1327,6 @@
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,
 				457C508F2A384B5F00FCE8D0 /* HomeItemCell.swift in Sources */,
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
-				45005CB72A5FDEE300560E21 /* EKRecurrenceRule+RWM.swift in Sources */,
 				457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */,
 				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,
 				459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */,

@@ -44,7 +44,7 @@ class CalendarAddEventView: UIView {
         didSet {
             guard let event = editEventModel else { return }
             
-            calendarBelongLabel.text = "you are editing \(event.calendar_belong_name)'s calendar"
+            calendarBelongLabel.text = "you are editing \(event.creator_name)'s calendar"
             titleTfTopCons.constant = 76
             calendarBelongLabel.isHidden = false
             

@@ -25,8 +25,8 @@ class CaledarItemCell: UITableViewCell {
             }
             
             
-            let starTime = model.start_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
-            let endTime = model.end_time.date(withFormat: "yyyy-MM-dd HH:mm:ss")?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
+            let starTime = model.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
+            let endTime = model.end_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.string(withFormat: "dd/MM/yyyy HH:mm") ?? ""
             timeLabel.text = starTime + " - " + endTime
             
             switch model.status {

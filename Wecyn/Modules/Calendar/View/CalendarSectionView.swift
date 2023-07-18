@@ -58,7 +58,7 @@ class CalendarSectionView: UIView {
            
             DatePickerView(title:"Start Time", mode: .date, date: Date()) { date in
                 self.startTimeLabel.text = date.string(withFormat: "dd/MM/yyyy")
-                self.startTime = date.string(withFormat: "yyyy-MM-dd")
+                self.startTime = date.string(withFormat: DateFormat.ddMMyyyy.rawValue)
                 self.dateRangeFilter?(self.startTime,self.endTime)
             }.show()
             
@@ -68,7 +68,7 @@ class CalendarSectionView: UIView {
             
             DatePickerView(title:"End Time", mode: .date, date: Date()) { date in
                 self.endTimeLabel.text = date.string(withFormat: "dd/MM/yyyy")
-                self.endTime = date.string(withFormat: "yyyy-MM-dd")
+                self.endTime = date.string(withFormat: DateFormat.ddMMyyyy.rawValue)
                 self.dateRangeFilter?(self.startTime,self.endTime)
             }.show()
             

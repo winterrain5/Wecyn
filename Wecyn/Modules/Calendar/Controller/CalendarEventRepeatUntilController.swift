@@ -112,7 +112,7 @@ class CalendarEventRepeatUntilController: BaseTableController {
                 
                 let model = datas[indexPath.section][indexPath.row]
                 cell.textLabel?.text = model.title
-                cell.textLabel?.font = UIFont.sk.pingFangRegular(15)
+                cell.textLabel?.font = UIFont.sk.pingFangRegular(16)
                 cell.textLabel?.textColor = R.color.textColor52()!
                 
                 cell.accessoryType = model.isSelect ? .checkmark : .none

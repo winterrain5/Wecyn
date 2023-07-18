@@ -124,6 +124,7 @@ class EventInfoModel: BaseModel {
     var is_online: Int = 0
     var location: String = ""
     var creator_id: Int = 0
+    var creator_name: String = ""
     var end_time: String = ""
     var attendance_limit: String = ""
     
@@ -131,9 +132,30 @@ class EventInfoModel: BaseModel {
     var attendees_public = ""
     var remarks = ""
     
+    var color:Int = 0
+    var rrule:String = ""
+    var is_repeat:Int = 0
     
-    var calendar_belong_id:Int = 0
-    var calendar_belong_name:String = ""
+    var isCreator:Bool {
+        CalendarBelongUserId == creator_id
+    }
+    
+    var recurrenceDescription:String {
+        var desc = ""
+        if is_repeat == 1 {
+            // DTSTART:20230717T062741Z\nRRULE:FREQ=DAILY;INTERVAL=1;WKST=MO;COUNT=4
+            let dtStart = rrule.split(separator: "\n").first?.split(separator: ":").joined(separator: "=") ?? ""
+            let rruleString = (rrule.split(separator: "\n").last ?? "") + ";" + dtStart
+            let rrule = RecurrenceRule(rruleString: rruleString)
+           
+            let repeatStr = "repeat " + (rrule?.toText() ?? "")
+
+            desc = start_time + "\n" + end_time + "\n\n" + repeatStr
+        } else {
+            desc = start_time + "\n" + end_time
+        }
+        return desc
+    }
     
 }
 class Attendees: BaseModel {
@@ -164,8 +186,6 @@ class EventListModel: BaseModel {
     var creator_name = ""
     var creator_avatar = ""
     
-    var calendar_belong_id:Int = 0
-    var calendar_belong_name:String = ""
 }
 
 class AssistantInfo: BaseModel {

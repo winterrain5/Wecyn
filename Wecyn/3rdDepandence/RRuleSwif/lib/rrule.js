@@ -854,6 +854,7 @@
     toText: function (gettext, language) {
       return getnlp().toText(this, gettext, language)
     },
+      
 
     isFullyConvertibleToText: function () {
       return getnlp().isFullyConvertible(this)
