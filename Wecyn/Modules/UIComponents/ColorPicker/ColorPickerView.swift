@@ -48,6 +48,7 @@ class ColorPickerView: UIView,UITableViewDataSource,UITableViewDelegate {
         confirmButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.action?(self.selectColor)
+            Haptico.selection()
             EntryKit.dismiss()
         }).disposed(by: rx.disposeBag)
         
@@ -145,6 +146,8 @@ class ColorPickerView: UIView,UITableViewDataSource,UITableViewDelegate {
         
         self.selectColor = model.isSelect ? model.color : nil
         tableView.reloadData()
+        
+        Haptico.selection()
         
     }
  

@@ -8,6 +8,7 @@
 import UIKit
 import PopMenu
 enum CalendarEventDetailCellType {
+    case Watch
     case Title
     case Creator
     case Location
@@ -35,8 +36,10 @@ class CalendarEventDetailModel {
 }
 
 class CalendarEventDetailController: BaseTableController {
-    var eventModel:EventListModel
+    
     var models:[[CalendarEventDetailModel]] = []
+    var eventInfoModel:EventInfoModel?
+    var eventModel:EventListModel
     init(eventModel:EventListModel) {
         self.eventModel = eventModel
         super.init(nibName: nil, bundle: nil)
@@ -48,10 +51,28 @@ class CalendarEventDetailController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.addLeftBarButtonItem(image: R.image.xmark()!)
+        self.leftButtonDidClick = { [weak self] in
+            self?.returnBack()
+        }
+        self.navigation.item.title = "Event Detail"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshData()
+    }
+    
+    override func refreshData() {
+        self.models.removeAll()
         ScheduleService.eventInfo(eventModel.id).subscribe(onNext:{ model in
-            
+            self.eventInfoModel = model
             model.creator_name = self.eventModel.creator_name
+            
+            if CalendarBelongUserId !=  UserDefaults.userModel?.id {
+                let watch = CalendarEventDetailModel(cellType: .Watch, model: model)
+                self.models.append([watch])
+            }
             
             let title = CalendarEventDetailModel(cellType: .Title, model: model)
             self.models.append([title])
@@ -70,18 +91,25 @@ class CalendarEventDetailController: BaseTableController {
             
             var section3:[CalendarEventDetailModel] = []
             if model.is_online  == 1 {
-                section3.append(link)
+                if !model.url.isEmpty { section3.append(link) }
             } else {
-                section3.append(loc)
+                if !model.location.isEmpty { section3.append(loc)  }
+                
             }
             
             let peolple = CalendarEventDetailModel(cellType: .People, model: model)
             let peopleLimit = CalendarEventDetailModel(cellType: .PeopleLimit, model: model)
             
             if model.is_public == 1 {
-                section3.append(peopleLimit)
+                if model.attendance_limit > 0 {
+                    section3.append(peopleLimit)
+                }
+                
             } else {
-                section3.append(peolple)
+                if model.attendees.count > 0 {
+                    section3.append(peolple)
+                }
+                
             }
             self.models.append(section3)
             
@@ -99,12 +127,6 @@ class CalendarEventDetailController: BaseTableController {
             self.reloadData()
             
         }).disposed(by: rx.disposeBag)
-        
-        self.addLeftBarButtonItem(image: R.image.xmark()!)
-        self.leftButtonDidClick = { [weak self] in
-            self?.returnBack()
-        }
-        self.navigation.item.title = "Event Detail"
     }
     
     func addEditButton() {
@@ -114,7 +136,7 @@ class CalendarEventDetailController: BaseTableController {
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         
         editButton.rx.tap.subscribe(onNext:{[weak self] in
-            let vc = CalendarAddNewEventController()
+            let vc = CalendarAddNewEventController(editEventModel: self?.eventInfoModel)
             self?.navigationController?.pushViewController(vc)
         }).disposed(by: rx.disposeBag)
     }
@@ -225,9 +247,10 @@ class CalendarEventDetailController: BaseTableController {
             let cell = tableView.dequeueReusableCell(withClass: CalendarEventDetailTitleCell.self)
             cell.model = model.model
             return cell
-        case .Delete:
+        case .Delete,.Watch:
             
             let cell = tableView.dequeueReusableCell(withClass: CalendarEventDetailDeleteCell.self)
+            cell.model = model
             return cell
             
         case .Link,.Location,.Creator,.PeopleLimit,.People,.Description:
@@ -253,10 +276,7 @@ class CalendarEventDetailController: BaseTableController {
                     
                 }
                 
-                alert.addAction(title: "cancel", style: .cancel) { _ in
-                    
-                }
-                
+                alert.addAction(title: "cancel", style: .cancel)
                 alert.show()
                 
             } else {
@@ -265,9 +285,7 @@ class CalendarEventDetailController: BaseTableController {
                     self.deleteEvent()
                 }
                 
-                alert.addAction(title: "cancel", style: .cancel) { _ in
-                    
-                }
+                alert.addAction(title: "cancel", style: .cancel)
                 
                 alert.show()
             }
@@ -280,7 +298,7 @@ class CalendarEventDetailController: BaseTableController {
         ScheduleService.deleteEvent(self.eventModel.id,currentUserId: CalendarBelongUserId).subscribe(onNext:{
 
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Successful operation",after: 2, {
+                Toast.showSuccess(withStatus: "Successful operation",after: 1, {
                     self.returnBack()
                 })
             } else {
@@ -362,15 +380,25 @@ class CalendarEventDetailTitleCell: UITableViewCell {
 
 class CalendarEventDetailDeleteCell: UITableViewCell {
     var label = UILabel()
-    
+    var model:CalendarEventDetailModel! {
+        didSet {
+            if model.cellType == .Watch {
+                label.text = "You are viewing \(CalendarBelongUserName)’s calendar"
+                label.textColor = R.color.theamColor()
+            } else {
+                label.textColor = .red
+                label.text = "Delete Event"
+            }
+        }
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(label)
-        label.textColor = .red
+       
         label.font = UIFont.sk.pingFangRegular(16)
         label.textAlignment = .center
-        label.text = "Delete Event"
+       
     }
     
     required init?(coder: NSCoder) {
@@ -410,7 +438,7 @@ class CalendarEventDetailInfoCell: UITableViewCell {
             }
             
             if model.cellType == .PeopleLimit  {
-                titleLabel.text = model.model.attendance_limit
+                titleLabel.text = model.model.attendance_limit.string
                 imgView.image = R.image.person2()
             }
             

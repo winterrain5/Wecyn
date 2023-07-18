@@ -42,6 +42,7 @@ class DatePickerView: UIView {
         confirmButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.action?(self.datePicker.date)
+            Haptico.selection()
             EntryKit.dismiss()
         }).disposed(by: rx.disposeBag)
         

@@ -19,7 +19,8 @@ enum DateFormat:String {
     case ddMMyyyy = "dd-MM-yyyy"
 }
 
-var CalendarBelongUserId:Int? = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id
+var CalendarBelongUserId:Int = 0
+var CalendarBelongUserName:String = ""
 class CalendarController: BaseTableController {
     let currentDate = Date().string(withFormat: DateFormat.ddMMyyyy.rawValue)
     let headerView = CalendarHeaderView()
@@ -31,11 +32,13 @@ class CalendarController: BaseTableController {
     let userTitleView = CalendarNavBarUserView()
     var selectAssistant = AssistantInfo()
     var assistants: [AssistantInfo] = []
-    let UserModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
+    let UserModel = UserDefaults.userModel
     var calendarChangeDate:Date?
     let headerHeight = 280.cgFloat
     override func viewDidLoad() {
         super.viewDidLoad()
+        CalendarBelongUserId = UserModel?.id ?? 0
+        CalendarBelongUserName = UserModel?.full_name ?? ""
         
         requestModel.start_date = currentDate
         requestModel.current_user_id = CalendarBelongUserId
@@ -43,6 +46,7 @@ class CalendarController: BaseTableController {
         selectAssistant.id = UserModel?.id ?? 0
         selectAssistant.name = UserModel?.full_name ?? ""
         selectAssistant.avatar = UserModel?.avatar ?? ""
+
         
         let searchView = UIButton()
         searchView.size = CGSize(width: 36, height: 36)
@@ -58,6 +62,8 @@ class CalendarController: BaseTableController {
         userTitleView.selectAssistantHanlder = { [weak self] assistant in
             guard let `self` = self else { return }
             CalendarBelongUserId = assistant.id
+            CalendarBelongUserName = assistant.name
+            
             self.selectAssistant = assistant
             
             self.requestModel.current_user_id = assistant.id
@@ -295,7 +301,7 @@ class CalendarController: BaseTableController {
     }
     
     deinit {
-        CalendarBelongUserId = nil
+        CalendarBelongUserId = 0
     }
     
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
