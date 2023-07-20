@@ -164,7 +164,7 @@ class CalendarEventRepeatUntilController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        Haptico.selection()
         datas.flatMap({ $0 }).forEach({ $0.isSelect = false })
         
         datas[indexPath.section][indexPath.row].isSelect.toggle()

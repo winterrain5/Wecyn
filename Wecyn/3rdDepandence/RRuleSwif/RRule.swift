@@ -12,23 +12,83 @@ import EventKit
 public struct RRule {
     public static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
         return dateFormatter
     }()
     public static let ymdDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter
     }()
 
     internal static let ISO8601DateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return dateFormatter
     }()
+    
+    /*
+     ["dtstart": 2023-07-20 14:00:00 +0000, "byweekday": [6, 0], "tzid": <null>, "interval": 1, "bymonthday": [], "byhour": [14], "byyearday": <null>, "until": <null>, "bynmonthday": [], "count": 10, "byeaster": <null>, "bysecond": [0], "bynweekday": <null>, "byweekno": <null>, "bysetpos": <null>, "byminute": [0], "wkst": 0, "freq": 2, "bymonth": [1, 2]]
+     */
+    public static func ruleFromDictionary(_ dictionary:Dictionary<String, Any>) -> RecurrenceRule? {
+        var recurrenceRule = RecurrenceRule(frequency: .daily)
+        
+        
+        var ruleFrequency: RecurrenceFrequency?
+        
+        if let freq = dictionary["freq"] as? Int {
+            ruleFrequency = RecurrenceFrequency.frequency(fromInt: freq)
+        }
+        
+        if let dtstart = dictionary["dtstart"] as? Date {
+            recurrenceRule.startDate = dtstart
+        }
+        
+        if let interval = dictionary["interval"] as? Int {
+            recurrenceRule.interval = max(1, interval)
+        }
+        
+        let wkst = dictionary["wkst"] as? Int ?? 0
+        if let firstDayOfWeek = EKWeekday.weekdayFromSymbol(wkst.string) {
+            recurrenceRule.firstDayOfWeek = firstDayOfWeek
+        }
+        
+        if let until = dictionary["until"] as? Date{
+            recurrenceRule.recurrenceEnd = EKRecurrenceEnd(end: until)
+        }
+        if let count = dictionary["count"] as? Int {
+            recurrenceRule.recurrenceEnd = EKRecurrenceEnd(occurrenceCount: count)
+        }
+        
+        if let bymonth = dictionary["bymonth"] as? [Int] {
+            recurrenceRule.bymonth = bymonth.sorted(by: <)
+        }
+        
+        
+        if let byweekday = dictionary["byweekday"] as? [Int] {
+            let byweekday = byweekday.map({ $0.string }).compactMap({ (string) -> EKWeekday? in
+                return EKWeekday.weekdayFromSymbol(string)
+            })
+            recurrenceRule.byweekday = byweekday.sorted(by: <)
+        }
+        
+        if let byhour = dictionary["byhour"] as? [Int] {
+            recurrenceRule.byhour = byhour.sorted(by: <)
+        }
+        
+        if let byhour = dictionary["byminute"] as? [Int] {
+            recurrenceRule.byhour = byhour.sorted(by: <)
+        }
+        
+        
+        guard let frequency = ruleFrequency else {
+            print("error: invalid frequency")
+            return nil
+        }
+        recurrenceRule.frequency = frequency
+        
+        return  recurrenceRule
+    }
 
     public static func ruleFromString(_ string: String) -> RecurrenceRule? {
         let string = string.trimmingCharacters(in: .whitespaces)

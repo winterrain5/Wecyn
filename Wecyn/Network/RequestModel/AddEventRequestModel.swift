@@ -45,7 +45,7 @@ class AddEventRequestModel: BaseModel {
     var attendees: [Attendees]?
     var desc: String = ""
     var is_repeat: Int?
-    var rrule:String?
+    var rrule_str:String?
     var color: Int?
     // update event 
     var id: Int?

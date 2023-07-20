@@ -29,7 +29,7 @@ class MainController: UITabBarController {
     func setupChildController() {
         let home = BaseNavigationController(rootViewController: HomeController())
         let connection = BaseNavigationController(rootViewController: ConnectionFriendController())
-        let job = BaseNavigationController(rootViewController: JobController())
+        let calendar = BaseNavigationController(rootViewController: CalendarController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
         let setting = BaseNavigationController(rootViewController: SettingController())
         
@@ -46,10 +46,10 @@ class MainController: UITabBarController {
             image: R.image.tab_connection(),
             selectedImage: selectedImage(R.image.tab_connection()))
         
-        job.tabBarItem = UITabBarItem.init(
-            title: "Job",
-            image: R.image.tab_job(),
-            selectedImage: selectedImage(R.image.tab_job()))
+        calendar.tabBarItem = UITabBarItem.init(
+            title: "Calendar",
+            image: R.image.tab_calendar(),
+            selectedImage: selectedImage(R.image.tab_calendar()))
         
         profile.tabBarItem = UITabBarItem.init(
             title: "Profile",
@@ -61,7 +61,7 @@ class MainController: UITabBarController {
             image: R.image.gearCircle(),
             selectedImage: selectedImage(R.image.gearCircle()))
         
-        self.viewControllers = [connection,profile,setting]
+        self.viewControllers = [calendar,connection,profile,setting]
         configAppearance()
     }
     

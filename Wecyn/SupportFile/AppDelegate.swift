@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
             let main = MainController()
             window?.rootViewController = main
-            main.setSelectedIndex(at: 3)
+            main.setSelectedIndex(at: 0)
         } else {
             let vc = LoginController()
             let main = BaseNavigationController(rootViewController: vc)

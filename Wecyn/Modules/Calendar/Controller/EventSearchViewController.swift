@@ -40,17 +40,9 @@ class EventSearchViewController: BaseTableController {
     
     override func refreshData() {
         let eventList = ScheduleService.eventList(model: requestModel)
-        let friendList = FriendService.friendList()
         
-        Observable.zip(eventList,friendList).subscribe(onNext:{ [weak self]  events,friends in
+        eventList.subscribe(onNext:{ [weak self]  events in
             guard let `self` = self else { return }
-            events.forEach({ event in
-                
-                let friend = friends.first(where: { $0.id == event.creator_id })
-                event.creator_name = friend?.full_name ?? ""
-                event.creator_avatar = friend?.avatar ?? ""
-
-            })
             
             self.dataArray = events
             
@@ -89,15 +81,10 @@ class EventSearchViewController: BaseTableController {
     
    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var model:EventListModel!
-        model = dataArray[indexPath.row] as? EventListModel
-        let vc = EventDetailController(eventModel:model)
-        let nav = BaseNavigationController(rootViewController: vc)
-        vc.container.operateCompleteHandler = { [weak self] in
-            guard let `self` = self else { return }
-            self.loadNewData()
-        }
-        self.present(nav, animated: true)
+
+        var model = dataArray[indexPath.row] as! EventListModel
+        let vc = CalendarEventDetailController(eventModel:model)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

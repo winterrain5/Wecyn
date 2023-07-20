@@ -133,26 +133,45 @@ class EventInfoModel: BaseModel {
     var remarks = ""
     
     var color:Int = 0
-    var rrule:String = ""
+    var colorHexString:String? {
+        if color < EventColor.allColor.count {
+            return EventColor.allColor[color]
+        }
+        return nil
+    }
+    
+    var rrule_str:String = ""
     var is_repeat:Int = 0
     
     var isCreator:Bool {
         CalendarBelongUserId == creator_id
     }
     
+    var start_date:Date? {
+        return start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+    }
+    var end_date:Date? {
+        return end_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+    }
+    var duration:TimeInterval  {
+        guard let start = start_date,let end = end_date else { return 0 }
+        return end.distance(to: start)
+    }
+    
     var rruleObject:RecurrenceRule? {
-        let dtStart = rrule.split(separator: "\n").first?.split(separator: ":").joined(separator: "=") ?? ""
-        let rruleString = (rrule.split(separator: "\n").last ?? "") + ";" + dtStart
-        let rrule = RecurrenceRule(rruleString: rruleString)
-        return rrule
+        if let rruleOptions = RecurrenceRule.toRRuleOptions(rrule_str) {
+            let rruleObj = RRule.ruleFromDictionary(rruleOptions)
+            return rruleObj
+        }
+        return nil
     }
     var recurrenceDescription:String {
         var desc = ""
         if is_repeat == 1 {
             // DTSTART:20230717T062741Z\nRRULE:FREQ=DAILY;INTERVAL=1;WKST=MO;COUNT=4
-            let repeatStr = "repeat " + (rruleObject?.toText() ?? "")
+            let repeatStr = "repeat " + (rruleObject?.toText(rrulestr: rrule_str) ?? "")
 
-            desc = start_time + "\n" + end_time + "\n\n" + repeatStr
+            desc = start_time + "\n" + end_time + "\n" + repeatStr
         } else {
             desc = start_time + "\n" + end_time
         }
@@ -170,6 +189,7 @@ class Attendees: BaseModel {
 }
 
 class EventListModel: BaseModel {
+ 
     /*
      "id": int # event_id
      "title": string # 标题
@@ -183,14 +203,63 @@ class EventListModel: BaseModel {
     var title = ""
     var start_time = ""
     var end_time = ""
+   
     var is_public = 0
     var status = 0
     var is_creator = 0
     var creator_id = 0
-    
     var creator_name = ""
-    var creator_avatar = ""
+    var creator_avt = ""
+    var is_repeat = 0
+    var rrule_str = ""
+   
+    var color = 0
+   
+    var colorHexString:String? {
+        if color < EventColor.allColor.count {
+            return EventColor.allColor[color]
+        }
+        return nil
+    }
     
+    var rruleObject:RecurrenceRule? {
+        if let rruleOptions = RecurrenceRule.toRRuleOptions(rrule_str) {
+            let rruleObj = RRule.ruleFromDictionary(rruleOptions)
+            return rruleObj
+        }
+        return nil
+    }
+    
+    var isParentData = false
+    var start_date:Date? {
+        return start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+    }
+    var end_date:Date? {
+        return end_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+    }
+    var duration:TimeInterval  {
+        guard let start = start_date,let end = end_date else { return 0 }
+        return start.distance(to: end)
+    }
+    func copyed(_ startDate:Date) -> EventListModel {
+        let model = EventListModel()
+        model.id = id
+        model.title = title
+        model.start_time = startDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZeroZone: true)
+        model.end_time = startDate.addingTimeInterval(duration).string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZeroZone: true)
+        model.is_public = is_public
+        model.status = status
+        model.is_creator = is_creator
+        model.creator_id = creator_id
+        model.creator_avt = creator_avt
+        model.creator_name = creator_name
+        model.is_repeat = is_repeat
+        model.color = color
+        model.rrule_str = rrule_str
+        model.isParentData = false
+        
+        return model
+    }
 }
 
 class AssistantInfo: BaseModel {
