@@ -100,7 +100,7 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        Haptico.selection()
         self.selectIndexs.removeAll()
         
         datas[indexPath.row].isSelect.toggle()

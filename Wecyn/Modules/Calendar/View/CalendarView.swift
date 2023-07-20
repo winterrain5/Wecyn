@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+
 class CalendarView: UIView {
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -19,10 +20,10 @@ class CalendarView: UIView {
     
     @IBOutlet weak var calendar: FSCalendar!
     var gregorian = NSCalendar(identifier: .gregorian)
-    let dateFormatter = DateFormatter()
+    
     var dateSelected:((Date)->())!
     var monthChanged:((Date)->())!
-    var eventDates:[String] = [] {
+    var eventDates:[[EventListModel]] = [] {
         didSet {
             calendar.reloadData()
         }
@@ -45,14 +46,16 @@ class CalendarView: UIView {
         calendar.headerHeight = 0
         calendar.appearance.weekdayFont = UIFont.sk.pingFangSemibold(15)
         calendar.appearance.weekdayTextColor = R.color.textColor162C46()!
+        
+        calendar.appearance.todayColor = R.color.theamColor()?.withAlphaComponent(0.4)
+        calendar.appearance.todaySelectionColor = R.color.theamColor()?.withAlphaComponent(0.4)
+        
         calendar.firstWeekday = 1
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: "FSCalendarCell")
         self.calendar.locale = NSLocale.init(localeIdentifier: "en") as Locale
         
        
-        dateFormatter.dateFormat = "MMM yyyy"
-        dateFormatter.locale = Locale(identifier: "en")
-        dateLabel.text = dateFormatter.string(from: currentDate)
+        dateLabel.text = currentDate.string(format: "MMM yyyy")
         
         preButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
@@ -87,8 +90,11 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let date = calendar.currentPage
-        dateLabel.text = dateFormatter.string(from: date)
-        monthChanged(date)
+        dateLabel.text = date.string(format: "MMM yyyy")
+        if let changeDate = date.string().date(withFormat: "dd/MM/yyyy HH:mm") {
+            monthChanged(changeDate)
+        }
+        
     }
     
     //  func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
@@ -106,15 +112,26 @@ extension CalendarView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegat
     //  }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
-        if eventDates.contains(date.string(withFormat: "yyyy-MM-dd")) {
-            return [R.color.textColor74()!]
+        
+        for models in eventDates {
+            guard let _date = models.first?.start_date else { break }
+            
+            if _date.month == date.month && _date.day == date.day{
+                let colors = models.map({ UIColor(hexString: $0.colorHexString ?? "" ) ?? .clear })
+                return colors
+            }
         }
-        return [.clear]
+        return nil
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        if eventDates.contains(date.string(withFormat: "yyyy-MM-dd")) {
-            return 1
+        
+        for models in eventDates {
+            guard let _date = models.first?.start_date else { break }
+            if _date.month == date.month && _date.day == date.day {
+                let count = models.count
+                return count
+            }
         }
         return 0
     }

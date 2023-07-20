@@ -100,6 +100,22 @@ public extension RecurrenceRule {
         return text
     }
     
+    func toText(rrulestr:String) -> String? {
+        guard let _ = JavaScriptBridge.bundlejs() else {
+            return nil
+        }
+        
+        let dtstart = rrulestr.split(separator: "\n").first ?? ""
+        let rrule = rrulestr.split(separator: "\n").last ?? ""
+        let _ = Iterator.bundleContext?.evaluateScript("var {RRule} = require('rrule')")
+        let _ = Iterator.bundleContext?.evaluateScript("var rule = RRule.fromString('\(dtstart)\\n\(rrule)')")
+        
+        guard let text = Iterator.bundleContext?.evaluateScript("rule.toText()").toString() else {
+            return nil
+        }
+        return text
+    }
+    
     func toString() ->  String? {
         guard let _ = JavaScriptBridge.bundlejs() else {
             return nil
@@ -114,20 +130,47 @@ public extension RecurrenceRule {
         return text
     }
     
+    static func toRRuleDictionary(_ rrulestr:String) -> Dictionary<String,Any>? {
+        guard let _ = JavaScriptBridge.bundlejs() else {
+            return nil
+        }
+        let dtstart = rrulestr.split(separator: "\n").first ?? ""
+        let rrule = rrulestr.split(separator: "\n").last ?? ""
+        let _ = Iterator.bundleContext?.evaluateScript("var {RRule} = require('rrule')")
+        guard let dict = Iterator.bundleContext?.evaluateScript("RRule.fromString('\(dtstart)\\n\(rrule)')").toDictionary() else {
+            return nil
+        }
+        let result = JSON.init(dict).rawValue as? [String:Any]
+        print("toRRuleDictionary: \(String(describing: result))")
+        return result
+    }
+    
+    static func toRRuleOptions(_ rrulestr:String) -> Dictionary<String,Any>? {
+        guard let rrule = toRRuleDictionary(rrulestr) else {
+            return nil
+        }
+        
+        guard let option = rrule["options"] as? [String:Any] else {
+            return nil
+        }
+        
+        return option
+    }
 
-    func occurrences(between date: Date, and otherDate: Date, endless endlessRecurrenceCount: Int = Iterator.endlessRecurrenceCount) -> [Date] {
-        guard let _ = JavaScriptBridge.rrulejs() else {
+    func occurrences(rrulestr:String, between date: Date, and otherDate: Date) -> [Date] {
+        guard let _ = JavaScriptBridge.bundlejs() else {
             return []
         }
+        let format = "yyyy-MM-dd HH:mm:ss 'UTC'"
+        let beginDate = date.adding(.day, value: 1).string(format: format).date(withFormat: format)!
+        let endDate = otherDate.adding(.day, value: 1).string(format: format).date(withFormat: format)!
+ 
+        let dtstart = rrulestr.split(separator: "\n").first ?? ""
+        let rrule = rrulestr.split(separator: "\n").last ?? ""
 
-        let beginDate = date.isBeforeOrSame(with: otherDate) ? date : otherDate
-        let untilDate = otherDate.isAfterOrSame(with: date) ? otherDate : date
-        let beginDateJSON = RRule.ISO8601DateFormatter.string(from: beginDate)
-        let untilDateJSON = RRule.ISO8601DateFormatter.string(from: untilDate)
-
-        let ruleJSONString = toJSONString(endless: endlessRecurrenceCount)
-        let _ = Iterator.rruleContext?.evaluateScript("var rule = new RRule({ \(ruleJSONString) })")
-        guard let betweenOccurrences = Iterator.rruleContext?.evaluateScript("rule.between(new Date('\(beginDateJSON)'), new Date('\(untilDateJSON)'), true)").toArray() as? [Date] else {
+        let _ = Iterator.bundleContext?.evaluateScript("var {RRule,datetime} = require('rrule')")
+        let _ = Iterator.bundleContext?.evaluateScript("var rule = RRule.fromString('\(dtstart)\\n\(rrule)')")
+        guard let betweenOccurrences = Iterator.bundleContext?.evaluateScript("rule.between(datetime('\(beginDate.year)','\(beginDate.month)','\(beginDate.day)'), datetime('\(endDate.year)','\(endDate.month)','\(endDate.day)'))").toArray() as? [Date] else {
             return []
         }
 

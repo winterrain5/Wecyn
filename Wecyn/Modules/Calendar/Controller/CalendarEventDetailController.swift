@@ -23,10 +23,10 @@ class CalendarEventDetailModel {
     var cellType:CalendarEventDetailCellType
     var model:EventInfoModel
     var cellHeight:CGFloat {
-        return model.recurrenceDescription.heightWithConstrainedWidth(width: kScreenWidth - 68, font: UIFont.sk.pingFangRegular(15)) + 58
+        return model.recurrenceDescription.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 58
     }
     var descHeight: CGFloat{
-        let descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 68, font: UIFont.sk.pingFangRegular(15))
+        let descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
         return descH >= 52 ? descH : 52
     }
     init(cellType: CalendarEventDetailCellType, model:EventInfoModel) {
@@ -65,9 +65,17 @@ class CalendarEventDetailController: BaseTableController {
     
     override func refreshData() {
         self.models.removeAll()
+        Toast.showLoading()
         ScheduleService.eventInfo(eventModel.id).subscribe(onNext:{ model in
-            self.eventInfoModel = model
+            Toast.dismiss()
+            
+            model.start_time = self.eventModel.start_time
+            model.end_time = self.eventModel.end_time
             model.creator_name = self.eventModel.creator_name
+            
+            
+            self.eventInfoModel = model
+           
             
             if CalendarBelongUserId !=  UserDefaults.userModel?.id {
                 let watch = CalendarEventDetailModel(cellType: .Watch, model: model)
@@ -115,9 +123,8 @@ class CalendarEventDetailController: BaseTableController {
             
             
             
-            if model.isCreator {
+            if CalendarBelongUserId ==  UserDefaults.userModel?.id {
                 self.addEditButton()
-                
                 let delete = CalendarEventDetailModel(cellType: .Delete, model: model)
                 self.models.append([delete])
             } else {
@@ -126,6 +133,9 @@ class CalendarEventDetailController: BaseTableController {
             
             self.reloadData()
             
+        },onError: { e in
+            Toast.dismiss()
+            self.endRefresh(e.asAPIError.emptyDatatype)
         }).disposed(by: rx.disposeBag)
     }
     
@@ -267,13 +277,14 @@ class CalendarEventDetailController: BaseTableController {
         let model = models[indexPath.section][indexPath.row]
         if model.cellType == .Delete  {
             if model.model.is_repeat == 1 {
-                let alert = UIAlertController(title: "this is a recurrence event", message: "Are you sure you want to delete \(self.eventModel.creator_name)'s event?", preferredStyle: .actionSheet)
-                alert.addAction(title: "delete only this event", style: .destructive) { _ in
-                    self.deleteEvent()
-                }
+                let message = CalendarBelongUserId == self.eventModel.creator_id ? "" : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
+                let alert = UIAlertController(title: "this is a recurrence event", message: message, preferredStyle: .actionSheet)
+//                alert.addAction(title: "delete only this event", style: .destructive) { _ in
+//
+//                }
                 
                 alert.addAction(title: "delete all events in the sequence", style: .destructive) { _ in
-                    
+                    self.deleteEvent()
                 }
                 
                 alert.addAction(title: "cancel", style: .cancel)

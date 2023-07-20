@@ -72,10 +72,8 @@
 		450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */; };
 		450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */; };
 		450F6CCF2A6508630001AA1B /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CCE2A6508630001AA1B /* bundle.js */; };
+		450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD02A6909570001AA1B /* CalendarEventController.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
-		4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A48A2A4AB716007481A6 /* EventDetailView.swift */; };
-		4519A48D2A4AB71E007481A6 /* EventDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4519A48C2A4AB71E007481A6 /* EventDetailView.xib */; };
-		4519A48F2A4AC69C007481A6 /* EventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A48E2A4AC69C007481A6 /* EventDetailController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
 		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
@@ -155,9 +153,6 @@
 		45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */; };
 		45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB28E2A3FF00E00745F6F /* UserApi.swift */; };
 		45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2902A3FF0AD00745F6F /* UserService.swift */; };
-		45ADB2932A3FF72D00745F6F /* CalendarAddEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */; };
-		45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */; };
-		45ADB2972A3FFCF800745F6F /* CalendarAddEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */; };
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
 		45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */; };
 		45BBF5262A48328D0018992C /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5252A48328D0018992C /* MessageController.swift */; };
@@ -178,8 +173,6 @@
 		45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B1A2A3AE25B00B820CD /* CalendarView.swift */; };
 		45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B1C2A3AE26500B820CD /* CalendarView.xib */; };
 		45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */; };
-		45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B202A3AFC4800B820CD /* CalendarSectionView.swift */; };
-		45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */; };
 		45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */; };
 		45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
@@ -251,10 +244,8 @@
 		450F6CBD2A613AFC0001AA1B /* JavaScriptBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaScriptBridge.swift; sourceTree = "<group>"; };
 		450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDetailController.swift; sourceTree = "<group>"; };
 		450F6CCE2A6508630001AA1B /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
+		450F6CD02A6909570001AA1B /* CalendarEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventController.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
-		4519A48A2A4AB716007481A6 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
-		4519A48C2A4AB71E007481A6 /* EventDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailView.xib; sourceTree = "<group>"; };
-		4519A48E2A4AC69C007481A6 /* EventDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
 		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
@@ -339,9 +330,6 @@
 		45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		45ADB28E2A3FF00E00745F6F /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
 		45ADB2902A3FF0AD00745F6F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddEventController.swift; sourceTree = "<group>"; };
-		45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddEventView.swift; sourceTree = "<group>"; };
-		45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarAddEventView.xib; sourceTree = "<group>"; };
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
 		45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyCell.swift; sourceTree = "<group>"; };
 		45BBF5252A48328D0018992C /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
@@ -362,8 +350,6 @@
 		45E85B1A2A3AE25B00B820CD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		45E85B1C2A3AE26500B820CD /* CalendarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
 		45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
-		45E85B202A3AFC4800B820CD /* CalendarSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSectionView.swift; sourceTree = "<group>"; };
-		45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarSectionView.xib; sourceTree = "<group>"; };
 		45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaledarItemCell.swift; sourceTree = "<group>"; };
 		45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaledarItemCell.xib; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -999,11 +985,10 @@
 			children = (
 				45005C852A5E395100560E21 /* RichText */,
 				45E85B182A3AE23500B820CD /* CalendarController.swift */,
-				45ADB2922A3FF72D00745F6F /* CalendarAddEventController.swift */,
-				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
-				4519A48E2A4AC69C007481A6 /* EventDetailController.swift */,
-				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
+				450F6CD02A6909570001AA1B /* CalendarEventController.swift */,
 				45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */,
+				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
+				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */,
 				45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */,
 				45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */,
@@ -1019,14 +1004,8 @@
 				45E85B1A2A3AE25B00B820CD /* CalendarView.swift */,
 				45E85B1C2A3AE26500B820CD /* CalendarView.xib */,
 				45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */,
-				45E85B202A3AFC4800B820CD /* CalendarSectionView.swift */,
-				45E85B222A3AFFC100B820CD /* CalendarSectionView.xib */,
 				45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */,
 				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
-				45ADB2942A3FFCEC00745F6F /* CalendarAddEventView.swift */,
-				45ADB2962A3FFCF800745F6F /* CalendarAddEventView.xib */,
-				4519A48A2A4AB716007481A6 /* EventDetailView.swift */,
-				4519A48C2A4AB71E007481A6 /* EventDetailView.xib */,
 				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
 			);
 			path = View;
@@ -1118,7 +1097,6 @@
 				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
-				4519A48D2A4AB71E007481A6 /* EventDetailView.xib in Resources */,
 				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
 				459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
@@ -1129,10 +1107,8 @@
 				450F6CC72A613AFC0001AA1B /* nlp.js in Resources */,
 				450F6CCF2A6508630001AA1B /* bundle.js in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
-				45E85B232A3AFFC100B820CD /* CalendarSectionView.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
-				45ADB2972A3FFCF800745F6F /* CalendarAddEventView.xib in Resources */,
 				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
 				45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
@@ -1227,7 +1203,6 @@
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
 				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
-				4519A48F2A4AC69C007481A6 /* EventDetailController.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
@@ -1236,6 +1211,7 @@
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
 				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
 				450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */,
+				450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
@@ -1292,7 +1268,6 @@
 				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
-				45ADB2952A3FFCEC00745F6F /* CalendarAddEventView.swift in Sources */,
 				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
 				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
@@ -1301,12 +1276,10 @@
 				45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */,
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
 				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
-				45ADB2932A3FF72D00745F6F /* CalendarAddEventController.swift in Sources */,
 				45005C572A57DC7E00560E21 /* ConnectionFriendController.swift in Sources */,
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
-				4519A48B2A4AB716007481A6 /* EventDetailView.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
 				45005C5D2A57FEEF00560E21 /* CreateGroupHeaderView.swift in Sources */,
@@ -1339,7 +1312,6 @@
 				450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */,
 				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
-				45E85B212A3AFC4800B820CD /* CalendarSectionView.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
 				45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */,
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,

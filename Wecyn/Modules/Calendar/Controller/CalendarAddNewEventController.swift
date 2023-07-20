@@ -192,7 +192,7 @@ class CalendarAddNewEventController: BaseTableController {
         requestModel.start_time = event.start_time
         requestModel.end_time = event.end_time
         requestModel.is_repeat = event.is_repeat
-        requestModel.rrule = event.rrule
+        requestModel.rrule_str = event.rrule_str
         requestModel.desc = event.desc
         requestModel.remarks = event.remarks
         requestModel.is_online = event.is_online
@@ -283,15 +283,25 @@ class CalendarAddNewEventController: BaseTableController {
     
     func addEvent() {
         Toast.showLoading()
+        guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+            Toast.showError(withStatus: "start time is required")
+            return
+        }
+        
         if let _ = self.rrule {
             //20230717T020531Z
-            self.rrule?.startDate = self.requestModel.start_time?.date(withFormat:  "yyyyMMdd'T'HHmmss'Z'") ?? Date()
-            self.requestModel.rrule = self.rrule?.toString()
+           
+            self.rrule?.startDate = startDate
+            let rrulestr = self.rrule?.toString()
+            print("rrulestr:\(rrulestr)")
+//            let dtstart = rrulestr.split(separator: "\n").first ?? ""
+//            let rruletext = rrulestr.split(separator: "\n").last ?? ""
+            self.requestModel.rrule_str = rrulestr
         }
         ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
             
             if $0.success == 1 {
-                Toast.showMessage("Event Add Success", after: 1) {
+                Toast.showSuccess(withStatus: "Event Add Success", after: 1) {
                     self.navigationController?.popViewController()
                 }
             } else {
@@ -305,14 +315,18 @@ class CalendarAddNewEventController: BaseTableController {
     
     func editEvent() {
         Toast.showLoading()
+        guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+            Toast.showError(withStatus: "start time is required")
+            return
+        }
         if let _ = self.rrule {
             //20230717T020531Z
-            self.rrule?.startDate = self.requestModel.start_time?.date(withFormat:  "yyyyMMdd'T'HHmmss'Z'") ?? Date()
-            self.requestModel.rrule = self.rrule?.toRRuleString()
+            self.rrule?.startDate = startDate
+            self.requestModel.rrule_str = self.rrule?.toString()
         }
         ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showMessage("Event Update Success", after: 1) {
+                Toast.showSuccess(withStatus: "Event Update Success", after: 1) {
                     self.navigationController?.popViewController()
                 }
             } else {
@@ -473,12 +487,12 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Start {
-            let maxmumDate = (self.requestModel.end_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue))?.adding(.minute, value: -5)
+            let date = self.isEdit ? self.editEventModel?.start_date : Date()
             DatePickerView(title:"Start Time",
                            mode: .dateAndTime,
-                           date: Date(),
-                           minimumDate: Date(),
-                           maximumDate: maxmumDate) { date in
+                           date: date,
+                           minimumDate: nil,
+                           maximumDate: nil) { date in
                 
                 let dateStr = date.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
                 self.requestModel.start_time = dateStr
@@ -490,11 +504,11 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .End {
-            let minimunDate = (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) ?? Date()).adding(.minute, value: 5)
+            let date = self.isEdit ? self.editEventModel?.end_date : Date()
             DatePickerView(title:"End Time",
                            mode: .dateAndTime,
-                           date: Date(),
-                           minimumDate: minimunDate,
+                           date: date,
+                           minimumDate: nil,
                            maximumDate: nil) { date in
                 
                 
@@ -547,11 +561,13 @@ class CalendarAddNewEventController: BaseTableController {
                 self.rrule = rrule
                 guard let rrule = rrule else {
                     self.requestModel.is_repeat = 0
-                    self.requestModel.rrule = nil
+                    self.requestModel.rrule_str = nil
+                    self.models[2][2].duplicate = "none"
+                    self.reloadData()
                     return
                 }
                 self.requestModel.is_repeat = 1
-                self.requestModel.rrule = rrule.toRRuleString()
+                self.requestModel.rrule_str = rrule.toRRuleString()
                 self.models[2][2].duplicate = "repeat " + rrule.frequency.toString().lowercased()
                 self.reloadData()
             }

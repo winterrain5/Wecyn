@@ -5,11 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "event_detail_delete@2x.png",
+      "filename" : "calendar@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "calendar@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

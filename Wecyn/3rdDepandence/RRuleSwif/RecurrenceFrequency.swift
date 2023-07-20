@@ -39,7 +39,7 @@ public enum RecurrenceFrequency {
         }
     }
 
-    internal static func frequency(from string: String) -> RecurrenceFrequency? {
+    static func frequency(from string: String) -> RecurrenceFrequency? {
         switch string {
         case "SECONDLY": return .secondly
         case "MINUTELY": return .minutely
@@ -48,6 +48,18 @@ public enum RecurrenceFrequency {
         case "WEEKLY": return .weekly
         case "MONTHLY": return .monthly
         case "YEARLY": return .yearly
+        default: return nil
+        }
+    }
+    static func frequency(fromInt: Int) -> RecurrenceFrequency? {
+        switch fromInt {
+        case 6: return .secondly
+        case 5: return .minutely
+        case 4: return .hourly
+        case 3: return .daily
+        case 2: return .weekly
+        case 1: return .monthly
+        case 0: return .yearly
         default: return nil
         }
     }

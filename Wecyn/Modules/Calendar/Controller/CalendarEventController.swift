@@ -1,9 +1,12 @@
 //
-//  CalendarController.swift
+//  CalendarEventController.swift
 //  Wecyn
 //
-//  Created by Derrick on 2023/6/15.
+//  Created by Derrick on 2023/7/20.
 //
+
+import UIKit
+
 
 import UIKit
 import RxSwift
@@ -11,15 +14,15 @@ import RxLocalizer
 import PopMenu
 
 
-//enum DateFormat:String {
-//    case ddMMyyyyHHmm = "dd-MM-yyyy HH:mm"
-//    case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss UTC"
-//    case ddMMyyyy = "dd-MM-yyyy"
-//}
-//
-//var CalendarBelongUserId:Int = 0
-//var CalendarBelongUserName:String = ""
-class CalendarController: BaseTableController {
+enum DateFormat:String {
+    case ddMMyyyyHHmm = "dd-MM-yyyy HH:mm"
+    case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss UTC"
+    case ddMMyyyy = "dd-MM-yyyy"
+}
+
+var CalendarBelongUserId:Int = 0
+var CalendarBelongUserName:String = ""
+class CalendarEventController: BaseTableController {
     
     let headerView = CalendarHeaderView()
     let requestModel = EventListRequestModel()
