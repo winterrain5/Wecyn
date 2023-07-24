@@ -9,25 +9,24 @@ import UIKit
 import IQKeyboardManagerSwift
 import SwiftAlertView
 /*
- #149bd0
-
- #1463d0
-
- #21a93c
-
- #ed8c00
-
- #d82739
+ 1st colour (primary): #13A5D6
+ 2nd colour: #136ED6
+ 3rd colour: #0943B2
+ 4th colour: #5451E1
+ 5th colour: #692BB7
+ 6th colour: #C33A7C
+ 7th colour: #EA6A6A
+ 8th colour: #2F9A94
+ 9th colour: #6FC23C
+ 10th colour:  #F2AF02
+ 11th colour: #C27502
+ 12th colour (gray): #888888
  */
-enum EventColor:String,CaseIterable {
-    case DarkBlue = "149bd0"
-    case LightBlue = "1463d0"
-    case Green = "21a93c"
-    case Yellow = "ed8c00"
-    case Red = "d82739"
+struct EventColor {
     static var allColor:[String] {
-        return ["149bd0","1463d0","21a93c","ed8c00","d82739"]
+        return ["13A5D6","136ED6","0943B2","5451E1","692BB7","C33A7C","EA6A6A","2F9A94","6FC23C","F2AF02","C27502","888888"]
     }
+    static var defaultColor: String = "13A5D6"
 }
 
 enum AddEventType {
@@ -87,7 +86,7 @@ class AddEventModel {
 class CalendarAddNewEventController: BaseTableController {
     
     var models:[[AddEventModel]] = []
-    let Title = AddEventModel(img: R.image.circleFill()?.withTintColor(UIColor(hexString: EventColor.Red.rawValue)!), placeholder: "Title",type: .Title)
+    let Title = AddEventModel(img: R.image.circleFill()?.withTintColor(UIColor(hexString: EventColor.defaultColor)!), placeholder: "Title",type: .Title)
     
     let IsPublic = AddEventModel(img: R.image.switch2(), placeholder: "Private Event", type: .IsPublic)
     let People = AddEventModel(img: R.image.person2(), placeholder: "Attendees", type: .People)
@@ -107,7 +106,7 @@ class CalendarAddNewEventController: BaseTableController {
     let Link = AddEventModel(img: R.image.link(), placeholder: "Link", type: .Link)
     
     
-    let Color = AddEventModel(img: R.image.tag(), placeholder: "Color", type: .Color)
+    let Color = AddEventModel(img: R.image.tagFill(), placeholder: "Color", type: .Color)
     
     
     var requestModel = AddEventRequestModel()
@@ -200,6 +199,7 @@ class CalendarAddNewEventController: BaseTableController {
         requestModel.location = event.location
         requestModel.color = event.color
         requestModel.id = event.id
+        requestModel.current_user_id = CalendarBelongUserId
         
         Title.title = event.title
         if event.color < EventColor.allColor.count   {
@@ -271,12 +271,12 @@ class CalendarAddNewEventController: BaseTableController {
         }
         models.append(isOnlineSection)
         
-        Color.color = EventColor.Red.rawValue
+        Color.color = EventColor.defaultColor
         let tagSection = [Color]
         models.append(tagSection)
         
         if editEventModel == nil  {
-            requestModel.color = EventColor.allColor.firstIndex(of: EventColor.Red.rawValue)
+            requestModel.color = 0
         }
         
     }
@@ -289,15 +289,11 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if let _ = self.rrule {
-            //20230717T020531Z
-           
             self.rrule?.startDate = startDate
             let rrulestr = self.rrule?.toString()
-            print("rrulestr:\(rrulestr)")
-//            let dtstart = rrulestr.split(separator: "\n").first ?? ""
-//            let rruletext = rrulestr.split(separator: "\n").last ?? ""
             self.requestModel.rrule_str = rrulestr
         }
+        self.requestModel.current_user_id = CalendarBelongUserId
         ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
             
             if $0.success == 1 {
@@ -462,7 +458,7 @@ class CalendarAddNewEventController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        Haptico.selection()
         let model = models[indexPath.section][indexPath.row]
         
         if model.type == .People {

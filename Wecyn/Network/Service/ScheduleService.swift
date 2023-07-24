@@ -245,8 +245,8 @@ class EventListModel: BaseModel {
         let model = EventListModel()
         model.id = id
         model.title = title
-        model.start_time = startDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZeroZone: true)
-        model.end_time = startDate.addingTimeInterval(duration).string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZeroZone: true)
+        model.start_time = startDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        model.end_time = startDate.addingTimeInterval(duration).string(format: DateFormat.ddMMyyyyHHmm.rawValue)
         model.is_public = is_public
         model.status = status
         model.is_creator = is_creator

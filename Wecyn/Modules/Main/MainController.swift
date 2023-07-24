@@ -29,7 +29,7 @@ class MainController: UITabBarController {
     func setupChildController() {
         let home = BaseNavigationController(rootViewController: HomeController())
         let connection = BaseNavigationController(rootViewController: ConnectionFriendController())
-        let calendar = BaseNavigationController(rootViewController: CalendarController())
+        let calendar = BaseNavigationController(rootViewController: CalendarEventController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
         let setting = BaseNavigationController(rootViewController: SettingController())
         

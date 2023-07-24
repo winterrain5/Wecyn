@@ -51,7 +51,7 @@ class CalendarEventDetailController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addLeftBarButtonItem(image: R.image.xmark()!)
+        self.addLeftBarButtonItem()
         self.leftButtonDidClick = { [weak self] in
             self?.returnBack()
         }
@@ -122,8 +122,8 @@ class CalendarEventDetailController: BaseTableController {
             self.models.append(section3)
             
             
-            
-            if CalendarBelongUserId ==  UserDefaults.userModel?.id {
+            self.models.removeAll(where: { $0.count == 0 })
+            if CalendarBelongUserId == model.creator_id{
                 self.addEditButton()
                 let delete = CalendarEventDetailModel(cellType: .Delete, model: model)
                 self.models.append([delete])
@@ -279,9 +279,9 @@ class CalendarEventDetailController: BaseTableController {
             if model.model.is_repeat == 1 {
                 let message = CalendarBelongUserId == self.eventModel.creator_id ? "" : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
                 let alert = UIAlertController(title: "this is a recurrence event", message: message, preferredStyle: .actionSheet)
-//                alert.addAction(title: "delete only this event", style: .destructive) { _ in
-//
-//                }
+                alert.addAction(title: "delete only this event", style: .destructive) { _ in
+                    Toast.showMessage("Function Not Implemented")
+                }
                 
                 alert.addAction(title: "delete all events in the sequence", style: .destructive) { _ in
                     self.deleteEvent()
@@ -291,7 +291,8 @@ class CalendarEventDetailController: BaseTableController {
                 alert.show()
                 
             } else {
-                let alert = UIAlertController(title:"Danger Operation",message: "Are you sure you want to delete \(self.eventModel.creator_name)'s event?", preferredStyle: .actionSheet)
+                let message = CalendarBelongUserId == self.eventModel.creator_id ? "" : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
+                let alert = UIAlertController(title:"Danger Operation",message: message, preferredStyle: .actionSheet)
                 alert.addAction(title: "delete this event", style: .destructive) { _ in
                     self.deleteEvent()
                 }
@@ -330,7 +331,7 @@ class CalendarEventDetailTitleCell: UITableViewCell {
     var model: EventInfoModel! {
         didSet  {
             
-            let color = UIColor(hexString: EventColor.allColor[model.color]) ?? UIColor(hexString: EventColor.Red.rawValue)!
+            let color = UIColor(hexString: EventColor.allColor[model.color]) ?? UIColor(hexString: EventColor.defaultColor)!
             imgView.image = R.image.circleFill()?.withTintColor(color)
             titleLabel.text = model.title
             

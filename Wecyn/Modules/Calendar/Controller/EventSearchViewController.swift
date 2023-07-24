@@ -57,6 +57,8 @@ class EventSearchViewController: BaseTableController {
     override func createListView() {
         super.createListView()
         registRefreshHeader()
+        tableView?.separatorStyle = .singleLine
+        tableView?.separatorColor = R.color.seperatorColor()!
         tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: kBottomsafeAreaMargin + 10, right: 0)
         tableView?.register(nibWithCellClass: CaledarItemCell.self)
     }
@@ -65,7 +67,7 @@ class EventSearchViewController: BaseTableController {
         return dataArray.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 113
+        return 92
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +84,7 @@ class EventSearchViewController: BaseTableController {
    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        var model = dataArray[indexPath.row] as! EventListModel
+        let model = dataArray[indexPath.row] as! EventListModel
         let vc = CalendarEventDetailController(eventModel:model)
         self.navigationController?.pushViewController(vc, animated: true)
     }

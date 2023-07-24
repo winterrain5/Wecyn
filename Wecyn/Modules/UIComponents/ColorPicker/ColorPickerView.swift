@@ -8,13 +8,9 @@
 import UIKit
 import EntryKit
 class ColorPickerModel {
-    var img:UIImage
-    var title:String
     var color:String
     var isSelect = false
-    init(img:UIImage, title:String, color:String) {
-        self.img = img
-        self.title = title
+    init(color:String) {
         self.color = color
     }
 }
@@ -62,26 +58,10 @@ class ColorPickerView: UIView,UITableViewDataSource,UITableViewDelegate {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = R.color.backgroundColor()!
         tableView.register(cellWithClass: UITableViewCell.self)
-       
-   
-        /*
-         #149bd0
-
-         #1463d0
-
-         #21a93c
-
-         #ed8c00
-
-         #d82739
-         */
-        let c1 = ColorPickerModel(img: R.image.tagFill1()!, title: "light blue", color: EventColor.LightBlue.rawValue)
-        let c2 = ColorPickerModel(img: R.image.tagFill2()!, title: "dark blue", color: EventColor.DarkBlue.rawValue)
-        let c3 = ColorPickerModel(img: R.image.tagFill3()!, title: "green", color: EventColor.Green.rawValue)
-        let c4 = ColorPickerModel(img: R.image.tagFill4()!, title: "yellow", color: EventColor.Yellow.rawValue)
-        let c5 = ColorPickerModel(img: R.image.tagFill5()!, title: "red", color: EventColor.Red.rawValue)
         
-        models.append(contentsOf: [c1,c2,c3,c4,c5])
+        models.append(contentsOf:  EventColor.allColor.map({
+            return ColorPickerModel(color: $0)
+        }))
         models.forEach({
             $0.isSelect = $0.color == self.selectColor
         })
@@ -94,7 +74,7 @@ class ColorPickerView: UIView,UITableViewDataSource,UITableViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let tableH = models.count * 50
+        let tableH = 6 * 50
         confirmButton.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(8)
             make.bottom.equalToSuperview().inset(kBottomsafeAreaMargin + 20)
@@ -115,7 +95,7 @@ class ColorPickerView: UIView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func show() {
-        let height = (models.count * 50).cgFloat + 32 +  80 + kBottomsafeAreaMargin
+        let height = (6 * 50).cgFloat + 32 +  80 + kBottomsafeAreaMargin
         EntryKit.display(view: self, size: CGSize(width: kScreenWidth, height: height), style: .sheet, touchDismiss: true)
     }
     
@@ -130,10 +110,13 @@ class ColorPickerView: UIView,UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: UITableViewCell.self)
         let model = models[indexPath.row]
-        cell.imageView?.image = model.img
-        cell.textLabel?.text = model.title
+        cell.imageView?.image = tintImage(model.color)
         cell.accessoryType = model.isSelect ? .checkmark : .none
         return cell
+    }
+    
+    func tintImage(_ colorHex: String) -> UIImage? {
+        R.image.tagFill()?.withTintColor(UIColor(hexString: colorHex) ?? .red).withRenderingMode(.alwaysOriginal)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

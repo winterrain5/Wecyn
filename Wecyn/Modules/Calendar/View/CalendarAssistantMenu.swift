@@ -20,6 +20,9 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
     var dissmissHandler:(()->())!
     init(assistants:[AssistantInfo], originView:UIView, selectRow:Int = 0) {
         super.init(frame: .zero)
+        
+        self.layer.zPosition = 1001
+        
         self.originView = originView
         self.assistants = assistants
         self.selectRow = selectRow

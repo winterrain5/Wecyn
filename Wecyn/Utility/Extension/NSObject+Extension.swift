@@ -176,13 +176,10 @@ extension Date {
         return endOfMonth
     }
     
-    func string(format: String = "dd/MM/yyyy HH:mm", locaIdentifier:String = LocaIdentifier, isZeroZone:Bool = false) -> String {
+    func string(format: String = "dd/MM/yyyy HH:mm", locaIdentifier:String = LocaIdentifier) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.locale = Locale(identifier: locaIdentifier)
-//        if isZeroZone {
-//            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-//        }
         
         return dateFormatter.string(from: self)
     }

@@ -48,7 +48,7 @@ class CalendarView: UIView {
         calendar.appearance.weekdayTextColor = R.color.textColor162C46()!
         
         calendar.appearance.todayColor = R.color.theamColor()?.withAlphaComponent(0.4)
-        calendar.appearance.todaySelectionColor = R.color.theamColor()?.withAlphaComponent(0.4)
+        calendar.appearance.todaySelectionColor = R.color.theamColor()!
         
         calendar.firstWeekday = 1
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: "FSCalendarCell")

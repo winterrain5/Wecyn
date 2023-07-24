@@ -13,8 +13,9 @@ class CaledarItemCell: UITableViewCell {
     @IBOutlet weak var creatorLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var shadowView: UIView!
     
+    @IBOutlet weak var repeatImgView: UIImageView!
+    @IBOutlet weak var statusImgView: UIImageView!
     var searchingText = ""
     var model: EventListModel? {
         didSet {
@@ -25,29 +26,28 @@ class CaledarItemCell: UITableViewCell {
             }
             
             
-            let starTime = model.start_time
-            let endTime = model.end_time
+            let starTime = model.start_time.split(separator: " ").last ?? ""
+            let endTime = model.end_time.split(separator: " ").last ?? ""
             timeLabel.text = starTime + " - " + endTime
             
             switch model.status {
             case 0: // 未知
-                statusView.backgroundColor = UIColor(hexString: "#ed8c00")
+                statusImgView.image = R.image.personFillQuestionmark()
             case 1: // 同意
-                statusView.backgroundColor = UIColor(hexString: "#21a93c")
+                statusImgView.image = R.image.personFillCheckmark()
             case 2: // 拒绝
-                statusView.backgroundColor = UIColor(hexString: "#d82739")
+                statusImgView.image = R.image.personFillXmark()
             default:
-                statusView.backgroundColor = UIColor(hexString: "#ed8c00")
+                statusImgView.image = R.image.personFillQuestionmark()
             }
-            
-            creatorLabel.text = "create by: \(model.creator_name)"
-//            locationLabel.text = "Location:\(model)"
+            statusView.backgroundColor = UIColor(hexString: EventColor.allColor[model.color])
+            repeatImgView.isHidden = model.is_repeat != 1
+            creatorLabel.text = "creator: \(model.creator_name)"
+
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        shadowView.addShadow(cornerRadius: 10)
-        statusView.sk.addCorner(conrners: [.topRight,.bottomRight], radius: 10)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

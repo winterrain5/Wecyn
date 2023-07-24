@@ -24,7 +24,7 @@ var CalendarBelongUserId:Int = 0
 var CalendarBelongUserName:String = ""
 class CalendarEventController: BaseTableController {
     
-    let headerView = CalendarHeaderView()
+    let headerView = CalendarEventHeadView()
     let requestModel = EventListRequestModel()
     var friendList:[FriendListModel] = []
     let userTitleView = CalendarNavBarUserView()
@@ -32,7 +32,10 @@ class CalendarEventController: BaseTableController {
     var assistants: [AssistantInfo] = []
     let UserModel = UserDefaults.userModel
     var calendarChangeDate = Date()
-    let headerHeight = 280.cgFloat
+    let headerHeight = 197.cgFloat
+    
+    let monthLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         CalendarBelongUserId = UserModel?.id ?? 0
@@ -46,15 +49,24 @@ class CalendarEventController: BaseTableController {
         selectAssistant.avatar = UserModel?.avatar ?? ""
         
         
-        let searchView = UIButton()
-        searchView.size = CGSize(width: 36, height: 36)
-        searchView.imageForNormal = R.image.connection_search()
-        self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: searchView)
-        searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+        let searchButton = UIButton()
+        searchButton.size = CGSize(width: 36, height: 36)
+        searchButton.imageForNormal = R.image.magnifyingglass()
+        searchButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
             let vc = EventSearchViewController()
             self.navigationController?.pushViewController(vc, animated: false)
         }).disposed(by: rx.disposeBag)
+        let searchItem = UIBarButtonItem(customView: searchButton)
+        self.navigation.item.rightBarButtonItem = searchItem
+        
+        
+        monthLabel.textColor = R.color.textColor52()!
+        monthLabel.size = CGSize(width: 60, height: 30)
+        monthLabel.textAlignment = .left
+        monthLabel.font = UIFont.sk.pingFangSemibold(20)
+        monthLabel.text = calendarChangeDate.string(format: "MMM")
+        self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: monthLabel)
         
         userTitleView.size = CGSize(width: kScreenWidth * 0.7, height: 40)
         userTitleView.selectAssistantHanlder = { [weak self] assistant in
@@ -70,6 +82,8 @@ class CalendarEventController: BaseTableController {
         }
         self.navigation.item.titleView = userTitleView
         
+        CalendarMenuView.addMenu(originView: self.view)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,11 +95,7 @@ class CalendarEventController: BaseTableController {
     override func refreshData() {
         
         let eventList = ScheduleService.eventList(model: requestModel)
-        if isFirstLoad {
-            self.view.showSkeleton()
-        } else {
-            Toast.showLoading()
-        }
+        Toast.showLoading()
         
         let sd = calendarChangeDate.startOfCurrentMonth()
         let ed = sd.endOfCurrentMonth()
@@ -122,10 +132,12 @@ class CalendarEventController: BaseTableController {
                 }
                 return start.compare(end)  ==  .orderedAscending
             }).forEach({ self.dataArray.append($0) })
-            self.headerView.calendarView.eventDates = self.dataArray as! [[EventListModel]]
+            self.headerView.eventDates = self.dataArray as! [[EventListModel]]
         
             self.endRefresh(.NoData, emptyString: "No Events")
-            self.scrollToSection()
+            if self.isFirstLoad {
+                self.scrollToSection(false)
+            }
             
             self.hideSkeleton()
             Toast.dismiss()
@@ -138,13 +150,13 @@ class CalendarEventController: BaseTableController {
         
     }
     
-    func scrollToSection() {
+    func scrollToSection(_ animated:Bool = true){
          let datas = self.dataArray as! [[EventListModel]]
         if datas.count == 0 { return }
         let section = datas.firstIndex(where: {
             return $0.first?.start_date?.day == self.calendarChangeDate.day && $0.first?.start_date?.month == self.calendarChangeDate.month
         })?.uInt ?? 0
-        self.tableView?.scrollToRow(at: IndexPath(row: 0, section: Int(section)), at: .top, animated: true)
+        self.tableView?.scrollToRow(at: IndexPath(row: 0, section: Int(section)), at: .top, animated: animated)
     }
     
     func getAssistants() {
@@ -163,33 +175,21 @@ class CalendarEventController: BaseTableController {
         headerView.frame.origin = CGPoint(x: 0, y: kNavBarHeight)
         headerView.size = CGSize(width: kScreenWidth, height: headerHeight)
         self.view.addSubview(headerView)
-        headerView.calendarView.dateSelected = { [weak self] date in
+        headerView.dateSelected = { [weak self] date in
             guard let `self` = self else { return }
-            
             self.calendarChangeDate = date
             self.scrollToSection()
         }
-        
-        headerView.calendarView.addButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-           
-            let vc = CalendarAddNewEventController()
-            self.navigationController?.pushViewController(vc)
-        }).disposed(by: rx.disposeBag)
-        
-        headerView.calendarView.shareButton.rx.tap.subscribe(onNext:{ [weak self] in
-            let vc = EventSetAssistantsController()
-            let nav = BaseNavigationController(rootViewController: vc)
-            self?.present(nav, animated: true)
-        }).disposed(by: rx.disposeBag)
-        
-        headerView.calendarView.monthChanged = { [weak self] date in
+  
+        headerView.monthChanged = { [weak self] date in
             guard let `self` = self else { return }
             self.calendarChangeDate = date
+            self.monthLabel.text = date.string(format: "MMM")
             self.loadNewData()
         }
         
-     
+        tableView?.separatorStyle = .singleLine
+        tableView?.separatorColor = R.color.seperatorColor()!
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kBottomsafeAreaMargin + kTabBarHeight + 10, right: 0)
         
         tableView?.isSkeletonable = true
@@ -214,7 +214,7 @@ class CalendarEventController: BaseTableController {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 113
+        return 92
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,11 +230,26 @@ class CalendarEventController: BaseTableController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let datas = self.dataArray as! [[EventListModel]]
         if  datas.count > 0,section < datas.count, datas[section].count > 0 {
-            let view = UIView().backgroundColor(.white)
-            let label = UILabel().color(R.color.textColor52()!).font(UIFont.sk.pingFangSemibold(15))
+            guard let dataDate = datas[section].first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+                return nil
+            }
+            let view = UIView()
+            let label = UILabel().font(UIFont.sk.pingFangRegular(14))
+            
+            if dataDate.isInToday{
+                label.text = "Today " + dataDate.string(format: "dd MMM EEE")
+                label.textColor = R.color.theamColor()
+                view.backgroundColor = UIColor(hexString: "#d0ebe9")
+                
+            } else {
+                label.text = dataDate.string(format: "dd MMM EEE")
+                label.textColor = R.color.textColor52()!
+                view.backgroundColor = R.color.backgroundColor()!
+            }
+            
             view.addSubview(label)
-            label.frame = CGRect(x: 28, y: 0, width: 100, height: 30)
-            label.text = datas[section].first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.string(format: "dd MMM yyyy")
+            label.frame = CGRect(x: 16, y: 0, width: 200, height: 30)
+            
             return view
         }
         return nil
@@ -259,7 +274,7 @@ class CalendarEventController: BaseTableController {
     }
     
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return headerHeight * 0.5
+        return -headerHeight * 0.5
     }
 }
 
@@ -288,7 +303,7 @@ class CalendarNavBarUserView: UIView {
         addSubview(arrow)
         
         avatar.kf.setImage(with: userModel?.avatar.avatarUrl,placeholder: R.image.proile_user()!)
-        avatar.cornerRadius = 15
+        avatar.cornerRadius = 12
         avatar.contentMode = .scaleAspectFill
         
         nameLabel.text = userModel?.full_name
@@ -296,10 +311,9 @@ class CalendarNavBarUserView: UIView {
         nameLabel.font = UIFont.sk.pingFangRegular(14)
         nameLabel.width = userModel?.full_name.widthWithConstrainedWidth(height: 40, font: nameLabel.font) ?? 0
         
-        arrow.image = R.image.calendar_item_arrow_down()
+        arrow.image = R.image.triangleFill()
         
         rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
-            self?.arrow.rotate(toAngle: 180, ofType: .degrees, duration: 0.25)
             self?.showMenu()
         }).disposed(by: rx.disposeBag)
     }
@@ -311,7 +325,7 @@ class CalendarNavBarUserView: UIView {
         nameLabel.y = 0
         nameLabel.center.x = self.center.x
         
-        avatar.frame = CGRect(x: nameLabel.x - 38, y: 0, width: 30, height: 30)
+        avatar.frame = CGRect(x: nameLabel.x - 38, y: 0, width: 24, height: 24)
         avatar.center.y = self.center.y
         
         arrow.frame = CGRect(x: nameLabel.frame.maxX + 8, y: 0, width: 15, height: 11)
@@ -321,10 +335,17 @@ class CalendarNavBarUserView: UIView {
     }
     
     func showMenu() {
+        let originView = UIViewController.sk.getTopVC()?.view
+        if originView?.subviews.contains(where: { $0 is  CalendarAssistantMenu }) ?? false {
+            return
+        }
+        
         if assistants.count == 0 {
             return
         }
-        let originView = UIViewController.sk.getTopVC()?.view
+        self.arrow.rotate(toAngle: 180, ofType: .degrees, duration: 0.25)
+        
+       
         let menu = CalendarAssistantMenu(assistants: assistants, originView: originView!, selectRow: self.selectRow)
         menu.showMenu()
         menu.selectComplete = {  [weak self] row in
@@ -336,7 +357,7 @@ class CalendarNavBarUserView: UIView {
             self.avatar.kf.setImage(with: self.assistants[row].avatar.avatarUrl,placeholder: R.image.proile_user()!)
             self.selectAssistantHanlder(self.assistants[row])
         }
-        
+
         menu.dissmissHandler = { [weak self] in
             guard let `self` = self else { return }
             self.arrow.rotate(toAngle: -180, ofType: .degrees,  duration: 0.25)

@@ -18,3 +18,10 @@
 "Interests"  = "Interests";
 
 /****Profile*****/
+
+
+//
+"pull_down_to_refresh" = "Pull down to refresh";
+"pull_up_to_refresh" = "Pull up to load more";
+"release_refresh" = "Release to refresh";
+//

@@ -55,11 +55,6 @@ class EventSetAssistantsController: BaseTableController {
             self.reloadData()
         }
         
-        self.addLeftBarButtonItem()
-        self.leftButtonDidClick = { [weak self] in
-            self?.dismiss(animated: true)
-        }
-        
    
         refreshData()
     }
@@ -79,7 +74,7 @@ class EventSetAssistantsController: BaseTableController {
         ScheduleService.addAssistants(model: requestModel).subscribe(onNext:{
             if $0.success == 1 {
                 Toast.showSuccess(withStatus: "Successful operation", after: 2, {
-                    self.dismiss(animated: true)
+                    self.navigationController?.popViewController()
                 })
                 
             } else {
