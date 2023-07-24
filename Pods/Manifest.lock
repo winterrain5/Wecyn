@@ -26,6 +26,7 @@ PODS:
     - Moya/Core
     - RxSwift (~> 5.0)
   - NewPopMenu (2.1.2)
+  - NFCReaderWriter (1.1.4)
   - Permission/Camera (3.1.2):
     - Permission/Core
   - Permission/Core (3.1.2)
@@ -125,6 +126,7 @@ DEPENDENCIES:
   - MarqueeLabel
   - MJRefresh
   - NewPopMenu (~> 2.0)
+  - NFCReaderWriter
   - Permission/Camera
   - Permission/Microphone
   - Permission/Notifications
@@ -173,6 +175,7 @@ SPEC REPOS:
     - MJRefresh
     - Moya
     - NewPopMenu
+    - NFCReaderWriter
     - Permission
     - PromiseKit
     - R.swift
@@ -226,6 +229,7 @@ SPEC CHECKSUMS:
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
+  NFCReaderWriter: b21965d1b3b8c53f7648f58f597b77a13f6ecdc5
   Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
@@ -249,6 +253,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: 01f676ed87d09f26c9a904e7f9bb7aec7bd63782
+PODFILE CHECKSUM: 529f72108db01d88154f2ac7205eece34954fe30
 
 COCOAPODS: 1.11.2

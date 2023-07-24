@@ -19,6 +19,7 @@ ${BUILT_PRODUCTS_DIR}/LookinServer/LookinServer.framework
 ${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
 ${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework
 ${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
+${BUILT_PRODUCTS_DIR}/NFCReaderWriter/NFCReaderWriter.framework
 ${BUILT_PRODUCTS_DIR}/NewPopMenu/PopMenu.framework
 ${BUILT_PRODUCTS_DIR}/Permission/Permission.framework
 ${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework

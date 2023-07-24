@@ -166,9 +166,9 @@ class CalendarAddNewEventController: BaseTableController {
         updateEditEventData()
         
         if self.isEdit {
-            self.navigation.item.title = "New Event"
-        } else {
             self.navigation.item.title = "Edit Event"
+        } else {
+            self.navigation.item.title = "New Event"
         }
     }
     func updateEditEventData() {

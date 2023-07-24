@@ -79,12 +79,13 @@ class ProfileHeaderView: UIView {
         }).disposed(by: rx.disposeBag)
         
         viewCalendarButton.rx.tap.subscribe(onNext:{
-            let vc = CalendarController()
+            let vc = CalendarEventController()
             UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
         }).disposed(by: rx.disposeBag)
         
         addNewSectionButton.rx.tap.subscribe(onNext:{
-            
+            let vc = NFCController()
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
         }).disposed(by: rx.disposeBag)
         
         [viewNamecardButton,viewCalendarButton,addNewSectionButton].forEach({
