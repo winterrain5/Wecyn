@@ -25,6 +25,7 @@ target 'Wecyn' do
   pod 'R.swift'
   pod 'SwiftDate'
   pod 'Kingfisher'
+  pod 'NFCReaderWriter'
 
   #UI
   pod 'IQKeyboardManagerSwift'

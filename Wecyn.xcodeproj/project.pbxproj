@@ -75,6 +75,7 @@
 		450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD02A6909570001AA1B /* CalendarEventController.swift */; };
 		450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */; };
 		450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD42A6928220001AA1B /* CalendarMenuView.swift */; };
+		450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD82A6E0FDA0001AA1B /* NFCController.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
@@ -171,10 +172,6 @@
 		45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765BD2A31ABA200BF6EEC /* MainController.swift */; };
 		45E85B112A398EBA00B820CD /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B102A398EBA00B820CD /* CityModel.swift */; };
 		45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B122A3AB4FA00B820CD /* TokenModel.swift */; };
-		45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B182A3AE23500B820CD /* CalendarController.swift */; };
-		45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B1A2A3AE25B00B820CD /* CalendarView.swift */; };
-		45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B1C2A3AE26500B820CD /* CalendarView.xib */; };
-		45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */; };
 		45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */; };
 		45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
@@ -249,6 +246,8 @@
 		450F6CD02A6909570001AA1B /* CalendarEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventController.swift; sourceTree = "<group>"; };
 		450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventHeadView.swift; sourceTree = "<group>"; };
 		450F6CD42A6928220001AA1B /* CalendarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMenuView.swift; sourceTree = "<group>"; };
+		450F6CD82A6E0FDA0001AA1B /* NFCController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCController.swift; sourceTree = "<group>"; };
+		450F6CDB2A6E6BCC0001AA1B /* Wecyn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wecyn.entitlements; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
@@ -350,10 +349,6 @@
 		45E765BD2A31ABA200BF6EEC /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		45E85B102A398EBA00B820CD /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		45E85B122A3AB4FA00B820CD /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
-		45E85B182A3AE23500B820CD /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
-		45E85B1A2A3AE25B00B820CD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		45E85B1C2A3AE26500B820CD /* CalendarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
-		45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaledarItemCell.swift; sourceTree = "<group>"; };
 		45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaledarItemCell.xib; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -508,6 +503,14 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		450F6CD72A6E0FC00001AA1B /* NFC */ = {
+			isa = PBXGroup;
+			children = (
+				450F6CD82A6E0FDA0001AA1B /* NFCController.swift */,
+			);
+			path = NFC;
+			sourceTree = "<group>";
+		};
 		453653382A41369D0026EC8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -587,6 +590,7 @@
 		459209CE2A26D5F4005871ED /* Wecyn */ = {
 			isa = PBXGroup;
 			children = (
+				450F6CDB2A6E6BCC0001AA1B /* Wecyn.entitlements */,
 				45005C8C2A5E87FF00560E21 /* 3rdDepandence */,
 				45920ABF2A26E045005871ED /* Base */,
 				45920A872A26E045005871ED /* Modules */,
@@ -646,6 +650,7 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				450F6CD72A6E0FC00001AA1B /* NFC */,
 				457C7D8E2A4D69F8002E50DF /* UIComponents */,
 				45BBF5222A4832590018992C /* Message */,
 				45E85B152A3AE1ED00B820CD /* Calendar */,
@@ -988,7 +993,6 @@
 			isa = PBXGroup;
 			children = (
 				45005C852A5E395100560E21 /* RichText */,
-				45E85B182A3AE23500B820CD /* CalendarController.swift */,
 				450F6CD02A6909570001AA1B /* CalendarEventController.swift */,
 				45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */,
 				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
@@ -1005,9 +1009,6 @@
 		45E85B172A3AE1F800B820CD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				45E85B1A2A3AE25B00B820CD /* CalendarView.swift */,
-				45E85B1C2A3AE26500B820CD /* CalendarView.xib */,
-				45E85B1E2A3AE3E800B820CD /* CalendarHeaderView.swift */,
 				45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */,
 				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
 				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
@@ -1116,7 +1117,6 @@
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
 				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
-				45E85B1D2A3AE26500B820CD /* CalendarView.xib in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
 				450BA6CB2A32B9D800764828 /* LoginView.xib in Resources */,
@@ -1269,13 +1269,11 @@
 				45920AF92A26E045005871ED /* BaseViewController+Extension.swift in Sources */,
 				45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */,
 				457C7D952A4E6BB1002E50DF /* FriendSearchController.swift in Sources */,
-				45E85B1F2A3AE3E800B820CD /* CalendarHeaderView.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
 				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
 				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
-				45E85B192A3AE23500B820CD /* CalendarController.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45920AFE2A26E045005871ED /* BaseModel.swift in Sources */,
 				450F6CC52A613AFC0001AA1B /* EKWeekday+RRule.swift in Sources */,
@@ -1295,7 +1293,6 @@
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
-				45E85B1B2A3AE25B00B820CD /* CalendarView.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
 				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
@@ -1315,6 +1312,7 @@
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
+				450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
 				450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */,
 				450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */,
@@ -1495,12 +1493,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4F6LM54QKY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
@@ -1534,12 +1534,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4F6LM54QKY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";

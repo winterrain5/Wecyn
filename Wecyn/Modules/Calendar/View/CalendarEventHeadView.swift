@@ -12,14 +12,19 @@ class CalendarEventHeadView: UIView {
     
     
     var calendar = FSCalendar()
+    let changeScopButton = UIButton()
+    let changeScopView = UIView()
     var gregorian = NSCalendar(identifier: .gregorian)
     var dateSelected:((Date)->())!
     var monthChanged:((Date)->())!
+    var scopChanged:((CGFloat,FSCalendarScope)->())!
     var eventDates:[[EventListModel]] = [] {
         didSet {
             calendar.reloadData()
         }
     }
+    
+    var calendarHeight:CGFloat = 195
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -32,24 +37,37 @@ class CalendarEventHeadView: UIView {
         calendar.appearance.caseOptions = .weekdayUsesUpperCase
         calendar.scope = .month
         calendar.appearance.borderRadius = 0.2
-        calendar.rowHeight = (kScreenWidth - 36) / 7
-        calendar.placeholderType = .none
+        calendar.placeholderType = .fillSixRows
         calendar.headerHeight = 0
         calendar.appearance.weekdayFont = UIFont.sk.pingFangRegular(14)
         calendar.appearance.weekdayTextColor = R.color.textColor52()!
-        
-        calendar.appearance.todayColor = R.color.theamColor()?.withAlphaComponent(0.4)
-        calendar.appearance.todaySelectionColor = R.color.theamColor()?.withAlphaComponent(0.4)
+        calendar.appearance.titlePlaceholderColor = UIColor(hexString: "dfdfdf")
+        calendar.appearance.titleTodayColor = R.color.textColor52()!
+        calendar.appearance.todayColor = .white
         
         calendar.firstWeekday = 1
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: "FSCalendarCell")
-        self.calendar.locale = NSLocale.init(localeIdentifier: "en") as Locale
-        
-        
-        calendar.sk.addBorderBottom(borderWidth: 1, borderColor: .lightText)
-        
+        calendar.locale = NSLocale.init(localeIdentifier: "en") as Locale
+        calendar.select(Date())
+    
         self.addSubview(calendar)
         
+      
+        changeScopButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            if self.calendar.scope == .week {
+                self.setCalendarScope(.month)
+            } else {
+                self.setCalendarScope(.week)
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        self.addSubview(changeScopButton)
+      
+        changeScopView.backgroundColor = R.color.theamColor()
+        changeScopView.cornerRadius = 3
+        changeScopView.isUserInteractionEnabled = false
+        changeScopButton.addSubview(changeScopView)
     }
     
     required init?(coder: NSCoder) {
@@ -58,8 +76,20 @@ class CalendarEventHeadView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        calendar.frame =  self.bounds
-        calendar.height = self.bounds.height - 1
+        calendar.snp.remakeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(self.calendarHeight)
+        }
+        changeScopButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(calendar.snp.bottom)
+            make.height.equalTo(20)
+        }
+        changeScopView.snp.remakeConstraints { make in
+            make.width.equalTo(60)
+            make.height.equalTo(6)
+            make.center.equalToSuperview()
+        }
     }
 
 
@@ -74,11 +104,9 @@ extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalend
     
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let date = calendar.currentPage
-        if let changeDate = date.string().date(withFormat: "dd/MM/yyyy HH:mm") {
-            monthChanged(changeDate)
-        }
-        
+        let date = calendar.currentPage // 当前页的最后一天
+        print("currentPage:\(date)")
+        monthChanged(date)
     }
     
     //  func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
@@ -125,11 +153,20 @@ extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        calendar.frame = CGRect(origin: calendar.frame.origin, size: bounds.size)
-        self.layoutIfNeeded()
+        self.calendarHeight = bounds.size.height
+        UIView.animate(withDuration: 0.5) {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+            self.scopChanged(bounds.size.height,self.calendar.scope)
+        }
+       
     }
     
     func setCalendarScope(_ scope:FSCalendarScope) {
         calendar.setScope(scope, animated: true)
+    }
+    
+    func setCalendarSelectDate(_ date:Date) {
+        calendar.select(date, scrollToDate: true)
     }
 }
