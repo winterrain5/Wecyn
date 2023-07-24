@@ -144,8 +144,8 @@ class CalendarEventRepeatController: BaseTableController {
         
         let interval = EventRepeatModel(title: "Interval", cellType: .Interval, value: "1")
         let until = EventRepeatModel(title: "Until", cellType: .Until)
-        let byweekday = EventRepeatModel(title: "ByWeekday", cellType: .Byweekday)
-        let bymonth = EventRepeatModel(title: "ByMonth", cellType: .Bymonth)
+        let byweekday = EventRepeatModel(title: "By Weekday", cellType: .Byweekday)
+        let bymonth = EventRepeatModel(title: "By Month", cellType: .Bymonth)
         
         section.append(contentsOf: [interval,byweekday,bymonth,until])
         section.forEach({ $0.frequencyType = .Weekly })
@@ -157,8 +157,8 @@ class CalendarEventRepeatController: BaseTableController {
         
         let interval = EventRepeatModel(title: "Interval", cellType: .Interval, value: "1")
         let until = EventRepeatModel(title: "Until", cellType: .Until)
-        let byweekday = EventRepeatModel(title: "ByWeekday", cellType: .Byweekday)
-        let bymonth = EventRepeatModel(title: "ByMonth", cellType: .Bymonth)
+        let byweekday = EventRepeatModel(title: "By Weekday", cellType: .Byweekday)
+        let bymonth = EventRepeatModel(title: "By Month", cellType: .Bymonth)
         
         section.append(contentsOf: [interval,byweekday,bymonth,until])
         section.forEach({ $0.frequencyType = .Monthly })

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        CocoaDebug.onlyURLs = [APIHost.share.BaseUrl.appending("/api")]
         
+        
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
             let main = MainController()
             window?.rootViewController = main

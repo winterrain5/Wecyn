@@ -73,6 +73,8 @@
 		450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */; };
 		450F6CCF2A6508630001AA1B /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 450F6CCE2A6508630001AA1B /* bundle.js */; };
 		450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD02A6909570001AA1B /* CalendarEventController.swift */; };
+		450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */; };
+		450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD42A6928220001AA1B /* CalendarMenuView.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
@@ -245,6 +247,8 @@
 		450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDetailController.swift; sourceTree = "<group>"; };
 		450F6CCE2A6508630001AA1B /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
 		450F6CD02A6909570001AA1B /* CalendarEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventController.swift; sourceTree = "<group>"; };
+		450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventHeadView.swift; sourceTree = "<group>"; };
+		450F6CD42A6928220001AA1B /* CalendarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMenuView.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
@@ -1007,6 +1011,8 @@
 				45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */,
 				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
 				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
+				450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */,
+				450F6CD42A6928220001AA1B /* CalendarMenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1278,6 +1284,7 @@
 				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
 				45005C572A57DC7E00560E21 /* ConnectionFriendController.swift in Sources */,
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
+				450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
@@ -1309,6 +1316,7 @@
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
+				450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */,
 				450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */,
 				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,

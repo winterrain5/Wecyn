@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (5.7.1)
   - Cache (6.0.0)
-  - CocoaDebug (1.7.7)
   - CodeTextField (0.4.0)
   - DKEmptyDataSet (0.1.0)
   - DKLogger (0.4.0)
@@ -108,7 +107,6 @@ PODS:
 
 DEPENDENCIES:
   - Cache (~> 6.0.0)
-  - CocoaDebug
   - CodeTextField (~> 0.4.0)
   - DKEmptyDataSet
   - DKLogger
@@ -156,7 +154,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Cache
-    - CocoaDebug
     - CodeTextField
     - DKEmptyDataSet
     - DKLogger
@@ -210,7 +207,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
-  CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
   DKEmptyDataSet: 3cca8b2435bec8a8265d238012f0f99ab112c91f
   DKLogger: 4db2407d09a97241fbb81ea2f2b7f3190f032769
@@ -253,6 +249,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: ed5f13838417906c7dd090f40414ef800a0c50fa
+PODFILE CHECKSUM: 01f676ed87d09f26c9a904e7f9bb7aec7bd63782
 
 COCOAPODS: 1.11.2

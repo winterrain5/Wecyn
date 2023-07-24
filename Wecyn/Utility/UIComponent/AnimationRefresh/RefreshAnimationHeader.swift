@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import RxLocalizer
 enum RefreshColorStyle {
     case white,gray
 }
@@ -46,8 +47,11 @@ class RefreshAnimationHeader: MJRefreshHeader {
     
     override func placeSubviews() {
          super.placeSubviews()
-        activity.frame = CGRect.init(x: (self.frame.size.width - 50) * 0.5, y: iPhoneX() ? 30 : 10, width: 50, height: 40)
-        messageLabel.frame = CGRect.init(x: (self.frame.size.width - 120) * 0.5, y: iPhoneX() ? 30 : 10, width: 120, height: 40)
+        activity.frame = CGRect.init(x: 0, y: iPhoneX() ? 30 : 10, width: 50, height: 40)
+        activity.center.x = self.center.x
+        
+        messageLabel.frame = CGRect.init(x: 0, y: iPhoneX() ? 30 : 10, width: 300, height: 40)
+        messageLabel.center.x = self.center.x
     }
     
     override var state: MJRefreshState {
@@ -56,13 +60,13 @@ class RefreshAnimationHeader: MJRefreshHeader {
             case .idle:
                 activity.stopAnimating()
                 messageLabel.isHidden = false
-                messageLabel.text = "下拉刷新"
+                messageLabel.text = Localizer.shared.localized("pull_down_to_refresh")
                 break
             case .pulling:
                 activity.stopAnimating()
                 Haptico.selection()
                 messageLabel.isHidden = false
-                messageLabel.text = "松手刷新"
+                messageLabel.text = Localizer.shared.localized("release_refresh")
                 break
             case .refreshing:
                 activity.startAnimating()

@@ -89,7 +89,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 8 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 11 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -134,6 +134,27 @@ struct _R {
       ///
       /// Locales: en, zh-Hans
       var add_new_section: RswiftResources.StringResource { .init(key: "add_new_section", tableName: "Localizable", source: source, developmentValue: "Add new section", comment: nil) }
+
+      /// en translation: Pull down to refresh
+      ///
+      /// Key: pull_down_to_refresh
+      ///
+      /// Locales: en, zh-Hans
+      var pull_down_to_refresh: RswiftResources.StringResource { .init(key: "pull_down_to_refresh", tableName: "Localizable", source: source, developmentValue: "Pull down to refresh", comment: nil) }
+
+      /// en translation: Pull up to load more
+      ///
+      /// Key: pull_up_to_refresh
+      ///
+      /// Locales: en, zh-Hans
+      var pull_up_to_refresh: RswiftResources.StringResource { .init(key: "pull_up_to_refresh", tableName: "Localizable", source: source, developmentValue: "Pull up to load more", comment: nil) }
+
+      /// en translation: Release to refresh
+      ///
+      /// Key: release_refresh
+      ///
+      /// Locales: en, zh-Hans
+      var release_refresh: RswiftResources.StringResource { .init(key: "release_refresh", tableName: "Localizable", source: source, developmentValue: "Release to refresh", comment: nil) }
 
       /// en translation: View Calendar
       ///
@@ -189,7 +210,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 67 images.
+  /// This `_R.image` struct is generated, and contains static references to 71 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -204,6 +225,9 @@ struct _R {
 
     /// Image `calendar`.
     var calendar: RswiftResources.ImageResource { .init(name: "calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar.badge.plus`.
+    var calendarBadgePlus: RswiftResources.ImageResource { .init(name: "calendar.badge.plus", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `calendar.day.timeline.left`.
     var calendarDayTimelineLeft: RswiftResources.ImageResource { .init(name: "calendar.day.timeline.left", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -220,17 +244,11 @@ struct _R {
     /// Image `calendar_item_arrow_right`.
     var calendar_item_arrow_right: RswiftResources.ImageResource { .init(name: "calendar_item_arrow_right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `calendar_left_arrow`.
-    var calendar_left_arrow: RswiftResources.ImageResource { .init(name: "calendar_left_arrow", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `calendar_right_arrow`.
-    var calendar_right_arrow: RswiftResources.ImageResource { .init(name: "calendar_right_arrow", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `calendar_share`.
-    var calendar_share: RswiftResources.ImageResource { .init(name: "calendar_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `checkmark`.
     var checkmark: RswiftResources.ImageResource { .init(name: "checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `chevron.up`.
+    var chevronUp: RswiftResources.ImageResource { .init(name: "chevron.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `circle.fill`.
     var circleFill: RswiftResources.ImageResource { .init(name: "circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -280,6 +298,9 @@ struct _R {
     /// Image `location`.
     var location: RswiftResources.ImageResource { .init(name: "location", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `magnifyingglass`.
+    var magnifyingglass: RswiftResources.ImageResource { .init(name: "magnifyingglass", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -306,6 +327,9 @@ struct _R {
 
     /// Image `person.2`.
     var person2: RswiftResources.ImageResource { .init(name: "person.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.badge.plus`.
+    var personBadgePlus: RswiftResources.ImageResource { .init(name: "person.badge.plus", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `person.circle`.
     var personCircle: RswiftResources.ImageResource { .init(name: "person.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -346,6 +370,12 @@ struct _R {
     /// Image `send`.
     var send: RswiftResources.ImageResource { .init(name: "send", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `square.and.arrow.up`.
+    var squareAndArrowUp: RswiftResources.ImageResource { .init(name: "square.and.arrow.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `square.fill.7`.
+    var squareFill7: RswiftResources.ImageResource { .init(name: "square.fill.7", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `switch.2`.
     var switch2: RswiftResources.ImageResource { .init(name: "switch.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -370,8 +400,8 @@ struct _R {
     /// Image `tab_setting`.
     var tab_setting: RswiftResources.ImageResource { .init(name: "tab_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `tag`.
-    var tag: RswiftResources.ImageResource { .init(name: "tag", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `tag.fill`.
+    var tagFill: RswiftResources.ImageResource { .init(name: "tag.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `tag.fill.1`.
     var tagFill1: RswiftResources.ImageResource { .init(name: "tag.fill.1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -390,6 +420,9 @@ struct _R {
 
     /// Image `text.quote`.
     var textQuote: RswiftResources.ImageResource { .init(name: "text.quote", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `triangle.fill`.
+    var triangleFill: RswiftResources.ImageResource { .init(name: "triangle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `xmark`.
     var xmark: RswiftResources.ImageResource { .init(name: "xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -468,7 +501,10 @@ struct _R {
     var registProfileView: RswiftResources.NibReference<RegistProfileView> { .init(name: "RegistProfileView", bundle: bundle) }
 
     func validate() throws {
+      if UIKit.UIImage(named: "person.fill.checkmark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'person.fill.checkmark' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "repeat", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'repeat' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "calendar_add", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_add' is used in nib 'CalendarView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "calendar_left_arrow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_left_arrow' is used in nib 'CalendarView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "calendar_right_arrow", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'calendar_right_arrow' is used in nib 'CalendarView', but couldn't be loaded.") }

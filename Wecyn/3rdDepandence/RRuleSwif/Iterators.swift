@@ -141,7 +141,6 @@ public extension RecurrenceRule {
             return nil
         }
         let result = JSON.init(dict).rawValue as? [String:Any]
-        print("toRRuleDictionary: \(String(describing: result))")
         return result
     }
     
@@ -153,7 +152,7 @@ public extension RecurrenceRule {
         guard let option = rrule["options"] as? [String:Any] else {
             return nil
         }
-        
+        print("toRRuleDictionary: \(String(describing: option))")
         return option
     }
 

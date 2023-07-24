@@ -15,7 +15,7 @@ class RefreshAnimationFooter: MJRefreshAutoFooter {
     override func prepare() {
         super.prepare()
         self.mj_h = 60
-        activity = UIActivityIndicatorView.init(style: .gray)
+        activity = UIActivityIndicatorView.init(style: .medium)
         activity?.isHidden = true
         activity?.hidesWhenStopped = true
         addSubview(activity!)
@@ -32,8 +32,10 @@ class RefreshAnimationFooter: MJRefreshAutoFooter {
     
     override func placeSubviews() {
         super.placeSubviews()
-        activity?.frame = CGRect.init(x: (self.frame.size.width - 50) * 0.5, y: 10, width: 50, height: 50)
-        messageLabel?.frame = CGRect.init(x: (self.frame.size.width - 120) * 0.5, y: 10, width: 120, height: 50)
+        activity?.frame = CGRect.init(x: 0, y: 10, width: 50, height: 50)
+        activity?.center.x = self.center.x
+        messageLabel?.frame = CGRect.init(x: 0, y: 10, width: 300, height: 50)
+        messageLabel?.center.x = self.center.x
     }
     
     override var state: MJRefreshState {
@@ -42,12 +44,12 @@ class RefreshAnimationFooter: MJRefreshAutoFooter {
             case .idle:
                 activity?.stopAnimating()
                 messageLabel?.isHidden = false
-                messageLabel?.text = "上拉加载"
+                messageLabel?.text = Localizer.shared.localized("pull_up_to_refresh")
                 break
             case .pulling:
                 activity?.stopAnimating()
                 messageLabel?.isHidden = false
-                messageLabel?.text = "松手刷新"
+                messageLabel?.text = Localizer.shared.localized("release_refresh")
                 break
             case .refreshing:
                 activity?.startAnimating()
