@@ -63,9 +63,11 @@ class ScheduleService {
     /// - Parameters:
     ///   - id: id
     ///   - currentUserId: 当前事件所属人的ID
+    ///   - type: 删除事件类型 1 此事件 2 此事件及后续 nil 所有事件
+    ///   - exdate: 当前事件的时间
     /// - Returns: ResponseStatus
-    static func deleteEvent(_ id: Int,currentUserId:Int? = nil) -> Observable<ResponseStatus> {
-        let target = MultiTarget(ScheduleApi.deleteEvent(id,currentUserId))
+    static func deleteEvent(_ id: Int,currentUserId:Int? = nil,type:Int? = nil, exdate:String? = nil) -> Observable<ResponseStatus> {
+        let target = MultiTarget(ScheduleApi.deleteEvent(id,currentUserId,type,exdate))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     

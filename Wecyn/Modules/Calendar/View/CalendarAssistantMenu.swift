@@ -18,6 +18,7 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
     var selectRow:Int = 0
     var selectComplete:((Int)->())!
     var dissmissHandler:(()->())!
+    var isShowed = false
     init(assistants:[AssistantInfo], originView:UIView, selectRow:Int = 0) {
         super.init(frame: .zero)
         
@@ -43,7 +44,6 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellWithClass: CalendarAssistantMenuCell.self)
-        tableView.alpha = 0
         tableView.backgroundColor = .white
         tableView.frame = CGRect(x: 0, y: -contentHeight, width: kScreenWidth, height: contentHeight)
         
@@ -69,27 +69,28 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
     
     func showMenu() {
         
-        self.tableView.alpha = 1
         self.alpha = 1
         UIView.animate(withDuration: 0.25, delay: 0,options: .curveEaseOut ,animations: {
             self.tableView.frame.origin.y = 0
             self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         })
+        
+        isShowed = true
     }
     
     func hideMenu() {
         
         UIView.animate(withDuration: 0.25, delay: 0,options: .curveEaseOut ,animations: {
+            
             self.tableView.frame.origin.y = -self.contentHeight
             self.backgroundColor = .clear
+            self.alpha = 0
             
         }) { flag in
-            self.tableView.alpha = 0
-            self.alpha = 0
-            self.removeFromSuperview()
+           
             self.dissmissHandler()
         }
-        
+        isShowed = false
     }
 }
 

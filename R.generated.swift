@@ -175,7 +175,7 @@ struct _R {
     }
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 11 colors.
+  /// This `_R.color` struct is generated, and contains static references to 12 colors.
   struct color {
     let bundle: Foundation.Bundle
 
@@ -184,6 +184,9 @@ struct _R {
 
     /// Color `BackgroundColor`.
     var backgroundColor: RswiftResources.ColorResource { .init(name: "BackgroundColor", path: [], bundle: bundle) }
+
+    /// Color `IconColor`.
+    var iconColor: RswiftResources.ColorResource { .init(name: "IconColor", path: [], bundle: bundle) }
 
     /// Color `SeperatorColor`.
     var seperatorColor: RswiftResources.ColorResource { .init(name: "SeperatorColor", path: [], bundle: bundle) }
@@ -213,7 +216,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 71 images.
+  /// This `_R.image` struct is generated, and contains static references to 75 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -273,6 +276,9 @@ struct _R {
 
     /// Image `connection_search`.
     var connection_search: RswiftResources.ImageResource { .init(name: "connection_search", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `envelope.circle.fill`.
+    var envelopeCircleFill: RswiftResources.ImageResource { .init(name: "envelope.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `gear.circle`.
     var gearCircle: RswiftResources.ImageResource { .init(name: "gear.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -349,6 +355,9 @@ struct _R {
     /// Image `person.fill.xmark`.
     var personFillXmark: RswiftResources.ImageResource { .init(name: "person.fill.xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `phone.circle.fill`.
+    var phoneCircleFill: RswiftResources.ImageResource { .init(name: "phone.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -375,6 +384,9 @@ struct _R {
 
     /// Image `square.and.arrow.up`.
     var squareAndArrowUp: RswiftResources.ImageResource { .init(name: "square.and.arrow.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `square.and.pencil.circle.fill`.
+    var squareAndPencilCircleFill: RswiftResources.ImageResource { .init(name: "square.and.pencil.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `square.fill.7`.
     var squareFill7: RswiftResources.ImageResource { .init(name: "square.fill.7", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -429,11 +441,18 @@ struct _R {
 
     /// Image `xmark`.
     var xmark: RswiftResources.ImageResource { .init(name: "xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `xmark.circle.fill`.
+    var xmarkCircleFill: RswiftResources.ImageResource { .init(name: "xmark.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.entitlements` struct is generated, and contains static references to 1 properties.
+  /// This `_R.entitlements` struct is generated, and contains static references to 2 properties.
   struct entitlements {
+    let comAppleDeveloperAssociatedDomains = comAppleDeveloperAssociatedDomains()
     let comAppleDeveloperNfcReadersessionFormats = comAppleDeveloperNfcReadersessionFormats()
+    struct comAppleDeveloperAssociatedDomains {
+      let applinksWwwTerrabyteSg: String = "applinks:www.terrabyte.sg"
+    }
     struct comAppleDeveloperNfcReadersessionFormats {
       let taG: String = "TAG"
     }

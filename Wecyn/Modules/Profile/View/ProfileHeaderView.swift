@@ -73,8 +73,7 @@ class ProfileHeaderView: UIView {
         }).disposed(by: rx.disposeBag)
         
         viewNamecardButton.rx.tap.subscribe(onNext: {
-            let vc = EditViewController()
-            vc.modalPresentationStyle = .fullScreen
+            let vc = NFCNameCardController()
             UIViewController.sk.getTopVC()?.present(vc, animated: true)
         }).disposed(by: rx.disposeBag)
         

@@ -56,8 +56,16 @@ class LoginView: UIView {
             AuthService.signin(username: username, password: MD5(password + "wecyn").lowercased()).subscribe(onNext:{ model in
                 self.signInButton.stopAnimation()
                 UserDefaults.sk.set(object: model, for: TokenModel.className)
-                let main = MainController()
-                UIApplication.shared.keyWindow?.rootViewController = main
+                
+                UserService.getUserInfo().subscribe(onNext:{ model in
+                    UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+                    let main = MainController()
+                    UIApplication.shared.keyWindow?.rootViewController = main
+                },onError: { e in
+                    let main = MainController()
+                    UIApplication.shared.keyWindow?.rootViewController = main
+                }).disposed(by: self.rx.disposeBag)
+               
             },onError: { e in
                 self.signInButton.stopAnimation()
                 Toast.showMessage((e as! APIError).errorInfo().message)
