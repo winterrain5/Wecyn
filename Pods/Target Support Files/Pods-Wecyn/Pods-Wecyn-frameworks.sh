@@ -178,6 +178,7 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Cache/Cache.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CodeTextField/CodeTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DKEmptyDataSet/DKEmptyDataSet.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DKLogger/DKLogger.framework"

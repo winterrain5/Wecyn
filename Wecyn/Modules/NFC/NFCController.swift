@@ -161,9 +161,11 @@ extension NFCController: NFCReaderDelegate {
     /// -----------------------------
     func reader(_ session: NFCReader, didDetect tags: [NFCNDEFTag]) {
         print("did detect tags")
-
+        guard let uid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id else {
+            return
+        }
         var payloadData = Data([0x02])
-        let uri = "-tel:+14085551212"
+        let uri = "terrabyte.sg/wecyn/uid/\(uid)"
         payloadData.append(uri.data(using: .utf8)!)
 
         let payload = NFCNDEFPayload.init(
@@ -201,6 +203,7 @@ extension NFCController: NFCReaderDelegate {
         DispatchQueue.main.async {
             var text = "Read Tag Identifier:\(tagId.hexadecimal)\n"
             text.append("TagInfo:\n\(tagInfosDetail)\nNFCNDEFMessage:\n\(content)")
+            print(text)
             self.textLabel.text = text
             self.textLabel.sizeToFit()
         }

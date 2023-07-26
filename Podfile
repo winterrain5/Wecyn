@@ -52,7 +52,7 @@ target 'Wecyn' do
   pod 'Permission/Notifications'
   
   pod 'LookinServer', :configurations => ['Debug']
-#  pod 'CocoaDebug', :configurations => ['Debug']
+  pod 'CocoaDebug', :configurations => ['Debug']
   
   pod 'DKLogger'
   pod 'ImagePickerSwift'

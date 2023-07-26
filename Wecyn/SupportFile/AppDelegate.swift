@@ -8,7 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Localizer.shared.changeLanguage.accept("en")
         
-//        CocoaDebug.onlyURLs = [APIHost.share.BaseUrl.appending("/api")]
+        //        CocoaDebug.onlyURLs = [APIHost.share.BaseUrl.appending("/api")]
         
         
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
@@ -45,25 +45,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func application(_ application: UIApplication,
+    func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-
-
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
             return false
         }
 
-
         // Confirm that the NSUserActivity object contains a valid NDEF message.
         let ndefMessage = userActivity.ndefMessagePayload
-        guard ndefMessage.records.count > 0,
-            ndefMessage.records[0].typeNameFormat != .empty else {
-                return false
+        guard
+            let record = ndefMessage.records.first,
+            record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
+            let uri = String(data: record.payload, encoding: .utf8),
+            let uid = uri.split(separator: "/").last else {
+            return false
         }
-
-
-
+        print("uid:\(uid)")
+        
+        let vc = NFCNameCardController(id: String(uid).int)
+        window?.rootViewController?.present(vc, animated: true)
+        
         return true
     }
     

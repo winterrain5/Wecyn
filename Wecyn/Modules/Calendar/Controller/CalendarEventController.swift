@@ -316,13 +316,20 @@ class CalendarNavBarUserView: UIView {
     let userModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
     var selectRow = 0
     var selectAssistantHanlder:((AssistantInfo)->())!
+    
+    lazy var menu:CalendarAssistantMenu = {
+        let originView = UIViewController.sk.getTopVC()?.view
+        let menu = CalendarAssistantMenu(assistants: assistants, originView: originView!, selectRow: self.selectRow)
+        return menu
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(avatar)
         addSubview(nameLabel)
         addSubview(arrow)
         
-        avatar.kf.setImage(with: userModel?.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+        avatar.kf.setImage(with: userModel?.avatar.avatarUrl,placeholder: R.image.proile_user())
         avatar.cornerRadius = 12
         avatar.contentMode = .scaleAspectFill
         
@@ -336,6 +343,8 @@ class CalendarNavBarUserView: UIView {
         rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             self?.showMenu()
         }).disposed(by: rx.disposeBag)
+        
+       
     }
     
     override func layoutSubviews() {
@@ -355,8 +364,10 @@ class CalendarNavBarUserView: UIView {
     }
     
     func showMenu() {
-        let originView = UIViewController.sk.getTopVC()?.view
-        if originView?.subviews.contains(where: { $0 is  CalendarAssistantMenu }) ?? false {
+      
+        if menu.isShowed {
+            self.arrow.rotate(toAngle: -180, ofType: .degrees,  duration: 0.25)
+            menu.hideMenu()
             return
         }
         
@@ -366,7 +377,7 @@ class CalendarNavBarUserView: UIView {
         self.arrow.rotate(toAngle: 180, ofType: .degrees, duration: 0.25)
         
         
-        let menu = CalendarAssistantMenu(assistants: assistants, originView: originView!, selectRow: self.selectRow)
+        
         menu.showMenu()
         menu.selectComplete = {  [weak self] row in
             guard let `self` = self else { return }

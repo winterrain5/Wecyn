@@ -277,12 +277,14 @@ class CalendarEventDetailController: BaseTableController {
         let model = models[indexPath.section][indexPath.row]
         if model.cellType == .Delete  {
             if model.model.is_repeat == 1 {
-                let message = CalendarBelongUserId == self.eventModel.creator_id ? "" : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
+                let message = CalendarBelongUserId == self.eventModel.creator_id ? nil : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
                 let alert = UIAlertController(title: "this is a recurrence event", message: message, preferredStyle: .actionSheet)
                 alert.addAction(title: "delete only this event", style: .destructive) { _ in
-                    Toast.showMessage("Function Not Implemented")
+                    self.deleteEvent(type: 1,exdate: String(model.model.start_time.split(separator: " ").first ?? ""))
                 }
-                
+                alert.addAction(title: "delete this and all following events", style: .destructive) { _ in
+                    self.deleteEvent(type: 2)
+                }
                 alert.addAction(title: "delete all events in the sequence", style: .destructive) { _ in
                     self.deleteEvent()
                 }
@@ -291,7 +293,7 @@ class CalendarEventDetailController: BaseTableController {
                 alert.show()
                 
             } else {
-                let message = CalendarBelongUserId == self.eventModel.creator_id ? "" : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
+                let message = CalendarBelongUserId == self.eventModel.creator_id ? nil : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
                 let alert = UIAlertController(title:"Danger Operation",message: message, preferredStyle: .actionSheet)
                 alert.addAction(title: "delete this event", style: .destructive) { _ in
                     self.deleteEvent()
@@ -305,9 +307,14 @@ class CalendarEventDetailController: BaseTableController {
         
     }
     
-    func deleteEvent() {
+    // 1: this event 2:此事件及后续 3:所有事件
+    func deleteEvent(type:Int? = nil,exdate:String? = nil) {
         Toast.showLoading()
-        ScheduleService.deleteEvent(self.eventModel.id,currentUserId: CalendarBelongUserId).subscribe(onNext:{
+        
+        ScheduleService.deleteEvent(self.eventModel.id,
+                                    currentUserId: CalendarBelongUserId,
+                                    type: type,
+                                    exdate: exdate).subscribe(onNext:{
 
             if $0.success == 1 {
                 Toast.showSuccess(withStatus: "Successful operation",after: 1, {

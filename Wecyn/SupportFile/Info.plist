@@ -8,7 +8,11 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>u</string>
+			<string>wecyn</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wecyn</string>
+			</array>
 		</dict>
 	</array>
 	<key>NSAppTransportSecurity</key>

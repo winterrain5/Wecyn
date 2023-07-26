@@ -13,7 +13,7 @@ enum ScheduleApi {
     case eventList(_ model:EventListRequestModel)
     case auditPrivitaEvent(_ id:Int,_ status:Int? = nil,_ currentUserId:Int? =  nil)
     case updateEvent(_ model:AddEventRequestModel)
-    case deleteEvent(_ id:Int,_ currentUserId:Int? =  nil)
+    case deleteEvent(_ id:Int,_ currentUserId:Int? =  nil,_ type:Int? = nil,_ exdate:String? = nil)
     case addAssistants(_ model:AddAssitantsRequestModel)
     case recieveAssistantsList
     case sendedAssistantsList
@@ -66,8 +66,8 @@ extension ScheduleApi: TargetType {
             return requestParametersByPost(["id":id,"status":status,"current_user_id":currentUserId])
         case .updateEvent(let model):
             return requestToTaskByPost(model)
-        case .deleteEvent(let id,let currentUserId):
-            return requestParametersByPost(["id":id,"current_user_id":currentUserId])
+        case .deleteEvent(let id,let currentUserId,let type,let exdate):
+            return requestParametersByPost(["id":id,"current_user_id":currentUserId,"type":type,"exdate":exdate])
         case .addAssistants(let model):
             return requestToTaskByPost(model)
         case .recieveAssistantsList:

@@ -76,6 +76,8 @@
 		450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */; };
 		450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD42A6928220001AA1B /* CalendarMenuView.swift */; };
 		450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD82A6E0FDA0001AA1B /* NFCController.swift */; };
+		450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */; };
+		450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
@@ -248,6 +250,8 @@
 		450F6CD42A6928220001AA1B /* CalendarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMenuView.swift; sourceTree = "<group>"; };
 		450F6CD82A6E0FDA0001AA1B /* NFCController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCController.swift; sourceTree = "<group>"; };
 		450F6CDB2A6E6BCC0001AA1B /* Wecyn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wecyn.entitlements; sourceTree = "<group>"; };
+		450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardView.swift; sourceTree = "<group>"; };
+		450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardController.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
@@ -506,9 +510,19 @@
 		450F6CD72A6E0FC00001AA1B /* NFC */ = {
 			isa = PBXGroup;
 			children = (
+				450F6CDC2A70A88F0001AA1B /* View */,
 				450F6CD82A6E0FDA0001AA1B /* NFCController.swift */,
+				450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */,
 			);
 			path = NFC;
+			sourceTree = "<group>";
+		};
+		450F6CDC2A70A88F0001AA1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		453653382A41369D0026EC8D /* Model */ = {
@@ -1253,6 +1267,7 @@
 				450BA6BF2A32B4B700764828 /* UIViewExtension.swift in Sources */,
 				45920AF22A26E045005871ED /* Defaults.swift in Sources */,
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
+				450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */,
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
 				450F6CC22A613AFC0001AA1B /* RRule.swift in Sources */,
@@ -1268,6 +1283,7 @@
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,
 				45920AF92A26E045005871ED /* BaseViewController+Extension.swift in Sources */,
 				45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */,
+				450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */,
 				457C7D952A4E6BB1002E50DF /* FriendSearchController.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
 				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
@@ -1494,9 +1510,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4F6LM54QKY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
@@ -1519,6 +1538,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "wecyn-dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1535,9 +1556,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4F6LM54QKY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
@@ -1560,6 +1584,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "wecyn-dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
