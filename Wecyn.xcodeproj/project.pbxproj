@@ -156,6 +156,10 @@
 		459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459C066C2A3700DF0066F85A /* NameCardEditView.xib */; };
 		45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A10A482A31B02500726B66 /* ProfileHeaderView.swift */; };
 		45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */; };
+		45A7E5A12A71128F0002014D /* NFCNameCardEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */; };
+		45A7E5A32A7212040002014D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A22A7212030002014D /* MapViewController.swift */; };
+		45A7E5A52A7218BC0002014D /* CalendarEventMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A42A7218BC0002014D /* CalendarEventMapController.swift */; };
+		45A7E5A72A7265610002014D /* UpdateUserInfoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */; };
 		45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB28E2A3FF00E00745F6F /* UserApi.swift */; };
 		45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2902A3FF0AD00745F6F /* UserService.swift */; };
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
@@ -335,6 +339,10 @@
 		459C066C2A3700DF0066F85A /* NameCardEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameCardEditView.xib; sourceTree = "<group>"; };
 		45A10A482A31B02500726B66 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardEditController.swift; sourceTree = "<group>"; };
+		45A7E5A22A7212030002014D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		45A7E5A42A7218BC0002014D /* CalendarEventMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventMapController.swift; sourceTree = "<group>"; };
+		45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoRequestModel.swift; sourceTree = "<group>"; };
 		45ADB28E2A3FF00E00745F6F /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
 		45ADB2902A3FF0AD00745F6F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
@@ -513,6 +521,7 @@
 				450F6CDC2A70A88F0001AA1B /* View */,
 				450F6CD82A6E0FDA0001AA1B /* NFCController.swift */,
 				450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */,
+				45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */,
 			);
 			path = NFC;
 			sourceTree = "<group>";
@@ -552,6 +561,7 @@
 				457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */,
 				45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */,
 				45005C582A57FB8900560E21 /* GroupUpdateRequestModel.swift */,
+				45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -571,6 +581,7 @@
 			children = (
 				45005C872A5E4A9F00560E21 /* ColorPicker */,
 				457C7D8F2A4D6A0B002E50DF /* DatePicker */,
+				45A7E5A22A7212030002014D /* MapViewController.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -1016,6 +1027,7 @@
 				45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */,
 				45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */,
 				450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */,
+				45A7E5A42A7218BC0002014D /* CalendarEventMapController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1265,6 +1277,7 @@
 				450BA6CF2A32C62D00764828 /* SwiftFitSize.swift in Sources */,
 				45920AFF2A26E045005871ED /* DataLoadable.swift in Sources */,
 				450BA6BF2A32B4B700764828 /* UIViewExtension.swift in Sources */,
+				45A7E5A72A7265610002014D /* UpdateUserInfoRequestModel.swift in Sources */,
 				45920AF22A26E045005871ED /* Defaults.swift in Sources */,
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
 				450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */,
@@ -1305,6 +1318,8 @@
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
 				45005C5D2A57FEEF00560E21 /* CreateGroupHeaderView.swift in Sources */,
 				45920AEA2A26E045005871ED /* ZoomImageScrollView.swift in Sources */,
+				45A7E5A12A71128F0002014D /* NFCNameCardEditController.swift in Sources */,
+				45A7E5A32A7212040002014D /* MapViewController.swift in Sources */,
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
@@ -1348,6 +1363,7 @@
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
 				45005C7C2A5E388200560E21 /* TextViewAttachmentDelegateProvider.swift in Sources */,
 				450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */,
+				45A7E5A52A7218BC0002014D /* CalendarEventMapController.swift in Sources */,
 				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,
@@ -1511,16 +1527,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4F6LM54QKY;
+				DEVELOPMENT_TEAM = 4F6LM54QKY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Please allow location to serve you better";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1539,7 +1555,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "wecyn-dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1557,16 +1572,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4F6LM54QKY;
+				DEVELOPMENT_TEAM = 4F6LM54QKY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Please allow location to serve you better";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1585,7 +1600,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "wecyn-dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

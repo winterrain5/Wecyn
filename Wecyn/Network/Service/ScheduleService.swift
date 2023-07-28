@@ -161,7 +161,7 @@ class EventInfoModel: BaseModel {
     }
     
     var rruleObject:RecurrenceRule? {
-        if let rruleOptions = RecurrenceRule.toRRuleOptions(rrule_str) {
+        if rrule_str.isEmpty == false, let rruleOptions = RecurrenceRule.toRRuleOptions(rrule_str) {
             let rruleObj = RRule.ruleFromDictionary(rruleOptions)
             return rruleObj
         }
@@ -180,7 +180,12 @@ class EventInfoModel: BaseModel {
         return desc
     }
     var recurrenceType: String {
-        return  "repeat " + (rruleObject?.frequency.toString().lowercased() ?? "")
+        if let freq = rruleObject?.frequency.toString().lowercased() {
+            return  "repeat " + freq
+        } else {
+            return "none"
+        }
+        
     }
     
 }
@@ -214,7 +219,7 @@ class EventListModel: BaseModel {
     var creator_avt = ""
     var is_repeat = 0
     var rrule_str = ""
-   
+    var exdates:[String] = []
     var color = 0
    
     var colorHexString:String? {
@@ -225,7 +230,7 @@ class EventListModel: BaseModel {
     }
     
     var rruleObject:RecurrenceRule? {
-        if let rruleOptions = RecurrenceRule.toRRuleOptions(rrule_str) {
+        if rrule_str.isEmpty == false,let rruleOptions = RecurrenceRule.toRRuleOptions(rrule_str) {
             let rruleObj = RRule.ruleFromDictionary(rruleOptions)
             return rruleObj
         }
@@ -247,8 +252,8 @@ class EventListModel: BaseModel {
         let model = EventListModel()
         model.id = id
         model.title = title
-        model.start_time = startDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
-        model.end_time = startDate.addingTimeInterval(duration).string(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        model.start_time = startDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZero: false)
+        model.end_time = startDate.addingTimeInterval(duration).string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZero: false)
         model.is_public = is_public
         model.status = status
         model.is_creator = is_creator
@@ -262,6 +267,11 @@ class EventListModel: BaseModel {
         
         return model
     }
+    
+    var isMoreThanOneDay_start:Bool = false
+    var isMoreThanOneDay_middle:Bool = false
+    var isMoreThanOneDay_end:Bool = false
+    
 }
 
 class AssistantInfo: BaseModel {

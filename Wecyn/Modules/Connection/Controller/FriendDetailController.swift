@@ -23,21 +23,16 @@ class FriendDetailController: BaseTableController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showSkeleton()
         FriendService.friendUserInfo(id).subscribe(onNext:{
             self.model = $0
             self.reloadData()
-            self.hideSkeleton()
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
-            self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
     }
     
     override func createListView() {
         super.createListView()
-        cellIdentifier = FriendDetailHeadCell.className
-        tableView?.isSkeletonable = true
         tableView?.register(cellWithClass: FriendDetailNomalCell.self)
         tableView?.register(cellWithClass: FriendDetailHeadCell.self)
         tableView?.backgroundColor = R.color.backgroundColor()!

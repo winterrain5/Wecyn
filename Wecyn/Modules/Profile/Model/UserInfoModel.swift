@@ -8,13 +8,19 @@
 import UIKit
 
 class UserInfoModel: BaseModel,Codable {
-    var mobile: String = ""
-    var avatar: String  = ""
+    
     var id: Int = 0
-    var last_name: String = ""
-    var wid: String = ""
-    var email: String = ""
+    var mobile: String = ""
+    var office_number: String = ""
+    var job_title: String = ""
+    var company: String = ""
+    var avatar: String = ""
+    var office_location: String = ""
     var first_name: String = ""
+    var wid: String = ""
+    var last_name: String = ""
+    var email: String = ""
+    var website: String = ""
     
     var full_name:String {
         return String.fullName(first: first_name, last: last_name)

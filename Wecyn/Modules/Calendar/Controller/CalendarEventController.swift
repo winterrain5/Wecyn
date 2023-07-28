@@ -14,7 +14,7 @@ import FSCalendar
 
 enum DateFormat:String {
     case ddMMyyyyHHmm = "dd-MM-yyyy HH:mm"
-    case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss UTC"
+    case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
     case ddMMyyyy = "dd-MM-yyyy"
 }
 
@@ -109,14 +109,19 @@ class CalendarEventController: BaseTableController {
             datas.forEach { data in
                 if data.is_repeat == 1 {
                     data.isParentData = true
-                    let copyed:[EventListModel] = data.rruleObject?.occurrences(rrulestr:data.rrule_str, between: sd, and: ed).map({
+                    var copyed:[EventListModel] = data.rruleObject?.occurrences(rrulestr:data.rrule_str, between: sd, and: ed).map({
                         let model = data.copyed($0)
                         return model
                     }) ?? []
+                    copyed.removeAll(where: {
+                        data.exdates.contains($0.start_time)
+                    })
                     datas.append(contentsOf: copyed)
                 }
             }
             datas.removeAll(where: { $0.isParentData })
+            
+            /// 日历事件显示
             var dict:[String:[EventListModel]] = [:]
             datas.forEach { model in
                 let key = model.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.string(format: DateFormat.ddMMyyyy.rawValue) ?? ""

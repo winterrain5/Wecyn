@@ -160,9 +160,13 @@ public extension RecurrenceRule {
         guard let _ = JavaScriptBridge.bundlejs() else {
             return []
         }
-        let format = "yyyy-MM-dd HH:mm:ss 'UTC'"
-        let beginDate = date.adding(.day, value: 1).string(format: format).date(withFormat: format)!
-        let endDate = otherDate.adding(.day, value: 1).string(format: format).date(withFormat: format)!
+        let format = "yyyy-MM-dd HH:mm"
+        guard let beginDate = date.adding(.day, value: 1).string(format: format,isZero: true).split(separator: " ").first?.appending(" 00:00").date(format: format,isZero: true)  else {
+            return []
+        }
+        guard let endDate = otherDate.adding(.day, value: 1).string(format: format,isZero: true).split(separator: " ").first?.appending(" 23:59").date(format: format,isZero: true) else {
+            return []
+        }
  
         let dtstart = rrulestr.split(separator: "\n").first ?? ""
         let rrule = rrulestr.split(separator: "\n").last ?? ""

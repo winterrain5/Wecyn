@@ -116,6 +116,7 @@ class CalendarAddNewEventController: BaseTableController {
     
     var editEventModel: EventInfoModel?
     var isEdit = false
+    
     init(editEventModel: EventInfoModel? = nil) {
         self.editEventModel = editEventModel
         super.init(nibName: nil, bundle: nil)
@@ -310,28 +311,60 @@ class CalendarAddNewEventController: BaseTableController {
     }
     
     func editEvent() {
-        Toast.showLoading()
-        guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
-            Toast.showError(withStatus: "start time is required")
-            return
-        }
-        if let _ = self.rrule {
-            //20230717T020531Z
-            self.rrule?.startDate = startDate
-            self.requestModel.rrule_str = self.rrule?.toString()
-        }
-        ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
-            if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Event Update Success", after: 1) {
-                    self.navigationController?.popViewController()
+        
+        func editEventRequest(){
+            Toast.showLoading()
+            guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+                Toast.showError(withStatus: "start time is required")
+                return
+            }
+            if let _ = self.rrule {
+                //20230717T020531Z
+                self.rrule?.startDate = startDate
+                self.requestModel.rrule_str = self.rrule?.toString()
+            }
+            ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
+                if $0.success == 1 {
+                    Toast.showSuccess(withStatus: "Event Update Success", after: 1) {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                } else {
+                    Toast.showMessage($0.message)
                 }
-            } else {
-                Toast.showMessage($0.message)
+                
+            },onError: { e in
+                Toast.showMessage(e.asAPIError.errorInfo().message)
+            }).disposed(by: self.rx.disposeBag)
+        }
+        guard let editEventModel = editEventModel else { return }
+        
+        if editEventModel.is_repeat == 1 {
+            
+            let alert = UIAlertController(title: "this is a recurrence event", message: nil, preferredStyle: .actionSheet)
+            alert.addAction(title: "edit only this event", style: .destructive) { _ in
+                
+                self.requestModel.is_repeat = 0
+                self.requestModel.exdate_str = String(editEventModel.start_time.split(separator: " ").first ?? "")
+                editEventRequest()
+            }
+            alert.addAction(title: "edit this and all following events", style: .destructive) { _ in
+                self.requestModel.is_repeat = 1
+                self.requestModel.exdate_str = String(editEventModel.start_time.split(separator: " ").first ?? "")
+                editEventRequest()
+            }
+            alert.addAction(title: "edit all events in the sequence", style: .destructive) { _ in
+                editEventRequest()
             }
             
-        },onError: { e in
-            Toast.showMessage(e.asAPIError.errorInfo().message)
-        }).disposed(by: self.rx.disposeBag)
+            alert.addAction(title: "cancel", style: .cancel)
+            alert.show()
+            
+        } else {
+            editEventRequest()
+        }
+       
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -500,7 +533,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .End {
-            let date = self.isEdit ? self.editEventModel?.end_date : Date()
+            let date = self.isEdit ? self.editEventModel?.end_date : (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue))
             DatePickerView(title:"End Time",
                            mode: .dateAndTime,
                            date: date,
@@ -553,7 +586,7 @@ class CalendarAddNewEventController: BaseTableController {
             let vc = CalendarEventRepeatController(rrule: self.rrule)
             vc.repeatSelectComplete = { [weak self] rrule in
                 guard let `self` = self else { return }
-                
+              
                 self.rrule = rrule
                 guard let rrule = rrule else {
                     self.requestModel.is_repeat = 0
@@ -838,7 +871,7 @@ class AddEventSwitchCell: UITableViewCell {
         contentView.addSubview(imgView)
         contentView.addSubview(titleLabel)
         
-        titleLabel.textColor = R.color.textColor74()
+        titleLabel.textColor = R.color.textColor52()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         
         imgView.contentMode = .scaleAspectFit
@@ -883,8 +916,11 @@ class AddEventColorCell: UITableViewCell {
     var model: AddEventModel! {
         didSet  {
             titleLabel.text = model.placeholder
-            imgView.image = model.img
-            colorView.backgroundColor = UIColor(hexString: model.color)
+            if let color = UIColor(hexString: model.color) {
+                imgView.image = model.img?.withTintColor(color)
+                colorView.backgroundColor = color
+            }
+            
         }
     }
     var switchChangeHandler:((AddEventModel,Bool)->())?
