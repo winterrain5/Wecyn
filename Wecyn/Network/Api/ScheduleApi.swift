@@ -67,7 +67,7 @@ extension ScheduleApi: TargetType {
         case .updateEvent(let model):
             return requestToTaskByPost(model)
         case .deleteEvent(let id,let currentUserId,let type,let exdate):
-            return requestParametersByPost(["id":id,"current_user_id":currentUserId,"type":type,"exdate":exdate])
+            return requestParametersByPost(["id":id,"current_user_id":currentUserId,"type":type,"exdate_str":exdate])
         case .addAssistants(let model):
             return requestToTaskByPost(model)
         case .recieveAssistantsList:

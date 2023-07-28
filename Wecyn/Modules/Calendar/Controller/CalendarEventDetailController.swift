@@ -7,6 +7,7 @@
 
 import UIKit
 import PopMenu
+import SafariServices
 enum CalendarEventDetailCellType {
     case Watch
     case Title
@@ -275,7 +276,29 @@ class CalendarEventDetailController: BaseTableController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = models[indexPath.section][indexPath.row]
+        if model.cellType == .Location {
+            Haptico.selection()
+            let vc = CalendarEventMapController(location: model.model.location)
+            self.navigationController?.pushViewController(vc)
+        }
+        if model.cellType == .Link {
+            Haptico.selection()
+            if model.model.url.isValidHttpUrl || model.model.url.isValidHttpsUrl {
+                if let url = URL(string: model.model.url) {
+                    let vc = SFSafariViewController(url: url)
+                    vc.delegate = self
+                    self.present(vc, animated: true)
+                }
+            } else {
+                if let url = URL(string: "http://" + model.model.url) {
+                    let vc = SFSafariViewController(url: url)
+                    self.present(vc, animated: true)
+                }
+            }
+           
+        }
         if model.cellType == .Delete  {
+            Haptico.selection()
             if model.model.is_repeat == 1 {
                 let message = CalendarBelongUserId == self.eventModel.creator_id ? nil : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
                 let alert = UIAlertController(title: "this is a recurrence event", message: message, preferredStyle: .actionSheet)
@@ -283,7 +306,7 @@ class CalendarEventDetailController: BaseTableController {
                     self.deleteEvent(type: 1,exdate: String(model.model.start_time.split(separator: " ").first ?? ""))
                 }
                 alert.addAction(title: "delete this and all following events", style: .destructive) { _ in
-                    self.deleteEvent(type: 2)
+                    self.deleteEvent(type: 2,exdate: String(model.model.start_time.split(separator: " ").first ?? ""))
                 }
                 alert.addAction(title: "delete all events in the sequence", style: .destructive) { _ in
                     self.deleteEvent()
@@ -329,6 +352,12 @@ class CalendarEventDetailController: BaseTableController {
         }).disposed(by: self.rx.disposeBag)
     }
     
+}
+
+extension CalendarEventDetailController:SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true)
+      }
 }
 
 class CalendarEventDetailTitleCell: UITableViewCell {
@@ -444,11 +473,13 @@ class CalendarEventDetailInfoCell: UITableViewCell {
             if model.cellType == .Link  {
                 titleLabel.text = model.model.url
                 imgView.image = R.image.link()
+                accessoryType = .disclosureIndicator
             }
             
             if model.cellType == .Location  {
                 titleLabel.text = model.model.location
                 imgView.image = R.image.location()
+                accessoryType = .disclosureIndicator
             }
             
             if model.cellType == .Creator  {

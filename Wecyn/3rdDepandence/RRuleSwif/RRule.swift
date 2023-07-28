@@ -13,17 +13,20 @@ public struct RRule {
     public static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         return dateFormatter
     }()
     public static let ymdDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         return dateFormatter
     }()
 
     internal static let ISO8601DateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         return dateFormatter
     }()
     
@@ -76,8 +79,8 @@ public struct RRule {
             recurrenceRule.byhour = byhour.sorted(by: <)
         }
         
-        if let byhour = dictionary["byminute"] as? [Int] {
-            recurrenceRule.byhour = byhour.sorted(by: <)
+        if let byminute = dictionary["byminute"] as? [Int] {
+            recurrenceRule.byminute = byminute.sorted(by: <)
         }
         
         

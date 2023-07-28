@@ -216,7 +216,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 75 images.
+  /// This `_R.image` struct is generated, and contains static references to 79 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -286,6 +286,9 @@ struct _R {
     /// Image `google`.
     var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `iphone.gen1.circle.fill`.
+    var iphoneGen1CircleFill: RswiftResources.ImageResource { .init(name: "iphone.gen1.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `job_location`.
     var job_location: RswiftResources.ImageResource { .init(name: "job_location", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -306,6 +309,9 @@ struct _R {
 
     /// Image `location`.
     var location: RswiftResources.ImageResource { .init(name: "location", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `location.circle.fill`.
+    var locationCircleFill: RswiftResources.ImageResource { .init(name: "location.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `magnifyingglass`.
     var magnifyingglass: RswiftResources.ImageResource { .init(name: "magnifyingglass", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -369,6 +375,12 @@ struct _R {
 
     /// Image `proile_user`.
     var proile_user: RswiftResources.ImageResource { .init(name: "proile_user", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `questionmark.circle.fill`.
+    var questionmarkCircleFill: RswiftResources.ImageResource { .init(name: "questionmark.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `rectangle.on.rectangle.circle.fill`.
+    var rectangleOnRectangleCircleFill: RswiftResources.ImageResource { .init(name: "rectangle.on.rectangle.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `repeat`.
     var `repeat`: RswiftResources.ImageResource { .init(name: "repeat", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -622,7 +634,7 @@ struct _R {
 
       let name = "LaunchScreen"
       func validate() throws {
-        if UIKit.UIImage(named: "appicon", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'appicon' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TextColor162C46", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor162C46' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
       }
     }
   }

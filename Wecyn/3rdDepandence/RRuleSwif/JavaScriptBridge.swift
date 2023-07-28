@@ -140,26 +140,26 @@ internal extension RecurrenceRule {
             jsonString += "byweekday: [\(byweekdayJSSymbols.joined(separator: ","))],"
         }
 
-        let byhourStrings = byhour.map({ (hour) -> String in
-            return String(hour)
-        })
-        if byhourStrings.count > 0 {
-            jsonString += "byhour: [\(byhourStrings.joined(separator: ","))],"
-        }
-
-        let byminuteStrings = byminute.map({ (minute) -> String in
-            return String(minute)
-        })
-        if byminuteStrings.count > 0 {
-            jsonString += "byminute: [\(byminuteStrings.joined(separator: ","))],"
-        }
-
-        let bysecondStrings = bysecond.map({ (second) -> String in
-            return String(second)
-        })
-        if bysecondStrings.count > 0 {
-            jsonString += "bysecond: [\(bysecondStrings.joined(separator: ","))]"
-        }
+//        let byhourStrings = byhour.map({ (hour) -> String in
+//            return String(hour)
+//        })
+//        if byhourStrings.count > 0 {
+//            jsonString += "byhour: [\(byhourStrings.joined(separator: ","))],"
+//        }
+//
+//        let byminuteStrings = byminute.map({ (minute) -> String in
+//            return String(minute)
+//        })
+//        if byminuteStrings.count > 0 {
+//            jsonString += "byminute: [\(byminuteStrings.joined(separator: ","))],"
+//        }
+//
+//        let bysecondStrings = bysecond.map({ (second) -> String in
+//            return String(second)
+//        })
+//        if bysecondStrings.count > 0 {
+//            jsonString += "bysecond: [\(bysecondStrings.joined(separator: ","))]"
+//        }
 
         if String(jsonString.suffix(from: jsonString.index(jsonString.endIndex, offsetBy: -1))) == "," {
             jsonString.remove(at: jsonString.index(jsonString.endIndex, offsetBy: -1))

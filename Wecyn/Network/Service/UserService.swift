@@ -22,4 +22,14 @@ class UserService {
         let target = MultiTarget(UserApi.userInfo)
         return APIProvider.rx.request(target).asObservable().mapObject(UserInfoModel.self)
     }
+    
+    
+    /// 修改用户信息
+    /// - Parameter model: UpdateUserInfoRequestModel
+    /// - Returns: ResponseStatus
+    static func updateUserInfo(model:UpdateUserInfoRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(UserApi.updateUserInfo(model: model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
 }

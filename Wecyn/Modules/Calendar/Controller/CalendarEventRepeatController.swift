@@ -228,7 +228,7 @@ class CalendarEventRepeatController: BaseTableController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
+        Haptico.selection()
         
         models.flatMap({ $0 }).forEach({ $0.isSelect = false })
         
@@ -437,23 +437,24 @@ class CalendarEventStepperCell: UITableViewCell {
         stepper.value = 1
         stepper.minimumValue = 1
         stepper.maximumValue = 999
-        stepper.rx.value.asObservable()
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                Haptico.selection()
-                if let model = self.model {
-                    model.value =  $0.int.string
-                    self.updateIntervalData()
-                    self.stepperIntervalDidChanged?(model,$0.int)
-                }
-                
-                if let model = self.countModel {
-                    model.value =  $0.int.string
-                    self.updateCountData()
-                    self.stepperCountDidChanged?(model,$0.int)
-                }
-            })
-            .disposed(by: rx.disposeBag)
+        stepper.addTarget(self, action: #selector(stepperDidChanged), for: .valueChanged)
+    
+    }
+    
+    @objc func stepperDidChanged() {
+        
+        Haptico.selection()
+        if let model = self.model {
+            model.value =  stepper.value.int.string
+            self.updateIntervalData()
+            self.stepperIntervalDidChanged?(model,stepper.value.int)
+        }
+        
+        if let model = self.countModel {
+            model.value =  stepper.value.int.string
+            self.updateCountData()
+            self.stepperCountDidChanged?(model,stepper.value.int)
+        }
     }
     
     

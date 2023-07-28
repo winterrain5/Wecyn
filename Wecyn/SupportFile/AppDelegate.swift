@@ -51,20 +51,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb else {
             return false
         }
-
+        
         // Confirm that the NSUserActivity object contains a valid NDEF message.
         let ndefMessage = userActivity.ndefMessagePayload
-        guard
+        if
             let record = ndefMessage.records.first,
             record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
             let uri = String(data: record.payload, encoding: .utf8),
-            let uid = uri.split(separator: "/").last else {
-            return false
+            let uid = uri.split(separator: "/").last  {
+            print("uid:\(uid)")
+            
+            let vc = NFCNameCardController(id: String(uid).int)
+            window?.rootViewController?.present(vc, animated: true)
         }
-        print("uid:\(uid)")
         
-        let vc = NFCNameCardController(id: String(uid).int)
-        window?.rootViewController?.present(vc, animated: true)
+        if let url = userActivity.webpageURL {
+            guard let uid = url.absoluteString.split(separator: "/").last else  {
+                return false
+            }
+            
+            let vc = NFCNameCardController(id: String(uid).int)
+            window?.rootViewController?.present(vc, animated: true)
+        }
+        
         
         return true
     }

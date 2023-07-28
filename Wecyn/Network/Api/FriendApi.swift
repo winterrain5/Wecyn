@@ -23,6 +23,7 @@ enum FriendApi  {
     case friendToGroup(_ id:Int, _ friendIds: [Int])
     case selectGroup(_ id:Int? = nil)
     case updateGroup(_ model:GroupUpdateRequestModel)
+    case friendNameCard(_  id:Int)
 }
 
 extension FriendApi:TargetType, Cacheable {
@@ -54,6 +55,8 @@ extension FriendApi:TargetType, Cacheable {
             return "/api/network/selectGroup/"
         case .updateGroup:
             return "/api/network/updateGroup/"
+        case .friendNameCard:
+            return "/api/network/nameCardInfo"
         }
     }
     
@@ -108,6 +111,8 @@ extension FriendApi:TargetType, Cacheable {
             return requestParametersByGet(["id":id])
         case .updateGroup(let model):
             return requestToTaskByPost(model)
+        case .friendNameCard(let id):
+            return requestParametersByGet(["user_id":id])
         }
         
     }

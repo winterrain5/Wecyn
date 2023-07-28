@@ -10,6 +10,7 @@ import Moya
 enum UserApi {
     case uploadAvatar(photo:String)
     case userInfo
+    case updateUserInfo(model:UpdateUserInfoRequestModel)
 }
 
 extension UserApi: TargetType {
@@ -19,6 +20,8 @@ extension UserApi: TargetType {
             return "/api/user/uploadAvatar/"
         case .userInfo:
             return "/api/user/userInfo/"
+        case .updateUserInfo:
+            return "/api/user/updateUserInfo/"
         }
     }
     
@@ -26,6 +29,8 @@ extension UserApi: TargetType {
         switch self {
         case .userInfo:
             return Moya.Method.get
+        case .updateUserInfo:
+            return Moya.Method.put
         default:
             return Moya.Method.post
         }
@@ -37,6 +42,8 @@ extension UserApi: TargetType {
             return requestParametersByPost(["photo":photo])
         case .userInfo:
             return .requestPlain
+        case .updateUserInfo(let model):
+            return requestToTaskByPost(model)
         }
     }
 }

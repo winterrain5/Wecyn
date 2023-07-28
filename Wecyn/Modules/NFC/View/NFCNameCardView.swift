@@ -18,17 +18,12 @@ class NFCNameCardView: UIView {
     
     let nameLabel = UILabel()
     
-    let phoneIcon = UIImageView()
-    let phoneLabel = UILabel()
-    
-    let mailIcon = UIImageView()
-    let mailLabel = UILabel()
-    
-   
     
     var model:UserInfoModel? {
         didSet {
             guard let model = model else { return }
+            
+            hideSkeleton()
             
             avtImgView.kf.setImage(with: model.avatar.avatarUrl, placeholder: R.image.proile_user())
             blurImageView.kf.setImage(with: model.avatar.avatarUrl)
@@ -36,9 +31,16 @@ class NFCNameCardView: UIView {
             let url = "www.terrabyte.sg/wecyn/uid/\(model.id)"
             qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: nil)
             
-            nameLabel.text = model.full_name
-            mailLabel.text = model.email
-            phoneLabel.text = model.mobile
+            var text:String = model.full_name
+            if !model.job_title.isEmpty {
+               text = text + "\n" + model.job_title
+            }
+            if !model.company.isEmpty {
+                text = text + "\n" + model.company
+            }
+            
+            nameLabel.text = text
+         
             
         }
     }
@@ -54,10 +56,6 @@ class NFCNameCardView: UIView {
         avtContentView.addSubview(avtImgView)
         addSubview(qrCodeImgView)
         addSubview(nameLabel)
-        addSubview(phoneIcon)
-        addSubview(phoneLabel)
-        addSubview(mailIcon)
-        addSubview(mailLabel)
         
         self.subviews.forEach({ $0.isSkeletonable = true })
         
@@ -76,20 +74,12 @@ class NFCNameCardView: UIView {
         
         avtImgView.contentMode = .scaleAspectFit
         avtImgView.cornerRadius = 40
-        avtImgView.layer.masksToBounds = true
         
         nameLabel.textColor = R.color.textColor162C46()
         nameLabel.font = UIFont.sk.pingFangSemibold(18)
+        nameLabel.numberOfLines = 3
         
-        phoneLabel.textColor = R.color.textColor162C46()
-        phoneLabel.font = UIFont.sk.pingFangRegular(15)
-        phoneIcon.image = R.image.phoneCircleFill()
-        
-        mailLabel.textColor = R.color.textColor162C46()
-        mailLabel.font = UIFont.sk.pingFangRegular(15)
-        mailIcon.image = R.image.envelopeCircleFill()
-        
-        
+        showSkeleton()
         
     }
     
@@ -124,36 +114,8 @@ class NFCNameCardView: UIView {
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.top.equalTo(avtImgView.snp.bottom).offset(32)
-            make.height.equalTo(20)
             make.right.equalToSuperview().offset(-16)
         }
-        
-        phoneIcon.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.top.equalTo(nameLabel.snp.bottom).offset(16)
-            make.width.height.equalTo(20)
-        }
-        
-        phoneLabel.snp.makeConstraints { make in
-            make.left.equalTo(phoneIcon.snp.right).offset(8)
-            make.centerY.equalTo(phoneIcon.snp.centerY)
-            make.height.equalTo(16)
-            make.right.equalToSuperview().offset(-16)
-        }
-        
-        mailIcon.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.top.equalTo(phoneIcon.snp.bottom).offset(16)
-            make.width.height.equalTo(20)
-        }
-        
-        mailLabel.snp.makeConstraints { make in
-            make.left.equalTo(mailIcon.snp.right).offset(8)
-            make.centerY.equalTo(mailIcon.snp.centerY)
-            make.height.equalTo(16)
-            make.right.equalToSuperview().offset(-16)
-        }
-        
      
         
        

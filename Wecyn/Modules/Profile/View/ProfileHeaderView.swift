@@ -74,7 +74,8 @@ class ProfileHeaderView: UIView {
         
         viewNamecardButton.rx.tap.subscribe(onNext: {
             let vc = NFCNameCardController()
-            UIViewController.sk.getTopVC()?.present(vc, animated: true)
+            let nav = BaseNavigationController(rootViewController: vc)
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
         }).disposed(by: rx.disposeBag)
         
         viewCalendarButton.rx.tap.subscribe(onNext:{

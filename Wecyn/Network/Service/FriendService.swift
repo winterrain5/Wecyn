@@ -132,6 +132,15 @@ class FriendService {
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
+    
+    /// 朋友的名片
+    /// - Parameter id: 好友ID
+    /// - Returns:UserInfoModel
+    static func friendNameCard(id: Int) -> Observable<UserInfoModel> {
+        let target = MultiTarget(FriendApi.friendNameCard(id))
+        return APIProvider.rx.request(target).asObservable().mapObject(UserInfoModel.self)
+    }
+    
 }
 
 class FriendListModel: BaseModel {
