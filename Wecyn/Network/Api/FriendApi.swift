@@ -56,7 +56,7 @@ extension FriendApi:TargetType, Cacheable {
         case .updateGroup:
             return "/api/network/updateGroup/"
         case .friendNameCard:
-            return "/api/network/nameCardInfo"
+            return "/api/network/nameCardInfo/"
         }
     }
     
@@ -112,7 +112,7 @@ extension FriendApi:TargetType, Cacheable {
         case .updateGroup(let model):
             return requestToTaskByPost(model)
         case .friendNameCard(let id):
-            return requestParametersByGet(["user_id":id])
+            return requestParametersByGet(["id":id])
         }
         
     }

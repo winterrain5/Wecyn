@@ -12,7 +12,7 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
-    var buildType: AppBuildType = .Uat
+    var buildType: AppBuildType = .Dev
     
     enum AppBuildType: Int {
         case Dev

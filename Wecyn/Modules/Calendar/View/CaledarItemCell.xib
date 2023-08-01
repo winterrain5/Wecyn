@@ -98,10 +98,18 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenWhenSkeletonIsActive" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXc-5z-sup">
+                                <rect key="frame" x="7.9999999999999982" y="38.666666666666664" width="26.333333333333329" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.15686274510000001" green="0.5450980392" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="dXc-5z-sup" firstAttribute="centerY" secondItem="LDz-uQ-mnD" secondAttribute="centerY" id="0IV-g7-P4N"/>
                             <constraint firstItem="a60-gB-22e" firstAttribute="top" secondItem="LDz-uQ-mnD" secondAttribute="bottom" constant="8" id="1IQ-02-MTb"/>
+                            <constraint firstItem="dXc-5z-sup" firstAttribute="centerX" secondItem="hg5-iA-Ijn" secondAttribute="centerX" id="2b7-D3-8ck"/>
                             <constraint firstItem="xwu-5I-2nE" firstAttribute="centerY" secondItem="kia-Ku-ri4" secondAttribute="centerY" id="2v2-yr-CH0"/>
                             <constraint firstItem="hg5-iA-Ijn" firstAttribute="top" secondItem="V8K-X5-Qsq" secondAttribute="top" constant="16" id="6rd-8I-hrC"/>
                             <constraint firstItem="QrG-ZC-Rqg" firstAttribute="centerY" secondItem="hg5-iA-Ijn" secondAttribute="centerY" id="Cdw-iG-BFh"/>
@@ -139,13 +147,14 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="creatorLabel" destination="a60-gB-22e" id="pp6-H1-jDM"/>
+                <outlet property="crossDayLabel" destination="dXc-5z-sup" id="KpD-3W-eY6"/>
                 <outlet property="repeatImgView" destination="xwu-5I-2nE" id="Axm-O5-qmY"/>
                 <outlet property="statusImgView" destination="kia-Ku-ri4" id="7OE-Fr-Aue"/>
                 <outlet property="statusView" destination="hg5-iA-Ijn" id="Slo-hY-nwI"/>
                 <outlet property="timeLabel" destination="LDz-uQ-mnD" id="Phm-Bv-W2V"/>
                 <outlet property="titleLabel" destination="QrG-ZC-Rqg" id="4KE-et-hGc"/>
             </connections>
-            <point key="canvasLocation" x="-193" y="-86"/>
+            <point key="canvasLocation" x="-34" y="-87"/>
         </tableViewCell>
     </objects>
     <resources>

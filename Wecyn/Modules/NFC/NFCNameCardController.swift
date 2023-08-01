@@ -7,23 +7,36 @@
 
 import UIKit
 import NFCReaderWriter
+import SafariServices
+import MessageUI
+enum NameCardDataType {
+    case FirstName
+    case LastName
+    case JobTitle
+    case CompanyName
+    case Mobile
+    case OfficeNumber
+    case Email
+    case OfficeLocation
+    case Website
+}
 
 class NameCardModel {
     var img:UIImage?
     var value:String
-    var sel:String
+    var type:NameCardDataType
     
-    init(img: UIImage?, value: String, sel: String) {
+    init(img: UIImage?, value: String, type: NameCardDataType) {
         self.img = img
         self.value = value
-        self.sel = sel
+        self.type = type
     }
 }
 
-class NFCNameCardController: BaseTableController {
+class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,MFMailComposeViewControllerDelegate ,MFMessageComposeViewControllerDelegate{
     let readerWriter = NFCReaderWriter.sharedInstance()
     let namecardView = NFCNameCardView()
-
+    
     let editButton = UIButton()
     let closeButton = UIButton()
     var datas:[NameCardModel] = []
@@ -39,8 +52,10 @@ class NFCNameCardController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isSkeletonable = true
-       
+        
         self.view.addSubview(editButton)
+        editButton.isSkeletonable = true
+        editButton.isHiddenWhenSkeletonIsActive = true
         editButton.snp.makeConstraints { make in
             make.right.top.equalToSuperview().inset(16)
             make.width.height.equalTo(30)
@@ -55,6 +70,8 @@ class NFCNameCardController: BaseTableController {
         editButton.imageForNormal = R.image.squareAndPencilCircleFill()
         
         self.view.addSubview(closeButton)
+        closeButton.isSkeletonable = true
+        closeButton.isHiddenWhenSkeletonIsActive = true
         closeButton.snp.makeConstraints { make in
             make.left.top.equalToSuperview().inset(16)
             make.width.height.equalTo(30)
@@ -70,7 +87,7 @@ class NFCNameCardController: BaseTableController {
     }
     
     override func refreshData() {
-       
+        
         if self.id == nil {
             
             UserService.getUserInfo().subscribe(onNext:{
@@ -83,6 +100,7 @@ class NFCNameCardController: BaseTableController {
         }
         
         guard let id = self.id else { return }
+        
         FriendService.friendNameCard(id:id).subscribe(onNext:{
             self.addConnectFooter()
             self.addDatas($0)
@@ -93,27 +111,27 @@ class NFCNameCardController: BaseTableController {
     func addDatas(_ model:UserInfoModel) {
         datas.removeAll()
         if !model.mobile.isEmpty {
-            let mobile = NameCardModel(img: R.image.iphoneGen1CircleFill(), value: model.mobile, sel: "mobileDidSelect")
+            let mobile = NameCardModel(img: R.image.iphoneGen1CircleFill(), value: model.mobile, type: .Mobile)
             datas.append(mobile)
         }
         
         if !model.office_number.isEmpty {
-            let officeNumber = NameCardModel(img: R.image.phoneCircleFill(), value: model.office_number, sel: "officeNumberSelect")
+            let officeNumber = NameCardModel(img: R.image.phoneCircleFill(), value: model.office_number, type: .OfficeNumber)
             datas.append(officeNumber)
         }
         
         if !model.email.isEmpty {
-            let email = NameCardModel(img: R.image.envelopeCircleFill(), value: model.email, sel: "emailDidSelect")
+            let email = NameCardModel(img: R.image.envelopeCircleFill(), value: model.email, type: .Email)
             datas.append(email)
         }
         
         if !model.office_location.isEmpty {
-            let location = NameCardModel(img: R.image.locationCircleFill(), value: model.office_location, sel: "locationDidSelect")
+            let location = NameCardModel(img: R.image.locationCircleFill(), value: model.office_location, type: .OfficeLocation)
             datas.append(location)
         }
         
         if !model.website.isEmpty {
-            let website = NameCardModel(img: R.image.rectangleOnRectangleCircleFill(), value: model.website, sel: "websiteDidSelect")
+            let website = NameCardModel(img: R.image.rectangleOnRectangleCircleFill(), value: model.website, type: .Website)
             datas.append(website)
         }
         self.namecardView.model = model
@@ -125,7 +143,11 @@ class NFCNameCardController: BaseTableController {
         self.tableView?.register(cellWithClass: UITableViewCell.self)
         self.tableView?.tableHeaderView = namecardView
         namecardView.size = CGSize(width: kScreenWidth, height: 268)
-     
+        namecardView.dataUpdateComplete = {  [weak self] height in
+            self?.namecardView.size = CGSize(width: kScreenWidth, height: height)
+            self?.tableView?.tableHeaderView = self?.namecardView
+        }
+        
         self.tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight, right: 0)
     }
     
@@ -155,7 +177,135 @@ class NFCNameCardController: BaseTableController {
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        Haptico.selection()
+        let data = datas[indexPath.row]
+        switch data.type {
+        case .Mobile:
+            let alert = UIAlertController(style: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Send Text Message", style: .default,handler: { _ in
+                if MFMessageComposeViewController.canSendText() {
+                    let vc = MFMessageComposeViewController()
+                    vc.recipients = [data.value]
+                    //设置代理
+                    vc.messageComposeDelegate = self
+                    self.present(vc, animated: true)
+                } else {
+                    print("本设备不能发短信")
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Call", style: .default, handler:{ _ in
+                let phone = "telprompt://" + data.value
+                if let url = phone.url, UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            present(alert, animated: true)
+        case .OfficeNumber:
+            let phone = "telprompt://" + data.value
+            if let url = phone.url, UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        case .Email:
+            if MFMailComposeViewController.canSendMail() {  //  是否可以发邮件 //  如果不能,去系统设置接收邮箱
+                let vc = MFMailComposeViewController()
+                vc.mailComposeDelegate = self
+                vc.setToRecipients([data.value])//  接收邮件的邮箱
+                vc.setSubject("")
+                vc.setMessageBody("", isHTML: false)
+                self.present(vc, animated: true)
+            } else if let emailUrl = createEmailUrl(to: data.value, subject: "", body: "") {
+                UIApplication.shared.open(emailUrl)
+            }
+        case .OfficeLocation:
+            let vc = MapViewController(location: data.value)
+            self.navigationController?.pushViewController(vc)
+        case .Website:
+            if data.value.isValidHttpUrl || data.value.isValidHttpsUrl {
+                if let url = URL(string: data.value) {
+                    let vc = SFSafariViewController(url: url)
+                    vc.delegate = self
+                    self.present(vc, animated: true)
+                }
+            } else {
+                if let url = URL(string: "http://" + data.value) {
+                    let vc = SFSafariViewController(url: url)
+                    self.present(vc, animated: true)
+                }
+            }
+        default:
+            print(data.type)
+        }
+        
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        
+        controller.dismiss(animated: true)
+        
+    }
+    
+    func createEmailUrl(to: String, subject: String, body: String) -> URL? {
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let gmailUrl = URL(string: "googlegmail://co?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let outlookUrl = URL(string: "ms-outlook://compose?to=\(to)&subject=\(subjectEncoded)")
+        let yahooMail = URL(string: "ymail://mail/compose?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let sparkUrl = URL(string: "readdle-spark://compose?recipient=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let defaultUrl = URL(string: "mailto:\(to)?subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        if let gmailUrl = gmailUrl, UIApplication.shared.canOpenURL(gmailUrl) {
+            return gmailUrl
+        } else if let outlookUrl = outlookUrl, UIApplication.shared.canOpenURL(outlookUrl) {
+            return outlookUrl
+        } else if let yahooMail = yahooMail,UIApplication.shared.canOpenURL(yahooMail) {
+            return yahooMail
+        } else if let sparkUrl = sparkUrl, UIApplication.shared.canOpenURL(sparkUrl) {
+            return sparkUrl
+        }
+        return defaultUrl
+    }
+    
+    //MARK:- Mail Delegate
+    //用户退出邮件窗口时被调用
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result.rawValue{
+        case MFMailComposeResult.sent.rawValue:
+            print("邮件已发送")
+        case MFMailComposeResult.cancelled.rawValue:
+            print("邮件已取消")
+        case MFMailComposeResult.saved.rawValue:
+            print("邮件已保存")
+        case MFMailComposeResult.failed.rawValue:
+            print("邮件发送失败")
+        default:
+            print("邮件没有发送")
+            break
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    //MFMessageComposeViewControllerDelegate
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+        controller.dismiss(animated: true, completion: nil)
+        //判断短信的状态
+        switch result{
+            
+        case .sent:
+            print("短信已发送")
+        case .cancelled:
+            print("短信取消发送")
+        case .failed:
+            print("短信发送失败")
+        default:
+            print("短信已发送")
+            break
+        }
+    }
+    
     func addConnectFooter(){
         let connectButton = LoadingButton()
         let saveToContactButton = UIButton()
@@ -257,16 +407,16 @@ class NFCNameCardController: BaseTableController {
         self.tableView?.tableFooterView = view
         view.size = CGSize(width: kScreenWidth, height: 112)
     }
-
+    
     // iOS 13 NFC Writer: write data to record
-   func write(){
+    func write(){
         readerWriter.newWriterSession(with: self, isLegacy: true, invalidateAfterFirstRead: true, alertMessage: "Nearby NFC card for write")
         readerWriter.begin()
         self.readerWriter.detectedMessage = "Write data success"
     }
     
     // iOS 13 NFC Tag Reader: Tag Info and NFCNDEFMessage
-   func read(){
+    func read(){
         readerWriter.newWriterSession(with: self, isLegacy: false, invalidateAfterFirstRead: true, alertMessage: "Nearby NFC card for read tag identifier")
         readerWriter.begin()
         //readerWriter.detectedMessage = "detected Tag info"
@@ -293,10 +443,10 @@ class NFCNameCardController: BaseTableController {
         return recordInfos
     }
     
-
+    
     func getTagInfos(_ tag: __NFCTag) -> [String: Any] {
         var infos: [String: Any] = [:]
-
+        
         switch tag.type {
         case .miFare:
             if let miFareTag = tag.asNFCMiFareTag() {
@@ -349,8 +499,8 @@ class NFCNameCardController: BaseTableController {
         }
         return infos
     }
-
-
+    
+    
 }
 extension NFCNameCardController: NFCReaderDelegate {
     
@@ -368,13 +518,13 @@ extension NFCNameCardController: NFCReaderDelegate {
     /// -----------------------------
     func reader(_ session: NFCReader, didDetectNDEFs messages: [NFCNDEFMessage]) {
         let  recordInfos = contentsForMessages(messages)
-
+        
         DispatchQueue.main.async {
             print(recordInfos)
         }
         readerWriter.end()
     }
-
+    
     /// -----------------------------
     // MARK: - 2. NFC Writer(iOS 13):
     /// -----------------------------
@@ -386,16 +536,16 @@ extension NFCNameCardController: NFCReaderDelegate {
         var payloadData = Data([0x02])
         let uri = "terrabyte.sg/wecyn/uid/\(uid)"
         payloadData.append(uri.data(using: .utf8)!)
-
+        
         let payload = NFCNDEFPayload.init(
             format: NFCTypeNameFormat.nfcWellKnown,
             type: "U".data(using: .utf8)!,
             identifier: Data.init(count: 0),
             payload: payloadData,
             chunkSize: 0)
-
+        
         let message = NFCNDEFMessage(records: [payload])
-
+        
         readerWriter.write(message, to: tags.first!) { (error) in
             if let err = error {
                 print("ERR:\(err)")

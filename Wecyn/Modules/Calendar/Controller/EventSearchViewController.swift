@@ -9,10 +9,11 @@ import UIKit
 import IQKeyboardManagerSwift
 class EventSearchViewController: BaseTableController {
     let requestModel = EventListRequestModel()
+    var searchView = NavbarSearchView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let searchView = NavbarSearchView(placeholder: "Search Event Title",isSearchable: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+        searchView = NavbarSearchView(placeholder: "Search Event Title",isSearchable: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
@@ -47,6 +48,8 @@ class EventSearchViewController: BaseTableController {
             self.dataArray = events
             
             self.endRefresh(events.count)
+            
+            self.searchView.endSearching()
             
         },onError: { e in
             self.endRefresh(.NoData, emptyString: "No Events")
@@ -91,78 +94,5 @@ class EventSearchViewController: BaseTableController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
-    }
-}
-class NavbarSearchView: UIView,UITextFieldDelegate {
-    var leftImgView = UIImageView()
-    var rightTf = UITextField()
-    var searching:((String)->())?
-    var beginSearch:(()->())?
-    var isSearchable = false
-    var placeholder:String = ""
-    var isBecomeFirstResponder = false
-    init(placeholder:String,isSearchable:Bool = false,isBecomeFirstResponder:Bool = false) {
-       
-        super.init(frame: .zero)
-        
-        self.placeholder = placeholder
-        self.isSearchable = isSearchable
-        
-        backgroundColor = R.color.backgroundColor()
-        
-        addSubview(leftImgView)
-        leftImgView.image = R.image.search_icon()
-        leftImgView.contentMode = .scaleAspectFit
-        
-        addSubview(rightTf)
-        rightTf.returnKeyType = .search
-        rightTf.enablesReturnKeyAutomatically = true
-        rightTf.placeholder = self.placeholder
-        rightTf.font = UIFont.sk.pingFangRegular(12)
-        rightTf.textColor = R.color.textColor52()
-        rightTf.delegate = self
-        rightTf.clearsOnBeginEditing = true
-        rightTf.clearButtonMode = .whileEditing
-        
-        rightTf.isUserInteractionEnabled = isSearchable
-        if isBecomeFirstResponder && isSearchable {
-            let work = DispatchWorkItem { [weak self] in
-                self?.rightTf.becomeFirstResponder()
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: work)
-            
-        }
-        
-    }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-       
-     
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        cornerRadius = frame.size.height * 0.5
-
-        leftImgView.frame = CGRect(x: 20, y: 0, width: 15, height: 15)
-        leftImgView.center.y = frame.center.y
-        rightTf.frame = CGRect(x: 43, y: 0, width: frame.width - 51, height: frame.height)
-        rightTf.center.y = frame.center.y
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let test = self.rightTf.text ?? ""
-        if test.isEmpty { return true }
-        self.searching?(test)
-        self.endEditing(true)
-        Logger.debug("search text:\(test)")
-        return true
-    }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        beginSearch?()
     }
 }

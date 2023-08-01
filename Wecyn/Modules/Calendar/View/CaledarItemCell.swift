@@ -10,6 +10,7 @@ import UIKit
 class CaledarItemCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var crossDayLabel: UILabel!
     @IBOutlet weak var creatorLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -26,10 +27,6 @@ class CaledarItemCell: UITableViewCell {
             }
             
             
-            let starTime = model.start_time.split(separator: " ").last ?? ""
-            let endTime = model.end_time.split(separator: " ").last ?? ""
-            timeLabel.text = starTime + " - " + endTime
-            
             switch model.status {
             case 0: // 未知
                 statusImgView.image = R.image.personFillQuestionmark()
@@ -43,7 +40,31 @@ class CaledarItemCell: UITableViewCell {
             statusView.backgroundColor = UIColor(hexString: EventColor.allColor[model.color])
             repeatImgView.isHidden = model.is_repeat != 1
             creatorLabel.text = "creator: \(model.creator_name)"
-
+            crossDayLabel.isHidden = !model.isCrossDay
+            
+            let startTime = model.start_time.split(separator: " ").last ?? ""
+            let endTime = model.end_time.split(separator: " ").last ?? ""
+            if model.isCrossDay {
+                
+                if model.isCrossDayStart {
+                    timeLabel.text = String(startTime)
+                    crossDayLabel.text = "Start"
+                }
+                
+                if model.isCrossDayEnd {
+                    timeLabel.text = String(endTime)
+                    crossDayLabel.text = "End"
+                }
+                
+                if model.isCrossDayMiddle {
+                    timeLabel.text = "all day"
+                    crossDayLabel.text = ""
+                }
+                
+               
+            } else {
+                timeLabel.text = startTime + " - " + endTime
+            }
         }
     }
     override func awakeFromNib() {

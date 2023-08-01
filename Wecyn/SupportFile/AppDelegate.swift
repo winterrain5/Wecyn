@@ -9,7 +9,7 @@ import UIKit
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
     
@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.makeKeyAndVisible()
+        
+        UNUserNotificationCenter.current().delegate = self
         
         return true
     }
@@ -76,6 +78,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         return true
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        guard let trigger = notification.request.trigger else { return; }
+        if trigger.isKind(of: UNCalendarNotificationTrigger.classForCoder()) {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
     
 }

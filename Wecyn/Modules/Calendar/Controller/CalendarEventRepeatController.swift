@@ -299,7 +299,7 @@ class CalendarEventRepeatController: BaseTableController {
             vc.selectComplete = { idx, end in
                 self.untilSelectIndex = idx
                 if end?.endDate != nil {
-                    self.models[1].last?.value = end?.endDate?.string(format: "dd MMM yyyy") ?? ""
+                    self.models[1].last?.value = end?.endDate?.toString(format: "dd MMM yyyy") ?? ""
                 } else {
                     if (end?.occurrenceCount ?? 0) > 1 {
                         let unit = (end?.occurrenceCount ?? 0) > 0 ? "times" : "time"

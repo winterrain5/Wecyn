@@ -3103,7 +3103,7 @@
 		56F1646E28FE87149A66D2AC7FEAFCAB /* CommentAttachmentToElementConverter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CommentAttachmentToElementConverter.swift; path = Aztec/Classes/NSAttributedString/Conversions/AttachmentToElementConverter/CommentAttachmentToElementConverter.swift; sourceTree = "<group>"; };
 		56FA7789F82CC02920F5EF90B36DC002 /* _icon_file_type_sandbox@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "_icon_file_type_sandbox@2x.png"; path = "Sources/Resources/images/_icon_file_type_sandbox@2x.png"; sourceTree = "<group>"; };
 		5711C3AFF419AA30F5F51E70787AFAAD /* KMPlaceholderTextView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KMPlaceholderTextView-Info.plist"; sourceTree = "<group>"; };
-		5731FD74D2C5609383792889F0189BF8 /* NFCReaderWriter */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NFCReaderWriter; path = NFCReaderWriter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5731FD74D2C5609383792889F0189BF8 /* NFCReaderWriter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NFCReaderWriter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		576544E5295D2F3D9FC06606B27925F4 /* StoryboardResource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StoryboardResource.swift; path = Sources/RswiftResources/StoryboardResource.swift; sourceTree = "<group>"; };
 		5778143782D6E3A359760EE4ED760517 /* MJRefresh-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MJRefresh-umbrella.h"; sourceTree = "<group>"; };
 		57816C9B59A653977AECF21C3271EE47 /* UIView+MJExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+MJExtension.h"; path = "MJRefresh/UIView+MJExtension.h"; sourceTree = "<group>"; };
@@ -6257,7 +6257,7 @@
 				E49D6D248DD1CEE584E6776B9164A1B2 /* MJRefresh */,
 				3756A9BBE41ABEE8DCBF5BCA6972C4DA /* Moya */,
 				BB9F085B83443B75B2DC41CF5AC93CEB /* NewPopMenu */,
-				5731FD74D2C5609383792889F0189BF8 /* NFCReaderWriter */,
+				5731FD74D2C5609383792889F0189BF8 /* NFCReaderWriter.framework */,
 				E1E7A876DC6C596EA3F34CF76008E569 /* Permission */,
 				65B8CAAE2DCF28CCCE3881054D5C92E8 /* Pods-Wecyn */,
 				002B1E88BA14EBF633CD66EBFBA107E9 /* PromiseKit */,
@@ -8870,7 +8870,7 @@
 			);
 			name = NFCReaderWriter;
 			productName = NFCReaderWriter;
-			productReference = 5731FD74D2C5609383792889F0189BF8 /* NFCReaderWriter */;
+			productReference = 5731FD74D2C5609383792889F0189BF8 /* NFCReaderWriter.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		368AB07CB562D88ADC87507611A2E4ED /* ImagePickerSwift */ = {
@@ -13374,7 +13374,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NFCReaderWriter/NFCReaderWriter-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NFCReaderWriter/NFCReaderWriter-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -14919,7 +14919,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NFCReaderWriter/NFCReaderWriter-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NFCReaderWriter/NFCReaderWriter-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

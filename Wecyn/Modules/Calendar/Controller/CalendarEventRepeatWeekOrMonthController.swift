@@ -21,11 +21,13 @@ class WeekOrMonthModel {
 }
 let MonthData = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 let WeekData = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+let AlarmData = ["None","5 minutes ago","15 minutes ago","30 minutes ago","1 hour ago","2 hour ago","1 day ago"]
 class CalendarEventRepeatWeekOrMonthController: BaseTableController {
     
     enum WeekOrMonthType {
         case Week
         case Month
+        case Alarm
     }
     var datas:[WeekOrMonthModel] = []
     
@@ -58,14 +60,21 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
                 let isSelect = self.selectIndexs.contains($0)
                 return WeekOrMonthModel(title: $1, value: $0, isSelect: isSelect)
             })
-            self.navigation.item.title = "ByMonth"
-        } else {
-            
+            self.navigation.item.title = "By Month"
+        }
+        if type == .Week {
             datas = WeekData.enumerated().map({
                 let isSelect = self.selectIndexs.contains($0)
                 return WeekOrMonthModel(title: $1, value: $0, isSelect: isSelect)
             })
-            self.navigation.item.title = "ByWeekday"
+            self.navigation.item.title = "By Weekday"
+        }
+        if type == .Alarm {
+            datas = AlarmData.enumerated().map({
+                let isSelect = self.selectIndexs.contains($0)
+                return WeekOrMonthModel(title: $1, value: $0, isSelect: isSelect)
+            })
+            self.navigation.item.title = "Alarm"
         }
         
     }
@@ -101,6 +110,14 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         Haptico.selection()
+        
+        if self.type == .Alarm {
+            datas.forEach({ $0.isSelect = false })
+            datas[indexPath.row].isSelect = true
+            self.selectIndexs = [indexPath.row]
+            tableView.reloadData()
+            return
+        }
         self.selectIndexs.removeAll()
         
         datas[indexPath.row].isSelect.toggle()
