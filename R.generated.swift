@@ -216,7 +216,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 79 images.
+  /// This `_R.image` struct is generated, and contains static references to 76 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -316,6 +316,9 @@ struct _R {
     /// Image `magnifyingglass`.
     var magnifyingglass: RswiftResources.ImageResource { .init(name: "magnifyingglass", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `mappin.and.ellipse`.
+    var mappinAndEllipse: RswiftResources.ImageResource { .init(name: "mappin.and.ellipse", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -336,6 +339,9 @@ struct _R {
 
     /// Image `password_visible`.
     var password_visible: RswiftResources.ImageResource { .init(name: "password_visible", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `path`.
+    var path: RswiftResources.ImageResource { .init(name: "path", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `pencil.line`.
     var pencilLine: RswiftResources.ImageResource { .init(name: "pencil.line", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -429,21 +435,6 @@ struct _R {
 
     /// Image `tag.fill`.
     var tagFill: RswiftResources.ImageResource { .init(name: "tag.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tag.fill.1`.
-    var tagFill1: RswiftResources.ImageResource { .init(name: "tag.fill.1", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tag.fill.2`.
-    var tagFill2: RswiftResources.ImageResource { .init(name: "tag.fill.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tag.fill.3`.
-    var tagFill3: RswiftResources.ImageResource { .init(name: "tag.fill.3", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tag.fill.4`.
-    var tagFill4: RswiftResources.ImageResource { .init(name: "tag.fill.4", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tag.fill.5`.
-    var tagFill5: RswiftResources.ImageResource { .init(name: "tag.fill.5", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `text.quote`.
     var textQuote: RswiftResources.ImageResource { .init(name: "text.quote", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

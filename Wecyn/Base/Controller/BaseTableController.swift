@@ -16,6 +16,7 @@ class BaseTableController: BaseViewController,DataLoadable {
     var dataArray: [Any] = []
     var refreshWhenLoad: Bool = false
     var isFirstLoad: Bool = true
+    var isBeginLoad: Bool = false
     
     var page: Int = 1
     var pageSize: Int = kPageSize
@@ -76,6 +77,7 @@ class BaseTableController: BaseViewController,DataLoadable {
     
     func registRefreshHeader(colorStyle:RefreshColorStyle = .gray) {
         let header = RefreshAnimationHeader{ [weak self] in
+            self?.isBeginLoad = true
             self?.loadNewData()
         }
         header.colorStyle = colorStyle
@@ -87,6 +89,7 @@ class BaseTableController: BaseViewController,DataLoadable {
     
     func registRefreshFooter() {
         let footer = RefreshAnimationFooter{ [weak self] in
+            self?.isBeginLoad = true
             self?.loadNextPage()
         }
         tableView?.mj_footer = footer
@@ -99,6 +102,7 @@ class BaseTableController: BaseViewController,DataLoadable {
             tableView?.reloadEmptyDataSet()
         }
         isFirstLoad = false
+        isBeginLoad = false
         hideSkeleton()
     }
     

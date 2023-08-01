@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import SwiftAlertView
+import NotificationCenter
 /*
  1st colour (primary): #13A5D6
  2nd colour: #136ED6
@@ -54,12 +55,11 @@ class AddEventModel {
     var location: String?
     var url: String?
     
-    
     var attendees: [Attendees] = []
     
     var color = ""
     var duplicate = ""
-    var remind = ""
+    var alarm = ""
     
     var start_time = ""
     var end_time: String?
@@ -116,6 +116,8 @@ class CalendarAddNewEventController: BaseTableController {
     
     var editEventModel: EventInfoModel?
     var isEdit = false
+    
+    var alarmSelectIndex:Int = 1
     
     init(editEventModel: EventInfoModel? = nil) {
         self.editEventModel = editEventModel
@@ -211,8 +213,14 @@ class CalendarAddNewEventController: BaseTableController {
         IsPublic.is_public =  event.is_public
         People.attendees = event.attendees
         PeopleLimit.attendance_limit = event.attendance_limit
-        Start.start_time = event.start_time
-        End.end_time = event.end_time
+        if event.is_repeat == 1 {
+            Start.start_time = event.repeat_start_time ?? ""
+            End.end_time = event.repeat_end_time ?? ""
+        } else {
+            Start.start_time = event.start_time
+            End.end_time = event.end_time
+        }
+       
         Duplicate.duplicate = event.recurrenceType
         Desc.desc = event.desc.htmlToString
         Remark.remarks = event.remarks
@@ -272,8 +280,9 @@ class CalendarAddNewEventController: BaseTableController {
         }
         models.append(isOnlineSection)
         
+        Alarm.alarm = "15 mins ago"
         Color.color = EventColor.defaultColor
-        let tagSection = [Color]
+        let tagSection = [Alarm,Color]
         models.append(tagSection)
         
         if editEventModel == nil  {
@@ -283,31 +292,77 @@ class CalendarAddNewEventController: BaseTableController {
     }
     
     func addEvent() {
-        Toast.showLoading()
-        guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
-            Toast.showError(withStatus: "start time is required")
-            return
-        }
-        
-        if let _ = self.rrule {
-            self.rrule?.startDate = startDate
-            let rrulestr = self.rrule?.toString()
-            self.requestModel.rrule_str = rrulestr
-        }
-        self.requestModel.current_user_id = CalendarBelongUserId
-        ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
-            
-            if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Event Add Success", after: 1) {
-                    self.navigationController?.popViewController()
-                }
-            } else {
-                Toast.showMessage($0.message)
+        func addEventRequest() {
+            Toast.showLoading()
+            guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+                Toast.showError(withStatus: "start time is required")
+                return
             }
             
-        },onError: { e in
-            Toast.showMessage(e.asAPIError.errorInfo().message)
-        }).disposed(by: self.rx.disposeBag)
+            if let _ = self.rrule {
+                self.rrule?.startDate = startDate
+                let rrulestr = self.rrule?.toString()
+                self.requestModel.rrule_str = rrulestr
+            }
+            self.requestModel.current_user_id = CalendarBelongUserId
+            ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
+                
+                if $0.success == 1 {
+                    Toast.showSuccess(withStatus: "Event Add Success", after: 1) {
+                        self.navigationController?.popViewController()
+                    }
+                } else {
+                    Toast.showMessage($0.message)
+                }
+                
+            },onError: { e in
+                Toast.showMessage(e.asAPIError.errorInfo().message)
+            }).disposed(by: self.rx.disposeBag)
+        }
+        
+      
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { status, e in
+            if !status {
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, completionHandler: nil)
+                }
+                return
+            }
+            
+            if self.rrule != nil {
+                let dates = self.rrule?.allOccurrences()
+                
+                dates?.forEach({ date in
+                    let content = UNMutableNotificationContent()
+                    content.title = self.Title.title ?? ""
+                    content.body = self.Desc.desc ?? ""
+                    content.badge = 1
+                    let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + 1)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                    let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request) { err in
+                        err != nil ? print("添加本地通知错误", err!.localizedDescription) : print("添加本地通知成功")
+                    }
+                })
+            } else {
+                guard let date = self.requestModel.start_time?.date(format: DateFormat.ddMMyyyyHHmm.rawValue) else { return }
+                let content = UNMutableNotificationContent()
+                content.title = self.Title.title ?? ""
+                content.body = self.Desc.desc ?? ""
+                content.badge = 1
+                let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + 1)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { err in
+                    err != nil ? print("添加本地通知错误", err!.localizedDescription) : print("添加本地通知成功")
+                }
+            }
+           
+            addEventRequest()
+           
+        }
+        
     }
     
     func editEvent() {
@@ -344,12 +399,12 @@ class CalendarAddNewEventController: BaseTableController {
             alert.addAction(title: "edit only this event", style: .destructive) { _ in
                 
                 self.requestModel.is_repeat = 0
-                self.requestModel.exdate_str = String(editEventModel.start_time.split(separator: " ").first ?? "")
+                self.requestModel.exdate_str = String(editEventModel.repeat_start_time?.split(separator: " ").first ?? "")
                 editEventRequest()
             }
             alert.addAction(title: "edit this and all following events", style: .destructive) { _ in
                 self.requestModel.is_repeat = 1
-                self.requestModel.exdate_str = String(editEventModel.start_time.split(separator: " ").first ?? "")
+                self.requestModel.exdate_str = String(editEventModel.repeat_start_time?.split(separator: " ").first ?? "")
                 editEventRequest()
             }
             alert.addAction(title: "edit all events in the sequence", style: .destructive) { _ in
@@ -377,7 +432,6 @@ class CalendarAddNewEventController: BaseTableController {
         configTableview(.insetGrouped)
         
         tableView?.backgroundColor = R.color.backgroundColor()
-        
         tableView?.separatorColor = R.color.seperatorColor()
         tableView?.separatorStyle = .singleLine
         
@@ -402,7 +456,7 @@ class CalendarAddNewEventController: BaseTableController {
         let model = models[indexPath.section][indexPath.row]
         
         switch model.type {
-        case .Title, .PeopleLimit, .Location, .Link:
+        case .Title, .PeopleLimit, .Link:
             let cell = AddEventInputCell()
             cell.model = model
             cell.inputDidComplete = { [weak self] in
@@ -416,11 +470,7 @@ class CalendarAddNewEventController: BaseTableController {
                     self.requestModel.attendance_limit = $1.int
                     $0.attendance_limit = $1.int
                 }
-                if $0.type == .Location {
-                    self.requestModel.location = $1
-                    $0.location = $1
-                }
-                
+
                 if $0.type == .Link {
                     self.requestModel.url = $1
                     $0.url = $1
@@ -516,24 +566,24 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Start {
-            let date = self.isEdit ? self.editEventModel?.start_date : Date()
+            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_start_date : self.editEventModel?.start_date) : Date()
             DatePickerView(title:"Start Time",
                            mode: .dateAndTime,
                            date: date,
                            minimumDate: nil,
                            maximumDate: nil) { date in
                 
-                let dateStr = date.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
+                let dateStr = date.toString()
                 self.requestModel.start_time = dateStr
                 
-                self.models[2][0].start_time = dateStr
+                self.Start.start_time = dateStr
                 self.reloadData()
                 
             }.show()
         }
         
         if model.type == .End {
-            let date = self.isEdit ? self.editEventModel?.end_date : (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue))
+            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_end_Date : self.editEventModel?.end_date) : (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue))
             DatePickerView(title:"End Time",
                            mode: .dateAndTime,
                            date: date,
@@ -541,10 +591,10 @@ class CalendarAddNewEventController: BaseTableController {
                            maximumDate: nil) { date in
                 
                 
-                let dateStr = date.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
+                let dateStr = date.toString()
                 self.requestModel.end_time = dateStr
                 
-                self.models[2][1].end_time = dateStr
+                self.End.end_time = dateStr
                 self.reloadData()
                 
             }.show()
@@ -557,10 +607,10 @@ class CalendarAddNewEventController: BaseTableController {
                
                 if model.type == .Description {
                     self?.requestModel.desc = html
-                    self?.models[3][0].desc = text
+                    self?.Desc.desc = text
                 } else {
                     self?.requestModel.remarks = html
-                    self?.models[3][1].remarks = text
+                    self?.Remark.remarks = text
                 }
                 
                 self?.reloadData()
@@ -575,11 +625,23 @@ class CalendarAddNewEventController: BaseTableController {
                 guard let color = color else { return }
                 self?.requestModel.color = EventColor.allColor.firstIndex(of: color)
                 
-                self?.models.last?.first?.color = color
-                self?.models.first?.first?.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color)!)
+                self?.Color.color = color
+                self?.Title.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color)!)
                 self?.reloadData()
                 
             }.show()
+        }
+        
+        if model.type == .Alarm {
+            let vc = CalendarEventRepeatWeekOrMonthController(type: .Alarm, selectIndexs: [self.alarmSelectIndex])
+            let nav = BaseNavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+            vc.selectComplete = { [weak self] ids in
+                guard let `self` = self else { return }
+                self.alarmSelectIndex = ids.first ?? 1
+                self.Alarm.alarm = AlarmData[self.alarmSelectIndex]
+                self.reloadData()
+            }
         }
         
         if model.type == .Repeat {
@@ -591,17 +653,29 @@ class CalendarAddNewEventController: BaseTableController {
                 guard let rrule = rrule else {
                     self.requestModel.is_repeat = 0
                     self.requestModel.rrule_str = nil
-                    self.models[2][2].duplicate = "none"
+                    self.Duplicate.duplicate = "none"
                     self.reloadData()
                     return
                 }
                 self.requestModel.is_repeat = 1
                 self.requestModel.rrule_str = rrule.toRRuleString()
-                self.models[2][2].duplicate = "repeat " + rrule.frequency.toString().lowercased()
+                self.Duplicate.duplicate = "repeat " + rrule.frequency.toString().lowercased()
                 self.reloadData()
             }
             let nav = BaseNavigationController(rootViewController: vc)
             self.present(nav, animated: true)
+        }
+        
+        if model.type == .Location {
+            let vc = CalendarEventSearchLocationController()
+            let nav = BaseNavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+            
+            vc.selectLocationComplete = { [weak self] location in
+                self?.requestModel.location = location
+                self?.Location.location = location
+                self?.tableView?.reloadData()
+            }
         }
     }
     
@@ -655,10 +729,6 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
                 tagImageView.contentMode = .scaleAspectFit
                 input.text = model.url
                 input.keyboardType = .URL
-            case .Location:
-                tagImageView.contentMode = .scaleAspectFit
-                input.text = model.location
-                input.keyboardType = .default
             default:
                 input.text = ""
             }
@@ -740,11 +810,13 @@ class AddEventArrowCell: UITableViewCell {
             case .Repeat:
                 detailLabel.text = model.duplicate
             case .Alarm:
-                detailLabel.text = model.remind
+                detailLabel.text = model.alarm
             case .Description:
                 detailLabel.text = model.desc
             case .Remark:
                 detailLabel.text = model.remarks
+            case .Location:
+                detailLabel.text = model.location
             default:
                 detailLabel.text = ""
             }

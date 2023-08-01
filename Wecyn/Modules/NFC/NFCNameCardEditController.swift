@@ -7,24 +7,14 @@
 
 import UIKit
 
-enum NameCardEditType {
-    case FirstName
-    case LastName
-    case JobTitle
-    case CompanyName
-    case Mobile
-    case OfficeNumber
-    case Email
-    case OfficeLocation
-    case Website
-}
+
 
 class NameCardEditModel {
     var placeholder:String
     var image:UIImage? = nil
     var value:String
-    var type:NameCardEditType
-    init(placeholder: String, image: UIImage? = nil, value: String = "", type: NameCardEditType) {
+    var type:NameCardDataType
+    init(placeholder: String, image: UIImage? = nil, value: String = "", type: NameCardDataType) {
         self.placeholder = placeholder
         self.image = image
         self.value = value

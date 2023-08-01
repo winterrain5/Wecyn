@@ -66,7 +66,7 @@ class CalendarEventRepeatUntilController: BaseTableController {
         }
         
         if let date = end.endDate, self.selectIndex == 1{
-            datas[0][1].value = date.string(format: "dd MMM yyyy HH:mm")
+            datas[0][1].value = date.toString(format: "dd MMM yyyy HH:mm")
         }
     }
     
@@ -147,7 +147,7 @@ class CalendarEventRepeatUntilController: BaseTableController {
                 guard let `self` = self else { return }
                 self.selectIndex = 1
                 
-                let dateStr = date.string(format: "dd MMM yyyy HH:mm")
+                let dateStr = date.toString(format: "dd MMM yyyy HH:mm")
                 
                 self.datas[0][1].value = dateStr
                 // count 置为0

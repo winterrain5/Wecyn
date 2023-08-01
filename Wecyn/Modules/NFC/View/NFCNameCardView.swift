@@ -17,7 +17,7 @@ class NFCNameCardView: UIView {
     let qrCodeImgView = UIImageView()
     
     let nameLabel = UILabel()
-    
+    let subLabel =  UILabel()
     
     var model:UserInfoModel? {
         didSet {
@@ -31,21 +31,50 @@ class NFCNameCardView: UIView {
             let url = "www.terrabyte.sg/wecyn/uid/\(model.id)"
             qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: nil)
             
-            var text:String = model.full_name
+            nameLabel.text = model.full_name
+         
+            var text = ""
             if !model.job_title.isEmpty {
-               text = text + "\n" + model.job_title
+               text = text + model.job_title + "\n"
             }
             if !model.company.isEmpty {
-                text = text + "\n" + model.company
+                text = text + model.company
             }
             
-            nameLabel.text = text
-         
+            subLabel.text = text
+            
+            if text.isEmpty == false {
+                subLabel.isHidden = false
+                subLabel.snp.makeConstraints { make in
+                    make.left.equalToSuperview().offset(16)
+                    make.right.equalToSuperview().offset(-16)
+                    make.top.equalTo(nameLabel.snp.bottom).offset(4)
+                }
+                
+                UIView.animate(withDuration: 0) {
+                    self.setNeedsLayout()
+                    self.layoutIfNeeded()
+                } completion: { flag in
+                    print(self.subLabel.frame.maxY)
+                    self.dataUpdateComplete?(self.subLabel.frame.maxY + 16)
+                }
+
+                
+            } else {
+                subLabel.isHidden = true
+                UIView.animate(withDuration: 0) {
+                    self.setNeedsLayout()
+                    self.layoutIfNeeded()
+                } completion: { flag in
+                    print(self.nameLabel.frame.maxY)
+                    self.dataUpdateComplete?(self.nameLabel.frame.maxY + 16)
+                }
+            }
             
         }
     }
     
-
+    var dataUpdateComplete:((CGFloat)->())?
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -56,6 +85,7 @@ class NFCNameCardView: UIView {
         avtContentView.addSubview(avtImgView)
         addSubview(qrCodeImgView)
         addSubview(nameLabel)
+        addSubview(subLabel)
         
         self.subviews.forEach({ $0.isSkeletonable = true })
         
@@ -78,6 +108,10 @@ class NFCNameCardView: UIView {
         nameLabel.textColor = R.color.textColor162C46()
         nameLabel.font = UIFont.sk.pingFangSemibold(18)
         nameLabel.numberOfLines = 3
+        
+        subLabel.textColor = R.color.textColor162C46()
+        subLabel.font = UIFont.sk.pingFangSemibold(15)
+        subLabel.numberOfLines = 2
         
         showSkeleton()
         

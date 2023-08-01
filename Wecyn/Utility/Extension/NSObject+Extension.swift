@@ -186,7 +186,7 @@ extension Date {
         return endOfMonth
     }
     
-    func string(format: String = "dd/MM/yyyy HH:mm", locaIdentifier:String = LocaIdentifier, isZero:Bool = false) -> String {
+    func toString(format: String = DateFormat.ddMMyyyyHHmm.rawValue, locaIdentifier:String = LocaIdentifier, isZero:Bool = false) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.locale = Locale(identifier: locaIdentifier)

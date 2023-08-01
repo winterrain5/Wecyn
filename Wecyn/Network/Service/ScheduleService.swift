@@ -149,15 +149,28 @@ class EventInfoModel: BaseModel {
         CalendarBelongUserId == creator_id
     }
     
+    var isCrossDay:Bool = false
+    
+    var repeat_start_time:String?
+    var repeat_start_date:Date? {
+        return repeat_start_time?.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
+    }
+    var repeat_end_time:String? {
+        repeat_start_date?.addingTimeInterval(duration).toString()
+    }
+    var repeat_end_Date:Date? {
+        repeat_start_date?.addingTimeInterval(duration)
+    }
+    
     var start_date:Date? {
-        return start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+        return start_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var end_date:Date? {
-        return end_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+        return end_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var duration:TimeInterval  {
         guard let start = start_date,let end = end_date else { return 0 }
-        return end.distance(to: start)
+        return start.distance(to: end)
     }
     
     var rruleObject:RecurrenceRule? {
@@ -168,15 +181,25 @@ class EventInfoModel: BaseModel {
         return nil
     }
     var recurrenceDescription:String {
+        
+        
+        let startTime = start_time.split(separator: " ").last ?? ""
+        let endTime = end_time.split(separator: " ").last ?? ""
         var desc = ""
         if is_repeat == 1 {
             // DTSTART:20230717T062741Z\nRRULE:FREQ=DAILY;INTERVAL=1;WKST=MO;COUNT=4
             let repeatStr = "repeat " + (rruleObject?.toText(rrulestr: rrule_str) ?? "")
+            desc = (repeat_start_time ?? "") + "\n" + (startTime + " → " + endTime + "(\(formateTime(duration.int)))") + "\n" + repeatStr
+            return desc
 
-            desc = start_time + "\n" + end_time + "\n" + repeatStr
-        } else {
-            desc = start_time + "\n" + end_time
         }
+        
+        if isCrossDay {
+            desc = start_time + "\n" + end_time + "\n\(formateTime(duration.int))"
+            return desc
+        }
+        
+        desc = start_time + "\n" + (startTime + " → " + endTime + "(\(formateTime(duration.int)))")
         return desc
     }
     var recurrenceType: String {
@@ -186,6 +209,28 @@ class EventInfoModel: BaseModel {
             return "none"
         }
         
+    }
+    
+    func formateTime(_ duration:Int) -> String {
+        let day = duration / (60 * 60 * 24);
+        let hour = (duration % (60 * 60 * 24)) / (60 * 60)
+        let minitue = (duration % (60 * 60)) / (60)
+
+        var desc = ""
+        let dayUnit = day > 1 ? "days" : "day"
+        let hourUnit = hour > 1 ? "hours" : "hour"
+        let minUnit = minitue > 1 ? "mins" : "min"
+        if day > 0 {
+            desc += "\(day) \(dayUnit) "
+        }
+        if hour > 0 {
+            desc += "\(hour) \(hourUnit) "
+        }
+        if minitue > 0 {
+            desc += "\(minitue) \(minUnit)"
+        }
+        
+        return desc
     }
     
 }
@@ -220,7 +265,15 @@ class EventListModel: BaseModel {
     var is_repeat = 0
     var rrule_str = ""
     var exdates:[String] = []
+    var exdatesObject:[Date?] {
+        exdates.map({ $0.date(format: DateFormat.ddMMyyyyHHmm.rawValue)})
+    }
     var color = 0
+
+    var isCrossDay: Bool = false
+    var isCrossDayStart: Bool = false
+    var isCrossDayEnd: Bool = false
+    var isCrossDayMiddle: Bool = false
    
     var colorHexString:String? {
         if color < EventColor.allColor.count {
@@ -239,21 +292,20 @@ class EventListModel: BaseModel {
     
     var isParentData = false
     var start_date:Date? {
-        return start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+        return start_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var end_date:Date? {
-        return end_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)
+        return end_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var duration:TimeInterval  {
         guard let start = start_date,let end = end_date else { return 0 }
         return start.distance(to: end)
     }
-    func copyed(_ startDate:Date) -> EventListModel {
+    func copyed(_ startDate:Date, endDate:Date? = nil, isCrossDays:Bool = false) -> EventListModel {
         let model = EventListModel()
         model.id = id
         model.title = title
-        model.start_time = startDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZero: false)
-        model.end_time = startDate.addingTimeInterval(duration).string(format: DateFormat.ddMMyyyyHHmm.rawValue,isZero: false)
+       
         model.is_public = is_public
         model.status = status
         model.is_creator = is_creator
@@ -265,12 +317,17 @@ class EventListModel: BaseModel {
         model.rrule_str = rrule_str
         model.isParentData = false
         
+        if isCrossDays {
+            model.start_time = startDate.toString()
+            model.end_time = endDate?.toString() ?? ""
+        } else {
+            model.start_time = startDate.toString()
+            model.end_time = startDate.addingTimeInterval(duration).toString()
+        }
+        
         return model
     }
     
-    var isMoreThanOneDay_start:Bool = false
-    var isMoreThanOneDay_middle:Bool = false
-    var isMoreThanOneDay_end:Bool = false
     
 }
 

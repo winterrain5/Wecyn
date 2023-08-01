@@ -13,8 +13,11 @@ import PopMenu
 import FSCalendar
 
 enum DateFormat:String {
+    /// dd-MM-yyyy HH:mm
     case ddMMyyyyHHmm = "dd-MM-yyyy HH:mm"
+    /// yyyy-MM-dd HH:mm:ss
     case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
+    /// dd-MM-yyyy
     case ddMMyyyy = "dd-MM-yyyy"
 }
 
@@ -35,12 +38,13 @@ class CalendarEventController: BaseTableController {
     var currentScope:FSCalendarScope = .week
     let monthLabel = UILabel()
     var isDataLoaded = false
+    var latesMonth:Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         CalendarBelongUserId = UserModel?.id ?? 0
         CalendarBelongUserName = UserModel?.full_name ?? ""
         
-        requestModel.start_date = calendarChangeDate.string(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        requestModel.start_date = calendarChangeDate.toString()
         requestModel.current_user_id = CalendarBelongUserId
         
         selectAssistant.id = UserModel?.id ?? 0
@@ -64,7 +68,7 @@ class CalendarEventController: BaseTableController {
         monthLabel.size = CGSize(width: 60, height: 30)
         monthLabel.textAlignment = .left
         monthLabel.font = UIFont.sk.pingFangSemibold(20)
-        monthLabel.text = calendarChangeDate.string(format: "MMM")
+        monthLabel.text = calendarChangeDate.toString(format: "MMM")
         self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: monthLabel)
         
         userTitleView.size = CGSize(width: kScreenWidth * 0.7, height: 40)
@@ -77,7 +81,7 @@ class CalendarEventController: BaseTableController {
             
             self.requestModel.current_user_id = assistant.id
             
-            self.loadNewData()
+            self.refreshData()
         }
         self.navigation.item.titleView = userTitleView
         
@@ -90,10 +94,19 @@ class CalendarEventController: BaseTableController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAssistants()
-        loadNewData()
+        latesMonth = 0
+        refreshData()
     }
     
     override func refreshData() {
+        
+        if latesMonth == calendarChangeDate.month, isBeginLoad == false {
+            return
+        }
+        
+        self.dataArray.removeAll()
+        
+        latesMonth = calendarChangeDate.month
         
         let eventList = ScheduleService.eventList(model: requestModel)
         
@@ -103,48 +116,70 @@ class CalendarEventController: BaseTableController {
         requestModel.end_date = ed.string(withFormat: DateFormat.ddMMyyyy.rawValue)
         
         eventList.subscribe(onNext:{ events in
-            
-            var datas = events
-            
-            datas.forEach { data in
-                if data.is_repeat == 1 {
-                    data.isParentData = true
-                    var copyed:[EventListModel] = data.rruleObject?.occurrences(rrulestr:data.rrule_str, between: sd, and: ed).map({
-                        let model = data.copyed($0)
-                        return model
-                    }) ?? []
-                    copyed.removeAll(where: {
-                        data.exdates.contains($0.start_time)
-                    })
-                    datas.append(contentsOf: copyed)
+            Asyncs.async {
+                var datas = events
+                //重复事件处理
+                datas.forEach { data in
+                    if data.is_repeat == 1 {
+                        data.isParentData = true
+                        var copyed:[EventListModel] = data.rruleObject?.occurrences(rrulestr:data.rrule_str, between: sd, and: ed).map({
+                            let model = data.copyed($0)
+                            return model
+                        }) ?? []
+                        copyed.removeAll(where: { copymodel in
+                            data.exdatesObject.contains(where: { copymodel.start_date?.day == $0?.day })
+                        })
+                        datas.append(contentsOf: copyed)
+                    } else {
+                        let day:Double = 24 * 60 * 60
+                        if data.duration >= day {
+                            let count = data.duration / day + 1
+                            data.isParentData = true
+                            var copyed:[EventListModel] = []
+                            for i in 0..<count.int {
+                                guard let start_date = data.start_date,let end_date = data.end_date else { return }
+                                let startDate = start_date.adding(.day, value: i)
+                                let endDate = (i == count.int - 1) ? end_date : nil
+                                let model = data.copyed(startDate,endDate: endDate,isCrossDays: true)
+                                model.isCrossDayStart = i == 0
+                                model.isCrossDayEnd = i == (count.int - 1)
+                                model.isCrossDayMiddle =  i > 0 && i < (count.int - 1)
+                                model.isCrossDay = true
+                                copyed.append(model)
+                            }
+                            datas.append(contentsOf: copyed)
+                        }
+                    }
                 }
-            }
-            datas.removeAll(where: { $0.isParentData })
-            
-            /// 日历事件显示
-            var dict:[String:[EventListModel]] = [:]
-            datas.forEach { model in
-                let key = model.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.string(format: DateFormat.ddMMyyyy.rawValue) ?? ""
-                if dict[key] != nil {
-                    dict[key]?.append(model)
-                } else {
-                    dict[key] = [model]
+                datas.removeAll(where: { $0.isParentData })
+                
+                /// 日历事件显示
+                var dict:[String:[EventListModel]] = [:]
+                datas.forEach { model in
+                    let key = model.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.toString(format: DateFormat.ddMMyyyy.rawValue) ?? ""
+                    if dict[key] != nil {
+                        dict[key]?.append(model)
+                    } else {
+                        dict[key] = [model]
+                    }
                 }
-            }
-            dict.values.sorted(by: {
-                guard let start = $0.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue),let end = $1.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
-                    return false
+                dict.values.sorted(by: {
+                    guard let start = $0.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue),let end = $1.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+                        return false
+                    }
+                    return start.compare(end)  ==  .orderedAscending
+                }).forEach({ self.dataArray.append($0) })
+            } mainTask: {
+                self.headerView.eventDates = self.dataArray as! [[EventListModel]]
+                
+                self.endRefresh(.NoData, emptyString: "No Events")
+                
+                if !self.isDataLoaded {
+                    self.scrollToSection(false)
                 }
-                return start.compare(end)  ==  .orderedAscending
-            }).forEach({ self.dataArray.append($0) })
-            self.headerView.eventDates = self.dataArray as! [[EventListModel]]
-            
-            self.endRefresh(.NoData, emptyString: "No Events")
-            
-            if !self.isDataLoaded {
-                self.scrollToSection(false)
+                self.isDataLoaded = true
             }
-            self.isDataLoaded = true
+
             
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype,emptyString: e.asAPIError.errorInfo().message)
@@ -189,8 +224,8 @@ class CalendarEventController: BaseTableController {
         headerView.monthChanged = { [weak self] date in
             guard let `self` = self else { return }
             self.calendarChangeDate = date
-            self.monthLabel.text = date.string(format: "MMM")
-            self.loadNewData()
+            self.monthLabel.text = date.toString(format: "MMM")
+            self.refreshData()
         }
         
         headerView.scopChanged = { [weak self] height,scope in
@@ -249,12 +284,12 @@ class CalendarEventController: BaseTableController {
             let label = UILabel().font(UIFont.sk.pingFangRegular(14))
             
             if dataDate.isInToday{
-                label.text = "Today " + dataDate.string(format: "dd MMM EEE")
+                label.text = "Today " + dataDate.toString(format: "dd MMM EEE")
                 label.textColor = R.color.theamColor()
                 view.backgroundColor = UIColor(hexString: "#d0ebe9")
                 
             } else {
-                label.text = dataDate.string(format: "dd MMM EEE")
+                label.text = dataDate.toString(format: "dd MMM EEE")
                 label.textColor = R.color.textColor52()!
                 view.backgroundColor = R.color.backgroundColor()!
             }
@@ -272,12 +307,15 @@ class CalendarEventController: BaseTableController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let model = (dataArray as! [[EventListModel]])[indexPath.section][indexPath.row]
-        
-        let vc = CalendarEventDetailController(eventModel:model)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        let datas = self.dataArray as! [[EventListModel]]
+        if  datas.count > 0,indexPath.section < datas.count, datas[indexPath.section].count > 0, indexPath.row < datas[indexPath.section].count {
+            let model = datas[indexPath.section][indexPath.row]
+            
+            let vc = CalendarEventDetailController(eventModel:model)
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+       
     }
     var lastContentOffsetY:CGFloat = 0
 

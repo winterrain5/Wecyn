@@ -70,11 +70,13 @@ class CalendarEventDetailController: BaseTableController {
         ScheduleService.eventInfo(eventModel.id).subscribe(onNext:{ model in
             Toast.dismiss()
             
-            model.start_time = self.eventModel.start_time
-            model.end_time = self.eventModel.end_time
+            if self.eventModel.is_repeat == 1 {
+                model.repeat_start_time = self.eventModel.start_time
+            }
+            model.isCrossDay = self.eventModel.isCrossDay
+            
             model.creator_name = self.eventModel.creator_name
-            
-            
+           
             self.eventInfoModel = model
            
             
@@ -278,7 +280,7 @@ class CalendarEventDetailController: BaseTableController {
         let model = models[indexPath.section][indexPath.row]
         if model.cellType == .Location {
             Haptico.selection()
-            let vc = CalendarEventMapController(location: model.model.location)
+            let vc = MapViewController(location: model.model.location)
             self.navigationController?.pushViewController(vc)
         }
         if model.cellType == .Link {
@@ -303,10 +305,11 @@ class CalendarEventDetailController: BaseTableController {
                 let message = CalendarBelongUserId == self.eventModel.creator_id ? nil : "Are you sure you want to delete \(self.eventModel.creator_name)'s event?"
                 let alert = UIAlertController(title: "this is a recurrence event", message: message, preferredStyle: .actionSheet)
                 alert.addAction(title: "delete only this event", style: .destructive) { _ in
-                    self.deleteEvent(type: 1,exdate: String(model.model.start_time.split(separator: " ").first ?? ""))
+                    let exdate = String(model.model.repeat_start_time?.split(separator: " ").first ?? "")
+                    self.deleteEvent(type: 1,exdate: exdate)
                 }
                 alert.addAction(title: "delete this and all following events", style: .destructive) { _ in
-                    self.deleteEvent(type: 2,exdate: String(model.model.start_time.split(separator: " ").first ?? ""))
+                    self.deleteEvent(type: 2,exdate: String(model.model.repeat_start_time?.split(separator: " ").first ?? ""))
                 }
                 alert.addAction(title: "delete all events in the sequence", style: .destructive) { _ in
                     self.deleteEvent()
@@ -369,6 +372,7 @@ class CalendarEventDetailTitleCell: UITableViewCell {
             
             let color = UIColor(hexString: EventColor.allColor[model.color]) ?? UIColor(hexString: EventColor.defaultColor)!
             imgView.image = R.image.circleFill()?.withTintColor(color)
+            
             titleLabel.text = model.title
             
             detailLabel.text = model.recurrenceDescription
@@ -474,12 +478,14 @@ class CalendarEventDetailInfoCell: UITableViewCell {
                 titleLabel.text = model.model.url
                 imgView.image = R.image.link()
                 accessoryType = .disclosureIndicator
+                titleLabel.numberOfLines = 1
             }
             
             if model.cellType == .Location  {
                 titleLabel.text = model.model.location
                 imgView.image = R.image.location()
                 accessoryType = .disclosureIndicator
+                titleLabel.numberOfLines = 1
             }
             
             if model.cellType == .Creator  {
@@ -500,6 +506,7 @@ class CalendarEventDetailInfoCell: UITableViewCell {
             if model.cellType == .Description {
                 titleLabel.text = model.model.desc.htmlToString
                 imgView.image = R.image.textQuote()
+                titleLabel.numberOfLines = 0
             }
             
             if model.cellType == .People {
@@ -517,7 +524,6 @@ class CalendarEventDetailInfoCell: UITableViewCell {
         titleLabel.textColor = R.color.textColor52()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         titleLabel.isCopyingEnabled = true
-        titleLabel.numberOfLines = 0
         
         imgView.contentMode = .center
         
