@@ -96,7 +96,7 @@ class ScheduleService {
     }
 }
 
-class EventInfoModel: BaseModel {
+@objcMembers class EventInfoModel: BaseModel {
     /*
      "id": int # event_id
      "creator_id": int # 创建者的user_id
@@ -149,7 +149,8 @@ class EventInfoModel: BaseModel {
         CalendarBelongUserId == creator_id
     }
     
-    var isCrossDay:Bool = false
+    var isCrossDay: Bool = false
+    var isBySearch: Bool = false
     
     var repeat_start_time:String?
     var repeat_start_date:Date? {
@@ -182,10 +183,13 @@ class EventInfoModel: BaseModel {
     }
     var recurrenceDescription:String {
         
-        
         let startTime = start_time.split(separator: " ").last ?? ""
         let endTime = end_time.split(separator: " ").last ?? ""
         var desc = ""
+        if isBySearch {
+            desc =  start_time + "\n" + end_time + "\n\(formateTime(duration.int))"
+            return desc
+        }
         if is_repeat == 1 {
             // DTSTART:20230717T062741Z\nRRULE:FREQ=DAILY;INTERVAL=1;WKST=MO;COUNT=4
             let repeatStr = "repeat " + (rruleObject?.toText(rrulestr: rrule_str) ?? "")
@@ -274,6 +278,8 @@ class EventListModel: BaseModel {
     var isCrossDayStart: Bool = false
     var isCrossDayEnd: Bool = false
     var isCrossDayMiddle: Bool = false
+    
+    var isBySearch: Bool = false
    
     var colorHexString:String? {
         if color < EventColor.allColor.count {

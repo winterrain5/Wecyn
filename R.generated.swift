@@ -92,44 +92,107 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 11 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 20 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
+
+      /// en translation: About Wecyn
+      ///
+      /// Key: About Wecyn
+      ///
+      /// Locales: en, zh-Hans
+      var aboutWecyn: RswiftResources.StringResource { .init(key: "About Wecyn", tableName: "Localizable", source: source, developmentValue: "About Wecyn", comment: nil) }
+
+      /// en translation: Account Manage
+      ///
+      /// Key: Account Manage
+      ///
+      /// Locales: en, zh-Hans
+      var accountManage: RswiftResources.StringResource { .init(key: "Account Manage", tableName: "Localizable", source: source, developmentValue: "Account Manage", comment: nil) }
 
       /// en translation: Activity
       ///
       /// Key: Activity
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var activity: RswiftResources.StringResource { .init(key: "Activity", tableName: "Localizable", source: source, developmentValue: "Activity", comment: nil) }
+
+      /// en translation: Contact us
+      ///
+      /// Key: Contact us
+      ///
+      /// Locales: en, zh-Hans
+      var contactUs: RswiftResources.StringResource { .init(key: "Contact us", tableName: "Localizable", source: source, developmentValue: "Contact us", comment: nil) }
 
       /// en translation: Education
       ///
       /// Key: Education
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var education: RswiftResources.StringResource { .init(key: "Education", tableName: "Localizable", source: source, developmentValue: "Education", comment: nil) }
 
       /// en translation: Experience
       ///
       /// Key: Experience
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var experience: RswiftResources.StringResource { .init(key: "Experience", tableName: "Localizable", source: source, developmentValue: "Experience", comment: nil) }
 
       /// en translation: Interests
       ///
       /// Key: Interests
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var interests: RswiftResources.StringResource { .init(key: "Interests", tableName: "Localizable", source: source, developmentValue: "Interests", comment: nil) }
+
+      /// en translation: Language
+      ///
+      /// Key: Language
+      ///
+      /// Locales: en, zh-Hans
+      var language: RswiftResources.StringResource { .init(key: "Language", tableName: "Localizable", source: source, developmentValue: "Language", comment: nil) }
+
+      /// en translation: Logout
+      ///
+      /// Key: Logout
+      ///
+      /// Locales: en, zh-Hans
+      var logout: RswiftResources.StringResource { .init(key: "Logout", tableName: "Localizable", source: source, developmentValue: "Logout", comment: nil) }
+
+      /// en translation: Notification
+      ///
+      /// Key: Notification
+      ///
+      /// Locales: en, zh-Hans
+      var notification: RswiftResources.StringResource { .init(key: "Notification", tableName: "Localizable", source: source, developmentValue: "Notification", comment: nil) }
+
+      /// en translation: Privacy Agreement
+      ///
+      /// Key: Privacy Agreement
+      ///
+      /// Locales: en, zh-Hans
+      var privacyAgreement: RswiftResources.StringResource { .init(key: "Privacy Agreement", tableName: "Localizable", source: source, developmentValue: "Privacy Agreement", comment: nil) }
+
+      /// en translation: Settings
+      ///
+      /// Key: Settings
+      ///
+      /// Locales: en, zh-Hans
+      var settings: RswiftResources.StringResource { .init(key: "Settings", tableName: "Localizable", source: source, developmentValue: "Settings", comment: nil) }
 
       /// en translation: Skills
       ///
       /// Key: Skills
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var skills: RswiftResources.StringResource { .init(key: "Skills", tableName: "Localizable", source: source, developmentValue: "Skills", comment: nil) }
+
+      /// en translation: Version
+      ///
+      /// Key: Version
+      ///
+      /// Locales: en, zh-Hans
+      var version: RswiftResources.StringResource { .init(key: "Version", tableName: "Localizable", source: source, developmentValue: "Version", comment: nil) }
 
       /// en translation: Add new section
       ///
@@ -216,7 +279,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 76 images.
+  /// This `_R.image` struct is generated, and contains static references to 73 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -228,6 +291,9 @@ struct _R {
 
     /// Image `attendace_delete`.
     var attendace_delete: RswiftResources.ImageResource { .init(name: "attendace_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `bell`.
+    var bell: RswiftResources.ImageResource { .init(name: "bell", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `calendar`.
     var calendar: RswiftResources.ImageResource { .init(name: "calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -253,6 +319,9 @@ struct _R {
     /// Image `checkmark`.
     var checkmark: RswiftResources.ImageResource { .init(name: "checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `chevron.backward`.
+    var chevronBackward: RswiftResources.ImageResource { .init(name: "chevron.backward", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `chevron.up`.
     var chevronUp: RswiftResources.ImageResource { .init(name: "chevron.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -277,11 +346,17 @@ struct _R {
     /// Image `connection_search`.
     var connection_search: RswiftResources.ImageResource { .init(name: "connection_search", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `ellipsis`.
+    var ellipsis: RswiftResources.ImageResource { .init(name: "ellipsis", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ellipsis.message`.
+    var ellipsisMessage: RswiftResources.ImageResource { .init(name: "ellipsis.message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `envelope.circle.fill`.
     var envelopeCircleFill: RswiftResources.ImageResource { .init(name: "envelope.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `gear.circle`.
-    var gearCircle: RswiftResources.ImageResource { .init(name: "gear.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `gearshape`.
+    var gearshape: RswiftResources.ImageResource { .init(name: "gearshape", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `google`.
     var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -319,20 +394,11 @@ struct _R {
     /// Image `mappin.and.ellipse`.
     var mappinAndEllipse: RswiftResources.ImageResource { .init(name: "mappin.and.ellipse", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `message`.
+    var message: RswiftResources.ImageResource { .init(name: "message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `navbar_bell`.
-    var navbar_bell: RswiftResources.ImageResource { .init(name: "navbar_bell", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `navbar_message`.
-    var navbar_message: RswiftResources.ImageResource { .init(name: "navbar_message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `navbar_more`.
-    var navbar_more: RswiftResources.ImageResource { .init(name: "navbar_more", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `navigation_back_default`.
-    var navigation_back_default: RswiftResources.ImageResource { .init(name: "navigation_back_default", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `password_invisible`.
     var password_invisible: RswiftResources.ImageResource { .init(name: "password_invisible", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -351,9 +417,6 @@ struct _R {
 
     /// Image `person.badge.plus`.
     var personBadgePlus: RswiftResources.ImageResource { .init(name: "person.badge.plus", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `person.circle`.
-    var personCircle: RswiftResources.ImageResource { .init(name: "person.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `person.fill`.
     var personFill: RswiftResources.ImageResource { .init(name: "person.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -412,26 +475,17 @@ struct _R {
     /// Image `switch.2`.
     var switch2: RswiftResources.ImageResource { .init(name: "switch.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `tab_book`.
+    var tab_book: RswiftResources.ImageResource { .init(name: "tab_book", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `tab_calendar`.
     var tab_calendar: RswiftResources.ImageResource { .init(name: "tab_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tab_calendar_selected`.
-    var tab_calendar_selected: RswiftResources.ImageResource { .init(name: "tab_calendar_selected", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tab_connection`.
-    var tab_connection: RswiftResources.ImageResource { .init(name: "tab_connection", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `tab_home`.
     var tab_home: RswiftResources.ImageResource { .init(name: "tab_home", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `tab_job`.
-    var tab_job: RswiftResources.ImageResource { .init(name: "tab_job", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tab_profile`.
-    var tab_profile: RswiftResources.ImageResource { .init(name: "tab_profile", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `tab_setting`.
-    var tab_setting: RswiftResources.ImageResource { .init(name: "tab_setting", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+    /// Image `tab_person`.
+    var tab_person: RswiftResources.ImageResource { .init(name: "tab_person", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `tag.fill`.
     var tagFill: RswiftResources.ImageResource { .init(name: "tag.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -575,7 +629,7 @@ struct _R {
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'NameCardEditView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'NameCardQRCodeView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'NameCardQRCodeView', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "profile_edit_userinfo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'profile_edit_userinfo' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "button:ZMY-2V-y3q:image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'button:ZMY-2V-y3q:image' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'RegistAddAvatarView', but couldn't be loaded.") }

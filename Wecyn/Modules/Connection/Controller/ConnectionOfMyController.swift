@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftAlertView
 import SectionIndexView
 class ConnectionOfMyController: BasePagingTableController {
     

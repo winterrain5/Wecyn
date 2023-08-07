@@ -1,6 +1,6 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '13.0'
 
+inhibit_all_warnings!
 target 'Wecyn' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
@@ -40,11 +40,12 @@ target 'Wecyn' do
   pod 'CodeTextField', '~> 0.4.0'
   pod 'FSCalendar'
   pod 'NewPopMenu', '~> 2.0'
-  pod 'SwiftAlertView'
   pod 'SectionIndexView'
   pod "WordPress-Aztec-iOS"
   pod "WordPress-Editor-iOS"
-
+  pod 'ParallaxHeader'
+  
+  pod 'OpenIMSDK'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

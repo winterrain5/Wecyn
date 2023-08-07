@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftAlertView
 class GroupZipModel: BaseModel {
     var head: GroupListModel =  GroupListModel()
     var groups: [FriendListModel] = []
@@ -134,40 +133,44 @@ class ConnectionGroupController: BasePagingTableController {
     
     
     func deleteGroup(id:Int) {
-        SwiftAlertView.show(title:"Are you sure you want to delete this group",buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
-            if buttonIndex == 1 {
-                Toast.showLoading()
-                FriendService.deleteGroup(id: id).subscribe(onNext:{
-                    if $0.success == 1 {
-                        Toast.showSuccess(withStatus: "Successful operation")
-                        self.loadNewData()
-                    } else {
-                        Toast.showError(withStatus: $0.message)
-                    }
-                },onError: { e in
-                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
-                }).disposed(by: self.rx.disposeBag)
-            }
+     
+        
+        let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this group?")
+        alert.addAction(title: "Confirm",style: .destructive) { _ in
+            Toast.showLoading()
+            FriendService.deleteGroup(id: id).subscribe(onNext:{
+                if $0.success == 1 {
+                    Toast.showSuccess(withStatus: "Successful operation")
+                    self.loadNewData()
+                } else {
+                    Toast.showError(withStatus: $0.message)
+                }
+            },onError: { e in
+                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            }).disposed(by: self.rx.disposeBag)
         }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.show()
       
     }
     
     func deleteUserFromGroup(id:Int) {
-        SwiftAlertView.show(title:"Are you sure you want to remove this friend from the group",buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
-            if buttonIndex == 1 {
-                Toast.showLoading()
-                FriendService.friendToGroup(id: 0, friendIds: [id]).subscribe(onNext:{
-                    if $0.success == 1 {
-                        Toast.showSuccess(withStatus: "Successful operation")
-                        self.loadNewData()
-                    } else {
-                        Toast.showError(withStatus: $0.message)
-                    }
-                },onError: { e in
-                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
-                }).disposed(by: self.rx.disposeBag)
-            }
+   
+        let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to remove this friend from the group?")
+        alert.addAction(title: "Confirm",style: .destructive) { _ in
+            Toast.showLoading()
+            FriendService.friendToGroup(id: 0, friendIds: [id]).subscribe(onNext:{
+                if $0.success == 1 {
+                    Toast.showSuccess(withStatus: "Successful operation")
+                    self.loadNewData()
+                } else {
+                    Toast.showError(withStatus: $0.message)
+                }
+            },onError: { e in
+                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            }).disposed(by: self.rx.disposeBag)
         }
-        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.show()
     }
 }

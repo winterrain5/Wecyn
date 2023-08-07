@@ -7,7 +7,6 @@
 
 import UIKit
 import ImagePickerSwift
-import SwiftAlertView
 class ProfileHeaderView: UIView {
 
     @IBOutlet weak var backImgView: UIImageView!

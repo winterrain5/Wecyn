@@ -31,7 +31,6 @@ class MainController: UITabBarController {
         let connection = BaseNavigationController(rootViewController: ConnectionFriendController())
         let calendar = BaseNavigationController(rootViewController: CalendarEventController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
-        let setting = BaseNavigationController(rootViewController: SettingController())
         
         func selectedImage(_ image: UIImage?) -> UIImage? {
             image?.withTintColor(R.color.theamColor()!).withRenderingMode(.alwaysOriginal)
@@ -43,8 +42,8 @@ class MainController: UITabBarController {
             selectedImage: selectedImage(R.image.tab_home()))
         connection.tabBarItem = UITabBarItem.init(
             title: "Connection",
-            image: R.image.tab_connection(),
-            selectedImage: selectedImage(R.image.tab_connection()))
+            image: R.image.tab_book(),
+            selectedImage: selectedImage(R.image.tab_book()))
         
         calendar.tabBarItem = UITabBarItem.init(
             title: "Calendar",
@@ -53,15 +52,11 @@ class MainController: UITabBarController {
         
         profile.tabBarItem = UITabBarItem.init(
             title: "Profile",
-            image: R.image.personCircle(),
-            selectedImage: selectedImage(R.image.personCircle()))
+            image: R.image.tab_person(),
+            selectedImage: selectedImage(R.image.tab_person()))
         
-        setting.tabBarItem = UITabBarItem.init(
-            title: "Setting",
-            image: R.image.gearCircle(),
-            selectedImage: selectedImage(R.image.gearCircle()))
         
-        self.viewControllers = [calendar,connection,profile,setting]
+        self.viewControllers = [calendar,connection,profile]
         configAppearance()
     }
     

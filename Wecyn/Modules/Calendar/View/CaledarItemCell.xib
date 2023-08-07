@@ -23,8 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="497" height="93"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom   Meeting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrG-ZC-Rqg">
-                                <rect key="frame" x="42" y="12.666666666666664" width="367" height="17"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <rect key="frame" x="42" y="12" width="367" height="18"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" name="TextColor52"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -47,7 +47,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00-12:00" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDz-uQ-mnD">
-                                <rect key="frame" x="42" y="37.666666666666664" width="120" height="16.333333333333336"/>
+                                <rect key="frame" x="42" y="38" width="120" height="16.333333333333329"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="DTq-JH-AB0"/>
                                 </constraints>
@@ -70,7 +70,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="creator:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a60-gB-22e">
-                                <rect key="frame" x="42" y="62" width="240" height="17"/>
+                                <rect key="frame" x="42" y="62.333333333333343" width="240" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="erN-bh-6TB"/>
                                 </constraints>
@@ -99,9 +99,19 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXc-5z-sup">
-                                <rect key="frame" x="7.9999999999999982" y="38.666666666666664" width="26.333333333333329" height="14.333333333333336"/>
+                                <rect key="frame" x="7.9999999999999982" y="39" width="26.333333333333329" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.15686274510000001" green="0.5450980392" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 15 mins to start " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFz-rx-5RU">
+                                <rect key="frame" x="0.0" y="0.0" width="66.666666666666671" height="12"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.66274509803921566" blue="0.63529411764705879" alpha="0.75082376700680276" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="TJi-hr-zOe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -121,12 +131,11 @@
                             <constraint firstItem="kia-Ku-ri4" firstAttribute="leading" secondItem="xwu-5I-2nE" secondAttribute="trailing" constant="16" id="eJ7-Bl-EuW"/>
                             <constraint firstItem="LDz-uQ-mnD" firstAttribute="top" secondItem="QrG-ZC-Rqg" secondAttribute="bottom" constant="8" id="iEU-9M-NpV"/>
                             <constraint firstItem="hg5-iA-Ijn" firstAttribute="leading" secondItem="V8K-X5-Qsq" secondAttribute="leading" constant="16" id="jOA-Fm-Aa1"/>
+                            <constraint firstItem="WFz-rx-5RU" firstAttribute="top" secondItem="V8K-X5-Qsq" secondAttribute="top" id="lYy-wD-IOa"/>
                             <constraint firstItem="LDz-uQ-mnD" firstAttribute="leading" secondItem="QrG-ZC-Rqg" secondAttribute="leading" id="qdp-n0-Ncg"/>
+                            <constraint firstItem="WFz-rx-5RU" firstAttribute="leading" secondItem="V8K-X5-Qsq" secondAttribute="leading" id="wka-jK-aZg"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -149,12 +158,13 @@
                 <outlet property="creatorLabel" destination="a60-gB-22e" id="pp6-H1-jDM"/>
                 <outlet property="crossDayLabel" destination="dXc-5z-sup" id="KpD-3W-eY6"/>
                 <outlet property="repeatImgView" destination="xwu-5I-2nE" id="Axm-O5-qmY"/>
+                <outlet property="startLabel" destination="WFz-rx-5RU" id="VB4-3v-eO0"/>
                 <outlet property="statusImgView" destination="kia-Ku-ri4" id="7OE-Fr-Aue"/>
                 <outlet property="statusView" destination="hg5-iA-Ijn" id="Slo-hY-nwI"/>
                 <outlet property="timeLabel" destination="LDz-uQ-mnD" id="Phm-Bv-W2V"/>
                 <outlet property="titleLabel" destination="QrG-ZC-Rqg" id="4KE-et-hGc"/>
             </connections>
-            <point key="canvasLocation" x="-34" y="-87"/>
+            <point key="canvasLocation" x="-34.351145038167935" y="-87.676056338028175"/>
         </tableViewCell>
     </objects>
     <resources>

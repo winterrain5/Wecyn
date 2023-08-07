@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import ParallaxHeader
 class ProfileController: BaseTableController {
     
     enum SectionType: Int {
@@ -22,8 +22,24 @@ class ProfileController: BaseTableController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addRightBarItems()
+        addRightBarItem()
+       
         getUserInfo()
+        
+        self.navigation.bar.alpha = 0
+    }
+    
+    func addRightBarItem() {
+     
+        let setting = UIButton()
+        setting.imageForNormal = R.image.gearshape()
+        setting.rx.tap.subscribe(onNext:{
+            let vc = SettingController()
+            self.navigationController?.pushViewController(vc)
+        }).disposed(by: rx.disposeBag)
+        let settingItem = UIBarButtonItem(customView: setting)
+        
+        self.navigation.item.rightBarButtonItem = settingItem
     }
     
     override func createListView() {
@@ -42,6 +58,12 @@ class ProfileController: BaseTableController {
         self.tableView?.register(cellWithClass: ProfileExperienceItemCell.self)
         self.tableView?.register(cellWithClass: ProfileInterestsItemsCell.self)
         self.tableView?.register(cellWithClass: ProfileEducationItemCell.self)
+        
+        
+    }
+    
+    override func listViewFrame() -> CGRect {
+        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kTabBarHeight)
     }
 
     func getUserInfo() {
@@ -125,5 +147,10 @@ class ProfileController: BaseTableController {
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == SectionType.Interests.rawValue ? 0 : 1
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let ratio = scrollView.contentOffset.y /  kNavBarHeight
+        self.navigation.bar.alpha = ratio
     }
 }

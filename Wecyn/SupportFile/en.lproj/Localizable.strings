@@ -17,6 +17,18 @@
 "Education"  = "Education";
 "Interests"  = "Interests";
 
+/**setting**/
+"Settings" = "Settings";
+"Notification" = "Notification";
+"Language" = "Language";
+"Privacy Agreement" = "Privacy Agreement";
+"Account Manage" = "Account Manage";
+"About Wecyn" = "About Wecyn";
+"Contact us" = "Contact us";
+"Logout" = "Logout";
+"Version" = "Version";
+
+
 /****Profile*****/
 
 

@@ -32,10 +32,8 @@ class CalendarMenuView: UIView {
             UIView.animate(withDuration: 0.25) {
                 self.setNeedsLayout()
                 self.layoutIfNeeded()
-            } completion: { flat in
-                if  let complete = complete {
-                    complete()
-                }
+            } completion: { _ in
+                complete?()
             }
             Haptico.selection()
         }

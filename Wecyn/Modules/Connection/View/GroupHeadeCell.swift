@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftAlertView
 class GroupHeadeCell: UITableViewCell {
 
     var groupNameLabel = UILabel()
@@ -47,12 +46,17 @@ class GroupHeadeCell: UITableViewCell {
         
         deleteButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            SwiftAlertView.show(title:"Are you sure you want to delete this group", buttonTitles: ["Cancel","Confirm"]).onActionButtonClicked { alertView, buttonIndex in
-                if buttonIndex == 1 {
-                    self.deleteButtonDidClickHandler?(self.model)
-                }
+            
+            let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this group?")
+            alert.addAction(title: "Confirm",style: .destructive) { _ in
+                self.deleteButtonDidClickHandler?(self.model)
             }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.show()
+            
         }).disposed(by: rx.disposeBag)
+        
+        
 
         editButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }

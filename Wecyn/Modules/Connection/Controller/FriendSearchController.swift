@@ -6,15 +6,14 @@
 //
 
 import UIKit
-import SwiftAlertView
 import IQKeyboardManagerSwift
 class FriendSearchController: BaseTableController {
-    
+    let searchView = NavbarSearchView(placeholder: "Search Friend Name",isSearchable: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+
     var keword:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let searchView = NavbarSearchView(placeholder: "Search Friend Name",isSearchable: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
@@ -22,7 +21,7 @@ class FriendSearchController: BaseTableController {
             self.loadNewData()
         }
         
-        self.addLeftBarButtonItem(image: R.image.navigation_back_default()!.withTintColor(.black))
+        self.addLeftBarButtonItem()
         self.leftButtonDidClick = {
             self.navigationController?.popViewController(animated: true)
         }
@@ -51,7 +50,9 @@ class FriendSearchController: BaseTableController {
                 return model
             })
             self.endRefresh(models.count)
+            self.searchView.endSearching()
         },onError: { e in
+            self.searchView.endSearching()
             self.endRefresh(e.asAPIError.emptyDatatype)
         }).disposed(by: rx.disposeBag)
     }

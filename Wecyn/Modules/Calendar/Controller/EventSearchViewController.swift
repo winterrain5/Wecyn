@@ -13,7 +13,7 @@ class EventSearchViewController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchView = NavbarSearchView(placeholder: "Search Event Title",isSearchable: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+        searchView = NavbarSearchView(placeholder: "Search Event Title",isSearchable: true,isBecomeFirstResponder: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
@@ -22,7 +22,7 @@ class EventSearchViewController: BaseTableController {
         }
         
         
-        self.addLeftBarButtonItem(image: R.image.navigation_back_default()!.withTintColor(.black))
+        self.addLeftBarButtonItem()
         self.leftButtonDidClick = {
             self.navigationController?.popViewController(animated: false)
         }
@@ -44,7 +44,7 @@ class EventSearchViewController: BaseTableController {
         
         eventList.subscribe(onNext:{ [weak self]  events in
             guard let `self` = self else { return }
-            
+            events.forEach({ $0.isBySearch = true })
             self.dataArray = events
             
             self.endRefresh(events.count)
@@ -52,6 +52,7 @@ class EventSearchViewController: BaseTableController {
             self.searchView.endSearching()
             
         },onError: { e in
+            self.searchView.endSearching()
             self.endRefresh(.NoData, emptyString: "No Events")
         }).disposed(by: rx.disposeBag)
         
@@ -70,7 +71,7 @@ class EventSearchViewController: BaseTableController {
         return dataArray.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 92
+        return 110
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -27,6 +27,7 @@ class BaseTableController: BaseViewController,DataLoadable {
     var emptyNoDataImage: String = ""
     
     var cellIdentifier:String = ""
+    var numberOfSkeletonCell:Int = 10
     
     public var tableView:UITableView?
     
@@ -199,7 +200,7 @@ class BaseTableController: BaseViewController,DataLoadable {
 extension  BaseTableController : UITableViewDelegate,SkeletonTableViewDataSource {
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return numberOfSkeletonCell
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
