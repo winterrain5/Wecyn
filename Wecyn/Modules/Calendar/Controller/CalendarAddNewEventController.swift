@@ -7,7 +7,6 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import SwiftAlertView
 import NotificationCenter
 /*
  1st colour (primary): #13A5D6
@@ -280,7 +279,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         models.append(isOnlineSection)
         
-        Alarm.alarm = "15 mins ago"
+        Alarm.alarm = "15 mins before"
         Color.color = EventColor.defaultColor
         let tagSection = [Alarm,Color]
         models.append(tagSection)
@@ -330,6 +329,16 @@ class CalendarAddNewEventController: BaseTableController {
                 return
             }
             
+            let mins = AlarmData.map({ String($0.split(separator: " ").first ?? "") }).compactMap({ $0.int })
+            var min:Int = 0
+            if 0 < self.alarmSelectIndex &&  self.alarmSelectIndex < 3 {
+                min = mins[self.alarmSelectIndex]
+            } else
+            if 3 < self.alarmSelectIndex && self.alarmSelectIndex < 6 {
+                min = mins[self.alarmSelectIndex] * 60
+            } else {
+                min = mins[self.alarmSelectIndex] * 60 * 24
+            }
             if self.rrule != nil {
                 let dates = self.rrule?.allOccurrences()
                 
@@ -338,7 +347,7 @@ class CalendarAddNewEventController: BaseTableController {
                     content.title = self.Title.title ?? ""
                     content.body = self.Desc.desc ?? ""
                     content.badge = 1
-                    let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + 1)
+                    let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + min)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                     let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request) { err in
@@ -351,7 +360,7 @@ class CalendarAddNewEventController: BaseTableController {
                 content.title = self.Title.title ?? ""
                 content.body = self.Desc.desc ?? ""
                 content.badge = 1
-                let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + 1)
+                let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + min)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request) { err in
@@ -460,6 +469,9 @@ class CalendarAddNewEventController: BaseTableController {
             let cell = AddEventInputCell()
             cell.model = model
             cell.inputDidComplete = { [weak self] in
+                self?.reloadData()
+            }
+            cell.inputDidChange = { [weak self] in
                 guard let `self` = self else { return }
                 
                 if $0.type == .Title {
@@ -475,7 +487,7 @@ class CalendarAddNewEventController: BaseTableController {
                     self.requestModel.url = $1
                     $0.url = $1
                 }
-                self.reloadData()
+                
             }
             return cell
         case .IsOnline,.IsPublic:
@@ -600,18 +612,27 @@ class CalendarAddNewEventController: BaseTableController {
             }.show()
         }
         
-        if model.type == .Description || model.type == .Remark {
+        if model.type == .Description {
             let vc = EditorDemoController(withSampleHTML: self.requestModel.desc, wordPressMode: false)
             vc.editComplete = { [weak self] text,html in
                 Logger.debug(html)
                
-                if model.type == .Description {
-                    self?.requestModel.desc = html
-                    self?.Desc.desc = text
-                } else {
-                    self?.requestModel.remarks = html
-                    self?.Remark.remarks = text
-                }
+                self?.requestModel.desc = html
+                self?.Desc.desc = text
+                
+                self?.reloadData()
+            }
+            self.navigationController?.pushViewController(vc)
+            
+        }
+        
+        if model.type == .Remark {
+            let vc = EditorDemoController(withSampleHTML: self.requestModel.remarks, wordPressMode: false)
+            vc.editComplete = { [weak self] text,html in
+                Logger.debug(html)
+               
+                self?.requestModel.remarks = html
+                self?.Remark.remarks = text
                 
                 self?.reloadData()
             }
@@ -736,7 +757,8 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
            
         }
     }
-    var inputDidComplete:((AddEventModel,String)->())?
+    var inputDidComplete:(()->())?
+    var inputDidChange:((AddEventModel,String)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(input)
@@ -751,7 +773,11 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
         input.delegate = self
         input.rx.controlEvent(.editingDidEnd).subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.inputDidComplete?(self.model,self.input.text ?? "")
+            self.inputDidComplete?()
+        }).disposed(by: rx.disposeBag)
+        input.rx.controlEvent(.editingChanged).subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.inputDidChange?(self.model,self.input.text ?? "")
         }).disposed(by: rx.disposeBag)
         
     }

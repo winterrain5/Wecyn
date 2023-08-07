@@ -45,7 +45,7 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
         tableView.dataSource = self
         tableView.register(cellWithClass: CalendarAssistantMenuCell.self)
         tableView.backgroundColor = .white
-        tableView.frame = CGRect(x: 0, y: -contentHeight, width: kScreenWidth, height: contentHeight)
+        tableView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: contentHeight)
         
         
         
@@ -69,10 +69,11 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
     
     func showMenu() {
         
-        self.alpha = 1
+        
         UIView.animate(withDuration: 0.25, delay: 0,options: .curveEaseOut ,animations: {
-            self.tableView.frame.origin.y = 0
+            self.tableView.frame.size.height = self.contentHeight
             self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+            self.alpha = 1
         })
         
         isShowed = true
@@ -82,12 +83,11 @@ class CalendarAssistantMenu: UIView ,UITableViewDataSource,UITableViewDelegate{
         
         UIView.animate(withDuration: 0.25, delay: 0,options: .curveEaseOut ,animations: {
             
-            self.tableView.frame.origin.y = -self.contentHeight
-            self.backgroundColor = .clear
+            self.tableView.frame.size.height = 0
             self.alpha = 0
             
         }) { flag in
-           
+            self.backgroundColor = .clear
             self.dissmissHandler()
         }
         isShowed = false

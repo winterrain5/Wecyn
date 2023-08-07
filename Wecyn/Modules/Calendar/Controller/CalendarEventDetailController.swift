@@ -17,6 +17,7 @@ enum CalendarEventDetailCellType {
     case People
     case PeopleLimit
     case Description
+    case Remark
     case Delete
 }
 
@@ -27,7 +28,15 @@ class CalendarEventDetailModel {
         return model.recurrenceDescription.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 58
     }
     var descHeight: CGFloat{
-        let descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
+        var  descH:CGFloat = 0
+        if cellType == .Description {
+            descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
+        }
+        if cellType == .Remark {
+            descH = model.remarks.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
+        }
+       
+        
         return descH >= 52 ? descH : 52
     }
     init(cellType: CalendarEventDetailCellType, model:EventInfoModel) {
@@ -74,13 +83,12 @@ class CalendarEventDetailController: BaseTableController {
                 model.repeat_start_time = self.eventModel.start_time
             }
             model.isCrossDay = self.eventModel.isCrossDay
-            
+            model.isBySearch = self.eventModel.isBySearch
             model.creator_name = self.eventModel.creator_name
-           
             self.eventInfoModel = model
            
             
-            if CalendarBelongUserId !=  UserDefaults.userModel?.id {
+            if CalendarBelongUserId !=  UserDefaults.userModel?.id.int {
                 let watch = CalendarEventDetailModel(cellType: .Watch, model: model)
                 self.models.append([watch])
             }
@@ -94,6 +102,10 @@ class CalendarEventDetailController: BaseTableController {
             if !model.desc.isEmpty {
                 let desc = CalendarEventDetailModel(cellType: .Description, model: model)
                 section2.append(desc)
+            }
+            if !model.remarks.isEmpty, model.isCreator {
+                let remark = CalendarEventDetailModel(cellType: .Remark, model: model)
+                section2.append(remark)
             }
             self.models.append(section2)
             
@@ -239,7 +251,7 @@ class CalendarEventDetailController: BaseTableController {
         if model.cellType == .Title {
             return model.cellHeight
         }
-        if model.cellType == .Description {
+        if model.cellType == .Description || model.cellType == .Remark {
             return model.descHeight
         }
         return 52
@@ -266,7 +278,7 @@ class CalendarEventDetailController: BaseTableController {
             cell.model = model
             return cell
             
-        case .Link,.Location,.Creator,.PeopleLimit,.People,.Description:
+        case .Link,.Location,.Creator,.PeopleLimit,.People,.Description,.Remark:
             let cell = tableView.dequeueReusableCell(withClass: CalendarEventDetailInfoCell.self)
             cell.model = model
             return cell
@@ -506,6 +518,12 @@ class CalendarEventDetailInfoCell: UITableViewCell {
             if model.cellType == .Description {
                 titleLabel.text = model.model.desc.htmlToString
                 imgView.image = R.image.textQuote()
+                titleLabel.numberOfLines = 0
+            }
+            
+            if model.cellType == .Remark {
+                titleLabel.text = model.model.remarks.htmlToString
+                imgView.image = R.image.line3Horizontal()
                 titleLabel.numberOfLines = 0
             }
             

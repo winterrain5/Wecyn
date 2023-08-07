@@ -22,7 +22,7 @@ class CountryListController: BaseTableController {
 
     var dataType: DataType = .Country
     var countryID:Int? = nil
-    
+    let searchView = NavbarSearchView(placeholder: "Search Name",isSearchable: true,isBecomeFirstResponder: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.72, height: 36))
     init(dataType:DataType,countryID:Int? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.dataType = dataType
@@ -37,7 +37,7 @@ class CountryListController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let searchView = NavbarSearchView(placeholder: "Search Name",isSearchable: true,isBecomeFirstResponder: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.72, height: 36))
+        
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
@@ -47,6 +47,7 @@ class CountryListController: BaseTableController {
             } else {
                 self.searchResult = (self.dataArray as! [CountryModel]).filter({ $0.country_name.contains(keyword.trimmed)})
             }
+            self.searchView.endSearching()
             self.reloadData()
         }
         

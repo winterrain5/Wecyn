@@ -186,6 +186,7 @@ class FriendUserInfoModel: BaseModel {
     /*
      "id": int # 用户的user_id
      "wid": string # Wecyn ID。类似QQ号和微信号
+     "status": 1 没关系，2 好友关系，3 已申请好友，4 被申请好友
      */
     var id: Int = 0
     var first_name: String = ""
@@ -193,6 +194,8 @@ class FriendUserInfoModel: BaseModel {
     var full_name: String {
         String.fullName(first: first_name, last: last_name)
     }
+    /// "friend_status" int # 好友状态。1 没关系，2 好友关系，3 已申请好友，4 被申请好友
+    var friend_status: Int = 0
     var avatar = ""
     var wid = ""
 }

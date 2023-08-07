@@ -31,7 +31,7 @@ import UIKit
             若is_public=1，则只传参attendance_limit
  */
 import HandyJSON
-class AddEventRequestModel: BaseModel {
+@objcMembers class AddEventRequestModel: BaseModel {
     var end_time: String?
     var is_online: Int = 0
     var is_public: Int = 0

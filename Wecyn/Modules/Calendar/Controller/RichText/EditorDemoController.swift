@@ -894,7 +894,7 @@ extension EditorDemoController {
         toolbar.autoresizingMask = [ .flexibleHeight ]
         toolbar.formatter = self
         
-        toolbar.leadingItem = mediaItem
+        toolbar.leadingItem = nil
         toolbar.setDefaultItems(scrollableItems,
                                 overflowItems: overflowItems)
         
@@ -930,7 +930,7 @@ extension EditorDemoController {
         listButton.alternativeIcons = listIcons
         
         return [
-            headerButton,
+//            headerButton,
             listButton,
             makeToolbarButton(identifier: .blockquote),
             makeToolbarButton(identifier: .bold),
@@ -943,7 +943,7 @@ extension EditorDemoController {
         return [
             makeToolbarButton(identifier: .underline),
             makeToolbarButton(identifier: .strikethrough),
-            makeToolbarButton(identifier: .code),
+//            makeToolbarButton(identifier: .code),
             makeToolbarButton(identifier: .horizontalruler),
             makeToolbarButton(identifier: .more),
             makeToolbarButton(identifier: .sourcecode)

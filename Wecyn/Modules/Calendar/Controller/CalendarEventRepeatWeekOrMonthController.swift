@@ -21,7 +21,7 @@ class WeekOrMonthModel {
 }
 let MonthData = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 let WeekData = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-let AlarmData = ["None","5 minutes ago","15 minutes ago","30 minutes ago","1 hour ago","2 hour ago","1 day ago"]
+let AlarmData = ["None","5 minutes before","15 minutes before","30 minutes before","1 hour before","2 hours before","1 day before"]
 class CalendarEventRepeatWeekOrMonthController: BaseTableController {
     
     enum WeekOrMonthType {

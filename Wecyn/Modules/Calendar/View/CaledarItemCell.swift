@@ -15,6 +15,7 @@ class CaledarItemCell: UITableViewCell {
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var repeatImgView: UIImageView!
     @IBOutlet weak var statusImgView: UIImageView!
     var searchingText = ""
@@ -42,6 +43,12 @@ class CaledarItemCell: UITableViewCell {
             creatorLabel.text = "creator: \(model.creator_name)"
             crossDayLabel.isHidden = !model.isCrossDay
             
+            if model.isBySearch {
+                self.startLabel.isHidden = true
+                timeLabel.text = model.start_time + "\n" + model.end_time
+                return
+            }
+            
             let startTime = model.start_time.split(separator: " ").last ?? ""
             let endTime = model.end_time.split(separator: " ").last ?? ""
             if model.isCrossDay {
@@ -64,6 +71,16 @@ class CaledarItemCell: UITableViewCell {
                
             } else {
                 timeLabel.text = startTime + " - " + endTime
+            }
+            
+            guard let startDate = model.start_date else { return }
+            let distance =  Date().distance(to: startDate)
+            let minitue = (distance.int % (60 * 60)) / (60)
+            if distance <= 30 * 60 && distance > 0 {
+                self.startLabel.isHidden = false
+                self.startLabel.text = " \(minitue) mins to start "
+            } else {
+                self.startLabel.isHidden = true
             }
         }
     }

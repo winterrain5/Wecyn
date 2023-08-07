@@ -33,7 +33,7 @@ class BaseViewController: UIViewController {
 
     }
     
-    func addLeftBarButtonItem(image:UIImage? = R.image.navigation_back_default()?.withTintColor(.black)) {
+    func addLeftBarButtonItem(image:UIImage? = R.image.chevronBackward()) {
         leftButton.setImage(image, for: .normal)
         leftButton.frame = CGRect(x: 0, y: 0, width: 33, height: 40)
         leftButton.contentHorizontalAlignment = .left

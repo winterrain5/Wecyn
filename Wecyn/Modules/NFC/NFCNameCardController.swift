@@ -101,11 +101,22 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         
         guard let id = self.id else { return }
         
-        FriendService.friendNameCard(id:id).subscribe(onNext:{
-            self.addConnectFooter()
-            self.addDatas($0)
+        let fuserInfo = FriendService.friendUserInfo(id)
+        let fNameCard = FriendService.friendNameCard(id:id)
+        Observable.zip(fuserInfo,fNameCard).subscribe(onNext:{ info, namecard in
+            /// 1 没关系，2 好友关系，3 已申请好友，4 被申请好友
+            if info.friend_status == 1 {
+                self.addConnectFooter()
+                self.addDatas(namecard)
+            } else {
+                self.addDatas(namecard)
+            }
+            
         },onError: { e in
-        }).disposed(by: self.rx.disposeBag)
+            self.endRefresh(e.asAPIError.emptyDatatype)
+        }).disposed(by: rx.disposeBag)
+        
+        
     }
     
     func addDatas(_ model:UserInfoModel) {
@@ -179,6 +190,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if self.id == nil { return }
         Haptico.selection()
         let data = datas[indexPath.row]
         switch data.type {

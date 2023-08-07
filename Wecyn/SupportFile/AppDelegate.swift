@@ -7,7 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-
+import OpenIMSDK
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
@@ -25,10 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         SwiftyFitsize.shared.referenceW = 375
         
-        Localizer.shared.changeLanguage.accept("en")
+        Localizer.shared.changeLanguage.accept(getCurrentLanguage())
         
-        //        CocoaDebug.onlyURLs = [APIHost.share.BaseUrl.appending("/api")]
         
+        IMService.imSDKInit().subscribe(onNext:{
+            print("imSDKInit:",$0.success)
+        },onError: { e in
+            print("imSDKInit:",e.asAPIError.errorInfo().message)
+        }).disposed(by: rx.disposeBag)
         
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
             let main = MainController()
@@ -46,6 +50,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
+    
+    func getCurrentLanguage() -> String {
+           let preferredLang = Bundle.main.preferredLocalizations.first! as NSString
+           Logger.debug("当前系统语言:\(preferredLang)")
+           
+           switch String(describing: preferredLang) {
+           case "en-US", "en-CN":
+               return "en"//英文
+           case "zh-Hans-US","zh-Hans-CN","zh-Hant-CN","zh-TW","zh-HK","zh-Hans":
+               return "zh_CN"//中文
+           default:
+               return "en"
+           }
+       }
     
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,

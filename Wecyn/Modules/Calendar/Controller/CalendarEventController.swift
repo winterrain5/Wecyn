@@ -41,13 +41,13 @@ class CalendarEventController: BaseTableController {
     var latesMonth:Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        CalendarBelongUserId = UserModel?.id ?? 0
+        CalendarBelongUserId = UserModel?.id.int ?? 0
         CalendarBelongUserName = UserModel?.full_name ?? ""
         
         requestModel.start_date = calendarChangeDate.toString()
         requestModel.current_user_id = CalendarBelongUserId
         
-        selectAssistant.id = UserModel?.id ?? 0
+        selectAssistant.id = UserModel?.id.int ?? 0
         selectAssistant.name = UserModel?.full_name ?? ""
         selectAssistant.avatar = UserModel?.avatar ?? ""
         
@@ -89,6 +89,7 @@ class CalendarEventController: BaseTableController {
         
         CalendarMenuView.addMenu(originView: self.view)
         
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -349,7 +350,7 @@ class CalendarNavBarUserView: UIView {
     var assistants: [AssistantInfo] = [] {
         didSet {
             let selfModel = AssistantInfo()
-            selfModel.id = userModel?.id ?? 0
+            selfModel.id = userModel?.id.int ?? 0
             selfModel.name = userModel?.full_name ?? ""
             selfModel.avatar = userModel?.avatar ?? ""
             assistants.insert(selfModel, at: 0)

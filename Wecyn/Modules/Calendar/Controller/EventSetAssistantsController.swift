@@ -16,7 +16,7 @@ class EventSetAssistantsController: BaseTableController {
     var selectUsers: [FriendListModel] = []
     var searchResults:[FriendListModel] = []
     var keyword = ""
-
+    let searchView = NavbarSearchView(placeholder: "Search by Name",isSearchable: true,isBecomeFirstResponder: false)
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +39,7 @@ class EventSetAssistantsController: BaseTableController {
             
         }).disposed(by: rx.disposeBag)
         
-        let searchView = NavbarSearchView(placeholder: "Search by Name",isSearchable: true,isBecomeFirstResponder: false)
+        
         searchView.size = CGSize(width: kScreenWidth * 0.75, height: 36)
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
@@ -80,8 +80,9 @@ class EventSetAssistantsController: BaseTableController {
             } else {
                 Toast.showError(withStatus: $0.message)
             }
-            
+            self.searchView.endSearching()
         },onError: { e in
+            self.searchView.endSearching()
             Toast.showError(withStatus: e.asAPIError.errorInfo().message)
         }).disposed(by: self.rx.disposeBag)
     }

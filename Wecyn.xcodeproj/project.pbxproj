@@ -100,6 +100,8 @@
 		457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */; };
 		457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */; };
 		458970602A7794EA00344B93 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589705F2A7794EA00344B93 /* Asyncs.swift */; };
+		458970622A78DAA100344B93 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970612A78DAA100344B93 /* IMService.swift */; };
+		458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970632A7CDAB900344B93 /* LanguageSettingController.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
 		45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */; };
 		45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7D2A26E045005871ED /* CacheProvider+Extension.swift */; };
@@ -280,6 +282,8 @@
 		457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssitantsRequestModel.swift; sourceTree = "<group>"; };
 		457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAssistantMenu.swift; sourceTree = "<group>"; };
 		4589705F2A7794EA00344B93 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
+		458970612A78DAA100344B93 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
+		458970632A7CDAB900344B93 /* LanguageSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingController.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45920A7B2A26E045005871ED /* Cacheable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cacheable+Extension.swift"; sourceTree = "<group>"; };
 		45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+HandyJson.swift"; sourceTree = "<group>"; };
@@ -553,6 +557,7 @@
 				45ADB2902A3FF0AD00745F6F /* UserService.swift */,
 				4536533D2A413F270026EC8D /* FriendService.swift */,
 				45BBF52B2A4835440018992C /* ScheduleService.swift */,
+				458970612A78DAA100344B93 /* IMService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -688,7 +693,6 @@
 				45E765BC2A31AB1B00BF6EEC /* Main */,
 				45E765B92A31A9F000BF6EEC /* Job */,
 				45E765B62A31A9DC00BF6EEC /* Connection */,
-				45E765B32A31A98600BF6EEC /* Setting */,
 				45E765B02A31A94D00BF6EEC /* Profile */,
 				45920A882A26E045005871ED /* Home */,
 			);
@@ -883,8 +887,10 @@
 		45A10A462A31B00F00726B66 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45E765B42A31A99400BF6EEC /* SettingController.swift */,
 				45E765B12A31A97F00BF6EEC /* ProfileController.swift */,
 				450B6C7F2A37F85B008B0C4A /* EditViewController.swift */,
+				458970632A7CDAB900344B93 /* LanguageSettingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -977,14 +983,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		45E765B32A31A98600BF6EEC /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				45E765B42A31A99400BF6EEC /* SettingController.swift */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
 		45E765B62A31A9DC00BF6EEC /* Connection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1043,9 +1041,9 @@
 			children = (
 				45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */,
 				45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */,
-				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
 				450F6CD22A6917590001AA1B /* CalendarEventHeadView.swift */,
 				450F6CD42A6928220001AA1B /* CalendarMenuView.swift */,
+				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1270,6 +1268,7 @@
 				450BA6B62A31B9B000764828 /* Localizer.swift in Sources */,
 				459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */,
 				45A7E5AB2A734DC30002014D /* NavbarSearchView.swift in Sources */,
+				458970622A78DAA100344B93 /* IMService.swift in Sources */,
 				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
 				45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */,
@@ -1352,6 +1351,7 @@
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
+				458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */,
 				450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
 				450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */,

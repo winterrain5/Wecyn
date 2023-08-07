@@ -56,17 +56,11 @@ class NFCNameCardEditController: BaseTableController {
         website.value = user.website
         datas.append([mobile,officeNo,officeLocation,website])
         
-        
-        request.first_name = user.first_name
-        request.last_name =  user.last_name
-        request.company_name = user.company
-        request.job_title = user.job_title
-        
-        request.mobile = user.mobile
-        request.office_number = user.office_number
-        request.office_location = user.office_location
-        request.website = user.website
-   
+        Mirror(reflecting: UpdateUserInfoRequestModel()).children.forEach { child in
+            guard let key = child.label else { return }
+            self.request.setValue(user.value(forKey: key), forKey: key)
+        }
+      
         
         self.addLeftBarButtonItem(image: R.image.xmark())
         self.leftButtonDidClick = {

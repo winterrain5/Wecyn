@@ -7,9 +7,9 @@
 
 import UIKit
 
-class UserInfoModel: BaseModel,Codable {
+@objcMembers class UserInfoModel: BaseModel,Codable {
     
-    var id: Int = 0
+    var id: String = ""
     var mobile: String = ""
     var office_number: String = ""
     var job_title: String = ""
@@ -24,6 +24,10 @@ class UserInfoModel: BaseModel,Codable {
     
     var full_name:String {
         return String.fullName(first: first_name, last: last_name)
+    }
+    
+    override func value(forUndefinedKey key: String) -> Any? {
+        return nil
     }
     
 }

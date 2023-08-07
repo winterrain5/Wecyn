@@ -35,16 +35,14 @@ class WebBrowserController: BaseViewController,WKUIDelegate, WKNavigationDelegat
     private lazy var closeBtn: UIButton = {
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 28, height: 44)
-        button.setTitleColor(UIColor.hexStringColor(hexString: "#333333"), for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.setTitle("关闭", for: .normal)
+        button.setImage(R.image.xmark(), for: .normal)
         button.addTarget(self, action: #selector(closeItemAction), for: .touchUpInside)
         return button
     }()
     private lazy var backBtn: UIButton = {
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 28, height: 44)
-//        button.setImage(R.image.nav_return(), for: .normal)
+        button.setImage(R.image.chevronBackward(), for: .normal)
         button.addTarget(self, action: #selector(leftBarButtonAction), for: .touchUpInside)
         return button
     }()
@@ -373,12 +371,6 @@ extension WebBrowserController {
         decisionHandler(.allow)
     }
     
-    
-    
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        self.webView?.load((self.webView?.fix(request: navigationAction.request))!)
-        return nil
-    }
     
     /// 处理js里的alert
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {

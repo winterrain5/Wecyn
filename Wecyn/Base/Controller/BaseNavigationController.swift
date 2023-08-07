@@ -18,7 +18,7 @@ class BaseNavigationController: UINavigationController {
         self.navigation.configuration.isShadowHidden = true
         self.navigation.configuration.isTranslucent = true
         self.navigation.configuration.barTintColor = .white
-        self.navigation.configuration.backItem = UINavigationController.Configuration.BackItem(style: .image(UIImage(named: "navigation_back_default")?.withTintColor(.black)))
+        self.navigation.configuration.backItem = UINavigationController.Configuration.BackItem(style: .image(R.image.chevronBackward()!))
         self.navigation.configuration.tintColor = .black
     }
     /// 拦截push

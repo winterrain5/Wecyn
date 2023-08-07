@@ -11,11 +11,11 @@ import IQKeyboardManagerSwift
 class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlowLayout {
     var sectionTitle = ["People in IT services you may know ","People you may know from Company209","People you may know from Nanyang Polytechnic"]
     
+    let searchView = NavbarSearchView(placeholder: "Search by name",isSearchable: true,isBecomeFirstResponder: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
     var searchResults:[FriendUserInfoModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let searchView = NavbarSearchView(placeholder: "Search by name",isSearchable: true,isBecomeFirstResponder: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+     
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
@@ -23,6 +23,7 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
                 $0.last_name.lowercased().contains(keyword.trimmed.lowercased()) ||
                 $0.full_name.lowercased().contains(keyword.trimmed.lowercased()) }) ?? []
             self.reloadData()
+            self.searchView.endSearching()
         }
         
         searchView.beginSearch = { [weak self] in

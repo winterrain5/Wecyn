@@ -14,6 +14,7 @@ class CalendarAddAttendanceController: BaseTableController {
     var selectUsers: BehaviorRelay<[FriendListModel]> =  BehaviorRelay(value: [])
     var searchResults:[FriendListModel] = []
     var keyword = ""
+    let searchView = NavbarSearchView(placeholder: "Search by Name",isSearchable: true,isBecomeFirstResponder: false)
     init(selecteds:[FriendListModel]) {
         super.init(nibName: nil, bundle: nil)
         selectUsers.accept(selecteds)
@@ -42,7 +43,7 @@ class CalendarAddAttendanceController: BaseTableController {
         
         selectUsers.map({ !$0.isEmpty }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)
         
-        let searchView = NavbarSearchView(placeholder: "Search by Name",isSearchable: true,isBecomeFirstResponder: false)
+        
         searchView.size = CGSize(width: kScreenWidth * 0.75, height: 36)
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
@@ -83,8 +84,10 @@ class CalendarAddAttendanceController: BaseTableController {
                 }
             })
             self.friends.append(contentsOf: models)
+            self.searchView.endSearching()
             self.endRefresh()
         },onError: { e in
+            self.searchView.endSearching()
             self.endRefresh(e.asAPIError.emptyDatatype)
         }).disposed(by: rx.disposeBag)
         
