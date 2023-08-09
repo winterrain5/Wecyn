@@ -69,10 +69,10 @@ class CalendarEventSearchLocationController: BaseTableController {
             }
 
         }
-        
-        self.addLeftBarButtonItem(image: R.image.xmark()!)
+        self.addLeftBarButtonItem()
         self.leftButtonDidClick = { [weak self] in
             self?.returnBack()
+            
         }
     }
  
