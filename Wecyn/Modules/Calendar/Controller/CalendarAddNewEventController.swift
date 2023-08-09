@@ -595,7 +595,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .End {
-            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_end_Date : self.editEventModel?.end_date) : (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue))
+            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_end_Date : self.editEventModel?.end_date) : (self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: 1))
             DatePickerView(title:"End Time",
                            mode: .dateAndTime,
                            date: date,
@@ -622,7 +622,8 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self?.reloadData()
             }
-            self.navigationController?.pushViewController(vc)
+            let nav = BaseNavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
             
         }
         
@@ -636,27 +637,35 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self?.reloadData()
             }
-            self.navigationController?.pushViewController(vc)
+            let nav = BaseNavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
             
         }
         
         if model.type == .Color {
             let select = EventColor.allColor[self.requestModel.color ?? 0]
-            ColorPickerView(selectColor: select) { [weak self] color in
+            let vc = ColorPickerController(selectColor: select) { color in
                 guard let color = color else { return }
-                self?.requestModel.color = EventColor.allColor.firstIndex(of: color)
+                self.requestModel.color = EventColor.allColor.firstIndex(of: color)
                 
-                self?.Color.color = color
-                self?.Title.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color)!)
-                self?.reloadData()
+                self.Color.color = color
+                self.Title.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color)!)
+                self.reloadData()
                 
-            }.show()
+            }
+            if let sheet = vc.sheetPresentationController{
+                sheet.detents = [.medium(), .large()]
+            }
+            present(vc, animated: true)
+
         }
         
         if model.type == .Alarm {
             let vc = CalendarEventRepeatWeekOrMonthController(type: .Alarm, selectIndexs: [self.alarmSelectIndex])
-            let nav = BaseNavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
+            if let sheet = vc.sheetPresentationController{
+                sheet.detents = [.medium(), .large()]
+            }
+            self.present(vc, animated: true)
             vc.selectComplete = { [weak self] ids in
                 guard let `self` = self else { return }
                 self.alarmSelectIndex = ids.first ?? 1

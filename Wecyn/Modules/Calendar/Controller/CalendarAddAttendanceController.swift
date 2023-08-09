@@ -97,7 +97,7 @@ class CalendarAddAttendanceController: BaseTableController {
         super.createListView()
         
         registRefreshHeader()
-        tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: kBottomsafeAreaMargin + 10, right: 0)
+        tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: kBottomsafeAreaMargin + 40, right: 0)
         tableView?.showsVerticalScrollIndicator = false
         tableView?.register(cellWithClass: CalendarAddAttendanceCell.self)
  

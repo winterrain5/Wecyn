@@ -51,7 +51,7 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
         self.leftButtonDidClick = { [weak self] in
             guard let `self` = self else { return }
             self.selectComplete?(self.selectIndexs)
-            self.navigationController?.popViewController(animated: true)
+            self.returnBack()
         }
         
         
@@ -92,6 +92,16 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
         
     }
     
+    override func listViewFrame() -> CGRect {
+        if self.navigationController != nil {
+            return CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: self.view.height - kNavBarHeight)
+        } else {
+           return CGRect(x: 0, y: 0, width: kScreenWidth, height: self.view.height)
+        }
+        
+    }
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         datas.count
     }
@@ -116,6 +126,8 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
             datas[indexPath.row].isSelect = true
             self.selectIndexs = [indexPath.row]
             tableView.reloadData()
+            self.selectComplete?(self.selectIndexs)
+            self.returnBack()
             return
         }
         self.selectIndexs.removeAll()
@@ -130,5 +142,7 @@ class CalendarEventRepeatWeekOrMonthController: BaseTableController {
                 self.selectIndexs.append($0)
             }
         })
+        
+     
     }
 }
