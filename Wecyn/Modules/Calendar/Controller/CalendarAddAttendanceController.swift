@@ -38,7 +38,7 @@ class CalendarAddAttendanceController: BaseTableController {
         self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.returnBack()
+            self.dismiss(animated: true)
         }).disposed(by: rx.disposeBag)
         
         selectUsers.map({ !$0.isEmpty }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)

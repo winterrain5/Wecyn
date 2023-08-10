@@ -44,6 +44,7 @@ target 'Wecyn' do
   pod "WordPress-Aztec-iOS"
   pod "WordPress-Editor-iOS"
   pod 'ParallaxHeader'
+  pod 'TagListView'
   
   pod 'OpenIMSDK'
   

@@ -279,7 +279,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 73 images.
+  /// This `_R.image` struct is generated, and contains static references to 75 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -361,6 +361,9 @@ struct _R {
     /// Image `google`.
     var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `house`.
+    var house: RswiftResources.ImageResource { .init(name: "house", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `iphone.gen1.circle.fill`.
     var iphoneGen1CircleFill: RswiftResources.ImageResource { .init(name: "iphone.gen1.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -390,6 +393,9 @@ struct _R {
 
     /// Image `magnifyingglass`.
     var magnifyingglass: RswiftResources.ImageResource { .init(name: "magnifyingglass", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `mail.stack`.
+    var mailStack: RswiftResources.ImageResource { .init(name: "mail.stack", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `mappin.and.ellipse`.
     var mappinAndEllipse: RswiftResources.ImageResource { .init(name: "mappin.and.ellipse", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

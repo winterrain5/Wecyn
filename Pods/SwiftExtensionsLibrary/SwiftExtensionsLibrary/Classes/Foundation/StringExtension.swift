@@ -61,16 +61,16 @@ public extension ExtensionBase where Base: ExpressibleByStringLiteral {
 public extension String {
     func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: [.usesLineFragmentOrigin, .usesFontLeading,.usesDeviceMetrics], attributes: [NSAttributedString.Key.font: font], context: nil)
         
-        return boundingBox.height
+        return ceil(boundingBox.height)
         
     }
     func widthWithConstrainedWidth(height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options:[.usesLineFragmentOrigin, .usesFontLeading,.usesDeviceMetrics], attributes: [NSAttributedString.Key.font: font], context: nil)
         
-        return boundingBox.width
+        return ceil(boundingBox.width)
         
     }
 }

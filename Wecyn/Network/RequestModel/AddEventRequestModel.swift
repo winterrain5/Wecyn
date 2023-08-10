@@ -33,7 +33,6 @@ import UIKit
 import HandyJSON
 @objcMembers class AddEventRequestModel: BaseModel {
     var end_time: String?
-    var is_online: Int = 0
     var is_public: Int = 0
     var current_user_id: Int?
     var remarks: String?
@@ -50,6 +49,8 @@ import HandyJSON
     var color: Int?
     // update event 
     var id: Int?
+    var room_id: Int?
+    var emails:[String]?
     
 }
 

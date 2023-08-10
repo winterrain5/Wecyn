@@ -56,7 +56,7 @@ extension FriendApi:TargetType, Cacheable {
         case .updateGroup:
             return "/api/network/updateGroup/"
         case .friendNameCard:
-            return "/api/network/nameCardInfo/"
+            return "/api/network/c  ardInfo/"
         }
     }
     

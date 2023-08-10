@@ -17,6 +17,7 @@ enum ScheduleApi {
     case addAssistants(_ model:AddAssitantsRequestModel)
     case recieveAssistantsList
     case sendedAssistantsList
+    case meetingRoom(_ id:Int)
 }
 
 extension ScheduleApi: TargetType {
@@ -40,6 +41,8 @@ extension ScheduleApi: TargetType {
             return "/api/assistant/assistantReceiveList/"
         case .sendedAssistantsList:
             return "/api/assistant/assistantSendList/"
+        case .meetingRoom:
+            return "/api/schedule/roomList/"
         }
     }
     
@@ -74,6 +77,8 @@ extension ScheduleApi: TargetType {
             return .requestPlain
         case .sendedAssistantsList:
             return .requestPlain
+        case .meetingRoom(let id):
+            return requestParametersByGet(["current_user_id":id])
         }
     }
 }

@@ -19,6 +19,7 @@ enum CalendarEventDetailCellType {
     case Description
     case Remark
     case Delete
+    case EmailCc
 }
 
 class CalendarEventDetailModel {
@@ -111,14 +112,13 @@ class CalendarEventDetailController: BaseTableController {
             
             let loc = CalendarEventDetailModel(cellType: .Location, model: model)
             let link = CalendarEventDetailModel(cellType: .Link, model: model)
+            let emailCc = CalendarEventDetailModel(cellType: .EmailCc, model: model)
             
             var section3:[CalendarEventDetailModel] = []
-            if model.is_online  == 1 {
-                if !model.url.isEmpty { section3.append(link) }
-            } else {
-                if !model.location.isEmpty { section3.append(loc)  }
-                
-            }
+            if !model.url.isEmpty { section3.append(link) }
+            if !model.location.isEmpty { section3.append(loc)  }
+            if !model.emails.isEmpty { section3.append(emailCc) }
+           
             
             let peolple = CalendarEventDetailModel(cellType: .People, model: model)
             let peopleLimit = CalendarEventDetailModel(cellType: .PeopleLimit, model: model)
@@ -278,7 +278,7 @@ class CalendarEventDetailController: BaseTableController {
             cell.model = model
             return cell
             
-        case .Link,.Location,.Creator,.PeopleLimit,.People,.Description,.Remark:
+        case .Link,.Location,.Creator,.PeopleLimit,.People,.Description,.Remark,.EmailCc:
             let cell = tableView.dequeueReusableCell(withClass: CalendarEventDetailInfoCell.self)
             cell.model = model
             return cell
@@ -515,6 +515,11 @@ class CalendarEventDetailInfoCell: UITableViewCell {
                 imgView.image = R.image.person2()
             }
             
+            if model.cellType == .EmailCc  {
+                titleLabel.text = ""
+                imgView.image = R.image.mailStack()
+            }
+            
             if model.cellType == .Description {
                 titleLabel.text = model.model.desc.htmlToString
                 imgView.image = R.image.textQuote()
@@ -527,7 +532,7 @@ class CalendarEventDetailInfoCell: UITableViewCell {
                 titleLabel.numberOfLines = 0
             }
             
-            if model.cellType == .People {
+            if model.cellType == .People || model.cellType == .EmailCc{
                 attendeesClv.isHidden = false
             } else {
                 attendeesClv.isHidden = true
@@ -594,19 +599,26 @@ extension CalendarEventDetailInfoCell: UICollectionViewDataSource,UICollectionVi
         let cell = collectionView.dequeueReusableCell(withClass: EventDetaiAttendeesCell.self, for: indexPath)
         if self.model.model.attendees.count > 0 {
             cell.model = model.model.attendees[indexPath.row]
-            
+        }
+        if self.model.model.emails.count > 0 {
+            cell.email = model.model.emails[indexPath.row]
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model.model.attendees.count
+        return self.model.model.attendees.count > 0 ? self.model.model.attendees.count : self.model.model.emails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.model.model.attendees.count > 0 {
             let model = model.model.attendees[indexPath.row]
             let width = model.name.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 8
+            return CGSize(width: width, height: 26)
+        }
+        if self.model.model.emails.count > 0 {
+            let email = model.model.emails[indexPath.row]
+            let width = email.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 8
             return CGSize(width: width, height: 26)
         }
         return .zero
@@ -631,7 +643,13 @@ class EventDetaiAttendeesCell: UICollectionViewCell {
             }
         }
     }
-    var deleteItemHandler:((FriendListModel)->())?
+    var email:String = "" {
+        didSet {
+            label.text = email
+            contentView.backgroundColor = R.color.theamColor()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(label)

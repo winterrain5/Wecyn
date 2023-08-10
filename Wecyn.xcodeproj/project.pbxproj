@@ -27,7 +27,6 @@
 		45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45005C7F2A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard */; };
 		45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */; };
 		45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */; };
-		45005C892A5E4AAF00560E21 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C882A5E4AAF00560E21 /* ColorPickerView.swift */; };
 		45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */; };
 		45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */; };
 		45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */; };
@@ -85,6 +84,13 @@
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
+		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
+		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
+		4564BE292A8329A400464AFA /* calendarBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE282A8329A400464AFA /* calendarBundle.swift */; };
+		4564BE2B2A8329A400464AFA /* calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE2A2A8329A400464AFA /* calendar.swift */; };
+		4564BE2D2A8329A700464AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4564BE2C2A8329A700464AFA /* Assets.xcassets */; };
+		4564BE312A8329A700464AFA /* calendarExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4564BE222A8329A300464AFA /* calendarExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4564BE372A83840500464AFA /* RoomPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE362A83840500464AFA /* RoomPickerController.swift */; };
 		457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457133B82A4D0E81007B783A /* EventSearchViewController.swift */; };
 		457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */; };
 		457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */; };
@@ -169,6 +175,7 @@
 		45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2902A3FF0AD00745F6F /* UserService.swift */; };
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
 		45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */; };
+		45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B643DF2A84863300C79D13 /* EmailCcAddController.swift */; };
 		45BBF5262A48328D0018992C /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5252A48328D0018992C /* MessageController.swift */; };
 		45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5272A4832EC0018992C /* ScheduleApi.swift */; };
 		45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5292A4833B00018992C /* AddEventRequestModel.swift */; };
@@ -187,6 +194,30 @@
 		45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4564BE2F2A8329A700464AFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459209C42A26D5F4005871ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4564BE212A8329A300464AFA;
+			remoteInfo = calendarExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4564BE322A8329A700464AFA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4564BE312A8329A700464AFA /* calendarExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListRequestModel.swift; sourceTree = "<group>"; };
@@ -209,7 +240,6 @@
 		45005C7F2A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AttachmentDetailsViewController.storyboard; sourceTree = "<group>"; };
 		45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentDetailsViewController.swift; sourceTree = "<group>"; };
 		45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownEditorViewController.swift; sourceTree = "<group>"; };
-		45005C882A5E4AAF00560E21 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatController.swift; sourceTree = "<group>"; };
 		45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatWeekOrMonthController.swift; sourceTree = "<group>"; };
 		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
@@ -268,6 +298,14 @@
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4564BE252A8329A300464AFA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4564BE282A8329A400464AFA /* calendarBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calendarBundle.swift; sourceTree = "<group>"; };
+		4564BE2A2A8329A400464AFA /* calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calendar.swift; sourceTree = "<group>"; };
+		4564BE2C2A8329A700464AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4564BE2E2A8329A700464AFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4564BE362A83840500464AFA /* RoomPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPickerController.swift; sourceTree = "<group>"; };
 		457133B82A4D0E81007B783A /* EventSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSearchViewController.swift; sourceTree = "<group>"; };
 		457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExperienceItemCell.swift; sourceTree = "<group>"; };
 		457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderJobItemCell.swift; sourceTree = "<group>"; };
@@ -357,6 +395,7 @@
 		45ADB2902A3FF0AD00745F6F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
 		45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyCell.swift; sourceTree = "<group>"; };
+		45B643DF2A84863300C79D13 /* EmailCcAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCcAddController.swift; sourceTree = "<group>"; };
 		45BBF5252A48328D0018992C /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		45BBF5272A4832EC0018992C /* ScheduleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleApi.swift; sourceTree = "<group>"; };
 		45BBF5292A4833B00018992C /* AddEventRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventRequestModel.swift; sourceTree = "<group>"; };
@@ -379,6 +418,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4564BE1F2A8329A300464AFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */,
+				4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459209C92A26D5F4005871ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,15 +450,6 @@
 				45005C7A2A5E388100560E21 /* TextViewAttachmentDelegateProvider.swift */,
 			);
 			path = RichText;
-			sourceTree = "<group>";
-		};
-		45005C872A5E4A9F00560E21 /* ColorPicker */ = {
-			isa = PBXGroup;
-			children = (
-				45005C882A5E4AAF00560E21 /* ColorPickerView.swift */,
-				4564BE1C2A822B2200464AFA /* ColorPickerController.swift */,
-			);
-			path = ColorPicker;
 			sourceTree = "<group>";
 		};
 		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
@@ -553,6 +592,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4564BE272A8329A400464AFA /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				4564BE282A8329A400464AFA /* calendarBundle.swift */,
+				4564BE2A2A8329A400464AFA /* calendar.swift */,
+				4564BE2C2A8329A700464AFA /* Assets.xcassets */,
+				4564BE2E2A8329A700464AFA /* Info.plist */,
+			);
+			path = calendar;
+			sourceTree = "<group>";
+		};
 		457C50912A38576200FCE8D0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,7 +641,6 @@
 		457C7D8E2A4D69F8002E50DF /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				45005C872A5E4A9F00560E21 /* ColorPicker */,
 				457C7D8F2A4D6A0B002E50DF /* DatePicker */,
 				45A7E5A22A7212030002014D /* MapViewController.swift */,
 				45A7E5AA2A734DC30002014D /* NavbarSearchView.swift */,
@@ -611,6 +660,7 @@
 			isa = PBXGroup;
 			children = (
 				459209CE2A26D5F4005871ED /* Wecyn */,
+				4564BE272A8329A400464AFA /* calendar */,
 				459209CD2A26D5F4005871ED /* Products */,
 				58E99C64972A237AA00869D0 /* Pods */,
 				E5E07ACF7CCE3FCFA3B7A7F5 /* Frameworks */,
@@ -621,6 +671,7 @@
 			isa = PBXGroup;
 			children = (
 				459209CC2A26D5F4005871ED /* Wecyn.app */,
+				4564BE222A8329A300464AFA /* calendarExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1035,6 +1086,9 @@
 				45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */,
 				450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */,
 				45A7E5A82A734C1C0002014D /* CalendarEventSearchLocationController.swift */,
+				4564BE1C2A822B2200464AFA /* ColorPickerController.swift */,
+				4564BE362A83840500464AFA /* RoomPickerController.swift */,
+				45B643DF2A84863300C79D13 /* EmailCcAddController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1064,6 +1118,8 @@
 			isa = PBXGroup;
 			children = (
 				5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */,
+				4564BE232A8329A300464AFA /* WidgetKit.framework */,
+				4564BE252A8329A300464AFA /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1071,6 +1127,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4564BE212A8329A300464AFA /* calendarExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4564BE352A8329A700464AFA /* Build configuration list for PBXNativeTarget "calendarExtension" */;
+			buildPhases = (
+				4564BE1E2A8329A300464AFA /* Sources */,
+				4564BE1F2A8329A300464AFA /* Frameworks */,
+				4564BE202A8329A300464AFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = calendarExtension;
+			productName = calendarExtension;
+			productReference = 4564BE222A8329A300464AFA /* calendarExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		459209CB2A26D5F4005871ED /* Wecyn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 459209E02A26D5F8005871ED /* Build configuration list for PBXNativeTarget "Wecyn" */;
@@ -1081,10 +1154,12 @@
 				459209C92A26D5F4005871ED /* Frameworks */,
 				459209CA2A26D5F4005871ED /* Resources */,
 				7ADA8EE899883EEC9D8C8070 /* [CP] Embed Pods Frameworks */,
+				4564BE322A8329A700464AFA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4564BE302A8329A700464AFA /* PBXTargetDependency */,
 			);
 			name = Wecyn;
 			productName = Wecyn;
@@ -1101,6 +1176,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					4564BE212A8329A300464AFA = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					459209CB2A26D5F4005871ED = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -1121,11 +1199,20 @@
 			projectRoot = "";
 			targets = (
 				459209CB2A26D5F4005871ED /* Wecyn */,
+				4564BE212A8329A300464AFA /* calendarExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4564BE202A8329A300464AFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4564BE2D2A8329A700464AFA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459209CA2A26D5F4005871ED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1222,6 +1309,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4564BE1E2A8329A300464AFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4564BE292A8329A400464AFA /* calendarBundle.swift in Sources */,
+				4564BE2B2A8329A400464AFA /* calendar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459209C82A26D5F4005871ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1236,7 +1332,6 @@
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
 				450BA6D52A32F05B00764828 /* RegistInfoController.swift in Sources */,
 				45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */,
-				45005C892A5E4AAF00560E21 /* ColorPickerView.swift in Sources */,
 				45920ACE2A26E045005871ED /* APIHost.swift in Sources */,
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
@@ -1297,6 +1392,7 @@
 				45920AE82A26E045005871ED /* LoaddingButton.swift in Sources */,
 				45005C552A57DC5400560E21 /* ConnectionGroupController.swift in Sources */,
 				450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */,
+				4564BE372A83840500464AFA /* RoomPickerController.swift in Sources */,
 				450F6CC32A613AFC0001AA1B /* RecurrenceRule.swift in Sources */,
 				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
@@ -1332,6 +1428,7 @@
 				45A7E5A32A7212040002014D /* MapViewController.swift in Sources */,
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
+				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
 				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
@@ -1384,6 +1481,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		4564BE302A8329A700464AFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4564BE212A8329A300464AFA /* calendarExtension */;
+			targetProxy = 4564BE2F2A8329A700464AFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		45920AB92A26E045005871ED /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1415,6 +1520,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4564BE332A8329A700464AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = calendar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = calendar;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn.calendar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4564BE342A8329A700464AFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = calendar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = calendar;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn.calendar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		459209DE2A26D5F8005871ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1535,6 +1698,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F6737696186A89881164CB5A /* Pods-Wecyn.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
@@ -1580,6 +1744,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 85753C0B8E9CA6B5BCF3B27A /* Pods-Wecyn.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
@@ -1624,6 +1789,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4564BE352A8329A700464AFA /* Build configuration list for PBXNativeTarget "calendarExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4564BE332A8329A700464AFA /* Debug */,
+				4564BE342A8329A700464AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		459209C72A26D5F4005871ED /* Build configuration list for PBXProject "Wecyn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

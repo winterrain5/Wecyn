@@ -94,6 +94,15 @@ class ScheduleService {
         let target = MultiTarget(ScheduleApi.sendedAssistantsList)
         return APIProvider.rx.request(target).asObservable().mapArray(AssistantInfo.self)
     }
+    
+    
+    /// 会议房间列表
+    /// - Parameter id: id
+    /// - Returns: MeetingRoom
+    static func meetingRoomList(id: Int) -> Observable<[MeetingRoom]> {
+        let target = MultiTarget(ScheduleApi.meetingRoom(id))
+        return APIProvider.rx.request(target).asObservable().mapArray(MeetingRoom.self)
+    }
 }
 
 @objcMembers class EventInfoModel: BaseModel {
@@ -123,7 +132,6 @@ class ScheduleService {
     var start_time: String = ""
     var desc: String = ""
     var title: String = ""
-    var is_online: Int = 0
     var location: String = ""
     var creator_id: Int = 0
     var creator_name: String = ""
@@ -133,6 +141,16 @@ class ScheduleService {
     var attendance_count = 0
     var attendees_public = ""
     var remarks = ""
+    var emails:[String] = []
+    var room_id:Int = 0
+    var room_name:String = ""
+    var roomModel:MeetingRoom {
+        let m = MeetingRoom()
+        m.id = room_id
+        m.name = room_name
+        m.isSelect = true
+        return m
+    }
     
     var color:Int = 0
     var colorHexString:String? {
@@ -341,4 +359,10 @@ class AssistantInfo: BaseModel {
     var id: Int = 0
     var name: String = ""
     var avatar: String = ""
+}
+
+class MeetingRoom: BaseModel {
+    var id: Int = 0
+    var name: String = ""
+    var isSelect: Bool = false
 }
