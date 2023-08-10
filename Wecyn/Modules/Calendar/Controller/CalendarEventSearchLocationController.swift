@@ -11,6 +11,7 @@ import MapKit
 class LocationModel {
     var title:String
     var detail:String
+    var isSelect: Bool = false
     init(title: String, detail: String) {
         self.title = title
         self.detail = detail
@@ -21,9 +22,24 @@ class CalendarEventSearchLocationController: BaseTableController {
     var searchView = NavbarSearchView()
     var datas:[LocationModel] = []
     var selectLocationComplete:((String)->())?
+    var selectLocation: BehaviorRelay = BehaviorRelay<LocationModel?>(value: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let doneButton = UIButton()
+        doneButton.textColor(.black)
+        let doneItem = UIBarButtonItem(customView: doneButton)
+        
+        let fixItem = UIBarButtonItem.fixedSpace(width: 16)
+        
+        self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
+        doneButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.selectLocationComplete?(self.selectLocation.value?.title ?? "")
+            self.dismiss(animated: true)
+        }).disposed(by: rx.disposeBag)
+        
+        selectLocation.map({ $0 != nil }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)
         
         searchView = NavbarSearchView(placeholder: "Search Location",
                                       isSearchable: true,
@@ -102,7 +118,7 @@ class CalendarEventSearchLocationController: BaseTableController {
         let cell = tableView.dequeueReusableCell(withClass: LocationItemCell.self)
         cell.titleLabel.text = datas[indexPath.row].title
         cell.detailLabel.text = datas[indexPath.row].detail
-       
+        cell.accessoryType = datas[indexPath.row].isSelect ? .checkmark : .none
         return cell
     }
     
@@ -110,8 +126,17 @@ class CalendarEventSearchLocationController: BaseTableController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         Haptico.selection()
-        self.selectLocationComplete?(datas[indexPath.row].title)
-        self.returnBack()
+        let model = datas[indexPath.row]
+        if model.isSelect {
+            model.isSelect = false
+        } else {
+            datas.forEach({ $0.isSelect = false })
+            model.isSelect.toggle()
+        }
+        
+        self.reloadData()
+        
+        self.selectLocation.accept(datas.filter({ $0.isSelect }).first)
     }
   
 }

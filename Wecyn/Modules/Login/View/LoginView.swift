@@ -56,7 +56,8 @@ class LoginView: UIView {
             AuthService.signin(username: username, password: MD5(password + "wecyn").lowercased()).subscribe(onNext:{ model in
                 self.signInButton.stopAnimation()
                 UserDefaults.sk.set(object: model, for: TokenModel.className)
-                
+                let userDefaults = UserDefaults(suiteName: "com.terra.wecyn")
+                userDefaults?.setValue(model.token, forKey: "token")
                 UserService.getUserInfo().subscribe(onNext:{ model in
                     UserDefaults.sk.set(object: model, for: UserInfoModel.className)
                     let main = MainController()

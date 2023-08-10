@@ -35,8 +35,9 @@ enum AddEventType {
     case Start
     case End
     case Description
-    case IsOnline
     case Location
+    case EmailCc
+    case MeetingRoom
     case Link
     case IsPublic
     case Remark
@@ -53,16 +54,16 @@ class AddEventModel {
     
     var location: String?
     var url: String?
-    
+    var emails:[String] = []
     var attendees: [Attendees] = []
     
     var color = ""
     var duplicate = ""
     var alarm = ""
+    var room = ""
     
     var start_time = ""
     var end_time: String?
-    var is_online: Int = 0
     var is_public: Int = 0
     var current_user_id: Int?
     var remarks: String?
@@ -100,10 +101,10 @@ class CalendarAddNewEventController: BaseTableController {
     let Desc = AddEventModel(img: R.image.textQuote(), placeholder: "Description", type: .Description)
     let Remark = AddEventModel(img: R.image.line3Horizontal(), placeholder: "Remark", type: .Remark)
     
-    let IsOnline = AddEventModel(img: R.image.switch2(), placeholder: "Offline", type: .IsOnline)
     let Location = AddEventModel(img: R.image.location(), placeholder: "Location", type: .Location)
     let Link = AddEventModel(img: R.image.link(), placeholder: "Link", type: .Link)
-    
+    let EmailCc = AddEventModel(img: R.image.mailStack(), placeholder: "Email Cc", type: .EmailCc)
+    let MeetingRoom = AddEventModel(img: R.image.house(), placeholder: "Room", type: .MeetingRoom)
     
     let Color = AddEventModel(img: R.image.tagFill(), placeholder: "Color", type: .Color)
     
@@ -117,6 +118,8 @@ class CalendarAddNewEventController: BaseTableController {
     var isEdit = false
     
     var alarmSelectIndex:Int = 1
+    var selectRoom:MeetingRoom?
+    var addedEmails:[String] = []
     
     init(editEventModel: EventInfoModel? = nil) {
         self.editEventModel = editEventModel
@@ -186,6 +189,9 @@ class CalendarAddNewEventController: BaseTableController {
             return attance
         })
         
+        addedEmails = event.emails
+        selectRoom = event.roomModel
+        
         requestModel.title = event.title
         requestModel.is_public = event.is_public
         requestModel.attendees = event.attendees
@@ -196,12 +202,13 @@ class CalendarAddNewEventController: BaseTableController {
         requestModel.rrule_str = event.rrule_str
         requestModel.desc = event.desc
         requestModel.remarks = event.remarks
-        requestModel.is_online = event.is_online
         requestModel.url = event.url
         requestModel.location = event.location
         requestModel.color = event.color
         requestModel.id = event.id
+        requestModel.emails = event.emails
         requestModel.current_user_id = CalendarBelongUserId
+        requestModel.room_id = event.room_id
         
         Title.title = event.title
         if event.color < EventColor.allColor.count   {
@@ -223,10 +230,11 @@ class CalendarAddNewEventController: BaseTableController {
         Duplicate.duplicate = event.recurrenceType
         Desc.desc = event.desc.htmlToString
         Remark.remarks = event.remarks
-        IsOnline.is_online = event.is_online
         Location.location = event.location
         Link.url = event.url
+        EmailCc.emails = event.emails
         Color.color = EventColor.allColor[event.color]
+        MeetingRoom.room = event.room_name
         
         isEdit = true
         rrule = event.rruleObject
@@ -259,25 +267,11 @@ class CalendarAddNewEventController: BaseTableController {
         let timeSection = [Start,End,Duplicate]
         models.append(timeSection)
         
-        
         let descSection = [Desc,Remark]
         models.append(descSection)
         
-        var isOnlineSection:[AddEventModel] = []
-        if editEventModel ==  nil {
-            isOnlineSection = [IsOnline,Location]
-        } else {
-            if (editEventModel?.is_online ?? 0) == 1 {
-                IsOnline.is_online = 1
-                IsOnline.placeholder = "Online"
-                isOnlineSection = [IsOnline,Link]
-            } else {
-                IsOnline.is_online = 0
-                IsOnline.placeholder = "Offline"
-                isOnlineSection = [IsOnline,Location]
-            }
-        }
-        models.append(isOnlineSection)
+        let urlLocationSection = [Link,Location,EmailCc,MeetingRoom]
+        models.append(urlLocationSection)
         
         Alarm.alarm = "15 mins before"
         Color.color = EventColor.defaultColor
@@ -490,26 +484,11 @@ class CalendarAddNewEventController: BaseTableController {
                 
             }
             return cell
-        case .IsOnline,.IsPublic:
+        case .IsPublic:
             let cell = AddEventSwitchCell()
             cell.model = model
             cell.switchChangeHandler = {  [weak self] in
                 guard let `self` = self else { return }
-                if $0.type == .IsOnline {
-                    self.IsOnline.is_online = $1.int
-                    self.IsOnline.placeholder = $1 ? "Online" : "Offline"
-                    self.requestModel.is_online = $1.int
-                    
-                    if $1 {
-                        self.models[4].remove(at: 1)
-                        self.models[4].append(self.Link)
-                    } else {
-                        self.models[4].remove(at: 1)
-                        self.models[4].append(self.Location)
-                    }
-                    
-                    self.reloadData()
-                }
                 if $0.type == .IsPublic {
                     self.IsPublic.is_public = $1.int
                     self.IsPublic.placeholder = $1 ? "Public Event" : "Private Event"
@@ -543,6 +522,13 @@ class CalendarAddNewEventController: BaseTableController {
                 self.People.attendees.removeAll(where: { $0.id == item.id })
                 self.reloadData()
                 
+            }
+            
+            cell.removeEmail = { item in
+                self.addedEmails.removeAll(where: { $0 == item })
+                self.requestModel.emails?.removeAll(where: { $0 == item })
+                self.EmailCc.emails.removeAll(where: { $0 == item })
+                self.reloadData()
             }
             
             return cell
@@ -707,6 +693,32 @@ class CalendarAddNewEventController: BaseTableController {
                 self?.tableView?.reloadData()
             }
         }
+        if model.type == .MeetingRoom {
+            let vc = RoomPickerController(selectRoom: self.selectRoom, action: { room in
+                guard let room = room else { return }
+                self.selectRoom = room
+                self.MeetingRoom.room = room.name
+                self.requestModel.room_id = room.id
+                self.reloadData()
+            })
+            
+            if let sheet = vc.sheetPresentationController{
+                sheet.detents = [.medium(), .large()]
+            }
+            self.present(vc, animated: true)
+        }
+        if model.type == .EmailCc {
+            let vc = EmailCcAddController(emails: self.addedEmails)
+            vc.selectComplete = { [weak self] in
+                guard let `self` = self else { return }
+                self.addedEmails = $0
+                self.requestModel.emails = $0
+                self.EmailCc.emails = $0
+                self.reloadData()
+            }
+            let nav = BaseNavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -829,7 +841,12 @@ class AddEventArrowCell: UITableViewCell {
             imgView.image = model.img
             
             if model.type == .People  {
+                detailLabel.text = ""
                 attendeesClv.isHidden = model.attendees.count == 0
+                attendeesClv.reloadData()
+            } else if model.type == .EmailCc {
+                detailLabel.text = ""
+                attendeesClv.isHidden = model.emails.count == 0
                 attendeesClv.reloadData()
             } else {
                 attendeesClv.isHidden = true
@@ -852,12 +869,15 @@ class AddEventArrowCell: UITableViewCell {
                 detailLabel.text = model.remarks
             case .Location:
                 detailLabel.text = model.location
+            case .MeetingRoom:
+                detailLabel.text = model.room
             default:
                 detailLabel.text = ""
             }
         }
     }
     var removeAttandance:((Attendees)->())?
+    var removeEmail:((String)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
@@ -875,13 +895,13 @@ class AddEventArrowCell: UITableViewCell {
         imgView.contentMode = .scaleAspectFit
         
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 4
+        layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 4
         layout.scrollDirection = .horizontal
         
         attendeesClv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         attendeesClv.register(cellWithClass: CalendarHasAddedAttendanceCell.self)
-        attendeesClv.backgroundColor = .white
+        attendeesClv.backgroundColor = .clear
         contentView.addSubview(attendeesClv)
         attendeesClv.isHidden = true
         attendeesClv.showsHorizontalScrollIndicator = false
@@ -889,6 +909,7 @@ class AddEventArrowCell: UITableViewCell {
         attendeesClv.dataSource = self
         
         accessoryType = .disclosureIndicator
+        
     }
     
     required init?(coder: NSCoder) {
@@ -920,7 +941,8 @@ class AddEventArrowCell: UITableViewCell {
         attendeesClv.snp.makeConstraints { make in
             make.left.equalTo(imgView.snp.right).offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.top.bottom.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(28)
         }
     }
 }
@@ -931,22 +953,34 @@ extension AddEventArrowCell: UICollectionViewDataSource,UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withClass: CalendarHasAddedAttendanceCell.self, for: indexPath)
         if self.model.attendees.count > 0 {
             cell.model = model.attendees[indexPath.row]
-            cell.deleteItemHandler = { item in
-                self.removeAttandance?(item)
+            cell.deleteItemHandler = { [weak self] item in
+                self?.removeAttandance?(item)
+            }
+        }
+        
+        if self.model.emails.count > 0 {
+            cell.email = model.emails[indexPath.row]
+            cell.deleteEmailHandler = {  [weak self] email in
+                self?.removeEmail?(email)
             }
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model.attendees.count
+        return self.model.attendees.count > 0 ? self.model.attendees.count : self.model.emails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.model.attendees.count > 0 {
             let model = model.attendees[indexPath.row]
             let width = model.name.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 30
-            return CGSize(width: width, height: 24)
+            return CGSize(width: width, height: 22)
+        }
+        if self.model.emails.count > 0 {
+            let email = model.emails[indexPath.row]
+            let width = email.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 30
+            return CGSize(width: width, height: 22)
         }
         return .zero
     }
@@ -965,9 +999,6 @@ class AddEventSwitchCell: UITableViewCell {
             
             if model.type == .IsPublic {
                 switchView.isOn = model.is_public == 1
-            }
-            if model.type == .IsOnline {
-                switchView.isOn = model.is_online == 1
             }
         }
     }
@@ -1079,8 +1110,11 @@ class AddEventColorCell: UITableViewCell {
 
 class CalendarHasAddedAttendanceCell: UICollectionViewCell {
     var btn = UIButton()
-    var model: Attendees =  Attendees() {
+    var model: Attendees? {
         didSet {
+            guard let model = model else {
+                return
+            }
             btn.titleForNormal = model.name
             
             switch model.status {
@@ -1096,7 +1130,14 @@ class CalendarHasAddedAttendanceCell: UICollectionViewCell {
             
         }
     }
+    var email: String = "" {
+        didSet {
+            btn.titleForNormal = email
+            contentView.backgroundColor = R.color.theamColor()
+        }
+    }
     var deleteItemHandler:((Attendees)->())?
+    var deleteEmailHandler:((String)->())?
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(btn)
@@ -1110,7 +1151,12 @@ class CalendarHasAddedAttendanceCell: UICollectionViewCell {
         
         btn.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.deleteItemHandler?(self.model)
+            if let model = self.model {
+                self.deleteItemHandler?(model)
+            }
+            if self.email.isEmpty == false {
+                self.deleteEmailHandler?(self.email)
+            }
             
         }).disposed(by: rx.disposeBag)
     }
@@ -1118,7 +1164,7 @@ class CalendarHasAddedAttendanceCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         btn.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(3)
+            make.edges.equalToSuperview()
         }
     }
     

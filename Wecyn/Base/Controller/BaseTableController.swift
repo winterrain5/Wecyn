@@ -26,7 +26,11 @@ class BaseTableController: BaseViewController,DataLoadable {
     var emptyNoDataString: String = ""
     var emptyNoDataImage: String = ""
     
-    var cellIdentifier:String = ""
+    var cellIdentifier:String = "" {
+        didSet {
+            tableView?.isSkeletonable = true
+        }
+    }
     var numberOfSkeletonCell:Int = 10
     
     public var tableView:UITableView?

@@ -59,7 +59,7 @@ PODS:
   - OpenIMSDK/Utils (3.0.0):
     - MJExtension
     - OpenIMSDKCore (= 3.0.0)
-  - OpenIMSDKCore (3.0.0)
+  - "OpenIMSDKCore (3.0.0+1)"
   - ParallaxHeader (3.0.0)
   - Permission/Camera (3.1.2):
     - Permission/Core
@@ -134,6 +134,7 @@ PODS:
   - SwifterSwift/UIKit (5.2.0)
   - SwiftExtensionsLibrary (0.2.4)
   - SwiftyJSON (5.0.1)
+  - TagListView (1.4.1)
   - Then (3.0.0)
   - WordPress-Aztec-iOS (1.19.8)
   - WordPress-Editor-iOS (1.19.8):
@@ -183,6 +184,7 @@ DEPENDENCIES:
   - SwifterSwift
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
+  - TagListView
   - Then
   - WordPress-Aztec-iOS
   - WordPress-Editor-iOS
@@ -233,6 +235,7 @@ SPEC REPOS:
     - SwiftDate
     - SwifterSwift
     - SwiftyJSON
+    - TagListView
     - Then
     - WordPress-Aztec-iOS
     - WordPress-Editor-iOS
@@ -272,7 +275,7 @@ SPEC CHECKSUMS:
   NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
   NFCReaderWriter: b21965d1b3b8c53f7648f58f597b77a13f6ecdc5
   OpenIMSDK: 6fe41871340af1360008c5710248818aba1861cc
-  OpenIMSDKCore: cf4fa9f9599cc6741f7acc5ef260647f34541e87
+  OpenIMSDKCore: 2e38a5b9be23e588b5049ebd378161cf277e41a0
   ParallaxHeader: a343f55eb38f52a89c5820a77e14cf975b84e6aa
   Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
@@ -292,10 +295,11 @@ SPEC CHECKSUMS:
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  TagListView: a1c236d17960a0cf64156725a76ce6d73ebce2be
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: a3e42a3ebe6e999b602891c6d0755911c9d4fce3
+PODFILE CHECKSUM: 044bdcfd91fd235e875b9c0fad0c53ac2ad9d4d4
 
 COCOAPODS: 1.11.2

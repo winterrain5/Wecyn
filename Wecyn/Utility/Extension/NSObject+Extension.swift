@@ -18,7 +18,7 @@ extension Reactive where Base: AnyObject {
 }
 
 public extension Reactive where Base: AnyObject {
-
+    
     /// a unique DisposeBag that is related to the Reactive.Base instance only for Reference type
     var disposeBag: DisposeBag {
         get {
@@ -43,65 +43,65 @@ public extension Reactive where Base: AnyObject {
 
 extension String {
     func isPasswordRuler() -> Bool {
-      let passwordRule = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$"
-      let regexPassword = NSPredicate(format: "SELF MATCHES %@",passwordRule)
-      if regexPassword.evaluate(with: self) == true {
-        return true
-      }else
-      {
-        return false
-      }
+        let passwordRule = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$"
+        let regexPassword = NSPredicate(format: "SELF MATCHES %@",passwordRule)
+        if regexPassword.evaluate(with: self) == true {
+            return true
+        }else
+        {
+            return false
+        }
     }
     
     func isHasLowercaseCharacter() -> Bool {
-      let rule = "(?s)[^a-z]*[a-z].*"
-      let regex = NSPredicate(format: "SELF MATCHES %@",rule)
-      if regex.evaluate(with: self) {
-        return true
-      }else
-      {
-        return false
-      }
+        let rule = "(?s)[^a-z]*[a-z].*"
+        let regex = NSPredicate(format: "SELF MATCHES %@",rule)
+        if regex.evaluate(with: self) {
+            return true
+        }else
+        {
+            return false
+        }
     }
     func isHasUppercaseCharacter() -> Bool {
-      let rule = "(?s)[^A-Z]*[A-Z].*"
-      let regex = NSPredicate(format: "SELF MATCHES %@",rule)
-      if regex.evaluate(with: self) {
-        return true
-      }else
-      {
-        return false
-      }
+        let rule = "(?s)[^A-Z]*[A-Z].*"
+        let regex = NSPredicate(format: "SELF MATCHES %@",rule)
+        if regex.evaluate(with: self) {
+            return true
+        }else
+        {
+            return false
+        }
     }
     func isHasSpecialSymbol() -> Bool {
-      let rule = "#@!~%^&*"
-      var result = false
-      for c in self.charactersArray {
-        if rule.charactersArray.contains(c) {
-          result = true
-          break
+        let rule = "#@!~%^&*"
+        var result = false
+        for c in self.charactersArray {
+            if rule.charactersArray.contains(c) {
+                result = true
+                break
+            }
         }
-      }
-      return result
+        return result
     }
     
     func valiatePassword() -> (flag:Bool,message:String){
         var errorMessage = ""
         if self.count < 8 {
-          /// ・Passwords need to be at least 6 characters ・At least one lowercase character ・At lease one uppercase character ・Must have numerical number
-          errorMessage += "Passwords need to be at least 6 characters\n"
+            /// ・Passwords need to be at least 6 characters ・At least one lowercase character ・At lease one uppercase character ・Must have numerical number
+            errorMessage += "Passwords need to be at least 6 characters\n"
         }
         if !self.isHasLowercaseCharacter() {
-          errorMessage += "At least one lowercase character \n"
+            errorMessage += "At least one lowercase character \n"
         }
         if !self.isHasUppercaseCharacter() {
-          errorMessage += "At lease one uppercase character \n"
+            errorMessage += "At lease one uppercase character \n"
         }
         if !self.hasNumbers {
-          errorMessage += "Must have numerical number\n"
+            errorMessage += "Must have numerical number\n"
         }
         if self.isHasSpecialSymbol() {
-          errorMessage += "Password cannot contain special characters such as \"#@!~%^&*\"\n"
+            errorMessage += "Password cannot contain special characters such as \"#@!~%^&*\"\n"
         }
         let result = errorMessage.isEmpty ? (flag: false,message: "") : (flag:true,message: errorMessage)
         return result
@@ -113,7 +113,7 @@ extension String {
         let host = APIHost.share.ImageUrl
         return URL(string: host.appending("/media/avatar/" + self))
     }
-   static func fullName(first: String, last: String) -> String{
+    static func fullName(first: String, last: String) -> String{
         let full = first + " " + last
         return full.replacingOccurrences(of: "\n", with: "")
     }
@@ -129,9 +129,9 @@ extension String {
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
     }
-   
+    
     func filterHTML() -> String {
-
+        
         let scanner = Scanner(string: self)
         var text:NSString?
         var result:String = self
@@ -153,9 +153,29 @@ extension String {
         }
         return dateFormatter.date(from: self)
     }
+
 }
 
 
+extension String {
+    
+    func getWidthWithLabel(font: UIFont) -> CGFloat {
+        let temlabel = UILabel(frame: CGRect(x: 0, y: 0, width: CGFloat.greatestFiniteMagnitude, height: 0))
+        temlabel.text = self
+        temlabel.font = font
+        temlabel.sizeToFit()
+        let temwidth = temlabel.frame.size.width
+        return ceil(temwidth)
+    }
+    func getHeightWithLabel(font: UIFont) -> CGFloat {
+        let temlabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.greatestFiniteMagnitude))
+        temlabel.text = self
+        temlabel.font = font
+        temlabel.sizeToFit()
+        let temwidth = temlabel.frame.size.height
+        return ceil(temwidth)
+    }
+}
 
 extension NSObject {
     var className: String {
@@ -175,7 +195,7 @@ extension Date {
         let startOfMonth = calendar.date(from: components)!
         return startOfMonth
     }
-     
+    
     //本月结束日期
     func endOfCurrentMonth() -> Date {
         let calendar = NSCalendar.current
