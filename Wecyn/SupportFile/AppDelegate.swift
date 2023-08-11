@@ -98,6 +98,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print(url.absoluteString)
+       
+        if url.scheme == "wecyn" {
+            if url.host == "addNewEvent" {
+                let vc = CalendarAddNewEventController()
+                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+            }
+            if url.host == "checkEventDetail" {
+                let components = URLComponents(
+                    url: url,
+                    resolvingAgainstBaseURL: false
+                )!
+                print(components.queryItems?.first?.value ?? "")
+//                let vc = CalendarEventDetailController(eventModel: <#T##EventListModel#> )
+//                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+            }
+        }
+        return true
+    }
+
+    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.absoluteString.hasSuffix("ics") {
             guard let content = try? String(contentsOf: url, encoding: .utf8) else {

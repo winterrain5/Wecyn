@@ -4,7 +4,7 @@
 //
 //  Created by Derrick on 2023/7/11.
 //
-
+import WidgetKit
 import UIKit
 import IQKeyboardManagerSwift
 import NotificationCenter
@@ -306,6 +306,7 @@ class CalendarAddNewEventController: BaseTableController {
                 if $0.success == 1 {
                     Toast.showSuccess(withStatus: "Event Add Success", after: 1) {
                         self.navigationController?.popViewController()
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                 } else {
                     Toast.showMessage($0.message)
