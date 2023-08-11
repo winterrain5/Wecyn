@@ -39,6 +39,7 @@ class CalendarEventController: BaseTableController {
     let monthLabel = UILabel()
     var isDataLoaded = false
     var latesMonth:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         CalendarBelongUserId = UserModel?.id.int ?? 0
@@ -88,7 +89,7 @@ class CalendarEventController: BaseTableController {
         
         
         CalendarMenuView.addMenu(originView: self.view)
-        
+
        
     }
     

@@ -34,8 +34,8 @@ class NFCNameCardView: UIView {
             nameLabel.text = model.full_name
          
             var text = ""
-            if !model.job_title.isEmpty {
-               text = text + model.job_title + "\n"
+            if !model.title.isEmpty {
+               text = text + model.title + "\n"
             }
             if !model.company.isEmpty {
                 text = text + model.company

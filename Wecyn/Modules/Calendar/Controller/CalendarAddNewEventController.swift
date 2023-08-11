@@ -176,6 +176,49 @@ class CalendarAddNewEventController: BaseTableController {
             self.navigation.item.title = "New Event"
         }
     }
+    func createAddEventModels() {
+        let titleSection = [Title]
+        models.append(titleSection)
+        
+        var peopelSection:[AddEventModel] = []
+        if editEventModel ==  nil {
+            peopelSection = [IsPublic,People]
+        } else {
+            if (editEventModel?.is_public ?? 0) == 1 {
+                IsPublic.is_public = 1
+                IsPublic.placeholder = "Public Event"
+                peopelSection = [IsPublic,PeopleLimit]
+            } else {
+                IsPublic.is_public = 0
+                IsPublic.placeholder = "Private Event"
+                peopelSection = [IsPublic,People]
+            }
+        }
+        models.append(peopelSection)
+        
+    
+        Duplicate.duplicate = "none"
+        let timeSection = [Start,End,Duplicate]
+        models.append(timeSection)
+        
+        let descSection = [Desc,Remark]
+        models.append(descSection)
+        
+        let urlLocationSection = [Link,Location,EmailCc,MeetingRoom]
+        models.append(urlLocationSection)
+        
+        Alarm.alarm = "15 mins before"
+        Color.color = EventColor.defaultColor
+        let tagSection = [Alarm,Color]
+        models.append(tagSection)
+        
+        if editEventModel == nil  {
+            requestModel.color = 0
+        }
+        
+    }
+    
+    
     func updateEditEventData() {
         guard let event = editEventModel else { return }
 
@@ -236,53 +279,13 @@ class CalendarAddNewEventController: BaseTableController {
         Color.color = EventColor.allColor[event.color]
         MeetingRoom.room = event.room_name
         
-        isEdit = true
+      
+        isEdit = !event.isCreateByiCS
         rrule = event.rruleObject
 
         reloadData()
     }
     
-    func createAddEventModels() {
-        let titleSection = [Title]
-        models.append(titleSection)
-        
-        var peopelSection:[AddEventModel] = []
-        if editEventModel ==  nil {
-            peopelSection = [IsPublic,People]
-        } else {
-            if (editEventModel?.is_public ?? 0) == 1 {
-                IsPublic.is_public = 1
-                IsPublic.placeholder = "Public Event"
-                peopelSection = [IsPublic,PeopleLimit]
-            } else {
-                IsPublic.is_public = 0
-                IsPublic.placeholder = "Private Event"
-                peopelSection = [IsPublic,People]
-            }
-        }
-        models.append(peopelSection)
-        
-    
-        Duplicate.duplicate = "none"
-        let timeSection = [Start,End,Duplicate]
-        models.append(timeSection)
-        
-        let descSection = [Desc,Remark]
-        models.append(descSection)
-        
-        let urlLocationSection = [Link,Location,EmailCc,MeetingRoom]
-        models.append(urlLocationSection)
-        
-        Alarm.alarm = "15 mins before"
-        Color.color = EventColor.defaultColor
-        let tagSection = [Alarm,Color]
-        models.append(tagSection)
-        
-        if editEventModel == nil  {
-            requestModel.color = 0
-        }
-        
-    }
     
     func addEvent() {
         func addEventRequest() {
