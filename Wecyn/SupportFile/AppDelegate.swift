@@ -28,12 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Localizer.shared.changeLanguage.accept(getCurrentLanguage())
         
         
-        IMService.imSDKInit().subscribe(onNext:{
-            print("imSDKInit:",$0.success)
-        },onError: { e in
-            print("imSDKInit:",e.asAPIError.errorInfo().message)
-        }).disposed(by: rx.disposeBag)
-        
         if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
             let main = MainController()
             window?.rootViewController = main
@@ -104,6 +98,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
     }
-    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if url.absoluteString.hasSuffix("ics") {
+            guard let content = try? String(contentsOf: url, encoding: .utf8) else {
+                return true
+            }
+            let alert = UIAlertController(title: "Want wecyn to create a new calendar schedule for you", message: nil, preferredStyle: .actionSheet)
+            
+            alert.addAction(title: "yes",style: .destructive) { _ in
+                ScheduleService.parseics(icsStr: content).subscribe(onNext:{
+                    let infoModel = EventInfoModel()
+                    infoModel.title = $0.title
+                    infoModel.start_time = $0.start_time
+                    infoModel.end_time = $0.end_time
+                    infoModel.is_repeat = $0.is_repeat
+                    infoModel.rrule_str = $0.rrule_str
+                    infoModel.url = $0.url
+                    infoModel.location = $0.location
+                    infoModel.desc = $0.desc
+                    infoModel.isCreateByiCS = true
+                    let vc = CalendarAddNewEventController(editEventModel: infoModel)
+                    UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+                }).disposed(by: self.rx.disposeBag)
+                
+            }
+            
+            alert.addAction(title: "cancel",style: .cancel)
+            
+            alert.show()
+        }
+        
+        return true
+    }
+
 }
 

@@ -46,14 +46,14 @@ class NFCNameCardEditController: BaseTableController {
         }
         firstname.value = user.first_name
         lastname.value = user.last_name
-        jobTitle.value = user.job_title
+        jobTitle.value = user.title
         companyName.value = user.company
         datas.append([firstname,lastname,companyName,jobTitle])
         
-        mobile.value  = user.mobile
-        officeNo.value = user.office_number
-        officeLocation.value = user.office_location
-        website.value = user.website
+        mobile.value  = user.tel_cell
+        officeNo.value = user.tel_work
+        officeLocation.value = user.adr_work
+        website.value = user.url
         datas.append([mobile,officeNo,officeLocation,website])
         
         Mirror(reflecting: UpdateUserInfoRequestModel()).children.forEach { child in
@@ -127,17 +127,17 @@ class NFCNameCardEditController: BaseTableController {
             case .LastName:
                 self.request.last_name = e.value
             case .CompanyName:
-                self.request.company_name = e.value
+                self.request.company = e.value
             case .JobTitle:
-                self.request.job_title = e.value
+                self.request.title = e.value
             case .Mobile:
-                self.request.mobile = e.value
+                self.request.tel_cell = e.value
             case .OfficeNumber:
-                self.request.office_number = e.value
+                self.request.tel_work = e.value
             case .OfficeLocation:
-                self.request.office_location = e.value
+                self.request.adr_work = e.value
             case .Website:
-                self.request.website = e.value
+                self.request.url = e.value
             default:
                 print(e.value)
             }

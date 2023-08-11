@@ -31,14 +31,14 @@ class CalendarEventDetailModel {
     var descHeight: CGFloat{
         var  descH:CGFloat = 0
         if cellType == .Description {
-            descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
+            descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
         }
         if cellType == .Remark {
-            descH = model.remarks.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
+            descH = model.remarks.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
         }
        
         
-        return descH >= 52 ? descH : 52
+        return descH >= 20 ? descH : 52
     }
     init(cellType: CalendarEventDetailCellType, model:EventInfoModel) {
         self.cellType = cellType

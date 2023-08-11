@@ -24,8 +24,8 @@ class ScheduleService {
         let target = MultiTarget(ScheduleApi.updateEvent(model))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
-
-
+    
+    
     /// 事件详情
     /// - Parameters:
     ///   - id: 当前登录用户的ID
@@ -103,6 +103,44 @@ class ScheduleService {
         let target = MultiTarget(ScheduleApi.meetingRoom(id))
         return APIProvider.rx.request(target).asObservable().mapArray(MeetingRoom.self)
     }
+    
+    
+    /// 解析ics文件
+    /// - Parameter icsStr: ics
+    /// - Returns: iCSFileParsedModel
+    static func parseics(icsStr:String) -> Observable<iCSFileParsedModel> {
+        let target = MultiTarget(ScheduleApi.parseics(icsStr))
+        return APIProvider.rx.request(target).asObservable().mapObject(iCSFileParsedModel.self)
+    }
+}
+
+class iCSFileParsedModel: BaseModel {
+    /*
+     title (string)
+     事件标题
+     start_time (string: %d-%m-%Y %H:%M:%S)
+     开始时间
+     end_time (string: %d-%m-%Y %H:%M:%S)
+     结束时间
+     is_repeat (int)
+     是否为重复事件。0 非重复事件，1 重复事件
+     rrule_str (string)
+     重复规则
+     desc (string)
+     即description
+     location (string)
+     位置
+     url (string)
+     链接
+     */
+    var title:String = ""
+    var start_time:String = ""
+    var end_time:String = ""
+    var is_repeat:Int = 0
+    var rrule_str:String = ""
+    var desc:String = ""
+    var location:String = ""
+    var url:String = ""
 }
 
 @objcMembers class EventInfoModel: BaseModel {
@@ -213,7 +251,7 @@ class ScheduleService {
             let repeatStr = "repeat " + (rruleObject?.toText(rrulestr: rrule_str) ?? "")
             desc = (repeat_start_time ?? "") + "\n" + (startTime + " → " + endTime + "(\(formateTime(duration.int)))") + "\n" + repeatStr
             return desc
-
+            
         }
         
         if isCrossDay {
@@ -237,7 +275,7 @@ class ScheduleService {
         let day = duration / (60 * 60 * 24);
         let hour = (duration % (60 * 60 * 24)) / (60 * 60)
         let minitue = (duration % (60 * 60)) / (60)
-
+        
         var desc = ""
         let dayUnit = day > 1 ? "days" : "day"
         let hourUnit = hour > 1 ? "hours" : "hour"
@@ -255,6 +293,8 @@ class ScheduleService {
         return desc
     }
     
+    var isCreateByiCS:Bool = false
+    
 }
 class Attendees: BaseModel {
     var id: Int = 0
@@ -263,7 +303,7 @@ class Attendees: BaseModel {
 }
 
 class EventListModel: BaseModel {
- 
+    
     /*
      "id": int # event_id
      "title": string # 标题
@@ -277,7 +317,7 @@ class EventListModel: BaseModel {
     var title = ""
     var start_time = ""
     var end_time = ""
-   
+    
     var is_public = 0
     var status = 0
     var is_creator = 0
@@ -291,14 +331,14 @@ class EventListModel: BaseModel {
         exdates.map({ $0.date(format: DateFormat.ddMMyyyyHHmm.rawValue)})
     }
     var color = 0
-
+    
     var isCrossDay: Bool = false
     var isCrossDayStart: Bool = false
     var isCrossDayEnd: Bool = false
     var isCrossDayMiddle: Bool = false
     
     var isBySearch: Bool = false
-   
+    
     var colorHexString:String? {
         if color < EventColor.allColor.count {
             return EventColor.allColor[color]
@@ -329,7 +369,7 @@ class EventListModel: BaseModel {
         let model = EventListModel()
         model.id = id
         model.title = title
-       
+        
         model.is_public = is_public
         model.status = status
         model.is_creator = is_creator

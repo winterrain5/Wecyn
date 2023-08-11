@@ -10,17 +10,21 @@ import UIKit
 @objcMembers class UserInfoModel: BaseModel,Codable {
     
     var id: String = ""
-    var mobile: String = ""
-    var office_number: String = ""
-    var job_title: String = ""
+    var uuid: String = ""
+    var tel_work: String = ""
+    var company_id: String = ""
+    var url: String = ""
     var company: String = ""
+    var title: String = ""
     var avatar: String = ""
-    var office_location: String = ""
-    var first_name: String = ""
+    var tel_cell: String = ""
     var wid: String = ""
+    var first_name: String = ""
+    var country_region: String = ""
+    var city: String = ""
     var last_name: String = ""
     var email: String = ""
-    var website: String = ""
+    var adr_work: String = ""
     
     var full_name:String {
         return String.fullName(first: first_name, last: last_name)

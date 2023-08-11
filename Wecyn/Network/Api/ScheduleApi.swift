@@ -18,6 +18,7 @@ enum ScheduleApi {
     case recieveAssistantsList
     case sendedAssistantsList
     case meetingRoom(_ id:Int)
+    case parseics(_ ics:String)
 }
 
 extension ScheduleApi: TargetType {
@@ -43,12 +44,14 @@ extension ScheduleApi: TargetType {
             return "/api/assistant/assistantSendList/"
         case .meetingRoom:
             return "/api/schedule/roomList/"
+        case .parseics:
+            return "/api/schedule/icsToJson/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .addEvent, .auditPrivitaEvent, .deleteEvent, .addAssistants:
+        case .addEvent, .auditPrivitaEvent, .deleteEvent, .addAssistants,.parseics:
             return Moya.Method.post
         case .updateEvent:
             return Moya.Method.put
@@ -79,6 +82,8 @@ extension ScheduleApi: TargetType {
             return .requestPlain
         case .meetingRoom(let id):
             return requestParametersByGet(["current_user_id":id])
+        case .parseics(let ics):
+            return requestParametersByPost(["ics_str":ics])
         }
     }
 }

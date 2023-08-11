@@ -46,8 +46,8 @@ class BaseViewController: UIViewController {
     }
     
     func returnBack() {
-        if let nav = self.navigationController {
-          nav.popViewController(animated: true)
+        if self.presentingViewController == nil {
+            self.navigationController?.popViewController(animated: true)
         }else {
           self.dismiss(animated: true, completion: nil)
         }

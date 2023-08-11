@@ -83,6 +83,7 @@
 		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
+		45540A4A2A84D1C900E5487A /* example.ics in Resources */ = {isa = PBXBuildFile; fileRef = 45540A492A84D1C900E5487A /* example.ics */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
 		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
 		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
@@ -297,6 +298,7 @@
 		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
+		45540A492A84D1C900E5487A /* example.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.ics; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -455,6 +457,7 @@
 		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
 			isa = PBXGroup;
 			children = (
+				45540A492A84D1C900E5487A /* example.ics */,
 				450F6CB12A613AFC0001AA1B /* RRuleSwif */,
 			);
 			path = 3rdDepandence;
@@ -1237,6 +1240,7 @@
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
 				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
+				45540A4A2A84D1C900E5487A /* example.ics in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
 				450BA6CB2A32B9D800764828 /* LoginView.xib in Resources */,

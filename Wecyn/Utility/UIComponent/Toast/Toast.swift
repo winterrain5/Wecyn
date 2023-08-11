@@ -44,7 +44,7 @@ class Toast {
         SVProgressHUD.showError(withStatus: message)
     }
     
-    static func showSuccess(withStatus message: String = "") {
+    static func showSuccess(withStatus message: String) {
         defaultStyle()
         SVProgressHUD.showSuccess(withStatus: message)
     }

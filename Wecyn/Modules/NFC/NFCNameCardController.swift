@@ -121,13 +121,13 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     
     func addDatas(_ model:UserInfoModel) {
         datas.removeAll()
-        if !model.mobile.isEmpty {
-            let mobile = NameCardModel(img: R.image.iphoneGen1CircleFill(), value: model.mobile, type: .Mobile)
+        if !model.tel_cell.isEmpty {
+            let mobile = NameCardModel(img: R.image.iphoneGen1CircleFill(), value: model.tel_cell, type: .Mobile)
             datas.append(mobile)
         }
         
-        if !model.office_number.isEmpty {
-            let officeNumber = NameCardModel(img: R.image.phoneCircleFill(), value: model.office_number, type: .OfficeNumber)
+        if !model.tel_work.isEmpty {
+            let officeNumber = NameCardModel(img: R.image.phoneCircleFill(), value: model.tel_work, type: .OfficeNumber)
             datas.append(officeNumber)
         }
         
@@ -136,13 +136,13 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
             datas.append(email)
         }
         
-        if !model.office_location.isEmpty {
-            let location = NameCardModel(img: R.image.locationCircleFill(), value: model.office_location, type: .OfficeLocation)
+        if !model.adr_work.isEmpty {
+            let location = NameCardModel(img: R.image.locationCircleFill(), value: model.adr_work, type: .OfficeLocation)
             datas.append(location)
         }
         
-        if !model.website.isEmpty {
-            let website = NameCardModel(img: R.image.rectangleOnRectangleCircleFill(), value: model.website, type: .Website)
+        if !model.url.isEmpty {
+            let website = NameCardModel(img: R.image.rectangleOnRectangleCircleFill(), value: model.url, type: .Website)
             datas.append(website)
         }
         self.namecardView.model = model

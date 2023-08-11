@@ -233,7 +233,7 @@ class EditorDemoController: BaseViewController {
         NSLayoutConstraint.activate([
             editorView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor),
             editorView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor),
-            editorView.topAnchor.constraint(equalTo: view.topAnchor, constant: kNavBarHeight),
+            editorView.topAnchor.constraint(equalTo: view.topAnchor, constant: kNavBarHeight + 16),
             editorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
