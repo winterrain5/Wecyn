@@ -56,6 +56,8 @@ class APIHost: NSObject {
         return [.Dev,.Uat,.Release]
     }
     
+    let suitName = "group.widget.calendar"
+    
 }
 
 extension APIHost.AppBuildType: CustomStringConvertible {

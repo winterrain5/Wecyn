@@ -244,6 +244,7 @@
 		45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatController.swift; sourceTree = "<group>"; };
 		45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatWeekOrMonthController.swift; sourceTree = "<group>"; };
 		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
+		4509FEE32A86146B005E3708 /* calendarExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calendarExtension.entitlements; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		450B6C7F2A37F85B008B0C4A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
@@ -662,6 +663,7 @@
 		459209C32A26D5F4005871ED = {
 			isa = PBXGroup;
 			children = (
+				4509FEE32A86146B005E3708 /* calendarExtension.entitlements */,
 				459209CE2A26D5F4005871ED /* Wecyn */,
 				4564BE272A8329A400464AFA /* calendar */,
 				459209CD2A26D5F4005871ED /* Products */,
@@ -1529,6 +1531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = calendarExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1558,6 +1561,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = calendarExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
