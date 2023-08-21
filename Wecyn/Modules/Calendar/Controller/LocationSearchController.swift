@@ -1,5 +1,5 @@
 //
-//  CalendarEventSearchLocationController.swift
+//  LocationSearchController.swift
 //  Wecyn
 //
 //  Created by Derrick on 2023/7/28.
@@ -17,7 +17,7 @@ class LocationModel {
         self.detail = detail
     }
 }
-class CalendarEventSearchLocationController: BaseTableController {
+class LocationSearchController: BaseTableController {
 
     var searchView = NavbarSearchView()
     var datas:[LocationModel] = []

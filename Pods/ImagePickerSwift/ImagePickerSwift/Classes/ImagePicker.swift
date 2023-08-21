@@ -11,7 +11,6 @@ open class ImagePicker:NSObject{
     
     private lazy var picker: UIImagePickerController = {
         let picker = UIImagePickerController()
-        picker.modalPresentationStyle = .overCurrentContext
         
         if #available(iOS 11.0, *) {
             picker.videoExportPreset = AVAssetExportPresetPassthrough

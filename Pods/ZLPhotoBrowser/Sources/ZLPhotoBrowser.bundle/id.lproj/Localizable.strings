@@ -19,20 +19,20 @@
 "preview" = "Pratinjau";
 
 "noPhotoTips" = "Tidak ada fotos";
-"notAllowMixSelect" = "Tidak dapat memilih video";
 
-"loading" = "sedang memuat, tolong tunggu";
 "hudLoading" = "menunggu...";
 
 "exceededMaxSelectCount" = "Jumlah maksimum untuk seleksi: %ld";
 "longerThanMaxVideoDuration" = "Tidak dapat memilih video dengan durasi lebih dari %ld detik";
-"shorterThanMaxVideoDuration" = "Tidak dapat memilih video dengan durasi lebih pendek dari %ld detik";
+"shorterThanMinVideoDuration" = "Tidak dapat memilih video dengan durasi lebih pendek dari %ld detik";
+"largerThanMaxVideoDataSize" = "Tidak dapat memilih video yang lebih besar dari %@MB";
+"smallerThanMinVideoDataSize" = "Tidak dapat memilih video yang lebih kecil dari %@MB";
 "exceededMaxVideoSelectCount" = "Jumlah maksimum untuk pemilihan video: %ld";
 "lessThanMinVideoSelectCount" = "Jumlah minimum untuk pemilihan video: %ld";
 
 "noCameraAuthority" = "Izinkan akses kamera di \"Pengaturan\" > \"%@\" iPhone Anda.";
 "noPhotoLibratyAuthority" = "Izinkan %@ mengakses album Anda di \"Setelan\" > \"Privasi\" > \"Foto\"";
-"noMicrophoneAuthority" = "Tidak dapat merekam audio. Buka \"Setelan\" > \"%@\" dan aktifkan akses mikrofon.";
+"noMicrophoneAuthority" = "Tidak dapat merekam audio. Buka \"Setelan\" > \"%@\" dan aktifkan akses mikrofon";
 "cameraUnavailable" = "Kamera tidak tersedia";
 "keepRecording" = "Terus Merekam";
 "gotoSettings" = "Pergi ke pengaturan";

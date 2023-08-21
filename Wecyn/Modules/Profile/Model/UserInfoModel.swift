@@ -25,7 +25,7 @@ import UIKit
     var last_name: String = ""
     var email: String = ""
     var adr_work: String = ""
-    
+
     var full_name:String {
         return String.fullName(first: first_name, last: last_name)
     }

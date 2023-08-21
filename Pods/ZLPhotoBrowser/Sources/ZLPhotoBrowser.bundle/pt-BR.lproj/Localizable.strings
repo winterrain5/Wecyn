@@ -19,20 +19,20 @@
 "preview" = "Pré-visualização";
 
 "noPhotoTips" = "Sem Fotos";
-"notAllowMixSelect" = "Não foi possível selecionar o vídeo";
 
-"loading" = "carregamento, esperando por favor";
 "hudLoading" = "à espera...";
 
 "exceededMaxSelectCount" = "Contagem máxima para seleção: %ld";
-"longerThanMaxVideoDuration" = "Incapaz de selecionar vídeos com duração superior a %lds";
-"shorterThanMaxVideoDuration" = "Incapaz de selecionar vídeos com duração inferior a %lds";
+"longerThanMaxVideoDuration" = "Não é possível selecionar vídeos com mais de %ld segundos";
+"shorterThanMinVideoDuration" = "Não é possível selecionar vídeos com menos de %ld segundos";
+"largerThanMaxVideoDataSize" = "Não é possível selecionar vídeos com mais de %@MB";
+"smallerThanMinVideoDataSize" = "Não é possível selecionar vídeos com menos de %@MB";
 "exceededMaxVideoSelectCount" = "Contagem máxima para seleção de vídeo: %ld";
 "lessThanMinVideoSelectCount" = "Contagem mínima para seleção de vídeo: %ld";
 
 "noCameraAuthority" = "Por favor, permita a %@ aceder à câmara do seu dispositivo em \"Definições\" > \"Privacidade\" > \"Câmara\".";
 "noPhotoLibratyAuthority" = "Por favor, permita que %@ acesse seu álbum em \"Configurações\" > \"Privacidade\" > \"Fotos\".";
-"noMicrophoneAuthority" = "Incapaz de gravar áudio. Vá para \"Configurações\" > \"%@\" e habilite o acesso ao microfone.";
+"noMicrophoneAuthority" = "Incapaz de gravar áudio. Vá para \"Configurações\" > \"%@\" e habilite o acesso ao microfone";
 "cameraUnavailable" = "A câmara não está disponível";
 "keepRecording" = "Continuar Gravando";
 "gotoSettings" = "Ir para Configurações";

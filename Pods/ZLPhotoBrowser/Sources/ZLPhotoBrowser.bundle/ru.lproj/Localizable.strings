@@ -19,20 +19,20 @@
 "preview" = "Предпросмотр";
 
 "noPhotoTips" = "Нет фотографии";
-"notAllowMixSelect" = "Невозможно выбрать видео";
 
-"loading" = "загрузка, подождите пожалуйста";
 "hudLoading" = "ожидание...";
 
 "exceededMaxSelectCount" = "Максимальное количество выбранных: %ld";
-"longerThanMaxVideoDuration" = "Невозможно выбрать видео длительностью более %ld с";
-"shorterThanMaxVideoDuration" = "Невозможно выбрать видео продолжительностью менее 2 с";
+"longerThanMaxVideoDuration" = "Невозможно выбрать видео продолжительностью более %ld сек";
+"shorterThanMinVideoDuration" = "Невозможно выбрать видео короче %ld сек";
+"largerThanMaxVideoDataSize" = "Невозможно выбрать видео размером более %@МБ";
+"smallerThanMinVideoDataSize" = "Невозможно выбрать видео размером менее %@МБ";
 "exceededMaxVideoSelectCount" = "Максимальное количество выбранных видео: %ld";
 "lessThanMinVideoSelectCount" = "Количество мин. Выбора видео: %ld";
 
 "noCameraAuthority" = "Разрешите %@ доступ к камере вашего устройства в \"Настройки\" > \"Конфиденциальность\" > \"Камера\"";
 "noPhotoLibratyAuthority" = "Разрешите %@ доступ к вашему альбому в \"Настройки\" > \"Конфиденциальность\" > \"Фото\"";
-"noMicrophoneAuthority" = "Не удалось записать звук. Перейдите в меню \"Настройки\" > \"%@\" и включите доступ к микрофону.";
+"noMicrophoneAuthority" = "Не удалось записать звук. Перейдите в меню \"Настройки\" > \"%@\" и включите доступ к микрофону";
 "cameraUnavailable" = "Камера недоступна";
 "keepRecording" = "Продолжить запись";
 "gotoSettings" = "Перейти в настройки";

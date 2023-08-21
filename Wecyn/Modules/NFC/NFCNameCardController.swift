@@ -41,8 +41,10 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     let closeButton = UIButton()
     var datas:[NameCardModel] = []
     var id:Int? = nil
-    init(id:Int? = nil){
+    var uuid:String? = nil
+    init(id:Int? = nil,uuid:String? = nil){
         self.id = id
+        self.uuid = uuid
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -99,10 +101,10 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
             return
         }
         
-        guard let id = self.id else { return }
+        guard let id = self.id,let uuid = self.uuid else { return }
         
         let fuserInfo = FriendService.friendUserInfo(id)
-        let fNameCard = FriendService.friendNameCard(id:id)
+        let fNameCard = FriendService.friendNameCard(uuid: uuid)
         Observable.zip(fuserInfo,fNameCard).subscribe(onNext:{ info, namecard in
             /// 1 没关系，2 好友关系，3 已申请好友，4 被申请好友
             if info.friend_status == 1 {
@@ -542,11 +544,11 @@ extension NFCNameCardController: NFCReaderDelegate {
     /// -----------------------------
     func reader(_ session: NFCReader, didDetect tags: [NFCNDEFTag]) {
         print("did detect tags")
-        guard let uid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id else {
+        guard let user = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className) else {
             return
         }
         var payloadData = Data([0x02])
-        let uri = "terrabyte.sg/wecyn/uid/\(uid)"
+        let uri = "terrabyte.sg/wecyn/?id=\(user.id)&uuid=\(user.uuid)"
         payloadData.append(uri.data(using: .utf8)!)
         
         let payload = NFCNDEFPayload.init(

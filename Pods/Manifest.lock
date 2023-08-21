@@ -86,6 +86,9 @@ PODS:
   - RxGesture (3.0.2):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
+  - RxKeyboard (1.0.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
   - RxLocalizer (1.5.0):
     - RxCocoa (~> 5.1.1)
     - RxSwift (~> 5.1.1)
@@ -139,6 +142,9 @@ PODS:
   - WordPress-Aztec-iOS (1.19.8)
   - WordPress-Editor-iOS (1.19.8):
     - WordPress-Aztec-iOS (= 1.19.8)
+  - ZLPhotoBrowser (4.4.3.2):
+    - ZLPhotoBrowser/Core (= 4.4.3.2)
+  - ZLPhotoBrowser/Core (4.4.3.2)
 
 DEPENDENCIES:
   - Cache (~> 6.0.0)
@@ -172,6 +178,7 @@ DEPENDENCIES:
   - R.swift
   - RxCocoa
   - RxGesture
+  - RxKeyboard
   - RxLocalizer
   - RxMoyaCache
   - RxSwift (= 5.1.2)
@@ -188,6 +195,7 @@ DEPENDENCIES:
   - Then
   - WordPress-Aztec-iOS
   - WordPress-Editor-iOS
+  - ZLPhotoBrowser
 
 SPEC REPOS:
   trunk:
@@ -223,6 +231,7 @@ SPEC REPOS:
     - R.swift
     - RxCocoa
     - RxGesture
+    - RxKeyboard
     - RxLocalizer
     - RxMoyaCache
     - RxRelay
@@ -239,6 +248,7 @@ SPEC REPOS:
     - Then
     - WordPress-Aztec-iOS
     - WordPress-Editor-iOS
+    - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
   SwiftExtensionsLibrary:
@@ -282,6 +292,7 @@ SPEC CHECKSUMS:
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
+  RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
   RxLocalizer: 7db2f964848a885d996d36f47f0e88a477cd627a
   RxMoyaCache: 38823d584cdfbea48d2ffdae32676f81e0dd06a6
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
@@ -299,7 +310,8 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
+  ZLPhotoBrowser: 0563c2bfc7b247b65d023d646012f46cba94101b
 
-PODFILE CHECKSUM: 044bdcfd91fd235e875b9c0fad0c53ac2ad9d4d4
+PODFILE CHECKSUM: 9f1069201a42a7928a7e224f5c774300c4ae3a97
 
 COCOAPODS: 1.11.2

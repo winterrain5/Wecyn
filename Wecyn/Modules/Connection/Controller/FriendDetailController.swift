@@ -9,7 +9,7 @@ import UIKit
 class FriendDetailController: BaseTableController {
     
     var id:Int = 0
-    var model:UserInfoModel?
+    var model:FriendUserInfoModel?
     var deleteUserComplete:((Int)->())?
     init(id:Int) {
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +23,7 @@ class FriendDetailController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showSkeleton()
-        FriendService.friendNameCard(id:id).subscribe(onNext:{
+        FriendService.friendUserInfo(id).subscribe(onNext:{
             self.model = $0
             self.reloadData()
             self.hideSkeleton()
@@ -39,11 +39,11 @@ class FriendDetailController: BaseTableController {
             let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this friend?")
             alert.addAction(title: "Confirm",style: .destructive) { _ in
                 Toast.showLoading()
-                FriendService.deleteFriend(friend_id: self.model?.id.int ?? 0).subscribe(onNext:{ status in
+                FriendService.deleteFriend(friend_id: self.model?.id ?? 0).subscribe(onNext:{ status in
                     Toast.dismiss()
                     if status.success == 1 {
                         Toast.showSuccess(withStatus: "Delete Success")
-                        self.deleteUserComplete?(self.model?.id.int ?? 0)
+                        self.deleteUserComplete?(self.model?.id ?? 0)
                     } else {
                         Toast.showError(withStatus: status.message)
                     }
@@ -85,7 +85,9 @@ class FriendDetailController: BaseTableController {
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(withClass: FriendDetailHeadCell.self)
-            cell.model = self.model
+            if let model = self.model {
+                cell.model = model
+            }
             return cell
         }
         let cell = tableView.dequeueReusableCell(withClass: FriendDetailSendMessageCell.self)
@@ -112,13 +114,13 @@ class FriendDetailHeadCell: UITableViewCell {
     var nameLabel = UILabel()
     var widLabel = UILabel()
     var emailLabel = UILabel()
-    var model: UserInfoModel? {
+    var model: FriendUserInfoModel? {
         didSet {
             guard let model = model else { return }
             imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user())
             nameLabel.text = model.full_name
             widLabel.text = "WID: \(model.wid)"
-            emailLabel.text = "Email: \(model.email)"
+//            emailLabel.text = "Email: \(model.email)"
         }
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

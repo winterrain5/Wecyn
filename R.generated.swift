@@ -279,7 +279,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 75 images.
+  /// This `_R.image` struct is generated, and contains static references to 86 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -406,6 +406,12 @@ struct _R {
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `paintbrush.pointed`.
+    var paintbrushPointed: RswiftResources.ImageResource { .init(name: "paintbrush.pointed", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `paperplane.fill`.
+    var paperplaneFill: RswiftResources.ImageResource { .init(name: "paperplane.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `password_invisible`.
     var password_invisible: RswiftResources.ImageResource { .init(name: "password_invisible", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -442,8 +448,14 @@ struct _R {
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `play.circle.fill`.
+    var playCircleFill: RswiftResources.ImageResource { .init(name: "play.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `plus.circle`.
     var plusCircle: RswiftResources.ImageResource { .init(name: "plus.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `post_picture_delete`.
+    var post_picture_delete: RswiftResources.ImageResource { .init(name: "post_picture_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `profile_edit_userinfo`.
     var profile_edit_userinfo: RswiftResources.ImageResource { .init(name: "profile_edit_userinfo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -499,6 +511,27 @@ struct _R {
     /// Image `text.quote`.
     var textQuote: RswiftResources.ImageResource { .init(name: "text.quote", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `toolbar_icon_at`.
+    var toolbar_icon_at: RswiftResources.ImageResource { .init(name: "toolbar_icon_at", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `toolbar_icon_emoji`.
+    var toolbar_icon_emoji: RswiftResources.ImageResource { .init(name: "toolbar_icon_emoji", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `toolbar_icon_hashtag`.
+    var toolbar_icon_hashtag: RswiftResources.ImageResource { .init(name: "toolbar_icon_hashtag", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `toolbar_icon_image`.
+    var toolbar_icon_image: RswiftResources.ImageResource { .init(name: "toolbar_icon_image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `toolbar_icon_keyboard`.
+    var toolbar_icon_keyboard: RswiftResources.ImageResource { .init(name: "toolbar_icon_keyboard", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `toolbar_icon_more`.
+    var toolbar_icon_more: RswiftResources.ImageResource { .init(name: "toolbar_icon_more", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `toolbar_link`.
+    var toolbar_link: RswiftResources.ImageResource { .init(name: "toolbar_link", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `triangle.fill`.
     var triangleFill: RswiftResources.ImageResource { .init(name: "triangle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -542,7 +575,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 17 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 18 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -557,6 +590,9 @@ struct _R {
 
     /// Nib `CreateGroupHeaderView`.
     var createGroupHeaderView: RswiftResources.NibReference<CreateGroupHeaderView> { .init(name: "CreateGroupHeaderView", bundle: bundle) }
+
+    /// Nib `CreatePostToolBar`.
+    var createPostToolBar: RswiftResources.NibReference<CreatePostToolBar> { .init(name: "CreatePostToolBar", bundle: bundle) }
 
     /// Nib `HomeHeaderJobItemCell`.
     var homeHeaderJobItemCell: RswiftResources.NibReference<HomeHeaderJobItemCell> { .init(name: "HomeHeaderJobItemCell", bundle: bundle) }
@@ -611,6 +647,12 @@ struct _R {
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "paperplane.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'paperplane.fill' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "toolbar_icon_at", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_at' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "toolbar_icon_emoji", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_emoji' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "toolbar_icon_hashtag", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_hashtag' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "toolbar_icon_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_image' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "toolbar_link", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_link' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }

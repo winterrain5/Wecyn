@@ -12,4 +12,5 @@ extension Notification.Name {
     static let ConnectionRefreshing = Notification.Name("ConnectionRefreshing")
     static let ConnectionAuditUser = Notification.Name("ConnectionAuditUser")
     static let CreateGroup = Notification.Name("CreateGroup")
+    static let WidgetItemSelected = Notification.Name("WidgetItemSelected")
 }

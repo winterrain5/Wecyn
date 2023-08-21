@@ -1,9 +1,10 @@
-[![Version](https://img.shields.io/cocoapods/v/ZLPhotoBrowser.svg?style=flat)](https://cocoapods.org/pods/ZLPhotoBrowser)
+[![Version](https://img.shields.io/github/v/tag/longitachi/ZLPhotoBrowser.svg?color=blue&include_prereleases=&sort=semver)](https://cocoapods.org/pods/ZLPhotoBrowser)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![SPM supported](https://img.shields.io/badge/SwiftPM-supported-E57141.svg)](https://swift.org/package-manager/)
-[![License](https://img.shields.io/cocoapods/l/ZLPhotoBrowser.svg?style=flat)](https://raw.githubusercontent.com/longitachi/ZLPhotoBrowser/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/ZLPhotoBrowser.svg?style=flat)](https://github.com/longitachi/ZLPhotoBrowser/wiki)
+[![License](https://img.shields.io/badge/license-MIT-black)](https://raw.githubusercontent.com/longitachi/ZLPhotoBrowser/master/LICENSE)
+[![Platform](https://img.shields.io/badge/Platforms-iOS-blue?style=flat)](https://img.shields.io/badge/Platforms-iOS-blue?style=flat)
 ![Language](https://img.shields.io/badge/Language-%20Swift%20-E57141.svg)
+[![Usage](https://img.shields.io/badge/Usage-Doc-yarn?style=flat)](https://github.com/longitachi/ZLPhotoBrowser/wiki/How-to-use-(Swift))
 
 ![image](https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/preview_with_title.png)
 
@@ -14,21 +15,20 @@ English | [简体中文](https://github.com/longitachi/ZLPhotoBrowser/blob/maste
 ZLPhotoBrowser is a Wechat-like image picker. Support select normal photos, videos, gif and livePhoto. Support edit image and crop video.
 
 ### Directory
-* [Features](#Features)
-* [Requirements](#Requirements)
-* [Usage](#Usage)
-* [Change Log](#ChangeLog)
-* [Languages](#Languages)
-* [Installation(Support Cocoapods/Carthage/SPM)](#Installation)
-* [Support](#Support)
-* [Demo Effect](#DemoEffect)
+* [Features](#features)
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Change Log](#change-log)
+* [Languages](#languages)
+* [Installation(Support Cocoapods/Carthage/SPM)](#installation)
+* [Support](#support)
+* [Demo Effect](#demo-effect)
 
 Detailed usage of `Swift` and `OC`, please refer to [Wiki](https://github.com/longitachi/ZLPhotoBrowser/wiki).
 
 If you only want to use the image edit feature, please move to [ZLImageEditor](https://github.com/longitachi/ZLImageEditor).
 
-### <a id="Features"></a>Features
-- [x] iOS14 supported.
+### Features
 - [x] Portrait and landscape.
 - [x] Two framework style.
 - [x] Preview selection (Support drag and drop).
@@ -50,16 +50,16 @@ If you only want to use the image edit feature, please move to [ZLImageEditor](h
 
 > If you have good needs and suggestions in use, or encounter any bugs, please create an issue and I will reply in time.
  
-### <a id="Requirements"></a>Requirements
+### Requirements
  * iOS 10.0
  * Swift 5.x
  * Xcode 12.x
  
-### <a id="Usage"></a>Usage
+### Usage
  - Preview selection
  ```swift
  let ps = ZLPhotoPreviewSheet()
- ps.selectImageBlock = { [weak self] (images, assets, isOriginal) in
+ ps.selectImageBlock = { [weak self] results, isOriginal in
      // your code
  }
  ps.showPreview(animate: true, sender: self)
@@ -68,7 +68,7 @@ If you only want to use the image edit feature, please move to [ZLImageEditor](h
  - Library selection
  ```swift
  let ps = ZLPhotoPreviewSheet()
- ps.selectImageBlock = { [weak self] (images, assets, isOriginal) in
+ ps.selectImageBlock = { [weak self] results, isOriginal in
      // your code
  }
  ps.showPhotoLibrary(sender: self)
@@ -88,30 +88,37 @@ If you only want to use the image edit feature, please move to [ZLImageEditor](h
  ```
  
  
-### <a id="ChangeLog"></a>Change Log
+### Change Log
 > [More logs](https://github.com/longitachi/ZLPhotoBrowser/blob/master/CHANGELOG.md)
 ```
-● 4.3.0
+● 4.4.3.1, 4.4.3.2 - 4.4.3 Patch
+  Fix:
+    Delete some time-consuming codes to improve the image loading speed of the thumbnail interface.
+    Disable TextView when user ends editing.
+● 4.4.3
   Add:
-    Turkish supported.
-    Separate UI-related properties such as color, text, font, and image from ZLPhotoConfiguration and put them in ZLPhotoUIConfiguration.
-    Add some properties to edit configuration to support Objective-C.
-    Add some customize color properties.
-    Add long press callback in ZLImagePreviewController.
-    Add property to allow user to do something before select photo result callback.
-● 4.2.5
+    Support to limit the data size of the video.
+    Add two blocks, called when asset is selected and deselected.
+    Support setting video codec type in custom camera.
+    Text stickers support display background color.
+● 4.4.2
+  Add:
+    Preserve the alpha channel of the edited image.
   Fix:
-    Fix the bug of failing to archive with Xcode 13.3.
-● 4.2.4
+    Fix a crash caused by UI modification in a sub-thread.
+● 4.4.1
+  Add:
+    Adapt to RTL.
   Fix:
-    Fixes the bug when select the original photo in the preview.
+    Fix the problem that the image editor does not work properly when the scale of the picture is not 1.
+    Fixed some UI display issue in the image preview interface.
 ...
 ```
 
-### <a id="Languages"></a>Languages
-🇨🇳 Chinese, 🇺🇸 English, 🇯🇵 Japanese, 🇫🇷 French, 🇩🇪 German, 🇷🇺 Russian, 🇻🇳 Vietnamese, 🇰🇷 Korean, 🇲🇾 Malay, 🇮🇹 Italian, 🇮🇩Indonesian, 🇪🇸Spanish, 🇵🇹Portuguese, 🇹🇷Turkish.
+### Languages
+🇨🇳 Chinese, 🇺🇸 English, 🇯🇵 Japanese, 🇫🇷 French, 🇩🇪 German, 🇷🇺 Russian, 🇻🇳 Vietnamese, 🇰🇷 Korean, 🇲🇾 Malay, 🇮🇹 Italian, 🇮🇩 Indonesian, 🇪🇸 Spanish, 🇵🇹 Portuguese, 🇹🇷 Turkish, 🇸🇦 Arabic.
 
-### <a id="Installation"></a>Installation
+### Installation
 There are four ways to use ZLPhotoBrowser in your project:
 
   - using CocoaPods
@@ -163,11 +170,11 @@ Rebuild with --use-xcframeworks to create an xcframework bundle instead.` [Click
 2. In the next page, specify the version resolving rule as "Up to Next Major" with "4.0.9" as its earliest version.
 3. After Xcode checking out the source and resolving the version, you can choose the "ZLPhotoBrowser" library and add it to your app target.
 
-### <a id="Support"></a> Support
+### Support
 * [**★ Star**](#) this repo.
-* Support with <img src="https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/aliPay.png" width = "100" height = "125" /> or <img src="https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/wechatPay.png" width = "100" height = "125" /> or <img src="https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/Paypal.png" width = "150" height = "125" />
+* Support with <img src="https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/ap.png" width = "100" height = "125" /> or <img src="https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/wp.png" width = "100" height = "125" /> or <img src="https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/pp.png" width = "150" height = "125" />
 
-### <a id="DemoEffect"></a> Demo Effect
+### Demo Effect
 - Selection
 ![image](https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9.gif)
 ![image](https://github.com/longitachi/ImageFolder/blob/master/ZLPhotoBrowser/%E7%9B%B8%E5%86%8C%E5%86%85%E9%83%A8%E9%80%89%E6%8B%A9.gif)
