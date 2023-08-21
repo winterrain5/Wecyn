@@ -136,8 +136,8 @@ class FriendService {
     /// 朋友的名片
     /// - Parameter id: 好友ID
     /// - Returns:UserInfoModel
-    static func friendNameCard(id: Int) -> Observable<UserInfoModel> {
-        let target = MultiTarget(FriendApi.friendNameCard(id))
+    static func friendNameCard(uuid: String) -> Observable<UserInfoModel> {
+        let target = MultiTarget(FriendApi.friendNameCard(uuid))
         return APIProvider.rx.request(target).asObservable().mapObject(UserInfoModel.self)
     }
     
@@ -150,6 +150,7 @@ class FriendListModel: BaseModel {
      "ln": string # 好友的last_name
      "avt": int # 用户头像
      */
+    var uuid:  String = ""
     var id: Int = 0
     var first_name: String = ""
     var last_name: String = ""

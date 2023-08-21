@@ -11,6 +11,7 @@ target 'Wecyn' do
   pod 'RxCocoa'
   pod 'RxMoyaCache'
   pod 'RxLocalizer'
+  pod 'RxKeyboard'
   pod 'Cache', '~> 6.0.0'
   
   
@@ -45,6 +46,7 @@ target 'Wecyn' do
   pod "WordPress-Editor-iOS"
   pod 'ParallaxHeader'
   pod 'TagListView'
+  pod 'ZLPhotoBrowser'
   
   pod 'OpenIMSDK'
   

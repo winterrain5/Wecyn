@@ -19,20 +19,20 @@
 "preview" = "Preview";
 
 "noPhotoTips" = "No Photos";
-"notAllowMixSelect" = "Unable to select video";
 
-"loading" = "loading, waiting please";
 "hudLoading" = "waiting...";
 
 "exceededMaxSelectCount" = "Max count for selection: %ld";
-"longerThanMaxVideoDuration" = "Unable to select video with a duration longer than %lds";
-"shorterThanMaxVideoDuration" = "Unable to select video with a duration shorter than %lds";
+"longerThanMaxVideoDuration" = "Can't select videos longer than %lds";
+"shorterThanMinVideoDuration" = "Can't select videos shorter than %lds";
+"largerThanMaxVideoDataSize" = "Can't select videos larger than %@MB";
+"smallerThanMinVideoDataSize" = "Can't select videos smaller than %@MB";
 "exceededMaxVideoSelectCount" = "Max count for video selection: %ld";
 "lessThanMinVideoSelectCount" = "Min count for video selection: %ld";
 
 "noCameraAuthority" = "Please allow %@ to access your device's camera in \"Settings\" > \"Privacy\" > \"Camera\"";
 "noPhotoLibratyAuthority" = "Please allow %@ to access your album in \"Settings\" > \"Privacy\" > \"Photos\"";
-"noMicrophoneAuthority" = "Unable to record audio. Go to \"Settings\" > \"%@\" and enable microphone access.";
+"noMicrophoneAuthority" = "Unable to record audio. Go to \"Settings\" > \"%@\" and enable microphone access";
 "cameraUnavailable" = "Camera is unavailable";
 "keepRecording" = "Keep Recording";
 "gotoSettings" = "Go to Settings";

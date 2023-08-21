@@ -38,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             window?.rootViewController = main
         }
         
+        let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
+        userDefaults?.setValue(APIHost.share.BaseUrl, forKey: "baseUrl")
+        userDefaults?.synchronize()
+        
         window?.makeKeyAndVisible()
         
         UNUserNotificationCenter.current().delegate = self
@@ -46,18 +50,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func getCurrentLanguage() -> String {
-           let preferredLang = Bundle.main.preferredLocalizations.first! as NSString
-           Logger.debug("当前系统语言:\(preferredLang)")
-           
-           switch String(describing: preferredLang) {
-           case "en-US", "en-CN":
-               return "en"//英文
-           case "zh-Hans-US","zh-Hans-CN","zh-Hant-CN","zh-TW","zh-HK","zh-Hans":
-               return "zh_CN"//中文
-           default:
-               return "en"
-           }
-       }
+        let preferredLang = Bundle.main.preferredLocalizations.first! as String
+        Logger.debug("当前系统语言:\(preferredLang)")
+        if preferredLang.hasPrefix("en") {
+            return "en"
+        }
+        if preferredLang.hasPrefix("zh") {
+            return "zh_cn"
+        }
+        return "en"
+        
+    }
     
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
@@ -72,31 +75,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let record = ndefMessage.records.first,
             record.typeNameFormat == .absoluteURI || record.typeNameFormat == .nfcWellKnown,
             let uri = String(data: record.payload, encoding: .utf8),
-            let uid = uri.split(separator: "/").last  {
-            print("uid:\(uid)")
+            let url = URL(string: uri.removingPrefix("\u{02}"))  {
+            if url.pathComponents.contains("terrabyte.sg") {
+                let components = URLComponents(
+                    url: url,
+                    resolvingAgainstBaseURL: false
+                )!
+                let id = components.queryItems?.first?.value ?? ""
+                let uuid = components.queryItems?.last?.value ?? ""
+                let vc = NFCNameCardController(id: id.int,uuid: uuid)
+                window?.rootViewController?.present(vc, animated: true)
+            }
             
-            let vc = NFCNameCardController(id: String(uid).int)
-            window?.rootViewController?.present(vc, animated: true)
         }
         
         if let url = userActivity.webpageURL {
-            guard let uid = url.absoluteString.split(separator: "/").last else  {
-                return false
-            }
             
-            let vc = NFCNameCardController(id: String(uid).int)
-            window?.rootViewController?.present(vc, animated: true)
+//            let vc = NFCNameCardController(id: String(uid).int)
+//            window?.rootViewController?.present(vc, animated: true)
         }
         
         
         return true
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        guard let trigger = notification.request.trigger else { return; }
-        if trigger.isKind(of: UNCalendarNotificationTrigger.classForCoder()) {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -113,15 +117,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     resolvingAgainstBaseURL: false
                 )!
                 print(components.queryItems?.first?.value ?? "")
-//                let vc = CalendarEventDetailController(eventModel: <#T##EventListModel#> )
-//                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+                if let id = components.queryItems?.first?.value?.int {
+                    NotificationCenter.default.post(name: NSNotification.Name.WidgetItemSelected, object: id)
+                }
+                
             }
+            return true
         }
-        return true
-    }
-
-    
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
         if url.absoluteString.hasSuffix("ics") {
             guard let content = try? String(contentsOf: url, encoding: .utf8) else {
                 return true
@@ -149,10 +152,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             alert.addAction(title: "cancel",style: .cancel)
             
             alert.show()
+            
+            return true
         }
         
         return true
     }
+
+    
 
 }
 

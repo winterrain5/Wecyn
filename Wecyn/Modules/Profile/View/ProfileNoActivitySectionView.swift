@@ -35,6 +35,13 @@ class ProfileNoActivitySectionView: UIView {
         addSubview(createPostBtn)
         addSubview(msgLabel1)
         addSubview(msgLabel2)
+        
+        createPostBtn.rx.tap.subscribe(onNext:{
+            let vc = CreatePostViewController()
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+        }).disposed(by: rx.disposeBag)
     }
     
     required init?(coder: NSCoder) {

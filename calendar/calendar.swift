@@ -15,57 +15,7 @@ struct EventColor {
     static var defaultColor: String = "13A5D6"
 }
 
-class APIHost: NSObject {
-    
-    static let share = APIHost()
-    
-    var buildType: AppBuildType = .Dev
-    
-    enum AppBuildType: Int {
-        case Dev
-        case Uat
-        case Release
-    }
-    
-    enum BackgroundServerType: Int {
-        case BaseClient
-        case ImageClients
-    }
-     var BaseClients = ["Dev": "http://10.1.3.23:1412",
-                        "Uat": "http://uat.api.wecyn.com",
-                    "Release": ""]
-    
-    var ImageClients = ["Dev": "http://10.1.3.23:1412",
-                        "Uat": "http://uat.api.wecyn.com",
-                    "Release": ""]
-    
-     func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {
-        let buildType = "\(buildType)"
-        var address: String
-        switch serverType {
-        case .BaseClient :
-            address = BaseClients[buildType]!
-        case .ImageClients:
-            address = ImageClients[buildType]!
-        }
-        return address
-    }
-    
-    @objc var BaseUrl: String {
-        return getUrlAddress(buildType: buildType,serverType: .BaseClient)
-    }
-   
-    @objc var ImageUrl: String {
-        return getUrlAddress(buildType: buildType,serverType: .ImageClients)
-    }
-   
-     var allBuildTypeCases:[AppBuildType] {
-        return [.Dev,.Uat,.Release]
-    }
-    
-    let suitName = "group.widget.calendar"
-    
-}
+
 struct CalendarModel: Identifiable,Codable {
     var id: Int = 0
     var title:String = ""
@@ -87,7 +37,7 @@ struct CalendarModel: Identifiable,Codable {
 
 
 struct Provider: TimelineProvider {
-    let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
+    let userDefaults = UserDefaults(suiteName: "group.widget.calendar")
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(),datas: [CalendarModel(id: 1, title: "New Event", start_time: "09:00", end_time: "09:39")])
     }
@@ -98,9 +48,7 @@ struct Provider: TimelineProvider {
     }
   
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let id = userDefaults?.object(forKey: "userId")
-        let token = userDefaults?.object(forKey: "token")
-    
+      
         let currentDate = Date()
               //设定1小时更新一次数据
         let updateDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
@@ -112,13 +60,13 @@ struct Provider: TimelineProvider {
     }
     
     func getCalendarDatas(complete:@escaping ([CalendarModel])->()) {
-        guard let id = userDefaults?.object(forKey: "userId"),let token = userDefaults?.object(forKey: "token") as? String else {
+        guard let id = userDefaults?.object(forKey: "userId"),let token = userDefaults?.object(forKey: "token") as? String,let baseurl = userDefaults?.object(forKey: "baseUrl") as? String else {
             complete([])
             return
         }
 
         let date = formatDate(format: "dd-MM-yyyy", date: Date())
-        let url: URL = URL(string: APIHost.share.BaseUrl + "/api/schedule/searchList/?current_user_id=\(id)&end_date=\(date)&start_date=\(date)")!
+        let url: URL = URL(string: baseurl + "/api/schedule/searchList/?current_user_id=\(id)&end_date=\(date)&start_date=\(date)")!
                 
         var request: URLRequest = URLRequest(url: url)
         request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")

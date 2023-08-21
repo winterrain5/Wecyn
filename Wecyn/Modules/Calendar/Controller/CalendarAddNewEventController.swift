@@ -687,7 +687,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Location {
-            let vc = CalendarEventSearchLocationController()
+            let vc = LocationSearchController()
             let nav = BaseNavigationController(rootViewController: vc)
             self.present(nav, animated: true)
             

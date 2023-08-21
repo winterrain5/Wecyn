@@ -39,6 +39,20 @@ class CalendarEventController: BaseTableController {
     let monthLabel = UILabel()
     var isDataLoaded = false
     var latesMonth:Int = 0
+    var isWidgetLinkId: Int? = nil
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nil, bundle: nil)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.WidgetItemSelected, object: nil, queue: .main) { noti in
+            let id = noti.object as? Int
+            self.isWidgetLinkId = id
+            self.loadNewData()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +116,7 @@ class CalendarEventController: BaseTableController {
     
     override func refreshData() {
         
-        if latesMonth == calendarChangeDate.month, isBeginLoad == false {
+        if latesMonth == calendarChangeDate.month, isBeginLoad == false, self.isWidgetLinkId == nil {
             return
         }
         
@@ -172,14 +186,29 @@ class CalendarEventController: BaseTableController {
                     return start.compare(end)  ==  .orderedAscending
                 }).forEach({ self.dataArray.append($0) })
             } mainTask: {
-                self.headerView.eventDates = self.dataArray as! [[EventListModel]]
                 
-                self.endRefresh(.NoData, emptyString: "No Events")
+                let eventDatas = self.dataArray as! [[EventListModel]]
+                self.headerView.eventDates = eventDatas
+                
+                self.endRefresh(self.dataArray.count, emptyString: "No Events")
                 
                 if !self.isDataLoaded {
                     self.scrollToSection(false)
                 }
                 self.isDataLoaded = true
+                
+                if self.isWidgetLinkId != nil {
+                    if let widgetItem = eventDatas.flatMap({ $0 }).filter({ $0.id == self.isWidgetLinkId }).first {
+                        let item = DispatchWorkItem {
+                            let vc = CalendarEventDetailController(eventModel: widgetItem)
+                            self.navigationController?.pushViewController(vc)
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: item)
+                        
+                    }
+                        
+                    self.isWidgetLinkId = nil
+                }
             }
 
             
