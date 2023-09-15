@@ -56,7 +56,7 @@ class MainController: UITabBarController {
             selectedImage: selectedImage(R.image.tab_person()))
         
         
-        self.viewControllers = [calendar,connection,profile]
+        self.viewControllers = [home,calendar,connection,profile]
         configAppearance()
     }
     

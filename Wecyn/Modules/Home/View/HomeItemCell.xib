@@ -32,173 +32,220 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="19"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI/UX Designer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8d3-Iv-Jyz">
-                                <rect key="frame" x="58" y="11" width="366" height="15.666666666666664"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI/UX Designer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8d3-Iv-Jyz">
+                                <rect key="frame" x="58" y="9" width="96" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="mEV-Uk-pIA"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" name="TextColor52"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
-                                        <real key="value" value="22"/>
+                                        <real key="value" value="18"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="posted 1 week ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-YH-ZGi">
-                                <rect key="frame" x="58.000000000000007" y="44.333333333333336" width="69.666666666666686" height="11.333333333333336"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="8"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="headline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-YH-ZGi">
+                                <rect key="frame" x="58" y="29" width="46.333333333333343" height="17"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                                 <color key="textColor" name="TextColor52"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGT-ex-muq">
-                                <rect key="frame" x="358" y="17" width="66" height="26"/>
-                                <color key="backgroundColor" name="TheamColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGT-ex-muq">
+                                <rect key="frame" x="384" y="17" width="40" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="JgS-CJ-ONy"/>
-                                    <constraint firstAttribute="width" constant="66" id="YAD-ot-1SZ"/>
+                                    <constraint firstAttribute="width" constant="40" id="YAD-ot-1SZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="+ Follow">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company1359" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrk-VH-MqG">
-                                <rect key="frame" x="58" y="26.666666666666668" width="302" height="15.666666666666668"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJd-sC-QKa">
+                                <rect key="frame" x="58.000000000000007" y="48" width="24.333333333333336" height="17"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                                 <color key="textColor" name="TextColor52"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="4UE-Ld-Fh1"/>
-                            <constraint firstItem="Jrk-VH-MqG" firstAttribute="top" secondItem="8d3-Iv-Jyz" secondAttribute="bottom" id="5q5-ej-sM9"/>
-                            <constraint firstItem="5T4-YH-ZGi" firstAttribute="leading" secondItem="Jrk-VH-MqG" secondAttribute="leading" id="AgC-Uz-bqI"/>
                             <constraint firstItem="8d3-Iv-Jyz" firstAttribute="leading" secondItem="Ggb-gw-Yh9" secondAttribute="trailing" constant="8" id="DKk-Ou-Zeg"/>
                             <constraint firstItem="Ggb-gw-Yh9" firstAttribute="centerY" secondItem="ehu-BW-0eu" secondAttribute="centerY" id="EWg-Vg-dBk"/>
-                            <constraint firstAttribute="trailing" secondItem="Jrk-VH-MqG" secondAttribute="trailing" constant="80" id="HZR-BC-7A3"/>
+                            <constraint firstItem="5T4-YH-ZGi" firstAttribute="top" secondItem="8d3-Iv-Jyz" secondAttribute="bottom" constant="2" id="KCn-GN-kyk"/>
                             <constraint firstAttribute="trailing" secondItem="cGT-ex-muq" secondAttribute="trailing" constant="16" id="MHZ-f6-HXV"/>
-                            <constraint firstItem="5T4-YH-ZGi" firstAttribute="top" secondItem="Jrk-VH-MqG" secondAttribute="bottom" constant="2" id="Qhb-OJ-4tK"/>
-                            <constraint firstItem="Jrk-VH-MqG" firstAttribute="leading" secondItem="8d3-Iv-Jyz" secondAttribute="leading" id="VMc-Wi-F3i"/>
+                            <constraint firstItem="XJd-sC-QKa" firstAttribute="top" secondItem="5T4-YH-ZGi" secondAttribute="bottom" constant="2" id="TB7-k6-RP7"/>
                             <constraint firstItem="cGT-ex-muq" firstAttribute="centerY" secondItem="ehu-BW-0eu" secondAttribute="centerY" id="Wi3-q5-zL1"/>
-                            <constraint firstAttribute="trailing" secondItem="8d3-Iv-Jyz" secondAttribute="trailing" constant="16" id="hSp-oY-rwE"/>
+                            <constraint firstItem="5T4-YH-ZGi" firstAttribute="leading" secondItem="8d3-Iv-Jyz" secondAttribute="leading" id="sK1-c8-iJ0"/>
+                            <constraint firstItem="XJd-sC-QKa" firstAttribute="leading" secondItem="5T4-YH-ZGi" secondAttribute="leading" id="ssb-l2-w9y"/>
                             <constraint firstItem="Ggb-gw-Yh9" firstAttribute="leading" secondItem="ehu-BW-0eu" secondAttribute="leading" constant="12" id="yx4-5K-R9e"/>
-                            <constraint firstItem="8d3-Iv-Jyz" firstAttribute="top" secondItem="Ggb-gw-Yh9" secondAttribute="top" id="zTL-bA-Mbd"/>
+                            <constraint firstItem="8d3-Iv-Jyz" firstAttribute="top" secondItem="Ggb-gw-Yh9" secondAttribute="top" constant="-2" id="zTL-bA-Mbd"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGe-Tb-PKH">
-                        <rect key="frame" x="16" y="68" width="408" height="33.666666666666657"/>
+                        <rect key="frame" x="16" y="68" width="408" height="63"/>
                         <string key="text">content...content...content...content...content...content...content...content...content...content...content...content...content...content...</string>
-                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                         <color key="textColor" name="TextColor52"/>
                         <nil key="highlightedColor"/>
-                    </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Syw-to-mxM">
-                        <rect key="frame" x="16" y="109.66666666666669" width="408" height="200"/>
-                        <color key="backgroundColor" name="BackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="200" id="Pjd-o8-KSZ"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="133 Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-Ft-uxc">
-                        <rect key="frame" x="16.000000000000004" y="321.66666666666669" width="39.333333333333343" height="12.666666666666686"/>
-                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="9"/>
-                        <color key="textColor" name="TextColor52"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="133 Reposted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adU-Cw-CYr">
-                        <rect key="frame" x="63.333333333333329" y="321.66666666666669" width="57.333333333333329" height="12.666666666666686"/>
-                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="9"/>
-                        <color key="textColor" name="TextColor52"/>
-                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOq-ui-Aok">
-                        <rect key="frame" x="16" y="342.33333333333331" width="408" height="40"/>
+                        <rect key="frame" x="0.0" y="327" width="440" height="30"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XZ-h2-4nJ">
-                                <rect key="frame" x="0.0" y="0.0" width="102" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  Like" image="like">
-                                    <color key="titleColor" name="TextColor52"/>
+                                <state key="normal" title="  Like" image="heart">
+                                    <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <state key="selected" title="  Like" image="heart.fill"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="likeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="g8j-v5-lp1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-KK-xkS">
-                                <rect key="frame" x="102" y="0.0" width="102" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <rect key="frame" x="110" y="0.0" width="110" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  comment" image="comment">
-                                    <color key="titleColor" name="TextColor52"/>
+                                <state key="normal" title="  Comment" image="post_comment">
+                                    <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="commentAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Wo-SN-7X0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1M-Pj-BLe">
-                                <rect key="frame" x="204" y="0.0" width="102" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <rect key="frame" x="220" y="0.0" width="110" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  Repost" image="retweet">
-                                    <color key="titleColor" name="TextColor52"/>
+                                <state key="normal" title="  Repost" image="post_repost">
+                                    <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="repostAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1hm-1c-u3d"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltj-r4-JcV">
-                                <rect key="frame" x="306" y="0.0" width="102" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <rect key="frame" x="330" y="0.0" width="110" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  Send" image="send">
-                                    <color key="titleColor" name="TextColor52"/>
+                                <state key="normal" title="  Share" image="post_share">
+                                    <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8M9-vD-b2y"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="height" constant="30" id="0CH-fR-x7L"/>
                             <constraint firstItem="w1M-Pj-BLe" firstAttribute="width" secondItem="1XZ-h2-4nJ" secondAttribute="width" id="Gdb-TQ-uCe"/>
                             <constraint firstItem="Ltj-r4-JcV" firstAttribute="width" secondItem="1XZ-h2-4nJ" secondAttribute="width" id="OxF-fR-9Tz"/>
-                            <constraint firstAttribute="height" constant="40" id="eaW-JW-lNd"/>
                             <constraint firstItem="xxr-KK-xkS" firstAttribute="width" secondItem="1XZ-h2-4nJ" secondAttribute="width" id="ocr-Ow-sef"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxp-T9-3pW">
+                        <rect key="frame" x="0.0" y="139" width="440" height="180"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="sWi-dU-xGe"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="adU-Cw-CYr" firstAttribute="leading" secondItem="5dR-Ft-uxc" secondAttribute="trailing" constant="8" id="4mO-FU-w7N"/>
-                    <constraint firstItem="EOq-ui-Aok" firstAttribute="top" secondItem="5dR-Ft-uxc" secondAttribute="bottom" constant="8" id="ACG-6O-ywg"/>
-                    <constraint firstItem="Syw-to-mxM" firstAttribute="top" secondItem="sGe-Tb-PKH" secondAttribute="bottom" constant="8" id="Dtd-fs-GoH"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="EOq-ui-Aok" secondAttribute="bottom" id="Gmg-X7-nZF"/>
-                    <constraint firstItem="5dR-Ft-uxc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="HJA-1Y-ytM"/>
+                    <constraint firstItem="sxp-T9-3pW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LdP-ft-3KM"/>
                     <constraint firstItem="sGe-Tb-PKH" firstAttribute="top" secondItem="ehu-BW-0eu" secondAttribute="bottom" constant="8" id="Lqs-Wp-gzY"/>
-                    <constraint firstAttribute="trailing" secondItem="Syw-to-mxM" secondAttribute="trailing" constant="16" id="NjF-Xh-Ora"/>
-                    <constraint firstItem="EOq-ui-Aok" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PoT-NA-7vM"/>
+                    <constraint firstItem="EOq-ui-Aok" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PoT-NA-7vM"/>
                     <constraint firstItem="ehu-BW-0eu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RMQ-Js-iYu"/>
-                    <constraint firstItem="5dR-Ft-uxc" firstAttribute="top" secondItem="Syw-to-mxM" secondAttribute="bottom" constant="12" id="SBb-os-LSv"/>
                     <constraint firstItem="sGe-Tb-PKH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ZEB-n6-Gzi"/>
                     <constraint firstAttribute="trailing" secondItem="sGe-Tb-PKH" secondAttribute="trailing" constant="16" id="afh-4D-1V3"/>
-                    <constraint firstItem="Syw-to-mxM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cAg-in-000"/>
+                    <constraint firstItem="EOq-ui-Aok" firstAttribute="top" secondItem="sxp-T9-3pW" secondAttribute="bottom" constant="8" id="kTu-gs-Veh"/>
                     <constraint firstAttribute="trailing" secondItem="ehu-BW-0eu" secondAttribute="trailing" id="oBL-YV-tPB"/>
-                    <constraint firstAttribute="trailing" secondItem="EOq-ui-Aok" secondAttribute="trailing" constant="16" id="ovT-tF-6Eq"/>
+                    <constraint firstAttribute="trailing" secondItem="EOq-ui-Aok" secondAttribute="trailing" id="ovT-tF-6Eq"/>
+                    <constraint firstItem="sxp-T9-3pW" firstAttribute="top" secondItem="sGe-Tb-PKH" secondAttribute="bottom" constant="8" id="qwg-Ev-qNd"/>
                     <constraint firstItem="ehu-BW-0eu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rkw-tk-28f"/>
-                    <constraint firstItem="adU-Cw-CYr" firstAttribute="centerY" secondItem="5dR-Ft-uxc" secondAttribute="centerY" id="xPL-ow-daG"/>
+                    <constraint firstAttribute="trailing" secondItem="sxp-T9-3pW" secondAttribute="trailing" id="yDs-UT-2Sh"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="avatarImgView" destination="Ggb-gw-Yh9" id="yz0-Kd-pRw"/>
+                <outlet property="clvHConst" destination="sWi-dU-xGe" id="lEo-Kb-yni"/>
+                <outlet property="commentButton" destination="xxr-KK-xkS" id="NCH-jl-w5o"/>
+                <outlet property="contentLabel" destination="sGe-Tb-PKH" id="1ar-l6-G4J"/>
                 <outlet property="followButton" destination="cGT-ex-muq" id="A7A-ha-fmG"/>
+                <outlet property="headLineLabel" destination="5T4-YH-ZGi" id="pI6-em-NvQ"/>
+                <outlet property="imgContentView" destination="sxp-T9-3pW" id="rn0-G5-Scx"/>
+                <outlet property="likeButton" destination="1XZ-h2-4nJ" id="GHO-kC-lhv"/>
+                <outlet property="postTimeLabel" destination="XJd-sC-QKa" id="VBc-4a-G6L"/>
+                <outlet property="repostButton" destination="w1M-Pj-BLe" id="yqi-o5-CCW"/>
+                <outlet property="shareButton" destination="Ltj-r4-JcV" id="vQO-gg-5gA"/>
+                <outlet property="userNameLabel" destination="8d3-Iv-Jyz" id="e3v-qK-uBy"/>
             </connections>
-            <point key="canvasLocation" x="207.63358778625954" y="91.901408450704224"/>
+            <point key="canvasLocation" x="-253.43511450381678" y="17.95774647887324"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="comment" width="21" height="21"/>
-        <image name="like" width="21" height="21"/>
+        <image name="heart" width="19.333333969116211" height="18.666666030883789"/>
+        <image name="heart.fill" width="19.333333969116211" height="18.666666030883789"/>
+        <image name="post_comment" width="22" height="20.333333969116211"/>
+        <image name="post_repost" width="24.333333969116211" height="18"/>
+        <image name="post_share" width="17.333333969116211" height="23.333333969116211"/>
         <image name="proile_user" width="94" height="94"/>
-        <image name="retweet" width="24" height="24"/>
-        <image name="send" width="17" height="17"/>
         <namedColor name="BackgroundColor">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor52">
             <color red="0.32199999690055847" green="0.32199999690055847" blue="0.32199999690055847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TheamColor">
-            <color red="0.15700000524520874" green="0.54500001668930054" blue="0.5220000147819519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

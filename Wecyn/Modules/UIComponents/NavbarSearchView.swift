@@ -91,5 +91,6 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
     
     func endSearching() {
         self.loadingView.stopAnimating()
+        self.loadingView.isHidden = true
     }
 }

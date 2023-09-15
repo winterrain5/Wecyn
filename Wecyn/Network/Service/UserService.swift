@@ -15,6 +15,14 @@ class UserService {
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
+    /// 上传cover
+    /// - Parameter photo: base64字符串
+    /// - Returns: ResponseStatus
+    static func updateCover(photo:String) -> Observable<ResponseStatus> {
+        let target = MultiTarget(UserApi.uploadCover(photo: photo))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
     
     /// 获取用户信息
     /// - Returns: UserInfoModel

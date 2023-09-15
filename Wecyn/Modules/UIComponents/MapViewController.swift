@@ -64,7 +64,7 @@ class MapViewController: BaseViewController,MKMapViewDelegate, CLLocationManager
                 self.mapView.zoom(to: [coordinate], meter: 1000, edgePadding: .zero, animated: false)
                 self.mapView.addAnnotation(annotation)
                 self.mapView.setCenter(coordinate, animated: false)
-                let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
                 let coordinateRegion = MKCoordinateRegion(center: coordinate, span: coordinateSpan)
                 self.mapView.setRegion(coordinateRegion, animated: false)
                 self.mapView.selectedAnnotations = [annotation]

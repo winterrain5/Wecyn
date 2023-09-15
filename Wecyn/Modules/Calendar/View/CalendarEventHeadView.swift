@@ -13,7 +13,6 @@ class CalendarEventHeadView: UIView {
     
     var calendar = FSCalendar()
     let changeScopButton = UIButton()
-    let changeScopView = UIView()
     var gregorian = NSCalendar(identifier: .gregorian)
     var dateSelected:((Date)->())!
     var monthChanged:((Date)->())!
@@ -53,8 +52,11 @@ class CalendarEventHeadView: UIView {
         self.addSubview(calendar)
         
       
+        changeScopButton.imageForNormal = R.image.chevronCompactUp()!
+        changeScopButton.imageForSelected = R.image.chevronCompactDown()!
         changeScopButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
+            self.changeScopButton.isSelected.toggle()
             if self.calendar.scope == .week {
                 self.setCalendarScope(.month)
             } else {
@@ -64,10 +66,7 @@ class CalendarEventHeadView: UIView {
         }).disposed(by: rx.disposeBag)
         self.addSubview(changeScopButton)
       
-        changeScopView.backgroundColor = R.color.theamColor()
-        changeScopView.cornerRadius = 3
-        changeScopView.isUserInteractionEnabled = false
-        changeScopButton.addSubview(changeScopView)
+      
     }
     
     required init?(coder: NSCoder) {
@@ -85,11 +84,7 @@ class CalendarEventHeadView: UIView {
             make.top.equalTo(calendar.snp.bottom)
             make.height.equalTo(20)
         }
-        changeScopView.snp.remakeConstraints { make in
-            make.width.equalTo(60)
-            make.height.equalTo(6)
-            make.center.equalToSuperview()
-        }
+       
     }
 
 

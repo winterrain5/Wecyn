@@ -69,7 +69,7 @@ class EmailCcAddController: BaseViewController ,UITextFieldDelegate, TagListView
         
         self.addLeftBarButtonItem()
         leftButtonDidClick = { [weak self] in
-            self?.dismiss(animated: true)
+            self?.returnBack()
         }
         
         let doneButton = UIButton()
@@ -82,7 +82,7 @@ class EmailCcAddController: BaseViewController ,UITextFieldDelegate, TagListView
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.selectComplete?(self.inputEmails.value.map({ $0.email }))
-            self.dismiss(animated: true)
+            self.returnBack()
         }).disposed(by: rx.disposeBag)
         
         self.inputEmails.map({ !$0.isEmpty }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)

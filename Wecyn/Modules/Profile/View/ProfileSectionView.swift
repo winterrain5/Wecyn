@@ -28,10 +28,8 @@ class ProfileSectionView: UIView {
         addSubview(titleLabel)
         titleLabel.text = Localizer.localized(for: title)
         
-        if title == .Skills || title == .Experience {
-            addSubview(editButton)
-            addSubview(addButton)
-        }
+        addSubview(editButton)
+        addSubview(addButton)
         
         backgroundColor = .white
         
@@ -50,18 +48,16 @@ class ProfileSectionView: UIView {
             make.height.equalTo(21)
         }
         
-        if title == .Skills || title == .Experience {
-            editButton.snp.makeConstraints { make in
-                make.right.equalToSuperview().inset(16)
-                make.centerY.equalTo(titleLabel)
-                make.height.width.equalTo(32)
-            }
-            
-            addButton.snp.makeConstraints { make in
-                make.right.equalTo(editButton.snp.right).inset(16)
-                make.centerY.equalTo(titleLabel)
-                make.height.width.equalTo(32)
-            }
+        editButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalTo(titleLabel)
+            make.height.width.equalTo(32)
+        }
+        
+        addButton.snp.makeConstraints { make in
+            make.right.equalTo(editButton.snp.right).inset(16)
+            make.centerY.equalTo(titleLabel)
+            make.height.width.equalTo(32)
         }
     }
 }

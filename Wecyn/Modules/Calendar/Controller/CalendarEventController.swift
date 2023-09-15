@@ -56,6 +56,7 @@ class CalendarEventController: BaseTableController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         CalendarBelongUserId = UserModel?.id.int ?? 0
         CalendarBelongUserName = UserModel?.full_name ?? ""
         
@@ -220,6 +221,7 @@ class CalendarEventController: BaseTableController {
         
     }
     
+    
     func scrollToSection(_ animated:Bool = true){
         let datas = self.dataArray as! [[EventListModel]]
         if datas.count == 0 { return }
@@ -263,12 +265,12 @@ class CalendarEventController: BaseTableController {
             self?.currentScope = scope
             let totalH = height + 20
             self?.headerView.frame.size.height = totalH
-            self?.tableView?.frame = CGRect(x: 0, y: kNavBarHeight + totalH, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - kTabBarHeight - totalH)
+            self?.tableView?.frame = CGRect(x: 0, y: kNavBarHeight + totalH, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - totalH)
         }
         
         tableView?.separatorStyle = .singleLine
         tableView?.separatorColor = R.color.seperatorColor()!
-        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kBottomsafeAreaMargin + kTabBarHeight + 10, right: 0)
+        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  kTabBarHeight + 10, right: 0)
         
         tableView?.isSkeletonable = true
         tableView?.register(nibWithCellClass: CaledarItemCell.self)
@@ -276,7 +278,7 @@ class CalendarEventController: BaseTableController {
     }
     
     override func listViewFrame() -> CGRect {
-        return CGRect(x: 0, y: kNavBarHeight + headerHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - kTabBarHeight - headerHeight)
+        return CGRect(x: 0, y: kNavBarHeight + headerHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - headerHeight)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -403,7 +405,7 @@ class CalendarNavBarUserView: UIView {
         addSubview(nameLabel)
         addSubview(arrow)
         
-        avatar.kf.setImage(with: userModel?.avatar.avatarUrl,placeholder: R.image.proile_user())
+        avatar.kf.setImage(with: userModel?.avatar_url,placeholder: R.image.proile_user())
         avatar.cornerRadius = 12
         avatar.contentMode = .scaleAspectFill
         
@@ -440,7 +442,6 @@ class CalendarNavBarUserView: UIView {
     func showMenu() {
       
         if menu.isShowed {
-            self.arrow.rotate(toAngle: -180, ofType: .degrees,  duration: 0.25)
             menu.hideMenu()
             return
         }
@@ -459,7 +460,7 @@ class CalendarNavBarUserView: UIView {
             self.nameLabel.text = self.assistants[row].name
             self.nameLabel.width = self.assistants[row].name.widthWithConstrainedWidth(height: 40, font: self.nameLabel.font)
             self.layoutIfNeeded()
-            self.avatar.kf.setImage(with: self.assistants[row].avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            self.avatar.kf.setImage(with: self.assistants[row].avatar.url,placeholder: R.image.proile_user()!)
             self.selectAssistantHanlder(self.assistants[row])
         }
         

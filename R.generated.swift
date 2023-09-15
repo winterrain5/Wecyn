@@ -279,7 +279,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 86 images.
+  /// This `_R.image` struct is generated, and contains static references to 97 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -316,11 +316,20 @@ struct _R {
     /// Image `calendar_item_arrow_right`.
     var calendar_item_arrow_right: RswiftResources.ImageResource { .init(name: "calendar_item_arrow_right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `camera.circle.fill`.
+    var cameraCircleFill: RswiftResources.ImageResource { .init(name: "camera.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `checkmark`.
     var checkmark: RswiftResources.ImageResource { .init(name: "checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `chevron.backward`.
     var chevronBackward: RswiftResources.ImageResource { .init(name: "chevron.backward", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `chevron.compact.down`.
+    var chevronCompactDown: RswiftResources.ImageResource { .init(name: "chevron.compact.down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `chevron.compact.up`.
+    var chevronCompactUp: RswiftResources.ImageResource { .init(name: "chevron.compact.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `chevron.up`.
     var chevronUp: RswiftResources.ImageResource { .init(name: "chevron.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -361,6 +370,12 @@ struct _R {
     /// Image `google`.
     var google: RswiftResources.ImageResource { .init(name: "google", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `heart`.
+    var heart: RswiftResources.ImageResource { .init(name: "heart", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `heart.fill`.
+    var heartFill: RswiftResources.ImageResource { .init(name: "heart.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `house`.
     var house: RswiftResources.ImageResource { .init(name: "house", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -375,6 +390,9 @@ struct _R {
 
     /// Image `job_marked`.
     var job_marked: RswiftResources.ImageResource { .init(name: "job_marked", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `keyboard.chevron.compact.down`.
+    var keyboardChevronCompactDown: RswiftResources.ImageResource { .init(name: "keyboard.chevron.compact.down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `like`.
     var like: RswiftResources.ImageResource { .init(name: "like", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -393,6 +411,9 @@ struct _R {
 
     /// Image `magnifyingglass`.
     var magnifyingglass: RswiftResources.ImageResource { .init(name: "magnifyingglass", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `magnifyingglass.circle.fill`.
+    var magnifyingglassCircleFill: RswiftResources.ImageResource { .init(name: "magnifyingglass.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `mail.stack`.
     var mailStack: RswiftResources.ImageResource { .init(name: "mail.stack", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -454,8 +475,20 @@ struct _R {
     /// Image `plus.circle`.
     var plusCircle: RswiftResources.ImageResource { .init(name: "plus.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `post_comment`.
+    var post_comment: RswiftResources.ImageResource { .init(name: "post_comment", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `post_picture_delete`.
     var post_picture_delete: RswiftResources.ImageResource { .init(name: "post_picture_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `post_repost`.
+    var post_repost: RswiftResources.ImageResource { .init(name: "post_repost", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `post_share`.
+    var post_share: RswiftResources.ImageResource { .init(name: "post_share", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `post_type_down`.
+    var post_type_down: RswiftResources.ImageResource { .init(name: "post_type_down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `profile_edit_userinfo`.
     var profile_edit_userinfo: RswiftResources.ImageResource { .init(name: "profile_edit_userinfo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -483,6 +516,9 @@ struct _R {
 
     /// Image `square.and.arrow.up`.
     var squareAndArrowUp: RswiftResources.ImageResource { .init(name: "square.and.arrow.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `square.and.arrow.up.circle.fill`.
+    var squareAndArrowUpCircleFill: RswiftResources.ImageResource { .init(name: "square.and.arrow.up.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `square.and.pencil.circle.fill`.
     var squareAndPencilCircleFill: RswiftResources.ImageResource { .init(name: "square.and.pencil.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -523,9 +559,6 @@ struct _R {
     /// Image `toolbar_icon_image`.
     var toolbar_icon_image: RswiftResources.ImageResource { .init(name: "toolbar_icon_image", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `toolbar_icon_keyboard`.
-    var toolbar_icon_keyboard: RswiftResources.ImageResource { .init(name: "toolbar_icon_keyboard", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `toolbar_icon_more`.
     var toolbar_icon_more: RswiftResources.ImageResource { .init(name: "toolbar_icon_more", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -558,15 +591,12 @@ struct _R {
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 4 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 3 resource files.
   struct file {
     let bundle: Foundation.Bundle
 
     /// Resource file `bundle.js`.
     var bundleJs: RswiftResources.FileResource { .init(name: "bundle", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
-
-    /// Resource file `example.ics`.
-    var exampleIcs: RswiftResources.FileResource { .init(name: "example", pathExtension: "ics", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `nlp.js`.
     var nlpJs: RswiftResources.FileResource { .init(name: "nlp", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
@@ -649,7 +679,6 @@ struct _R {
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "paperplane.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'paperplane.fill' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_at", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_at' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "toolbar_icon_emoji", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_emoji' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_hashtag", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_hashtag' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_image' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_link", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_link' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
@@ -660,14 +689,14 @@ struct _R {
       if UIKit.UIColor(named: "TextColor162C46", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor162C46' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "comment", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'comment' is used in nib 'HomeItemCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "like", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'like' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "heart", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'heart' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "heart.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'heart.fill' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "post_comment", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'post_comment' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "post_repost", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'post_repost' is used in nib 'HomeItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "post_share", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'post_share' is used in nib 'HomeItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'HomeItemCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "retweet", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'retweet' is used in nib 'HomeItemCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "send", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'send' is used in nib 'HomeItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'HomeItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeItemCell', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'HomeItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_location", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_location' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'JobItemCell', but couldn't be loaded.") }
@@ -684,7 +713,6 @@ struct _R {
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'NameCardEditView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'NameCardQRCodeView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'NameCardQRCodeView', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "button:ZMY-2V-y3q:image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'button:ZMY-2V-y3q:image' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'RegistAddAvatarView', but couldn't be loaded.") }
@@ -734,7 +762,7 @@ struct _R {
 
       let name = "LaunchScreen"
       func validate() throws {
-        if UIKit.UIColor(named: "TextColor162C46", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor162C46' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
       }
     }
   }

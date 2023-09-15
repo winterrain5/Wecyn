@@ -29,7 +29,7 @@ class RefreshAnimationHeader: MJRefreshHeader {
     override func prepare() {
         super.prepare()
         self.backgroundColor = .clear
-        self.mj_h = iPhoneX() ? 80 : 60
+        self.mj_h = UIDevice.isiPhoneX ? 80 : 60
         
         activity = UIActivityIndicatorView.init(style: .medium)
         activity.isHidden = true
@@ -47,10 +47,10 @@ class RefreshAnimationHeader: MJRefreshHeader {
     
     override func placeSubviews() {
          super.placeSubviews()
-        activity.frame = CGRect.init(x: 0, y: iPhoneX() ? 30 : 10, width: 50, height: 40)
+        activity.frame = CGRect.init(x: 0, y: UIDevice.isiPhoneX ? 30 : 10, width: 50, height: 40)
         activity.center.x = self.center.x
         
-        messageLabel.frame = CGRect.init(x: 0, y: iPhoneX() ? 30 : 10, width: 300, height: 40)
+        messageLabel.frame = CGRect.init(x: 0, y: UIDevice.isiPhoneX ? 30 : 10, width: 300, height: 40)
         messageLabel.center.x = self.center.x
     }
     

@@ -35,7 +35,6 @@ class ConnectAuditController: BaseTableController {
         super.createListView()
         cellIdentifier = ConnectAuditItemCell.className
         tableView?.isSkeletonable = true
-        registRefreshHeader()
         tableView?.showsVerticalScrollIndicator = false
         tableView?.register(nibWithCellClass: ConnectAuditItemCell.self)
     }

@@ -19,18 +19,14 @@ class BaseTableController: BaseViewController,DataLoadable {
     var isBeginLoad: Bool = false
     
     var page: Int = 1
-    var pageSize: Int = kPageSize
+    var pageSize: Int = 10
     
     var shouldDisplayEmptyDataView: Bool = false
     var emptyDataType: EmptyDataType = .NoData
     var emptyNoDataString: String = ""
     var emptyNoDataImage: String = ""
     
-    var cellIdentifier:String = "" {
-        didSet {
-            tableView?.isSkeletonable = true
-        }
-    }
+    var cellIdentifier:String = ""
     var numberOfSkeletonCell:Int = 10
     
     public var tableView:UITableView?
@@ -133,8 +129,9 @@ class BaseTableController: BaseViewController,DataLoadable {
         shouldDisplayEmptyDataView = type == .Success ? false : true
         self.emptyDataType = type
         self.emptyNoDataString = emptyString
-        reloadData()
         endHeaderFooterRefresh(0)
+        reloadData()
+        
     }
     
     func endRefresh(_ count: Int,
@@ -144,8 +141,9 @@ class BaseTableController: BaseViewController,DataLoadable {
         self.emptyDataType = self.dataArray.count > 0 ? .Success : .NoData
         self.emptyNoDataImage = emptyImage
         self.emptyNoDataString = emptyString
-        reloadData()
         endHeaderFooterRefresh(count)
+        reloadData()
+        
     }
     
     func endRefresh() {
@@ -173,9 +171,9 @@ class BaseTableController: BaseViewController,DataLoadable {
             if (footer.isRefreshing) {
                 tableView?.mj_footer?.endRefreshing()
             }
-            
             let isNoMoreData = count < pageSize || count == 0
             tableView?.mj_footer?.isHidden = isNoMoreData
+            
         }
     }
     

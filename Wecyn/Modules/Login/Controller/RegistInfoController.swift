@@ -14,7 +14,7 @@ class RegistInfoController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if iPhoneX() {
+        if UIDevice.isiPhoneX {
             self.view.addSubview(container)
             container.frame = self.view.bounds
         } else {

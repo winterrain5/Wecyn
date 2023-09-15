@@ -19,38 +19,32 @@
                     <rect key="frame" x="0.0" y="0.0" width="496" height="79"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOg-ej-FLF">
-                            <rect key="frame" x="0.0" y="0.0" width="82.5" height="79"/>
+                            <rect key="frame" x="0.0" y="0.0" width="99" height="79"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="toolbar_icon_image"/>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spK-MC-g06">
-                            <rect key="frame" x="82.5" y="0.0" width="83" height="79"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="toolbar_icon_emoji"/>
-                        </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHg-6f-wIT">
-                            <rect key="frame" x="165.5" y="0.0" width="82.5" height="79"/>
+                            <rect key="frame" x="99" y="0.0" width="99.5" height="79"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="toolbar_icon_at"/>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oem-gj-75U">
-                            <rect key="frame" x="248" y="0.0" width="82.5" height="79"/>
+                            <rect key="frame" x="198.5" y="0.0" width="99" height="79"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="toolbar_icon_hashtag"/>
                         </button>
                         <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sS9-TD-f0k">
-                            <rect key="frame" x="330.5" y="0.0" width="83" height="79"/>
+                            <rect key="frame" x="297.5" y="0.0" width="99.5" height="79"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="toolbar_link"/>
                         </button>
                         <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dC-Lb-OFv">
-                            <rect key="frame" x="413.5" y="0.0" width="82.5" height="79"/>
+                            <rect key="frame" x="397" y="0.0" width="99" height="79"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="paperplane.fill"/>
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="spK-MC-g06" firstAttribute="width" secondItem="eOg-ej-FLF" secondAttribute="width" id="2cr-Et-eiB"/>
                         <constraint firstItem="oem-gj-75U" firstAttribute="width" secondItem="eOg-ej-FLF" secondAttribute="width" id="FuQ-d5-2Py"/>
                         <constraint firstItem="sS9-TD-f0k" firstAttribute="width" secondItem="eOg-ej-FLF" secondAttribute="width" id="OKW-pc-oa4"/>
                         <constraint firstItem="2dC-Lb-OFv" firstAttribute="width" secondItem="eOg-ej-FLF" secondAttribute="width" id="hZA-O2-epq"/>
@@ -69,7 +63,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="atButton" destination="qHg-6f-wIT" id="CGV-0Q-Zgm"/>
-                <outlet property="emojiButton" destination="spK-MC-g06" id="ngd-PM-lmc"/>
                 <outlet property="hastagButton" destination="oem-gj-75U" id="F32-dx-jvB"/>
                 <outlet property="imageButton" destination="eOg-ej-FLF" id="yUL-VK-IFJ"/>
                 <outlet property="linkButton" destination="sS9-TD-f0k" id="Vtx-EG-uKs"/>
@@ -81,7 +74,6 @@
     <resources>
         <image name="paperplane.fill" width="20.5" height="21.5"/>
         <image name="toolbar_icon_at" width="24" height="24"/>
-        <image name="toolbar_icon_emoji" width="24" height="24"/>
         <image name="toolbar_icon_hashtag" width="24" height="24"/>
         <image name="toolbar_icon_image" width="25" height="25"/>
         <image name="toolbar_link" width="24" height="24.5"/>

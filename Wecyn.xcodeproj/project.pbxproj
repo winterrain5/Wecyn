@@ -83,7 +83,11 @@
 		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
-		45540A4A2A84D1C900E5487A /* example.ics in Resources */ = {isa = PBXBuildFile; fileRef = 45540A492A84D1C900E5487A /* example.ics */; };
+		4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */; };
+		4549ECEA2AB40A4500EB9C4C /* UIImage+System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECE92AB40A4500EB9C4C /* UIImage+System.swift */; };
+		4549ECEC2AB40AF900EB9C4C /* UIMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */; };
+		4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */; };
+		4549ECF02AB45B4400EB9C4C /* PostCommentToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
 		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
 		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
@@ -181,6 +185,21 @@
 		45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5272A4832EC0018992C /* ScheduleApi.swift */; };
 		45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5292A4833B00018992C /* AddEventRequestModel.swift */; };
 		45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF52B2A4835440018992C /* ScheduleService.swift */; };
+		45C781EF2A95C2B600D4E721 /* VisualActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781EE2A95C2B500D4E721 /* VisualActivityViewController.swift */; };
+		45C781F12A9858FE00D4E721 /* NFCNameCardEditHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F02A9858FE00D4E721 /* NFCNameCardEditHeadView.swift */; };
+		45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F32A98A0FB00D4E721 /* ImageCompress+Builder.swift */; };
+		45C781FA2A98A0FB00D4E721 /* ImageCompress+Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F42A98A0FB00D4E721 /* ImageCompress+Property.swift */; };
+		45C781FB2A98A0FB00D4E721 /* ImageCompress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F52A98A0FB00D4E721 /* ImageCompress.swift */; };
+		45C781FC2A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F62A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift */; };
+		45C781FD2A98A0FB00D4E721 /* ImageCompress+DPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F72A98A0FB00D4E721 /* ImageCompress+DPI.swift */; };
+		45C781FE2A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F82A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift */; };
+		45C999F02AB05C7E0017CDC3 /* PostApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999EF2AB05C7E0017CDC3 /* PostApi.swift */; };
+		45C999F22AB05EBA0017CDC3 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F12AB05EBA0017CDC3 /* PostService.swift */; };
+		45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F32AB06C8D0017CDC3 /* PostTypeController.swift */; };
+		45C999F62AB1C7C00017CDC3 /* PostUserInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F52AB1C7C00017CDC3 /* PostUserInfoController.swift */; };
+		45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F72AB1C8A20017CDC3 /* PostUserHeaderController.swift */; };
+		45C999FA2AB1CBC80017CDC3 /* PostUserPostedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F92AB1CBC80017CDC3 /* PostUserPostedController.swift */; };
+		45C999FC2AB1CBD70017CDC3 /* PostUserLikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999FB2AB1CBD60017CDC3 /* PostUserLikeController.swift */; };
 		45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */; };
 		45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */; };
 		45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */; };
@@ -302,7 +321,11 @@
 		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
-		45540A492A84D1C900E5487A /* example.ics */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.ics; sourceTree = "<group>"; };
+		4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserHeaderInfoView.swift; sourceTree = "<group>"; };
+		4549ECE92AB40A4500EB9C4C /* UIImage+System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+System.swift"; sourceTree = "<group>"; };
+		4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMenuExtension.swift; sourceTree = "<group>"; };
+		4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentToolBarView.swift; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -406,6 +429,21 @@
 		45BBF5272A4832EC0018992C /* ScheduleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleApi.swift; sourceTree = "<group>"; };
 		45BBF5292A4833B00018992C /* AddEventRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventRequestModel.swift; sourceTree = "<group>"; };
 		45BBF52B2A4835440018992C /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
+		45C781EE2A95C2B500D4E721 /* VisualActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualActivityViewController.swift; sourceTree = "<group>"; };
+		45C781F02A9858FE00D4E721 /* NFCNameCardEditHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardEditHeadView.swift; sourceTree = "<group>"; };
+		45C781F32A98A0FB00D4E721 /* ImageCompress+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+Builder.swift"; sourceTree = "<group>"; };
+		45C781F42A98A0FB00D4E721 /* ImageCompress+Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+Property.swift"; sourceTree = "<group>"; };
+		45C781F52A98A0FB00D4E721 /* ImageCompress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCompress.swift; sourceTree = "<group>"; };
+		45C781F62A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+ColorConfig.swift"; sourceTree = "<group>"; };
+		45C781F72A98A0FB00D4E721 /* ImageCompress+DPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+DPI.swift"; sourceTree = "<group>"; };
+		45C781F82A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+ImageFormat.swift"; sourceTree = "<group>"; };
+		45C999EF2AB05C7E0017CDC3 /* PostApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostApi.swift; sourceTree = "<group>"; };
+		45C999F12AB05EBA0017CDC3 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		45C999F32AB06C8D0017CDC3 /* PostTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTypeController.swift; sourceTree = "<group>"; };
+		45C999F52AB1C7C00017CDC3 /* PostUserInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserInfoController.swift; sourceTree = "<group>"; };
+		45C999F72AB1C8A20017CDC3 /* PostUserHeaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserHeaderController.swift; sourceTree = "<group>"; };
+		45C999F92AB1CBC80017CDC3 /* PostUserPostedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserPostedController.swift; sourceTree = "<group>"; };
+		45C999FB2AB1CBD60017CDC3 /* PostUserLikeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserLikeController.swift; sourceTree = "<group>"; };
 		45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemCell.swift; sourceTree = "<group>"; };
 		45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionItemCell.xib; sourceTree = "<group>"; };
 		45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRecommendController.swift; sourceTree = "<group>"; };
@@ -464,7 +502,8 @@
 		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
 			isa = PBXGroup;
 			children = (
-				45540A492A84D1C900E5487A /* example.ics */,
+				45C781F22A98A0FB00D4E721 /* ImageCompress */,
+				45C781EE2A95C2B500D4E721 /* VisualActivityViewController.swift */,
 				450F6CB12A613AFC0001AA1B /* RRuleSwif */,
 			);
 			path = 3rdDepandence;
@@ -590,6 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */,
+				45C781F02A9858FE00D4E721 /* NFCNameCardEditHeadView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -621,6 +661,7 @@
 				4536533D2A413F270026EC8D /* FriendService.swift */,
 				45BBF52B2A4835440018992C /* ScheduleService.swift */,
 				458970612A78DAA100344B93 /* IMService.swift */,
+				45C999F12AB05EBA0017CDC3 /* PostService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -743,6 +784,7 @@
 				45ADB28E2A3FF00E00745F6F /* UserApi.swift */,
 				4536533B2A413DF70026EC8D /* FriendApi.swift */,
 				45BBF5272A4832EC0018992C /* ScheduleApi.swift */,
+				45C999EF2AB05C7E0017CDC3 /* PostApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -804,11 +846,13 @@
 		45920A912A26E045005871ED /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4549ECE92AB40A4500EB9C4C /* UIImage+System.swift */,
 				45920AC12A26E045005871ED /* BaseViewController+Extension.swift */,
 				45920A942A26E045005871ED /* NotifictionCenter+Name.swift */,
 				45920A962A26E045005871ED /* NSObject+Extension.swift */,
 				45920A9A2A26E045005871ED /* Permission+Extension.swift */,
 				450BA6BE2A32B4B700764828 /* UIViewExtension.swift */,
+				4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1007,6 +1051,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		45C781F22A98A0FB00D4E721 /* ImageCompress */ = {
+			isa = PBXGroup;
+			children = (
+				45C781F32A98A0FB00D4E721 /* ImageCompress+Builder.swift */,
+				45C781F42A98A0FB00D4E721 /* ImageCompress+Property.swift */,
+				45C781F52A98A0FB00D4E721 /* ImageCompress.swift */,
+				45C781F62A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift */,
+				45C781F72A98A0FB00D4E721 /* ImageCompress+DPI.swift */,
+				45C781F82A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift */,
+			);
+			path = ImageCompress;
+			sourceTree = "<group>";
+		};
 		45D4D9AF2A3C2B0000D7ED04 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1130,6 +1187,12 @@
 			isa = PBXGroup;
 			children = (
 				45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */,
+				45C999F32AB06C8D0017CDC3 /* PostTypeController.swift */,
+				45C999F52AB1C7C00017CDC3 /* PostUserInfoController.swift */,
+				45C999F72AB1C8A20017CDC3 /* PostUserHeaderController.swift */,
+				45C999F92AB1CBC80017CDC3 /* PostUserPostedController.swift */,
+				45C999FB2AB1CBD60017CDC3 /* PostUserLikeController.swift */,
+				4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1139,6 +1202,8 @@
 			children = (
 				45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */,
 				45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */,
+				4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */,
+				4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1275,7 +1340,6 @@
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
 				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
-				45540A4A2A84D1C900E5487A /* example.ics in Resources */,
 				45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */,
 				457C50902A384B5F00FCE8D0 /* HomeItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
@@ -1365,6 +1429,9 @@
 				4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */,
 				45920AF72A26E045005871ED /* AppDelegate.swift in Sources */,
 				459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */,
+				45C999F22AB05EBA0017CDC3 /* PostService.swift in Sources */,
+				45C999F62AB1C7C00017CDC3 /* PostUserInfoController.swift in Sources */,
+				45C999FA2AB1CBC80017CDC3 /* PostUserPostedController.swift in Sources */,
 				457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */,
 				45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
@@ -1381,18 +1448,23 @@
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
+				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
 				45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
 				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
+				45C781FA2A98A0FB00D4E721 /* ImageCompress+Property.swift in Sources */,
 				450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */,
 				450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */,
+				45C781FC2A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
+				4549ECEA2AB40A4500EB9C4C /* UIImage+System.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
+				45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
 				45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */,
@@ -1400,6 +1472,7 @@
 				453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */,
 				45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */,
 				45920AE62A26E045005871ED /* RefreshAnimationFooter.swift in Sources */,
+				45C999F02AB05C7E0017CDC3 /* PostApi.swift in Sources */,
 				459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */,
 				45920AEB2A26E045005871ED /* WebBrowser+MessageHandler.swift in Sources */,
 				45005C732A5D027D00560E21 /* CalendarAddNewEventController.swift in Sources */,
@@ -1407,6 +1480,7 @@
 				459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */,
 				45A7E5AB2A734DC30002014D /* NavbarSearchView.swift in Sources */,
 				458970622A78DAA100344B93 /* IMService.swift in Sources */,
+				4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */,
 				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
 				45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */,
@@ -1440,8 +1514,10 @@
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,
+				45C999FC2AB1CBD70017CDC3 /* PostUserLikeController.swift in Sources */,
 				45920AF92A26E045005871ED /* BaseViewController+Extension.swift in Sources */,
 				45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */,
+				45C781FB2A98A0FB00D4E721 /* ImageCompress.swift in Sources */,
 				450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */,
 				457C7D952A4E6BB1002E50DF /* FriendSearchController.swift in Sources */,
 				450BA6C72A32B9BD00764828 /* LoginController.swift in Sources */,
@@ -1449,6 +1525,7 @@
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
 				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
+				45C781F12A9858FE00D4E721 /* NFCNameCardEditHeadView.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45A7E5A92A734C1C0002014D /* LocationSearchController.swift in Sources */,
 				45920AFE2A26E045005871ED /* BaseModel.swift in Sources */,
@@ -1471,9 +1548,11 @@
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
 				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
+				45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				458970602A7794EA00344B93 /* Asyncs.swift in Sources */,
+				45C781FE2A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift in Sources */,
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
 				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
@@ -1491,6 +1570,7 @@
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
 				450F6CBE2A613AFC0001AA1B /* NSDate+Comparison.swift in Sources */,
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
+				45C781EF2A95C2B600D4E721 /* VisualActivityViewController.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
 				458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */,
@@ -1501,8 +1581,10 @@
 				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
+				4549ECEC2AB40AF900EB9C4C /* UIMenuExtension.swift in Sources */,
 				45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */,
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,
+				4549ECF02AB45B4400EB9C4C /* PostCommentToolBarView.swift in Sources */,
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,
 				4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */,
 				45920ACD2A26E045005871ED /* NetworkLogPlugin.swift in Sources */,
@@ -1514,7 +1596,9 @@
 				45920AD62A26E045005871ED /* PKError.swift in Sources */,
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
 				45005C7C2A5E388200560E21 /* TextViewAttachmentDelegateProvider.swift in Sources */,
+				45C781FD2A98A0FB00D4E721 /* ImageCompress+DPI.swift in Sources */,
 				450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */,
+				45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */,
 				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,

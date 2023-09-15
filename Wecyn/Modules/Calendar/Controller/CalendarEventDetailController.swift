@@ -20,6 +20,7 @@ enum CalendarEventDetailCellType {
     case Remark
     case Delete
     case EmailCc
+    case Room
 }
 
 class CalendarEventDetailModel {
@@ -121,18 +122,16 @@ class CalendarEventDetailController: BaseTableController {
            
             
             let peolple = CalendarEventDetailModel(cellType: .People, model: model)
-            let peopleLimit = CalendarEventDetailModel(cellType: .PeopleLimit, model: model)
+            let room = CalendarEventDetailModel(cellType: .Room, model: model)
+//            let peopleLimit = CalendarEventDetailModel(cellType: .PeopleLimit, model: model)
             
-            if model.is_public == 1 {
-                if model.attendance_limit > 0 {
-                    section3.append(peopleLimit)
-                }
-                
-            } else {
+            if model.is_public != 1 {
                 if model.attendees.count > 0 {
                     section3.append(peolple)
                 }
-                
+            }
+            if model.room_id != 0 {
+                section3.append(room)
             }
             self.models.append(section3)
             
@@ -178,39 +177,27 @@ class CalendarEventDetailController: BaseTableController {
             editButton.imageForNormal = R.image.personFillXmark()
         }
         editButton.size = CGSize(width: 36, height: 36)
+        editButton.showsMenuAsPrimaryAction = true
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         
-        editButton.rx.tap.subscribe(onNext:{[weak self] in
-            guard let `self` = self else { return }
-           
-            let appearance = PopMenuAppearance()
-            appearance.popMenuBackgroundStyle = .dimmed(color: .black, opacity: 0.4)
-            appearance.popMenuPresentationStyle = .near(.right,offset: CGPoint(x: 40, y: 60))
-            appearance.popMenuActionHeight = 52
-            
-            let manager = PopMenuManager(appearance: appearance)
-            manager.popMenuShouldDismissOnSelection = true
-            let action1 = PopMenuDefaultAction(title: "Accept",image: R.image.personFillCheckmark(),didSelect: { _ in
-                self.updateStatus(status: 1)
-            })
-            let action2 = PopMenuDefaultAction(title: "Unknown",image: R.image.personFillQuestionmark(),didSelect: { _ in
-                self.updateStatus(status: 0)
-            })
-            let action3 = PopMenuDefaultAction(title: "Reject",image: R.image.personFillXmark(),didSelect: { _ in
-                self.updateStatus(status: 2)
-            })
-            
-            let actions = [action1,action2,action3]
-            manager.actions = actions
-            
-            actions.forEach({
-                $0.imageRenderingMode = .alwaysOriginal
-                $0.iconWidthHeight = 22
-            })
-         
-            manager.present(sourceView: editButton)
-            
-        }).disposed(by: rx.disposeBag)
+        let Accept = UIAction(title: "Accept", image: R.image.personFillCheckmark()) { _ in
+            self.updateStatus(status: 1)
+        }
+        let Unknown = UIAction(title: "Unknown", image: R.image.personFillQuestionmark()) { _ in
+            self.updateStatus(status: 0)
+        }
+        let Reject = UIAction(title: "Reject", image: R.image.personFillXmark()) { _ in
+            self.updateStatus(status: 2)
+        }
+        
+        
+        let menuActions = [Accept,Unknown,Reject]
+        
+        let menu = UIMenu(
+            title: "",
+            children: menuActions)
+        editButton.menu = menu
+        
     }
     
     func updateStatus(status:Int) {
@@ -278,8 +265,8 @@ class CalendarEventDetailController: BaseTableController {
             cell.model = model
             return cell
             
-        case .Link,.Location,.Creator,.PeopleLimit,.People,.Description,.Remark,.EmailCc:
-            let cell = tableView.dequeueReusableCell(withClass: CalendarEventDetailInfoCell.self)
+        case .Link,.Location,.Creator,.PeopleLimit,.People,.Description,.Remark,.EmailCc,.Room:
+            let cell = CalendarEventDetailInfoCell()
             cell.model = model
             return cell
         }
@@ -486,57 +473,55 @@ class CalendarEventDetailInfoCell: UITableViewCell {
     var model:CalendarEventDetailModel! {
         didSet{
             
-            if model.cellType == .Link  {
+            
+            switch model.cellType {
+            case .Link:
+                attendeesClv.isHidden = true
                 titleLabel.text = model.model.url
                 imgView.image = R.image.link()
                 accessoryType = .disclosureIndicator
                 titleLabel.numberOfLines = 1
-            }
-            
-            if model.cellType == .Location  {
+            case .Location:
+                attendeesClv.isHidden = true
                 titleLabel.text = model.model.location
                 imgView.image = R.image.location()
                 accessoryType = .disclosureIndicator
                 titleLabel.numberOfLines = 1
-            }
-            
-            if model.cellType == .Creator  {
+            case .Creator:
+                attendeesClv.isHidden = true
                 titleLabel.text = model.model.creator_name
                 imgView.image = R.image.personFill()
-            }
-            
-            if model.cellType == .PeopleLimit  {
+            case .PeopleLimit:
+                attendeesClv.isHidden = true
                 titleLabel.text = model.model.attendance_limit.string
                 imgView.image = R.image.person2()
-            }
-            
-            if model.cellType == .People  {
+            case .People:
+                attendeesClv.isHidden = false
                 titleLabel.text = ""
                 imgView.image = R.image.person2()
-            }
-            
-            if model.cellType == .EmailCc  {
+            case .EmailCc:
+                attendeesClv.isHidden = false
                 titleLabel.text = ""
                 imgView.image = R.image.mailStack()
-            }
-            
-            if model.cellType == .Description {
+            case .Description:
+                attendeesClv.isHidden = true
                 titleLabel.text = model.model.desc.htmlToString
                 imgView.image = R.image.textQuote()
                 titleLabel.numberOfLines = 0
-            }
-            
-            if model.cellType == .Remark {
+            case .Remark:
+                attendeesClv.isHidden = true
                 titleLabel.text = model.model.remarks.htmlToString
                 imgView.image = R.image.line3Horizontal()
                 titleLabel.numberOfLines = 0
-            }
-            
-            if model.cellType == .People || model.cellType == .EmailCc{
-                attendeesClv.isHidden = false
-            } else {
+            case .Room:
                 attendeesClv.isHidden = true
+                titleLabel.text = model.model.room_name
+                imgView.image = R.image.house()
+            default:
+                attendeesClv.isHidden = true
+                titleLabel.text = ""
             }
+          
         }
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -597,26 +582,35 @@ extension CalendarEventDetailInfoCell: UICollectionViewDataSource,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: EventDetaiAttendeesCell.self, for: indexPath)
-        if self.model.model.attendees.count > 0 {
+       
+       
+        if self.model.model.attendees.count > 0 && self.model.cellType == .People{
             cell.model = model.model.attendees[indexPath.row]
         }
-        if self.model.model.emails.count > 0 {
+        if self.model.model.emails.count > 0 && self.model.cellType == .EmailCc{
             cell.email = model.model.emails[indexPath.row]
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model.model.attendees.count > 0 ? self.model.model.attendees.count : self.model.model.emails.count
+        switch self.model.cellType {
+        case .EmailCc:
+            return self.model.model.emails.count
+        case .People:
+            return self.model.model.attendees.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if self.model.model.attendees.count > 0 {
+        if self.model.model.attendees.count > 0 && self.model.cellType == .People{
             let model = model.model.attendees[indexPath.row]
             let width = model.name.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 8
             return CGSize(width: width, height: 26)
         }
-        if self.model.model.emails.count > 0 {
+        if self.model.model.emails.count > 0 && self.model.cellType == .EmailCc{
             let email = model.model.emails[indexPath.row]
             let width = email.widthWithConstrainedWidth(height: 2, font: UIFont.sk.pingFangRegular(12)) + 8
             return CGSize(width: width, height: 26)

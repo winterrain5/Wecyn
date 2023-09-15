@@ -155,6 +155,9 @@ class FriendListModel: BaseModel {
     var first_name: String = ""
     var last_name: String = ""
     var avatar = ""
+    var avatar_url: URL? {
+        return URL(string: avatar)
+    }
     var group_id: Int = 0
     var full_name: String {
         get {
@@ -198,6 +201,7 @@ class FriendUserInfoModel: BaseModel {
     /// "friend_status" int # 好友状态。1 没关系，2 好友关系，3 已申请好友，4 被申请好友
     var friend_status: Int = 0
     var avatar = ""
+    var cover = ""
     var wid = ""
 }
 

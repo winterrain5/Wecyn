@@ -13,9 +13,9 @@ import UIKit
     var id: Int = 0
     var uuid: String?
     var tel_work: String?
-    var company_id: Int = 0
+    var org_id: Int = 0
     var url: String?
-    var company: String?
+    var org_name: String?
     var title: String?
     var avatar: String?
     var tel_cell: String?
