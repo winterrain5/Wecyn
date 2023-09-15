@@ -54,20 +54,21 @@ class LoginView: UIView {
             guard let username = self.userNameTf.text,let password = self.passwordTf.text else { return }
             self.signInButton.startAnimation()
             AuthService.signin(username: username, password: MD5(password + "wecyn").lowercased()).subscribe(onNext:{ model in
-                self.signInButton.stopAnimation()
+                
                 UserDefaults.sk.set(object: model, for: TokenModel.className)
                 let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
                 userDefaults?.setValue(model.token, forKey: "token")
                 userDefaults?.synchronize()
-                UserService.getUserInfo().subscribe(onNext:{ model in
+                UserService.getUserInfo().retry(3).subscribe(onNext:{ model in
+                    self.signInButton.stopAnimation()
                     UserDefaults.sk.set(object: model, for: UserInfoModel.className)
                     userDefaults?.setValue(model.id, forKey: "userId")
                     userDefaults?.synchronize()
                     let main = MainController()
                     UIApplication.shared.keyWindow?.rootViewController = main
                 },onError: { e in
-                    let main = MainController()
-                    UIApplication.shared.keyWindow?.rootViewController = main
+                    self.signInButton.stopAnimation()
+                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
                 }).disposed(by: self.rx.disposeBag)
                
             },onError: { e in

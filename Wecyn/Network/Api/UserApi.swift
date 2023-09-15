@@ -11,6 +11,7 @@ enum UserApi {
     case uploadAvatar(photo:String)
     case userInfo
     case updateUserInfo(model:UpdateUserInfoRequestModel)
+    case uploadCover(photo:String)
 }
 
 extension UserApi: TargetType {
@@ -22,6 +23,8 @@ extension UserApi: TargetType {
             return "/api/user/userInfo/"
         case .updateUserInfo:
             return "/api/user/updateUserInfo/"
+        case .uploadCover:
+            return "/api/user/uploadCover/"
         }
     }
     
@@ -44,6 +47,8 @@ extension UserApi: TargetType {
             return .requestPlain
         case .updateUserInfo(let model):
             return requestToTaskByPost(model)
+        case .uploadCover(let photo):
+            return requestParametersByPost(["photo":photo])
         }
     }
 }

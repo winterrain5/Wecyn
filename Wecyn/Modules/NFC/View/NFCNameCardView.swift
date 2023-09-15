@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import ZLPhotoBrowser
 class NFCNameCardView: UIView {
     
     let blurImageView = UIImageView()
@@ -25,20 +26,20 @@ class NFCNameCardView: UIView {
             
             hideSkeleton()
             
-            avtImgView.kf.setImage(with: model.avatar.avatarUrl, placeholder: R.image.proile_user())
-            blurImageView.kf.setImage(with: model.avatar.avatarUrl)
-            
-            let url = "www.terrabyte.sg/wecyn/uid/\(model.id)"
+            avtImgView.kf.setImage(with: model.avatar_url, placeholder: R.image.proile_user())
+            blurImageView.kf.setImage(with: model.cover_url)
+            //10.1.3.144:5173/card/a65ab2f2-e348-4e5b-b1cd-eeba7f644cd2
+            let url = APIHost.share.WebpageUrl + "/card/\(model.uuid)"
             qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: nil)
             
             nameLabel.text = model.full_name
          
             var text = ""
             if !model.title.isEmpty {
-               text = text + model.title + "\n"
+               text = text + model.title
             }
-            if !model.company.isEmpty {
-                text = text + model.company
+            if !model.org_name.isEmpty {
+                text = text + "  " + model.org_name
             }
             
             subLabel.text = text
@@ -90,13 +91,12 @@ class NFCNameCardView: UIView {
         self.subviews.forEach({ $0.isSkeletonable = true })
         
         blurImageView.contentMode = .scaleAspectFill
-        blurImageView.blur(withStyle: .light)
+        blurImageView.clipsToBounds = true
         
         qrCodeImgView.contentMode = .scaleAspectFit
         qrCodeImgView.borderColor = .white
         qrCodeImgView.borderWidth = 2
         qrCodeImgView.addShadow(cornerRadius: 0)
-        
         
         avtContentView.addShadow(cornerRadius: 40)
         avtContentView.borderColor = .white
@@ -104,6 +104,7 @@ class NFCNameCardView: UIView {
         
         avtImgView.contentMode = .scaleAspectFit
         avtImgView.cornerRadius = 40
+       
         
         nameLabel.textColor = R.color.textColor162C46()
         nameLabel.font = UIFont.sk.pingFangSemibold(18)
@@ -126,7 +127,7 @@ class NFCNameCardView: UIView {
         
         blurImageView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(160)
+            make.height.equalTo(200)
         }
         
         avtContentView.snp.makeConstraints { make in
@@ -147,7 +148,7 @@ class NFCNameCardView: UIView {
         
         nameLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
-            make.top.equalTo(avtImgView.snp.bottom).offset(32)
+            make.top.equalTo(avtImgView.snp.bottom).offset(16)
             make.right.equalToSuperview().offset(-16)
         }
      

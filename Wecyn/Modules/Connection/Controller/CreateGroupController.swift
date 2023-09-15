@@ -114,7 +114,7 @@ class CreateGroupController: BaseTableController {
         let cell = tableView.dequeueReusableCell(withClass: CalendarAddAttendanceCell.self)
         if selectedUsers.count > 0 {
             let model = selectedUsers[indexPath.row]
-            cell.imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            cell.imgView.kf.setImage(with: model.avatar_url,placeholder: R.image.proile_user()!)
             cell.nameLabel.text = model.full_name
         }
         cell.selectionStyle = .none

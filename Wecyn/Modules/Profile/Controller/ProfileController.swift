@@ -19,7 +19,7 @@ class ProfileController: BaseTableController {
 
     private var headerView = ProfileHeaderView.loadViewFromNib()
     private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     override func viewDidLoad() {
         super.viewDidLoad()
         addRightBarItem()
@@ -48,10 +48,7 @@ class ProfileController: BaseTableController {
     
         self.tableView?.tableHeaderView = headerView
         headerView.size = CGSize(width: kScreenWidth, height: 320)
-        headerView.uplodaImageComplete = { [weak self] in
-            guard let `self` = self else { return }
-            self.getUserInfo()
-        }
+   
 
         self.tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
         self.tableView?.register(cellWithClass: ProfileSkillsItemCell.self)
@@ -60,6 +57,11 @@ class ProfileController: BaseTableController {
         self.tableView?.register(cellWithClass: ProfileEducationItemCell.self)
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserInfo()
     }
     
     override func listViewFrame() -> CGRect {
@@ -79,9 +81,9 @@ class ProfileController: BaseTableController {
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == SectionType.Activity.rawValue { return 0 }
-        if section == SectionType.Skills.rawValue { return 1 }
+        if section == SectionType.Skills.rawValue { return 0 }
         
-        return 2
+        return 0
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

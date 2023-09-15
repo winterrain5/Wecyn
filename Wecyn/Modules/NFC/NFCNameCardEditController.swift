@@ -28,15 +28,16 @@ class NFCNameCardEditController: BaseTableController {
     let firstname = NameCardEditModel(placeholder: "First Name", type:.FirstName)
     let lastname = NameCardEditModel(placeholder: "Last Name", type:.LastName)
     let jobTitle = NameCardEditModel(placeholder: "Job Title", type:.JobTitle)
-    let companyName = NameCardEditModel(placeholder: "Company Name", type:.CompanyName)
+    let companyName = NameCardEditModel(placeholder: "Organization Name", type:.CompanyName)
     
-    let mobile = NameCardEditModel(placeholder: "Mobile Number",image: R.image.iphoneGen1CircleFill(), type:.Mobile)
+    let mobile = NameCardEditModel(placeholder: "Mobile Number", type:.Mobile)
     let officeNo = NameCardEditModel(placeholder: "Office Number",image: R.image.phoneCircleFill(), type:.OfficeNumber)
     let officeLocation = NameCardEditModel(placeholder: "Office Location",image: R.image.locationCircleFill(), type:.OfficeLocation)
-    let website = NameCardEditModel(placeholder: "Company Website",image: R.image.rectangleOnRectangleCircleFill(), type:.Website)
+    let website = NameCardEditModel(placeholder: "Organization Website",image: R.image.rectangleOnRectangleCircleFill(), type:.Website)
     
     let request = UpdateUserInfoRequestModel()
     
+    let headView = NFCNameCardEditHeadView()
     var updateComplete:(()->())?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +48,16 @@ class NFCNameCardEditController: BaseTableController {
         firstname.value = user.first_name
         lastname.value = user.last_name
         jobTitle.value = user.title
-        companyName.value = user.company
-        datas.append([firstname,lastname,companyName,jobTitle])
+        companyName.value = user.org_name
+        datas.append([firstname,lastname,companyName,jobTitle,mobile])
         
         mobile.value  = user.tel_cell
         officeNo.value = user.tel_work
         officeLocation.value = user.adr_work
         website.value = user.url
-        datas.append([mobile,officeNo,officeLocation,website])
+        datas.append([officeNo,officeLocation,website])
+        
+        headView.model = user
         
         Mirror(reflecting: UpdateUserInfoRequestModel()).children.forEach { child in
             guard let key = child.label else { return }
@@ -62,18 +65,13 @@ class NFCNameCardEditController: BaseTableController {
         }
       
         
-        self.addLeftBarButtonItem(image: R.image.xmark())
-        self.leftButtonDidClick = {
-            self.navigationController?.popViewController()
-        }
-        
         let saveButton = UIButton()
         saveButton.imageForNormal = R.image.checkmark()
         saveButton.size = CGSize(width: 30, height: 30)
         saveButton.contentMode = .right
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-           
+            Toast.showLoading()
             UserService.updateUserInfo(model: self.request).subscribe(onNext:{
                 if $0.success == 1 {
                     Toast.showSuccess(withStatus: "Update Successful")
@@ -103,8 +101,11 @@ class NFCNameCardEditController: BaseTableController {
         tableView?.separatorColor = R.color.seperatorColor()
         tableView?.separatorStyle = .singleLine
         tableView?.register(cellWithClass: NameCardEditItemCell.self)
-        tableView?.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         tableView?.rowHeight = 48
+        
+        headView.size = CGSize(width: kScreenWidth, height: 280)
+        tableView?.tableHeaderView = headView
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -127,7 +128,7 @@ class NFCNameCardEditController: BaseTableController {
             case .LastName:
                 self.request.last_name = e.value
             case .CompanyName:
-                self.request.company = e.value
+                self.request.org_name = e.value
             case .JobTitle:
                 self.request.title = e.value
             case .Mobile:
@@ -151,13 +152,15 @@ class NFCNameCardEditController: BaseTableController {
             view.label.text = "Personal details"
             return view
         }
+        if section == 1 {
+            let view = NameCardSectionView()
+            view.label.text = "Organization Info"
+            return view
+        }
         return nil
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 40
-        }
-        return 20
+        return 40
     }
 }
 

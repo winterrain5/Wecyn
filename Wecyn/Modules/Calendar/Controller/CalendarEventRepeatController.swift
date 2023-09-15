@@ -119,13 +119,13 @@ class CalendarEventRepeatController: BaseTableController {
         saveButton.imageForNormal = R.image.checkmark()
         saveButton.rx.tap.subscribe(onNext:{ [weak self] in
             self?.repeatSelectComplete?(self?.rrule)
-            self?.dismiss(animated: true)
+            self?.returnBack()
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
         self.addLeftBarButtonItem(image: R.image.xmark()!)
         self.leftButtonDidClick = { [weak self] in
-            self?.dismiss(animated: true)
+            self?.returnBack()
         }
         
     }

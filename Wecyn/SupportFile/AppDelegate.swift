@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         UNUserNotificationCenter.current().delegate = self
         
+     
+        
         return true
     }
     
@@ -84,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let id = components.queryItems?.first?.value ?? ""
                 let uuid = components.queryItems?.last?.value ?? ""
                 let vc = NFCNameCardController(id: id.int,uuid: uuid)
-                window?.rootViewController?.present(vc, animated: true)
+                window?.rootViewController?.navigationController?.pushViewController(vc)
             }
             
         }
@@ -99,8 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

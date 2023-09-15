@@ -24,7 +24,7 @@ class ConnectAuditItemCell: UITableViewCell {
         didSet {
             guard let model = model else { return }
             nameLabel.text = String.fullName(first: model.first_name, last: model.last_name)
-            avatarView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            avatarView.kf.setImage(with: model.avatar.url,placeholder: R.image.proile_user()!)
         }
     }
     

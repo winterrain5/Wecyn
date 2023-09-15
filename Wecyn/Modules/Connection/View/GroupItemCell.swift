@@ -15,7 +15,7 @@ class GroupItemCell: UITableViewCell {
     var model: FriendListModel? {
         didSet {
             guard let model = model else { return }
-            imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+            imgView.kf.setImage(with: model.avatar_url,placeholder: R.image.proile_user()!)
             nameLabel.text = model.full_name
         }
     }

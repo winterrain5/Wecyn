@@ -27,7 +27,7 @@ class RoomPickerController: BaseTableController {
                 })
             }
             self.models = $0
-            self.reloadData()
+            self.endRefresh(.NoData,emptyString: "No Room")
             self.hideSkeleton()
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
@@ -50,6 +50,7 @@ class RoomPickerController: BaseTableController {
     override func createListView() {
         configTableview(.insetGrouped)
         cellIdentifier = UITableViewCell.className
+        tableView?.isSkeletonable = true
         tableView?.backgroundColor = R.color.backgroundColor()!
         tableView?.separatorStyle = .singleLine
         tableView?.separatorColor = R.color.seperatorColor()!
@@ -77,9 +78,6 @@ class RoomPickerController: BaseTableController {
         return cell
     }
     
-    func tintImage(_ colorHex: String) -> UIImage? {
-        R.image.tagFill()?.withTintColor(UIColor(hexString: colorHex) ?? .red).withRenderingMode(.alwaysOriginal)
-    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

@@ -113,6 +113,12 @@ extension String {
         let host = APIHost.share.ImageUrl
         return URL(string: host.appending("/media/avatar/" + self))
     }
+    var coverUrl: URL? {
+        let host = APIHost.share.ImageUrl
+        return URL(string: host.appending("/media/cover/" + self))
+    }
+    
+    
     static func fullName(first: String, last: String) -> String{
         let full = first + " " + last
         return full.replacingOccurrences(of: "\n", with: "")
@@ -153,7 +159,7 @@ extension String {
         }
         return dateFormatter.date(from: self)
     }
-
+    
 }
 
 
@@ -218,3 +224,61 @@ extension Date {
     }
 }
 
+extension UIApplication {
+    // 查找keyWindow
+    var keyWindow: UIWindow? {
+        UIApplication
+            .shared
+            .connectedScenes
+            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+            .last { $0.isKeyWindow }
+    }
+}
+
+
+extension UIDevice {
+    static let window = UIApplication.shared.keyWindow
+    
+    static var topSafeAreaMargin:CGFloat {
+        return window?.safeAreaInsets.top ?? 0
+    }
+    static var bottomSafeAreaMargin:CGFloat {
+        return window?.safeAreaInsets.bottom ?? 0
+    }
+    static var navigationBarHeight:CGFloat {
+        return 44.0 + topSafeAreaMargin
+    }
+    static var tabbarHeight:CGFloat {
+        return 49.0 + bottomSafeAreaMargin
+    }
+    static var statusBarHeight:CGFloat {
+         let statusBarManager = UIApplication
+            .shared
+            .connectedScenes
+            .compactMap { ($0 as? UIWindowScene)?.statusBarManager }
+            .last
+        return statusBarManager?.statusBarFrame.size.height ?? 0
+    }
+    
+    static var isiPhoneX:Bool {
+        topSafeAreaMargin > 0
+    }
+}
+/// 导航栏高度
+var kNavBarHeight: CGFloat {
+    return UIDevice.navigationBarHeight
+}
+/// tab栏高度
+var kTabBarHeight: CGFloat {
+    return UIDevice.tabbarHeight
+}
+/// 底部安全区域
+let kBottomsafeAreaMargin: CGFloat = UIDevice.bottomSafeAreaMargin
+/// 顶部安全区域
+let kTopsafeAreaMargin: CGFloat = UIDevice.topSafeAreaMargin
+/// 状态栏高度
+let kStatusBarHeight: CGFloat = UIDevice.statusBarHeight
+/// 屏幕高度
+let kScreenHeight:CGFloat = UIScreen.main.bounds.size.height
+/// 屏幕宽度
+let kScreenWidth:CGFloat = UIScreen.main.bounds.size.width

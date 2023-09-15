@@ -517,7 +517,7 @@ class CalendarAddNewEventController: BaseTableController {
             cell.model = model
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withClass: AddEventArrowCell.self)
+            let cell = AddEventArrowCell()
             cell.model = model
             cell.removeAttandance = { item in
                 
@@ -548,7 +548,6 @@ class CalendarAddNewEventController: BaseTableController {
         
         if model.type == .People {
             let vc = CalendarAddAttendanceController(selecteds: self.attendees)
-            let nav = BaseNavigationController(rootViewController: vc)
             vc.selectUsers.subscribe(onNext:{ models in
                 self.attendees = models
                 // status，是否接受邀请。默认传0。0 未知，1 同意，2 拒绝
@@ -564,11 +563,11 @@ class CalendarAddNewEventController: BaseTableController {
                 self.People.attendees = results
                 self.reloadData()
             }).disposed(by: self.rx.disposeBag)
-            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+            self.navigationController?.pushViewController(vc)
         }
         
         if model.type == .Start {
-            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_start_date : self.editEventModel?.start_date) : Date()
+            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_start_date : self.editEventModel?.start_date) : Date().adding(.minute, value: 30)
             DatePickerView(title:"Start Time",
                            mode: .dateAndTime,
                            date: date,
@@ -603,7 +602,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Description {
-            let vc = EditorDemoController(withSampleHTML: self.requestModel.desc, wordPressMode: false)
+            let vc = EditorDemoController(withSampleHTML: self.requestModel.desc, wordPressMode: true)
             vc.editComplete = { [weak self] text,html in
                 Logger.debug(html)
                
@@ -612,8 +611,7 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self?.reloadData()
             }
-            let nav = BaseNavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
+            self.navigationController?.pushViewController(vc)
             
         }
         
@@ -627,8 +625,7 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self?.reloadData()
             }
-            let nav = BaseNavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
+            self.navigationController?.pushViewController(vc)
             
         }
         
@@ -682,14 +679,12 @@ class CalendarAddNewEventController: BaseTableController {
                 self.Duplicate.duplicate = "repeat " + rrule.frequency.toString().lowercased()
                 self.reloadData()
             }
-            let nav = BaseNavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
+            self.navigationController?.pushViewController(vc)
         }
         
         if model.type == .Location {
             let vc = LocationSearchController()
-            let nav = BaseNavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
+            self.navigationController?.pushViewController(vc)
             
             vc.selectLocationComplete = { [weak self] location in
                 self?.requestModel.location = location
@@ -720,8 +715,7 @@ class CalendarAddNewEventController: BaseTableController {
                 self.EmailCc.emails = $0
                 self.reloadData()
             }
-            let nav = BaseNavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
+            self.navigationController?.pushViewController(vc)
         }
     }
     
@@ -846,13 +840,16 @@ class AddEventArrowCell: UITableViewCell {
             
             if model.type == .People  {
                 detailLabel.text = ""
+                titleLabel.isHidden = model.attendees.count != 0
                 attendeesClv.isHidden = model.attendees.count == 0
                 attendeesClv.reloadData()
             } else if model.type == .EmailCc {
                 detailLabel.text = ""
+                titleLabel.isHidden = model.emails.count != 0
                 attendeesClv.isHidden = model.emails.count == 0
                 attendeesClv.reloadData()
             } else {
+                titleLabel.isHidden = false
                 attendeesClv.isHidden = true
             }
             

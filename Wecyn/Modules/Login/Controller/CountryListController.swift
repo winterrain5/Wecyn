@@ -22,7 +22,7 @@ class CountryListController: BaseTableController {
 
     var dataType: DataType = .Country
     var countryID:Int? = nil
-    let searchView = NavbarSearchView(placeholder: "Search Name",isSearchable: true,isBecomeFirstResponder: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.72, height: 36))
+    let searchView = NavbarSearchView(placeholder: "Search Name",isSearchable: true,isBecomeFirstResponder: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.6, height: 36))
     init(dataType:DataType,countryID:Int? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.dataType = dataType
@@ -33,7 +33,7 @@ class CountryListController: BaseTableController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var keword:String = ""
+//    var keyword:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,13 +41,15 @@ class CountryListController: BaseTableController {
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
-            self.keword = keyword.trimmed
             if self.dataType == .City {
-                self.searchResult = (self.dataArray as! [CityModel]).filter({ $0.city_name.contains(keyword.trimmed)})
+                self.searchResult = (self.dataArray as! [CityModel]).filter({ $0.city_name.lowercased().contains(keyword.trimmed.lowercased())})
             } else {
-                self.searchResult = (self.dataArray as! [CountryModel]).filter({ $0.country_name.contains(keyword.trimmed)})
+                self.searchResult = (self.dataArray as! [CountryModel]).filter({ $0.country_name.lowercased().contains(keyword.trimmed.lowercased())})
             }
-            self.searchView.endSearching()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.searchView.endSearching()
+            }
+            
             self.reloadData()
         }
         
@@ -73,7 +75,7 @@ class CountryListController: BaseTableController {
         
         let doneButton = UIButton()
         doneButton.textColor(.black)
-        doneButton.titleForNormal = "Done"
+        doneButton.titleForNormal = "Cancel"
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
@@ -84,12 +86,12 @@ class CountryListController: BaseTableController {
         let isCountrySelected = selectedCountry.map({ $0 != nil })
         let isCitySelected = selectedCity.map({ $0 != nil })
         let isSelected = Observable.combineLatest(isCountrySelected,isCitySelected).map({ $0.0 || $0.1 })
-        isSelected.asDriver(onErrorJustReturn: false).drive(doneButton.rx.isEnabled).disposed(by: rx.disposeBag)
+
         isSelected.subscribe(onNext:{
             if $0 {
-                doneButton.textColor(.blue)
+                doneButton.titleForNormal = "Done"
             }else {
-                doneButton.textColor(R.color.textColor52()!)
+                doneButton.titleForNormal = "Cancel"
             }
         }).disposed(by: rx.disposeBag)
          

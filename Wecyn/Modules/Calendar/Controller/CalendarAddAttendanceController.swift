@@ -12,6 +12,7 @@ class CalendarAddAttendanceController: BaseTableController {
 
     var friends:[FriendListModel] = []
     var selectUsers: BehaviorRelay<[FriendListModel]> =  BehaviorRelay(value: [])
+    var selectComplete: ((FriendListModel)->())?
     var searchResults:[FriendListModel] = []
     var keyword = ""
     let searchView = NavbarSearchView(placeholder: "Search by Name",isSearchable: true,isBecomeFirstResponder: false)
@@ -31,6 +32,7 @@ class CalendarAddAttendanceController: BaseTableController {
         
         let doneButton = UIButton()
         doneButton.textColor(.black)
+        doneButton.width = 72
         let doneItem = UIBarButtonItem(customView: doneButton)
         
         let fixItem = UIBarButtonItem.fixedSpace(width: 16)
@@ -38,13 +40,13 @@ class CalendarAddAttendanceController: BaseTableController {
         self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.dismiss(animated: true)
+            self.returnBack()
         }).disposed(by: rx.disposeBag)
         
         selectUsers.map({ !$0.isEmpty }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)
         
         
-        searchView.size = CGSize(width: kScreenWidth * 0.75, height: 36)
+        searchView.size = CGSize(width: kScreenWidth * 0.7, height: 36)
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
@@ -61,7 +63,7 @@ class CalendarAddAttendanceController: BaseTableController {
         
         self.addLeftBarButtonItem()
         self.leftButtonDidClick = { [weak self] in
-            self?.dismiss(animated: true)
+            self?.returnBack()
         }
    
         refreshData()
@@ -76,7 +78,7 @@ class CalendarAddAttendanceController: BaseTableController {
   
     
     func getFriendList() {
-        
+        self.friends.removeAll()
         FriendService.friendList(id: CalendarBelongUserId).subscribe(onNext:{ models in
             models.forEach({ item in
                 if self.selectUsers.value.contains(where: { $0.id == item.id }) {
@@ -123,7 +125,7 @@ class CalendarAddAttendanceController: BaseTableController {
             model = friends[indexPath.row]
         }
         guard let model = model else { return cell  }
-        cell.imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+        cell.imgView.kf.setImage(with: model.avatar_url,placeholder: R.image.proile_user()!)
         cell.nameLabel.text = model.full_name
         cell.accessoryType = model.isSelected ? .checkmark : .none
         cell.selectionStyle = .none
@@ -132,9 +134,16 @@ class CalendarAddAttendanceController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = friends[indexPath.row]
+        if let selectComplete {
+            selectComplete(model)
+            self.dismiss(animated: true)
+            return
+        }
+        
         model.isSelected = !model.isSelected
         selectUsers.accept(friends.filter({ $0.isSelected }))
         tableView.reloadData()
+        
     }
 
 }

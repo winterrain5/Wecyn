@@ -12,11 +12,18 @@ import UIKit
     var id: String = ""
     var uuid: String = ""
     var tel_work: String = ""
-    var company_id: String = ""
+    var org_id: String = ""
     var url: String = ""
-    var company: String = ""
+    var org_name: String = ""
     var title: String = ""
     var avatar: String = ""
+    var avatar_url: URL? {
+        return URL(string: avatar)
+    }
+    var cover: String = ""
+    var cover_url: URL? {
+        return URL(string: cover)
+    }
     var tel_cell: String = ""
     var wid: String = ""
     var first_name: String = ""

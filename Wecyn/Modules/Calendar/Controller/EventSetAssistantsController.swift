@@ -98,9 +98,12 @@ class EventSetAssistantsController: BaseTableController {
     }
     
     override func refreshData() {
+        self.friends.removeAll()
+        self.selectUsers.removeAll()
+        
         let friendList = FriendService.friendList()
         let assistants = ScheduleService.sendedAssistantList()
-        
+
         Observable.zip(friendList,assistants).subscribe(onNext:{ friends,assistants in
             
             friends.forEach({ item in
@@ -163,7 +166,7 @@ class EventSetAssistantsController: BaseTableController {
             model = friends[indexPath.row]
         }
         guard let model = model else { return cell  }
-        cell.imgView.kf.setImage(with: model.avatar.avatarUrl,placeholder: R.image.proile_user()!)
+        cell.imgView.kf.setImage(with: model.avatar.url,placeholder: R.image.proile_user()!)
         cell.nameLabel.text = model.full_name
         cell.accessoryType = model.isSelected ? .checkmark : .none
         cell.selectionStyle = .none

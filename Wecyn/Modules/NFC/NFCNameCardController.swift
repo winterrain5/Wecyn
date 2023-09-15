@@ -36,9 +36,8 @@ class NameCardModel {
 class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,MFMailComposeViewControllerDelegate ,MFMessageComposeViewControllerDelegate{
     let readerWriter = NFCReaderWriter.sharedInstance()
     let namecardView = NFCNameCardView()
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
-    let editButton = UIButton()
-    let closeButton = UIButton()
     var datas:[NameCardModel] = []
     var id:Int? = nil
     var uuid:String? = nil
@@ -55,13 +54,8 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         super.viewDidLoad()
         self.view.isSkeletonable = true
         
-        self.view.addSubview(editButton)
-        editButton.isSkeletonable = true
-        editButton.isHiddenWhenSkeletonIsActive = true
-        editButton.snp.makeConstraints { make in
-            make.right.top.equalToSuperview().inset(16)
-            make.width.height.equalTo(30)
-        }
+        let editButton = UIButton()
+        let editItem = UIBarButtonItem(customView: editButton)
         editButton.rx.tap.subscribe(onNext:{ [weak self] in
             let vc = NFCNameCardEditController()
             self?.navigationController?.pushViewController(vc)
@@ -71,20 +65,50 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         }).disposed(by: rx.disposeBag)
         editButton.imageForNormal = R.image.squareAndPencilCircleFill()
         
-        self.view.addSubview(closeButton)
-        closeButton.isSkeletonable = true
-        closeButton.isHiddenWhenSkeletonIsActive = true
-        closeButton.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().inset(16)
-            make.width.height.equalTo(30)
+        self.addLeftBarButtonItem(image: R.image.xmarkCircleFill()!)
+        self.leftButtonDidClick = { [weak self] in
+            self?.navigationController?.popViewController()
         }
-        closeButton.imageForNormal = R.image.xmarkCircleFill()
-        closeButton.rx.tap.subscribe(onNext:{ [weak self] in
-            self?.dismiss(animated: true)
-        }).disposed(by: rx.disposeBag)
         
-        self.navigation.bar.isHidden = true
+        let shareButton = UIButton()
+        let shareItem = UIBarButtonItem(customView: shareButton)
+        shareButton.imageForNormal = R.image.squareAndArrowUpCircleFill()
+        shareButton.showsMenuAsPrimaryAction = true
+        let action1 = UIAction(title:"Share url with others") { _ in
+            let uuid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.uuid ?? ""
+            let shareURLString = APIHost.share.WebpageUrl + "/card/\(uuid)"
+            guard let url = URL(string: shareURLString) else {
+                return
+            }
+            
+            let vc = VisualActivityViewController(url: url)
+            vc.previewLinkColor = .magenta
+            self.present(vc, animated: true)
+        }
+        let action2 = UIAction(title:"Share QR code") { _ in
+            let uuid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.uuid ?? ""
+            let shareURLString = APIHost.share.WebpageUrl + "/card/\(uuid)"
+            guard let image = UIImage.sk.QRImage(with: shareURLString, size: CGSize(width: 120, height: 120), logoSize: nil) else {
+                return
+            }
+            let vc = VisualActivityViewController(image: image)
+            vc.previewImageSideLength = 40
+            self.present(vc, animated: true)
+        }
+        let menuItems = [action1,action2]
+        let menu = UIMenu(children: menuItems)
+        shareButton.menu = menu
         
+        let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
+        
+        self.navigation.item.rightBarButtonItems = [editItem,fixItem2,shareItem]
+        
+        self.navigation.bar.alpha = 0
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         refreshData()
     }
     
@@ -155,7 +179,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         super.createListView()
         self.tableView?.register(cellWithClass: UITableViewCell.self)
         self.tableView?.tableHeaderView = namecardView
-        namecardView.size = CGSize(width: kScreenWidth, height: 268)
+        namecardView.size = CGSize(width: kScreenWidth, height: 308)
         namecardView.dataUpdateComplete = {  [weak self] height in
             self?.namecardView.size = CGSize(width: kScreenWidth, height: height)
             self?.tableView?.tableHeaderView = self?.namecardView

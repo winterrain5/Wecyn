@@ -86,6 +86,7 @@ class CaledarItemCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.startLabel.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

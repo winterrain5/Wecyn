@@ -126,7 +126,7 @@ class CalendarMenuView: UIView {
         super.layoutSubviews()
        
         let menuW:CGFloat = self.isOpen ? 56 : 112
-        let menuY = kScreenHeight - kTabBarHeight - 12 - 56
+        let menuY = kScreenHeight - kTabBarHeight - 16 - 56
         
         createEventView.frame = CGRect(x: 0, y: 0, width: menuW, height: 56)
         self.frame = CGRect(x: kScreenWidth - menuW - 16, y: menuY, width: menuW, height: 56)

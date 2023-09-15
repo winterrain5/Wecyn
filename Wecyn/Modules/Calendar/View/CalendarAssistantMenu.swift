@@ -102,7 +102,7 @@ extension CalendarAssistantMenu {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: CalendarAssistantMenuCell.self)
         cell.nameLabel.text = assistants[indexPath.row].name
-        cell.imgView.kf.setImage(with: assistants[indexPath.row].avatar.avatarUrl,placeholder: R.image.proile_user()!)
+        cell.imgView.kf.setImage(with: assistants[indexPath.row].avatar.url,placeholder: R.image.proile_user()!)
         cell.accessoryType = indexPath.row == selectRow ? .checkmark : .none
         return cell
     }

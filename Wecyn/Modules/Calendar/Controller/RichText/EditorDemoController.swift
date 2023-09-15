@@ -32,13 +32,11 @@ class EditorDemoController: BaseViewController {
     }()
     
     fileprivate(set) lazy var editorView: Aztec.EditorView = {
-        let defaultHTMLFont: UIFont
         
-        defaultHTMLFont = UIFontMetrics.default.scaledFont(for: Constants.defaultContentFont)
-        
+    
         let editorView = Aztec.EditorView(
-            defaultFont: Constants.defaultContentFont,
-            defaultHTMLFont: defaultHTMLFont,
+            defaultFont: UIFont.systemFont(ofSize: 18),
+            defaultHTMLFont: UIFont.systemFont(ofSize: 18),
             defaultParagraphStyle: .default,
             defaultMissingImage: Constants.defaultMissingImage)
         

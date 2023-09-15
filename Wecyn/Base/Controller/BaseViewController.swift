@@ -30,6 +30,7 @@ class BaseViewController: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = true
         interactivePopGestureRecognizerEnable = true
         self.becomeFirstResponder()
+        
 
     }
     
