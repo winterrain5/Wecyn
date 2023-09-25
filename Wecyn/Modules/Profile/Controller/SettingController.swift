@@ -175,11 +175,11 @@ class SettingCell:UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
-        titleLabel.textColor = R.color.textColor52()
+        titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangSemibold(16)
         
         contentView.addSubview(detailLabel)
-        detailLabel.textColor = R.color.textColor74()
+        detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(14)
         detailLabel.textAlignment = .right
     }

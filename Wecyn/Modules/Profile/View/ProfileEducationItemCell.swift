@@ -14,18 +14,18 @@ class ProfileEducationItemCell: UITableViewCell {
     }
     private let schoolLabel = UILabel().then { label in
         label.text = "Nanyang Polytechnic"
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangSemibold(16)
     }
     private let majorLabel =  UILabel().then { label in
         label.text = "High School Diploma, \nInteraction Design"
         label.numberOfLines = 2
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(13)
     }
     private let timeLabel =  UILabel().then { label in
         label.text = "2016-2019"
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

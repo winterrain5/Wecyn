@@ -9,7 +9,6 @@ import UIKit
 
 import RxSwift
 import RxLocalizer
-import PopMenu
 import FSCalendar
 
 enum DateFormat:String {
@@ -80,7 +79,7 @@ class CalendarEventController: BaseTableController {
         self.navigation.item.rightBarButtonItem = searchItem
         
         
-        monthLabel.textColor = R.color.textColor52()!
+        monthLabel.textColor = R.color.textColor33()!
         monthLabel.size = CGSize(width: 60, height: 30)
         monthLabel.textAlignment = .left
         monthLabel.font = UIFont.sk.pingFangSemibold(20)
@@ -323,7 +322,7 @@ class CalendarEventController: BaseTableController {
                 
             } else {
                 label.text = dataDate.toString(format: "dd MMM EEE")
-                label.textColor = R.color.textColor52()!
+                label.textColor = R.color.textColor33()!
                 view.backgroundColor = R.color.backgroundColor()!
             }
             
@@ -410,7 +409,7 @@ class CalendarNavBarUserView: UIView {
         avatar.contentMode = .scaleAspectFill
         
         nameLabel.text = userModel?.full_name
-        nameLabel.textColor = R.color.textColor52()
+        nameLabel.textColor = R.color.textColor33()
         nameLabel.font = UIFont.sk.pingFangRegular(14)
         nameLabel.width = userModel?.full_name.widthWithConstrainedWidth(height: 40, font: nameLabel.font) ?? 0
         

@@ -13,7 +13,7 @@ class LanguageSettingController: BaseViewController {
         super.viewDidLoad()
         
         let label = UILabel()
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.numberOfLines = 0
         label.font = UIFont.sk.pingFangRegular(15)
         

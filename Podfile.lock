@@ -1,5 +1,19 @@
 PODS:
   - Alamofire (5.7.1)
+  - AnyImageKit (0.16.0):
+    - AnyImageKit/Capture (= 0.16.0)
+    - AnyImageKit/Core (= 0.16.0)
+    - AnyImageKit/Editor (= 0.16.0)
+    - AnyImageKit/Picker (= 0.16.0)
+  - AnyImageKit/Capture (0.16.0):
+    - AnyImageKit/Core
+  - AnyImageKit/Core (0.16.0):
+    - Kingfisher
+    - SnapKit
+  - AnyImageKit/Editor (0.16.0):
+    - AnyImageKit/Core
+  - AnyImageKit/Picker (0.16.0):
+    - AnyImageKit/Core
   - Cache (6.0.0)
   - CocoaDebug (1.7.7)
   - CodeTextField (0.4.0)
@@ -27,7 +41,6 @@ PODS:
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - NewPopMenu (2.1.2)
   - NFCReaderWriter (1.1.4)
   - OpenIMSDK (3.0.0):
     - MJExtension
@@ -107,9 +120,11 @@ PODS:
     - RxSwiftExt/Core
   - SectionIndexView (3.0.0)
   - SkeletonView (1.30.4)
+  - SKPhotoBrowser (7.1.0)
   - SnapKit (5.6.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.3.1)
+  - SwiftEntryKit (2.0.0)
   - SwifterSwift (5.2.0):
     - SwifterSwift/AppKit (= 5.2.0)
     - SwifterSwift/CoreAnimation (= 5.2.0)
@@ -142,11 +157,9 @@ PODS:
   - WordPress-Aztec-iOS (1.19.8)
   - WordPress-Editor-iOS (1.19.8):
     - WordPress-Aztec-iOS (= 1.19.8)
-  - ZLPhotoBrowser (4.4.3.2):
-    - ZLPhotoBrowser/Core (= 4.4.3.2)
-  - ZLPhotoBrowser/Core (4.4.3.2)
 
 DEPENDENCIES:
+  - AnyImageKit
   - Cache (~> 6.0.0)
   - CocoaDebug
   - CodeTextField (~> 0.4.0)
@@ -166,7 +179,6 @@ DEPENDENCIES:
   - LookinServer
   - MarqueeLabel
   - MJRefresh
-  - NewPopMenu (~> 2.0)
   - NFCReaderWriter
   - OpenIMSDK
   - ParallaxHeader
@@ -185,9 +197,11 @@ DEPENDENCIES:
   - RxSwiftExt
   - SectionIndexView
   - SkeletonView
+  - SKPhotoBrowser
   - SnapKit
   - SVProgressHUD
   - SwiftDate
+  - SwiftEntryKit
   - SwifterSwift
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
@@ -195,11 +209,11 @@ DEPENDENCIES:
   - Then
   - WordPress-Aztec-iOS
   - WordPress-Editor-iOS
-  - ZLPhotoBrowser
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AnyImageKit
     - Cache
     - CocoaDebug
     - CodeTextField
@@ -221,7 +235,6 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - Moya
-    - NewPopMenu
     - NFCReaderWriter
     - OpenIMSDK
     - OpenIMSDKCore
@@ -239,16 +252,17 @@ SPEC REPOS:
     - RxSwiftExt
     - SectionIndexView
     - SkeletonView
+    - SKPhotoBrowser
     - SnapKit
     - SVProgressHUD
     - SwiftDate
+    - SwiftEntryKit
     - SwifterSwift
     - SwiftyJSON
     - TagListView
     - Then
     - WordPress-Aztec-iOS
     - WordPress-Editor-iOS
-    - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
   SwiftExtensionsLibrary:
@@ -261,6 +275,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  AnyImageKit: 5f30ce2cad2ffa9162c3e6d827ccb3a280553640
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
@@ -282,7 +297,6 @@ SPEC CHECKSUMS:
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
   NFCReaderWriter: b21965d1b3b8c53f7648f58f597b77a13f6ecdc5
   OpenIMSDK: 6fe41871340af1360008c5710248818aba1861cc
   OpenIMSDKCore: 2e38a5b9be23e588b5049ebd378161cf277e41a0
@@ -300,9 +314,11 @@ SPEC CHECKSUMS:
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   SectionIndexView: b5369b14500696aec99531cb9a390773d162929e
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
+  SKPhotoBrowser: cd95b95a6f352fc2a50992721299f75ead77f9ab
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
   SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
@@ -310,8 +326,7 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
-  ZLPhotoBrowser: 0563c2bfc7b247b65d023d646012f46cba94101b
 
-PODFILE CHECKSUM: 9f1069201a42a7928a7e224f5c774300c4ae3a97
+PODFILE CHECKSUM: c5ed8e8608ba386b2fe38f76a1cb5b56ad94fa04
 
 COCOAPODS: 1.11.2

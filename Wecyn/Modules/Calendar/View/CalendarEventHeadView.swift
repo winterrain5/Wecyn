@@ -31,7 +31,7 @@ class CalendarEventHeadView: UIView {
         calendar.delegate = self
         
         calendar.appearance.selectionColor = R.color.theamColor()
-        calendar.appearance.titleDefaultColor = R.color.textColor52()!
+        calendar.appearance.titleDefaultColor = R.color.textColor33()!
         calendar.appearance.titleFont = UIFont.sk.pingFangRegular(14)
         calendar.appearance.caseOptions = .weekdayUsesUpperCase
         calendar.scope = .month
@@ -39,9 +39,9 @@ class CalendarEventHeadView: UIView {
         calendar.placeholderType = .fillSixRows
         calendar.headerHeight = 0
         calendar.appearance.weekdayFont = UIFont.sk.pingFangRegular(14)
-        calendar.appearance.weekdayTextColor = R.color.textColor52()!
+        calendar.appearance.weekdayTextColor = R.color.textColor33()!
         calendar.appearance.titlePlaceholderColor = UIColor(hexString: "dfdfdf")
-        calendar.appearance.titleTodayColor = R.color.textColor52()!
+        calendar.appearance.titleTodayColor = R.color.textColor33()!
         calendar.appearance.todayColor = .white
         
         calendar.firstWeekday = 1

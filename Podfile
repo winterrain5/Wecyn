@@ -40,14 +40,14 @@ target 'Wecyn' do
   pod 'MarqueeLabel'
   pod 'CodeTextField', '~> 0.4.0'
   pod 'FSCalendar'
-  pod 'NewPopMenu', '~> 2.0'
   pod 'SectionIndexView'
   pod "WordPress-Aztec-iOS"
   pod "WordPress-Editor-iOS"
   pod 'ParallaxHeader'
   pod 'TagListView'
-  pod 'ZLPhotoBrowser'
-  
+  pod 'AnyImageKit'
+  pod 'SKPhotoBrowser'
+  pod 'SwiftEntryKit'
   pod 'OpenIMSDK'
   
   pod 'Permission/Camera'
@@ -75,6 +75,7 @@ post_install do |installer|
       end
     end
     target.build_configurations.each do |config|
+      config.build_settings["DEVELOPMENT_TEAM"] = "4F6LM54QKY"
       if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 12.0
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
       end

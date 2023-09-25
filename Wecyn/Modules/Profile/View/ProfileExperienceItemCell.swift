@@ -14,24 +14,24 @@ class ProfileExperienceItemCell: UITableViewCell {
     }
     private let jobLabel = UILabel().then { label in
         label.text = "UI/UX Designer"
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangSemibold(16)
     }
     private let companyLabel =  UILabel().then { label in
         label.text = "Company1234  |  Full-time"
         label.numberOfLines = 2
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(13)
     }
     private let timeLabel =  UILabel().then { label in
         label.text = "Aug 2020 - Oct 2020"
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
     }
     private let descLabel =  UILabel().then { label in
         label.text = "Job Description"
         label.numberOfLines = 0
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

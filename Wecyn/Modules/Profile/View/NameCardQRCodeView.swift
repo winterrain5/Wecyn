@@ -17,7 +17,7 @@ class NameCardQRCodeView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        closeLabel.sk.setSpecificTextUnderLine("Close", color: R.color.textColor52()!)
+        closeLabel.sk.setSpecificTextUnderLine("Close", color: R.color.textColor33()!)
         useNFCButton.addShadow(cornerRadius: 6)
         
         QRCodeImgView.image = UIImage.sk.QRImage(with: "test", size: CGSize(width: 121, height: 121), logoSize: nil)

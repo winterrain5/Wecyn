@@ -7,7 +7,7 @@
 
 import UIKit
 import Kingfisher
-import ZLPhotoBrowser
+
 class NFCNameCardView: UIView {
     
     let blurImageView = UIImageView()
@@ -106,11 +106,11 @@ class NFCNameCardView: UIView {
         avtImgView.cornerRadius = 40
        
         
-        nameLabel.textColor = R.color.textColor162C46()
+        nameLabel.textColor = R.color.textColor22()
         nameLabel.font = UIFont.sk.pingFangSemibold(18)
         nameLabel.numberOfLines = 3
         
-        subLabel.textColor = R.color.textColor162C46()
+        subLabel.textColor = R.color.textColor22()
         subLabel.font = UIFont.sk.pingFangSemibold(15)
         subLabel.numberOfLines = 2
         

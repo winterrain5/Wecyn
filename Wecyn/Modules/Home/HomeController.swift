@@ -10,6 +10,7 @@ import UIKit
 class HomeController: BaseTableController {
     var lastId:Int = 0
     var createPostButton = UIButton()
+    override var preferredStatusBarStyle: UIStatusBarStyle { .default }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isSkeletonable = true
@@ -24,39 +25,30 @@ class HomeController: BaseTableController {
         createPostButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(kTabBarHeight + 16)
-            make.width.height.equalTo(68)
+            make.width.height.equalTo(60)
         }
-        createPostButton.addShadow(cornerRadius: 34)
+        createPostButton.addShadow(cornerRadius: 30)
         createPostButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
            
             
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 4) {
-                self.createPostButton.transform = CGAffineTransformMakeScale(0.8, 0.8)
-            } completion: { flag in
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 4) {
-                    self.createPostButton.transform = CGAffineTransform.identity
-                } completion: { flag in
-                    let vc = CreatePostViewController()
-                    let nav = BaseNavigationController(rootViewController: vc)
-                    nav.modalPresentationStyle = .fullScreen
-                    UIViewController.sk.getTopVC()?.present(nav, animated: true)
-                    vc.addCompleteHandler = { [weak self] in
-                        guard let `self` = self else { return }
-                        self.dataArray.insert($0, at: 0)
-                        self.tableView?.reloadData()
-                        self.tableView?.scrollToTop(animated: false)
-                    }
-                }
+            let vc = CreatePostViewController()
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+            vc.addCompleteHandler = { [weak self] in
+                guard let `self` = self else { return }
+                self.dataArray.insert($0, at: 0)
+                self.tableView?.reloadData()
+                self.tableView?.scrollToTop(animated: false)
             }
-
            
         }).disposed(by: rx.disposeBag)
         
         let wecynLabel = UILabel()
         wecynLabel.text = "Wecyn"
-        wecynLabel.textColor = R.color.textColor162C46()!
+        wecynLabel.textColor = R.color.textColor22()!
         wecynLabel.font = UIFont(name: "Zapfino", size: 16)
         let leftItem = UIBarButtonItem(customView: wecynLabel)
         self.navigation.item.leftBarButtonItem = leftItem
@@ -64,14 +56,19 @@ class HomeController: BaseTableController {
         refreshData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
     override func createListView() {
         super.createListView()
         
-        cellIdentifier = HomeItemCell.className
+        cellIdentifier = HomePostItemCell.className
         tableView?.isSkeletonable = true
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
         
-        tableView?.register(nibWithCellClass: HomeItemCell.self)
+        tableView?.register(cellWithClass: HomePostItemCell.self)
         
         tableView?.separatorColor = R.color.seperatorColor()
         tableView?.separatorInset = .zero
@@ -82,7 +79,7 @@ class HomeController: BaseTableController {
     }
     
     override func refreshData() {
-        self.view.showSkeleton()
+        self.showSkeleton()
         PostService.postFeedList(lastId: lastId).subscribe(onNext:{ models in
             self.dataArray.append(contentsOf: models)
             self.endRefresh(models.count,emptyString: "No Post")
@@ -102,7 +99,7 @@ class HomeController: BaseTableController {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.dataArray.count > 0 {
+        if self.dataArray.count > 0,indexPath.row < self.dataArray.count {
             return (dataArray[indexPath.row] as? PostListModel)?.cellHeight ?? 0
         }
         return 0
@@ -112,9 +109,24 @@ class HomeController: BaseTableController {
         return self.dataArray.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withClass: HomeItemCell.self)
+        let cell = tableView.dequeueReusableCell(withClass: HomePostItemCell.self)
         if dataArray.count > 0 {
             cell.model = dataArray[indexPath.row] as? PostListModel
+        }
+        cell.footerView.likeHandler = { [weak self] in
+            guard let `self` = self else { return }
+            let item = (self.dataArray as! [PostListModel]).firstIndex(of: $0) ?? 0
+            self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
+        }
+        cell.footerView.commentHandler = { [weak self] in
+            guard let `self` = self else { return }
+            let vc = PostDetailViewController(postModel: $0,isBeginEdit: true)
+            self.navigationController?.pushViewController(vc)
+        }
+        cell.userInfoView.updatePostType = { [weak self] in
+            guard let `self` = self else { return }
+            let item = (self.dataArray as! [PostListModel]).firstIndex(of: $0) ?? 0
+            self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
         }
         cell.selectionStyle = .none
         return cell

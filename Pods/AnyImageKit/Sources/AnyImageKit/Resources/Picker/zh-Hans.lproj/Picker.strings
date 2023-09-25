@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  AnyImageKit
+
+  Created by 蒋惠 on 2019/9/16.
+  Copyright © 2019-2022 AnyImageKit.org. All rights reserved.
+*/
+
+"ORIGINAL_IMAGE" = "原图";
+"SELECT_PHOTO" = "选中图片";
+"UNSELECT_PHOTO" = "未选中图片";
+"TAKE_PHOTO" = "拍照";
+"SELECT_A_MAXIMUM_OF_PHOTOS" = "你最多只能选择 %zd 张照片";
+"SELECT_A_MAXIMUM_OF_VIDEOS" = "你最多只能选择 %zd 个视频";
+"SELECT_A_MAXIMUM_OF_PHOTOS_OR_VIDEOS" = "你最多只能选择 %zd 个照片/视频";
+"DOWNLOADING_FROM_ICLOUD" = "iCloud 同步中";
+"FETCH_FAILED_PLEASE_RETRY" = "获取内容失败，请重试";
+"A11Y_SWITCH_ALBUM_TIPS" = "切换相册，当前相册是%@";
+"LIMITED_PHOTOS_PERMISSION_TIPS" = "无法查看相册全部照片\n点击选择更多照片";
+"CANNOT_PREVIEW_ASSET_IN_OTHER_ALBUM" = "当前相册不支持预览该素材";
+
+// Asset Disable Check Rule
+"DURATION_OF_SELECTED_VIDEO_RANGE" = "选取视频长度应在 %d-%d 秒之间";
+"CANNOT_SELECT_PHOTOS_AND_VIDEOS_AT_SAME_TIME" = "不能同时选择图片和视频";

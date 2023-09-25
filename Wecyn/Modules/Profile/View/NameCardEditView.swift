@@ -40,7 +40,7 @@ class NameCardEditView: UIView {
         })
         
         updateButton.addShadow(cornerRadius: 6)
-        closeLabel.sk.setSpecificTextUnderLine("Close", color: R.color.textColor52()!)
+        closeLabel.sk.setSpecificTextUnderLine("Close", color: R.color.textColor33()!)
         
         closeLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             NameCardView.dismissNameCard()

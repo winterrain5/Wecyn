@@ -14,12 +14,12 @@ class ProfileInterestsItemsCell: UITableViewCell {
     }
     private let companyLabel = UILabel().then { label in
         label.text = "Company1234"
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangSemibold(16)
     }
     private let followersLabel =  UILabel().then { label in
         label.text = "3,000followers"
-        label.textColor = R.color.textColor52()
+        label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(13)
     }
     private let followBtn = UIButton().then { btn in

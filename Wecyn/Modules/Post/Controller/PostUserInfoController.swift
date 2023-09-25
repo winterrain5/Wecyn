@@ -75,7 +75,7 @@ class PostUserInfoController: BaseViewController {
         super.init(nibName: nil, bundle: nil)
         self.userId = userId
         headerVc = PostUserHeaderController(userId: userId)
-        controllers = [PostUserPostedController(userId: userId),PostUserLikeController()]
+        controllers = [PostUserPostedController(userId: userId),PostUserLikeController(userId: userId)]
     }
     
     
@@ -133,13 +133,27 @@ class PostUserInfoController: BaseViewController {
         headerVc.updateUserInfoComplete = { [weak self] in
             self?.userName = $0.full_name
         }
-        let postedVc = controllers[0]
-        postedVc.refreshData()
-        (
-            postedVc as! PostUserPostedController
-        ).updateDataComplete =  { [weak self] in
-            self?.paggingView.mainTableView.mj_header?.endRefreshing()
+        
+        if segmentedView.selectedIndex == 0 {
+            let postedVc = controllers[0]
+            postedVc.refreshData()
+            (
+                postedVc as! PostUserPostedController
+            ).updateDataComplete =  { [weak self] in
+                self?.paggingView.mainTableView.mj_header?.endRefreshing()
+            }
         }
+      
+        if segmentedView.selectedIndex == 1 {
+            let likedVc = controllers[1]
+            likedVc.refreshData()
+            (
+                likedVc as! PostUserLikeController
+            ).updateDataComplete =  { [weak self] in
+                self?.paggingView.mainTableView.mj_header?.endRefreshing()
+            }
+        }
+        
     }
     
     

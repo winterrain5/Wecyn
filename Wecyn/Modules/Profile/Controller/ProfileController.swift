@@ -7,24 +7,27 @@
 
 import UIKit
 import ParallaxHeader
+enum SectionType: Int {
+    case Activity
+    case Skills
+    case Experience
+    case Education
+    case Interests
+}
+
 class ProfileController: BaseTableController {
     
-    enum SectionType: Int {
-        case Activity
-        case Skills
-        case Experience
-        case Education
-        case Interests
-    }
-
+   
     private var headerView = ProfileHeaderView.loadViewFromNib()
     private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
+    private let sectionType:[SectionType] = [.Activity,.Skills,.Experience,.Education,.Interests]
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+    
+    var latesdPost:PostListModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         addRightBarItem()
        
-        getUserInfo()
         
         self.navigation.bar.alpha = 0
     }
@@ -51,42 +54,54 @@ class ProfileController: BaseTableController {
    
 
         self.tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
+        self.tableView?.register(cellWithClass: HomePostItemCell.self)
         self.tableView?.register(cellWithClass: ProfileSkillsItemCell.self)
         self.tableView?.register(cellWithClass: ProfileExperienceItemCell.self)
         self.tableView?.register(cellWithClass: ProfileInterestsItemsCell.self)
         self.tableView?.register(cellWithClass: ProfileEducationItemCell.self)
+        registRefreshHeader(colorStyle: .gray)
         
+    }
+    
+    override func refreshData() {
+        UserService.getUserInfo().subscribe(onNext:{ model in
+            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+            self.headerView.userInfoModel = model
+            PostService.postList(userId: model.id.int).subscribe(onNext:{
+                self.latesdPost = $0.first
+                self.tableView?.reloadData()
+            }).disposed(by: self.rx.disposeBag)
+        }).disposed(by: rx.disposeBag)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getUserInfo()
+        refreshData()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func listViewFrame() -> CGRect {
         CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kTabBarHeight)
     }
 
-    func getUserInfo() {
-        UserService.getUserInfo().subscribe(onNext:{ model in
-            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
-            self.headerView.userInfoModel = model
-        }).disposed(by: rx.disposeBag)
-    }
- 
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == SectionType.Activity.rawValue { return 0 }
+        if section == SectionType.Activity.rawValue {
+            return self.latesdPost == nil ? 0 : 1
+        }
         if section == SectionType.Skills.rawValue { return 0 }
         
         return 0
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == SectionType.Activity.rawValue {
+            return self.latesdPost?.cellHeight ?? 0
+        }
         if indexPath.section == SectionType.Skills.rawValue {
             return 150
         }
@@ -118,15 +133,26 @@ class ProfileController: BaseTableController {
             let cell = tableView.dequeueReusableCell(withClass: ProfileInterestsItemsCell.self)
             return cell
         }
+        if indexPath.section == SectionType.Activity.rawValue {
+            let cell = tableView.dequeueReusableCell(withClass: HomePostItemCell.self)
+            cell.model = self.latesdPost
+            return cell
+        }
         return UITableViewCell()
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == SectionType.Activity.rawValue {
-            let view = ProfileNoActivitySectionView()
-            return view
+            if self.latesdPost == nil {
+                let view = ProfileNoActivitySectionView()
+                return view
+            }
+            if let title = sectionTitleMap[section] {
+                let sectionView = ProfileSectionView(title: title,type: sectionType[section])
+                return sectionView
+            }
         } else {
             if let title = sectionTitleMap[section] {
-                let sectionView = ProfileSectionView(title: title)
+                let sectionView = ProfileSectionView(title: title,type: sectionType[section])
                 return sectionView
             }
         }
@@ -136,7 +162,10 @@ class ProfileController: BaseTableController {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == SectionType.Activity.rawValue {
-            return 88
+            if self.latesdPost == nil {
+                return 88
+            }
+            return 42
         }
         return 42
     }

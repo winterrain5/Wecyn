@@ -124,7 +124,7 @@ class CalendarAssistantMenuCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         imgView.sk.cornerRadius = 15
         imgView.contentMode = .scaleAspectFill
-        nameLabel.textColor = R.color.textColor52()
+        nameLabel.textColor = R.color.textColor33()
         nameLabel.font = UIFont.sk.pingFangRegular(16)
     }
     

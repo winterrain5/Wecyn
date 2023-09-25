@@ -157,11 +157,11 @@ class LocationItemCell: UITableViewCell {
         
         
         titleLabel.font = UIFont.sk.pingFangRegular(15)
-        titleLabel.textColor = R.color.textColor162C46()
+        titleLabel.textColor = R.color.textColor22()
         
         
         detailLabel.font = UIFont.sk.pingFangRegular(12)
-        detailLabel.textColor = R.color.textColor74()
+        detailLabel.textColor = R.color.textColor77()
     }
     
     required init?(coder: NSCoder) {

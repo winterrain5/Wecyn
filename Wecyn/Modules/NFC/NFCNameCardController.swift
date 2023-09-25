@@ -209,7 +209,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
             cell.textLabel?.text = model.value
             
             cell.textLabel?.font = UIFont.sk.pingFangRegular(15)
-            cell.textLabel?.textColor = R.color.textColor162C46()
+            cell.textLabel?.textColor = R.color.textColor22()
         }
         return cell
     }
@@ -384,7 +384,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         
         view.addSubview(saveToContactButton)
         saveToContactButton.titleForNormal = "Save to contact"
-        saveToContactButton.titleColorForNormal = R.color.textColor162C46()
+        saveToContactButton.titleColorForNormal = R.color.textColor22()
         saveToContactButton.titleLabel?.font = UIFont.sk.pingFangSemibold(16)
         saveToContactButton.snp.makeConstraints { make in
             make.top.equalTo(connectButton.snp.bottom).offset(16)

@@ -25,7 +25,7 @@ class RegistProfileView: UIView {
         nextButton.addShadow(cornerRadius: 20)
         self.subviews.filter({ $0 is UITextField }).forEach({ $0.addShadow(cornerRadius: 11) })
         
-        studentLabel.sk.setSpecificTextUnderLine("I'm a student", color: R.color.textColor52()!)
+        studentLabel.sk.setSpecificTextUnderLine("I'm a student", color: R.color.textColor33()!)
         studentLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             let main = MainController()
             UIApplication.shared.keyWindow?.rootViewController =  main

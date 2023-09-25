@@ -27,7 +27,7 @@ class GroupItemCell: UITableViewCell {
         contentView.addSubview(deletebutton)
         imgView.sk.cornerRadius = 20
         imgView.contentMode = .scaleAspectFill
-        nameLabel.textColor = R.color.textColor52()
+        nameLabel.textColor = R.color.textColor33()
         nameLabel.font = UIFont.sk.pingFangRegular(16)
         deletebutton.imageForNormal = R.image.connection_delete()
         

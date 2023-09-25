@@ -77,7 +77,7 @@ class ConnectAuditController: BaseTableController {
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView().backgroundColor(.white)
-        let label = UILabel().text("New connection request(s) from:").color(R.color.textColor52()!).font(UIFont.sk.pingFangSemibold(15))
+        let label = UILabel().text("New connection request(s) from:").color(R.color.textColor33()!).font(UIFont.sk.pingFangSemibold(15))
         view.addSubview(label)
         label.frame = CGRect(x: 16, y: 0, width: kScreenWidth, height: ConnectionAuditSectionHeight)
         return view

@@ -12,6 +12,14 @@ enum PostApi {
     case postList(_ userId:Int? = nil,_ lastPostId:Int? = nil)
     case updatePostType(_ id:Int,_ type:Int)
     case feedList(lastPostId:Int? = nil)
+    case addComment(_ id:Int,_ content:String)
+    case commentList(_ id:Int,_ lastCommentId:Int? = nil)
+    case addReply(_ commentId:Int,_ toUserId:Int,_ content:String)
+    case setLike(_ id:Int,_ type:Int = 1)
+    case cancelLike(_ id:Int,_ type:Int = 1)
+    case likeShow(_ id:Int,_ lastLikeId:Int?  = nil)
+    case likedList(_ userId:Int? = nil,_ lastId:Int? = nil)
+    case repost(_ id:Int,_ content:String,_ type:Int = 1)
 }
 
 extension PostApi: TargetType {
@@ -25,13 +33,29 @@ extension PostApi: TargetType {
             return "/api/post/updatePostType/"
         case .feedList:
             return "/api/post/feedList/"
+        case .addComment:
+            return "/api/post/addComment/"
+        case .commentList:
+            return "/api/post/commentListM/"
+        case .addReply:
+            return "/api/post/addReply/"
+        case .setLike:
+            return "/api/post/setLike/"
+        case .cancelLike:
+            return "/api/post/cancelLike/"
+        case .likeShow:
+            return "/api/post/likeShow/"
+        case .likedList:
+            return "/api/post/likedList/"
+        case .repost:
+            return "/api/post/repost/"
         }
     }
     var method: Moya.Method {
         switch self{
-        case .addPost:
+        case .addPost,.addReply,.cancelLike,.setLike,.addComment,.repost:
             return .post
-        case .postList,.feedList:
+        case .postList,.feedList,.commentList,.likeShow,.likedList:
             return .get
         case .updatePostType:
             return .put
@@ -47,6 +71,22 @@ extension PostApi: TargetType {
             return requestParametersByPost(["id":id,"type":type])
         case .feedList(let lastId):
             return requestParametersByGet(["last_id":lastId])
+        case .addComment(let id, let content):
+            return requestParametersByPost(["post_id":id,"content":content])
+        case .addReply(let commentId, let toUserId, let content):
+            return requestParametersByPost(["comment_id":commentId,"to_user_id":toUserId,"content":content])
+        case .setLike(let id,let type):
+            return requestParametersByPost(["source_id":id,"type":type])
+        case .cancelLike(let id,let type):
+            return requestParametersByPost(["source_id":id,"type":type])
+        case .likeShow(let id,let lastId):
+            return requestParametersByGet(["id":id,"last_id":lastId])
+        case .commentList(let id,let lastId):
+            return requestParametersByGet(["id":id,"last_id":lastId])
+        case .likedList(let userId,let lastId):
+            return requestParametersByGet(["user_id":userId,"last_id":lastId])
+        case .repost(let id,let content,let type):
+            return requestParametersByPost(["id":id,"content":content,"type":type])
         }
     }
 }

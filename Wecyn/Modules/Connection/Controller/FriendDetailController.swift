@@ -136,15 +136,15 @@ class FriendDetailHeadCell: UITableViewCell {
         imgView.contentMode = .scaleAspectFill
         imgView.isSkeletonable = true
         
-        nameLabel.textColor = R.color.textColor52()
+        nameLabel.textColor = R.color.textColor33()
         nameLabel.font = UIFont.sk.pingFangSemibold(16)
         nameLabel.isSkeletonable = true
         
-        widLabel.textColor = R.color.textColor74()
+        widLabel.textColor = R.color.textColor77()
         widLabel.font = UIFont.sk.pingFangRegular(15)
         widLabel.isSkeletonable = true
         
-        emailLabel.textColor = R.color.textColor74()
+        emailLabel.textColor = R.color.textColor77()
         emailLabel.font = UIFont.sk.pingFangRegular(15)
         emailLabel.isSkeletonable = true
         
@@ -214,7 +214,7 @@ class FriendDetailSendMessageCell: UITableViewCell {
         
         contentView.addSubview(btn)
         btn.titleForNormal = " Send Message"
-        btn.titleColorForNormal = R.color.textColor162C46()
+        btn.titleColorForNormal = R.color.textColor22()
         btn.titleLabel?.font = UIFont.sk.pingFangSemibold(15)
         btn.imageForNormal = R.image.message()
         
