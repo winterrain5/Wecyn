@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PopMenu
 import IQKeyboardManagerSwift
 class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlowLayout {
     var sectionTitle = ["People in IT services you may know ","People you may know from Company209","People you may know from Nanyang Polytechnic"]
@@ -152,7 +151,7 @@ class ConnectionSectionHeaderView: UICollectionReusableView {
     }
     private let titleLabel = UILabel().then {
         $0.font = UIFont.sk.pingFangSemibold(15)
-        $0.textColor = R.color.textColor162C46()!
+        $0.textColor = R.color.textColor22()!
     }
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -180,14 +179,14 @@ class ConnectionFooterView: UICollectionReusableView {
     
     private let titleLabel = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 15)
-        $0.textColor = R.color.textColor52()!
+        $0.textColor = R.color.textColor33()!
         $0.text = "View more"
     }
     var viewMoreHandler: (()->())?
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(titleLabel)
-        titleLabel.sk.addBorderBottom(borderWidth: 1, borderColor: R.color.textColor52()!)
+        titleLabel.sk.addBorderBottom(borderWidth: 1, borderColor: R.color.textColor33()!)
         titleLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             self?.viewMoreHandler?()
         }).disposed(by: rx.disposeBag)

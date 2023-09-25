@@ -1,0 +1,17 @@
+/* 
+  Editor.strings
+  AnyImageKit
+
+  Created by 蒋惠 on 2019/11/12.
+  Copyright © 2019-2022 AnyImageKit.org. All rights reserved.
+*/
+
+"BRUSH" = "画笔";
+"CROP" = "裁剪";
+"MOSAIC" = "马赛克";
+"INPUT_TEXT" = "输入文本";
+
+"FREE" = "自由";
+
+"DRAG_HERE_TO_REMOVE" = "拖到此处删除";
+"RELEASE_TO_REMOVE" = "松手即可删除";

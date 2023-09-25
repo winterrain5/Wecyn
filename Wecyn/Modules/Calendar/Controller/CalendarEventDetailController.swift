@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PopMenu
 import SafariServices
 enum CalendarEventDetailCellType {
     case Watch
@@ -385,10 +384,10 @@ class CalendarEventDetailTitleCell: UITableViewCell {
         contentView.addSubview(imgView)
         contentView.addSubview(detailLabel)
         
-        titleLabel.textColor = R.color.textColor52()
+        titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         
-        detailLabel.textColor = R.color.textColor74()
+        detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(15)
         detailLabel.textAlignment = .left
         detailLabel.numberOfLines = 0
@@ -529,7 +528,7 @@ class CalendarEventDetailInfoCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(imgView)
         
-        titleLabel.textColor = R.color.textColor52()
+        titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         titleLabel.isCopyingEnabled = true
         

@@ -264,6 +264,13 @@ extension UIDevice {
         topSafeAreaMargin > 0
     }
 }
+
+extension UIImage {
+    func tintImage(_ color:UIColor) -> UIImage {
+        self.withTintColor(color).withRenderingMode(.alwaysOriginal)
+    }
+}
+
 /// 导航栏高度
 var kNavBarHeight: CGFloat {
     return UIDevice.navigationBarHeight

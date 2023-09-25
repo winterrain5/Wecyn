@@ -30,8 +30,7 @@ class ProfileHeaderView: UIView {
             guard let userInfoModel = userInfoModel else { return }
             
             nameLabel.text = userInfoModel.first_name + " " + userInfoModel.last_name
-            jobTitleLabel.text = userInfoModel.title
-            locationLabel.text = userInfoModel.city.isEmpty ? userInfoModel.adr_work : userInfoModel.city
+            jobTitleLabel.text = userInfoModel.org_name + "-" + userInfoModel.title
             userAvatarImageView.kf.setImage(with: userInfoModel.avatar_url)
             backImgView.kf.setImage(with: userInfoModel.cover_url)
             

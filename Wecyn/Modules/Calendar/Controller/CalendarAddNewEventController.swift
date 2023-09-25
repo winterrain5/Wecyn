@@ -784,9 +784,9 @@ class AddEventInputCell: UITableViewCell,UITextFieldDelegate {
         contentView.addSubview(tagImageView)
         
         input.borderStyle = .none
-        input.textColor = R.color.textColor52()
+        input.textColor = R.color.textColor33()
         input.font = UIFont.sk.pingFangRegular(16)
-        input.setPlaceHolderTextColor(R.color.textColor52()!)
+        input.setPlaceHolderTextColor(R.color.textColor33()!)
         input.returnKeyType = .done
         input.enablesReturnKeyAutomatically = true
         input.delegate = self
@@ -885,10 +885,10 @@ class AddEventArrowCell: UITableViewCell {
         contentView.addSubview(imgView)
         contentView.addSubview(detailLabel)
         
-        titleLabel.textColor = R.color.textColor52()
+        titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         
-        detailLabel.textColor = R.color.textColor74()
+        detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(16)
         detailLabel.lineBreakMode = .byTruncatingTail
         detailLabel.textAlignment = .right
@@ -1010,7 +1010,7 @@ class AddEventSwitchCell: UITableViewCell {
         contentView.addSubview(imgView)
         contentView.addSubview(titleLabel)
         
-        titleLabel.textColor = R.color.textColor52()
+        titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         
         imgView.contentMode = .scaleAspectFit
@@ -1069,7 +1069,7 @@ class AddEventColorCell: UITableViewCell {
         contentView.addSubview(imgView)
         contentView.addSubview(titleLabel)
         
-        titleLabel.textColor = R.color.textColor74()
+        titleLabel.textColor = R.color.textColor77()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         
         imgView.contentMode = .scaleAspectFit

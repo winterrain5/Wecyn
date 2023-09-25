@@ -11,7 +11,7 @@ class ProfileNoActivitySectionView: UIView {
 
     private let titleLabel = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.textColor = R.color.textColor52()!
+        $0.textColor = R.color.textColor33()!
         $0.text = "Activity"
     }
     private let createPostBtn = UIButton().then { btn in
@@ -22,12 +22,12 @@ class ProfileNoActivitySectionView: UIView {
     private let msgLabel1 = UILabel().then {
         $0.font = UIFont.sk.pingFangRegular(13)
         $0.text = "You have not posted lately"
-        $0.textColor = R.color.textColor52()!
+        $0.textColor = R.color.textColor33()!
     }
     private let msgLabel2 = UILabel().then {
         $0.font = UIFont.sk.pingFangRegular(11)
         $0.text = "Recent posts you share or comment on will be displayed here"
-        $0.textColor = R.color.textColor52()!
+        $0.textColor = R.color.textColor33()!
     }
     override init(frame: CGRect) {
         super.init(frame: frame)

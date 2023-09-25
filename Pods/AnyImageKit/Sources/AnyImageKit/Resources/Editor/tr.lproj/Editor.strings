@@ -1,0 +1,17 @@
+/* 
+  Editor.strings
+  AnyImageKit
+
+  Created by Hamza Öztürk on 2021/1/13.
+  Copyright © 2021-2022 AnyImageKit.org. All rights reserved.
+*/
+
+"BRUSH" = "Kalem";
+"CROP" = "Kırp";
+"MOSAIC" = "Mozaik";
+"INPUT_TEXT" = "Metin ekle";
+
+"FREE" = "Serbest";
+
+"DRAG_HERE_TO_REMOVE" = "Silmek için sürükle";
+"RELEASE_TO_REMOVE" = "Silmek için bırak";

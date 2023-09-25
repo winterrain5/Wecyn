@@ -34,7 +34,7 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         rightTf.enablesReturnKeyAutomatically = true
         rightTf.placeholder = self.placeholder
         rightTf.font = UIFont.sk.pingFangRegular(12)
-        rightTf.textColor = R.color.textColor52()
+        rightTf.textColor = R.color.textColor33()
         rightTf.delegate = self
         rightTf.clearButtonMode = .whileEditing
         

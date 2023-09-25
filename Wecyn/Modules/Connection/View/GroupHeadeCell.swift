@@ -26,7 +26,7 @@ class GroupHeadeCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(groupNameLabel)
-        groupNameLabel.textColor = R.color.textColor52()
+        groupNameLabel.textColor = R.color.textColor33()
         groupNameLabel.font = UIFont.sk.pingFangRegular(16)
         
         contentView.addSubview(arrowButton)

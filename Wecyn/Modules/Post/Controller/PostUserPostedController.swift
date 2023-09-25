@@ -29,11 +29,11 @@ class PostUserPostedController: BasePagingTableController {
     
     override func createListView() {
         super.createListView()
-        cellIdentifier = HomeItemCell.className
+        cellIdentifier = HomePostItemCell.className
         tableView?.isSkeletonable = true
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kBottomsafeAreaMargin, right: 0)
         
-        tableView?.register(nibWithCellClass: HomeItemCell.self)
+        tableView?.register(cellWithClass: HomePostItemCell.self)
         
         tableView?.separatorColor = R.color.backgroundColor()
         tableView?.separatorInset = .zero
@@ -80,10 +80,9 @@ class PostUserPostedController: BasePagingTableController {
         return self.dataArray.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withClass: HomeItemCell.self)
+        let cell = tableView.dequeueReusableCell(withClass: HomePostItemCell.self)
         if dataArray.count > 0 {
             let model = dataArray[indexPath.row] as? PostListModel
-            model?.is_need_follow = false
             cell.model = model
         }
         cell.selectionStyle = .none

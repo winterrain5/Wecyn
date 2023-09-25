@@ -1,0 +1,24 @@
+/*
+  Localizable.strings
+  AnyImageKit
+
+  Created by Henrique Gouveia on 2021/8/8
+  Copyright © 2021-2022 AnyImageKit.org. All rights reserved.
+*/
+
+"ORIGINAL_IMAGE" = "Imagem original";
+"SELECT_PHOTO" = "Selecionar foto";
+"UNSELECT_PHOTO" = "Deselecionar foto";
+"TAKE_PHOTO" = "Tirar foto";
+"SELECT_A_MAXIMUM_OF_PHOTOS" = "Selecione um máximo de %zd fotos";
+"SELECT_A_MAXIMUM_OF_VIDEOS" = "Selecione um máximo de %zd vídeos";
+"SELECT_A_MAXIMUM_OF_PHOTOS_OR_VIDEOS" = "Selecione um máximo de %zd fotos ou vídeos";
+"DOWNLOADING_FROM_ICLOUD" = "Baixando de iCloud";
+"FETCH_FAILED_PLEASE_RETRY" = "A busca falhou, tente novamente";
+"A11Y_SWITCH_ALBUM_TIPS" = "Trocar de álbum, o álbum atual é %@";
+"LIMITED_PHOTOS_PERMISSION_TIPS" = "Não foi possível recuperar todas as fotos\nClique para selecionar mais fotos";
+"CANNOT_PREVIEW_ASSET_IN_OTHER_ALBUM" = "Não é possível visualizar este ativo no álbum atual";
+
+// Asset Disable Check Rule
+"DURATION_OF_SELECTED_VIDEO_RANGE" = "A duração do vídeo selecionado deve ser entre %d-%d segundos";
+"CANNOT_SELECT_PHOTOS_AND_VIDEOS_AT_SAME_TIME" = "Não é possível selecionar imagens e vídeos ao mesmo tempo";

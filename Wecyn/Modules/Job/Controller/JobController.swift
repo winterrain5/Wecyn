@@ -19,8 +19,8 @@ class JobController: BaseTableController {
     }
     
     func setupNavigationBar() {
-        let label = UILabel().text("My Saved Jobs").color(R.color.textColor162C46()!).font(UIFont.sk.pingFangSemibold(20))
-        label.sk.setSpecificTextUnderLine("My Saved Jobs", color: R.color.textColor162C46()!)
+        let label = UILabel().text("My Saved Jobs").color(R.color.textColor22()!).font(UIFont.sk.pingFangSemibold(20))
+        label.sk.setSpecificTextUnderLine("My Saved Jobs", color: R.color.textColor22()!)
         self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: label)
         label.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
@@ -50,7 +50,7 @@ class JobController: BaseTableController {
 
 class TitleHeaderView: UIView {
     private let label = UILabel().then { label in
-        label.textColor = R.color.textColor162C46()
+        label.textColor = R.color.textColor22()
         label.numberOfLines = 0
     }
     

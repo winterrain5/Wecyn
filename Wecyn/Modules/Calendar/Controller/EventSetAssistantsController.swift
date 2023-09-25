@@ -134,7 +134,7 @@ class EventSetAssistantsController: BaseTableController {
         label.numberOfLines = 0
         label.text = "You can choose up to 3 assistants from your friends, who have full control of your schedule."
         label.font = UIFont.sk.pingFangSemibold(15)
-        label.textColor = R.color.textColor162C46()
+        label.textColor = R.color.textColor22()
         
         view.addSubview(label)
         label.snp.makeConstraints { make in

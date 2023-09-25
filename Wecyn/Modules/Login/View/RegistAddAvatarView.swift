@@ -36,7 +36,7 @@ class RegistAddAvatarView: UIView {
         
         addPhotoButton.addShadow(cornerRadius: 20)
         
-        skipLabel.sk.setSpecificTextUnderLine("Skip", color: R.color.textColor52()!)
+        skipLabel.sk.setSpecificTextUnderLine("Skip", color: R.color.textColor33()!)
       
         addPhotoButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }

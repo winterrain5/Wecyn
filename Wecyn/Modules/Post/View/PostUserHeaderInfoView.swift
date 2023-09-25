@@ -53,6 +53,7 @@ class PostUserHeaderInfoView: UIView {
         
         self.isSkeletonable = true
         
+        blurImageView.backgroundColor = R.color.backgroundColor()!
         addSubview(blurImageView)
         addSubview(avtContentView)
         avtContentView.addSubview(avtImgView)
@@ -74,16 +75,16 @@ class PostUserHeaderInfoView: UIView {
         avtImgView.cornerRadius = 40
         
         
-        nameLabel.textColor = R.color.textColor162C46()
+        nameLabel.textColor = R.color.textColor22()
         nameLabel.font = UIFont.sk.pingFangSemibold(18)
         nameLabel.numberOfLines = 2
         
-        subLabel.textColor = R.color.textColor162C46()
+        subLabel.textColor = R.color.textColor22()
         subLabel.font = UIFont.sk.pingFangSemibold(15)
         subLabel.numberOfLines = 1
         
         followButton.backgroundColor = R.color.theamColor()!
-        followButton.cornerRadius = 8
+        followButton.cornerRadius = 15
         followButton.titleForNormal = "Follow"
         followButton.titleColorForNormal = .white
         followButton.titleLabel?.font = UIFont.sk.pingFangMedium(15)

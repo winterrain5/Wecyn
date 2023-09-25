@@ -1,0 +1,6 @@
+framework module AnyImageKit {
+  umbrella header "AnyImageKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

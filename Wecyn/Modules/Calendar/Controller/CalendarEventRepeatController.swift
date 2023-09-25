@@ -390,7 +390,7 @@ class CalendarEventFrequencyCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        textLabel?.textColor = R.color.textColor52()
+        textLabel?.textColor = R.color.textColor33()
         self.textLabel?.font = UIFont.sk.pingFangRegular(16)
     }
     
@@ -427,12 +427,12 @@ class CalendarEventStepperCell: UITableViewCell {
     var stepperCountDidChanged:((CalendarEventRepeatUntilModel,Int)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        textLabel?.textColor = R.color.textColor52()
+        textLabel?.textColor = R.color.textColor33()
         self.textLabel?.font = UIFont.sk.pingFangRegular(16)
         
         contentView.addSubview(stepper)
         contentView.addSubview(detailLabel)
-        detailLabel.textColor = R.color.textColor74()
+        detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(16)
         stepper.value = 1
         stepper.minimumValue = 1
@@ -530,10 +530,10 @@ class CalendarEventArrowCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.textLabel?.textColor = R.color.textColor52()
+        self.textLabel?.textColor = R.color.textColor33()
         self.textLabel?.font = UIFont.sk.pingFangRegular(16)
         
-        detailLabel.textColor = R.color.textColor74()
+        detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(16)
         
         contentView.addSubview(detailLabel)
@@ -563,7 +563,7 @@ class CalendarEventSectionView: UIView {
         super.init(frame: frame)
         
         addSubview(label)
-        label.textColor = R.color.textColor74()
+        label.textColor = R.color.textColor77()
         label.font = UIFont.sk.pingFangRegular(12)
         label.numberOfLines = 0
     }

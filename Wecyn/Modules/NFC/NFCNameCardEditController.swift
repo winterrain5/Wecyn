@@ -171,7 +171,7 @@ class NameCardSectionView: UIView {
         super.init(frame: frame)
         
         addSubview(label)
-        label.textColor = R.color.textColor162C46()
+        label.textColor = R.color.textColor22()
         label.font = UIFont.sk.pingFangSemibold(15)
         label.numberOfLines = 0
     }
@@ -225,9 +225,9 @@ class NameCardEditItemCell: UITableViewCell,UITextFieldDelegate {
         
         input.borderStyle = .none
         input.clearButtonMode = .whileEditing
-        input.textColor = R.color.textColor52()
+        input.textColor = R.color.textColor33()
         input.font = UIFont.sk.pingFangRegular(16)
-        input.setPlaceHolderTextColor(R.color.textColor162C46()!)
+        input.setPlaceHolderTextColor(R.color.textColor22()!)
         input.returnKeyType = .done
         input.enablesReturnKeyAutomatically = true
         input.delegate = self

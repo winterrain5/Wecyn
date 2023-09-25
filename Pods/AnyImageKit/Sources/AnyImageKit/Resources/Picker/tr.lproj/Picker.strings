@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  AnyImageKit
+
+  Created by Hamza Öztürk on 2021/1/13.
+  Copyright © 2021-2022 AnyImageKit.org. All rights reserved.
+*/
+
+"ORIGINAL_IMAGE" = "Orijinal resim";
+"SELECT_PHOTO" = "Fotoğraf seç";
+"UNSELECT_PHOTO" = "Seçimi kaldır";
+"TAKE_PHOTO" = "Fotoğraf çek";
+"SELECT_A_MAXIMUM_OF_PHOTOS" = "Maximum %zd fotoğraf seçin";
+"SELECT_A_MAXIMUM_OF_VIDEOS" = "Maksimum %zd video seçin";
+"SELECT_A_MAXIMUM_OF_PHOTOS_OR_VIDEOS" = "Maksimum %zd fotoğraf ya da video seçin";
+"DOWNLOADING_FROM_ICLOUD" = "iCloud'dan İndiriliyor";
+"FETCH_FAILED_PLEASE_RETRY" = "İndirme başarısız, tekrar deneyin";
+"A11Y_SWITCH_ALBUM_TIPS" = "Albümü değiştir. Mevcut albüm %@";
+"LIMITED_PHOTOS_PERMISSION_TIPS" = "Tüm fotoğraflar getirilemiyor\nDaha fazla fotoğraf seçmek için tıklayın";
+"CANNOT_PREVIEW_ASSET_IN_OTHER_ALBUM" = "Bu varlığın önizlemesi mevcut albümde yapılamıyor";
+
+// Asset Disable Check Rule
+"DURATION_OF_SELECTED_VIDEO_RANGE" = "Seçilen videonun süresi %d-%d saniye arasında olmalıdır";
+"CANNOT_SELECT_PHOTOS_AND_VIDEOS_AT_SAME_TIME" = "Resimler ve videolar aynı anda seçilemez";

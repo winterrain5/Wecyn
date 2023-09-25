@@ -112,7 +112,7 @@ class ConnectionOfMyController: BasePagingTableController {
         if sectionCharacters.count > 0, section < sectionCharacters.count{
             let view = UIView().backgroundColor(R.color.backgroundColor()!)
             let label = UILabel().text(self.sectionCharacters[section])
-                .color(R.color.textColor74()!)
+                .color(R.color.textColor77()!)
                 .font(UIFont.sk.pingFangSemibold(12))
             view.addSubview(label)
             label.frame = CGRect(x: 16, y: 0, width: kScreenWidth, height: 22)

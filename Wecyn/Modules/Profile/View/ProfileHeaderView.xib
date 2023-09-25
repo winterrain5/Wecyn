@@ -41,16 +41,10 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-Wa-ac6">
-                    <rect key="frame" x="0.0" y="206.5" width="236" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-Wa-ac6">
+                    <rect key="frame" x="16" y="206.5" width="452" height="17"/>
                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                     <color key="textColor" red="0.32156862745098036" green="0.32156862745098036" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fB-F8-0m9">
-                    <rect key="frame" x="248" y="206.5" width="236" height="17"/>
-                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
-                    <color key="textColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="A81-GI-R6G">
@@ -106,23 +100,20 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ahu-Wa-ac6" secondAttribute="trailing" constant="16" id="6Nj-qM-pq4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="A81-GI-R6G" secondAttribute="trailing" constant="20" id="JrX-04-XMi"/>
                 <constraint firstItem="Qf3-ct-wI2" firstAttribute="top" secondItem="A81-GI-R6G" secondAttribute="bottom" constant="15" id="Q6Z-Vx-hBy"/>
                 <constraint firstItem="A81-GI-R6G" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="TLi-dA-O1T"/>
                 <constraint firstItem="s8w-UZ-4ul" firstAttribute="top" secondItem="A81-GI-R6G" secondAttribute="bottom" constant="15" id="Vs1-Wi-PfP"/>
-                <constraint firstItem="3fB-F8-0m9" firstAttribute="top" secondItem="Ahu-Wa-ac6" secondAttribute="top" id="WvW-Cv-JqS"/>
                 <constraint firstItem="Ahu-Wa-ac6" firstAttribute="top" secondItem="gmz-0l-LAm" secondAttribute="bottom" constant="7" id="ZUw-gP-QhL"/>
                 <constraint firstItem="LRp-pw-Ar0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="a7U-H9-H3P"/>
                 <constraint firstItem="ge2-9T-4dm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aWk-Id-VKF"/>
                 <constraint firstItem="Qf3-ct-wI2" firstAttribute="centerX" secondItem="9cZ-RY-Xp2" secondAttribute="centerX" id="fQG-BV-hVM"/>
                 <constraint firstItem="ge2-9T-4dm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="78" id="gUp-b4-Bdk"/>
-                <constraint firstItem="3fB-F8-0m9" firstAttribute="leading" secondItem="Ahu-Wa-ac6" secondAttribute="trailing" constant="12" id="hDG-H7-yXQ"/>
                 <constraint firstItem="LRp-pw-Ar0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jYs-8l-EgD"/>
                 <constraint firstItem="s8w-UZ-4ul" firstAttribute="centerX" secondItem="LRx-sd-pxE" secondAttribute="centerX" id="jjf-cG-R3T"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3fB-F8-0m9" secondAttribute="trailing" id="mpG-1g-RLS"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LRp-pw-Ar0" secondAttribute="trailing" id="mwB-hc-FiU"/>
-                <constraint firstItem="Ahu-Wa-ac6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="squ-ee-SJU"/>
-                <constraint firstItem="3fB-F8-0m9" firstAttribute="width" secondItem="Ahu-Wa-ac6" secondAttribute="width" id="uYz-sU-0Sg"/>
+                <constraint firstItem="Ahu-Wa-ac6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="squ-ee-SJU"/>
                 <constraint firstItem="gmz-0l-LAm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="urO-TW-XWi"/>
                 <constraint firstItem="gmz-0l-LAm" firstAttribute="top" secondItem="ge2-9T-4dm" secondAttribute="bottom" constant="5" id="vVi-Cu-tTc"/>
                 <constraint firstItem="A81-GI-R6G" firstAttribute="top" secondItem="Ahu-Wa-ac6" secondAttribute="bottom" constant="14" id="xeD-b4-rNT"/>
@@ -132,7 +123,6 @@
                 <outlet property="addNewSectionButton" destination="U2v-Qk-vJh" id="z6Y-fD-tpi"/>
                 <outlet property="backImgView" destination="LRp-pw-Ar0" id="wLN-cl-BXU"/>
                 <outlet property="jobTitleLabel" destination="Ahu-Wa-ac6" id="1oy-JX-iTs"/>
-                <outlet property="locationLabel" destination="3fB-F8-0m9" id="sq9-FM-uf3"/>
                 <outlet property="nameLabel" destination="gmz-0l-LAm" id="Cst-DZ-3Iq"/>
                 <outlet property="stackView" destination="A81-GI-R6G" id="5kX-yr-Rid"/>
                 <outlet property="userAvatarImageView" destination="ge2-9T-4dm" id="ecl-m0-zYK"/>

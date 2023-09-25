@@ -13,6 +13,8 @@ class PostCommentToolBarView: UIView {
     var tv = KMPlaceholderTextView()
     var sendButton = LoadingButton()
     let line = CALayer()
+    var isBeginEdit = false
+    var expendButton = UIButton()
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -22,39 +24,18 @@ class PostCommentToolBarView: UIView {
         
         tvContentView.addSubview(tv)
         tv.placeholder = "Post your comment"
-        tv.textColor = R.color.textColor52()!
+        tv.textColor = R.color.textColor33()!
         tv.font = UIFont.sk.pingFangRegular(15)
         tv.backgroundColor = .clear
-        tv.rx.didBeginEditing.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            
-            UIView.animate(withDuration: 0.25, delay: 0) {
-                self.tvContentView.frame.size.width = self.width - 88
-                self.sendButton.alpha = 1
-            }
-            
-        }).disposed(by: rx.disposeBag)
-        tv.rx.didEndEditing.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            UIView.animate(withDuration: 0.25, delay: 0) {
-                self.tvContentView.frame.size.width = self.width - 32
-                self.sendButton.alpha = 0
-            }
+        tv.rx.text.map({ ($0?.isEmpty ?? false) }).subscribe(onNext:{ [weak self] in
+            self?.sendButton.isEnabled = !$0
         }).disposed(by: rx.disposeBag)
         
         addSubview(sendButton)
-        sendButton.cornerRadius = 16
-        sendButton.backgroundColor = R.color.theamColor()
-        sendButton.titleForNormal = "Post"
-        sendButton.titleColorForNormal = .white
-        sendButton.titleLabel?.font = UIFont.sk.pingFangRegular(14)
-        sendButton.alpha = 0
+        sendButton.imageForNormal = R.image.paperplaneFill()!
         
-        tv.rx.text.map({ $0?.isEmpty ?? false }).asObservable().bind(to: sendButton.rx.isEnabled).disposed(by: rx.disposeBag)
-        
-        
-        line.backgroundColor = R.color.seperatorColor()?.cgColor
-        self.layer.addSublayer(line)
+        tvContentView.addSubview(expendButton)
+        expendButton.imageForNormal = R.image.post_comment_expend()?.rotated(by: 80)
         
         backgroundColor = .white
     }
@@ -66,13 +47,34 @@ class PostCommentToolBarView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        line.frame = CGRect(x: 0, y: 0, width: self.width, height: 1)
+       
+        sendButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-12)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(32)
+            make.height.equalTo(32)
+        }
         
-        tvContentView.frame = CGRect(x: 16, y: 8, width: self.width - 32, height: 32)
+        tvContentView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(12)
+            make.height.equalTo(32)
+            make.top.equalToSuperview().offset(8)
+            make.right.equalTo(sendButton.snp.left).offset(-12)
+        }
         
-        tv.frame = CGRect(x: 8, y: 0, width: tvContentView.width - 16, height: 32)
+        tv.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(8)
+            make.height.equalTo(32)
+            make.top.equalToSuperview()
+            make.right.equalToSuperview().offset(-42)
+        }
         
-        sendButton.frame = CGRect(x: self.width - 16, y: 8, width: 48, height: 32)
+        expendButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-12)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(18)
+        }
+        
     
     }
 
