@@ -22,19 +22,19 @@ class WeekOrMonthModel {
 let MonthData = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 let WeekData = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
 let AlarmData = ["None","5 minutes before","15 minutes before","30 minutes before","1 hour before","2 hours before","1 day before"]
-class CalendarEventRepeatWeekOrMonthController: BaseTableController {
+class CalendarEventSingelChooseController: BaseTableController {
     
-    enum WeekOrMonthType {
+    enum DataType {
         case Week
         case Month
         case Alarm
     }
     var datas:[WeekOrMonthModel] = []
     
-    var type:WeekOrMonthType
+    var type:DataType
     var selectIndexs:[Int] = [0]
     var selectComplete:(([Int])->())?
-    init(type:WeekOrMonthType,selectIndexs:[Int] = [0]) {
+    init(type:DataType,selectIndexs:[Int] = [0]) {
         self.type = type
         self.selectIndexs = selectIndexs
         super.init(nibName: nil, bundle: nil)

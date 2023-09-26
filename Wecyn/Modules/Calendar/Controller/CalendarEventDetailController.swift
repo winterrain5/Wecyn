@@ -341,9 +341,8 @@ class CalendarEventDetailController: BaseTableController {
                                     exdate: exdate).subscribe(onNext:{
 
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Successful operation",after: 1, {
-                    self.returnBack()
-                })
+                Toast.showSuccess(withStatus: "Successful operation")
+                self.returnBack()
             } else {
                 Toast.showMessage($0.message)
             }

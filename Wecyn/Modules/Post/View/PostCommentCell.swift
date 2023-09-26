@@ -55,7 +55,13 @@ class PostCommentCell: UITableViewCell {
         reportButton.showsMenuAsPrimaryAction  = true
         
         let action = UIAction(title:"Report",image: UIImage.flag) { _ in
-            Toast.showMessage("Function under development")
+            let vc = PostReportController(type: 2)
+            let nav = BaseNavigationController(rootViewController: vc)
+            if let sheet = nav.sheetPresentationController{
+                sheet.detents = [.medium(), .large()]
+            }
+            
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
         }
         reportButton.menu = UIMenu(children: [action])
         

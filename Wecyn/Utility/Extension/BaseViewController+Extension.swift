@@ -22,7 +22,7 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
         notification.imageForNormal = R.image.bell()
         let notificationItem = UIBarButtonItem(customView: notification)
         notification.rx.tap.subscribe(onNext:{
-          
+            
         }).disposed(by: rx.disposeBag)
         
         let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
@@ -33,44 +33,45 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
         message.rx.tap.subscribe(onNext:{
             
         }).disposed(by: rx.disposeBag)
-                
+        
         
         self.navigation.item.rightBarButtonItems = [notificationItem,fixItem1,messageItem,fixItem2]
-  
+        
     }
 }
 
 
 class BasePagingTableController: BaseTableController {
-
-  var listViewDidScrollCallback: ((UIScrollView) -> ())?
-
-  override func viewDidLoad() {
-      super.viewDidLoad()
-
-      // Do any additional setup after loading the view.
-  }
-  
-
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-      self.listViewDidScrollCallback?(scrollView)
-  }
-
+    
+    var updateDataComplete:(()->())?
+    var listViewDidScrollCallback: ((UIScrollView) -> ())?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.listViewDidScrollCallback?(scrollView)
+    }
+    
 }
 
 extension BasePagingTableController: JXPagingViewListViewDelegate {
     override func listView() -> UIView {
         return view
     }
-
+    
     func listViewDidScrollCallback(callback: @escaping (UIScrollView) -> ()) {
         self.listViewDidScrollCallback = callback
     }
-
+    
     func listScrollView() -> UIScrollView {
         return self.tableView!
     }
-
+    
 }
 
 extension JXPagingListContainerView: JXSegmentedViewListContainer {}

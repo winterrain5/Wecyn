@@ -10,7 +10,8 @@ import UIKit
 class HomeController: BaseTableController {
     var lastId:Int = 0
     var createPostButton = UIButton()
-    override var preferredStatusBarStyle: UIStatusBarStyle { .default }
+    override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
+    var cellHeightCache:[Int:CGFloat] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isSkeletonable = true
@@ -63,9 +64,11 @@ class HomeController: BaseTableController {
     
     override func createListView() {
         super.createListView()
-        
-        cellIdentifier = HomePostItemCell.className
+        pageSize = 10
+        numberOfSkeletonCell = 5
         tableView?.isSkeletonable = true
+        cellIdentifier = HomePostItemCell.className
+        
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
         
         tableView?.register(cellWithClass: HomePostItemCell.self)
@@ -100,9 +103,15 @@ class HomeController: BaseTableController {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.dataArray.count > 0,indexPath.row < self.dataArray.count {
-            return (dataArray[indexPath.row] as? PostListModel)?.cellHeight ?? 0
+            let model = dataArray[indexPath.row] as! PostListModel
+            if let cacheHeight = cellHeightCache[model.id] {
+                return cacheHeight
+            }
+            let cellHeight = model.cellHeight
+            cellHeightCache[model.id] = cellHeight
+            return cellHeight
         }
-        return 0
+        return 184
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,9 +123,7 @@ class HomeController: BaseTableController {
             cell.model = dataArray[indexPath.row] as? PostListModel
         }
         cell.footerView.likeHandler = { [weak self] in
-            guard let `self` = self else { return }
-            let item = (self.dataArray as! [PostListModel]).firstIndex(of: $0) ?? 0
-            self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
+            self?.updateRow($0)
         }
         cell.footerView.commentHandler = { [weak self] in
             guard let `self` = self else { return }
@@ -124,12 +131,27 @@ class HomeController: BaseTableController {
             self.navigationController?.pushViewController(vc)
         }
         cell.userInfoView.updatePostType = { [weak self] in
+            self?.updateRow($0)
+        }
+        cell.userInfoView.followHandler = { [weak self] model in
             guard let `self` = self else { return }
-            let item = (self.dataArray as! [PostListModel]).firstIndex(of: $0) ?? 0
-            self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
+            if model.followed {
+                self.updateRow(model)
+            } else {
+                var dataArray = (self.dataArray as! [PostListModel])
+                let _ = dataArray.removeAll(where: { $0.id == model.id })
+                self.dataArray = dataArray
+                self.tableView?.reloadData()
+            }
+            
         }
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func updateRow(_ model:PostListModel) {
+        let item = (self.dataArray as! [PostListModel]).firstIndex(of: model) ?? 0
+        self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

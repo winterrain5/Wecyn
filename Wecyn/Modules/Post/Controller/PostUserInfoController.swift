@@ -10,7 +10,8 @@ import UIKit
 
 import JXPagingView
 import JXSegmentedView
-let PostUserHeaderInSectionHeight: Int = 40
+let PagingSegmentHeight: Int = 40
+let PostUserHeaderViewHeight: Int = 340
 class PostUserInfoController: BaseViewController {
     
     var controllers:[BasePagingTableController]  = []
@@ -21,7 +22,7 @@ class PostUserInfoController: BaseViewController {
     
     var headerVc:PostUserHeaderController!
     
-    var tableHeaderViewHeight: Int = 322
+    
     
     var titleDataSource: JXSegmentedTitleDataSource = {
         let dataSource = JXSegmentedTitleDataSource()
@@ -98,7 +99,7 @@ class PostUserInfoController: BaseViewController {
         let bottomLayer = CALayer()
         bottomLayer.backgroundColor = R.color.backgroundColor()?.cgColor
         segmentedView.layer.addSublayer(bottomLayer)
-        bottomLayer.frame = CGRect(x: 0, y: PostUserHeaderInSectionHeight.cgFloat, width: kScreenWidth, height: 1)
+        bottomLayer.frame = CGRect(x: 0, y: PagingSegmentHeight.cgFloat, width: kScreenWidth, height: 1)
         
         
         paggingView.mainTableView.gestureDelegate = self
@@ -134,26 +135,12 @@ class PostUserInfoController: BaseViewController {
             self?.userName = $0.full_name
         }
         
-        if segmentedView.selectedIndex == 0 {
-            let postedVc = controllers[0]
-            postedVc.refreshData()
-            (
-                postedVc as! PostUserPostedController
-            ).updateDataComplete =  { [weak self] in
-                self?.paggingView.mainTableView.mj_header?.endRefreshing()
-            }
+        let vc  = controllers[segmentedView.selectedIndex]
+        vc.refreshData()
+        vc.updateDataComplete  = {[weak self] in
+            self?.paggingView.mainTableView.mj_header?.endRefreshing()
         }
       
-        if segmentedView.selectedIndex == 1 {
-            let likedVc = controllers[1]
-            likedVc.refreshData()
-            (
-                likedVc as! PostUserLikeController
-            ).updateDataComplete =  { [weak self] in
-                self?.paggingView.mainTableView.mj_header?.endRefreshing()
-            }
-        }
-        
     }
     
     
@@ -178,7 +165,7 @@ extension PostUserInfoController:JXSegmentedViewDelegate {
 
 extension PostUserInfoController:JXPagingViewDelegate {
     func tableHeaderViewHeight(in pagingView: JXPagingView) -> Int {
-        return tableHeaderViewHeight
+        return PostUserHeaderViewHeight
     }
     
     func tableHeaderView(in pagingView: JXPagingView) -> UIView {
@@ -186,7 +173,7 @@ extension PostUserInfoController:JXPagingViewDelegate {
     }
     
     func heightForPinSectionHeader(in pagingView: JXPagingView) -> Int {
-        return PostUserHeaderInSectionHeight
+        return PagingSegmentHeight
     }
     
     func viewForPinSectionHeader(in pagingView: JXPagingView) -> UIView {

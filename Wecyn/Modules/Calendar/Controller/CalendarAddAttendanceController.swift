@@ -79,7 +79,7 @@ class CalendarAddAttendanceController: BaseTableController {
     
     func getFriendList() {
         self.friends.removeAll()
-        FriendService.friendList(id: CalendarBelongUserId).subscribe(onNext:{ models in
+        NetworkService.friendList(id: CalendarBelongUserId).subscribe(onNext:{ models in
             models.forEach({ item in
                 if self.selectUsers.value.contains(where: { $0.id == item.id }) {
                     item.isSelected = true

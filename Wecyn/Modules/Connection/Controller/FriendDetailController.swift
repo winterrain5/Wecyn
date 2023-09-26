@@ -23,7 +23,7 @@ class FriendDetailController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showSkeleton()
-        FriendService.friendUserInfo(id).subscribe(onNext:{
+        NetworkService.friendUserInfo(id).subscribe(onNext:{
             self.model = $0
             self.reloadData()
             self.hideSkeleton()
@@ -39,7 +39,7 @@ class FriendDetailController: BaseTableController {
             let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this friend?")
             alert.addAction(title: "Confirm",style: .destructive) { _ in
                 Toast.showLoading()
-                FriendService.deleteFriend(friend_id: self.model?.id ?? 0).subscribe(onNext:{ status in
+                NetworkService.deleteFriend(friend_id: self.model?.id ?? 0).subscribe(onNext:{ status in
                     Toast.dismiss()
                     if status.success == 1 {
                         Toast.showSuccess(withStatus: "Delete Success")

@@ -8,8 +8,8 @@
 import Foundation
 import Moya
 import RxMoyaCache
-let FriendProvider = MoyaProvider<FriendApi>()
-enum FriendApi  {
+let NetworkProvider = MoyaProvider<NetworkApi>()
+enum NetworkApi  {
     case addFriend(_ userId: Int,_ reason: String? = nil)
     case auditFriend(_ from_user_id: Int,_ audit_status: Int = 0,_ is_delete: Int? = 0)
     case deleteFriend(_ friendId: Int)
@@ -24,9 +24,12 @@ enum FriendApi  {
     case selectGroup(_ id:Int? = nil)
     case updateGroup(_ model:GroupUpdateRequestModel)
     case friendNameCard(_  uuid:String)
+    case addFollow(_ userId:Int)
+    case cancelFollow(_ userId:Int)
+    case followedList(_ type:Int)
 }
 
-extension FriendApi:TargetType, Cacheable {
+extension NetworkApi:TargetType, Cacheable {
     var path: String {
         switch self {
         case .addFriend:
@@ -57,6 +60,12 @@ extension FriendApi:TargetType, Cacheable {
             return "/api/network/updateGroup/"
         case .friendNameCard:
             return "/api/network/cardInfo/"
+        case .addFollow:
+            return "/api/network/follow/"
+        case  .cancelFollow:
+            return "/api/network/unfollow/"
+        case .followedList:
+            return "/api/network/followList/"
         }
     }
     
@@ -67,9 +76,11 @@ extension FriendApi:TargetType, Cacheable {
              .deleteFriend,
              .addGroup,
              .deleteGroup,
-             .friendToGroup:
+             .friendToGroup,
+             .addFollow,
+             .cancelFollow:
             return Moya.Method.post
-        case .updateGroup:
+        case .updateGroup,.followedList:
             return Moya.Method.put
         default:
             return Moya.Method.get
@@ -113,6 +124,12 @@ extension FriendApi:TargetType, Cacheable {
             return requestToTaskByPost(model)
         case .friendNameCard(let uuid):
             return requestParametersByGet(["uuid":uuid])
+        case .addFollow(let userId):
+            return requestParametersByPost(["user_id":userId])
+        case .cancelFollow(let userId):
+            return requestParametersByPost(["user_id":userId])
+        case .followedList(let type):
+            return requestParametersByGet(["type":type])
         }
         
     }

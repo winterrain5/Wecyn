@@ -179,7 +179,7 @@ class BaseTableController: BaseViewController,DataLoadable {
     
     func showSkeleton() {
         if isFirstLoad {
-            self.view.showSkeleton()
+            self.view.showAnimatedSkeleton()
         }
     }
     
@@ -206,8 +206,13 @@ extension  BaseTableController : UITableViewDelegate,SkeletonTableViewDataSource
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return self.cellIdentifier
+        return cellIdentifier
     }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+        return skeletonView.dequeueReusableCell(withIdentifier: cellIdentifier)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

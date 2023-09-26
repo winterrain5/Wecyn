@@ -8,6 +8,7 @@
 
 import Foundation
 import EntryKit
+import Moya
 let NetworkErrorCode = -8888
 let ServiceErrorCode = -9999
 
@@ -20,7 +21,19 @@ enum APIError:Error {
         
        
     }
-    
+    static func moyaErrorHandler(_ statusCode:Int) {
+        if statusCode == 401 { // token 失效
+            let alert = UIAlertController(style: .actionSheet,title: "Login has expired, please log in again")
+            alert.addAction(title: "Confirm",style: .destructive) { _ in
+                UserDefaults.sk.removeAllKeyValue()
+                let nav = BaseNavigationController(rootViewController: LoginController())
+                UIApplication.shared.keyWindow?.rootViewController = nav
+            }
+            
+            alert.addAction(title: "Cancel",style: .cancel)
+            alert.show()
+        }
+    }
     
 }
 

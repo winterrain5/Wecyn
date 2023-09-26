@@ -35,8 +35,8 @@ class ConnectionGroupController: BasePagingTableController {
     
     override func refreshData() {
         datas.removeAll()
-        let friendList = FriendService.friendList()
-        let groupList = FriendService.selectGroup()
+        let friendList = NetworkService.friendList()
+        let groupList = NetworkService.selectGroup()
         Observable.zip(friendList,groupList).subscribe(onNext:{ friends,groups in
             
             var temp = friends
@@ -138,7 +138,7 @@ class ConnectionGroupController: BasePagingTableController {
         let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this group?")
         alert.addAction(title: "Confirm",style: .destructive) { _ in
             Toast.showLoading()
-            FriendService.deleteGroup(id: id).subscribe(onNext:{
+            NetworkService.deleteGroup(id: id).subscribe(onNext:{
                 if $0.success == 1 {
                     Toast.showSuccess(withStatus: "Successful operation")
                     self.loadNewData()
@@ -159,7 +159,7 @@ class ConnectionGroupController: BasePagingTableController {
         let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to remove this friend from the group?")
         alert.addAction(title: "Confirm",style: .destructive) { _ in
             Toast.showLoading()
-            FriendService.friendToGroup(id: 0, friendIds: [id]).subscribe(onNext:{
+            NetworkService.friendToGroup(id: 0, friendIds: [id]).subscribe(onNext:{
                 if $0.success == 1 {
                     Toast.showSuccess(withStatus: "Successful operation")
                     self.loadNewData()

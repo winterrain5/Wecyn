@@ -15,6 +15,7 @@ class HomePostUserInfoView: UIView {
     var headlineLabel = UILabel()
     var moreButton = UIButton()
     var updatePostType:((PostListModel)->())?
+    var followHandler:((PostListModel)->())?
     var postModel:PostListModel? {
         didSet {
             guard let model = postModel else { return }
@@ -46,8 +47,14 @@ class HomePostUserInfoView: UIView {
                 
                 moreButton.menu = UIMenu(children: [action1,submenu])
             } else {
-                let action1 = UIAction(title:"Follow @\(model.user.full_name)",image: UIImage.person_fill_checkmark) { _ in
-                    Toast.showMessage("Function under development")
+                let followImage = model.followed ? UIImage.person_fill_xmark : UIImage.person_fill_checkmark
+                let followTitle = "\(model.followed ? "Unfollow" : "Follow")@\(model.user.full_name)"
+                let action1 = UIAction(title:followTitle ,image: followImage) { _ in
+                    if model.followed {
+                        self.cancelFollowUser()
+                    }else {
+                        self.followUser()
+                    }
                 }
                 let action2 = UIAction(title:"Mute @\(model.user.full_name)",image: UIImage.speaker_slash) { _ in
                     Toast.showMessage("Function under development")
@@ -55,8 +62,13 @@ class HomePostUserInfoView: UIView {
                 let action3 = UIAction(title:"Block @\(model.user.full_name)",image: UIImage.slash_circle) { _ in
                     Toast.showMessage("Function under development")
                 }
-                let action4 = UIAction(title:"Report post",image: UIImage.flag) { _ in
-                    Toast.showMessage("Function under development")
+                let action4 = UIAction(title:"Report",image: UIImage.flag) { _ in
+                    let vc = PostReportController(type: 1)
+                    let nav = BaseNavigationController(rootViewController: vc)
+                    if let sheet = nav.sheetPresentationController{
+                        sheet.detents = [.medium(), .large()]
+                    }
+                    UIViewController.sk.getTopVC()?.present(nav, animated: true)
                 }
                 moreButton.menu = UIMenu(children: [action1,action2,action3,action4])
             }
@@ -96,11 +108,14 @@ class HomePostUserInfoView: UIView {
         headlineLabel.numberOfLines = 4
         
         moreButton.imageForNormal = UIImage.ellipsis?.withTintColor(R.color.iconColor()!,renderingMode: .alwaysOriginal).scaled(toWidth: 18)
+        moreButton.contentHorizontalAlignment = .right
         moreButton.showsMenuAsPrimaryAction  = true
+        moreButton.isHiddenWhenSkeletonIsActive = true
         
         self.isSkeletonable = true
         self.subviews.forEach({ $0.isSkeletonable = true })
-        
+        nameLabel.skeletonTextLineHeight = .relativeToFont
+        postTimeLabel.skeletonTextLineHeight = .relativeToFont
     }
     
     required init?(coder: NSCoder) {
@@ -120,30 +135,56 @@ class HomePostUserInfoView: UIView {
         nameLabel.snp.makeConstraints { make in
             make.left.equalTo(avatar.snp.right).offset(8)
             make.top.equalTo(avatar.snp.top)
+            make.width.greaterThanOrEqualTo(80)
+            make.height.equalTo(20)
         }
         
         postTimeLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel.snp.left)
             make.top.equalTo(nameLabel.snp.bottom).offset(2)
-            
+            make.width.equalTo(160)
+            make.height.equalTo(17)
         }
         
         headlineLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel.snp.right).offset(4)
             make.centerY.equalTo(nameLabel.snp.centerY)
+            make.height.equalTo(17)
         }
         
         moreButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-16)
             make.centerY.equalTo(nameLabel.snp.centerY)
             make.height.equalTo(30)
+            make.width.equalTo(40)
         }
     }
     
     func updatePostType(type:Int){
         guard let model = postModel else { return }
-        PostService.updatePostType(id: self.postModel?.id ?? 0, type: type).subscribe(onNext:{ _ in
+        PostService.updatePostType(id: model.id, type: type).subscribe(onNext:{ _ in
             self.updatePostType?(model)
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    func followUser() {
+        guard let model = postModel else { return }
+        NetworkService.addFollow(userId: model.user.id).subscribe(onNext:{
+            if $0.success == 1 {
+                model.followed = true
+                self.followHandler?(model)
+                SPIndicatorView(title: "You follow @\(model.user.full_name)", preset: .custom(UIImage(.checkmark.circleFill).tintImage(.hexStringColor(hexString: "#2ec04f")))).present()
+            }
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    func cancelFollowUser() {
+        guard let model = postModel else { return }
+        NetworkService.addFollow(userId: model.user.id).subscribe(onNext:{
+            if $0.success == 1 {
+                model.followed = false
+                self.followHandler?(model)
+            }
         }).disposed(by: rx.disposeBag)
     }
 }

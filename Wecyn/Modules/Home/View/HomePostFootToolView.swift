@@ -54,8 +54,7 @@ class HomePostFootToolView: UIView {
         }).disposed(by: rx.disposeBag)
         
         self.isSkeletonable = true
-        stackView.isSkeletonable = true
-        stackView.subviews.forEach({ $0.isSkeletonable = true  })
+        self.isHiddenWhenSkeletonIsActive = true
     }
     
     func configButton(_ btn:UIButton,_ image:UIImage?) {

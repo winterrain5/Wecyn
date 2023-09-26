@@ -27,3 +27,5 @@ import Foundation
 @_exported import RxLocalizer
 @_exported import SwiftExtensionsLibrary
 @_exported import Kingfisher
+@_exported import SPIndicator
+@_exported import SafeSFSymbols

@@ -46,7 +46,7 @@ class CreateGroupController: BaseTableController {
     func createGroup() {
         Toast.showLoading()
         let friends = selectedUsers.map({ $0.id })
-        FriendService.addGroup(name: groupName,friends: friends).subscribe(onNext:{
+        NetworkService.addGroup(name: groupName,friends: friends).subscribe(onNext:{
             if $0.success == 1 {
                 Toast.showSuccess(withStatus: "Created Successfully")
                 self.navigationController?.popViewController()

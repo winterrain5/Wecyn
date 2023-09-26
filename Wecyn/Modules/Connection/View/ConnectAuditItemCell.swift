@@ -34,7 +34,7 @@ class ConnectAuditItemCell: UITableViewCell {
         agreeButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Toast.showLoading()
-            FriendService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 1).subscribe(onNext:{ status in
+            NetworkService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 1).subscribe(onNext:{ status in
                 Toast.dismiss()
                 if status.success == 1 {
                     Toast.showSuccess(withStatus: "Successful operation")
@@ -53,7 +53,7 @@ class ConnectAuditItemCell: UITableViewCell {
             guard let `self` = self else { return }
             
             Toast.showLoading()
-            FriendService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 2).subscribe(onNext:{ status in
+            NetworkService.auditFriend(from_user_id: self.model?.from_user_id ?? 0, audit_status: 2).subscribe(onNext:{ status in
                 Toast.dismiss()
                 if status.success == 1 {
                     Toast.showSuccess(withStatus: "Successful operation")

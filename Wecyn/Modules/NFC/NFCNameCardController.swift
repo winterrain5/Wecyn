@@ -127,8 +127,8 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         
         guard let id = self.id,let uuid = self.uuid else { return }
         
-        let fuserInfo = FriendService.friendUserInfo(id)
-        let fNameCard = FriendService.friendNameCard(uuid: uuid)
+        let fuserInfo = NetworkService.friendUserInfo(id)
+        let fNameCard = NetworkService.friendNameCard(uuid: uuid)
         Observable.zip(fuserInfo,fNameCard).subscribe(onNext:{ info, namecard in
             /// 1 没关系，2 好友关系，3 已申请好友，4 被申请好友
             if info.friend_status == 1 {
@@ -367,7 +367,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         connectButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             connectButton.startAnimation()
-            FriendService.addFriend(userId: self.id ?? 0).subscribe(onNext:{
+            NetworkService.addFriend(userId: self.id ?? 0).subscribe(onNext:{
                 connectButton.stopAnimation()
                 if $0.success == 1 {
                     self.dismiss(animated: true)

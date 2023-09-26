@@ -28,7 +28,7 @@
 		45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */; };
 		45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */; };
 		45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */; };
-		45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */; };
+		45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */; };
 		45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
 		450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7F2A37F85B008B0C4A /* EditViewController.swift */; };
@@ -79,8 +79,8 @@
 		450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
-		4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* FriendApi.swift */; };
-		4536533E2A413F270026EC8D /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* FriendService.swift */; };
+		4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* NetworkApi.swift */; };
+		4536533E2A413F270026EC8D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* NetworkService.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
 		4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */; };
@@ -180,6 +180,12 @@
 		45A0E6392ABD7A06003C5153 /* HomePostUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6382ABD7A06003C5153 /* HomePostUserInfoView.swift */; };
 		45A0E63B2ABD7A1B003C5153 /* HomePostFootToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E63A2ABD7A1B003C5153 /* HomePostFootToolView.swift */; };
 		45A0E63D2ABD7E7C003C5153 /* HomePostItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E63C2ABD7E7C003C5153 /* HomePostItemCell.swift */; };
+		45A0E63F2AC14E25003C5153 /* PostReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E63E2AC14E25003C5153 /* PostReportController.swift */; };
+		45A0E6412AC29BF6003C5153 /* PostFollowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6402AC29BF5003C5153 /* PostFollowController.swift */; };
+		45A0E6432AC29C49003C5153 /* PostMyFollowedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6422AC29C49003C5153 /* PostMyFollowedController.swift */; };
+		45A0E6452AC29C5F003C5153 /* PostFollowMeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6442AC29C5F003C5153 /* PostFollowMeController.swift */; };
+		45A0E6472AC2C149003C5153 /* PostFollowUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6462AC2C149003C5153 /* PostFollowUserCell.swift */; };
+		45A0E64A2AC2D2FE003C5153 /* SafeSFSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 45A0E6492AC2D2FE003C5153 /* SafeSFSymbols */; };
 		45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A10A482A31B02500726B66 /* ProfileHeaderView.swift */; };
 		45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */; };
 		45A7E5A12A71128F0002014D /* NFCNameCardEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */; };
@@ -275,7 +281,7 @@
 		45005C802A5E38ED00560E21 /* AttachmentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentDetailsViewController.swift; sourceTree = "<group>"; };
 		45005C832A5E391D00560E21 /* UnknownEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownEditorViewController.swift; sourceTree = "<group>"; };
 		45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatController.swift; sourceTree = "<group>"; };
-		45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatWeekOrMonthController.swift; sourceTree = "<group>"; };
+		45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventSingelChooseController.swift; sourceTree = "<group>"; };
 		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
 		4509FEE32A86146B005E3708 /* calendarExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calendarExtension.entitlements; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -328,8 +334,8 @@
 		450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardController.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
-		4536533B2A413DF70026EC8D /* FriendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendApi.swift; sourceTree = "<group>"; };
-		4536533D2A413F270026EC8D /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
+		4536533B2A413DF70026EC8D /* NetworkApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApi.swift; sourceTree = "<group>"; };
+		4536533D2A413F270026EC8D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
 		4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserHeaderInfoView.swift; sourceTree = "<group>"; };
@@ -435,6 +441,11 @@
 		45A0E6382ABD7A06003C5153 /* HomePostUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostUserInfoView.swift; sourceTree = "<group>"; };
 		45A0E63A2ABD7A1B003C5153 /* HomePostFootToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostFootToolView.swift; sourceTree = "<group>"; };
 		45A0E63C2ABD7E7C003C5153 /* HomePostItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostItemCell.swift; sourceTree = "<group>"; };
+		45A0E63E2AC14E25003C5153 /* PostReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportController.swift; sourceTree = "<group>"; };
+		45A0E6402AC29BF5003C5153 /* PostFollowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowController.swift; sourceTree = "<group>"; };
+		45A0E6422AC29C49003C5153 /* PostMyFollowedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMyFollowedController.swift; sourceTree = "<group>"; };
+		45A0E6442AC29C5F003C5153 /* PostFollowMeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowMeController.swift; sourceTree = "<group>"; };
+		45A0E6462AC2C149003C5153 /* PostFollowUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowUserCell.swift; sourceTree = "<group>"; };
 		45A10A482A31B02500726B66 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardEditController.swift; sourceTree = "<group>"; };
@@ -500,6 +511,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A0E64A2AC2D2FE003C5153 /* SafeSFSymbols in Frameworks */,
 				C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -681,7 +693,7 @@
 			children = (
 				457C50992A38598100FCE8D0 /* AuthService.swift */,
 				45ADB2902A3FF0AD00745F6F /* UserService.swift */,
-				4536533D2A413F270026EC8D /* FriendService.swift */,
+				4536533D2A413F270026EC8D /* NetworkService.swift */,
 				45BBF52B2A4835440018992C /* ScheduleService.swift */,
 				458970612A78DAA100344B93 /* IMService.swift */,
 				45C999F12AB05EBA0017CDC3 /* PostService.swift */,
@@ -805,7 +817,7 @@
 				45920A862A26E045005871ED /* MainApi.swift */,
 				457C50972A38589200FCE8D0 /* AuthApi.swift */,
 				45ADB28E2A3FF00E00745F6F /* UserApi.swift */,
-				4536533B2A413DF70026EC8D /* FriendApi.swift */,
+				4536533B2A413DF70026EC8D /* NetworkApi.swift */,
 				45BBF5272A4832EC0018992C /* ScheduleApi.swift */,
 				45C999EF2AB05C7E0017CDC3 /* PostApi.swift */,
 			);
@@ -1174,7 +1186,7 @@
 				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */,
 				45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */,
-				45005C8F2A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift */,
+				45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */,
 				45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */,
 				450F6CCB2A64E04F0001AA1B /* CalendarEventDetailController.swift */,
 				45A7E5A82A734C1C0002014D /* LocationSearchController.swift */,
@@ -1219,6 +1231,10 @@
 				45A0E6282AB9619B003C5153 /* PostDraftsController.swift */,
 				45A0E6302ABB06B6003C5153 /* PostCommentReplyController.swift */,
 				45A0E6322ABC0A29003C5153 /* PostCommentFullScreenController.swift */,
+				45A0E63E2AC14E25003C5153 /* PostReportController.swift */,
+				45A0E6402AC29BF5003C5153 /* PostFollowController.swift */,
+				45A0E6422AC29C49003C5153 /* PostMyFollowedController.swift */,
+				45A0E6442AC29C5F003C5153 /* PostFollowMeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1237,6 +1253,7 @@
 				45A0E6262AB95987003C5153 /* PostReturnBackSheetView.swift */,
 				45A0E6342ABD3D65003C5153 /* PostRepostTypeSheetView.swift */,
 				45A0E6362ABD428C003C5153 /* PostQuoteView.swift */,
+				45A0E6462AC2C149003C5153 /* PostFollowUserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1298,6 +1315,9 @@
 				4564BE302A8329A700464AFA /* PBXTargetDependency */,
 			);
 			name = Wecyn;
+			packageProductDependencies = (
+				45A0E6492AC2D2FE003C5153 /* SafeSFSymbols */,
+			);
 			productName = Wecyn;
 			productReference = 459209CC2A26D5F4005871ED /* Wecyn.app */;
 			productType = "com.apple.product-type.application";
@@ -1330,6 +1350,9 @@
 				"zh-Hans",
 			);
 			mainGroup = 459209C32A26D5F4005871ED;
+			packageReferences = (
+				45A0E6482AC2D2FE003C5153 /* XCRemoteSwiftPackageReference "SafeSFSymbols" */,
+			);
 			productRefGroup = 459209CD2A26D5F4005871ED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1479,6 +1502,7 @@
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
+				45A0E6432AC29C49003C5153 /* PostMyFollowedController.swift in Sources */,
 				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
@@ -1487,7 +1511,7 @@
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
 				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
-				45005C902A5F95BD00560E21 /* CalendarEventRepeatWeekOrMonthController.swift in Sources */,
+				45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
 				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
 				45C781FA2A98A0FB00D4E721 /* ImageCompress+Property.swift in Sources */,
@@ -1525,6 +1549,7 @@
 				45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */,
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
 				450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */,
+				45A0E6452AC29C5F003C5153 /* PostFollowMeController.swift in Sources */,
 				45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */,
 				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
@@ -1542,6 +1567,7 @@
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
 				450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */,
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
+				45A0E6412AC29BF6003C5153 /* PostFollowController.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
 				450F6CC22A613AFC0001AA1B /* RRule.swift in Sources */,
 				45005C592A57FB8900560E21 /* GroupUpdateRequestModel.swift in Sources */,
@@ -1551,8 +1577,10 @@
 				4564BE372A83840500464AFA /* RoomPickerController.swift in Sources */,
 				450F6CC32A613AFC0001AA1B /* RecurrenceRule.swift in Sources */,
 				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
+				45A0E6472AC2C149003C5153 /* PostFollowUserCell.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
+				45A0E63F2AC14E25003C5153 /* PostReportController.swift in Sources */,
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,
 				45C999FC2AB1CBD70017CDC3 /* PostUserLikeController.swift in Sources */,
@@ -1565,7 +1593,7 @@
 				45005C4C2A52AF4500560E21 /* EventListRequestModel.swift in Sources */,
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
-				4536533C2A413DF70026EC8D /* FriendApi.swift in Sources */,
+				4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */,
 				45C781F12A9858FE00D4E721 /* NFCNameCardEditHeadView.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45A7E5A92A734C1C0002014D /* LocationSearchController.swift in Sources */,
@@ -1643,7 +1671,7 @@
 				450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */,
 				45A0E6292AB9619B003C5153 /* PostDraftsController.swift in Sources */,
 				45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */,
-				4536533E2A413F270026EC8D /* FriendService.swift in Sources */,
+				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,
 			);
@@ -1991,6 +2019,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		45A0E6482AC2D2FE003C5153 /* XCRemoteSwiftPackageReference "SafeSFSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/SafeSFSymbols";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		45A0E6492AC2D2FE003C5153 /* SafeSFSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45A0E6482AC2D2FE003C5153 /* XCRemoteSwiftPackageReference "SafeSFSymbols" */;
+			productName = SafeSFSymbols;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 459209C42A26D5F4005871ED /* Project object */;
 }

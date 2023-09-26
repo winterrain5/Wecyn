@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FriendService {
+class NetworkService {
     
     
     /// 添加好友
@@ -17,7 +17,7 @@ class FriendService {
     ///   - remark: 备注
     /// - Returns: ResponseStatus
     static func addFriend(userId: Int, reason: String? = nil) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.addFriend(userId, reason))
+        let target = MultiTarget(NetworkApi.addFriend(userId, reason))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -29,7 +29,7 @@ class FriendService {
     ///   - is_delete: 删除好友请求信息。默认0。0 不删除，1 删除
     /// - Returns: ResponseStatus
     static func auditFriend(from_user_id: Int, audit_status: Int = 0, is_delete: Int? = nil) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.auditFriend(from_user_id, audit_status, is_delete))
+        let target = MultiTarget(NetworkApi.auditFriend(from_user_id, audit_status, is_delete))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -38,7 +38,7 @@ class FriendService {
     /// - Parameter friend_id: 好友的user_id
     /// - Returns: ResponseStatus
     static func deleteFriend(friend_id: Int) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.deleteFriend(friend_id))
+        let target = MultiTarget(NetworkApi.deleteFriend(friend_id))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -46,7 +46,7 @@ class FriendService {
     /// - Parameter id: id所属的好友列表
     /// - Returns: FriendListModel
     static func friendList(id:Int? = nil) -> Observable<[FriendListModel]> {
-        let target = MultiTarget(FriendApi.friendList(id))
+        let target = MultiTarget(NetworkApi.friendList(id))
         return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
 //                return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
     }
@@ -54,14 +54,14 @@ class FriendService {
     /// 获取收到的好友申请列表
     /// - Returns: FriendRecieveModel
     static func friendRecieveList() -> Observable<[FriendRecieveModel]> {
-        let target = MultiTarget(FriendApi.friendReceiveList)
+        let target = MultiTarget(NetworkApi.friendReceiveList)
         return APIProvider.rx.request(target).asObservable().mapArray(FriendRecieveModel.self)
     }
     
     /// 获取发出的好友申请列表
     /// - Returns: FriendRecieveModel
     static func friendSendList() -> Observable<[FriendSendModel]> {
-        let target = MultiTarget(FriendApi.friendSendList)
+        let target = MultiTarget(NetworkApi.friendSendList)
         return APIProvider.rx.request(target).asObservable().mapArray(FriendSendModel.self)
     }
     
@@ -70,7 +70,7 @@ class FriendService {
     /// - Parameter friendID: 好友ID
     /// - Returns: FriendUserInfoModel
     static func friendUserInfo(_ friendID: Int) -> Observable<FriendUserInfoModel> {
-        let target = MultiTarget(FriendApi.friendUserInfo(friendID))
+        let target = MultiTarget(NetworkApi.friendUserInfo(friendID))
         return APIProvider.rx.request(target).asObservable().mapObject(FriendUserInfoModel.self)
     }
     
@@ -79,7 +79,7 @@ class FriendService {
     /// - Parameter keyword: 默认空
     /// - Returns: FriendListModel
     static func searchUserList(keyword: String = "") -> Observable<[FriendUserInfoModel]> {
-        let target = MultiTarget(FriendApi.userSearchList(keyword))
+        let target = MultiTarget(NetworkApi.userSearchList(keyword))
         return APIProvider.rx.request(target).asObservable().mapArray(FriendUserInfoModel.self)
     }
     
@@ -90,7 +90,7 @@ class FriendService {
     ///   - friends: 好友id
     /// - Returns: ResponseStatus
     static func addGroup(name:String,friends:[Int] = []) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.addGroup(name, friends))
+        let target = MultiTarget(NetworkApi.addGroup(name, friends))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -99,7 +99,7 @@ class FriendService {
     /// - Parameter id: 分组ID
     /// - Returns: ResponseStatus
     static func deleteGroup(id:Int) ->  Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.deleteGroup(id))
+        let target = MultiTarget(NetworkApi.deleteGroup(id))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -110,7 +110,7 @@ class FriendService {
     ///   - friendId: 好友ID
     /// - Returns: ResponseStatus
     static func friendToGroup(id:Int,friendIds:[Int]) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.friendToGroup(id, friendIds))
+        let target = MultiTarget(NetworkApi.friendToGroup(id, friendIds))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -119,7 +119,7 @@ class FriendService {
     /// - Parameter id: 分组ID
     /// - Returns: GroupListModel 数组
     static func selectGroup(id:Int? = nil) -> Observable<[GroupListModel]> {
-        let target = MultiTarget(FriendApi.selectGroup(id))
+        let target = MultiTarget(NetworkApi.selectGroup(id))
         return APIProvider.rx.request(target).asObservable().mapArray(GroupListModel.self)
     }
     
@@ -128,7 +128,7 @@ class FriendService {
     /// - Parameter model: GroupUpdateRequestModel
     /// - Returns: ResponseStatus
     static func updateGroup(model: GroupUpdateRequestModel) -> Observable<ResponseStatus> {
-        let target = MultiTarget(FriendApi.updateGroup(model))
+        let target = MultiTarget(NetworkApi.updateGroup(model))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
     
@@ -137,8 +137,34 @@ class FriendService {
     /// - Parameter id: 好友ID
     /// - Returns:UserInfoModel
     static func friendNameCard(uuid: String) -> Observable<UserInfoModel> {
-        let target = MultiTarget(FriendApi.friendNameCard(uuid))
+        let target = MultiTarget(NetworkApi.friendNameCard(uuid))
         return APIProvider.rx.request(target).asObservable().mapObject(UserInfoModel.self)
+    }
+    
+    
+    /// 关注好友
+    /// - Parameter userId: 用户id
+    /// - Returns: ResponseStatus
+    static func addFollow(userId:Int)  -> Observable<ResponseStatus> {
+        let target = MultiTarget(NetworkApi.addFollow(userId))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    /// 取消关注好友
+    /// - Parameter userId: 用户id
+    /// - Returns: ResponseStatus
+    static func cancelFollow(userId:Int)  -> Observable<ResponseStatus> {
+        let target = MultiTarget(NetworkApi.cancelFollow(userId))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
+    /// 关注列表
+    /// - Parameter type: 1 关注列表 2 粉丝列表
+    /// - Returns: FriendListModel
+    static func followedList(type:Int) -> Observable<[FriendListModel]> {
+        let target = MultiTarget(NetworkApi.followedList(type))
+        return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
     }
     
 }
@@ -149,6 +175,7 @@ class FriendListModel: BaseModel {
      "fn": string # 好友的first_name
      "ln": string # 好友的last_name
      "avt": int # 用户头像
+     "mutual_following": int 是否互相关注
      */
     var uuid:  String = ""
     var id: Int = 0
@@ -168,6 +195,8 @@ class FriendListModel: BaseModel {
             last_name = String(newValue.split(separator: " ").last ?? "")
         }
     }
+    
+    var mutual_following:Int = 0
     
     override func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -203,6 +232,7 @@ class FriendUserInfoModel: BaseModel {
     var avatar = ""
     var cover = ""
     var wid = ""
+    var is_following:Bool = false
 }
 
 

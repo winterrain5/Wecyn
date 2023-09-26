@@ -17,6 +17,9 @@ class PostUserHeaderInfoView: UIView {
     let nameLabel = UILabel()
     let subLabel =  UILabel()
     
+    let myFollowedCountLabel = UILabel()
+    let followmeCountLabel = UILabel()
+    
     let followButton = UIButton()
     
     var model:FriendUserInfoModel? {
@@ -34,17 +37,10 @@ class PostUserHeaderInfoView: UIView {
                 followButton.isHidden =  user.id.int == model.id
             }
             
-            let unsubscribe = UIAction(title: "Unfollow @\(model.full_name)", image: UIImage(systemName: "person.fill.xmark")?.withTintColor(.red).withRenderingMode(.alwaysOriginal),attributes: .destructive) { _ in
-                Toast.showSuccess(withStatus: "Unfollow")
-            }
+            
+           updateFollowStatus(model)
             
             
-            let menuActions = [unsubscribe]
-            
-            let addNewMenu = UIMenu(
-                title: "",
-                children: menuActions)
-            self.followButton.menu = addNewMenu
         }
     }
     
@@ -60,6 +56,8 @@ class PostUserHeaderInfoView: UIView {
         addSubview(nameLabel)
         addSubview(subLabel)
         addSubview(followButton)
+        addSubview(myFollowedCountLabel)
+        addSubview(followmeCountLabel)
         
         self.subviews.forEach({ $0.isSkeletonable = true })
         
@@ -79,20 +77,99 @@ class PostUserHeaderInfoView: UIView {
         nameLabel.font = UIFont.sk.pingFangSemibold(18)
         nameLabel.numberOfLines = 2
         
-        subLabel.textColor = R.color.textColor22()
-        subLabel.font = UIFont.sk.pingFangSemibold(15)
+        subLabel.textColor = R.color.textColor77()
+        subLabel.font = UIFont.sk.pingFangRegular(14)
         subLabel.numberOfLines = 1
         
+        func configLabel(_ label:UILabel,text:String) {
+            label.textColor = R.color.textColor33()
+            label.font = UIFont.sk.pingFangSemibold(12)
+            label.sk.setSpecificTextColor(text, color: R.color.textColor77()!)
+            label.sk.setsetSpecificTextFont(text, font: UIFont.sk.pingFangRegular(12))
+        }
+        
+       
+        myFollowedCountLabel.text = "5 Following"
+        configLabel(myFollowedCountLabel, text: "Following")
+        myFollowedCountLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self,let model = self.model else { return }
+            let vc = PostFollowController(user: model,defaultIndex: 1)
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+            
+        }).disposed(by: rx.disposeBag)
+       
+        followmeCountLabel.text = "\(12345.formatted(.number)) Followers"
+        configLabel(followmeCountLabel, text: "Followers")
+        followmeCountLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self,let model = self.model else { return }
+            let vc = PostFollowController(user: model,defaultIndex: 0)
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+        }).disposed(by: rx.disposeBag)
+        
+        
         followButton.backgroundColor = R.color.theamColor()!
-        followButton.cornerRadius = 15
+        followButton.cornerRadius = 18
         followButton.titleForNormal = "Follow"
         followButton.titleColorForNormal = .white
         followButton.titleLabel?.font = UIFont.sk.pingFangMedium(15)
         followButton.showsMenuAsPrimaryAction = true
         
-        
+        followButton.rx.tap.subscribe(onNext:{ [weak self] in
+            
+            self?.followAction()
+            
+        }).disposed(by: rx.disposeBag)
         showSkeleton()
         
+    }
+    
+    
+    func followAction() {
+        guard let model = self.model else { return }
+        if model.is_following {
+            NetworkService.cancelFollow(userId: model.id).subscribe(onNext:{
+                if $0.success == 1 {
+                    model.is_following = false
+                    self.updateFollowStatus(model)
+                }
+            }).disposed(by: self.rx.disposeBag)
+        } else {
+            
+            NetworkService.addFollow(userId: model.id).subscribe(onNext:{
+                if $0.success == 1 {
+                    model.is_following = true
+                    self.updateFollowStatus(model)
+                }
+            }).disposed(by: self.rx.disposeBag)
+            
+        }
+    }
+    
+    
+    func updateFollowStatus(_ model:FriendUserInfoModel) {
+        if model.is_following  {
+            let unsubscribe = UIAction(title: "Unfollow @\(model.full_name)", image: UIImage(systemName: "person.fill.xmark")?.withTintColor(.red).withRenderingMode(.alwaysOriginal),attributes: .destructive) { _ in
+                self.followAction()
+            }
+            
+            let menuActions = [unsubscribe]
+            let menu = UIMenu(
+                title: "",
+                children: menuActions)
+            self.followButton.menu = menu
+            
+            followButton.backgroundColor = .white
+            followButton.borderColor = R.color.seperatorColor()!
+            followButton.borderWidth = 0.5
+            followButton.titleForNormal = "Following"
+            followButton.titleColorForNormal = R.color.textColor22()
+        } else {
+            followButton.backgroundColor = R.color.theamColor()!
+            followButton.titleForNormal = "Follow"
+            followButton.borderWidth = 0
+            followButton.titleColorForNormal = .white
+            self.followButton.menu = nil
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -132,8 +209,20 @@ class PostUserHeaderInfoView: UIView {
         followButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
             make.top.equalTo(blurImageView.snp.bottom).offset(12)
-            make.height.equalTo(30)
-            make.width.equalTo(72)
+            make.height.equalTo(36)
+            make.width.equalTo(90)
+        }
+        
+        myFollowedCountLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-8)
+            make.height.equalTo(14)
+        }
+        
+        followmeCountLabel.snp.makeConstraints { make in
+            make.left.equalTo(myFollowedCountLabel.snp.right).offset(8)
+            make.bottom.equalToSuperview().offset(-8)
+            make.height.equalTo(14)
         }
     }
     

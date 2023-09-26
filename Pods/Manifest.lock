@@ -122,6 +122,7 @@ PODS:
   - SkeletonView (1.30.4)
   - SKPhotoBrowser (7.1.0)
   - SnapKit (5.6.0)
+  - SPIndicator (1.6.4)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.3.1)
   - SwiftEntryKit (2.0.0)
@@ -199,6 +200,7 @@ DEPENDENCIES:
   - SkeletonView
   - SKPhotoBrowser
   - SnapKit
+  - SPIndicator
   - SVProgressHUD
   - SwiftDate
   - SwiftEntryKit
@@ -254,6 +256,7 @@ SPEC REPOS:
     - SkeletonView
     - SKPhotoBrowser
     - SnapKit
+    - SPIndicator
     - SVProgressHUD
     - SwiftDate
     - SwiftEntryKit
@@ -316,6 +319,7 @@ SPEC CHECKSUMS:
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SKPhotoBrowser: cd95b95a6f352fc2a50992721299f75ead77f9ab
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SPIndicator: 93e0a4fb23de51294ac48e874c0f081a5e293e4f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
@@ -327,6 +331,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: c5ed8e8608ba386b2fe38f76a1cb5b56ad94fa04
+PODFILE CHECKSUM: 2b31d02ec35b6421ccc9a194589a87c457d41447
 
 COCOAPODS: 1.11.2

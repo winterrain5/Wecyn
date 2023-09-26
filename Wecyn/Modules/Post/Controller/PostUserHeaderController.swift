@@ -24,13 +24,13 @@ class PostUserHeaderController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(infoView)
-        infoView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 322)
-      
+        infoView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: PostUserHeaderViewHeight.cgFloat)
+       
     }
     
     
     func refreshData() {
-        FriendService.friendUserInfo(userId).subscribe(onNext:{
+        NetworkService.friendUserInfo(userId).subscribe(onNext:{
             self.infoView.model = $0
             self.updateUserInfoComplete?($0)
         },onError: { e in

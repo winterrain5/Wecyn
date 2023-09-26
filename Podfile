@@ -49,6 +49,7 @@ target 'Wecyn' do
   pod 'SKPhotoBrowser'
   pod 'SwiftEntryKit'
   pod 'OpenIMSDK'
+  pod 'SPIndicator'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'
@@ -65,6 +66,7 @@ target 'Wecyn' do
   pod 'SwiftExtensionsLibrary', :git => 'https://github.com/winterrain5/SwiftExtensionsLibrary.git'
   
 
+  
 end
 
 post_install do |installer|
