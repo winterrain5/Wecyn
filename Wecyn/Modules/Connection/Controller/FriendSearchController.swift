@@ -39,7 +39,7 @@ class FriendSearchController: BaseTableController {
     }
     
     override func refreshData() {
-        FriendService.searchUserList(keyword:keword).subscribe(onNext:{ models in
+        NetworkService.searchUserList(keyword:keword).subscribe(onNext:{ models in
             self.dataArray = models.map({
                 let model = FriendListModel()
                 model.avatar = $0.avatar

@@ -304,10 +304,9 @@ class CalendarAddNewEventController: BaseTableController {
             ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
                 
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Event Add Success", after: 1) {
-                        self.navigationController?.popViewController()
-                        WidgetCenter.shared.reloadAllTimelines()
-                    }
+                    Toast.showSuccess(withStatus: "Event Add Success")
+                    self.navigationController?.popViewController()
+                    WidgetCenter.shared.reloadAllTimelines()
                 } else {
                     Toast.showMessage($0.message)
                 }
@@ -387,9 +386,8 @@ class CalendarAddNewEventController: BaseTableController {
             }
             ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Event Update Success", after: 1) {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
+                    Toast.showSuccess(withStatus: "Event Update Success")
+                    self.navigationController?.popToRootViewController(animated: true)
                 } else {
                     Toast.showMessage($0.message)
                 }
@@ -648,7 +646,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Alarm {
-            let vc = CalendarEventRepeatWeekOrMonthController(type: .Alarm, selectIndexs: [self.alarmSelectIndex])
+            let vc = CalendarEventSingelChooseController(type: .Alarm, selectIndexs: [self.alarmSelectIndex])
             if let sheet = vc.sheetPresentationController{
                 sheet.detents = [.medium(), .large()]
             }

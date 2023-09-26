@@ -21,8 +21,8 @@ class ProfileController: BaseTableController {
     private var headerView = ProfileHeaderView.loadViewFromNib()
     private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
     private let sectionType:[SectionType] = [.Activity,.Skills,.Experience,.Education,.Interests]
-    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio == 0 ? .lightContent : .darkContent }
+    var ratio:CGFloat = 0
     var latesdPost:PostListModel?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,7 +181,9 @@ class ProfileController: BaseTableController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let ratio = scrollView.contentOffset.y /  kNavBarHeight
+        ratio = scrollView.contentOffset.y /  kNavBarHeight
         self.navigation.bar.alpha = ratio
+        setNeedsStatusBarAppearanceUpdate()
+        
     }
 }

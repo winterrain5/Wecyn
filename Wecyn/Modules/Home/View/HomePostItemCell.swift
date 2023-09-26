@@ -46,6 +46,9 @@ class HomePostItemCell: UITableViewCell {
         contentLabel.font = UIFont.sk.pingFangRegular(15)
         contentLabel.textColor = R.color.textColor33()!
         contentLabel.numberOfLines = 0
+        contentLabel.skeletonTextLineHeight = .fixed(18)
+        contentLabel.lastLineFillPercent = 75
+        contentLabel.skeletonTextNumberOfLines = 4
         
         self.isSkeletonable = true
         contentView.isSkeletonable  = true
@@ -60,26 +63,28 @@ class HomePostItemCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        guard let model = model else { return }
+       
         
         userInfoView.frame = CGRect(x: 0, y: 0, width: self.width, height: 60)
         
-        contentLabel.frame = CGRect(x: 16, y: userInfoView.frame.maxY + 8, width: self.width - 32, height: model.contentH)
-        
-        if model.images_obj.count > 0 {
-            imageClvView.isHidden = false
-            imageClvView.frame = CGRect(x: 0, y: contentLabel.frame.maxY + 8, width: self.width, height: model.imgH)
+        if let contentH = model?.contentH {
+            contentLabel.frame = CGRect(x: 16, y: userInfoView.frame.maxY + 8, width: self.width - 32, height: contentH)
         } else {
-            imageClvView.isHidden = true
-            imageClvView.frame = .zero
+            contentLabel.frame = CGRect(x: 16, y: userInfoView.frame.maxY + 8, width: self.width - 32, height: 80)
         }
         
-        if model.source_data != nil {
-            postQuoteView.isHidden = false
-            postQuoteView.frame = CGRect(x: 16, y: max(imageClvView.frame.maxY, contentLabel.frame.maxY) + 8, width: self.width - 32, height: model.sourceDataH)
+        
+        
+        if (model?.images_obj.count ?? 0) > 0 {
+            imageClvView.frame = CGRect(x: 0, y: contentLabel.frame.maxY + 8, width: self.width, height: model?.imgH ?? 0)
         } else {
-            postQuoteView.isHidden = true
-            postQuoteView.frame = .zero
+            imageClvView.height = 0
+        }
+        
+        if model?.source_data != nil {
+            postQuoteView.frame = CGRect(x: 16, y: max(imageClvView.frame.maxY, contentLabel.frame.maxY) + 8, width: self.width - 32, height: model?.sourceDataH ?? 0)
+        } else {
+            postQuoteView.height = 0
         }
         
         footerView.frame = CGRect(x: 16, y: max(imageClvView.frame.maxY, postQuoteView.frame.maxY, contentLabel.frame.maxY) + 8, width: self.width - 32, height: 30)

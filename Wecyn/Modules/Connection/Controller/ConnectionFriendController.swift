@@ -126,8 +126,8 @@ class ConnectionFriendController: BaseViewController {
     
     func getDatas() {
         
-        let recieveList = FriendService.friendRecieveList()
-        let friendList = FriendService.friendList()
+        let recieveList = NetworkService.friendRecieveList()
+        let friendList = NetworkService.friendList()
         Observable.zip(recieveList,friendList).subscribe(onNext:{ recieves,friends in
             if recieves.count > 0 {
                 self.tableHeaderViewHeight = Int(recieves.count.cgFloat * ConnectionAuditCellHeight + ConnectionAuditSectionHeight)

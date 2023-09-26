@@ -27,7 +27,7 @@ class ConnectionItemCell: UICollectionViewCell {
         connectButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             
-            FriendService.addFriend(userId: self.model?.id ?? 0).subscribe(onNext:{ status in
+            NetworkService.addFriend(userId: self.model?.id ?? 0).subscribe(onNext:{ status in
                 if status.success == 1 {
                     Toast.showSuccess(withStatus: "Send Apply Success")
                 } else {

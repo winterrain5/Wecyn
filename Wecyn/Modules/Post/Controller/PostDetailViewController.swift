@@ -161,6 +161,10 @@ class PostDetailViewController: BaseTableController {
                 guard let `self` = self else { return }
                 self.tableView?.reloadRows(at: [IndexPath(item: 0, section: 0)], with: .none)
             }
+            cell.userInfoView.followHandler = { [weak self] _ in
+                guard let `self` = self else { return }
+                self.tableView?.reloadRows(at: [IndexPath(item: 0, section: 0)], with: .none)
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withClass: PostCommentCell.self)

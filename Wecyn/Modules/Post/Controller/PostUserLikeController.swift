@@ -10,7 +10,6 @@ import UIKit
 class PostUserLikeController: BasePagingTableController {
     var lastId:Int = 0
     var userId:Int = 0
-    var updateDataComplete:(()->())?
     required init(userId:Int) {
         super.init(nibName: nil, bundle: nil)
         self.userId = userId
@@ -58,7 +57,7 @@ class PostUserLikeController: BasePagingTableController {
     
 
     override func listViewFrame() -> CGRect {
-        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - PostUserHeaderInSectionHeight.cgFloat - kNavBarHeight)
+        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - PagingSegmentHeight.cgFloat - kNavBarHeight)
     }
     
     override func loadNewData() {

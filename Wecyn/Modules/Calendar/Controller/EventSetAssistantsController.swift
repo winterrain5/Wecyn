@@ -73,10 +73,8 @@ class EventSetAssistantsController: BaseTableController {
         requestModel.assistants = assistants
         ScheduleService.addAssistants(model: requestModel).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Successful operation", after: 2, {
-                    self.navigationController?.popViewController()
-                })
-                
+                Toast.showSuccess(withStatus: "Successful operation")
+                self.navigationController?.popViewController()
             } else {
                 Toast.showError(withStatus: $0.message)
             }
@@ -101,7 +99,7 @@ class EventSetAssistantsController: BaseTableController {
         self.friends.removeAll()
         self.selectUsers.removeAll()
         
-        let friendList = FriendService.friendList()
+        let friendList = NetworkService.friendList()
         let assistants = ScheduleService.sendedAssistantList()
 
         Observable.zip(friendList,assistants).subscribe(onNext:{ friends,assistants in

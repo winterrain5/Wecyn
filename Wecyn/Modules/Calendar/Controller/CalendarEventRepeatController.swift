@@ -253,7 +253,7 @@ class CalendarEventRepeatController: BaseTableController {
             if model.value.isEmpty == false {
                 selectIndexs = model.value.split(separator: ",").map({ String($0).int ?? 0 })
             }
-            let vc = CalendarEventRepeatWeekOrMonthController(type: .Week, selectIndexs: selectIndexs)
+            let vc = CalendarEventSingelChooseController(type: .Week, selectIndexs: selectIndexs)
             vc.selectComplete = { [weak self] weekIdx in
                 guard let `self` = self else { return }
                 
@@ -279,7 +279,7 @@ class CalendarEventRepeatController: BaseTableController {
             if model.value.isEmpty == false {
                 selectIndexs = model.value.split(separator: ",").map({ String($0).int ?? 0 })
             }
-            let vc = CalendarEventRepeatWeekOrMonthController(type: .Month, selectIndexs: selectIndexs)
+            let vc = CalendarEventSingelChooseController(type: .Month, selectIndexs: selectIndexs)
             vc.selectComplete = { [weak self] monthIdx in
                 guard let `self` = self else { return }
                 

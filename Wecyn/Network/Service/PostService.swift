@@ -121,6 +121,7 @@ class PostListModel :BaseModel {
     var type: Int = 0
     var repost_count: Int = 0
     var user: PostUser = PostUser()
+    var followed:Bool = false
     var is_own_post:Bool {
         let userid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id.int ?? 0
         return userid ==  user.id

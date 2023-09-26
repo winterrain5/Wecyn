@@ -46,7 +46,7 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
     
     override func refreshData() {
         showSkeleton()
-        FriendService.searchUserList().subscribe(onNext:{ models in
+        NetworkService.searchUserList().subscribe(onNext:{ models in
             self.dataArray.append(contentsOf: models)
             self.endRefresh(models.count,emptyString: "No Data")
             self.hideSkeleton()

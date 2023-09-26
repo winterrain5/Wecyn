@@ -26,56 +26,25 @@ class Toast {
         SVProgressHUD.show(withStatus: message)
     }
     
-    static func showMessage(_ message:String, after:TimeInterval, _ complete:@escaping ()->()) {
-        self.showMessage(message)
-        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
-            complete()
-        }
-    }
-    
     static func showMessage(_ message:String) {
-        defaultStyle()
-        SVProgressHUD.showInfo(withStatus: message)
+        SPIndicatorView(title: message, message: nil).present()
     }
     
     
     static func showError(withStatus message: String) {
-        defaultStyle()
-        SVProgressHUD.showError(withStatus: message)
+        SPIndicator.present(title: message, preset: .error)
     }
     
     static func showSuccess(withStatus message: String) {
-        defaultStyle()
-        SVProgressHUD.showSuccess(withStatus: message)
+        SPIndicator.present(title: message, preset: .done)
     }
     
-    static func showSuccess(withStatus message: String, after:TimeInterval, _ complete:@escaping ()->()) {
-        defaultStyle()
-        SVProgressHUD.showSuccess(withStatus: message)
-        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
-            complete()
-        }
-       
-    }
     
     static func showWarning(withStatus message: String) {
-        defaultStyle()
-        SVProgressHUD.showInfo(withStatus: message)
+        SPIndicatorView(title: message, preset: .custom(UIImage(.exclamationmark.triangleFill).tintImage(.hexStringColor(hexString: "#ff8a00")))).present()
     }
     
-    static func showMessage(message:String,imageName:String,shouldDismiss:Bool = true) {
-        defaultStyle()
-        if !shouldDismiss {
-            SVProgressHUD.setMaximumDismissTimeInterval(Double.infinity)
-            SVProgressHUD.setMinimumDismissTimeInterval(Double.infinity)
-        }
-        SVProgressHUD.setImageViewSize(CGSize(width: 50, height: 47))
-        SVProgressHUD.setInfoImage(UIImage(named: imageName)!)
-        SVProgressHUD.setFont(UIFont.sk.pingFangMedium(12))
-        SVProgressHUD.setMinimumSize(CGSize(width: 190, height: 130))
-        SVProgressHUD.showInfo(withStatus: message)
-        
-    }
+  
     static func showProgress(_ progress:Float,_ status:String = "") {
         defaultStyle()
         SVProgressHUD.showProgress(progress,status: status)

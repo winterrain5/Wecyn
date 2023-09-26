@@ -360,9 +360,8 @@ class CreatePostViewController: BaseViewController {
             let content = self.richTextView.text ?? ""
             let type = self.postType.rawValue
             PostService.addPost(content: content,images: images,type: type).subscribe(onNext:{ model in
-                Toast.showSuccess(withStatus:"Posted successfully", after: 1) {
-                    self.returnBack()
-                }
+                Toast.showSuccess(withStatus:"Posted successfully")
+                self.returnBack()
                 self.saveButton.stopAnimation()
                 self.addCompleteHandler?(model)
             },onError: { e in

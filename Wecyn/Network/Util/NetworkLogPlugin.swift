@@ -31,11 +31,22 @@ class NetworkLogPlugin: PluginType {
     }
     
     func didReceive(_ result: Swift.Result<Response, MoyaError>, target: TargetType) {
-        if case .success(let response) = result {
+        switch result {
+        case .success(let response):
+            APIError.moyaErrorHandler(response.statusCode)
             outputItems(logNetworkResponse(response.response, data: response.data, target: target))
-        } else {
-            outputItems(logNetworkResponse(nil, data: nil, target: target))
+        case .failure(let error):
+            outputItems(logNetworkError(error.response, target: target))
         }
+        
+    }
+    
+    func logNetworkError(_ response:Response?,target: TargetType) -> [String] {
+        var output = [String]()
+        output += [format(identifier: "Request URL", message: "\(target.baseURL)\(target.path)")]
+        output += [format(identifier: "Request Headers", message: "\(target.headers ?? [:])")]
+        output += [format(identifier: "Error", message: response?.debugDescription ?? "")]
+        return output
     }
     
     func logNetworkResponse(_ response: HTTPURLResponse?, data: Data?, target: TargetType) -> [String]{
