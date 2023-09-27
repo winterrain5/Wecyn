@@ -46,16 +46,16 @@ extension TargetType {
     var headers: [String : String]? {
         if let token = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)?.token {
             return  [
-                "versionDevice":"ios",
-                "versionNumber":Device.appVersion,
-                "versionDeviceNumber":Device.sysVersion,
+                "device_type":"ios",
+                "app_version":Device.appVersion,
+                "device_system_version":Device.sysVersion,
                 "Authorization": "Bearer " + token
             ]
         } else {
             return  [
-                "versionDevice":"ios",
-                "versionNumber":Device.appVersion,
-                "versionDeviceNumber":Device.sysVersion,
+                "device_type":"ios",
+                "app_version":Device.appVersion,
+                "device_system_version":Device.sysVersion,
                     ]
         }
         

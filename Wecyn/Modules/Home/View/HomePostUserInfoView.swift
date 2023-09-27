@@ -47,21 +47,21 @@ class HomePostUserInfoView: UIView {
                 
                 moreButton.menu = UIMenu(children: [action1,submenu])
             } else {
-                let followImage = model.followed ? UIImage.person_fill_xmark : UIImage.person_fill_checkmark
-                let followTitle = "\(model.followed ? "Unfollow" : "Follow")@\(model.user.full_name)"
+                let followImage = model.user.is_following ? UIImage.person_fill_xmark : UIImage.person_fill_checkmark
+                let followTitle = "\(model.user.is_following ? "Unfollow" : "Follow")@\(model.user.full_name)"
                 let action1 = UIAction(title:followTitle ,image: followImage) { _ in
-                    if model.followed {
+                    if model.user.is_following {
                         self.cancelFollowUser()
                     }else {
                         self.followUser()
                     }
                 }
-                let action2 = UIAction(title:"Mute @\(model.user.full_name)",image: UIImage.speaker_slash) { _ in
-                    Toast.showMessage("Function under development")
-                }
-                let action3 = UIAction(title:"Block @\(model.user.full_name)",image: UIImage.slash_circle) { _ in
-                    Toast.showMessage("Function under development")
-                }
+//                let action2 = UIAction(title:"Mute @\(model.user.full_name)",image: UIImage.speaker_slash) { _ in
+//                    Toast.showMessage("Function under development")
+//                }
+//                let action3 = UIAction(title:"Block @\(model.user.full_name)",image: UIImage.slash_circle) { _ in
+//                    Toast.showMessage("Function under development")
+//                }
                 let action4 = UIAction(title:"Report",image: UIImage.flag) { _ in
                     let vc = PostReportController(type: 1)
                     let nav = BaseNavigationController(rootViewController: vc)
@@ -70,7 +70,7 @@ class HomePostUserInfoView: UIView {
                     }
                     UIViewController.sk.getTopVC()?.present(nav, animated: true)
                 }
-                moreButton.menu = UIMenu(children: [action1,action2,action3,action4])
+                moreButton.menu = UIMenu(children: [action1,action4])
             }
             
          
@@ -105,7 +105,6 @@ class HomePostUserInfoView: UIView {
         
         headlineLabel.textColor = R.color.textColor77()!
         headlineLabel.font = UIFont.sk.pingFangRegular(12)
-        headlineLabel.numberOfLines = 4
         
         moreButton.imageForNormal = UIImage.ellipsis?.withTintColor(R.color.iconColor()!,renderingMode: .alwaysOriginal).scaled(toWidth: 18)
         moreButton.contentHorizontalAlignment = .right
@@ -135,21 +134,21 @@ class HomePostUserInfoView: UIView {
         nameLabel.snp.makeConstraints { make in
             make.left.equalTo(avatar.snp.right).offset(8)
             make.top.equalTo(avatar.snp.top)
-            make.width.greaterThanOrEqualTo(80)
             make.height.equalTo(20)
         }
         
-        postTimeLabel.snp.makeConstraints { make in
+        headlineLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel.snp.left)
             make.top.equalTo(nameLabel.snp.bottom).offset(2)
-            make.width.equalTo(160)
+            make.right.equalToSuperview().offset(-16)
             make.height.equalTo(17)
         }
         
-        headlineLabel.snp.makeConstraints { make in
+        postTimeLabel.snp.makeConstraints { make in
             make.left.equalTo(nameLabel.snp.right).offset(4)
             make.centerY.equalTo(nameLabel.snp.centerY)
             make.height.equalTo(17)
+            make.width.greaterThanOrEqualTo(100)
         }
         
         moreButton.snp.makeConstraints { make in
@@ -171,9 +170,9 @@ class HomePostUserInfoView: UIView {
         guard let model = postModel else { return }
         NetworkService.addFollow(userId: model.user.id).subscribe(onNext:{
             if $0.success == 1 {
-                model.followed = true
+                model.user.is_following = true
                 self.followHandler?(model)
-                SPIndicatorView(title: "You follow @\(model.user.full_name)", preset: .custom(UIImage(.checkmark.circleFill).tintImage(.hexStringColor(hexString: "#2ec04f")))).present()
+                Toast.showSuccess( "You follow @\(model.user.full_name)")
             }
         }).disposed(by: rx.disposeBag)
     }
@@ -182,7 +181,7 @@ class HomePostUserInfoView: UIView {
         guard let model = postModel else { return }
         NetworkService.addFollow(userId: model.user.id).subscribe(onNext:{
             if $0.success == 1 {
-                model.followed = false
+                model.user.is_following = false
                 self.followHandler?(model)
             }
         }).disposed(by: rx.disposeBag)

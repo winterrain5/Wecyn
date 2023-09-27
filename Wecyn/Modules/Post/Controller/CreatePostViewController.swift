@@ -174,7 +174,7 @@ class CreatePostViewController: BaseViewController {
         
         
         self.view.addSubview(scrollView)
-        scrollView.rx.didScroll.observeOn(MainScheduler.asyncInstance).subscribe(onNext:{ [weak self] in
+        scrollView.rx.didEndDragging.observeOn(MainScheduler.asyncInstance).subscribe(onNext:{ [weak self] _ in
             self?.view.endEditing(true)
         }).disposed(by: rx.disposeBag)
         scrollView.frame = self.view.bounds
@@ -240,6 +240,8 @@ class CreatePostViewController: BaseViewController {
             guard let `self` = self else { return }
             self.updateScrollViewContentSize()
         }).disposed(by: rx.disposeBag)
+        
+        
         richTextView.becomeFirstResponder()
         
         
@@ -264,13 +266,13 @@ class CreatePostViewController: BaseViewController {
         
         toolBar.linkButton.rx.tap.subscribe(onNext:{ [weak self] in
             Haptico.selection()
-            Toast.showMessage("Function under development")
+            Toast.showSuccess("Function under development")
         }).disposed(by: rx.disposeBag)
         
         toolBar.atButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            Toast.showMessage("Function under development")
+            Toast.showSuccess("Function under development")
             return
             let vc = CalendarAddAttendanceController(selecteds: [])
             let nav = BaseNavigationController(rootViewController: vc)
@@ -287,7 +289,7 @@ class CreatePostViewController: BaseViewController {
         toolBar.hastagButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            Toast.showMessage("Function under development")
+            Toast.showSuccess("Function under development")
         }).disposed(by: rx.disposeBag)
         
         if let postModel = self.postModel {
@@ -360,13 +362,13 @@ class CreatePostViewController: BaseViewController {
             let content = self.richTextView.text ?? ""
             let type = self.postType.rawValue
             PostService.addPost(content: content,images: images,type: type).subscribe(onNext:{ model in
-                Toast.showSuccess(withStatus:"Posted successfully")
+                Toast.showSuccess("Posted successfully")
                 self.returnBack()
                 self.saveButton.stopAnimation()
                 self.addCompleteHandler?(model)
             },onError: { e in
                 self.saveButton.stopAnimation()
-                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                Toast.showError(e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
         }
         
@@ -376,12 +378,12 @@ class CreatePostViewController: BaseViewController {
     
     func repost() {
         PostService.repost(id: self.postModel?.id ?? 0, content: self.richTextView.text).subscribe(onNext:{ model in
-            Toast.showSuccess(withStatus: "You have reposted")
+            Toast.showSuccess( "You have reposted")
             self.saveButton.stopAnimation()
             self.addCompleteHandler?(model)
         },onError: { e in
             self.saveButton.stopAnimation()
-            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
     }
     

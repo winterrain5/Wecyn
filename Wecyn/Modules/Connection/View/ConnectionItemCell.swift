@@ -29,7 +29,7 @@ class ConnectionItemCell: UICollectionViewCell {
             
             NetworkService.addFriend(userId: self.model?.id ?? 0).subscribe(onNext:{ status in
                 if status.success == 1 {
-                    Toast.showSuccess(withStatus: "Send Apply Success")
+                    Toast.showSuccess( "Send Apply Success")
                 } else {
                     Toast.showMessage(status.message)
                 }

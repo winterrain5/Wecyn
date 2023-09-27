@@ -22,7 +22,7 @@ class PostUserPostedController: BasePagingTableController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.isSkeletonable = true
         // Do any additional setup after loading the view.
     }
     
@@ -42,6 +42,7 @@ class PostUserPostedController: BasePagingTableController {
     }
     
     override func refreshData() {
+        self.showSkeleton()
         PostService.postList(userId:userId, lastId: lastId).subscribe(onNext:{ models in
             self.dataArray.append(contentsOf: models)
             self.endRefresh(models.count,emptyString: "No Post")
@@ -69,7 +70,7 @@ class PostUserPostedController: BasePagingTableController {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.dataArray.count > 0 {
+        if self.dataArray.count > 0 && indexPath.row < dataArray.count {
             return (dataArray[indexPath.row] as? PostListModel)?.cellHeight ?? 0
         }
         return 0
@@ -87,5 +88,13 @@ class PostUserPostedController: BasePagingTableController {
         cell.selectionStyle = .none
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if dataArray.count > 0 {
+            let model = dataArray[indexPath.row] as! PostListModel
+            let vc = PostDetailViewController(postModel: model)
+            self.navigationController?.pushViewController(vc)
+        }
+        
+    }
 }

@@ -6,8 +6,17 @@
 //
 
 import UIKit
-
+import RxSwift
 class PostFollowingController: BasePagingTableController {
+    var userId:Int = 0
+    required init(userId:Int) {
+        super.init(nibName: nil, bundle: nil)
+        self.userId = userId
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,19 +42,25 @@ class PostFollowingController: BasePagingTableController {
     }
     
     override func refreshData() {
-        self.endRefresh()
-        self.hideSkeleton()
-        self.updateDataComplete?()
+        self.showSkeleton()
+        NetworkService.followedList(type: 1,userId: userId,page: page).subscribe(onNext:{ models in
+            self.dataArray.append(contentsOf: models)
+            self.endRefresh(models.count,emptyString: "No Following")
+            self.hideSkeleton()
+            self.updateDataComplete?()
+        },onError: { e in
+            self.endRefresh(e.asAPIError.emptyDatatype)
+            self.hideSkeleton()
+            self.updateDataComplete?()
+        }).disposed(by: rx.disposeBag)
     }
     
     
-
     override func listViewFrame() -> CGRect {
         CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - PagingSegmentHeight.cgFloat - kNavBarHeight)
     }
     
  
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 72
@@ -57,7 +72,7 @@ class PostFollowingController: BasePagingTableController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: PostFollowUserCell.self)
         if self.dataArray.count > 0 {
-            cell.model = self.dataArray[indexPath.row] as? FriendUserInfoModel
+            cell.model = self.dataArray[indexPath.row] as? FriendFollowModel
         }
         cell.selectionStyle = .none
         return cell

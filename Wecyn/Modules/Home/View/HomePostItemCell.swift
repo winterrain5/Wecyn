@@ -53,6 +53,8 @@ class HomePostItemCell: UITableViewCell {
         self.isSkeletonable = true
         contentView.isSkeletonable  = true
         contentView.subviews.forEach({ $0.isSkeletonable = true })
+        contentView.clipsToBounds = true
+        
     }
     
     required init?(coder: NSCoder) {
@@ -74,17 +76,16 @@ class HomePostItemCell: UITableViewCell {
         }
         
         
-        
         if (model?.images_obj.count ?? 0) > 0 {
             imageClvView.frame = CGRect(x: 0, y: contentLabel.frame.maxY + 8, width: self.width, height: model?.imgH ?? 0)
         } else {
-            imageClvView.height = 0
+            imageClvView.frame = .zero
         }
         
         if model?.source_data != nil {
-            postQuoteView.frame = CGRect(x: 16, y: max(imageClvView.frame.maxY, contentLabel.frame.maxY) + 8, width: self.width - 32, height: model?.sourceDataH ?? 0)
+            postQuoteView.frame = CGRect(x: 16, y: max(imageClvView.frame.maxY, contentLabel.frame.maxY) + 8, width: self.width - 32, height: model?.sourceDataContentH ?? 0)
         } else {
-            postQuoteView.height = 0
+            postQuoteView.frame = .zero
         }
         
         footerView.frame = CGRect(x: 16, y: max(imageClvView.frame.maxY, postQuoteView.frame.maxY, contentLabel.frame.maxY) + 8, width: self.width - 32, height: 30)

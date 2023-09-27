@@ -17,8 +17,8 @@ class PostUserHeaderInfoView: UIView {
     let nameLabel = UILabel()
     let subLabel =  UILabel()
     
-    let myFollowedCountLabel = UILabel()
-    let followmeCountLabel = UILabel()
+    let followingCountLabel = UILabel()
+    let followerCountLabel = UILabel()
     
     let followButton = UIButton()
     
@@ -37,8 +37,11 @@ class PostUserHeaderInfoView: UIView {
                 followButton.isHidden =  user.id.int == model.id
             }
             
-            
-           updateFollowStatus(model)
+            followingCountLabel.text = "\(model.following_count.formatted(.number)) Following"
+            followerCountLabel.text = "\(model.follower_count.formatted(.number)) Followers"
+            configLabel(followingCountLabel, text: "Following")
+            configLabel(followerCountLabel, text: "Followers")
+            updateFollowStatus(model)
             
             
         }
@@ -56,8 +59,8 @@ class PostUserHeaderInfoView: UIView {
         addSubview(nameLabel)
         addSubview(subLabel)
         addSubview(followButton)
-        addSubview(myFollowedCountLabel)
-        addSubview(followmeCountLabel)
+        addSubview(followingCountLabel)
+        addSubview(followerCountLabel)
         
         self.subviews.forEach({ $0.isSkeletonable = true })
         
@@ -81,28 +84,20 @@ class PostUserHeaderInfoView: UIView {
         subLabel.font = UIFont.sk.pingFangRegular(14)
         subLabel.numberOfLines = 1
         
-        func configLabel(_ label:UILabel,text:String) {
-            label.textColor = R.color.textColor33()
-            label.font = UIFont.sk.pingFangSemibold(12)
-            label.sk.setSpecificTextColor(text, color: R.color.textColor77()!)
-            label.sk.setsetSpecificTextFont(text, font: UIFont.sk.pingFangRegular(12))
-        }
-        
+     
        
-        myFollowedCountLabel.text = "5 Following"
-        configLabel(myFollowedCountLabel, text: "Following")
-        myFollowedCountLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+      
+        followingCountLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self,let model = self.model else { return }
-            let vc = PostFollowController(user: model,defaultIndex: 1)
+            let vc = PostFollowController(user: model,defaultIndex: 0)
             UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
             
         }).disposed(by: rx.disposeBag)
+        
        
-        followmeCountLabel.text = "\(12345.formatted(.number)) Followers"
-        configLabel(followmeCountLabel, text: "Followers")
-        followmeCountLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+        followerCountLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self,let model = self.model else { return }
-            let vc = PostFollowController(user: model,defaultIndex: 0)
+            let vc = PostFollowController(user: model,defaultIndex: 1)
             UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
         }).disposed(by: rx.disposeBag)
         
@@ -122,6 +117,15 @@ class PostUserHeaderInfoView: UIView {
         showSkeleton()
         
     }
+    
+    func configLabel(_ label:UILabel,text:String) {
+        label.textColor = R.color.textColor33()
+        label.font = UIFont.sk.pingFangSemibold(12)
+        label.sk.setSpecificTextColor(text, color: R.color.textColor77()!)
+        label.sk.setsetSpecificTextFont(text, font: UIFont.sk.pingFangRegular(12))
+    }
+    
+    
     
     
     func followAction() {
@@ -213,14 +217,14 @@ class PostUserHeaderInfoView: UIView {
             make.width.equalTo(90)
         }
         
-        myFollowedCountLabel.snp.makeConstraints { make in
+        followingCountLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-8)
             make.height.equalTo(14)
         }
         
-        followmeCountLabel.snp.makeConstraints { make in
-            make.left.equalTo(myFollowedCountLabel.snp.right).offset(8)
+        followerCountLabel.snp.makeConstraints { make in
+            make.left.equalTo(followingCountLabel.snp.right).offset(8)
             make.bottom.equalToSuperview().offset(-8)
             make.height.equalTo(14)
         }

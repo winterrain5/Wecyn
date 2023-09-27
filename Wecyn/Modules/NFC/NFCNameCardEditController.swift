@@ -74,15 +74,15 @@ class NFCNameCardEditController: BaseTableController {
             Toast.showLoading()
             UserService.updateUserInfo(model: self.request).subscribe(onNext:{
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Update Successful")
+                    Toast.showSuccess( "Update Successful")
                     self.navigationController?.popViewController(animated: true,{
                         self.updateComplete?()
                     })
                 } else {
-                    Toast.showError(withStatus: $0.message)
+                    Toast.showError($0.message)
                 }
             },onError: { e in
-                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                Toast.showError(e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
             
             

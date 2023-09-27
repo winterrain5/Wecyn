@@ -8,11 +8,21 @@
 import UIKit
 
 class PostFollowersController: BasePagingTableController {
-
+    var userId:Int = 0
+    required init(userId:Int) {
+        super.init(nibName: nil, bundle: nil)
+        self.userId = userId
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.isSkeletonable = true
+        refreshData()
     }
     
 
@@ -33,9 +43,19 @@ class PostFollowersController: BasePagingTableController {
     }
     
     override func refreshData() {
-        self.endRefresh()
-        self.hideSkeleton()
-        self.updateDataComplete?()
+        
+        self.showSkeleton()
+        NetworkService.followedList(type: 2,userId: userId,page: page).subscribe(onNext:{ models in
+            self.dataArray.append(contentsOf: models)
+            self.endRefresh(models.count,emptyString: "No Follower")
+            self.hideSkeleton()
+            self.updateDataComplete?()
+        },onError: { e in
+            self.endRefresh(e.asAPIError.emptyDatatype)
+            self.hideSkeleton()
+            self.updateDataComplete?()
+        }).disposed(by: rx.disposeBag)
+      
     }
     
     
@@ -57,7 +77,7 @@ class PostFollowersController: BasePagingTableController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: PostFollowUserCell.self)
         if self.dataArray.count > 0 {
-            cell.model = self.dataArray[indexPath.row] as? FriendUserInfoModel
+            cell.model = self.dataArray[indexPath.row] as? FriendFollowModel
         }
         cell.selectionStyle = .none
         return cell

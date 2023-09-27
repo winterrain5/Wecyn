@@ -110,11 +110,13 @@ class HomePostFootToolView: UIView {
     }
     
     func repostAction() {
-        Haptico.selection()
+        
         guard let model = self.postModel else { return }
+        Haptico.selection()
         PostRepostTypeSheetView.display(isRepost: model.posted) {
-            PostService.repost(id: model.id, content: "You reposted").subscribe(onNext:{ _ in
-                Toast.showSuccess(withStatus: "You have reposted")
+            PostService.repost(id: model.id, content: "You reposted").subscribe(onNext:{
+                Toast.showSuccess( "You have reposted")
+                self.repostHandler?($0)
             }).disposed(by: self.rx.disposeBag)
         } quoteAction: {
             let vc = CreatePostViewController(postModel: model)
@@ -129,7 +131,7 @@ class HomePostFootToolView: UIView {
     
    func shareAction() {
        Haptico.selection()
-       guard let url = "http://10.1.3.144/home".url else { return }
+       guard let url = APIHost.share.WebpageUrl.appending("/post/\(self.postModel?.id ?? 0)").url else { return }
        let vc = VisualActivityViewController(url: url)
        vc.previewLinkColor = .magenta
        UIViewController.sk.getTopVC()?.present(vc, animated: true)

@@ -143,37 +143,37 @@ class NFCNameCardEditHeadView: UIView {
     func uploadAvatar(_ image:UIImage) {
         Toast.showLoading()
         guard let base64 = compressionImage(50,image: image) else {
-            Toast.showError(withStatus: "Failed to compress image")
+            Toast.showError("Failed to compress image")
             return
         }
         UserService.updateAvatar(photo: base64).subscribe(onNext:{
             if $0.success != 1 {
-                Toast.showError(withStatus: $0.message)
+                Toast.showError($0.message)
             }else {
                 self.avtImgView.image = image
                 Toast.dismiss()
             }
         },onError: { e in
-            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
     }
     
     func uploadCover(_ image:UIImage) {
         Toast.showLoading()
         guard let base64 = compressionImage(300,image: image) else {
-            Toast.showError(withStatus: "Failed to compress image")
+            Toast.showError("Failed to compress image")
             return
         }
         UserService.updateCover(photo: base64).subscribe(onNext:{
             if $0.success != 1 {
-                Toast.showError(withStatus: $0.message)
+                Toast.showError($0.message)
             } else {
                 self.coverImageView.image = image
                 Toast.dismiss()
             }
             
         },onError: { e in
-            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
     }
     

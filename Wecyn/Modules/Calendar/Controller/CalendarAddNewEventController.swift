@@ -291,7 +291,7 @@ class CalendarAddNewEventController: BaseTableController {
         func addEventRequest() {
             Toast.showLoading()
             guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
-                Toast.showError(withStatus: "start time is required")
+                Toast.showError("start time is required")
                 return
             }
             
@@ -304,7 +304,7 @@ class CalendarAddNewEventController: BaseTableController {
             ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
                 
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Event Add Success")
+                    Toast.showSuccess( "Event Add Success")
                     self.navigationController?.popViewController()
                     WidgetCenter.shared.reloadAllTimelines()
                 } else {
@@ -376,7 +376,7 @@ class CalendarAddNewEventController: BaseTableController {
         func editEventRequest(){
             Toast.showLoading()
             guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
-                Toast.showError(withStatus: "start time is required")
+                Toast.showError("start time is required")
                 return
             }
             if let _ = self.rrule {
@@ -386,7 +386,7 @@ class CalendarAddNewEventController: BaseTableController {
             }
             ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Event Update Success")
+                    Toast.showSuccess( "Event Update Success")
                     self.navigationController?.popToRootViewController(animated: true)
                 } else {
                     Toast.showMessage($0.message)

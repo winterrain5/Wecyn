@@ -86,10 +86,16 @@ extension ObservableType where Element == Moya.Response {
     /// - Parameters:
     ///   - type: 模型类型
     /// - Returns: 数组模型
-    func mapArray<T: HandyJSON>(_ type: T.Type,toast:Bool = true) -> Observable<[T]> {
+    func mapObjectArray<T: HandyJSON>(_ type: T.Type, designatedPath: String? = nil,toast:Bool = true) -> Observable<[T]> {
         return filterNetworkErrorAndMapJSON(toast:toast)
             .map({ (response)  in
-                let jsonArray = JSON(response)[DataKey].arrayObject
+                var jsonArray:[Any] = []
+                if let path = designatedPath {
+                    jsonArray = JSON(response)[DataKey][path].arrayObject ?? []
+                } else {
+                    jsonArray = JSON(response)[DataKey].arrayObject ?? []
+                }
+                
                 guard let array = Array<T>.deserialize(from: jsonArray) as? [T] else {
                     throw APIError.serviceError(.unableHandyJsonNotArray)
                 }
@@ -103,10 +109,10 @@ extension ObservableType where Element == Moya.Response {
     ///   - type: 数组里的数据类型
     ///   - designatedPath: 解析的路径 默认 list
     /// - Returns: 数组
-    func mapArray<T>(_ type: T.Type,toast:Bool = true) -> Observable<[T]> {
+    func mapArray<T>(_ type: T.Type, designatedPath: String = DataKey, toast:Bool = true) -> Observable<[T]> {
         return filterNetworkErrorAndMapJSON(toast:toast)
             .map({ (response)  in
-                guard let jsonArray = response[DataKey] as? [T] else {
+                guard let jsonArray = response[designatedPath] as? [T] else {
                     throw APIError.serviceError(.unableHandyJsonNotArray)
                 }
                 return jsonArray
