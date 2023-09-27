@@ -43,7 +43,7 @@ class ScheduleService {
     /// - Returns: [EventListModel]
     static func eventList(model:EventListRequestModel) -> Observable<[EventListModel]> {
         let target = MultiTarget(ScheduleApi.eventList(model))
-        return APIProvider.rx.request(target).asObservable().mapArray(EventListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(EventListModel.self)
     }
     
     
@@ -85,14 +85,14 @@ class ScheduleService {
     /// - Returns: [AssistantInfo]
     static func recieveAssistantList() -> Observable<[AssistantInfo]> {
         let target = MultiTarget(ScheduleApi.recieveAssistantsList)
-        return APIProvider.rx.request(target).asObservable().mapArray(AssistantInfo.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(AssistantInfo.self)
     }
     
     /// 发送的助理列表
     /// - Returns: [AssistantInfo]
     static func sendedAssistantList() -> Observable<[AssistantInfo]> {
         let target = MultiTarget(ScheduleApi.sendedAssistantsList)
-        return APIProvider.rx.request(target).asObservable().mapArray(AssistantInfo.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(AssistantInfo.self)
     }
     
     
@@ -101,7 +101,7 @@ class ScheduleService {
     /// - Returns: MeetingRoom
     static func meetingRoomList(id: Int) -> Observable<[MeetingRoom]> {
         let target = MultiTarget(ScheduleApi.meetingRoom(id))
-        return APIProvider.rx.request(target).asObservable().mapArray(MeetingRoom.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(MeetingRoom.self)
     }
     
     

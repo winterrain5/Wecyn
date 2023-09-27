@@ -140,13 +140,13 @@ class ConnectionGroupController: BasePagingTableController {
             Toast.showLoading()
             NetworkService.deleteGroup(id: id).subscribe(onNext:{
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Successful operation")
+                    Toast.showSuccess( "Successful operation")
                     self.loadNewData()
                 } else {
-                    Toast.showError(withStatus: $0.message)
+                    Toast.showError($0.message)
                 }
             },onError: { e in
-                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                Toast.showError(e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -161,13 +161,13 @@ class ConnectionGroupController: BasePagingTableController {
             Toast.showLoading()
             NetworkService.friendToGroup(id: 0, friendIds: [id]).subscribe(onNext:{
                 if $0.success == 1 {
-                    Toast.showSuccess(withStatus: "Successful operation")
+                    Toast.showSuccess( "Successful operation")
                     self.loadNewData()
                 } else {
-                    Toast.showError(withStatus: $0.message)
+                    Toast.showError($0.message)
                 }
             },onError: { e in
-                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                Toast.showError(e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))

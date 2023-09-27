@@ -182,8 +182,8 @@
 		45A0E63D2ABD7E7C003C5153 /* HomePostItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E63C2ABD7E7C003C5153 /* HomePostItemCell.swift */; };
 		45A0E63F2AC14E25003C5153 /* PostReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E63E2AC14E25003C5153 /* PostReportController.swift */; };
 		45A0E6412AC29BF6003C5153 /* PostFollowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6402AC29BF5003C5153 /* PostFollowController.swift */; };
-		45A0E6432AC29C49003C5153 /* PostMyFollowedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6422AC29C49003C5153 /* PostMyFollowedController.swift */; };
-		45A0E6452AC29C5F003C5153 /* PostFollowMeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6442AC29C5F003C5153 /* PostFollowMeController.swift */; };
+		45A0E6432AC29C49003C5153 /* PostFollowingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6422AC29C49003C5153 /* PostFollowingController.swift */; };
+		45A0E6452AC29C5F003C5153 /* PostFollowersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6442AC29C5F003C5153 /* PostFollowersController.swift */; };
 		45A0E6472AC2C149003C5153 /* PostFollowUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6462AC2C149003C5153 /* PostFollowUserCell.swift */; };
 		45A0E64A2AC2D2FE003C5153 /* SafeSFSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 45A0E6492AC2D2FE003C5153 /* SafeSFSymbols */; };
 		45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A10A482A31B02500726B66 /* ProfileHeaderView.swift */; };
@@ -443,8 +443,8 @@
 		45A0E63C2ABD7E7C003C5153 /* HomePostItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostItemCell.swift; sourceTree = "<group>"; };
 		45A0E63E2AC14E25003C5153 /* PostReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportController.swift; sourceTree = "<group>"; };
 		45A0E6402AC29BF5003C5153 /* PostFollowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowController.swift; sourceTree = "<group>"; };
-		45A0E6422AC29C49003C5153 /* PostMyFollowedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMyFollowedController.swift; sourceTree = "<group>"; };
-		45A0E6442AC29C5F003C5153 /* PostFollowMeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowMeController.swift; sourceTree = "<group>"; };
+		45A0E6422AC29C49003C5153 /* PostFollowingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowingController.swift; sourceTree = "<group>"; };
+		45A0E6442AC29C5F003C5153 /* PostFollowersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowersController.swift; sourceTree = "<group>"; };
 		45A0E6462AC2C149003C5153 /* PostFollowUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFollowUserCell.swift; sourceTree = "<group>"; };
 		45A10A482A31B02500726B66 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
@@ -1233,8 +1233,8 @@
 				45A0E6322ABC0A29003C5153 /* PostCommentFullScreenController.swift */,
 				45A0E63E2AC14E25003C5153 /* PostReportController.swift */,
 				45A0E6402AC29BF5003C5153 /* PostFollowController.swift */,
-				45A0E6422AC29C49003C5153 /* PostMyFollowedController.swift */,
-				45A0E6442AC29C5F003C5153 /* PostFollowMeController.swift */,
+				45A0E6422AC29C49003C5153 /* PostFollowingController.swift */,
+				45A0E6442AC29C5F003C5153 /* PostFollowersController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1502,7 +1502,7 @@
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
-				45A0E6432AC29C49003C5153 /* PostMyFollowedController.swift in Sources */,
+				45A0E6432AC29C49003C5153 /* PostFollowingController.swift in Sources */,
 				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
@@ -1549,7 +1549,7 @@
 				45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */,
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
 				450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */,
-				45A0E6452AC29C5F003C5153 /* PostFollowMeController.swift in Sources */,
+				45A0E6452AC29C5F003C5153 /* PostFollowersController.swift in Sources */,
 				45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */,
 				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,

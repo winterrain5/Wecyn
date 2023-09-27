@@ -63,9 +63,9 @@ class RegistAddAvatarView: UIView {
         print("image.kilobytesSize:\(image.kilobytesSize),base64Size:\(base64.lengthOfBytes(using: .utf8))")
         UserService.updateAvatar(photo: base64).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Upload Success")
+                Toast.showSuccess( "Upload Success")
             } else {
-                Toast.showError(withStatus: $0.message)
+                Toast.showError($0.message)
             }
             self.addPhotoButton.stopAnimation()
         },onError: { e in

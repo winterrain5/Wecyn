@@ -136,7 +136,7 @@ class PostUserInfoController: BaseViewController {
         }
         
         let vc  = controllers[segmentedView.selectedIndex]
-        vc.refreshData()
+        vc.loadNewData()
         vc.updateDataComplete  = {[weak self] in
             self?.paggingView.mainTableView.mj_header?.endRefreshing()
         }

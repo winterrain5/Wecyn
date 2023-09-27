@@ -83,13 +83,14 @@ class HomeController: BaseTableController {
     
     override func refreshData() {
         self.showSkeleton()
+        
         PostService.postFeedList(lastId: lastId).subscribe(onNext:{ models in
             self.dataArray.append(contentsOf: models)
             self.endRefresh(models.count,emptyString: "No Post")
             self.hideSkeleton()
             self.lastId = models.last?.id ?? 0
         }, onError: { e in
-            self.endRefresh(e.asAPIError.emptyDatatype)
+            self.endRefresh(e.asAPIError.emptyDatatype,emptyString: e.asAPIError.errorInfo().message)
             self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
     }
@@ -122,6 +123,11 @@ class HomeController: BaseTableController {
         if dataArray.count > 0 {
             cell.model = dataArray[indexPath.row] as? PostListModel
         }
+        cell.footerView.repostHandler = {[weak self] in
+            self?.dataArray.insert($0, at: 0)
+            self?.tableView?.insertRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
+            
+        }
         cell.footerView.likeHandler = { [weak self] in
             self?.updateRow($0)
         }
@@ -135,7 +141,7 @@ class HomeController: BaseTableController {
         }
         cell.userInfoView.followHandler = { [weak self] model in
             guard let `self` = self else { return }
-            if model.followed {
+            if model.user.is_following {
                 self.updateRow(model)
             } else {
                 var dataArray = (self.dataArray as! [PostListModel])
@@ -145,6 +151,7 @@ class HomeController: BaseTableController {
             }
             
         }
+       
         cell.selectionStyle = .none
         return cell
     }

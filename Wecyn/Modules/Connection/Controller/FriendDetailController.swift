@@ -42,14 +42,14 @@ class FriendDetailController: BaseTableController {
                 NetworkService.deleteFriend(friend_id: self.model?.id ?? 0).subscribe(onNext:{ status in
                     Toast.dismiss()
                     if status.success == 1 {
-                        Toast.showSuccess(withStatus: "Delete Success")
+                        Toast.showSuccess( "Delete Success")
                         self.deleteUserComplete?(self.model?.id ?? 0)
                     } else {
-                        Toast.showError(withStatus: status.message)
+                        Toast.showError(status.message)
                     }
                     
                 },onError: { e in
-                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                    Toast.showError(e.asAPIError.errorInfo().message)
                 }).disposed(by: self.rx.disposeBag)
             }
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))

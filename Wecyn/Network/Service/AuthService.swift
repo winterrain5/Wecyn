@@ -23,7 +23,7 @@ class AuthService {
     /// 国家信息
     static func getAllCountry() -> Observable<[CountryModel]> {
         let target = AuthApi.getCountryList
-        return UserProvider.rx.cache.request(target).asObservable().mapArray(CountryModel.self)
+        return UserProvider.rx.cache.request(target).asObservable().mapObjectArray(CountryModel.self)
 //        let target = MultiTarget(AuthApi.getCountryList)
 //        return APIProvider.rx.request(target).asObservable().mapArray(CountryModel.self)
     }
@@ -31,7 +31,7 @@ class AuthService {
     /// 城市信息
     static func getAllCity(by countryID:Int) -> Observable<[CityModel]> {
         let target = MultiTarget(AuthApi.getCityList(countryId: countryID))
-        return APIProvider.rx.request(target).asObservable().mapArray(CityModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(CityModel.self)
     }
     
     /// 注册

@@ -68,7 +68,7 @@ class LoginView: UIView {
                     UIApplication.shared.keyWindow?.rootViewController = main
                 },onError: { e in
                     self.signInButton.stopAnimation()
-                    Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                    Toast.showError(e.asAPIError.errorInfo().message)
                 }).disposed(by: self.rx.disposeBag)
                
             },onError: { e in

@@ -48,14 +48,14 @@ class CreateGroupController: BaseTableController {
         let friends = selectedUsers.map({ $0.id })
         NetworkService.addGroup(name: groupName,friends: friends).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Created Successfully")
+                Toast.showSuccess( "Created Successfully")
                 self.navigationController?.popViewController()
                 NotificationCenter.default.post(name: NSNotification.Name.CreateGroup, object: nil)
             } else {
-                Toast.showError(withStatus: $0.message)
+                Toast.showError($0.message)
             }
         },onError: { e in
-            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
     }
     

@@ -60,7 +60,7 @@ class PostReportController: BaseTableController {
         
         selected.bind(to: button.rx.isEnabled).disposed(by: rx.disposeBag)
         button.rx.tap.subscribe(onNext:{ [weak self] in
-            Toast.showMessage("Your report has been submitted")
+            Toast.showSuccess( "Your report has been submitted")
             self?.returnBack()
         }).disposed(by: rx.disposeBag)
         

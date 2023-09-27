@@ -18,7 +18,7 @@ class PostFollowController: BaseViewController {
     
     var titleDataSource: JXSegmentedTitleDataSource = {
         let dataSource = JXSegmentedTitleDataSource()
-        dataSource.titles = ["Followers","Following"]
+        dataSource.titles = ["Following","Followers"]
         dataSource.isTitleColorGradientEnabled = true
         dataSource.isTitleZoomEnabled = false
         dataSource.isTitleStrokeWidthEnabled = false
@@ -59,12 +59,13 @@ class PostFollowController: BaseViewController {
     
     var user:FriendUserInfoModel?
     var defaultIndex:Int = 0
+    
     required init(user:FriendUserInfoModel,defaultIndex:Int = 0) {
         super.init(nibName: nil, bundle: nil)
         
         self.user = user
         self.defaultIndex = defaultIndex
-        controllers  = [PostFollowersController(),PostFollowingController()]
+        controllers  = [PostFollowingController(userId: user.id),PostFollowersController(userId: user.id)]
     }
     
     required init?(coder: NSCoder) {
@@ -76,7 +77,7 @@ class PostFollowController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigation.item.title = user?.first_name
+        self.navigation.item.title = user?.full_name
    
         segmentedView.dataSource = titleDataSource
         segmentedView.listContainer = paggingView.listContainerView
@@ -89,7 +90,6 @@ class PostFollowController: BaseViewController {
         
         
         paggingView.mainTableView.gestureDelegate = self
-        paggingView.pinSectionHeaderVerticalOffset = kNavBarHeight.int
         self.view.addSubview(paggingView)
         paggingView.frame = CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
         
@@ -106,13 +106,11 @@ class PostFollowController: BaseViewController {
     
     func loadData() {
     
-        
         let vc  = controllers[segmentedView.selectedIndex]
-        vc.refreshData()
+        vc.loadNewData()
         vc.updateDataComplete  = {[weak self] in
             self?.paggingView.mainTableView.mj_header?.endRefreshing()
         }
-      
         
     }
     

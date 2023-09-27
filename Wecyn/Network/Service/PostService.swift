@@ -22,12 +22,12 @@ class PostService {
     
     static func postList(userId:Int? = nil,lastId:Int = 0) -> Observable<[PostListModel]> {
         let target = MultiTarget(PostApi.postList(userId,lastId))
-        return APIProvider.rx.request(target).asObservable().mapArray(PostListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(PostListModel.self)
     }
     
     static func postFeedList(lastId:Int? = nil) -> Observable<[PostListModel]> {
         let target = MultiTarget(PostApi.feedList(lastPostId: lastId))
-        return APIProvider.rx.request(target).asObservable().mapArray(PostListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(PostListModel.self)
     }
     
     
@@ -65,7 +65,7 @@ class PostService {
     
     static func commentList(postId:Int,lastCommentId:Int? = nil) -> Observable<[PostCommentModel]> {
         let target = MultiTarget(PostApi.commentList(postId,lastCommentId))
-        return APIProvider.rx.request(target).asObservable().mapArray(PostCommentModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(PostCommentModel.self)
     }
     
     static func addReply(commentId:Int,content:String,toUserId:Int = 0) -> Observable<PostCommentReplyModel> {
@@ -75,7 +75,7 @@ class PostService {
     
     static func likedList(userId:Int = 0,lastId:Int? = nil) -> Observable<[PostListModel]> {
         let target = MultiTarget(PostApi.likedList(lastId))
-        return APIProvider.rx.request(target).asObservable().mapArray(PostListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(PostListModel.self)
     }
     
     static func repost(id:Int,content:String,type:Int = 1) -> Observable<PostListModel> {
@@ -90,7 +90,7 @@ class PostUser :BaseModel {
     var last_name: String = ""
     var first_name: String = ""
     var headline: String = ""
-    
+    var is_following:Bool = false
     var full_name:String {
         return String.fullName(first: first_name, last: last_name)
     }
@@ -121,7 +121,7 @@ class PostListModel :BaseModel {
     var type: Int = 0
     var repost_count: Int = 0
     var user: PostUser = PostUser()
-    var followed:Bool = false
+    
     var is_own_post:Bool {
         let userid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id.int ?? 0
         return userid ==  user.id
@@ -131,8 +131,8 @@ class PostListModel :BaseModel {
         let height = content.heightWithConstrainedWidth(width: kScreenWidth - 32, font: UIFont.sk.pingFangRegular(15))
         return height < 18 ? 18 : height
     }
-    var sourceDataH:CGFloat {
-        let height = source_data?.content.heightWithConstrainedWidth(width: kScreenWidth - 32, font: UIFont.sk.pingFangRegular(12)) ?? 0
+    var sourceDataContentH:CGFloat {
+        let height = source_data?.content.heightWithConstrainedWidth(width: kScreenWidth - 64, font: UIFont.sk.pingFangRegular(12)) ?? 0
         return (height < 16 ? 16 : height) + 44
     }
     var imgH:CGFloat {
@@ -155,7 +155,7 @@ class PostListModel :BaseModel {
         var space:CGFloat = 0
         var sourceH:CGFloat = 0
         if source_data != nil {
-            sourceH = sourceDataH
+            sourceH = sourceDataContentH
             space += 8
         }
         if images_obj.count > 0 {
@@ -234,7 +234,7 @@ func formateTime(_ create_time:String) -> String {
 //        return  "\(week) \(weekUnit)"
 //    }
     if day > 7 {
-        let dateStr = createTime?.toString(format: "dd-MM-yyyy")
+        let dateStr = createTime?.toString(format: "dd-MM-yyyy HH:mm")
         return dateStr ?? ""
     }
     if day > 0 && day < 7 {

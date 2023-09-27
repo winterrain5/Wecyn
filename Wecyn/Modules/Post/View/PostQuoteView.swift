@@ -28,7 +28,7 @@ class PostQuoteView: UIView {
     }
     var viewHeight:CGFloat {
         guard let model = postModel else { return 0 }
-        let contentH = model.content.heightWithConstrainedWidth(width: self.width - 16, font: UIFont.sk.pingFangRegular(12))
+        let contentH = model.content.heightWithConstrainedWidth(width: self.width - 32, font: UIFont.sk.pingFangRegular(12))
         return (contentH < 16 ? 16 : contentH) + 44
     }
     
@@ -95,8 +95,9 @@ class PostQuoteView: UIView {
             
         }
         guard let model = postModel else { return }
-        let contentH = model.content.heightWithConstrainedWidth(width: self.width - 16, font: UIFont.sk.pingFangRegular(12))
+        let contentH = model.content.heightWithConstrainedWidth(width: self.width - 32, font: UIFont.sk.pingFangRegular(12))
         contentLabel.frame = CGRect(x: 16, y: avatar.frame.maxY + 8, width: self.width - 32, height: contentH < 16 ? 16 : contentH)
+      
     }
     
 }

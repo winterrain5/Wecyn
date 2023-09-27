@@ -31,16 +31,16 @@ class Toast {
     }
     
     
-    static func showError(withStatus message: String) {
+    static func showError(_ message: String) {
         SPIndicator.present(title: message, preset: .error)
     }
     
-    static func showSuccess(withStatus message: String) {
+    static func showSuccess(_ message: String) {
         SPIndicator.present(title: message, preset: .done)
     }
     
     
-    static func showWarning(withStatus message: String) {
+    static func showWarning(_ message: String) {
         SPIndicatorView(title: message, preset: .custom(UIImage(.exclamationmark.triangleFill).tintImage(.hexStringColor(hexString: "#ff8a00")))).present()
     }
     

@@ -47,7 +47,7 @@ class NetworkService {
     /// - Returns: FriendListModel
     static func friendList(id:Int? = nil) -> Observable<[FriendListModel]> {
         let target = MultiTarget(NetworkApi.friendList(id))
-        return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendListModel.self)
 //                return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
     }
     
@@ -55,14 +55,14 @@ class NetworkService {
     /// - Returns: FriendRecieveModel
     static func friendRecieveList() -> Observable<[FriendRecieveModel]> {
         let target = MultiTarget(NetworkApi.friendReceiveList)
-        return APIProvider.rx.request(target).asObservable().mapArray(FriendRecieveModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendRecieveModel.self)
     }
     
     /// 获取发出的好友申请列表
     /// - Returns: FriendRecieveModel
     static func friendSendList() -> Observable<[FriendSendModel]> {
         let target = MultiTarget(NetworkApi.friendSendList)
-        return APIProvider.rx.request(target).asObservable().mapArray(FriendSendModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendSendModel.self)
     }
     
     
@@ -80,7 +80,7 @@ class NetworkService {
     /// - Returns: FriendListModel
     static func searchUserList(keyword: String = "") -> Observable<[FriendUserInfoModel]> {
         let target = MultiTarget(NetworkApi.userSearchList(keyword))
-        return APIProvider.rx.request(target).asObservable().mapArray(FriendUserInfoModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendUserInfoModel.self)
     }
     
     
@@ -120,7 +120,7 @@ class NetworkService {
     /// - Returns: GroupListModel 数组
     static func selectGroup(id:Int? = nil) -> Observable<[GroupListModel]> {
         let target = MultiTarget(NetworkApi.selectGroup(id))
-        return APIProvider.rx.request(target).asObservable().mapArray(GroupListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(GroupListModel.self)
     }
     
     
@@ -160,13 +160,26 @@ class NetworkService {
     
     
     /// 关注列表
-    /// - Parameter type: 1 关注列表 2 粉丝列表
+    /// - Parameter type: 1 following 2 follower
     /// - Returns: FriendListModel
-    static func followedList(type:Int) -> Observable<[FriendListModel]> {
-        let target = MultiTarget(NetworkApi.followedList(type))
-        return APIProvider.rx.request(target).asObservable().mapArray(FriendListModel.self)
+    static func followedList(type:Int,userId:Int = 0,page:Int = 1,pageSize:Int = 10,keyword:String = "") -> Observable<[FriendFollowModel]> {
+        let target = MultiTarget(NetworkApi.followedList(type,userId,page,pageSize,keyword))
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendFollowModel.self,designatedPath: "items")
     }
     
+}
+
+class FriendFollowModel: BaseModel {
+    var id: Int = 0
+    var first_name: String = ""
+    var headline:  String = ""
+    var last_name: String = ""
+    var avatar = ""
+    var is_following:Bool = false
+    var full_name: String {
+        String.fullName(first: first_name, last: last_name)
+    }
+    var is_my_follow:Bool = false
 }
 
 class FriendListModel: BaseModel {
@@ -175,7 +188,6 @@ class FriendListModel: BaseModel {
      "fn": string # 好友的first_name
      "ln": string # 好友的last_name
      "avt": int # 用户头像
-     "mutual_following": int 是否互相关注
      */
     var uuid:  String = ""
     var id: Int = 0
@@ -196,7 +208,7 @@ class FriendListModel: BaseModel {
         }
     }
     
-    var mutual_following:Int = 0
+    var is_following:Bool = false
     
     override func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -233,6 +245,9 @@ class FriendUserInfoModel: BaseModel {
     var cover = ""
     var wid = ""
     var is_following:Bool = false
+    
+    var follower_count:Int = 0
+    var following_count:Int = 0
 }
 
 

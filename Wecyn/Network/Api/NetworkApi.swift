@@ -26,7 +26,7 @@ enum NetworkApi  {
     case friendNameCard(_  uuid:String)
     case addFollow(_ userId:Int)
     case cancelFollow(_ userId:Int)
-    case followedList(_ type:Int)
+    case followedList(_ type:Int,_ userId:Int,_ page:Int,_ pageSize:Int,_ keyword:String)
 }
 
 extension NetworkApi:TargetType, Cacheable {
@@ -80,7 +80,7 @@ extension NetworkApi:TargetType, Cacheable {
              .addFollow,
              .cancelFollow:
             return Moya.Method.post
-        case .updateGroup,.followedList:
+        case .updateGroup:
             return Moya.Method.put
         default:
             return Moya.Method.get
@@ -128,8 +128,8 @@ extension NetworkApi:TargetType, Cacheable {
             return requestParametersByPost(["user_id":userId])
         case .cancelFollow(let userId):
             return requestParametersByPost(["user_id":userId])
-        case .followedList(let type):
-            return requestParametersByGet(["type":type])
+        case .followedList(let type,let userId,let page,let pageSize,let keyword):
+            return requestParametersByGet(["type":type,"user_id":userId,"page":page,"pagesize":pageSize,"keyword":keyword])
         }
         
     }

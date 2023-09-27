@@ -73,15 +73,15 @@ class EventSetAssistantsController: BaseTableController {
         requestModel.assistants = assistants
         ScheduleService.addAssistants(model: requestModel).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showSuccess(withStatus: "Successful operation")
+                Toast.showSuccess( "Successful operation")
                 self.navigationController?.popViewController()
             } else {
-                Toast.showError(withStatus: $0.message)
+                Toast.showError($0.message)
             }
             self.searchView.endSearching()
         },onError: { e in
             self.searchView.endSearching()
-            Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+            Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: self.rx.disposeBag)
     }
     

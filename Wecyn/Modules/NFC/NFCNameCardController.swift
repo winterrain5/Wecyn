@@ -372,12 +372,12 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
                 if $0.success == 1 {
                     self.dismiss(animated: true)
                 } else {
-                    Toast.showError(withStatus: $0.message)
+                    Toast.showError($0.message)
                 }
                 
             },onError: { e in
                 connectButton.stopAnimation()
-                Toast.showError(withStatus: e.asAPIError.errorInfo().message)
+                Toast.showError(e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
             
         }).disposed(by: rx.disposeBag)

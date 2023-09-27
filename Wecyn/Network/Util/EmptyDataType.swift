@@ -59,13 +59,13 @@ public enum EmptyDataType:Equatable {
         case .NoData:
             text = noDataString.isEmpty ? text : noDataString
         case .Network:
-            text = EmptyStatus.Message.Network.rawValue
+            text = noDataString.isEmpty ? EmptyStatus.Message.Network.rawValue : noDataString
         case .TimeOut:
-            text = EmptyStatus.Message.Timeout.rawValue
+            text = noDataString.isEmpty ? EmptyStatus.Message.Timeout.rawValue : noDataString
         case .Service:
-            text = EmptyStatus.Message.Service.rawValue
+            text = noDataString.isEmpty ? EmptyStatus.Message.Service.rawValue : noDataString
         default:
-            text = "暂无数据"
+            text = "No Data"
         }
         let attributes:[NSAttributedString.Key:AnyObject] = [NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): UIFont.systemFont(ofSize: 14),NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.gray]
         
