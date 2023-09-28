@@ -50,8 +50,8 @@ class ProfileSectionView: UIView {
         }).disposed(by: rx.disposeBag)
         
         editButton.titleColorForNormal = R.color.iconColor()
-        editButton.titleLabel?.font = UIFont.sk.pingFangRegular(14)
-        editButton.sk.setImageTitleLayout(.imgRight,spacing: 6)
+        editButton.titleLabel?.font = UIFont.sk.pingFangRegular(12)
+        editButton.sk.setImageTitleLayout(.imgRight,spacing: 4)
         backgroundColor = .white
         
     }
@@ -73,12 +73,14 @@ class ProfileSectionView: UIView {
             make.right.equalToSuperview().inset(16)
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(32)
+            make.width.equalTo(46)
         }
         
         addButton.snp.makeConstraints { make in
-            make.right.equalTo(editButton.snp.right).inset(16)
+            make.right.equalTo(editButton.snp.left).offset(-16)
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(32)
+            make.width.equalTo(46)
         }
     }
 }

@@ -16,6 +16,7 @@ class HomePostUserInfoView: UIView {
     var moreButton = UIButton()
     var updatePostType:((PostListModel)->())?
     var followHandler:((PostListModel)->())?
+    var deleteHandler:((PostListModel)->())?
     var postModel:PostListModel? {
         didSet {
             guard let model = postModel else { return }
@@ -27,7 +28,14 @@ class HomePostUserInfoView: UIView {
             
             if model.is_own_post {
                 let action1 = UIAction(title: "Delete post",image: UIImage.trash?.tintImage(.red),attributes: .destructive) { _ in
-                    
+                    PostService.updatePostType(id: model.id, type: 0).subscribe(onNext:{
+                        if $0.success == 1 {
+                            Toast.showSuccess("You have deleted this post")
+                            self.deleteHandler?(model)
+                        } else {
+                            Toast.showError($0.message)
+                        }
+                    }).disposed(by: self.rx.disposeBag)
                 }
                 
                 let submenu = UIMenu(title:"Change post type",children: [
