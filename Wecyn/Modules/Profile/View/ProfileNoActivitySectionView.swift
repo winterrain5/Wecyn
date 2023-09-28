@@ -9,22 +9,22 @@ import UIKit
 
 class ProfileNoActivitySectionView: UIView {
 
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 16)
         $0.textColor = R.color.textColor33()!
         $0.text = "Activity"
     }
-    private let createPostBtn = UIButton().then { btn in
+    let createPostBtn = UIButton().then { btn in
         btn.titleForNormal = "Create a post"
         btn.backgroundColor = R.color.theamColor()!
         btn.titleLabel?.font = UIFont.sk.pingFangSemibold(12)
     }
-    private let msgLabel1 = UILabel().then {
+    let msgLabel1 = UILabel().then {
         $0.font = UIFont.sk.pingFangRegular(13)
         $0.text = "You have not posted lately"
         $0.textColor = R.color.textColor33()!
     }
-    private let msgLabel2 = UILabel().then {
+    let msgLabel2 = UILabel().then {
         $0.font = UIFont.sk.pingFangRegular(11)
         $0.text = "Recent posts you share or comment on will be displayed here"
         $0.textColor = R.color.textColor33()!
@@ -36,12 +36,7 @@ class ProfileNoActivitySectionView: UIView {
         addSubview(msgLabel1)
         addSubview(msgLabel2)
         
-        createPostBtn.rx.tap.subscribe(onNext:{
-            let vc = CreatePostViewController()
-            let nav = BaseNavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            UIViewController.sk.getTopVC()?.present(nav, animated: true)
-        }).disposed(by: rx.disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {

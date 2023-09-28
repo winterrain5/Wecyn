@@ -17,6 +17,7 @@ class PostDetailViewController: BaseTableController {
     var commentList:[PostCommentModel] = []
     var lastCommentId:Int = 0
     var isBeginEdit = false
+    var deletePostFromDetailComplete:((PostListModel)->())?
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
     required init(postModel:PostListModel,isBeginEdit:Bool = false) {
         super.init(nibName: nil, bundle: nil)
@@ -164,6 +165,11 @@ class PostDetailViewController: BaseTableController {
             cell.userInfoView.followHandler = { [weak self] _ in
                 guard let `self` = self else { return }
                 self.tableView?.reloadRows(at: [IndexPath(item: 0, section: 0)], with: .none)
+            }
+            cell.userInfoView.deleteHandler = { [weak self]  in
+                guard let `self` = self else { return }
+                self.deletePostFromDetailComplete?($0)
+                self.navigationController?.popViewController()
             }
             return cell
         } else {

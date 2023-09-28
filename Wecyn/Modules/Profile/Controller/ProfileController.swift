@@ -23,13 +23,15 @@ class ProfileController: BaseTableController {
     private let sectionType:[SectionType] = [.Activity,.Skills,.Experience,.Education,.Interests]
     override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio == 0 ? .lightContent : .darkContent }
     var ratio:CGFloat = 0
-    var latesdPost:PostListModel?
+    var userPosts:[PostListModel] =  []
     override func viewDidLoad() {
         super.viewDidLoad()
         addRightBarItem()
        
         
         self.navigation.bar.alpha = 0
+        
+        refreshData()
     }
     
     func addRightBarItem() {
@@ -68,16 +70,20 @@ class ProfileController: BaseTableController {
             UserDefaults.sk.set(object: model, for: UserInfoModel.className)
             self.headerView.userInfoModel = model
             PostService.postList(userId: model.id.int).subscribe(onNext:{
-                self.latesdPost = $0.first
-                self.tableView?.reloadData()
+                self.userPosts = $0
+                self.endRefresh()
+            },onError: { e in
+                self.endRefresh()
             }).disposed(by: self.rx.disposeBag)
+        },onError: { e in
+            self.endRefresh()
         }).disposed(by: rx.disposeBag)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshData()
+        
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -91,7 +97,7 @@ class ProfileController: BaseTableController {
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == SectionType.Activity.rawValue {
-            return self.latesdPost == nil ? 0 : 1
+            return self.userPosts.first == nil ? 0 : 1
         }
         if section == SectionType.Skills.rawValue { return 0 }
         
@@ -100,7 +106,7 @@ class ProfileController: BaseTableController {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == SectionType.Activity.rawValue {
-            return self.latesdPost?.cellHeight ?? 0
+            return self.userPosts.first?.cellHeight ?? 0
         }
         if indexPath.section == SectionType.Skills.rawValue {
             return 150
@@ -135,15 +141,32 @@ class ProfileController: BaseTableController {
         }
         if indexPath.section == SectionType.Activity.rawValue {
             let cell = tableView.dequeueReusableCell(withClass: HomePostItemCell.self)
-            cell.model = self.latesdPost
+            cell.model = self.userPosts.first
+            cell.userInfoView.updatePostType = { [weak self] _ in
+                self?.tableView?.reloadData()
+            }
+            cell.userInfoView.deleteHandler = { [weak self] _ in
+                self?.deletePost()
+            }
             return cell
         }
         return UITableViewCell()
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == SectionType.Activity.rawValue {
-            if self.latesdPost == nil {
+            if self.userPosts.first == nil {
                 let view = ProfileNoActivitySectionView()
+                view.createPostBtn.rx.tap.subscribe(onNext:{ [weak self] in
+                    guard let `self` = self else { return }
+                    let vc = CreatePostViewController()
+                    let nav = BaseNavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    UIViewController.sk.getTopVC()?.present(nav, animated: true)
+                    vc.addCompleteHandler = {
+                        self.userPosts.insert($0, at: 0)
+                        self.tableView?.reloadData()
+                    }
+                }).disposed(by: self.rx.disposeBag)
                 return view
             }
             if let title = sectionTitleMap[section] {
@@ -162,7 +185,7 @@ class ProfileController: BaseTableController {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == SectionType.Activity.rawValue {
-            if self.latesdPost == nil {
+            if self.userPosts.first == nil {
                 return 88
             }
             return 42
@@ -178,6 +201,28 @@ class ProfileController: BaseTableController {
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == SectionType.Interests.rawValue ? 0 : 1
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section  == 0 {
+            guard let model = userPosts.first else { return }
+            let vc = PostDetailViewController(postModel: model)
+            self.navigationController?.pushViewController(vc)
+            vc.deletePostFromDetailComplete = { [weak self] _ in
+                self?.deletePost()
+            }
+        }
+        
+    }
+    
+    func deletePost() {
+        if self.userPosts.count > 0 {
+            self.userPosts.remove(at: 0)
+            self.tableView?.reloadData()
+            if self.userPosts.count == 0 {
+                self.refreshData()
+            }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

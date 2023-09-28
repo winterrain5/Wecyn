@@ -136,9 +136,7 @@ class HomeController: BaseTableController {
             let vc = PostDetailViewController(postModel: $0,isBeginEdit: true)
             self.navigationController?.pushViewController(vc)
         }
-        cell.userInfoView.updatePostType = { [weak self] in
-            self?.updateRow($0)
-        }
+       
         cell.userInfoView.followHandler = { [weak self] model in
             guard let `self` = self else { return }
             if model.user.is_following {
@@ -151,6 +149,13 @@ class HomeController: BaseTableController {
             }
             
         }
+        cell.userInfoView.updatePostType = { [weak self] in
+            self?.updateRow($0)
+        }
+        cell.userInfoView.deleteHandler = { [weak self] model in
+            guard let `self` = self else { return }
+            self.deleteRow(model)
+        }
        
         cell.selectionStyle = .none
         return cell
@@ -160,12 +165,20 @@ class HomeController: BaseTableController {
         let item = (self.dataArray as! [PostListModel]).firstIndex(of: model) ?? 0
         self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
     }
+    func deleteRow(_ model:PostListModel) {
+        let item = (self.dataArray as! [PostListModel]).firstIndex(of: model) ?? 0
+        self.dataArray.remove(at: item)
+        self.tableView?.deleteRows(at: [IndexPath(item: item, section: 0)], with: .automatic)
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if dataArray.count > 0 {
             let model = dataArray[indexPath.row] as! PostListModel
             let vc = PostDetailViewController(postModel: model)
             self.navigationController?.pushViewController(vc)
+            vc.deletePostFromDetailComplete = { [weak self] in
+                self?.deleteRow($0)
+            }
         }
         
     }

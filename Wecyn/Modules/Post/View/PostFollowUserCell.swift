@@ -21,6 +21,8 @@ class PostFollowUserCell: UITableViewCell {
             nameLabel.text = model.full_name
             headlineLabel.text = model.headline
             updateFollowStatus(model)
+            
+            followButton.isHidden = model.id == (UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id.int ?? 0)
         }
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

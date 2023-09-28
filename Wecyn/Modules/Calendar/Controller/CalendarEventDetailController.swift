@@ -26,15 +26,18 @@ class CalendarEventDetailModel {
     var cellType:CalendarEventDetailCellType
     var model:EventInfoModel
     var cellHeight:CGFloat {
-        return model.recurrenceDescription.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 58
+        let titleH = model.title.heightWithConstrainedWidth(width: kScreenWidth - 68, font: UIFont.sk.pingFangRegular(16))
+        let descH = model.recurrenceDescription.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
+        let space = 32
+        return (titleH < 18 ? 18 : titleH) + (descH < 42 ? 42 : descH) + space.cgFloat
     }
     var descHeight: CGFloat{
         var  descH:CGFloat = 0
         if cellType == .Description {
-            descH = model.desc.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
+            descH = model.desc.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
         }
         if cellType == .Remark {
-            descH = model.remarks.filterHTML().heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
+            descH = model.remarks.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
         }
        
         
@@ -385,6 +388,7 @@ class CalendarEventDetailTitleCell: UITableViewCell {
         
         titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
+        titleLabel.numberOfLines = 0
         
         detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(15)
@@ -412,8 +416,7 @@ class CalendarEventDetailTitleCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(imgView.snp.right).offset(16)
             make.right.equalToSuperview().inset(16)
-            make.height.equalTo(18)
-            make.centerY.equalTo(imgView.snp.centerY)
+            make.top.equalTo(imgView.snp.top).offset(-2)
         }
         
         detailLabel.snp.makeConstraints { make in

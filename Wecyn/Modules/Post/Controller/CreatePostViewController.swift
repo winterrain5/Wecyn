@@ -266,13 +266,13 @@ class CreatePostViewController: BaseViewController {
         
         toolBar.linkButton.rx.tap.subscribe(onNext:{ [weak self] in
             Haptico.selection()
-            Toast.showSuccess("Function under development")
+            Toast.showWarning("Function under development")
         }).disposed(by: rx.disposeBag)
         
         toolBar.atButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            Toast.showSuccess("Function under development")
+            Toast.showWarning("Function under development")
             return
             let vc = CalendarAddAttendanceController(selecteds: [])
             let nav = BaseNavigationController(rootViewController: vc)
@@ -289,7 +289,7 @@ class CreatePostViewController: BaseViewController {
         toolBar.hastagButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            Toast.showSuccess("Function under development")
+            Toast.showWarning("Function under development")
         }).disposed(by: rx.disposeBag)
         
         if let postModel = self.postModel {
@@ -418,12 +418,10 @@ extension CreatePostViewController: ImageEditorControllerDelegate {
 
 extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Logger.info(postMedias)
         return postMedias.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: CreatePostImageCell.self, for: indexPath)
-        Logger.info(postMedias)
         if postMedias.count > 0 {
             cell.result = postMedias[indexPath.item]
             cell.deleteItemHandler = { [weak self] result in
