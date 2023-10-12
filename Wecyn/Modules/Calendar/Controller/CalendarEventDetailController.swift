@@ -80,15 +80,24 @@ class CalendarEventDetailController: BaseTableController {
     override func refreshData() {
         self.models.removeAll()
         Toast.showLoading()
-        ScheduleService.eventInfo(eventModel.id).subscribe(onNext:{ model in
+        ScheduleService.eventInfo(eventModel.id,currentUserId: CalendarBelongUserId).subscribe(onNext:{ model in
             Toast.dismiss()
             
             if self.eventModel.is_repeat == 1 {
+                model.is_repeat = self.eventModel.is_repeat
                 model.repeat_start_time = self.eventModel.start_time
+                model.rrule_str = self.eventModel.rrule_str
             }
             model.isCrossDay = self.eventModel.isCrossDay
             model.isBySearch = self.eventModel.isBySearch
             model.creator_name = self.eventModel.creator_name
+            
+            if model.start_date == nil { // 不属于自己的room事件
+                model.start_time = self.eventModel.start_time
+                model.end_time = self.eventModel.end_time
+                model.title = self.eventModel.title
+            }
+            
             self.eventInfoModel = model
            
             
@@ -125,14 +134,13 @@ class CalendarEventDetailController: BaseTableController {
             
             let peolple = CalendarEventDetailModel(cellType: .People, model: model)
             let room = CalendarEventDetailModel(cellType: .Room, model: model)
-//            let peopleLimit = CalendarEventDetailModel(cellType: .PeopleLimit, model: model)
             
             if model.is_public != 1 {
                 if model.attendees.count > 0 {
                     section3.append(peolple)
                 }
             }
-            if model.room_id != 0 {
+            if !model.room_name.isEmpty {
                 section3.append(room)
             }
             self.models.append(section3)
@@ -169,15 +177,22 @@ class CalendarEventDetailController: BaseTableController {
     
     func addStatusButton() {
         let editButton = UIButton()
-        if eventModel.status == 0 {
-            editButton.imageForNormal = R.image.personFillQuestionmark()
+        if eventModel.is_own {
+            if eventModel.status == 0 {
+                editButton.imageForNormal = R.image.personFillQuestionmark()
+            }
+            if eventModel.status == 1 {
+                editButton.imageForNormal = R.image.personFillCheckmark()
+            }
+            if eventModel.status == 2 {
+                editButton.imageForNormal = R.image.personFillXmark()
+            }
+            editButton.isUserInteractionEnabled = true
+        } else {
+            editButton.imageForNormal = R.image.sharedWithYouSlash()
+            editButton.isUserInteractionEnabled = false
         }
-        if eventModel.status == 1 {
-            editButton.imageForNormal = R.image.personFillCheckmark()
-        }
-        if eventModel.status == 2 {
-            editButton.imageForNormal = R.image.personFillXmark()
-        }
+       
         editButton.size = CGSize(width: 36, height: 36)
         editButton.showsMenuAsPrimaryAction = true
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: editButton)

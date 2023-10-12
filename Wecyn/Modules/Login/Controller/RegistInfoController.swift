@@ -14,16 +14,11 @@ class RegistInfoController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UIDevice.isiPhoneX {
-            self.view.addSubview(container)
-            container.frame = self.view.bounds
-        } else {
-            self.view.addSubview(scrollView)
-            scrollView.frame = self.view.bounds
-            scrollView.addSubview(container)
-            container.frame = CGRect(x: 0, y: -kNavBarHeight, width: kScreenWidth, height: 730)
-            scrollView.contentSize = CGSize(width: kScreenWidth, height: 730)
-        }
+        self.view.addSubview(scrollView)
+        scrollView.frame = self.view.bounds
+        scrollView.addSubview(container)
+        container.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 730)
+        scrollView.contentSize = CGSize(width: kScreenWidth, height: 730)
         
      
     }

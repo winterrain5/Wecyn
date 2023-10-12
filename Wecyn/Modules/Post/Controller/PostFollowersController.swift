@@ -22,7 +22,7 @@ class PostFollowersController: BasePagingTableController {
         super.viewDidLoad()
 
         self.view.isSkeletonable = true
-        refreshData()
+        
     }
     
 

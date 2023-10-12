@@ -25,7 +25,7 @@ class HomeController: BaseTableController {
         createPostButton.titleColorForNormal = .white
         createPostButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(kTabBarHeight + 16)
+            make.bottom.equalToSuperview().offset(-(kTabBarHeight + 16))
             make.width.height.equalTo(60)
         }
         createPostButton.addShadow(cornerRadius: 30)
@@ -54,6 +54,11 @@ class HomeController: BaseTableController {
         let leftItem = UIBarButtonItem(customView: wecynLabel)
         self.navigation.item.leftBarButtonItem = leftItem
         
+        Logger.info("kNavBarHeight:\(kNavBarHeight)")
+        Logger.info("kTabBarHeight:\(kTabBarHeight)")
+        Logger.info("UIDevice.tabbarHeight:\(UIDevice.tabbarHeight)")
+        Logger.info("UIDevice.bottomSafeAreaMargin:\(UIDevice.topSafeAreaMargin)")
+        
         refreshData()
     }
     
@@ -79,6 +84,10 @@ class HomeController: BaseTableController {
         
         registRefreshHeader(colorStyle: .gray)
         registRefreshFooter()
+    }
+    
+    override func listViewFrame() -> CGRect {
+        return .init(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
     }
     
     override func refreshData() {

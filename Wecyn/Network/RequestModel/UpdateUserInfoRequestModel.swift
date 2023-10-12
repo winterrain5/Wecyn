@@ -13,7 +13,7 @@ import UIKit
     var id: Int = 0
     var uuid: String?
     var tel_work: String?
-    var org_id: Int = 0
+    var org_id: Int?
     var url: String?
     var org_name: String?
     var title: String?
@@ -26,5 +26,4 @@ import UIKit
     var last_name: String?
     var email: String?
     var adr_work: String?
-    
 }

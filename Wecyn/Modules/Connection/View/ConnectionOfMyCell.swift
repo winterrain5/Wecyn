@@ -15,7 +15,8 @@ class ConnectionOfMyCell: UITableViewCell {
         didSet {
             guard let model = model else { return }
             imgView.kf.setImage(with: model.avatar_url,placeholder: R.image.proile_user()!)
-            nameLabel.text = model.full_name
+            nameLabel.text = model.remark.isEmpty ? model.full_name : "\(model.full_name) (\(model.remark))"
+            nameLabel.sk.setSpecificTextColor("(\(model.remark))", color: R.color.textColor77()!)
         }
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -26,6 +27,8 @@ class ConnectionOfMyCell: UITableViewCell {
         imgView.contentMode = .scaleAspectFill
         nameLabel.textColor = R.color.textColor33()
         nameLabel.font = UIFont.sk.pingFangRegular(16)
+        self.isSkeletonable =  true
+        self.subviews.forEach({ $0.isSkeletonable = true })
     }
     
     required init?(coder: NSCoder) {
@@ -42,6 +45,7 @@ class ConnectionOfMyCell: UITableViewCell {
         nameLabel.snp.makeConstraints { make in
             make.left.equalTo(imgView.snp.right).offset(16)
             make.centerY.equalToSuperview()
+            make.height.equalTo(23)
         }
     }
 }

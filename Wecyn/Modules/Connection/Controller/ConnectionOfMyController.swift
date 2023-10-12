@@ -29,11 +29,12 @@ class ConnectionOfMyController: BasePagingTableController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.isSkeletonable = true
         
-        self.showSkeleton()
     }
     
     func configData(models:[FriendListModel]) {
+        self.showSkeleton()
         self.friends.removeAll()
         if  models.count > 0 {
             var characters = models.map({ String( $0.first_name.first! ).uppercased() })

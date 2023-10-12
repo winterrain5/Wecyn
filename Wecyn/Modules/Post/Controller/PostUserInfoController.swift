@@ -135,14 +135,17 @@ class PostUserInfoController: BaseViewController {
             self?.userName = $0.full_name
         }
         
+        loadPageData()
+      
+    }
+    
+    func loadPageData() {
         let vc  = controllers[segmentedView.selectedIndex]
         vc.loadNewData()
         vc.updateDataComplete  = {[weak self] in
             self?.paggingView.mainTableView.mj_header?.endRefreshing()
         }
-      
     }
-    
     
 }
 

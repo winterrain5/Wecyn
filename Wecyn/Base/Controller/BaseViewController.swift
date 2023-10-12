@@ -58,7 +58,13 @@ class BaseViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
+        IQKeyboardManager.shared.enableAutoToolbar = true
         Toast.dismiss()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
     func barTintColor(_ color:UIColor) {

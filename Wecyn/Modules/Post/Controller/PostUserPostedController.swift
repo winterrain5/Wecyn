@@ -85,8 +85,51 @@ class PostUserPostedController: BasePagingTableController {
             let model = dataArray[indexPath.row] as? PostListModel
             cell.model = model
         }
+        cell.userInfoView.deleteHandler = { [weak self] model in
+            guard let `self` = self else { return }
+            self.deleteRow(model)
+        }
+        cell.footerView.repostHandler = {[weak self] in
+            self?.dataArray.insert($0, at: 0)
+            self?.tableView?.insertRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
+            
+        }
+        cell.footerView.likeHandler = { [weak self] in
+            self?.updateRow($0)
+        }
+        cell.footerView.commentHandler = { [weak self] in
+            guard let `self` = self else { return }
+            let vc = PostDetailViewController(postModel: $0,isBeginEdit: true)
+            self.navigationController?.pushViewController(vc)
+        }
+       
+        cell.userInfoView.followHandler = { [weak self] model in
+            guard let `self` = self else { return }
+            if model.user.is_following {
+                self.updateRow(model)
+            } else {
+                var dataArray = (self.dataArray as! [PostListModel])
+                let _ = dataArray.removeAll(where: { $0.id == model.id })
+                self.dataArray = dataArray
+                self.tableView?.reloadData()
+            }
+            
+        }
+        cell.userInfoView.updatePostType = { [weak self] in
+            self?.updateRow($0)
+        }
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func deleteRow(_ model:PostListModel) {
+        let item = (self.dataArray as! [PostListModel]).firstIndex(of: model) ?? 0
+        self.dataArray.remove(at: item)
+        self.tableView?.deleteRows(at: [IndexPath(item: item, section: 0)], with: .automatic)
+    }
+    func updateRow(_ model:PostListModel) {
+        let item = (self.dataArray as! [PostListModel]).firstIndex(of: model) ?? 0
+        self.tableView?.reloadRows(at: [IndexPath(item: item, section: 0)], with: .none)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

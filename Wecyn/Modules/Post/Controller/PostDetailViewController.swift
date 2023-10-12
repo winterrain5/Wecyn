@@ -121,7 +121,7 @@ class PostDetailViewController: BaseTableController {
     override func createListView() {
         super.createListView()
         
-        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
+        tableView?.contentInset = .zero
         
         tableView?.register(cellWithClass: HomePostItemCell.self)
         tableView?.register(nibWithCellClass: PostCommentCell.self)
@@ -135,6 +135,7 @@ class PostDetailViewController: BaseTableController {
         registRefreshHeader(colorStyle: .gray)
         registRefreshFooter()
     }
+    
  
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -157,6 +158,10 @@ class PostDetailViewController: BaseTableController {
             cell.selectionStyle = .none
             cell.footerView.commentHandler = { [weak self] _ in
                 self?.postBar.tv.becomeFirstResponder()
+            }
+            cell.footerView.likeHandler = { [weak self] _ in
+                guard let `self` = self else { return }
+                self.tableView?.reloadRows(at: [IndexPath(item: 0, section: 0)], with: .none)
             }
             cell.userInfoView.updatePostType = { [weak self] _ in
                 guard let `self` = self else { return }
@@ -206,6 +211,15 @@ class PostDetailViewController: BaseTableController {
             return cell
         }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = commentList[indexPath.row]
+        let vc = PostCommentReplyController(commentModel: model,isBeginEdit: false)
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

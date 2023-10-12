@@ -279,7 +279,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 103 images.
+  /// This `_R.image` struct is generated, and contains static references to 105 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -309,6 +309,9 @@ struct _R {
 
     /// Image `calendar_calendar`.
     var calendar_calendar: RswiftResources.ImageResource { .init(name: "calendar_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `calendar_filter`.
+    var calendar_filter: RswiftResources.ImageResource { .init(name: "calendar_filter", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `calendar_item_arrow_down`.
     var calendar_item_arrow_down: RswiftResources.ImageResource { .init(name: "calendar_item_arrow_down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -528,6 +531,9 @@ struct _R {
 
     /// Image `send`.
     var send: RswiftResources.ImageResource { .init(name: "send", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `shared.with.you.slash`.
+    var sharedWithYouSlash: RswiftResources.ImageResource { .init(name: "shared.with.you.slash", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `square.and.arrow.up`.
     var squareAndArrowUp: RswiftResources.ImageResource { .init(name: "square.and.arrow.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

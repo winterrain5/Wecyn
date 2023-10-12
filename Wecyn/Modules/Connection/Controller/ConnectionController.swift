@@ -51,7 +51,7 @@ class ConnectionController: BaseCollectionController,UICollectionViewDelegateFlo
             self.endRefresh(models.count,emptyString: "No Data")
             self.hideSkeleton()
         },onError: { e in
-            self.endRefresh(e.asAPIError.emptyDatatype)
+            self.endRefresh(e.asAPIError.emptyDatatype,emptyString: e.asAPIError.errorInfo().message)
             self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
         

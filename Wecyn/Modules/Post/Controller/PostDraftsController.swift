@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import IQKeyboardManagerSwift
 class PostDraftsController: BaseTableController {
 
     var drafts:[PostDraftModel] = []
@@ -34,6 +34,8 @@ class PostDraftsController: BaseTableController {
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         editButton.isEnabled = drafts.count != 0
+        
+        IQKeyboardManager.shared.enableAutoToolbar  = false
     }
     
     override func createListView() {

@@ -224,6 +224,13 @@ extension Date {
     }
 }
 
+
+extension UIImage {
+    func tintImage(_ color:UIColor) -> UIImage {
+        self.withTintColor(color).withRenderingMode(.alwaysOriginal)
+    }
+}
+
 extension UIApplication {
     // 查找keyWindow
     var keyWindow: UIWindow? {
@@ -231,7 +238,8 @@ extension UIApplication {
             .shared
             .connectedScenes
             .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-            .last { $0.isKeyWindow }
+            .filter({ $0.isKeyWindow })
+            .last
     }
 }
 
@@ -240,16 +248,16 @@ extension UIDevice {
     static let window = UIApplication.shared.keyWindow
     
     static var topSafeAreaMargin:CGFloat {
-        return window?.safeAreaInsets.top ?? 0
+        return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
     }
     static var bottomSafeAreaMargin:CGFloat {
-        return window?.safeAreaInsets.bottom ?? 0
+        return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
     }
     static var navigationBarHeight:CGFloat {
-        return 44.0 + topSafeAreaMargin
+        return 44.0
     }
     static var tabbarHeight:CGFloat {
-        return 49.0 + bottomSafeAreaMargin
+        return 49.0
     }
     static var statusBarHeight:CGFloat {
          let statusBarManager = UIApplication
@@ -265,19 +273,14 @@ extension UIDevice {
     }
 }
 
-extension UIImage {
-    func tintImage(_ color:UIColor) -> UIImage {
-        self.withTintColor(color).withRenderingMode(.alwaysOriginal)
-    }
-}
 
-/// 导航栏高度
+/// 导航栏总高度
 var kNavBarHeight: CGFloat {
-    return UIDevice.navigationBarHeight
+    return UIDevice.navigationBarHeight + UIDevice.statusBarHeight
 }
-/// tab栏高度
+/// tab栏高度总高度
 var kTabBarHeight: CGFloat {
-    return UIDevice.tabbarHeight
+    return UIDevice.tabbarHeight + UIDevice.bottomSafeAreaMargin
 }
 /// 底部安全区域
 let kBottomsafeAreaMargin: CGFloat = UIDevice.bottomSafeAreaMargin

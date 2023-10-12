@@ -34,7 +34,12 @@ import UIKit
     var adr_work: String = ""
 
     var full_name:String {
-        return String.fullName(first: first_name, last: last_name)
+        get {
+            String.fullName(first: first_name, last: last_name)
+        }
+        set {
+            first_name = newValue
+        }
     }
     
     override func value(forUndefinedKey key: String) -> Any? {
