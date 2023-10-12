@@ -106,7 +106,7 @@ class PostFollowController: BaseViewController {
     
     func loadData() {
     
-        let vc  = controllers[segmentedView.selectedIndex]
+        let vc  = controllers[defaultIndex]
         vc.loadNewData()
         vc.updateDataComplete  = {[weak self] in
             self?.paggingView.mainTableView.mj_header?.endRefreshing()
@@ -130,7 +130,9 @@ extension PostFollowController:JXPagingMainTableViewGestureDelegate {
 extension PostFollowController:JXSegmentedViewDelegate {
     func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = (index == 0)
-        
+        defaultIndex = index
+        loadData()
+     
     }
 }
 

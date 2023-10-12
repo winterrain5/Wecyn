@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SafeSFSymbols
 class CaledarItemCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -28,16 +28,21 @@ class CaledarItemCell: UITableViewCell {
             }
             
             
-            switch model.status {
-            case 0: // 未知
-                statusImgView.image = R.image.personFillQuestionmark()
-            case 1: // 同意
-                statusImgView.image = R.image.personFillCheckmark()
-            case 2: // 拒绝
-                statusImgView.image = R.image.personFillXmark()
-            default:
-                statusImgView.image = R.image.personFillQuestionmark()
+            if model.is_own {
+                switch model.status {
+                case 0: // 未知
+                    statusImgView.image = R.image.personFillQuestionmark()
+                case 1: // 同意
+                    statusImgView.image = R.image.personFillCheckmark()
+                case 2: // 拒绝
+                    statusImgView.image = R.image.personFillXmark()
+                default:
+                    statusImgView.image = R.image.personFillQuestionmark()
+                }
+            } else {
+                statusImgView.image = R.image.sharedWithYouSlash()
             }
+           
             statusView.backgroundColor = UIColor(hexString: EventColor.allColor[model.color])
             repeatImgView.isHidden = model.is_repeat != 1
             creatorLabel.text = "creator: \(model.creator_name)"
@@ -82,6 +87,8 @@ class CaledarItemCell: UITableViewCell {
             } else {
                 self.startLabel.isHidden = true
             }
+            
+           
         }
     }
     override func awakeFromNib() {

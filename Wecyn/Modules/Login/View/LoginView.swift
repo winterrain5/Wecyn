@@ -59,6 +59,8 @@ class LoginView: UIView {
                 let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
                 userDefaults?.setValue(model.token, forKey: "token")
                 userDefaults?.synchronize()
+                
+                
                 UserService.getUserInfo().retry(3).subscribe(onNext:{ model in
                     self.signInButton.stopAnimation()
                     UserDefaults.sk.set(object: model, for: UserInfoModel.className)
@@ -73,7 +75,7 @@ class LoginView: UIView {
                
             },onError: { e in
                 self.signInButton.stopAnimation()
-                Toast.showMessage((e as! APIError).errorInfo().message)
+                Toast.showError((e as! APIError).errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
 
         }).disposed(by: rx.disposeBag)

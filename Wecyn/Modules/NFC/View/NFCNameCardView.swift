@@ -26,8 +26,8 @@ class NFCNameCardView: UIView {
             
             hideSkeleton()
             
-            avtImgView.kf.setImage(with: model.avatar_url, placeholder: R.image.proile_user())
-            blurImageView.kf.setImage(with: model.cover_url)
+            avtImgView.kf.setImage(with: model.avatar.url, placeholder: R.image.proile_user())
+            blurImageView.kf.setImage(with: model.cover.url)
             //10.1.3.144:5173/card/a65ab2f2-e348-4e5b-b1cd-eeba7f644cd2
             let url = APIHost.share.WebpageUrl + "/card/\(model.uuid)"
             qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: nil)

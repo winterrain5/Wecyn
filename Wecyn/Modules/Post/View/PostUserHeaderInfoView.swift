@@ -134,6 +134,7 @@ class PostUserHeaderInfoView: UIView {
             NetworkService.cancelFollow(userId: model.id).subscribe(onNext:{
                 if $0.success == 1 {
                     model.is_following = false
+                    Toast.showSuccess("You follow @\(model.full_name)")
                     self.updateFollowStatus(model)
                 }
             }).disposed(by: self.rx.disposeBag)

@@ -46,7 +46,7 @@ class PostDraftModel:BaseModel, Codable {
 class CreatePostViewController: BaseViewController {
     
     var toolBar = CreatePostToolBar.loadViewFromNib()
-
+    
     var richTextView = KMPlaceholderTextView()
     lazy var imageClvView:UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
@@ -147,7 +147,7 @@ class CreatePostViewController: BaseViewController {
                 let vc = PostDraftsController()
                 vc.selectDraftsCompelet = {
                     let images:[PostMediaModel?] = $0.images.enumerated().map({
-
+                        
                         if let image = UIImage(base64String: $1) {
                             let model = PostMediaModel()
                             model.image = image
@@ -349,15 +349,15 @@ class CreatePostViewController: BaseViewController {
     func addPost() {
         
         func compressionImage(_ size:Int,image:UIImage) -> String {
-            guard let data = image.pngData() else { return "" }
-            guard let result = try? ImageCompress.compressImageData(data, limitDataSize: size * 1024 * 1024) else { return "" }
-            let base64 = UIImage(data: result)?.pngBase64String() ?? ""
-            print("image.kilobytesSize:\(UIImage(data: data)?.kilobytesSize ?? 0),base64Size:\(base64.lengthOfBytes(using: .utf8))")
-            return base64
+//            guard let data = image.compressOriginalImage(size * 1024) else { return "" }
+//            let base64 = UIImage(data: data)?.pngBase64String() ?? ""
+//            print("oringalImage:\(UIImage(data: data)?.kilobytesSize ?? 0),compressimageImage:\(UIImage(base64String: base64)?.kilobytesSize ?? 0)")
+            
+            return image.jpegBase64String(compressionQuality: 0.2) ?? ""
         }
         var images:[String] = []
         Asyncs.async {
-            images = self.postMedias.map { compressionImage(100, image: $0.image) }.filter({ !$0.isEmpty })
+            images = self.postMedias.map { compressionImage(50, image: $0.image) }.filter({ !$0.isEmpty })
         } mainTask: {
             let content = self.richTextView.text ?? ""
             let type = self.postType.rawValue
@@ -441,7 +441,7 @@ extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        Logger.info(postMedias)
+        
         if postMedias.count == 1 {
             let size = postMedias[indexPath.item].image.scaled(toWidth: kScreenWidth - 32)?.size ?? .zero
             let height = size.height > kScreenHeight * 0.6 ? kScreenHeight * 0.6 : size.height
@@ -456,7 +456,7 @@ extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CreatePostImageCell
-        let originImage = cell.imageView.image 
+        let originImage = cell.imageView.image
         let images = self.postMedias.map({ SKPhoto.photoWithImage($0.image) })
         let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell)
         browser.initializePageIndex(indexPath.row)
@@ -476,10 +476,10 @@ class CreatePostImageCell: UICollectionViewCell {
     var result:PostMediaModel? {
         didSet {
             imageView.image = result?.image
-//            playButton.isHidden = result?.mediaType != .video
-//            durationLabel.isHidden = result?.mediaType != .video
-//            durationLabel.text = "\(result?.phAsset.duration.string ?? "")s"
-//            durationW = durationLabel.text?.getWidthWithLabel(font: UIFont.sk.pingFangRegular(12)) ?? 0
+            //            playButton.isHidden = result?.mediaType != .video
+            //            durationLabel.isHidden = result?.mediaType != .video
+            //            durationLabel.text = "\(result?.phAsset.duration.string ?? "")s"
+            //            durationW = durationLabel.text?.getWidthWithLabel(font: UIFont.sk.pingFangRegular(12)) ?? 0
             self.setNeedsUpdateConstraints()
             self.layoutIfNeeded()
         }
@@ -728,4 +728,30 @@ extension CreatePostViewController {
     //
     //        insertAction.isEnabled = !urlFieldText.isEmpty
     //    }
+}
+
+
+
+extension UIImage {
+    
+    func compressOriginalImage(_ toKb: Int) -> Data?{
+        var compression: CGFloat = 1
+        let minCompression: CGFloat = 0.1
+        guard var imageData = self.jpegData(compressionQuality: compression) else {
+            return nil
+        }
+        if imageData.count < toKb {
+            return imageData
+        }
+        while imageData.count > toKb, compression > minCompression {
+            compression -= 0.1
+            guard let data = self.jpegData(compressionQuality: compression) else { return nil }
+            imageData = data
+        }
+        if imageData.count > toKb {
+            return imageData
+        }
+        return imageData
+    }
+    
 }

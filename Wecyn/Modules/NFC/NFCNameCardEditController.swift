@@ -63,7 +63,6 @@ class NFCNameCardEditController: BaseTableController {
             guard let key = child.label else { return }
             self.request.setValue(user.value(forKey: key), forKey: key)
         }
-      
         
         let saveButton = UIButton()
         saveButton.imageForNormal = R.image.checkmark()

@@ -178,9 +178,6 @@ class NFCNameCardEditHeadView: UIView {
     }
     
     func compressionImage(_ size:Int,image:UIImage) -> String? {
-        //        guard let data = image.sk.compressDataSize(maxSize: size * 1024), let base64 = UIImage(data: data)?.pngBase64String() else { return nil } //
-        //        print("image.kilobytesSize:\(UIImage(data: data)?.kilobytesSize ?? 0),base64Size:\(base64.lengthOfBytes(using: .utf8))")
-        //        return base64
         guard let data = image.pngData() else { return nil }
         guard let result = try? ImageCompress.compressImageData(data, limitDataSize: size * 1024 * 1024) else { return nil }
         let base64 = UIImage(data: result)?.pngBase64String()

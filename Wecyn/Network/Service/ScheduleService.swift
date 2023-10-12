@@ -321,6 +321,7 @@ class EventListModel: BaseModel {
     var is_public = 0
     var status = 0
     var is_creator = 0
+    var is_own = false // 该事件是否与自己有关
     var creator_id = 0
     var creator_name = ""
     var creator_avt = ""
@@ -401,7 +402,7 @@ class AssistantInfo: BaseModel {
     var avatar: String = ""
 }
 
-class MeetingRoom: BaseModel {
+class MeetingRoom: BaseModel,Codable {
     var id: Int = 0
     var name: String = ""
     var isSelect: Bool = false

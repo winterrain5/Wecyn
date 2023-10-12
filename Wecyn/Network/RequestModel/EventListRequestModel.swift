@@ -18,4 +18,5 @@ class EventListRequestModel: BaseModel {
     var end_date:String?
     var start_date:String?
     var keyword:String?
+    var room_id:Int?
 }

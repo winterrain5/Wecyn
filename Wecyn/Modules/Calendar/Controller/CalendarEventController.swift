@@ -28,8 +28,6 @@ class CalendarEventController: BaseTableController {
     let requestModel = EventListRequestModel()
     var friendList:[FriendListModel] = []
     let userTitleView = CalendarNavBarUserView()
-    var selectAssistant = AssistantInfo()
-    var assistants: [AssistantInfo] = []
     let UserModel = UserDefaults.userModel
     var calendarChangeDate = Date()
     let headerHeight = 215.cgFloat
@@ -39,7 +37,8 @@ class CalendarEventController: BaseTableController {
     var isDataLoaded = false
     var latesMonth:Int = 0
     var isWidgetLinkId: Int? = nil
-    
+    var showFilterView = false
+    let filterView = CalendarFilterView()
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.WidgetItemSelected, object: nil, queue: .main) { noti in
@@ -56,19 +55,23 @@ class CalendarEventController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        CalendarBelongUserId = UserModel?.id.int ?? 0
-        CalendarBelongUserName = UserModel?.full_name ?? ""
+        if let selectAssistant = UserDefaults.sk.get(of: UserInfoModel.self, for: "selectAssistant") {
+            CalendarBelongUserId = selectAssistant.id.int ?? 0
+            CalendarBelongUserName = selectAssistant.full_name
+        } else {
+            CalendarBelongUserId = UserModel?.id.int ?? 0
+            CalendarBelongUserName = UserModel?.full_name ?? ""
+        }
+        
+        if let selectRoom = UserDefaults.sk.get(of: MeetingRoom.self, for: "selectRoom") {
+            self.requestModel.room_id = selectRoom.id
+        }
+   
         
         requestModel.start_date = calendarChangeDate.toString()
         requestModel.current_user_id = CalendarBelongUserId
         
-        selectAssistant.id = UserModel?.id.int ?? 0
-        selectAssistant.name = UserModel?.full_name ?? ""
-        selectAssistant.avatar = UserModel?.avatar ?? ""
-        
-        
         let searchButton = UIButton()
-        searchButton.size = CGSize(width: 36, height: 36)
         searchButton.imageForNormal = R.image.magnifyingglass()
         searchButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
@@ -76,7 +79,42 @@ class CalendarEventController: BaseTableController {
             self.navigationController?.pushViewController(vc, animated: false)
         }).disposed(by: rx.disposeBag)
         let searchItem = UIBarButtonItem(customView: searchButton)
-        self.navigation.item.rightBarButtonItem = searchItem
+        
+        
+        let filterButton = UIButton()
+        filterButton.imageForNormal = R.image.calendar_filter()
+        filterButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self else { return }
+            Haptico.selection()
+            self.showFilterView.toggle()
+            if self.showFilterView {
+                self.filterView.display()
+            } else {
+                self.filterView.dismiss()
+            }
+        }).disposed(by: rx.disposeBag)
+        let filterItem = UIBarButtonItem(customView: filterButton)
+        
+        let fixItem = UIBarButtonItem.fixedSpace(width: 22)
+        
+        self.navigation.item.rightBarButtonItems = [searchItem,fixItem,filterItem]
+        
+        self.filterView.filterHandler = { [weak self] tupple in
+            guard let `self` = self else { return }
+            
+            CalendarBelongUserId = tupple.assistant.id
+            CalendarBelongUserName = tupple.assistant.name
+            
+            self.requestModel.current_user_id = tupple.assistant.id
+            self.requestModel.room_id = tupple.room?.id
+            
+            self.userTitleView.update(tupple.assistant.name, tupple.assistant.avatar)
+            
+            self.isBeginLoad = true
+            self.refreshData()
+            self.showFilterView = false
+            
+        }
         
         
         monthLabel.textColor = R.color.textColor33()!
@@ -87,17 +125,7 @@ class CalendarEventController: BaseTableController {
         self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: monthLabel)
         
         userTitleView.size = CGSize(width: kScreenWidth * 0.7, height: 40)
-        userTitleView.selectAssistantHanlder = { [weak self] assistant in
-            guard let `self` = self else { return }
-            CalendarBelongUserId = assistant.id
-            CalendarBelongUserName = assistant.name
-            
-            self.selectAssistant = assistant
-            
-            self.requestModel.current_user_id = assistant.id
-            
-            self.refreshData()
-        }
+ 
         self.navigation.item.titleView = userTitleView
         
         
@@ -109,7 +137,6 @@ class CalendarEventController: BaseTableController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getAssistants()
         latesMonth = 0
         refreshData()
     }
@@ -230,13 +257,7 @@ class CalendarEventController: BaseTableController {
         self.tableView?.scrollToRow(at: IndexPath(row: 0, section: Int(section)), at: .top, animated: animated)
     }
     
-    func getAssistants() {
-        ScheduleService.recieveAssistantList().subscribe(onNext:{ models in
-            self.userTitleView.assistants = models
-            self.assistants = models
-        }).disposed(by: rx.disposeBag)
-    }
-    
+
     
     override func createListView() {
         super.createListView()
@@ -375,101 +396,59 @@ class CalendarEventController: BaseTableController {
 
 
 class CalendarNavBarUserView: UIView {
-    let avatar = UIImageView()
+    let avatarImgView = UIImageView()
     let nameLabel = UILabel()
-    let arrow = UIImageView()
-    var assistants: [AssistantInfo] = [] {
-        didSet {
-            let selfModel = AssistantInfo()
-            selfModel.id = userModel?.id.int ?? 0
-            selfModel.name = userModel?.full_name ?? ""
-            selfModel.avatar = userModel?.avatar ?? ""
-            assistants.insert(selfModel, at: 0)
-            
-        }
-    }
     let userModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
-    var selectRow = 0
-    var selectAssistantHanlder:((AssistantInfo)->())!
-    
-    lazy var menu:CalendarAssistantMenu = {
-        let originView = UIViewController.sk.getTopVC()?.view
-        let menu = CalendarAssistantMenu(assistants: assistants, originView: originView!, selectRow: self.selectRow)
-        return menu
-    }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(avatar)
+        addSubview(avatarImgView)
         addSubview(nameLabel)
-        addSubview(arrow)
         
-        avatar.kf.setImage(with: userModel?.avatar_url,placeholder: R.image.proile_user())
-        avatar.cornerRadius = 12
-        avatar.contentMode = .scaleAspectFill
         
-        nameLabel.text = userModel?.full_name
+        avatarImgView.cornerRadius = 12
+        avatarImgView.contentMode = .scaleAspectFill
+        
+        
         nameLabel.textColor = R.color.textColor33()
         nameLabel.font = UIFont.sk.pingFangRegular(14)
-        nameLabel.width = userModel?.full_name.widthWithConstrainedWidth(height: 40, font: nameLabel.font) ?? 0
-        
-        arrow.image = R.image.triangleFill()
-        
-        rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
-            self?.showMenu()
-        }).disposed(by: rx.disposeBag)
-        
+       
+
+        if let selectAssistant = UserDefaults.sk.get(of: UserInfoModel.self, for: "selectAssistant") {
+            avatarImgView.kf.setImage(with: selectAssistant.avatar.url,placeholder: R.image.proile_user())
+            nameLabel.text = selectAssistant.full_name
+            nameLabel.width = selectAssistant.full_name.widthWithConstrainedWidth(height: 18, font: UIFont.sk.pingFangRegular(14)) + 10
+        }else{
+            avatarImgView.kf.setImage(with: userModel?.avatar_url,placeholder: R.image.proile_user())
+            nameLabel.width = userModel?.full_name.widthWithConstrainedWidth(height: 18, font: UIFont.sk.pingFangRegular(14)) ?? 0 + 10
+            nameLabel.text = userModel?.full_name
+        }
        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        nameLabel.height = 40
-        nameLabel.y = 0
+        nameLabel.height = 18
+        nameLabel.center.y = self.center.y
         nameLabel.center.x = self.center.x
         
-        avatar.frame = CGRect(x: nameLabel.x - 38, y: 0, width: 24, height: 24)
-        avatar.center.y = self.center.y
-        
-        arrow.frame = CGRect(x: nameLabel.frame.maxX + 8, y: 0, width: 15, height: 11)
-        arrow.center.y = self.center.y
-        
-        
+        avatarImgView.frame = CGRect(x: nameLabel.x - 30, y: 0, width: 24, height: 24)
+        avatarImgView.center.y = self.center.y
+       
     }
     
-    func showMenu() {
-      
-        if menu.isShowed {
-            menu.hideMenu()
-            return
-        }
-        
-        if assistants.count == 0 {
-            return
-        }
-        self.arrow.rotate(toAngle: 180, ofType: .degrees, duration: 0.25)
-        
-        
-        
-        menu.showMenu()
-        menu.selectComplete = {  [weak self] row in
-            guard let `self` = self else { return }
-            self.selectRow = row
-            self.nameLabel.text = self.assistants[row].name
-            self.nameLabel.width = self.assistants[row].name.widthWithConstrainedWidth(height: 40, font: self.nameLabel.font)
-            self.layoutIfNeeded()
-            self.avatar.kf.setImage(with: self.assistants[row].avatar.url,placeholder: R.image.proile_user()!)
-            self.selectAssistantHanlder(self.assistants[row])
-        }
-        
-        menu.dissmissHandler = { [weak self] in
-            guard let `self` = self else { return }
-            self.arrow.rotate(toAngle: -180, ofType: .degrees,  duration: 0.25)
-        }
-        
-    }
+ 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func update(_ name:String,_ avatar:String) {
+        avatarImgView.kf.setImage(with: avatar.url,placeholder: R.image.placeholder()!)
+        nameLabel.text = name
+        nameLabel.width = name.widthWithConstrainedWidth(height: 18, font: UIFont.sk.pingFangRegular(14)) + 10
+        
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 }

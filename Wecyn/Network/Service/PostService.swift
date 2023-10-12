@@ -31,6 +31,11 @@ class PostService {
     }
     
     
+    /// 更新post状态
+    /// - Parameters:
+    ///   - id: post id
+    ///   - type: 1 公开  2 仅好友可见 3 仅自己可见 0 删除
+    /// - Returns: ResponseStatus
     static func updatePostType(id:Int,type:Int) -> Observable<ResponseStatus> {
         let target = MultiTarget(PostApi.updatePostType(id, type))
         return APIProvider.rx.request(target).asObservable().mapStatus()
@@ -239,16 +244,16 @@ func formateTime(_ create_time:String) -> String {
     }
     if day > 0 && day < 7 {
         let dayUnit = day > 1 ? "days" : "day"
-        return "Posted \(day) \(dayUnit) ago"
+        return "· \(day) \(dayUnit) ago"
     }
     
     if hour > 0 {
         let hourUnit = hour > 1 ? "hours" : "hour"
-        return  "Posted \(hour) \(hourUnit) ago"
+        return  "· \(hour) \(hourUnit) ago"
     }
     if minitue > 0 {
         let minUnit = minitue > 1 ? "mins" : "min"
-        return  "Posted \(minitue) \(minUnit) ago"
+        return  "· \(minitue) \(minUnit) ago"
     }
-    return "Posted just now"
+    return "· just now"
 }

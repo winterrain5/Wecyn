@@ -167,6 +167,17 @@ class NetworkService {
         return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendFollowModel.self,designatedPath: "items")
     }
     
+    
+    /// 添加备注
+    /// - Parameters:
+    ///   - id: 用户id
+    ///   - remark: 备注
+    /// - Returns: ResponseStatus
+    static func updateRemark(id:Int,remark:String) -> Observable<ResponseStatus>  {
+        let target = MultiTarget(NetworkApi.updateRemark(id, remark))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
 }
 
 class FriendFollowModel: BaseModel {
@@ -197,6 +208,7 @@ class FriendListModel: BaseModel {
     var avatar_url: URL? {
         return URL(string: avatar)
     }
+    var remark = ""
     var group_id: Int = 0
     var full_name: String {
         get {
@@ -244,6 +256,7 @@ class FriendUserInfoModel: BaseModel {
     var avatar = ""
     var cover = ""
     var wid = ""
+    var remark = ""
     var is_following:Bool = false
     
     var follower_count:Int = 0
