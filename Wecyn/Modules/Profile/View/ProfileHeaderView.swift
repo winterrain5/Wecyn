@@ -31,8 +31,8 @@ class ProfileHeaderView: UIView {
             
             nameLabel.text = userInfoModel.first_name + " " + userInfoModel.last_name
             jobTitleLabel.text = userInfoModel.org_name + "-" + userInfoModel.title
-            userAvatarImageView.kf.setImage(with: userInfoModel.avatar_url)
-            backImgView.kf.setImage(with: userInfoModel.cover_url)
+            userAvatarImageView.kf.setImage(with: userInfoModel.avatar.url)
+            backImgView.kf.setImage(with: userInfoModel.cover.url)
             
         }
     }

@@ -31,7 +31,6 @@
 		45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */; };
 		45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
-		450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7F2A37F85B008B0C4A /* EditViewController.swift */; };
 		450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C832A37FFAB008B0C4A /* JobItemCell.swift */; };
 		450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450B6C842A37FFAB008B0C4A /* JobItemCell.xib */; };
 		450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C872A380CC9008B0C4A /* JobSavedController.swift */; };
@@ -111,6 +110,14 @@
 		457C7D952A4E6BB1002E50DF /* FriendSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D942A4E6BB1002E50DF /* FriendSearchController.swift */; };
 		457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */; };
 		457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */; };
+		458870DC2AE638AD00029353 /* AddUserExperienceRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870DB2AE638AD00029353 /* AddUserExperienceRequestModel.swift */; };
+		458870DE2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870DD2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift */; };
+		458870E02AE66D7000029353 /* AddUserWorkExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870DF2AE66D6F00029353 /* AddUserWorkExperienceView.swift */; };
+		458870E22AE66D7F00029353 /* AddUserWorkExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458870E12AE66D7E00029353 /* AddUserWorkExperienceView.xib */; };
+		458870E42AE67F0700029353 /* OrganizationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870E32AE67F0700029353 /* OrganizationSearchController.swift */; };
+		458870E62AE7BD2000029353 /* AddUserEducationExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870E52AE7BD2000029353 /* AddUserEducationExperienceView.swift */; };
+		458870E82AE7BD2D00029353 /* AddUserEducationExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458870E72AE7BD2D00029353 /* AddUserEducationExperienceView.xib */; };
+		458870EA2AE7BE8400029353 /* ProfileAddEduExperienceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */; };
 		458970602A7794EA00344B93 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589705F2A7794EA00344B93 /* Asyncs.swift */; };
 		458970622A78DAA100344B93 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970612A78DAA100344B93 /* IMService.swift */; };
 		458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970632A7CDAB900344B93 /* LanguageSettingController.swift */; };
@@ -162,13 +169,6 @@
 		459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C06582A36B9150066F85A /* ProfileInterestsItemsCell.swift */; };
 		459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C065A2A36BBED0066F85A /* ProfileEducationItemCell.swift */; };
 		459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C065C2A36C0540066F85A /* ProfileSkillsItemCell.swift */; };
-		459C06612A36F03E0066F85A /* NameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C06602A36F03E0066F85A /* NameCardView.swift */; };
-		459C06632A36F1370066F85A /* NameCardQRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459C06622A36F1370066F85A /* NameCardQRCodeView.xib */; };
-		459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C06642A36F59C0066F85A /* NameCardQRCodeView.swift */; };
-		459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C06662A36F7220066F85A /* NameCardContentView.swift */; };
-		459C06692A36F73F0066F85A /* NameCardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459C06682A36F73F0066F85A /* NameCardContentView.xib */; };
-		459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C066A2A3700D70066F85A /* NameCardEditView.swift */; };
-		459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459C066C2A3700DF0066F85A /* NameCardEditView.xib */; };
 		45A0E6242AB841FF003C5153 /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6222AB841FF003C5153 /* PostCommentCell.swift */; };
 		45A0E6252AB841FF003C5153 /* PostCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A0E6232AB841FF003C5153 /* PostCommentCell.xib */; };
 		45A0E6272AB95987003C5153 /* PostReturnBackSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0E6262AB95987003C5153 /* PostReturnBackSheetView.swift */; };
@@ -287,7 +287,6 @@
 		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
 		4509FEE32A86146B005E3708 /* calendarExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calendarExtension.entitlements; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		450B6C7F2A37F85B008B0C4A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
 		450B6C842A37FFAB008B0C4A /* JobItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobItemCell.xib; sourceTree = "<group>"; };
 		450B6C872A380CC9008B0C4A /* JobSavedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSavedController.swift; sourceTree = "<group>"; };
@@ -369,6 +368,14 @@
 		457C7D942A4E6BB1002E50DF /* FriendSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchController.swift; sourceTree = "<group>"; };
 		457C7D962A52644D002E50DF /* AddAssitantsRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssitantsRequestModel.swift; sourceTree = "<group>"; };
 		457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAssistantMenu.swift; sourceTree = "<group>"; };
+		458870DB2AE638AD00029353 /* AddUserExperienceRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserExperienceRequestModel.swift; sourceTree = "<group>"; };
+		458870DD2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAddWorkExperienceController.swift; sourceTree = "<group>"; };
+		458870DF2AE66D6F00029353 /* AddUserWorkExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserWorkExperienceView.swift; sourceTree = "<group>"; };
+		458870E12AE66D7E00029353 /* AddUserWorkExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddUserWorkExperienceView.xib; sourceTree = "<group>"; };
+		458870E32AE67F0700029353 /* OrganizationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationSearchController.swift; sourceTree = "<group>"; };
+		458870E52AE7BD2000029353 /* AddUserEducationExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserEducationExperienceView.swift; sourceTree = "<group>"; };
+		458870E72AE7BD2D00029353 /* AddUserEducationExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddUserEducationExperienceView.xib; sourceTree = "<group>"; };
+		458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAddEduExperienceController.swift; sourceTree = "<group>"; };
 		4589705F2A7794EA00344B93 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
 		458970612A78DAA100344B93 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		458970632A7CDAB900344B93 /* LanguageSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingController.swift; sourceTree = "<group>"; };
@@ -425,13 +432,6 @@
 		459C06582A36B9150066F85A /* ProfileInterestsItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInterestsItemsCell.swift; sourceTree = "<group>"; };
 		459C065A2A36BBED0066F85A /* ProfileEducationItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEducationItemCell.swift; sourceTree = "<group>"; };
 		459C065C2A36C0540066F85A /* ProfileSkillsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSkillsItemCell.swift; sourceTree = "<group>"; };
-		459C06602A36F03E0066F85A /* NameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCardView.swift; sourceTree = "<group>"; };
-		459C06622A36F1370066F85A /* NameCardQRCodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameCardQRCodeView.xib; sourceTree = "<group>"; };
-		459C06642A36F59C0066F85A /* NameCardQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCardQRCodeView.swift; sourceTree = "<group>"; };
-		459C06662A36F7220066F85A /* NameCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCardContentView.swift; sourceTree = "<group>"; };
-		459C06682A36F73F0066F85A /* NameCardContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameCardContentView.xib; sourceTree = "<group>"; };
-		459C066A2A3700D70066F85A /* NameCardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCardEditView.swift; sourceTree = "<group>"; };
-		459C066C2A3700DF0066F85A /* NameCardEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameCardEditView.xib; sourceTree = "<group>"; };
 		45A0E6222AB841FF003C5153 /* PostCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
 		45A0E6232AB841FF003C5153 /* PostCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentCell.xib; sourceTree = "<group>"; };
 		45A0E6262AB95987003C5153 /* PostReturnBackSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReturnBackSheetView.swift; sourceTree = "<group>"; };
@@ -714,6 +714,7 @@
 				45005C4B2A52AF4500560E21 /* EventListRequestModel.swift */,
 				45005C582A57FB8900560E21 /* GroupUpdateRequestModel.swift */,
 				45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */,
+				458870DB2AE638AD00029353 /* AddUserExperienceRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -1038,8 +1039,10 @@
 			children = (
 				45E765B42A31A99400BF6EEC /* SettingController.swift */,
 				45E765B12A31A97F00BF6EEC /* ProfileController.swift */,
-				450B6C7F2A37F85B008B0C4A /* EditViewController.swift */,
 				458970632A7CDAB900344B93 /* LanguageSettingController.swift */,
+				458870DD2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift */,
+				458870E32AE67F0700029353 /* OrganizationSearchController.swift */,
+				458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1055,13 +1058,10 @@
 				459C06582A36B9150066F85A /* ProfileInterestsItemsCell.swift */,
 				459C065A2A36BBED0066F85A /* ProfileEducationItemCell.swift */,
 				459C065C2A36C0540066F85A /* ProfileSkillsItemCell.swift */,
-				459C06602A36F03E0066F85A /* NameCardView.swift */,
-				459C06642A36F59C0066F85A /* NameCardQRCodeView.swift */,
-				459C06622A36F1370066F85A /* NameCardQRCodeView.xib */,
-				459C06662A36F7220066F85A /* NameCardContentView.swift */,
-				459C06682A36F73F0066F85A /* NameCardContentView.xib */,
-				459C066A2A3700D70066F85A /* NameCardEditView.swift */,
-				459C066C2A3700DF0066F85A /* NameCardEditView.xib */,
+				458870DF2AE66D6F00029353 /* AddUserWorkExperienceView.swift */,
+				458870E12AE66D7E00029353 /* AddUserWorkExperienceView.xib */,
+				458870E52AE7BD2000029353 /* AddUserEducationExperienceView.swift */,
+				458870E72AE7BD2D00029353 /* AddUserEducationExperienceView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1385,13 +1385,12 @@
 				450BA6DF2A330B8400764828 /* RegistProfileView.xib in Resources */,
 				45A0E6252AB841FF003C5153 /* PostCommentCell.xib in Resources */,
 				453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */,
-				459C06692A36F73F0066F85A /* NameCardContentView.xib in Resources */,
 				45005C5F2A57FF0100560E21 /* CreateGroupHeaderView.xib in Resources */,
 				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
+				458870E22AE66D7F00029353 /* AddUserWorkExperienceView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
 				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
-				459C066D2A3700DF0066F85A /* NameCardEditView.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
 				4549ECF42AB837E300EB9C4C /* PostDetailCommentFooterView.xib in Resources */,
 				45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */,
@@ -1401,13 +1400,13 @@
 				450F6CC72A613AFC0001AA1B /* nlp.js in Resources */,
 				450F6CCF2A6508630001AA1B /* bundle.js in Resources */,
 				450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */,
+				458870E82AE7BD2D00029353 /* AddUserEducationExperienceView.xib in Resources */,
 				45920AF42A26E045005871ED /* Assets.xcassets in Resources */,
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
 				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
 				45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
 				450BA6CB2A32B9D800764828 /* LoginView.xib in Resources */,
-				459C06632A36F1370066F85A /* NameCardQRCodeView.xib in Resources */,
 				45920AF52A26E045005871ED /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1492,7 +1491,6 @@
 				45A0E6392ABD7A06003C5153 /* HomePostUserInfoView.swift in Sources */,
 				4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */,
 				45920AF72A26E045005871ED /* AppDelegate.swift in Sources */,
-				459C06652A36F59C0066F85A /* NameCardQRCodeView.swift in Sources */,
 				45C999F22AB05EBA0017CDC3 /* PostService.swift in Sources */,
 				45C999F62AB1C7C00017CDC3 /* PostUserInfoController.swift in Sources */,
 				45C999FA2AB1CBC80017CDC3 /* PostUserPostedController.swift in Sources */,
@@ -1510,6 +1508,7 @@
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
 				45A0E6432AC29C49003C5153 /* PostFollowingController.swift in Sources */,
 				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
+				458870DE2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift in Sources */,
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
@@ -1517,6 +1516,7 @@
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
 				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
+				458870E42AE67F0700029353 /* OrganizationSearchController.swift in Sources */,
 				45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
 				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
@@ -1531,7 +1531,6 @@
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				4549ECEA2AB40A4500EB9C4C /* UIImage+System.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
-				450B6C802A37F85B008B0C4A /* EditViewController.swift in Sources */,
 				45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
@@ -1587,6 +1586,7 @@
 				45A0E6472AC2C149003C5153 /* PostFollowUserCell.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
+				458870DC2AE638AD00029353 /* AddUserExperienceRequestModel.swift in Sources */,
 				45A0E64C2AD10ECD003C5153 /* FriendAddRemarkController.swift in Sources */,
 				45A0E63F2AC14E25003C5153 /* PostReportController.swift in Sources */,
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
@@ -1609,9 +1609,9 @@
 				450F6CC52A613AFC0001AA1B /* EKWeekday+RRule.swift in Sources */,
 				45005C842A5E391D00560E21 /* UnknownEditorViewController.swift in Sources */,
 				45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */,
-				459C06612A36F03E0066F85A /* NameCardView.swift in Sources */,
 				45005C572A57DC7E00560E21 /* ConnectionFriendController.swift in Sources */,
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
+				458870E62AE7BD2000029353 /* AddUserEducationExperienceView.swift in Sources */,
 				450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
@@ -1624,7 +1624,6 @@
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
-				459C066B2A3700D70066F85A /* NameCardEditView.swift in Sources */,
 				45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
@@ -1644,7 +1643,6 @@
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
 				457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */,
 				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,
-				459C06672A36F7220066F85A /* NameCardContentView.swift in Sources */,
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
 				450F6CBE2A613AFC0001AA1B /* NSDate+Comparison.swift in Sources */,
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
@@ -1658,6 +1656,7 @@
 				450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */,
 				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
+				458870EA2AE7BE8400029353 /* ProfileAddEduExperienceController.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
 				4549ECEC2AB40AF900EB9C4C /* UIMenuExtension.swift in Sources */,
 				45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */,
@@ -1679,6 +1678,7 @@
 				450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */,
 				45A0E6292AB9619B003C5153 /* PostDraftsController.swift in Sources */,
 				45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */,
+				458870E02AE66D7000029353 /* AddUserWorkExperienceView.swift in Sources */,
 				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,

@@ -18,6 +18,7 @@ class CalendarFilterView: UIView,UITableViewDelegate,UITableViewDataSource {
     let confirmButton = UIButton()
     let resetButton = UIButton()
     var filterHandler:(((assistant:AssistantInfo,room:MeetingRoom?))->())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

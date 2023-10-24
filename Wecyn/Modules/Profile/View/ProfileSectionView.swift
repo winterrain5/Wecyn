@@ -18,6 +18,7 @@ class ProfileSectionView: UIView {
     
     private lazy var addButton = UIButton()
     private lazy var editButton = UIButton()
+    var profileAddDataHandler:((SectionType)->())?
     
     required init(title:LocalizerKey,type:SectionType) {
         super.init(frame: .zero)
@@ -36,7 +37,7 @@ class ProfileSectionView: UIView {
             editButton.imageForNormal = R.image.chevronRight()?.scaled(toHeight: 12)
             editButton.titleForNormal = "More"
         } else {
-            editButton.imageForNormal = R.image.squareAndPencil()
+            editButton.imageForNormal = UIImage(.plus.circle).tintImage(R.color.iconColor()!)
             editButton.titleForNormal = ""
         }
         
@@ -52,7 +53,12 @@ class ProfileSectionView: UIView {
         editButton.titleColorForNormal = R.color.iconColor()
         editButton.titleLabel?.font = UIFont.sk.pingFangRegular(12)
         editButton.sk.setImageTitleLayout(.imgRight,spacing: 4)
+        editButton.contentHorizontalAlignment = .right
         backgroundColor = .white
+        editButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.profileAddDataHandler?(self.type)
+        }).disposed(by: rx.disposeBag)
         
     }
     
@@ -64,9 +70,9 @@ class ProfileSectionView: UIView {
         super.layoutSubviews()
         
         titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(25)
-            make.top.equalToSuperview().offset(14)
-            make.height.equalTo(21)
+            make.left.equalToSuperview().offset(16)
+            make.bottom.top.equalToSuperview()
+            
         }
         
         editButton.snp.makeConstraints { make in

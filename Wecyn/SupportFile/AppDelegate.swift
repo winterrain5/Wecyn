@@ -55,12 +55,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func getCurrentLanguage() -> String {
         let preferredLang = Bundle.main.preferredLocalizations.first! as String
         Logger.debug("当前系统语言:\(preferredLang)")
-        if preferredLang.hasPrefix("en") {
-            return "en"
-        }
-        if preferredLang.hasPrefix("zh") {
-            return "zh_cn"
-        }
+//        if preferredLang.hasPrefix("en") {
+//            return "en"
+//        }
+//        if preferredLang.hasPrefix("zh") {
+//            return "zh_cn"
+//        }
         return "en"
         
     }

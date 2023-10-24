@@ -27,13 +27,18 @@ class ProfileInterestsItemsCell: UITableViewCell {
         btn.backgroundColor = R.color.theamColor()!
         btn.titleLabel?.font = UIFont.sk.pingFangSemibold(12)
     }
+    private let descLabel =  UILabel().then { label in
+        label.numberOfLines = 0
+        label.textColor = R.color.textColor33()
+        label.font = UIFont.sk.pingFangRegular(12)
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(imgView)
         contentView.addSubview(companyLabel)
         contentView.addSubview(followersLabel)
         contentView.addSubview(followBtn)
-        
+        contentView.addSubview(descLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -44,18 +49,18 @@ class ProfileInterestsItemsCell: UITableViewCell {
         super.layoutSubviews()
         
         imgView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(36)
+            make.left.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(12)
             make.size.equalTo(CGSize(width: 50, height: 50))
         }
         
         companyLabel.snp.makeConstraints { make in
-            make.left.equalTo(imgView.snp.right).offset(20)
+            make.left.equalTo(imgView.snp.right).offset(16)
             make.top.equalToSuperview().offset(15)
         }
         
         followersLabel.snp.makeConstraints { make in
-            make.left.equalTo(imgView.snp.right).offset(20)
+            make.left.equalTo(imgView.snp.right).offset(16)
             make.top.equalTo(companyLabel.snp.bottom).offset(2)
         }
         

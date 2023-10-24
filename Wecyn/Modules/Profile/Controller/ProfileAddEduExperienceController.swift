@@ -1,0 +1,159 @@
+//
+//  ProfileAddEduExperienceController.swift
+//  Wecyn
+//
+//  Created by Derrick on 2023/10/24.
+//
+
+import UIKit
+import IQKeyboardManagerSwift
+class ProfileAddEduExperienceController: BaseViewController {
+
+    var scrollView = UIScrollView()
+    let container = AddUserEducationExperienceView.loadViewFromNib()
+    var model:UserExperienceInfoModel?
+    
+    var orgNameRelay:BehaviorRelay = BehaviorRelay(value: "")
+    var durationStartRelay:BehaviorRelay = BehaviorRelay(value: "")
+    
+    var requestModel = AddUserExperienceRequestModel()
+    var profileEduDataUpdated:(()->())?
+    required init(model:UserExperienceInfoModel? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        self.model = model
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        
+        view.addSubview(scrollView)
+        scrollView.frame = self.view.bounds
+        scrollView.contentSize = self.view.size
+    
+        scrollView.addSubview(container)
+        container.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 454)
+        
+        if let model = model {
+            self.navigation.item.title = "Edit Education Experience"
+            self.container.orgTf.text = model.org_name
+            self.container.degreeTf.text = model.degree_name
+            self.container.startButton.titleForNormal = model.start_date
+            self.container.startButton.titleColorForNormal = R.color.textColor33()
+            self.container.endButton.titleForNormal = model.end_date.isEmpty ? "Present" :  model.end_date
+            self.container.fieldTf.text = model.field_name
+            self.container.descTf.text = model.desc
+            
+            self.requestModel.start_date = model.start_date
+            self.requestModel.end_date = model.end_date
+            self.requestModel.is_current = model.is_current
+            
+            self.orgNameRelay.accept(model.org_name)
+            self.durationStartRelay.accept(model.start_date)
+            
+        } else {
+            self.navigation.item.title = "Add Education Experience"
+        }
+        
+        let saveButton = UIButton()
+        saveButton.imageForNormal = R.image.checkmark()
+        saveButton.size = CGSize(width: 40, height: 36)
+        self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
+        saveButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.requestModel.exp_type = 1
+            self.requestModel.org_name = self.container.orgTf.text
+            self.requestModel.degree_name = self.container.degreeTf.text
+            self.requestModel.desc = self.container.descTf.text
+            self.requestModel.field_name = self.container.fieldTf.text
+            if self.model == nil  {
+                self.add()
+            } else {
+                self.requestModel.id = self.model?.id
+                self.update()
+            }
+            
+        }).disposed(by: rx.disposeBag)
+        
+        let isSaveEnable = Observable.combineLatest(orgNameRelay,durationStartRelay).map({
+            !$0.0.isEmpty && !$0.1.isEmpty
+        }).asObservable()
+        
+        isSaveEnable.bind(to: saveButton.rx.isEnabled).disposed(by: rx.disposeBag)
+        
+        
+        container.startButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.view.endEditing(true)
+            DatePickerView(title: "Start Date", mode: .date) { date in
+                let dateStr = date.toString(format: "MM-yyyy")
+                self.durationStartRelay.accept(dateStr)
+                self.requestModel.start_date = dateStr
+                self.container.startButton.titleForNormal = dateStr
+                self.container.startButton.titleColorForNormal = R.color.textColor33()
+            }.show()
+        }).disposed(by: rx.disposeBag)
+        
+        container.endButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.view.endEditing(true)
+            DatePickerView(title: "End Date", mode: .date,maximumDate: Date()) { date in
+                let dateStr = date.toString(format: "MM-yyyy")
+                self.requestModel.end_date = dateStr
+                self.requestModel.is_current = 0
+                self.container.endButton.titleForNormal = dateStr
+            }.show()
+        }).disposed(by: rx.disposeBag)
+        
+        
+        container.orgNameSelectButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            let vc = OrganizationSearchController()
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            vc.selectComplete = {
+                self.container.orgTf.text = $0.name
+                self.orgNameRelay.accept($0.name)
+                if $0.id != -1 {
+                    self.requestModel.org_id = $0.id
+                }
+            }
+            self.present(nav, animated: true)
+        }).disposed(by: rx.disposeBag)
+
+        
+    }
+    
+    func add() {
+        
+        UserService.addUserExperience(model: self.requestModel).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showSuccess("Added successfully")
+                self.returnBack()
+                self.profileEduDataUpdated?()
+            } else {
+                Toast.showError($0.message)
+            }
+        },onError: { e in
+            Toast.showError(e.asAPIError.errorInfo().message)
+        }).disposed(by: self.rx.disposeBag)
+    }
+    
+    func update() {
+        UserService.updateUserExperience(model: self.requestModel).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showSuccess("Edit successfully")
+                self.returnBack()
+                self.profileEduDataUpdated?()
+            } else {
+                Toast.showError($0.message)
+            }
+        },onError: { e in
+            Toast.showError(e.asAPIError.errorInfo().message)
+        }).disposed(by: self.rx.disposeBag)
+    }
+}

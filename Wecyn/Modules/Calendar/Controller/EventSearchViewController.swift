@@ -23,8 +23,8 @@ class EventSearchViewController: BaseTableController {
         
         
         self.addLeftBarButtonItem()
-        self.leftButtonDidClick = {
-            self.navigationController?.popViewController(animated: false)
+        self.leftButtonDidClick = { [weak self] in
+            self?.returnBack()
         }
         
     }
