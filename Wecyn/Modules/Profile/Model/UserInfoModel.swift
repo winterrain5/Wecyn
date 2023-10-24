@@ -32,6 +32,9 @@ import UIKit
     var last_name: String = ""
     var email: String = ""
     var adr_work: String = ""
+    
+    var edu_exp:[UserExperienceInfoModel] = []
+    var work_exp:[UserExperienceInfoModel] = []
 
     var full_name:String {
         get {

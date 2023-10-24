@@ -10,10 +10,10 @@ import UIKit
 
  */
 @objcMembers class UpdateUserInfoRequestModel: BaseModel {
-    var id: Int = 0
+    var id: String = ""
     var uuid: String?
     var tel_work: String?
-    var org_id: Int?
+    var org_id: String?
     var url: String?
     var org_name: String?
     var title: String?

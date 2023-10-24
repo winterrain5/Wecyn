@@ -12,6 +12,12 @@ enum UserApi {
     case userInfo
     case updateUserInfo(model:UpdateUserInfoRequestModel)
     case uploadCover(photo:String)
+    case addExperience(_ model:AddUserExperienceRequestModel)
+    case deleteExperience(_ id:Int,_ type:Int)
+    case updateExperience(_ model:AddUserExperienceRequestModel)
+    case experienceInfo(_ id:Int,_ type:Int)
+    case experienceList(_ type:Int,_ userId:Int? = nil)
+    case organizationList(_ isEdu:Int = 0,_ keyword:String)
 }
 
 extension UserApi: TargetType {
@@ -25,14 +31,26 @@ extension UserApi: TargetType {
             return "/api/user/updateUserInfo/"
         case .uploadCover:
             return "/api/user/uploadCover/"
+        case .addExperience:
+            return "/api/user/addExperience/"
+        case .deleteExperience:
+            return "/api/user/deleteExperience/"
+        case .experienceInfo:
+            return "/api/user/experienceInfo/"
+        case .experienceList:
+            return "/api/user/experienceList/"
+        case .organizationList:
+            return "/api/org/searchList/"
+        case .updateExperience:
+            return "/api/user/updateExperience/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .userInfo:
+        case .userInfo,.experienceInfo,.experienceList,.organizationList:
             return Moya.Method.get
-        case .updateUserInfo:
+        case .updateUserInfo,.updateExperience:
             return Moya.Method.put
         default:
             return Moya.Method.post
@@ -49,6 +67,18 @@ extension UserApi: TargetType {
             return requestToTaskByPost(model)
         case .uploadCover(let photo):
             return requestParametersByPost(["photo":photo])
+        case .addExperience(let model):
+            return requestToTaskByPost(model)
+        case .deleteExperience(let id, let type):
+            return requestParametersByPost(["id":id,"exp_type":type])
+        case .experienceInfo(let id, let type):
+            return requestParametersByGet(["id":id,"exp_type":type])
+        case .experienceList(let type,let id):
+            return requestParametersByGet(["user_id":id,"exp_type":type])
+        case .organizationList(let isEdu,let keyword):
+            return requestParametersByGet(["is_edu":isEdu,"keyword":keyword])
+        case .updateExperience(let model):
+            return requestToTaskByPost(model)
         }
     }
 }

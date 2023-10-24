@@ -12,11 +12,11 @@
 "view_calendar" = "日历";
 "add_new_section" = "添加新分区";
 
-"Activity" = "活动";
-"Skills" = "技能";
-"Experience" = "经验";
-"Education"  = "教育";
-"Interests"  = "兴趣";
+"Activity" = "最近发布";
+"Skills" = "主要技能";
+"Experience" = "工作经历";
+"Education"  = "教育经历";
+"Interests"  = "兴趣爱好";
 
 "Settings" = "设置";
 "Notification" = "通知";

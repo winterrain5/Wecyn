@@ -7,10 +7,11 @@
 
 import UIKit
 import ParallaxHeader
+import PromiseKit
 enum SectionType: Int {
     case Activity
     case Skills
-    case Experience
+    case Work
     case Education
     case Interests
 }
@@ -20,10 +21,12 @@ class ProfileController: BaseTableController {
    
     private var headerView = ProfileHeaderView.loadViewFromNib()
     private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
-    private let sectionType:[SectionType] = [.Activity,.Skills,.Experience,.Education,.Interests]
+    private let sectionType:[SectionType] = [.Activity,.Skills,.Work,.Education,.Interests]
     override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio == 0 ? .lightContent : .darkContent }
     var ratio:CGFloat = 0
     var userPosts:[PostListModel] =  []
+    var workExperiences:[UserExperienceInfoModel] = []
+    var eduExperiences:[UserExperienceInfoModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         addRightBarItem()
@@ -66,19 +69,64 @@ class ProfileController: BaseTableController {
     }
     
     override func refreshData() {
-        UserService.getUserInfo().subscribe(onNext:{ model in
-            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
-            self.headerView.userInfoModel = model
-            PostService.postList(userId: model.id.int).subscribe(onNext:{
-                self.userPosts = $0
-                self.endRefresh()
-            },onError: { e in
-                self.endRefresh()
-            }).disposed(by: self.rx.disposeBag)
-        },onError: { e in
+        getUserInfo().then({
+            self.getUserPost()
+        }).done {
             self.endRefresh()
-        }).disposed(by: rx.disposeBag)
+        }.catch { e in
+            print(e)
+        }
         
+    }
+    @discardableResult
+    func getUserPost() -> Promise<Void>{
+        return Promise.init { resolver in
+            PostService.postList().subscribe(onNext:{
+                self.userPosts = $0
+                self.tableView?.reloadData()
+                resolver.fulfill_()
+            },onError: { e in
+                resolver.reject(APIError.networkError(e))
+            }).disposed(by: self.rx.disposeBag)
+        }
+       
+    }
+    @discardableResult
+    func getUserInfo() -> Promise<Void>{
+        return Promise.init { resolver in
+            UserService.getUserInfo().subscribe(onNext:{ model in
+                UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+                self.headerView.userInfoModel = model
+                self.workExperiences = model.work_exp
+                self.eduExperiences = model.edu_exp
+                self.tableView?.reloadData()
+                resolver.fulfill_()
+            },onError: { e in
+                resolver.reject(APIError.networkError(e))
+            }).disposed(by: rx.disposeBag)
+        }
+        
+    }
+    
+    func deleteUserExperience(_ model:UserExperienceInfoModel,type:Int) {
+        UserService.deleteUserExperience(id: model.id, type: type).subscribe(onNext:{
+            if $0.success == 1 {
+                Toast.showSuccess("successfully deleted")
+                if type == 1 {
+                    let row = self.eduExperiences.firstIndex(of: model) ?? 0
+                    let index = IndexPath(row: row, section: 3)
+                    self.eduExperiences.removeAll(model)
+                    self.tableView?.deleteRows(at: [index], with: .none)
+                } else {
+                    let row = self.workExperiences.firstIndex(of: model) ?? 0
+                    let index = IndexPath(row: row, section: 2)
+                    self.workExperiences.removeAll(model)
+                    self.tableView?.deleteRows(at: [index], with: .none)
+                }
+            } else {
+                Toast.showError($0.message)
+            }
+        }).disposed(by: rx.disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +148,8 @@ class ProfileController: BaseTableController {
             return self.userPosts.first == nil ? 0 : 1
         }
         if section == SectionType.Skills.rawValue { return 0 }
-        
+        if section == SectionType.Work.rawValue { return self.workExperiences.count }
+        if section == SectionType.Education.rawValue { return self.eduExperiences.count }
         return 0
     }
 
@@ -111,7 +160,7 @@ class ProfileController: BaseTableController {
         if indexPath.section == SectionType.Skills.rawValue {
             return 150
         }
-        if indexPath.section == SectionType.Experience.rawValue {
+        if indexPath.section == SectionType.Work.rawValue {
             return 115
         }
         if indexPath.section == SectionType.Education.rawValue {
@@ -127,12 +176,38 @@ class ProfileController: BaseTableController {
             let cell = tableView.dequeueReusableCell(withClass: ProfileSkillsItemCell.self)
             return cell
         }
-        if indexPath.section == SectionType.Experience.rawValue { // experience
+        if indexPath.section == SectionType.Work.rawValue { // experience
             let cell = tableView.dequeueReusableCell(withClass: ProfileExperienceItemCell.self)
+            if self.workExperiences.count > 0 {
+                cell.model = workExperiences[indexPath.row]
+                cell.deleteHandler = { [weak self] in
+                    self?.deleteUserExperience($0, type: 2)
+                }
+                cell.editHandler = { [weak self] in
+                    let vc = ProfileAddWorkExperienceController(model: $0)
+                    vc.profileWorkDataUpdated = {  [weak self] in
+                        self?.getUserInfo()
+                    }
+                    self?.navigationController?.pushViewController(vc)
+                }
+            }
             return cell
         }
         if indexPath.section == SectionType.Education.rawValue {
             let cell = tableView.dequeueReusableCell(withClass: ProfileEducationItemCell.self)
+            if self.eduExperiences.count > 0 {
+                cell.model = eduExperiences[indexPath.row]
+                cell.deleteHandler = { [weak self] in
+                    self?.deleteUserExperience($0, type: 1)
+                }
+                cell.editHandler = { [weak self] in
+                    let vc = ProfileAddEduExperienceController(model: $0)
+                    vc.profileEduDataUpdated = {  [weak self] in
+                        self?.getUserInfo()
+                    }
+                    self?.navigationController?.pushViewController(vc)
+                }
+            }
             return cell
         }
         if indexPath.section == SectionType.Interests.rawValue {
@@ -176,6 +251,24 @@ class ProfileController: BaseTableController {
         } else {
             if let title = sectionTitleMap[section] {
                 let sectionView = ProfileSectionView(title: title,type: sectionType[section])
+                sectionView.profileAddDataHandler = { [weak self] type in
+                    switch type {
+                    case .Work:
+                        let vc = ProfileAddWorkExperienceController()
+                        vc.profileWorkDataUpdated = {  [weak self] in
+                            self?.getUserInfo()
+                        }
+                        self?.navigationController?.pushViewController(vc)
+                    case .Education:
+                        let vc = ProfileAddEduExperienceController()
+                        vc.profileEduDataUpdated = {  [weak self] in
+                            self?.getUserInfo()
+                        }
+                        self?.navigationController?.pushViewController(vc)
+                    default:
+                        print(type)
+                    }
+                }
                 return sectionView
             }
         }
