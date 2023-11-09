@@ -39,12 +39,21 @@ class CalendarEventRepeatUntilController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.addLeftBarButtonItem()
         self.leftButtonDidClick = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        let saveButton = UIButton()
+        saveButton.size = CGSize(width: 30, height: 30)
+        saveButton.contentMode = .right
+        saveButton.imageForNormal = R.image.checkmark()
+        saveButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.selectComplete?(self.selectIndex, self.end)
-            self.navigationController?.popViewController(animated: true)
-        }
+            self.returnBack()
+        }).disposed(by: rx.disposeBag)
+        self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
         
         

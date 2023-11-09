@@ -8,13 +8,13 @@
 import UIKit
 
 class AddUserExperienceRequestModel: BaseModel {
-    var org_id: Int = 0
+    var org_id: Int?
     var title_name: String?
-    var is_current: Int = 0
+    var is_current: Int?
     var start_date: String?
     var industry_name: String?
     var degree_name: String?
-    var exp_type: Int = 0
+    var exp_type: Int?
     var field_name: String?
     var org_name: String?
     var end_date: String?

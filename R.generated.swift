@@ -282,7 +282,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 107 images.
+  /// This `_R.image` struct is generated, and contains static references to 108 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -363,6 +363,9 @@ struct _R {
 
     /// Image `connection_search`.
     var connection_search: RswiftResources.ImageResource { .init(name: "connection_search", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `creditcard.viewfinder`.
+    var creditcardViewfinder: RswiftResources.ImageResource { .init(name: "creditcard.viewfinder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `edu_placeholder`.
     var edu_placeholder: RswiftResources.ImageResource { .init(name: "edu_placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

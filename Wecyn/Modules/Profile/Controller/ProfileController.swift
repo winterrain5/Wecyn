@@ -8,11 +8,12 @@
 import UIKit
 import ParallaxHeader
 import PromiseKit
+import ImagePickerSwift
 enum SectionType: Int {
     case Activity
-    case Skills
     case Work
     case Education
+    case Skills
     case Interests
 }
 
@@ -20,9 +21,9 @@ class ProfileController: BaseTableController {
     
    
     private var headerView = ProfileHeaderView.loadViewFromNib()
-    private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Skills,2:.Experience,3:.Education,4:.Interests]
-    private let sectionType:[SectionType] = [.Activity,.Skills,.Work,.Education,.Interests]
-    override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio == 0 ? .lightContent : .darkContent }
+    private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Experience,2:.Education]
+    private let sectionTypes:[SectionType] = [.Activity,.Work,.Education]
+    override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio <= 0 ? .lightContent : .darkContent }
     var ratio:CGFloat = 0
     var userPosts:[PostListModel] =  []
     var workExperiences:[UserExperienceInfoModel] = []
@@ -47,7 +48,63 @@ class ProfileController: BaseTableController {
         }).disposed(by: rx.disposeBag)
         let settingItem = UIBarButtonItem(customView: setting)
         
-        self.navigation.item.rightBarButtonItem = settingItem
+        
+        let fixItem = UIBarButtonItem.fixedSpace(width: 22)
+        
+        let scan = UIButton()
+        scan.imageForNormal = R.image.creditcardViewfinder()
+        scan.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            
+            func compressionImage(_ size:Int,image:UIImage?) -> String {
+                guard let data = image?.pngData() else { return "" }
+                guard let result = try? ImageCompress.compressImageData(data, limitDataSize: size * 1024 * 1024) else { return "" }
+                let base64 = UIImage(data: result)?.pngBase64String() ?? ""
+                print("image.kilobytesSize:\(UIImage(data: data)?.kilobytesSize ?? 0),base64Size:\(base64.lengthOfBytes(using: .utf8))")
+                return base64
+            }
+            
+            func uploadPhoto(_ image:UIImage?) {
+                
+                let base64 = compressionImage(50, image: image)
+                Toast.showLoading()
+                NetworkService.scanCard(photo: base64).subscribe(onNext:{
+                    Toast.dismiss()
+                    let vc = AddNewBusinessCardController(model: $0)
+                    self.navigationController?.pushViewController(vc)
+                },onError: { e in
+                    Toast.dismiss()
+                }).disposed(by: self.rx.disposeBag)
+              
+            }
+            
+            let alert = UIAlertController.init(title: "Scan BusinessCard", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
+            let config = ImagePickerOptions()
+            config.allowsEditing = true
+            config.presentController = self
+            alert.addAction(title: "Camera",style: .destructive) { _ in
+                
+                ImagePicker.show(type: .takePhoto, with: config) { image, path in
+                    uploadPhoto(image)
+                }
+            }
+            
+            alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
+                ImagePicker.show(type: .selectPhoto, with: config) { image, path in
+                    uploadPhoto(image)
+                }
+            }
+            
+            alert.addAction(title: "Cancel",style: .cancel)
+            
+            alert.show()
+           
+            
+        
+        }).disposed(by: rx.disposeBag)
+        let scanItem = UIBarButtonItem(customView: scan)
+        
+        self.navigation.item.rightBarButtonItems = [settingItem,fixItem,scanItem]
     }
     
     override func createListView() {
@@ -114,12 +171,12 @@ class ProfileController: BaseTableController {
                 Toast.showSuccess("successfully deleted")
                 if type == 1 {
                     let row = self.eduExperiences.firstIndex(of: model) ?? 0
-                    let index = IndexPath(row: row, section: 3)
+                    let index = IndexPath(row: row, section: SectionType.Education.rawValue)
                     self.eduExperiences.removeAll(model)
                     self.tableView?.deleteRows(at: [index], with: .none)
                 } else {
                     let row = self.workExperiences.firstIndex(of: model) ?? 0
-                    let index = IndexPath(row: row, section: 2)
+                    let index = IndexPath(row: row, section: SectionType.Work.rawValue)
                     self.workExperiences.removeAll(model)
                     self.tableView?.deleteRows(at: [index], with: .none)
                 }
@@ -141,7 +198,7 @@ class ProfileController: BaseTableController {
 
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 3
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == SectionType.Activity.rawValue {
@@ -223,6 +280,14 @@ class ProfileController: BaseTableController {
             cell.userInfoView.deleteHandler = { [weak self] _ in
                 self?.deletePost()
             }
+            cell.footerView.likeHandler = { [weak self] in
+                self?.updateRow($0)
+            }
+            cell.footerView.commentHandler = { [weak self] in
+                guard let `self` = self else { return }
+                let vc = PostDetailViewController(postModel: $0,isBeginEdit: true)
+                self.navigationController?.pushViewController(vc)
+            }
             return cell
         }
         return UITableViewCell()
@@ -245,12 +310,12 @@ class ProfileController: BaseTableController {
                 return view
             }
             if let title = sectionTitleMap[section] {
-                let sectionView = ProfileSectionView(title: title,type: sectionType[section])
+                let sectionView = ProfileSectionView(title: title,type: sectionTypes[section])
                 return sectionView
             }
         } else {
             if let title = sectionTitleMap[section] {
-                let sectionView = ProfileSectionView(title: title,type: sectionType[section])
+                let sectionView = ProfileSectionView(title: title,type: sectionTypes[section])
                 sectionView.profileAddDataHandler = { [weak self] type in
                     switch type {
                     case .Work:
@@ -297,7 +362,7 @@ class ProfileController: BaseTableController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section  == 0 {
+        if indexPath.section  == SectionType.Activity.rawValue {
             guard let model = userPosts.first else { return }
             let vc = PostDetailViewController(postModel: model)
             self.navigationController?.pushViewController(vc)
@@ -306,7 +371,30 @@ class ProfileController: BaseTableController {
             }
         }
         
+        if indexPath.section ==  SectionType.Education.rawValue {
+            let vc = ProfileAddEduExperienceController(model: self.eduExperiences[indexPath.row])
+            vc.profileEduDataUpdated = {  [weak self] in
+                self?.getUserInfo()
+            }
+            self.navigationController?.pushViewController(vc)
+        }
+        
+        if indexPath.section ==  SectionType.Work.rawValue {
+            let vc = ProfileAddWorkExperienceController(model: self.workExperiences[indexPath.row])
+            vc.profileWorkDataUpdated = {  [weak self] in
+                self?.getUserInfo()
+            }
+            self.navigationController?.pushViewController(vc)
+        }
+        
     }
+    
+    func updateRow(_ model:PostListModel) {
+        let item = userPosts.firstIndex(of: model) ?? 0
+        self.tableView?.reloadRows(at: [IndexPath(item: item, section: SectionType.Activity.rawValue)], with: .none)
+    }
+
+    
     
     func deletePost() {
         if self.userPosts.count > 0 {

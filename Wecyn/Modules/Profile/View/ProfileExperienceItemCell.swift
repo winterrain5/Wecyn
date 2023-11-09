@@ -28,7 +28,6 @@ class ProfileExperienceItemCell: UITableViewCell {
         label.font = UIFont.sk.pingFangRegular(12)
     }
     private let descLabel =  UILabel().then { label in
-        label.numberOfLines = 0
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
     }
@@ -38,10 +37,12 @@ class ProfileExperienceItemCell: UITableViewCell {
             guard let model = model else { return }
             if model.org_avatar.url == nil {
                 imgView.contentMode = .center
+                imgView.image = R.image.org_placeholder()
             } else {
                 imgView.contentMode = .scaleAspectFit
+                imgView.kf.setImage(with: model.org_avatar.url)
             }
-            imgView.kf.setImage(with: model.org_avatar.url,placeholder: R.image.org_placeholder()!)
+            
             companyLabel.text = model.org_name
             jobLabel.text = model.title_name + " " + model.industry_name
             timeLabel.text = model.start_date_format + " - " + (model.is_current == 1 ? "Present" : model.end_date_format)

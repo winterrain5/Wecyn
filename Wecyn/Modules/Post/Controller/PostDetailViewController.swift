@@ -215,6 +215,12 @@ class PostDetailViewController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            return
+        }
+        if commentList.count == 0 {
+            return
+        }
         let model = commentList[indexPath.row]
         let vc = PostCommentReplyController(commentModel: model,isBeginEdit: false)
         let nav = BaseNavigationController(rootViewController: vc)

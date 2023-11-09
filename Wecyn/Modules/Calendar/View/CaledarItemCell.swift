@@ -28,7 +28,7 @@ class CaledarItemCell: UITableViewCell {
             }
             
             
-            if model.is_own {
+            if model.is_own == 1{
                 switch model.status {
                 case 0: // 未知
                     statusImgView.image = R.image.personFillQuestionmark()

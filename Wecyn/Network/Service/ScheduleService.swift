@@ -210,7 +210,7 @@ class iCSFileParsedModel: BaseModel {
     
     var repeat_start_time:String?
     var repeat_start_date:Date? {
-        return repeat_start_time?.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        return repeat_start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var repeat_end_time:String? {
         repeat_start_date?.addingTimeInterval(duration).toString()
@@ -220,10 +220,10 @@ class iCSFileParsedModel: BaseModel {
     }
     
     var start_date:Date? {
-        return start_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        return start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var end_date:Date? {
-        return end_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        return end_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var duration:TimeInterval  {
         guard let start = start_date,let end = end_date else { return 0 }
@@ -248,7 +248,7 @@ class iCSFileParsedModel: BaseModel {
         }
         if is_repeat == 1 {
             // DTSTART:20230717T062741Z\nRRULE:FREQ=DAILY;INTERVAL=1;WKST=MO;COUNT=4
-            let repeatStr = "repeat " + (rruleObject?.toText(rrulestr: rrule_str) ?? "")
+            let repeatStr = "repeat " + (rruleObject?.toText(rrulestr: rrule_str) ?? "") + ",start from \(start_time)"
             desc = (repeat_start_time ?? "") + "\n" + (startTime + " → " + endTime + "(\(formateTime(duration.int)))") + "\n" + repeatStr
             return desc
             
@@ -321,7 +321,7 @@ class EventListModel: BaseModel {
     var is_public = 0
     var status = 0
     var is_creator = 0
-    var is_own = false // 该事件是否与自己有关
+    var is_own = 0 // 该事件是否与自己有关
     var creator_id = 0
     var creator_name = ""
     var creator_avt = ""
@@ -329,7 +329,7 @@ class EventListModel: BaseModel {
     var rrule_str = ""
     var exdates:[String] = []
     var exdatesObject:[Date?] {
-        exdates.map({ $0.date(format: DateFormat.ddMMyyyyHHmm.rawValue)})
+        exdates.map({ $0.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)})
     }
     var color = 0
     
@@ -357,10 +357,10 @@ class EventListModel: BaseModel {
     
     var isParentData = false
     var start_date:Date? {
-        return start_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        return start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var end_date:Date? {
-        return end_time.date(format: DateFormat.ddMMyyyyHHmm.rawValue)
+        return end_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
     var duration:TimeInterval  {
         guard let start = start_date,let end = end_date else { return 0 }
@@ -380,6 +380,7 @@ class EventListModel: BaseModel {
         model.is_repeat = is_repeat
         model.color = color
         model.rrule_str = rrule_str
+        model.is_own = is_own
         model.isParentData = false
         
         if isCrossDays {

@@ -290,7 +290,7 @@ class CalendarAddNewEventController: BaseTableController {
     func addEvent() {
         func addEventRequest() {
             Toast.showLoading()
-            guard let startDate = self.requestModel.start_time?.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+            guard let startDate = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else {
                 Toast.showError("start time is required")
                 return
             }
@@ -352,7 +352,7 @@ class CalendarAddNewEventController: BaseTableController {
                     }
                 })
             } else {
-                guard let date = self.requestModel.start_time?.date(format: DateFormat.ddMMyyyyHHmm.rawValue) else { return }
+                guard let date = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else { return }
                 let content = UNMutableNotificationContent()
                 content.title = self.Title.title ?? ""
                 content.body = self.Desc.desc ?? ""
@@ -572,7 +572,7 @@ class CalendarAddNewEventController: BaseTableController {
                            minimumDate: nil,
                            maximumDate: nil) { date in
                 
-                let dateStr = date.toString()
+                let dateStr = date.toString(isZero: false)
                 self.requestModel.start_time = dateStr
                 
                 self.Start.start_time = dateStr
@@ -590,7 +590,7 @@ class CalendarAddNewEventController: BaseTableController {
                            maximumDate: nil) { date in
                 
                 
-                let dateStr = date.toString()
+                let dateStr = date.toString(isZero: false)
                 self.requestModel.end_time = dateStr
                 
                 self.End.end_time = dateStr

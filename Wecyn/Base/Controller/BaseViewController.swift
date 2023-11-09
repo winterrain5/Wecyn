@@ -34,6 +34,10 @@ class BaseViewController: UIViewController {
         IQKeyboardManager.shared.enableAutoToolbar = false
 
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Toast.dismiss()
+    }
     
     func addLeftBarButtonItem(image:UIImage? = R.image.chevronBackward()) {
         leftButton.setImage(image, for: .normal)

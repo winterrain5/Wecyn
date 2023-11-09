@@ -177,7 +177,7 @@ class CalendarEventDetailController: BaseTableController {
     
     func addStatusButton() {
         let editButton = UIButton()
-        if eventModel.is_own {
+        if eventModel.is_own == 1{
             if eventModel.status == 0 {
                 editButton.imageForNormal = R.image.personFillQuestionmark()
             }

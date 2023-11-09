@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AddUserWorkExperienceView" customModule="Wecyn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="494"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="527"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a73-FN-hl1">
@@ -256,10 +256,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3E-Lr-QcY">
-                    <rect key="frame" x="0.0" y="384" width="393" height="96"/>
+                    <rect key="frame" x="0.0" y="384" width="393" height="117"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Yt-jI-RbM">
-                            <rect key="frame" x="16" y="95" width="361" height="1"/>
+                            <rect key="frame" x="16" y="116" width="361" height="1"/>
                             <color key="backgroundColor" name="SeperatorColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="Qfo-9r-HGA"/>
@@ -267,6 +267,9 @@
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iQ-9l-ysa">
                             <rect key="frame" x="16" y="14" width="74" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="1ij-KU-LjA"/>
+                            </constraints>
                             <attributedString key="attributedText">
                                 <fragment content="Description">
                                     <attributes>
@@ -284,29 +287,31 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please Input" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-K0-m8m">
-                            <rect key="frame" x="16" y="41" width="361" height="39"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-7U-wX5" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                            <rect key="frame" x="16" y="41" width="361" height="60"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="39" id="uj9-mm-Vk0"/>
+                                <constraint firstAttribute="height" constant="60" id="uWz-MJ-9FY"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            <connections>
-                                <outlet property="delegate" destination="iN0-l3-epB" id="3S7-gY-0sw"/>
-                            </connections>
-                        </textField>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please Input"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                    <color key="value" red="0.74117647058823533" green="0.74117647058823533" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="4Yt-jI-RbM" secondAttribute="bottom" id="3sQ-Re-ju2"/>
                         <constraint firstItem="6iQ-9l-ysa" firstAttribute="top" secondItem="w3E-Lr-QcY" secondAttribute="top" constant="14" id="AJk-xP-bQa"/>
                         <constraint firstItem="6iQ-9l-ysa" firstAttribute="leading" secondItem="w3E-Lr-QcY" secondAttribute="leading" constant="16" id="Cv2-ls-FPm"/>
-                        <constraint firstAttribute="trailing" secondItem="9GG-K0-m8m" secondAttribute="trailing" constant="16" id="HPT-aH-hoN"/>
+                        <constraint firstItem="lyw-7U-wX5" firstAttribute="leading" secondItem="w3E-Lr-QcY" secondAttribute="leading" constant="16" id="Ffl-E6-3b6"/>
                         <constraint firstItem="4Yt-jI-RbM" firstAttribute="leading" secondItem="w3E-Lr-QcY" secondAttribute="leading" constant="16" id="I5Q-82-SrV"/>
-                        <constraint firstAttribute="height" constant="96" id="I65-qN-3Yt"/>
-                        <constraint firstItem="9GG-K0-m8m" firstAttribute="top" secondItem="6iQ-9l-ysa" secondAttribute="bottom" constant="10" id="Ly1-Ij-d3a"/>
-                        <constraint firstItem="9GG-K0-m8m" firstAttribute="leading" secondItem="w3E-Lr-QcY" secondAttribute="leading" constant="16" id="UVJ-Hf-iKV"/>
+                        <constraint firstItem="4Yt-jI-RbM" firstAttribute="top" secondItem="lyw-7U-wX5" secondAttribute="bottom" constant="15" id="IXb-Tu-t4Q"/>
+                        <constraint firstAttribute="trailing" secondItem="lyw-7U-wX5" secondAttribute="trailing" constant="16" id="LC6-8U-VwL"/>
                         <constraint firstAttribute="trailing" secondItem="4Yt-jI-RbM" secondAttribute="trailing" constant="16" id="qAf-Xr-xTg"/>
+                        <constraint firstItem="lyw-7U-wX5" firstAttribute="top" secondItem="6iQ-9l-ysa" secondAttribute="bottom" constant="10" id="v1Z-Tz-gEq"/>
                     </constraints>
                 </view>
             </subviews>
@@ -331,7 +336,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="descTf" destination="9GG-K0-m8m" id="Ex2-ET-lB3"/>
+                <outlet property="descTf" destination="lyw-7U-wX5" id="9By-tI-qc4"/>
+                <outlet property="descTfHCons" destination="uWz-MJ-9FY" id="fu3-g6-gIN"/>
                 <outlet property="endButton" destination="Rv5-3M-QRM" id="Reu-6A-VMU"/>
                 <outlet property="industryTf" destination="uHP-Zw-gwR" id="dKT-OD-rEd"/>
                 <outlet property="jobTitleTf" destination="MkE-Cv-vTd" id="G0H-TQ-Tu6"/>
@@ -339,7 +345,7 @@
                 <outlet property="orgTf" destination="PNC-nb-c6e" id="p9a-Mw-jiS"/>
                 <outlet property="startButton" destination="wrB-fK-75a" id="lYh-a4-xTX"/>
             </connections>
-            <point key="canvasLocation" x="130.53435114503816" y="-158.45070422535213"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-146.83098591549296"/>
         </view>
     </objects>
     <resources>

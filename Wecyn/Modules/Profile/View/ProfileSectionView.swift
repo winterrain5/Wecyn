@@ -47,6 +47,8 @@ class ProfileSectionView: UIView {
                 let user = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
                 let vc = PostUserInfoController(userId: user?.id.int ?? 0)
                 UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+            } else {
+                self.profileAddDataHandler?(self.type)
             }
         }).disposed(by: rx.disposeBag)
         
@@ -55,10 +57,7 @@ class ProfileSectionView: UIView {
         editButton.sk.setImageTitleLayout(.imgRight,spacing: 4)
         editButton.contentHorizontalAlignment = .right
         backgroundColor = .white
-        editButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            self.profileAddDataHandler?(self.type)
-        }).disposed(by: rx.disposeBag)
+      
         
     }
     
@@ -79,14 +78,9 @@ class ProfileSectionView: UIView {
             make.right.equalToSuperview().inset(16)
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(32)
-            make.width.equalTo(46)
+            make.width.equalTo(30)
         }
         
-        addButton.snp.makeConstraints { make in
-            make.right.equalTo(editButton.snp.left).offset(-16)
-            make.centerY.equalTo(titleLabel)
-            make.height.equalTo(32)
-            make.width.equalTo(46)
-        }
+    
     }
 }
