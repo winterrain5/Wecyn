@@ -49,10 +49,19 @@ class CalendarEventSingelChooseController: BaseTableController {
         
         self.addLeftBarButtonItem()
         self.leftButtonDidClick = { [weak self] in
+            self?.returnBack()
+        }
+        
+        let saveButton = UIButton()
+        saveButton.size = CGSize(width: 30, height: 30)
+        saveButton.contentMode = .right
+        saveButton.imageForNormal = R.image.checkmark()
+        saveButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.selectComplete?(self.selectIndexs)
             self.returnBack()
-        }
+        }).disposed(by: rx.disposeBag)
+        self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
         
         if type == .Month {

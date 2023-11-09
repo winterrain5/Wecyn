@@ -48,7 +48,7 @@ class NetworkService {
     static func friendList(id:Int? = nil) -> Observable<[FriendListModel]> {
         let target = MultiTarget(NetworkApi.friendList(id))
         return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendListModel.self)
-//                return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
+        //                return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
     }
     
     /// 获取收到的好友申请列表
@@ -177,6 +177,29 @@ class NetworkService {
         let target = MultiTarget(NetworkApi.updateRemark(id, remark))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
+    
+    
+    /// 扫描实体名片
+    /// - Parameter photo: base64
+    /// - Returns: ScanCardModel
+    static func scanCard(photo:String) -> Observable<ScanCardModel> {
+        let target = MultiTarget(NetworkApi.scanCard(photo))
+        return APIProvider.rx.request(target).asObservable().mapObject(ScanCardModel.self)
+    }
+    
+}
+
+class ScanCardModel:BaseModel  {
+    var url: String = ""
+    var postal_code: String = ""
+    var adr_work: String = ""
+    var tel_work: String = ""
+    var title: String = ""
+    var email: String = ""
+    var other: [String] = []
+    var org_name: String = ""
+    var name: String = ""
+    var tel_cell: String = ""
     
 }
 

@@ -216,31 +216,18 @@ class PostCommentReplyModel:BaseModel {
 }
 
 func formateTime(_ create_time:String) -> String {
-    let createTime = create_time.date(format: "dd-MM-yyyy HH:mm:ss")
+    guard let createTime = create_time.toDate(format: "dd-MM-yyyy HH:mm:ss",isZero: false) else {
+        return ""
+    }
     let now = Date()
-    let duration = (createTime?.distance(to: now) ?? 0).int
+    let duration = createTime.distance(to: now).int
     let day = duration / (60 * 60 * 24);
     let hour = (duration % ( 60 * 60 * 24)) / (60 * 60)
     let minitue = (duration % (60 * 60)) / (60)
     
-//    if day > 365 {
-//        let year = day / 365
-//        let yearUnit = year > 1 ? "years" : "year"
-//        return  "\(year) \(yearUnit)"
-//    }
-//    if day > 30 {
-//        let month = day / 30
-//        let monthkUnit = month > 1 ? "months" : "month"
-//        return  "\(month) \(monthkUnit)"
-//    }
-//    if day > 7 {
-//        let week = day / 7
-//        let weekUnit = week > 1 ? "weeks" : "week"
-//        return  "\(week) \(weekUnit)"
-//    }
     if day > 7 {
-        let dateStr = createTime?.toString(format: "dd-MM-yyyy HH:mm")
-        return dateStr ?? ""
+        let dateStr = createTime.toString(format: "dd-MM-yyyy HH:mm",isZero: false)
+        return dateStr
     }
     if day > 0 && day < 7 {
         let dayUnit = day > 1 ? "days" : "day"

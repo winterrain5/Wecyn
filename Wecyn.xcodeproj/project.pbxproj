@@ -118,6 +118,7 @@
 		458870E62AE7BD2000029353 /* AddUserEducationExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870E52AE7BD2000029353 /* AddUserEducationExperienceView.swift */; };
 		458870E82AE7BD2D00029353 /* AddUserEducationExperienceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458870E72AE7BD2D00029353 /* AddUserEducationExperienceView.xib */; };
 		458870EA2AE7BE8400029353 /* ProfileAddEduExperienceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */; };
+		458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458871032AFB7B0F00029353 /* AddNewBusinessCardController.swift */; };
 		458970602A7794EA00344B93 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589705F2A7794EA00344B93 /* Asyncs.swift */; };
 		458970622A78DAA100344B93 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970612A78DAA100344B93 /* IMService.swift */; };
 		458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970632A7CDAB900344B93 /* LanguageSettingController.swift */; };
@@ -376,6 +377,7 @@
 		458870E52AE7BD2000029353 /* AddUserEducationExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserEducationExperienceView.swift; sourceTree = "<group>"; };
 		458870E72AE7BD2D00029353 /* AddUserEducationExperienceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddUserEducationExperienceView.xib; sourceTree = "<group>"; };
 		458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAddEduExperienceController.swift; sourceTree = "<group>"; };
+		458871032AFB7B0F00029353 /* AddNewBusinessCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBusinessCardController.swift; sourceTree = "<group>"; };
 		4589705F2A7794EA00344B93 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
 		458970612A78DAA100344B93 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		458970632A7CDAB900344B93 /* LanguageSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingController.swift; sourceTree = "<group>"; };
@@ -1041,8 +1043,9 @@
 				45E765B12A31A97F00BF6EEC /* ProfileController.swift */,
 				458970632A7CDAB900344B93 /* LanguageSettingController.swift */,
 				458870DD2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift */,
-				458870E32AE67F0700029353 /* OrganizationSearchController.swift */,
 				458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */,
+				458870E32AE67F0700029353 /* OrganizationSearchController.swift */,
+				458871032AFB7B0F00029353 /* AddNewBusinessCardController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1527,6 +1530,7 @@
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
+				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				4549ECEA2AB40A4500EB9C4C /* UIImage+System.swift in Sources */,
@@ -1920,6 +1924,7 @@
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Wecyn requires your consent to access your address book.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
@@ -1967,6 +1972,7 @@
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Wecyn requires your consent to access your address book.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";

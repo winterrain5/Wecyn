@@ -170,6 +170,7 @@ class HomePostUserInfoView: UIView {
     func updatePostType(type:Int){
         guard let model = postModel else { return }
         PostService.updatePostType(id: model.id, type: type).subscribe(onNext:{ _ in
+            Toast.showSuccess("You have updated this post tye")
             self.updatePostType?(model)
         }).disposed(by: rx.disposeBag)
     }

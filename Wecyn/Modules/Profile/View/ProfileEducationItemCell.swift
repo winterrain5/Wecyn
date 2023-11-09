@@ -27,7 +27,6 @@ class ProfileEducationItemCell: UITableViewCell {
         label.font = UIFont.sk.pingFangRegular(12)
     }
     private let descLabel =  UILabel().then { label in
-        label.numberOfLines = 0
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
     }
@@ -63,11 +62,12 @@ class ProfileEducationItemCell: UITableViewCell {
             
             if model.org_avatar.url == nil {
                 imgView.contentMode = .center
+                imgView.image = R.image.edu_placeholder()
             } else {
                 imgView.contentMode = .scaleAspectFit
+                imgView.kf.setImage(with: model.org_avatar.url)
             }
             
-            imgView.kf.setImage(with: model.org_avatar.url,placeholder: R.image.edu_placeholder())
             schoolLabel.text = model.org_name
             majorLabel.text = model.degree_name + " " + model.field_name
             timeLabel.text = model.start_date_format + " - " + (model.is_current == 1 ? "Present" : model.end_date_format)

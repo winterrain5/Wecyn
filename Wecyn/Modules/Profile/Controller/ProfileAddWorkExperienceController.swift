@@ -38,7 +38,8 @@ class ProfileAddWorkExperienceController: BaseViewController {
         scrollView.contentSize = self.view.size
     
         scrollView.addSubview(container)
-        container.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 454)
+        container.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 520)
+
         
         if let model = model {
             self.navigation.item.title = "Edit Work Experience"
@@ -53,10 +54,25 @@ class ProfileAddWorkExperienceController: BaseViewController {
             self.requestModel.start_date = model.start_date
             self.requestModel.end_date = model.end_date
             self.requestModel.is_current = model.is_current
+            self.requestModel.org_id = model.org_id
             
             self.orgNameRelay.accept(model.org_name)
             self.jobTitleRelay.accept(model.title_name)
             self.durationStartRelay.accept(model.start_date)
+            
+            func updateLayout() {
+                let height = model.desc.heightWithConstrainedWidth(width: kScreenWidth - 32, font: UIFont.systemFont(ofSize: 16))
+                let calHeight = height == 0 ? 60 :  (height + 15)
+                self.container.descTfHCons.constant  = calHeight
+                self.container.setNeedsUpdateConstraints()
+                self.container.updateConstraintsIfNeeded()
+                
+                self.container.frame.size.height += height
+                self.scrollView.contentSize =  CGSize(width: kScreenWidth, height: self.container.height)
+            }
+
+            updateLayout()
+           
         } else {
             self.navigation.item.title = "Add Work Experience"
         }
@@ -93,8 +109,9 @@ class ProfileAddWorkExperienceController: BaseViewController {
         container.startButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.view.endEditing(true)
-            DatePickerView(title: "Start Date", mode: .date) { date in
-                let dateStr = date.toString(format: "MM-yyyy")
+            let maxmumDate = self.requestModel.end_date?.date(withFormat: "MM-yyyy") ?? Date()
+            DatePickerView(title: "Start Date", mode: .date,maximumDate: maxmumDate) { date in
+                let dateStr = date.toString(format: "MM-yyyy",isZero: false)
                 self.durationStartRelay.accept(dateStr)
                 self.requestModel.start_date = dateStr
                 self.container.startButton.titleForNormal = dateStr
@@ -105,8 +122,9 @@ class ProfileAddWorkExperienceController: BaseViewController {
         container.endButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.view.endEditing(true)
-            DatePickerView(title: "End Date", mode: .date,maximumDate: Date()) { date in
-                let dateStr = date.toString(format: "MM-yyyy")
+            let minimumDate = self.requestModel.start_date?.date(withFormat: "MM-yyyy")
+            DatePickerView(title: "End Date", mode: .date,minimumDate: minimumDate,maximumDate: Date()) { date in
+                let dateStr = date.toString(format: "MM-yyyy",isZero: false)
                 self.requestModel.end_date = dateStr
                 self.requestModel.is_current = 0
                 self.container.endButton.titleForNormal = dateStr
@@ -124,6 +142,8 @@ class ProfileAddWorkExperienceController: BaseViewController {
                 self.orgNameRelay.accept($0.name)
                 if $0.id != -1 {
                     self.requestModel.org_id = $0.id
+                } else {
+                    self.requestModel.org_id = nil
                 }
             }
             self.present(nav, animated: true)

@@ -150,7 +150,7 @@ extension String {
         return result
     }
     
-    func date(format: String, locaIdentifier:String = LocaIdentifier, isZero:Bool = false) -> Date? {
+    func toDate(format: String, locaIdentifier:String = LocaIdentifier, isZero:Bool = true) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: locaIdentifier)
         dateFormatter.dateFormat = format
@@ -212,7 +212,7 @@ extension Date {
         return endOfMonth
     }
     
-    func toString(format: String = DateFormat.ddMMyyyyHHmm.rawValue, locaIdentifier:String = LocaIdentifier, isZero:Bool = false) -> String {
+    func toString(format: String = DateFormat.ddMMyyyyHHmm.rawValue, locaIdentifier:String = LocaIdentifier, isZero:Bool = true) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.locale = Locale(identifier: locaIdentifier)
