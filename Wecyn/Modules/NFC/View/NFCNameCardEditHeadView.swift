@@ -7,6 +7,7 @@
 
 import UIKit
 import ImagePickerSwift
+import AnyImageKit
 class NFCNameCardEditHeadView: UIView {
     
     let coverImageView = UIImageView()
@@ -17,6 +18,7 @@ class NFCNameCardEditHeadView: UIView {
     let avtEditButton = UIButton()
     let coverEditButton = UIButton()
     
+    var editAvatar = false
     var model:UserInfoModel? {
         didSet {
             guard let model = model else { return }
@@ -51,27 +53,43 @@ class NFCNameCardEditHeadView: UIView {
         addSubview(avtEditButton)
         addSubview(coverEditButton)
         
+        func presentCapture() {
+            var option = CaptureOptionsInfo()
+            var photoInfo = EditorPhotoOptionsInfo()
+            photoInfo.toolOptions = [.crop]
+            option.editorPhotoOptions =  photoInfo
+            let vc = ImageCaptureController(options: option, delegate: self)
+            vc.modalPresentationStyle = .fullScreen
+            UIViewController.sk.getTopVC()?.present(vc, animated: true)
+        }
+        func presentImagePicker() {
+            var option = PickerOptionsInfo()
+            
+            var photoOption = EditorPhotoOptionsInfo()
+            photoOption.toolOptions = [.crop]
+           
+            option.editorOptions = .photo
+            option.editorPhotoOptions = photoOption
+            option.selectLimit = 1
+            
+            let vc = ImagePickerController(options: option, delegate: self)
+            vc.modalPresentationStyle = .fullScreen
+            UIViewController.sk.getTopVC()?.present(vc, animated: true)
+        }
         avtEditButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             
-            let option = ImagePickerOptions.default
-            option.resizeWidth = 128
-            option.allowsEditing = true
-            
             let alert = UIAlertController.init(title: "Edit Photo", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
             alert.addAction(title: "Camera",style: .destructive) { _ in
-                ImagePicker.show(type: .takePhoto, with: option) { image, path in
-                    guard let image = image else { return }
-                    self.uploadAvatar(image)
-                }
+                presentCapture()
+                self.editAvatar = true
             }
             
             alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
-                ImagePicker.show(type: .selectPhoto, with: option) { image, path in
-                    guard let image = image else { return }
-                    self.uploadAvatar(image)
-                }
+               presentImagePicker()
+                self.editAvatar = true
             }
+            
             
             alert.addAction(title: "Cancel",style: .cancel)
             
@@ -81,23 +99,15 @@ class NFCNameCardEditHeadView: UIView {
         coverEditButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             
-            let option = ImagePickerOptions.default
-            option.resizeWidth = kScreenWidth
-            option.allowsEditing = true
-            
             let alert = UIAlertController.init(title: "Edit Cover", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
             alert.addAction(title: "Camera",style: .destructive) { _ in
-                ImagePicker.show(type: .takePhoto, with: option) { image, path in
-                    guard let image = image else { return }
-                    self.uploadCover(image)
-                }
+                presentCapture()
+                self.editAvatar = false
             }
             
             alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
-                ImagePicker.show(type: .selectPhoto, with: option) { image, path in
-                    guard let image = image else { return }
-                    self.uploadCover(image)
-                }
+                presentImagePicker()
+                self.editAvatar = false
             }
             
             alert.addAction(title: "Cancel",style: .cancel)
@@ -142,10 +152,7 @@ class NFCNameCardEditHeadView: UIView {
     
     func uploadAvatar(_ image:UIImage) {
         Toast.showLoading()
-        guard let base64 = compressionImage(50,image: image) else {
-            Toast.showError("Failed to compress image")
-            return
-        }
+        let base64 = image.compressionImageToBase64(500)
         UserService.updateAvatar(photo: base64).subscribe(onNext:{
             if $0.success != 1 {
                 Toast.showError($0.message)
@@ -154,16 +161,14 @@ class NFCNameCardEditHeadView: UIView {
                 Toast.dismiss()
             }
         },onError: { e in
+            Toast.dismiss()
             Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
     }
     
     func uploadCover(_ image:UIImage) {
         Toast.showLoading()
-        guard let base64 = compressionImage(300,image: image) else {
-            Toast.showError("Failed to compress image")
-            return
-        }
+        let base64 = image.compressionImageToBase64(500)
         UserService.updateCover(photo: base64).subscribe(onNext:{
             if $0.success != 1 {
                 Toast.showError($0.message)
@@ -173,18 +178,36 @@ class NFCNameCardEditHeadView: UIView {
             }
             
         },onError: { e in
+            Toast.dismiss()
             Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
-    }
-    
-    func compressionImage(_ size:Int,image:UIImage) -> String? {
-        guard let data = image.pngData() else { return nil }
-        guard let result = try? ImageCompress.compressImageData(data, limitDataSize: size * 1024 * 1024) else { return nil }
-        let base64 = UIImage(data: result)?.pngBase64String()
-        print("image.kilobytesSize:\(UIImage(data: data)?.kilobytesSize ?? 0),base64Size:\(base64?.lengthOfBytes(using: .utf8))")
-        return base64
     }
     
 }
 
 
+extension NFCNameCardEditHeadView: ImageCaptureControllerDelegate {
+    func imageCapture(_ capture: ImageCaptureController, didFinishCapturing result: CaptureResult) {
+        if result.type == .photo {
+            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
+            guard let image = UIImage(data: photoData) else { return }
+            if editAvatar {
+                uploadAvatar(image)
+            } else {
+                uploadCover(image)
+            }
+        }
+        capture.dismiss(animated: true, completion: nil)
+    }
+}
+extension NFCNameCardEditHeadView: ImagePickerControllerDelegate {
+    func imagePicker(_ picker: ImagePickerController, didFinishPicking result: PickerResult) {
+        guard let image = result.assets.first?.image else  { return }
+        if editAvatar {
+            uploadAvatar(image)
+        } else {
+            uploadCover(image)
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+}

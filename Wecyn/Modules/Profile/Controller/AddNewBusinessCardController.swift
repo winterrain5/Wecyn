@@ -9,11 +9,12 @@ import UIKit
 import AddressBook
 import AddressBookUI
 import Contacts
-// email, tel_cell, name, postal_code, title, adr_work, tel_work, url
+import ParallaxHeader
 
 enum BusinessCardField {
-    case FamilyName
-    case GivenName
+    case Lang
+    
+    case Name
     
     case Phone
     case TelWork
@@ -47,9 +48,12 @@ class AddNewBusinessCardController: BaseTableController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
     var datas:[[BusinessCardModel]] = []
     var model:ScanCardModel!
-    required init(model:ScanCardModel) {
+    var image:UIImage!
+    var lange = "1"
+    required init(model:ScanCardModel,image:UIImage) {
         super.init(nibName: nil, bundle: nil)
         self.model = model
+        self.image = image
     }
     
     required init?(coder: NSCoder) {
@@ -70,6 +74,11 @@ class AddNewBusinessCardController: BaseTableController {
             
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
+       
+        configData()
+    }
+    
+    func configData() {
         /*
          {
            "email": "user@example.com",
@@ -85,17 +94,26 @@ class AddNewBusinessCardController: BaseTableController {
          }
          */
         datas = [
-            [BusinessCardModel(label: "FamilyName",type: .FamilyName,value: model.name),BusinessCardModel(label: "GivenName",type: .GivenName)],
-            [BusinessCardModel(label: "Phone",type: .Phone,value: model.tel_cell),BusinessCardModel(label: "Office Number",type: .TelWork,value: model.tel_work)],
-            [BusinessCardModel(label: "Organization",type: .Organization,value: model.org_name),BusinessCardModel(label: "Department",type: .Department),BusinessCardModel(label: "Job Title",type: .JobTitle,value: model.title)],
-            [BusinessCardModel(label: "Address",type: .Address,value: model.adr_work),BusinessCardModel(label: "Postal Code", type: .PostCode,value: model.postal_code),BusinessCardModel(label: "Email",type: .Email,value: model.email),BusinessCardModel(label: "Url", type: .Url,value: model.url)],
+            [BusinessCardModel(label: "Lang", type: .Lang,value: lange)],
+            [BusinessCardModel(label: "Name",type: .Name,value: model.name)],
+            [BusinessCardModel(label: "Phone",type: .Phone,value: model.tel_cell),
+             BusinessCardModel(label: "Office Number",type: .TelWork,value: model.tel_work)],
+            [BusinessCardModel(label: "Organization",type: .Organization,value: model.org_name),
+             BusinessCardModel(label: "Department",type: .Department),
+             BusinessCardModel(label: "Job Title",type: .JobTitle,value: model.title)],
+            [BusinessCardModel(label: "Address",type: .Address,value: model.adr_work),
+             BusinessCardModel(label: "Postal Code", type: .PostCode,value: model.postal_code),
+             BusinessCardModel(label: "Email",type: .Email,value: model.email),
+             BusinessCardModel(label: "Url", type: .Url,value: model.url)],
             [BusinessCardModel(label: "Note", type: .Note)],
             [BusinessCardModel(label: "Other", type: .Other,value: model.other.joined(separator: "\n"))]
         ]
+        
+        self.tableView?.reloadData()
     }
     
    
-    func  addContact() {
+    func addContact() {
         
         
         let contact = CNMutableContact()
@@ -107,8 +125,7 @@ class AddNewBusinessCardController: BaseTableController {
             return flapData.filter({ $0.type == type }).first?.value ?? ""
         }
         //姓名
-        contact.familyName = String(getValue(.FamilyName).split(separator: " ").first ?? "")
-        contact.givenName =  String(getValue(.GivenName).split(separator: " ").last ?? "")
+        contact.givenName =  getValue(.Name)
         
         //公司信息
         contact.organizationName = getValue(.Organization)
@@ -155,12 +172,23 @@ class AddNewBusinessCardController: BaseTableController {
     override func createListView() {
         super.createListView()
         
+
+        let scaledImage = image.scaled(toWidth: kScreenWidth)
+        let headImageView = UIImageView(image: scaledImage)
+        headImageView.contentMode = .scaleAspectFill
+        tableView?.tableHeaderView = headImageView
+        headImageView.size = CGSize(width: kScreenWidth, height: scaledImage?.size.height ?? 0)
+    
+        
         tableView?.separatorStyle = .singleLine
         tableView?.separatorColor = R.color.seperatorColor()
         tableView?.separatorInset = UIEdgeInsets(horizontal: 16, vertical: 0)
         tableView?.register(cellWithClass: AddNewBusinessCardCell.self)
         tableView?.register(cellWithClass: AddNewBusinessCardOtherCell.self)
+        
     }
+    
+   
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == datas.count - 1 {
             return 200
@@ -174,15 +202,34 @@ class AddNewBusinessCardController: BaseTableController {
         datas[section].count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = datas[indexPath.section][indexPath.row]
+        if indexPath.section == 0 {
+            let cell = AddNewBusinessCardLangCell()
+            cell.model = data
+            cell.changeLangHandler = { [weak self] lange in
+                guard let `self` = self else { return }
+                self.lange = lange
+                self.tableView?.reloadSections(IndexSet(integer: 0), with: .none)
+                let base64 = self.image.compressionImageToBase64(800)
+                Toast.showLoading()
+                NetworkService.scanCard(photo: base64,lang: lange.int ?? 1).subscribe(onNext:{
+                    Toast.dismiss()
+                    self.model = $0
+                    self.configData()
+                },onError: { e in
+                    Toast.showError(e.asAPIError.errorInfo().message)
+                }).disposed(by: self.rx.disposeBag)
+                
+            }
+            return cell
+        }
         if indexPath.section == datas.count - 1 {
             
             let cell = AddNewBusinessCardOtherCell()
-            let data = datas[indexPath.section][indexPath.row]
             cell.model = data
             return cell
         }
         let cell = AddNewBusinessCardCell()
-        let data = datas[indexPath.section][indexPath.row]
         cell.model = data
         return cell
     }
@@ -194,6 +241,7 @@ class AddNewBusinessCardController: BaseTableController {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 22
     }
+  
 }
 
 class AddNewBusinessCardCell:UITableViewCell {
@@ -240,6 +288,65 @@ class AddNewBusinessCardCell:UITableViewCell {
     }
 }
 
+class AddNewBusinessCardLangCell: UITableViewCell {
+    let label = UILabel().color(R.color.textColor77()!).font(UIFont.systemFont(ofSize: 15, weight: .regular)).text("Lang")
+    let langLabel = UILabel().color(R.color.textColor22()!).font(UIFont.systemFont(ofSize: 15, weight: .regular)).text("English")
+    let button = UIButton()
+    var changeLangHandler:((String)->())?
+    var model:BusinessCardModel! {
+        didSet {
+            label.text = model.label
+            langLabel.text = model.value.int == 1 ? "English" : "中文"
+        }
+    }
+    var editEndHandler:((BusinessCardModel)->())?
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(label)
+        contentView.addSubview(langLabel)
+        contentView.addSubview(button)
+        
+        button.titleForNormal = "Change"
+        button.titleColorForNormal = .systemBlue
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        button.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            if self.model.value.int == 1 {
+                self.model.value = "2"
+            } else {
+                self.model.value = "1"
+            }
+            self.changeLangHandler?(self.model.value)
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(106)
+        }
+        
+        button.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-16)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(72)
+        }
+        
+        langLabel.snp.makeConstraints { make in
+            make.left.equalTo(label.snp.right).offset(8)
+            make.centerY.equalToSuperview()
+            make.right.equalTo(button.snp.left).offset(-16)
+        }
+    }
+}
 class AddNewBusinessCardOtherCell: UITableViewCell {
     let label = UILabel().color(R.color.textColor77()!).font(UIFont.systemFont(ofSize: 15, weight: .regular)).text("unrecognized")
     let textField = UITextView()

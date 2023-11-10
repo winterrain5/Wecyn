@@ -348,16 +348,11 @@ class CreatePostViewController: BaseViewController {
     
     func addPost() {
         
-        func compressionImage(_ size:Int,image:UIImage) -> String {
-//            guard let data = image.compressOriginalImage(size * 1024) else { return "" }
-//            let base64 = UIImage(data: data)?.pngBase64String() ?? ""
-//            print("oringalImage:\(UIImage(data: data)?.kilobytesSize ?? 0),compressimageImage:\(UIImage(base64String: base64)?.kilobytesSize ?? 0)")
-            
-            return image.jpegBase64String(compressionQuality: 0.2) ?? ""
-        }
         var images:[String] = []
         Asyncs.async {
-            images = self.postMedias.map { compressionImage(50, image: $0.image) }.filter({ !$0.isEmpty })
+            self.postMedias.forEach {
+                images.append($0.image.compressionImageToBase64(400))
+            }
         } mainTask: {
             let content = self.richTextView.text ?? ""
             let type = self.postType.rawValue
@@ -371,7 +366,6 @@ class CreatePostViewController: BaseViewController {
                 Toast.showError(e.asAPIError.errorInfo().message)
             }).disposed(by: self.rx.disposeBag)
         }
-        
         
     }
     
