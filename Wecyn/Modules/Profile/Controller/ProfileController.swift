@@ -9,6 +9,7 @@ import UIKit
 import ParallaxHeader
 import PromiseKit
 import ImagePickerSwift
+import AnyImageKit
 enum SectionType: Int {
     case Activity
     case Work
@@ -41,7 +42,7 @@ class ProfileController: BaseTableController {
     func addRightBarItem() {
      
         let setting = UIButton()
-        setting.imageForNormal = R.image.gearshape()
+        setting.imageForNormal = R.image.gearCircleFill()
         setting.rx.tap.subscribe(onNext:{
             let vc = SettingController()
             self.navigationController?.pushViewController(vc)
@@ -52,47 +53,34 @@ class ProfileController: BaseTableController {
         let fixItem = UIBarButtonItem.fixedSpace(width: 22)
         
         let scan = UIButton()
-        scan.imageForNormal = R.image.creditcardViewfinder()
+        scan.imageForNormal = R.image.viewfinderCircleFill()
         scan.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             
-            func compressionImage(_ size:Int,image:UIImage?) -> String {
-                guard let data = image?.pngData() else { return "" }
-                guard let result = try? ImageCompress.compressImageData(data, limitDataSize: size * 1024 * 1024) else { return "" }
-                let base64 = UIImage(data: result)?.pngBase64String() ?? ""
-                print("image.kilobytesSize:\(UIImage(data: data)?.kilobytesSize ?? 0),base64Size:\(base64.lengthOfBytes(using: .utf8))")
-                return base64
-            }
             
-            func uploadPhoto(_ image:UIImage?) {
-                
-                let base64 = compressionImage(50, image: image)
-                Toast.showLoading()
-                NetworkService.scanCard(photo: base64).subscribe(onNext:{
-                    Toast.dismiss()
-                    let vc = AddNewBusinessCardController(model: $0)
-                    self.navigationController?.pushViewController(vc)
-                },onError: { e in
-                    Toast.dismiss()
-                }).disposed(by: self.rx.disposeBag)
-              
-            }
             
             let alert = UIAlertController.init(title: "Scan BusinessCard", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
-            let config = ImagePickerOptions()
-            config.allowsEditing = true
-            config.presentController = self
+    
             alert.addAction(title: "Camera",style: .destructive) { _ in
+                var option = CaptureOptionsInfo()
+               
+                var photoOption = EditorPhotoOptionsInfo()
+                photoOption.toolOptions = [.crop]
                 
-                ImagePicker.show(type: .takePhoto, with: config) { image, path in
-                    uploadPhoto(image)
-                }
+                option.editorPhotoOptions = photoOption
+                
+                let vc = ImageCaptureController(options: option, delegate: self)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
             }
             
             alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
-                ImagePicker.show(type: .selectPhoto, with: config) { image, path in
-                    uploadPhoto(image)
-                }
+                var option = PickerOptionsInfo()
+                option.selectLimit = 1
+               
+                let vc = ImagePickerController(options: option, delegate: self)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
             }
             
             alert.addAction(title: "Cancel",style: .cancel)
@@ -412,4 +400,56 @@ class ProfileController: BaseTableController {
         setNeedsStatusBarAppearanceUpdate()
         
     }
+    func uploadBusinessCard(_ image:UIImage) {
+        let base64 = image.compressionImageToBase64(800)
+        Toast.showLoading()
+        NetworkService.scanCard(photo: base64).subscribe(onNext:{
+            Toast.dismiss()
+            let vc = AddNewBusinessCardController(model: $0,image: image)
+            self.navigationController?.pushViewController(vc)
+        },onError: { e in
+            Toast.showError(e.asAPIError.errorInfo().message)
+            Toast.dismiss()
+        }).disposed(by: self.rx.disposeBag)
+        
+    }
+}
+extension ProfileController: ImageCaptureControllerDelegate {
+    func imageCapture(_ capture: ImageCaptureController, didFinishCapturing result: CaptureResult) {
+        if result.type == .photo {
+            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
+            guard let image = UIImage(data: photoData) else { return }
+           
+            uploadBusinessCard(image)
+            
+            capture.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+extension ProfileController: ImagePickerControllerDelegate {
+    func imagePicker(_ picker: ImagePickerController, didFinishPicking result: PickerResult) {
+        guard let image = result.assets.first?.image else  { return }
+        var option =  EditorPhotoOptionsInfo()
+        option.toolOptions = [.crop]
+        let vc = ImageEditorController(photo: image, options: option, delegate: self)
+        
+        picker.dismiss(animated: true) { [weak self] in
+            self?.present(vc, animated: true)
+        }
+    }
+}
+
+extension ProfileController: ImageEditorControllerDelegate {
+    func imageEditor(_ editor: ImageEditorController, didFinishEditing result: EditorResult) {
+        if result.type == .photo {
+            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
+            guard let image = UIImage(data: photoData) else { return }
+           
+            uploadBusinessCard(image)
+            
+            editor.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
 }

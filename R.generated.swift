@@ -282,7 +282,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 108 images.
+  /// This `_R.image` struct is generated, and contains static references to 109 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -364,9 +364,6 @@ struct _R {
     /// Image `connection_search`.
     var connection_search: RswiftResources.ImageResource { .init(name: "connection_search", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `creditcard.viewfinder`.
-    var creditcardViewfinder: RswiftResources.ImageResource { .init(name: "creditcard.viewfinder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `edu_placeholder`.
     var edu_placeholder: RswiftResources.ImageResource { .init(name: "edu_placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -378,6 +375,9 @@ struct _R {
 
     /// Image `envelope.circle.fill`.
     var envelopeCircleFill: RswiftResources.ImageResource { .init(name: "envelope.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `gear.circle.fill`.
+    var gearCircleFill: RswiftResources.ImageResource { .init(name: "gear.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `gearshape`.
     var gearshape: RswiftResources.ImageResource { .init(name: "gearshape", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -603,6 +603,9 @@ struct _R {
 
     /// Image `triangle.fill`.
     var triangleFill: RswiftResources.ImageResource { .init(name: "triangle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `viewfinder.circle.fill`.
+    var viewfinderCircleFill: RswiftResources.ImageResource { .init(name: "viewfinder.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `xmark`.
     var xmark: RswiftResources.ImageResource { .init(name: "xmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

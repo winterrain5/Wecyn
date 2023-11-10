@@ -229,6 +229,16 @@ extension UIImage {
     func tintImage(_ color:UIColor) -> UIImage {
         self.withTintColor(color).withRenderingMode(.alwaysOriginal)
     }
+    func compressionImageToBase64(_ size:Int) -> String {
+        guard let data = self.jpegData(compressionQuality: 1) else { return "" }
+        guard let result = try? ImageCompress.compressImageData(data, limitDataSize: size * 1024) else { return "" }
+        let base64 = result.base64EncodedString()
+        
+        print("image.kilobytesSize:\(UIImage.init(base64String: base64)?.kilobytesSize ?? 0),base64kilobytesSize:\(base64.lengthOfBytes(using: .utf8) / 1024)")
+        return base64
+    }
+    
+    
 }
 
 extension UIApplication {

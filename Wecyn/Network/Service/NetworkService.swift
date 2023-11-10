@@ -180,10 +180,10 @@ class NetworkService {
     
     
     /// 扫描实体名片
-    /// - Parameter photo: base64
+    /// - Parameter photo: base64 lange 1 英文 2 中文
     /// - Returns: ScanCardModel
-    static func scanCard(photo:String) -> Observable<ScanCardModel> {
-        let target = MultiTarget(NetworkApi.scanCard(photo))
+    static func scanCard(photo:String,lang:Int = 1) -> Observable<ScanCardModel> {
+        let target = MultiTarget(NetworkApi.scanCard(photo,lang))
         return APIProvider.rx.request(target).asObservable().mapObject(ScanCardModel.self)
     }
     
