@@ -59,5 +59,10 @@
 		<string>D2760000850101</string>
 		<string>D4100000030001</string>
 	</array>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Wecyn requires your consent to access the calendar</string>
+
+    <key>NSRemindersUsageDescription</key>
+    <string>Wecyn requires your consent to access reminders</string>
 </dict>
 </plist>

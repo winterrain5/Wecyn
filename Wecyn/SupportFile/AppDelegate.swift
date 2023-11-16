@@ -106,6 +106,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        guard let trigger = response.notification.request.trigger else { return; }
+        if trigger.isKind(of: UNCalendarNotificationTrigger.classForCoder()) {
+            print("Notification did receive, Is class UNCalendarNotificationTrigger")
+        } 
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(url.absoluteString)
        
