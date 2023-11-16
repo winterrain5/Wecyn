@@ -293,6 +293,8 @@ class CalendarEventDetailController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if models.count == 0 { return }
         let model = models[indexPath.section][indexPath.row]
         if model.cellType == .Location {
             Haptico.selection()

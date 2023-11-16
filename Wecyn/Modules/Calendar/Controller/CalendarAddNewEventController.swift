@@ -8,6 +8,7 @@ import WidgetKit
 import UIKit
 import IQKeyboardManagerSwift
 import NotificationCenter
+import EventKit
 /*
  1st colour (primary): #13A5D6
  2nd colour: #136ED6
@@ -207,7 +208,7 @@ class CalendarAddNewEventController: BaseTableController {
         let urlLocationSection = [Link,Location,EmailCc,MeetingRoom]
         models.append(urlLocationSection)
         
-        Alarm.alarm = "15 mins before"
+        Alarm.alarm = "5 mins before"
         Color.color = EventColor.defaultColor
         let tagSection = [Alarm,Color]
         models.append(tagSection)
@@ -289,7 +290,7 @@ class CalendarAddNewEventController: BaseTableController {
     
     func addEvent() {
         func addEventRequest() {
-            Toast.showLoading()
+            
             guard let startDate = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else {
                 Toast.showError("start time is required")
                 return
@@ -301,11 +302,15 @@ class CalendarAddNewEventController: BaseTableController {
                 self.requestModel.rrule_str = rrulestr
             }
             self.requestModel.current_user_id = CalendarBelongUserId
+            Toast.showLoading()
             ScheduleService.addEvent(self.requestModel).subscribe(onNext:{
-                
+                Toast.dismiss()
                 if $0.success == 1 {
-                    Toast.showSuccess( "Event Add Success")
-                    self.navigationController?.popViewController()
+                    self.addNotification {
+                        Toast.showSuccess( "Event Add Success")
+                        self.navigationController?.popViewController()
+                    }
+                   
                     WidgetCenter.shared.reloadAllTimelines()
                 } else {
                     Toast.showMessage($0.message)
@@ -316,60 +321,162 @@ class CalendarAddNewEventController: BaseTableController {
             }).disposed(by: self.rx.disposeBag)
         }
         
-      
+        
+        addEventRequest()
+        
+    }
+    
+    func addNotification(_ complete:@escaping ()->()) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { status, e in
             if !status {
+                Toast.dismiss()
                 guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, completionHandler: nil)
-                }
+                let alertViewController = UIAlertController(title: "", message: "Please allow Wecyn to send you notifications", preferredStyle: .alert)
+                let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                })
+                let actinSure = UIAlertAction(title: "Settting", style: .default, handler: { (action) in
+                    UIApplication.shared.open(url)
+                })
+                alertViewController.addAction(actionCancel)
+                alertViewController.addAction(actinSure)
+                self.present(alertViewController, animated: true, completion: nil)
+                
                 return
             }
             
             let mins = AlarmData.map({ String($0.split(separator: " ").first ?? "") }).compactMap({ $0.int })
             var min:Int = 0
             if 0 < self.alarmSelectIndex &&  self.alarmSelectIndex < 3 {
-                min = mins[self.alarmSelectIndex]
+                min = mins[self.alarmSelectIndex - 1] * 60
             } else
             if 3 < self.alarmSelectIndex && self.alarmSelectIndex < 6 {
-                min = mins[self.alarmSelectIndex] * 60
-            } else {
-                min = mins[self.alarmSelectIndex] * 60 * 24
+                min = mins[self.alarmSelectIndex - 1] * 60 * 60
+            }
+            if self.alarmSelectIndex ==  6 {
+                min = mins[self.alarmSelectIndex - 1] * 60 * 24 * 60
             }
             if self.rrule != nil {
                 let dates = self.rrule?.allOccurrences()
                 
-                dates?.forEach({ date in
+                dates?.enumerated().forEach({ idx,date in
                     let content = UNMutableNotificationContent()
                     content.title = self.Title.title ?? ""
                     content.body = self.Desc.desc ?? ""
                     content.badge = 1
-                    let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + min)
+                    let alarmDate = date.addingTimeInterval(-min.double).addingTimeInterval(-8*60*60)
+                    let dateComponents = DateComponents(year:alarmDate.year,month: alarmDate.month,day: alarmDate.day,hour: alarmDate.hour,minute: alarmDate.minute)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                    let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request) { err in
+                        DispatchQueue.main.async {
+                            if (idx == (dates?.count ?? 0) - 1) { complete() }
+                        }
                         err != nil ? print("添加本地通知错误", err!.localizedDescription) : print("添加本地通知成功")
                     }
                 })
             } else {
-                guard let date = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else { return }
+                guard let date = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue, isZero: false) else { return }
                 let content = UNMutableNotificationContent()
                 content.title = self.Title.title ?? ""
                 content.body = self.Desc.desc ?? ""
                 content.badge = 1
-                let dateComponents = DateComponents(year:date.year,month: date.month,day: date.day,hour: date.hour,minute: date.minute + min)
+                let alarmDate = date.addingTimeInterval(-min.double)
+                
+                let dateComponents = DateComponents(year:alarmDate.year,month: alarmDate.month,day: alarmDate.day,hour: alarmDate.hour,minute: alarmDate.minute)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request) { err in
+                    DispatchQueue.main.async {
+                        complete()
+                    }
+                    
                     err != nil ? print("添加本地通知错误", err!.localizedDescription) : print("添加本地通知成功")
                 }
             }
-           
-            addEventRequest()
-           
         }
-        
     }
+  
+    
+    
+    /**
+    * 将App事件添加到系统日历提醒事项，实现闹铃提醒的功能
+    *
+    * @param title 事件标题
+    * @param location 事件位置
+    * @param startDate 开始时间
+    * @param endDate 结束时间
+    * @param allDay 是否全天
+    * @param alarmArray 闹钟集合
+    */
+    func createEventCalendarTitle(title: String, location: String, startDate: Date, endDate: Date, allDay: Bool, alarmArray: Array<String>) {
+
+        EventCalendar.eventStore.requestAccess(to: EKEntityType.event) { [unowned self] (granted, error) in
+            DispatchQueue.main.async {
+                
+                //用户没授权
+                if !granted {
+                    let alertViewController = UIAlertController(title: "", message: "Please allow Wecyn to access your calendar in the iPhone's \"Settings->Privacy->Calendar\" option.", preferredStyle: .alert)
+                    let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                    })
+                    let actinSure = UIAlertAction(title: "Settting", style: .default, handler: { (action) in
+                        //跳转到系统设置主页
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    })
+                    alertViewController.addAction(actionCancel)
+                    alertViewController.addAction(actinSure)
+                    self.present(alertViewController, animated: true, completion: nil)
+                    return
+                }
+                //允许
+                if granted {
+                    //过滤重复事件
+                    let predicate = EventCalendar.eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: nil)  //根据时间段来筛选
+                    let eventsArray = EventCalendar.eventStore.events(matching: predicate)
+                    if eventsArray.count > 0 {
+                        for item in eventsArray {
+                            //根据事件唯一性,如果已经插入的就不再插入了
+                            if let start = item.startDate, let end = item.endDate {
+                                if start == startDate && end == endDate {
+                                    return
+                                }
+                            }
+                        }
+                    }
+                    
+                    let event = EKEvent(eventStore: EventCalendar.eventStore)
+                    event.title = title
+                    event.location = location
+                    event.startDate = startDate
+                    event.endDate = endDate
+                    event.isAllDay = allDay
+                    
+                    //添加提醒时间(提前)
+                    if alarmArray.count > 0 {
+                        
+                        for timeString in alarmArray {
+                            if let time = TimeInterval(timeString) {
+                                event.addAlarm(EKAlarm(relativeOffset: TimeInterval(time)))
+                            }
+                        }
+                        
+                    }
+                    
+                    event.calendar = EventCalendar.eventStore.defaultCalendarForNewEvents  //必须设置系统的日历
+                    
+                    do {
+                        try EventCalendar.eventStore.save(event, span: EKSpan.thisEvent)
+                    }catch{}
+                    
+                    print("事件ID--\(event.eventIdentifier)")  //系统随机生成的,需要保存下来,下次删除使用
+                   
+                    print("成功添加到系统日历中")
+                }
+            }
+        }
+    }
+
     
     func editEvent() {
         
@@ -386,8 +493,11 @@ class CalendarAddNewEventController: BaseTableController {
             }
             ScheduleService.updateEvent(self.requestModel).subscribe(onNext:{
                 if $0.success == 1 {
-                    Toast.showSuccess( "Event Update Success")
-                    self.navigationController?.popToRootViewController(animated: true)
+                    self.addNotification {
+                        Toast.showSuccess( "Event Update Success")
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                   
                 } else {
                     Toast.showMessage($0.message)
                 }
@@ -565,7 +675,7 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Start {
-            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_start_date : self.editEventModel?.start_date) : Date().adding(.minute, value: 30)
+            let date = self.isEdit ? (self.editEventModel?.is_repeat == 1 ? self.editEventModel?.repeat_start_date : self.editEventModel?.start_date) : Date().adding(.minute, value: 10)
             DatePickerView(title:"Start Time",
                            mode: .dateAndTime,
                            date: date,
@@ -1169,5 +1279,18 @@ class CalendarHasAddedAttendanceCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+class EventCalendar: NSObject {
+    //单例
+    static let eventStore = EKEventStore()
+    
+    ///用户是否授权使用日历
+    func isEventStatus() -> Bool {
+        let eventStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        if eventStatus == .denied || eventStatus == .restricted {
+            return false
+        }
+        return true
     }
 }
