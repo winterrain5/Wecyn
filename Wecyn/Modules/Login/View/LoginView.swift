@@ -56,6 +56,7 @@ class LoginView: UIView {
             AuthService.signin(username: username, password: MD5(password + "wecyn").lowercased()).subscribe(onNext:{ model in
                 
                 UserDefaults.sk.set(object: model, for: TokenModel.className)
+                
                 let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
                 userDefaults?.setValue(model.token, forKey: "token")
                 userDefaults?.synchronize()
@@ -63,9 +64,12 @@ class LoginView: UIView {
                 
                 UserService.getUserInfo().retry(3).subscribe(onNext:{ model in
                     self.signInButton.stopAnimation()
+                    
                     UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+                    
                     userDefaults?.setValue(model.id, forKey: "userId")
                     userDefaults?.synchronize()
+                    
                     let main = MainController()
                     UIApplication.shared.keyWindow?.rootViewController = main
                 },onError: { e in

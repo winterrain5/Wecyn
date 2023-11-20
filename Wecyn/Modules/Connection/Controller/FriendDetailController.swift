@@ -89,6 +89,7 @@ class FriendDetailController: BaseTableController {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withClass: FriendDetailHeadCell.self)
+                cell.accessoryType = .disclosureIndicator
                 if let model = self.model {
                     cell.model = model
                 }
@@ -126,10 +127,15 @@ class FriendDetailController: BaseTableController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let model = model else { return }
         
         if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                let vc = NFCNameCardController(id: model.id)
+                self.navigationController?.pushViewController(vc)
+            }
             if indexPath.row == 1 {
-                guard let model = model else { return }
+               
                 let vc = FriendAddRemarkController(model: model)
                 let nav = BaseNavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
@@ -141,6 +147,9 @@ class FriendDetailController: BaseTableController {
         }
         
         if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                Toast.showWarning("Function under development")
+            }
             if indexPath.row == 1 {
                 deleteUser()
             }
@@ -150,10 +159,11 @@ class FriendDetailController: BaseTableController {
 }
 
 class FriendDetailHeadCell: UITableViewCell {
-    var imgView = UIImageView()
-    var nameLabel = UILabel()
-    var widLabel = UILabel()
-    var remarkLabel = UILabel()
+    let imgView = UIImageView()
+    let nameLabel = UILabel()
+    let widLabel = UILabel()
+    let remarkLabel = UILabel()
+    let arrowButton = UIButton()
     var model: FriendUserInfoModel? {
         didSet {
             guard let model = model else { return }

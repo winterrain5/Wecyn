@@ -209,7 +209,11 @@ class CalendarAddNewEventController: BaseTableController {
         models.append(urlLocationSection)
         
         Alarm.alarm = "5 mins before"
+        
         Color.color = EventColor.defaultColor
+        Logger.info(UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark)
+        Color.placeholder = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark.first ?? "Color"
+        
         let tagSection = [Alarm,Color]
         models.append(tagSection)
         
@@ -363,6 +367,7 @@ class CalendarAddNewEventController: BaseTableController {
                     content.title = self.Title.title ?? ""
                     content.body = self.Desc.desc ?? ""
                     content.badge = 1
+                    content.sound = .defaultCriticalSound(withAudioVolume: 0.6)
                     let alarmDate = date.addingTimeInterval(-min.double).addingTimeInterval(-8*60*60)
                     let dateComponents = DateComponents(year:alarmDate.year,month: alarmDate.month,day: alarmDate.day,hour: alarmDate.hour,minute: alarmDate.minute)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
@@ -380,6 +385,7 @@ class CalendarAddNewEventController: BaseTableController {
                 content.title = self.Title.title ?? ""
                 content.body = self.Desc.desc ?? ""
                 content.badge = 1
+                content.sound = .defaultCriticalSound(withAudioVolume: 0.6)
                 let alarmDate = date.addingTimeInterval(-min.double)
                 
                 let dateComponents = DateComponents(year:alarmDate.year,month: alarmDate.month,day: alarmDate.day,hour: alarmDate.hour,minute: alarmDate.minute)
@@ -397,86 +403,6 @@ class CalendarAddNewEventController: BaseTableController {
     }
   
     
-    
-    /**
-    * 将App事件添加到系统日历提醒事项，实现闹铃提醒的功能
-    *
-    * @param title 事件标题
-    * @param location 事件位置
-    * @param startDate 开始时间
-    * @param endDate 结束时间
-    * @param allDay 是否全天
-    * @param alarmArray 闹钟集合
-    */
-    func createEventCalendarTitle(title: String, location: String, startDate: Date, endDate: Date, allDay: Bool, alarmArray: Array<String>) {
-
-        EventCalendar.eventStore.requestAccess(to: EKEntityType.event) { [unowned self] (granted, error) in
-            DispatchQueue.main.async {
-                
-                //用户没授权
-                if !granted {
-                    let alertViewController = UIAlertController(title: "", message: "Please allow Wecyn to access your calendar in the iPhone's \"Settings->Privacy->Calendar\" option.", preferredStyle: .alert)
-                    let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                    })
-                    let actinSure = UIAlertAction(title: "Settting", style: .default, handler: { (action) in
-                        //跳转到系统设置主页
-                        if let url = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(url)
-                        }
-                    })
-                    alertViewController.addAction(actionCancel)
-                    alertViewController.addAction(actinSure)
-                    self.present(alertViewController, animated: true, completion: nil)
-                    return
-                }
-                //允许
-                if granted {
-                    //过滤重复事件
-                    let predicate = EventCalendar.eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: nil)  //根据时间段来筛选
-                    let eventsArray = EventCalendar.eventStore.events(matching: predicate)
-                    if eventsArray.count > 0 {
-                        for item in eventsArray {
-                            //根据事件唯一性,如果已经插入的就不再插入了
-                            if let start = item.startDate, let end = item.endDate {
-                                if start == startDate && end == endDate {
-                                    return
-                                }
-                            }
-                        }
-                    }
-                    
-                    let event = EKEvent(eventStore: EventCalendar.eventStore)
-                    event.title = title
-                    event.location = location
-                    event.startDate = startDate
-                    event.endDate = endDate
-                    event.isAllDay = allDay
-                    
-                    //添加提醒时间(提前)
-                    if alarmArray.count > 0 {
-                        
-                        for timeString in alarmArray {
-                            if let time = TimeInterval(timeString) {
-                                event.addAlarm(EKAlarm(relativeOffset: TimeInterval(time)))
-                            }
-                        }
-                        
-                    }
-                    
-                    event.calendar = EventCalendar.eventStore.defaultCalendarForNewEvents  //必须设置系统的日历
-                    
-                    do {
-                        try EventCalendar.eventStore.save(event, span: EKSpan.thisEvent)
-                    }catch{}
-                    
-                    print("事件ID--\(event.eventIdentifier)")  //系统随机生成的,需要保存下来,下次删除使用
-                   
-                    print("成功添加到系统日历中")
-                }
-            }
-        }
-    }
-
     
     func editEvent() {
         
@@ -739,11 +665,12 @@ class CalendarAddNewEventController: BaseTableController {
         
         if model.type == .Color {
             let select = EventColor.allColor[self.requestModel.color ?? 0]
-            let vc = ColorPickerController(selectColor: select) { color in
+            let vc = ColorPickerController(selectColor: select) { color,remark in
                 guard let color = color else { return }
                 self.requestModel.color = EventColor.allColor.firstIndex(of: color)
                 
                 self.Color.color = color
+                self.Color.placeholder = remark ?? "color"
                 self.Title.img = R.image.circleFill()?.withTintColor(UIColor(hexString: color)!)
                 self.reloadData()
                 

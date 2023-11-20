@@ -23,7 +23,7 @@ enum NetworkApi  {
     case friendToGroup(_ id:Int, _ friendIds: [Int])
     case selectGroup(_ id:Int? = nil)
     case updateGroup(_ model:GroupUpdateRequestModel)
-    case friendNameCard(_  uuid:String)
+    case friendNameCard(_ uuid:String?,_ id:Int?)
     case addFollow(_ userId:Int)
     case cancelFollow(_ userId:Int)
     case followedList(_ type:Int,_ userId:Int,_ page:Int,_ pageSize:Int,_ keyword:String)
@@ -130,8 +130,8 @@ extension NetworkApi:TargetType, Cacheable {
             return requestParametersByGet(["id":id])
         case .updateGroup(let model):
             return requestToTaskByPost(model)
-        case .friendNameCard(let uuid):
-            return requestParametersByGet(["uuid":uuid])
+        case .friendNameCard(let uuid,let id):
+            return requestParametersByGet(["uuid":uuid,"id":id])
         case .addFollow(let userId):
             return requestParametersByPost(["user_id":userId])
         case .cancelFollow(let userId):

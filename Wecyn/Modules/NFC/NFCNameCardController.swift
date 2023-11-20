@@ -54,6 +54,17 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         super.viewDidLoad()
         self.view.isSkeletonable = true
         
+        self.addLeftBarButtonItem(image: R.image.xmarkCircleFill()!)
+        self.leftButtonDidClick = { [weak self] in
+            self?.navigationController?.popViewController()
+        }
+        
+        self.navigation.bar.alpha = 0
+        
+    }
+    
+    func addBarItem() {
+        
         let editButton = UIButton()
         let editItem = UIBarButtonItem(customView: editButton)
         editButton.rx.tap.subscribe(onNext:{ [weak self] in
@@ -65,10 +76,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         }).disposed(by: rx.disposeBag)
         editButton.imageForNormal = R.image.squareAndPencilCircleFill()
         
-        self.addLeftBarButtonItem(image: R.image.xmarkCircleFill()!)
-        self.leftButtonDidClick = { [weak self] in
-            self?.navigationController?.popViewController()
-        }
+      
         
         let shareButton = UIButton()
         let shareItem = UIBarButtonItem(customView: shareButton)
@@ -102,9 +110,6 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
         
         self.navigation.item.rightBarButtonItems = [editItem,fixItem2,shareItem]
-        
-        self.navigation.bar.alpha = 0
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,8 +119,8 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     
     override func refreshData() {
         
-        if self.id == nil {
-            
+        if self.id == nil { // 查看自己的名片
+            addBarItem()
             UserService.getUserInfo().subscribe(onNext:{
                 UserDefaults.sk.set(object: $0, for: UserInfoModel.className)
                 self.addWriteToNFCTagFooter()
@@ -125,10 +130,11 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
             return
         }
         
-        guard let id = self.id,let uuid = self.uuid else { return }
+        
+        guard let id = self.id else { return }
         
         let fuserInfo = NetworkService.friendUserInfo(id)
-        let fNameCard = NetworkService.friendNameCard(uuid: uuid)
+        let fNameCard = NetworkService.friendNameCard(uuid: uuid,id:id)
         Observable.zip(fuserInfo,fNameCard).subscribe(onNext:{ info, namecard in
             /// 1 没关系，2 好友关系，3 已申请好友，4 被申请好友
             if info.friend_status == 1 {
