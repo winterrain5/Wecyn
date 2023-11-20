@@ -136,8 +136,8 @@ class NetworkService {
     /// 朋友的名片
     /// - Parameter id: 好友ID
     /// - Returns:UserInfoModel
-    static func friendNameCard(uuid: String) -> Observable<UserInfoModel> {
-        let target = MultiTarget(NetworkApi.friendNameCard(uuid))
+    static func friendNameCard(uuid: String?,id: Int?) -> Observable<UserInfoModel> {
+        let target = MultiTarget(NetworkApi.friendNameCard(uuid,id))
         return APIProvider.rx.request(target).asObservable().mapObject(UserInfoModel.self)
     }
     
