@@ -170,6 +170,7 @@ class CalendarAddNewEventController: BaseTableController {
         
         createAddEventModels()
         updateEditEventData()
+        updateColorPlaceholder()
         
         if self.isEdit {
             self.navigation.item.title = "Edit Event"
@@ -211,15 +212,10 @@ class CalendarAddNewEventController: BaseTableController {
         Alarm.alarm = "5 mins before"
         
         Color.color = EventColor.defaultColor
-        Logger.info(UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark)
-        Color.placeholder = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark.first ?? "Color"
         
         let tagSection = [Alarm,Color]
         models.append(tagSection)
         
-        if editEventModel == nil  {
-            requestModel.color = 0
-        }
         
     }
     
@@ -288,9 +284,31 @@ class CalendarAddNewEventController: BaseTableController {
         isEdit = !event.isCreateByiCS
         rrule = event.rruleObject
 
-        reloadData()
+        
     }
     
+    func updateColorPlaceholder() {
+        UserService.getUserInfo().subscribe(onNext:{ model in
+           
+            if model.color_remark.isEmpty {
+                model.color_remark = Array(repeating: "", count: 12)
+            }
+            if let event = self.editEventModel {
+                let remark = model.color_remark[event.color]
+                self.Color.placeholder = remark.isEmpty ? "Color" : remark
+            } else {
+                self.Color.placeholder = "Color"
+            }
+            
+            self.reloadData()
+            
+        }).disposed(by: rx.disposeBag)
+        
+        if editEventModel == nil  {
+            requestModel.color = 0
+        }
+        
+    }
     
     func addEvent() {
         func addEventRequest() {
@@ -1094,7 +1112,17 @@ class AddEventColorCell: UITableViewCell {
                 imgView.image = model.img?.withTintColor(color)
                 colorView.backgroundColor = color
             }
-            
+            accessoryType = .disclosureIndicator
+        }
+    }
+    var detailModel: CalendarEventDetailModel! {
+        didSet  {
+            titleLabel.text = detailModel.model.color_remark
+            if let color = UIColor(hexString: EventColor.allColor[detailModel.model.color]) {
+                imgView.image = R.image.tagFill()?.tintImage(color)
+                colorView.isHidden = true
+            }
+            accessoryType = .none
         }
     }
     var switchChangeHandler:((AddEventModel,Bool)->())?
@@ -1111,7 +1139,7 @@ class AddEventColorCell: UITableViewCell {
         
         colorView.cornerRadius = 6
         
-        accessoryType = .disclosureIndicator
+        
     }
     
     required init?(coder: NSCoder) {

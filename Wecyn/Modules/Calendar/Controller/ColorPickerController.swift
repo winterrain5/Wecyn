@@ -99,6 +99,7 @@ class ColorPickerController: BaseTableController {
         tableView?.separatorColor = R.color.seperatorColor()!
         tableView?.register(cellWithClass: ColorPickerCell.self)
         
+        
     }
     
     override func listViewFrame() -> CGRect {
