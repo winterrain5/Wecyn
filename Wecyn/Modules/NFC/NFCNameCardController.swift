@@ -317,12 +317,14 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         switch result.rawValue{
         case MFMailComposeResult.sent.rawValue:
             print("邮件已发送")
+            Toast.showSuccess("Email has been sent")
         case MFMailComposeResult.cancelled.rawValue:
             print("邮件已取消")
         case MFMailComposeResult.saved.rawValue:
             print("邮件已保存")
         case MFMailComposeResult.failed.rawValue:
             print("邮件发送失败")
+            Toast.showError("Email sending failed")
         default:
             print("邮件没有发送")
             break
@@ -339,13 +341,14 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         switch result{
             
         case .sent:
-            print("短信已发送")
+            Toast.showSuccess("Message has been sent")
         case .cancelled:
             print("短信取消发送")
         case .failed:
             print("短信发送失败")
+            Toast.showError("Message sending failed")
         default:
-            print("短信已发送")
+            print("短信没发送")
             break
         }
     }

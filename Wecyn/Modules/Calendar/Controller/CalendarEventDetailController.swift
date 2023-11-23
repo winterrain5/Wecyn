@@ -20,6 +20,7 @@ enum CalendarEventDetailCellType {
     case Delete
     case EmailCc
     case Room
+    case Color
 }
 
 class CalendarEventDetailModel {
@@ -91,6 +92,9 @@ class CalendarEventDetailController: BaseTableController {
             model.isCrossDay = self.eventModel.isCrossDay
             model.isBySearch = self.eventModel.isBySearch
             model.creator_name = self.eventModel.creator_name
+            if let color_remark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark {
+                model.color_remark = color_remark[self.eventModel.color]
+            }
             
             if model.start_date == nil { // 不属于自己的room事件
                 model.start_time = self.eventModel.start_time
@@ -106,8 +110,11 @@ class CalendarEventDetailController: BaseTableController {
                 self.models.append([watch])
             }
             
+            var section1:[CalendarEventDetailModel] = []
             let title = CalendarEventDetailModel(cellType: .Title, model: model)
-            self.models.append([title])
+            let color = CalendarEventDetailModel(cellType: .Color, model: model)
+            section1 = [title,color]
+            self.models.append(section1)
             
             var section2:[CalendarEventDetailModel] = []
             let creator = CalendarEventDetailModel(cellType: .Creator, model: model)
@@ -143,6 +150,7 @@ class CalendarEventDetailController: BaseTableController {
             if !model.room_name.isEmpty {
                 section3.append(room)
             }
+            
             self.models.append(section3)
             
             
@@ -240,7 +248,7 @@ class CalendarEventDetailController: BaseTableController {
         tableView?.register(cellWithClass: CalendarEventDetailTitleCell.self)
         tableView?.register(cellWithClass: CalendarEventDetailDeleteCell.self)
         tableView?.register(cellWithClass: CalendarEventDetailInfoCell.self)
-        
+        tableView?.register(cellWithClass: AddEventColorCell.self)
         
         tableView?.backgroundColor = R.color.backgroundColor()
         tableView?.separatorColor = R.color.seperatorColor()
@@ -285,6 +293,10 @@ class CalendarEventDetailController: BaseTableController {
         case .Link,.Location,.Creator,.PeopleLimit,.People,.Description,.Remark,.EmailCc,.Room:
             let cell = CalendarEventDetailInfoCell()
             cell.model = model
+            return cell
+        case .Color:
+            let cell = AddEventColorCell()
+            cell.detailModel = model
             return cell
         }
         

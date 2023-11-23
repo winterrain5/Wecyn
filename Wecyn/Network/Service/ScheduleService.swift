@@ -175,7 +175,7 @@ class iCSFileParsedModel: BaseModel {
     var creator_name: String = ""
     var end_time: String = ""
     var attendance_limit: Int = 0
-    
+    var color_remark = ""
     var attendance_count = 0
     var attendees_public = ""
     var remarks = ""
