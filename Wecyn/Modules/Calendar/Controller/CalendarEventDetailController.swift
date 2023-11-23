@@ -113,7 +113,10 @@ class CalendarEventDetailController: BaseTableController {
             var section1:[CalendarEventDetailModel] = []
             let title = CalendarEventDetailModel(cellType: .Title, model: model)
             let color = CalendarEventDetailModel(cellType: .Color, model: model)
-            section1 = [title,color]
+            section1 = [title]
+            if !model.color_remark.isEmpty {
+                section1.append(color)
+            }
             self.models.append(section1)
             
             var section2:[CalendarEventDetailModel] = []

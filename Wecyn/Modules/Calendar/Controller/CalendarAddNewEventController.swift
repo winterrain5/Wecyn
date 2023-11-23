@@ -297,7 +297,7 @@ class CalendarAddNewEventController: BaseTableController {
                 let remark = model.color_remark[event.color]
                 self.Color.placeholder = remark.isEmpty ? "Color" : remark
             } else {
-                self.Color.placeholder = "Color"
+                self.Color.placeholder = model.color_remark.first ?? "Color"
             }
             
             self.reloadData()

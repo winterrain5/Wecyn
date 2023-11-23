@@ -34,6 +34,9 @@ class ColorPickerController: BaseTableController {
     
     func getUserInfo() {
         UserService.getUserInfo().subscribe(onNext:{ model in
+            
+            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+            
             self.models.append(contentsOf:  EventColor.allColor.map({
                 return ColorPickerModel(color: $0)
             }))
