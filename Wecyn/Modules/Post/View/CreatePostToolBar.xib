@@ -26,7 +26,7 @@
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHg-6f-wIT">
                             <rect key="frame" x="99" y="0.0" width="99.5" height="79"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="toolbar_icon_at"/>
+                            <state key="normal" image="video"/>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oem-gj-75U">
                             <rect key="frame" x="198.5" y="0.0" width="99" height="79"/>
@@ -62,21 +62,21 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="atButton" destination="qHg-6f-wIT" id="CGV-0Q-Zgm"/>
                 <outlet property="hastagButton" destination="oem-gj-75U" id="F32-dx-jvB"/>
                 <outlet property="imageButton" destination="eOg-ej-FLF" id="yUL-VK-IFJ"/>
                 <outlet property="linkButton" destination="sS9-TD-f0k" id="Vtx-EG-uKs"/>
                 <outlet property="moreButton" destination="2dC-Lb-OFv" id="5Xt-lK-Kep"/>
+                <outlet property="videoButton" destination="qHg-6f-wIT" id="kS3-Ty-iFW"/>
             </connections>
             <point key="canvasLocation" x="-230" y="105"/>
         </view>
     </objects>
     <resources>
         <image name="paperplane.fill" width="20.5" height="21.5"/>
-        <image name="toolbar_icon_at" width="24" height="24"/>
         <image name="toolbar_icon_hashtag" width="24" height="24"/>
         <image name="toolbar_icon_image" width="25" height="25"/>
         <image name="toolbar_link" width="24" height="24.5"/>
+        <image name="video" width="24" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

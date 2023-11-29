@@ -51,6 +51,7 @@ target 'Wecyn' do
   pod 'SwiftEntryKit'
   pod 'OpenIMSDK'
   pod 'SPIndicator'
+  pod 'FYVideoCompressor'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 enum PostApi {
-    case addPost(_ content:String,_ images:[String]? = nil, _ type:Int = 1)
+    case addPost(_ content:String,_ images:[String]? = nil,_ video:String? = nil, _ type:Int = 1)
     case postList(_ userId:Int? = nil,_ lastPostId:Int? = nil)
     case updatePostType(_ id:Int,_ type:Int)
     case feedList(lastPostId:Int? = nil)
@@ -20,6 +20,7 @@ enum PostApi {
     case likeShow(_ id:Int,_ lastLikeId:Int?  = nil)
     case likedList(_ userId:Int? = nil,_ lastId:Int? = nil)
     case repost(_ id:Int,_ content:String,_ type:Int = 1)
+    case getUploadVideoUrl
 }
 
 extension PostApi: TargetType {
@@ -49,13 +50,15 @@ extension PostApi: TargetType {
             return "/api/post/likedList/"
         case .repost:
             return "/api/post/repost/"
+        case .getUploadVideoUrl:
+            return "/api/post/getUploadVideoUrl/"
         }
     }
     var method: Moya.Method {
         switch self{
         case .addPost,.addReply,.cancelLike,.setLike,.addComment,.repost:
             return .post
-        case .postList,.feedList,.commentList,.likeShow,.likedList:
+        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl:
             return .get
         case .updatePostType:
             return .put
@@ -63,8 +66,8 @@ extension PostApi: TargetType {
     }
     var task: Task {
         switch self{
-        case .addPost(let content,let images,let type):
-            return requestParametersByPost(["content":content,"images":images,"type":type])
+        case .addPost(let content,let images,let video,let type):
+            return requestParametersByPost(["content":content,"images":images,"video":video,"type":type])
         case .postList(let userId,let lastId):
             return requestParametersByGet(["user_id":userId,"last_id":lastId])
         case .updatePostType(let id,let type):
@@ -87,6 +90,8 @@ extension PostApi: TargetType {
             return requestParametersByGet(["user_id":userId,"last_id":lastId])
         case .repost(let id,let content,let type):
             return requestParametersByPost(["id":id,"content":content,"type":type])
+        case .getUploadVideoUrl:
+            return .requestPlain
         }
     }
 }

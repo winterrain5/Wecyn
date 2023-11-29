@@ -139,9 +139,12 @@ class CalendarEventController: BaseTableController {
         super.viewWillAppear(animated)
         latesMonth = 0
         refreshData()
+        
     }
     
     override func refreshData() {
+        
+        getUserInfo()
         
         if latesMonth == calendarChangeDate.month, isBeginLoad == false, self.isWidgetLinkId == nil {
             return
@@ -245,6 +248,16 @@ class CalendarEventController: BaseTableController {
         }).disposed(by: rx.disposeBag)
         
         
+    }
+    
+    func getUserInfo(){
+        UserService.getUserInfo().subscribe(onNext:{ model in
+            if model.color_remark.isEmpty {
+                model.color_remark = Array(repeating: "", count: 12)
+            }
+            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     

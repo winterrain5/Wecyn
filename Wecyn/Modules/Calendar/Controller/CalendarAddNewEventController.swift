@@ -280,33 +280,30 @@ class CalendarAddNewEventController: BaseTableController {
         Color.color = EventColor.allColor[event.color]
         MeetingRoom.room = event.room_name
         
-      
+       
         isEdit = !event.isCreateByiCS
         rrule = event.rruleObject
-
         
+      
     }
     
     func updateColorPlaceholder() {
-        UserService.getUserInfo().subscribe(onNext:{ model in
-           
-            if model.color_remark.isEmpty {
-                model.color_remark = Array(repeating: "", count: 12)
-            }
-            if let event = self.editEventModel {
-                let remark = model.color_remark[event.color]
-                self.Color.placeholder = remark.isEmpty ? "Color" : remark
-            } else {
-                self.Color.placeholder = model.color_remark.first ?? "Color"
-            }
-            
-            self.reloadData()
-            
-        }).disposed(by: rx.disposeBag)
+
         
-        if editEventModel == nil  {
-            requestModel.color = 0
+        guard let model = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className) else {
+            self.reloadData()
+            return
         }
+        
+        
+        if let event = self.editEventModel {
+            let remark = model.color_remark[event.color]
+            self.Color.placeholder = remark.isEmpty ? "Color" : remark
+        } else {
+            self.Color.placeholder = model.color_remark.first ?? "Color"
+        }
+        
+        self.reloadData()
         
     }
     
