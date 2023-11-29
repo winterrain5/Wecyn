@@ -104,6 +104,8 @@ class HomeController: BaseTableController {
         }).disposed(by: rx.disposeBag)
     }
     
+  
+    
     override func loadNewData() {
         lastId = 0
         self.dataArray.removeAll()

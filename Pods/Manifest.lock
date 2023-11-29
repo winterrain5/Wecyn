@@ -23,6 +23,7 @@ PODS:
   - EachNavigationBar (1.17.0)
   - EntryKit (0.8.0)
   - FSCalendar (2.8.4)
+  - FYVideoCompressor (0.0.9)
   - HandyJSON (5.0.2)
   - ImagePickerSwift (0.3.1)
   - IQKeyboardManagerSwift (6.5.11)
@@ -170,6 +171,7 @@ DEPENDENCIES:
   - EachNavigationBar
   - EntryKit
   - FSCalendar
+  - FYVideoCompressor
   - HandyJSON
   - ImagePickerSwift
   - IQKeyboardManagerSwift
@@ -225,6 +227,7 @@ SPEC REPOS:
     - EachNavigationBar
     - EntryKit
     - FSCalendar
+    - FYVideoCompressor
     - HandyJSON
     - ImagePickerSwift
     - IQKeyboardManagerSwift
@@ -288,6 +291,7 @@ SPEC CHECKSUMS:
   EachNavigationBar: 87430187ca1f898e6d9d8bb95c35e49749e5a0a2
   EntryKit: eca0306497a948fa9c81ff665bf6895309c7d67e
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  FYVideoCompressor: 80e2a90bbc118044038b37b8442f23084c5698bf
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   ImagePickerSwift: 0328d670660823ff33529b58be08c7a13b686758
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
@@ -331,6 +335,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: 2b31d02ec35b6421ccc9a194589a87c457d41447
+PODFILE CHECKSUM: fe97e46a22c59e5be5b64e8ec017b471f699cc63
 
 COCOAPODS: 1.11.2

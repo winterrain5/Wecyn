@@ -1,0 +1,6 @@
+framework module FYVideoCompressor {
+  umbrella header "FYVideoCompressor-umbrella.h"
+
+  export *
+  module * { export * }
+}

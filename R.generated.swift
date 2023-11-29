@@ -282,7 +282,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 109 images.
+  /// This `_R.image` struct is generated, and contains static references to 110 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -604,6 +604,9 @@ struct _R {
     /// Image `triangle.fill`.
     var triangleFill: RswiftResources.ImageResource { .init(name: "triangle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `video`.
+    var video: RswiftResources.ImageResource { .init(name: "video", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `viewfinder.circle.fill`.
     var viewfinderCircleFill: RswiftResources.ImageResource { .init(name: "viewfinder.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -725,10 +728,10 @@ struct _R {
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "paperplane.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'paperplane.fill' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "toolbar_icon_at", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_at' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_hashtag", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_hashtag' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_image' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_link", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_link' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "video", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'video' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }

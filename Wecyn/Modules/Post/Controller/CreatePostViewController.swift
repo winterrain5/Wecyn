@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import MobileCoreServices
+import PromiseKit
 import RxKeyboard
 import KMPlaceholderTextView
 import IQKeyboardManagerSwift
@@ -17,6 +18,15 @@ import RxRelay
 import Photos
 import AnyImageKit
 import SKPhotoBrowser
+import AVKit
+import FYVideoCompressor
+
+enum PostMediaType {
+    case Video
+    case Image
+    case None
+}
+
 enum PostType:Int {
     case Public = 1
     case OnlyFans = 2
@@ -36,7 +46,13 @@ enum PostType:Int {
 
 class PostMediaModel: BaseModel {
     var image = UIImage()
+    var mediaURL:URL?
+    var isEdited:Bool = false
     var index = 0
+    var asset:Asset?
+    var size:CGSize {
+        CGSize(width: asset?.phAsset.pixelWidth ?? 0, height: asset?.phAsset.pixelHeight ?? 0)
+    }
 }
 class PostDraftModel:BaseModel, Codable {
     var content:String = ""
@@ -76,6 +92,11 @@ class CreatePostViewController: BaseViewController {
     
     var postModel:PostListModel?
     var quotepostView:PostQuoteView?
+    
+    var postMediaType:PostMediaType = .None
+    
+    var task: URLSessionUploadTask?
+    
     convenience init(postModel:PostListModel) {
         self.init(nibName: nil, bundle: nil)
         self.postModel = postModel
@@ -89,26 +110,38 @@ class CreatePostViewController: BaseViewController {
         self.addLeftBarButtonItem(image: R.image.xmark())
         self.leftButtonDidClick = { [weak self] in
             guard let `self` = self else { return }
-            self.view.endEditing(true)
-            if !self.postDraft.content.isEmpty || !self.postDraft.images.isEmpty {
-                PostReturnBackSheetView.display(deleteAction: {
-                    self.returnBack()
-                }, saveAction: {
-                    var drafs:[PostDraftModel] = UserDefaults.sk.get(for: PostDraftModel.className)
-                    if drafs.count > 0 {
-                        drafs.append(self.postDraft)
-                        UserDefaults.sk.set(objects: drafs, for: PostDraftModel.className)
-                    } else {
-                        UserDefaults.sk.set(objects: [self.postDraft], for: PostDraftModel.className)
+            
+            if let task = self.task,task.state == .running {
+                self.showAlert(title: "The video is being uploaded. Exiting the current page will terminate the upload.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
+                    if idx == 1 {
+                        self.task?.cancel()
+                        self.returnBack()
                     }
+                }
+            } else  {
+                self.view.endEditing(true)
+                if !self.postDraft.content.isEmpty || !self.postDraft.images.isEmpty {
+                    PostReturnBackSheetView.display(deleteAction: {
+                        self.returnBack()
+                    }, saveAction: {
+                        var drafs:[PostDraftModel] = UserDefaults.sk.get(for: PostDraftModel.className)
+                        if drafs.count > 0 {
+                            drafs.append(self.postDraft)
+                            UserDefaults.sk.set(objects: drafs, for: PostDraftModel.className)
+                        } else {
+                            UserDefaults.sk.set(objects: [self.postDraft], for: PostDraftModel.className)
+                        }
+                        
+                        self.returnBack()
+                    })
                     
-                    self.returnBack()
-                })
+                    return
+                }
                 
-                return
+                self.returnBack()
             }
             
-            self.returnBack()
+            
         }
         
         saveButton.size = CGSize(width: 50, height: 30)
@@ -258,25 +291,73 @@ class CreatePostViewController: BaseViewController {
         toolBar.imageButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            let vc = ImagePickerController(options: PickerOptionsInfo(), delegate: self)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
             
+            func presentController() {
+                var options = PickerOptionsInfo()
+                options.selectOptions = [.photo]
+                options.selectLimit  = 9
+                options.preselectAssets = self.postMedias.map({ $0.asset?.identifier ?? "" })
+                let vc = ImagePickerController(options: options, delegate: self)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            
+            if self.postMediaType == .Video {
+                self.showAlert(title: "Only supports uploading 1 video or 9 pictures. If you need to upload pictures, you need to delete the selected video.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
+                    if idx == 1 {
+                        self.postMedias.removeAll()
+                        
+                        self.updateScrollViewContentSize({
+                            presentController()
+                        })
+                        
+                    }
+                }
+               
+            } else {
+                presentController()
+            }
         }).disposed(by: rx.disposeBag)
+        
+        
         
         toolBar.linkButton.rx.tap.subscribe(onNext:{ [weak self] in
             Haptico.selection()
             Toast.showWarning("Function under development")
         }).disposed(by: rx.disposeBag)
         
-        toolBar.atButton.rx.tap.subscribe(onNext:{ [weak self] in
+        toolBar.videoButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            Toast.showWarning("Function under development")
-            return
-            let vc = CalendarAddAttendanceController(selecteds: [])
-            let nav = BaseNavigationController(rootViewController: vc)
-            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+            
+            func presentController() {
+                var options = PickerOptionsInfo()
+                options.selectOptions = [.video]
+                options.selectLimit  = 1
+                
+                let vc = ImagePickerController(options: options, delegate: self)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            
+            
+            if self.postMediaType == .Image {
+                
+                self.showAlert(title: "Only supports uploading 1 video or 9 pictures. If you need to upload video, you need to delete the selected images.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
+                    if idx == 1 {
+                        self.postMedias.removeAll()
+                        self.updateScrollViewContentSize({
+                            presentController()
+                        })
+                        
+                    }
+                }
+            } else {
+                presentController()
+            }
+            
+           
+            
         }).disposed(by: rx.disposeBag)
         
         toolBar.moreButton.rx.tap.subscribe(onNext:{ [weak self] in
@@ -311,9 +392,10 @@ class CreatePostViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.shared.enableAutoToolbar  = true
+        
     }
     
-    func updateScrollViewContentSize() {
+    func updateScrollViewContentSize(_  complete: (()->())? = nil) {
         var contentH = self.richTextView.text.heightWithConstrainedWidth(width: kScreenWidth - 32, font: UIFont.sk.pingFangRegular(15)) + 20
         contentH = contentH < 40 ? 40 : contentH
         self.richTextView.frame.size.height = contentH
@@ -335,38 +417,179 @@ class CreatePostViewController: BaseViewController {
             self.scrollView.contentSize = CGSize(width: kScreenWidth, height: clvHeight + contentH + 64 + kNavBarHeight)
         }
         
+        if postMedias.count == 0 {
+            self.postMediaType = .None
+        }
         
         self.postDraft.images = postMedias.map({  $0.image.pngBase64String() ?? "" })
         self.postDraft.content = self.richTextView.text ?? ""
         
-        let isenabalePost = postMedias.count > 0 || !self.richTextView.text.isEmpty || (self.postModel != nil)
-        self.isEnablePost.accept(isenabalePost)
+        let isEnablePost = postMedias.count > 0 || !self.richTextView.text.isEmpty || (self.postModel != nil)
+        self.isEnablePost.accept(isEnablePost)
         
-        self.imageClvView.reloadData()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0, delay: 0) {
+            self.imageClvView.reloadData()
+        } completion: { flag in
+            complete?()
+        }
+
     }
     
     
     func addPost() {
         
-        var images:[String] = []
-        Asyncs.async {
-            self.postMedias.forEach {
-                images.append($0.image.compressionImageToBase64(400))
+        if self.postMediaType == .Video {
+            uploadVideoData()
+        } else {
+            var images:[String] = []
+            Asyncs.async {
+                self.postMedias.forEach {
+                    images.append($0.image.compressionImageToBase64(400))
+                }
+            } mainTask: {
+                let content = self.richTextView.text ?? ""
+                let type = self.postType.rawValue
+                PostService.addPost(content: content,images: images,type: type).subscribe(onNext:{ model in
+                    Toast.showSuccess("Posted successfully")
+                    self.returnBack()
+                    self.saveButton.stopAnimation()
+                    self.addCompleteHandler?(model)
+                },onError: { e in
+                    self.saveButton.stopAnimation()
+                    Toast.showError(e.asAPIError.errorInfo().message)
+                }).disposed(by: self.rx.disposeBag)
             }
-        } mainTask: {
-            let content = self.richTextView.text ?? ""
-            let type = self.postType.rawValue
-            PostService.addPost(content: content,images: images,type: type).subscribe(onNext:{ model in
-                Toast.showSuccess("Posted successfully")
-                self.returnBack()
-                self.saveButton.stopAnimation()
-                self.addCompleteHandler?(model)
-            },onError: { e in
-                self.saveButton.stopAnimation()
-                Toast.showError(e.asAPIError.errorInfo().message)
-            }).disposed(by: self.rx.disposeBag)
         }
         
+    }
+    
+   
+    
+    func uploadVideoData() {
+        guard let media = self.postMedias.first else {
+            return
+        }
+        
+        func compressVideo(_ sourceURL:URL) ->  Promise<URL> {
+            return Promise.init { resolver in
+                Toast.showLoading(withStatus: "compress video")
+                FYVideoCompressor().compressVideo(sourceURL, quality: .mediumQuality) { result in
+                    switch result {
+                    case .success(let compressedVideoURL):
+                        resolver.fulfill(compressedVideoURL)
+                    case .failure(let error):
+                        resolver.reject(APIError.requestError(code: -1, message: error.localizedDescription))
+                    }
+                }
+            }
+        }
+       
+        
+        func getUploadUrl(_ outputURL:URL) -> Promise<UploadVideoResponse>{
+            return Promise.init { resolver in
+                Toast.showLoading(withStatus: "upload video")
+                PostService.getUploadVideoUrl().subscribe(onNext:{
+                    $0.outputURL = outputURL
+                    resolver.fulfill($0)
+                },onError: { e in
+                    resolver.reject(APIError.requestError(code: -1, message: e.localizedDescription))
+                }).disposed(by: rx.disposeBag)
+            }
+        }
+        
+        
+        func uploadData(_ model:UploadVideoResponse) -> Promise<String>{
+        
+            return Promise { [weak self] resolver in
+                guard let `self` = self else { return }
+                var request: URLRequest = URLRequest(url: model.url.urlDecode().url!)
+                request.addValue("video/mp4", forHTTPHeaderField: "Content-Type")
+                request.method = .put
+                request.timeoutInterval = 300
+                let configuration = URLSessionConfiguration.default
+                configuration.timeoutIntervalForResource = 300
+                configuration.timeoutIntervalForRequest = 300
+                configuration.waitsForConnectivity = true
+                
+                let session = URLSession(configuration: configuration,delegate: self,delegateQueue: .main)
+                print("fileUrl:\(model.outputURL.absoluteString)")
+                print("uploadUrl:\(model.url.urlDecode().url?.absoluteString ?? "")")
+                self.task = session.uploadTask(with: request, fromFile: model.outputURL) { data, response, error in
+                    if error == nil,let data = data {
+                        let result = String.init(data: data, encoding: .utf8) ?? ""
+                        if result.isEmpty {
+                            resolver.fulfill(model.video)
+                        } else {
+                            resolver.reject(APIError.requestError(code: -1, message: result))
+                        }
+                        print("result:\(result)")
+                        
+                    } else {
+                        resolver.reject(APIError.requestError(code: -1, message: error?.localizedDescription ?? ""))
+                    }
+                }
+                //5、启动任务
+                self.task?.resume()
+                
+            }
+            
+        }
+        
+        func addPost(video:String) ->  Promise<Void> {
+            return Promise { resolver in
+                let content = self.richTextView.text ?? ""
+                let type = self.postType.rawValue
+                PostService.addPost(content: content,video: video ,type: type).subscribe(onNext:{ model in
+                    Toast.showSuccess("Posted successfully")
+                    self.returnBack()
+                    self.saveButton.stopAnimation()
+                    self.addCompleteHandler?(model)
+                    resolver.fulfill_()
+                },onError: { e in
+                    self.saveButton.stopAnimation()
+                    Toast.showError(e.asAPIError.errorInfo().message)
+                    resolver.reject(APIError.requestError(code: -1, message: e.localizedDescription))
+                }).disposed(by: self.rx.disposeBag)
+            }
+        }
+        
+        func upload(_ sourceUrl:URL) {
+            firstly {
+                compressVideo(sourceUrl)
+            }.then({
+                getUploadUrl($0)
+            }).then {
+                uploadData($0)
+            }.then {
+                addPost(video: $0)
+            }.done {
+                Toast.dismiss()
+            }.catch { e in
+                Toast.dismiss()
+                Toast.showError(e.asAPIError.errorInfo().message)
+            }
+        }
+        
+        if media.isEdited {
+            guard let url = media.mediaURL else {
+                Toast.showError("Get Video Data Failed")
+                return
+            }
+            upload(url)
+        } else {
+            media.asset?.fetchVideoURL(completion: { result, id in
+                switch result {
+                case .success(let response):
+                    upload(response.url)
+                case .failure(let e):
+                    Toast.showError(e.localizedDescription)
+                }
+            })
+        }
+    
     }
     
     
@@ -383,32 +606,13 @@ class CreatePostViewController: BaseViewController {
     
     
 }
-extension CreatePostViewController: ImagePickerControllerDelegate {
-    
-    func imagePicker(_ picker: ImagePickerController, didFinishPicking result: PickerResult) {
-        self.postMedias.append(contentsOf: result.assets.enumerated().map{
-            let media = PostMediaModel()
-            media.image = $1.image
-            media.index = $0
-            return media
-        })
-        self.updateScrollViewContentSize()
-        picker.dismiss(animated: true, completion: nil)
+
+extension CreatePostViewController: URLSessionTaskDelegate {
+    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        print("bytesSent:\(bytesSent),totalBytesSent:\(totalBytesSent),totalBytesExpectedToSend:\(totalBytesExpectedToSend)")
     }
 }
 
-extension CreatePostViewController: ImageEditorControllerDelegate {
-    
-    func imageEditor(_ editor: ImageEditorController, didFinishEditing result: EditorResult) {
-        if result.type == .photo {
-            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
-            guard let photo = UIImage(data: photoData) else { return }
-            self.editMedia?.image = photo
-            self.updateScrollViewContentSize()
-            editor.dismiss(animated: true, completion: nil)
-        }
-    }
-}
 
 extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -425,11 +629,42 @@ extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewD
             cell.editItemHandler = { [weak self] result in
                 guard let `self` = self else { return }
                 self.editMedia = result
-                let vc = ImageEditorController(photo: result.image, options: EditorPhotoOptionsInfo(), delegate: self)
-                self.present(vc, animated: true)
+                if result.asset?.mediaType == .video,let video = result.asset?.phAsset {
+                    let vc = ImageEditorController(video: video, placeholderImage: result.image, options: EditorVideoOptionsInfo(), delegate: self)
+                    self.present(vc, animated: true)
+                } else {
+                    let vc = ImageEditorController(photo: result.image, options: EditorPhotoOptionsInfo(), delegate: self)
+                    self.present(vc, animated: true)
+                   
+                }
+                
             }
-            
-            
+            cell.playItemHandler =  { [weak self] result in
+                guard let `self` = self else { return }
+                if result.isEdited {
+                    let controller = AVPlayerViewController()
+                    guard let url = result.mediaURL else { return }
+                    let player = AVPlayer(url: url)
+                    player.playImmediately(atRate: 1)
+                    controller.player = player
+                    self.present(controller, animated: true)
+                } else {
+                    result.asset?.fetchVideo { result, id in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let response):
+                                let controller = AVPlayerViewController()
+                                let player = AVPlayer(playerItem: response.playerItem)
+                                player.playImmediately(atRate: 1)
+                                controller.player = player
+                                self.present(controller, animated: true)
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
+                }
+            }
         }
         return cell
     }
@@ -451,13 +686,67 @@ extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CreatePostImageCell
         let originImage = cell.imageView.image
-        let images = self.postMedias.map({ SKPhoto.photoWithImage($0.image) })
-        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell)
-        browser.initializePageIndex(indexPath.row)
-        present(browser, animated: true, completion: {})
+        if self.postMedias[indexPath.item].asset?.mediaType == .photo {
+            let images = self.postMedias.filter({  $0.asset?.mediaType == .photo  }).map({ SKPhoto.photoWithImage($0.image) })
+            let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell)
+            browser.initializePageIndex(indexPath.row)
+            present(browser, animated: true, completion: {})
+        }
+       
     }
     
 }
+
+extension CreatePostViewController: ImagePickerControllerDelegate {
+    
+    func imagePicker(_ picker: ImagePickerController, didFinishPicking result: PickerResult) {
+        self.postMediaType = result.assets.first?.mediaType == .video ? .Video : .Image
+        
+        if self.postMediaType == .Image {
+            self.postMedias.append(contentsOf: result.assets.enumerated().map{
+                let media = PostMediaModel()
+                media.asset = $1
+                media.index = $0
+                media.image = $1.image
+                return media
+            })
+            self.postMedias.removeDuplicates(keyPath: \.asset)
+        } else {
+            self.postMedias = result.assets.enumerated().map{
+                let media = PostMediaModel()
+                media.asset = $1
+                media.index = $0
+                media.image = $1.image
+                return media
+            }
+        }
+        
+        self.updateScrollViewContentSize({
+            picker.dismiss(animated: true, completion: nil)
+        })
+        
+    }
+}
+
+extension CreatePostViewController: ImageEditorControllerDelegate {
+    
+    func imageEditor(_ editor: ImageEditorController, didFinishEditing result: EditorResult) {
+        if result.type == .photo {
+            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
+            guard let photo = UIImage(data: photoData) else { return }
+            self.editMedia?.image = photo
+        }  else {
+            self.editMedia?.isEdited = result.isEdited
+            self.editMedia?.mediaURL = result.mediaURL
+            if let image = self.editMedia?.mediaURL?.thumbnail() {
+                self.editMedia?.image = image
+            }
+        }
+        self.updateScrollViewContentSize()
+        editor.dismiss(animated: true, completion: nil)
+    }
+}
+
 
 class CreatePostImageCell: UICollectionViewCell {
     var imageView = UIImageView()
@@ -469,11 +758,20 @@ class CreatePostImageCell: UICollectionViewCell {
     var durationW:CGFloat = 0
     var result:PostMediaModel? {
         didSet {
-            imageView.image = result?.image
-            //            playButton.isHidden = result?.mediaType != .video
-            //            durationLabel.isHidden = result?.mediaType != .video
-            //            durationLabel.text = "\(result?.phAsset.duration.string ?? "")s"
-            //            durationW = durationLabel.text?.getWidthWithLabel(font: UIFont.sk.pingFangRegular(12)) ?? 0
+            guard let result = result else { return }
+            imageView.image = result.image
+            playButton.isHidden = result.asset?.mediaType != .video
+            durationLabel.isHidden = result.asset?.mediaType != .video
+            if result.isEdited {
+                guard let url = result.mediaURL else { return }
+                let asset = AVAsset(url: url)
+                let duration = CMTimeGetSeconds(asset.duration)
+                durationLabel.text = "\(duration.int.string)s"
+            } else {
+                durationLabel.text = "\(result.asset?.phAsset.duration.int.string ?? "")s"
+            }
+           
+            durationW = durationLabel.text?.getWidthWithLabel(font: UIFont.sk.pingFangRegular(12)) ?? 0
             self.setNeedsUpdateConstraints()
             self.layoutIfNeeded()
         }
@@ -495,7 +793,6 @@ class CreatePostImageCell: UICollectionViewCell {
         contentView.addSubview(playButton)
         playButton.imageForNormal = R.image.playCircleFill()
         playButton.isHidden = true
-        playButton.isUserInteractionEnabled = false
         
         contentView.addSubview(durationLabel)
         durationLabel.textColor = .white
@@ -541,6 +838,7 @@ class CreatePostImageCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         imageView.frame = contentView.bounds
         deleteButton.snp.makeConstraints { make in
             make.right.top.equalToSuperview().inset(6)
@@ -724,28 +1022,3 @@ extension CreatePostViewController {
     //    }
 }
 
-
-
-extension UIImage {
-    
-    func compressOriginalImage(_ toKb: Int) -> Data?{
-        var compression: CGFloat = 1
-        let minCompression: CGFloat = 0.1
-        guard var imageData = self.jpegData(compressionQuality: compression) else {
-            return nil
-        }
-        if imageData.count < toKb {
-            return imageData
-        }
-        while imageData.count > toKb, compression > minCompression {
-            compression -= 0.1
-            guard let data = self.jpegData(compressionQuality: compression) else { return nil }
-            imageData = data
-        }
-        if imageData.count > toKb {
-            return imageData
-        }
-        return imageData
-    }
-    
-}

@@ -83,7 +83,6 @@
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
 		4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */; };
-		4549ECEA2AB40A4500EB9C4C /* UIImage+System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECE92AB40A4500EB9C4C /* UIImage+System.swift */; };
 		4549ECEC2AB40AF900EB9C4C /* UIMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */; };
 		4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */; };
 		4549ECF02AB45B4400EB9C4C /* PostCommentToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */; };
@@ -223,6 +222,7 @@
 		45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */; };
 		45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */; };
 		45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */; };
+		45DC5EE92B144E17005C6848 /* UIImage+System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DC5EE82B144E17005C6848 /* UIImage+System.swift */; };
 		45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B12A31A97F00BF6EEC /* ProfileController.swift */; };
 		45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B42A31A99400BF6EEC /* SettingController.swift */; };
 		45E765B82A31A9EE00BF6EEC /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */; };
@@ -341,7 +341,6 @@
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
 		4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserHeaderInfoView.swift; sourceTree = "<group>"; };
-		4549ECE92AB40A4500EB9C4C /* UIImage+System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+System.swift"; sourceTree = "<group>"; };
 		4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMenuExtension.swift; sourceTree = "<group>"; };
 		4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentToolBarView.swift; sourceTree = "<group>"; };
@@ -486,6 +485,7 @@
 		45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemCell.swift; sourceTree = "<group>"; };
 		45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionItemCell.xib; sourceTree = "<group>"; };
 		45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRecommendController.swift; sourceTree = "<group>"; };
+		45DC5EE82B144E17005C6848 /* UIImage+System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+System.swift"; sourceTree = "<group>"; };
 		45E765B12A31A97F00BF6EEC /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		45E765B42A31A99400BF6EEC /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		45E765B72A31A9EE00BF6EEC /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
@@ -888,7 +888,7 @@
 		45920A912A26E045005871ED /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4549ECE92AB40A4500EB9C4C /* UIImage+System.swift */,
+				45DC5EE82B144E17005C6848 /* UIImage+System.swift */,
 				45920AC12A26E045005871ED /* BaseViewController+Extension.swift */,
 				45920A942A26E045005871ED /* NotifictionCenter+Name.swift */,
 				45920A962A26E045005871ED /* NSObject+Extension.swift */,
@@ -1533,7 +1533,6 @@
 				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
-				4549ECEA2AB40A4500EB9C4C /* UIImage+System.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
@@ -1636,6 +1635,7 @@
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
 				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
+				45DC5EE92B144E17005C6848 /* UIImage+System.swift in Sources */,
 				450BA6E12A3312D500764828 /* RegistConfirmController.swift in Sources */,
 				45005C532A57D9A200560E21 /* ConnectAuditController.swift in Sources */,
 				45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */,
@@ -1923,12 +1923,14 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wecyn requires your consent to access the calendar";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Wecyn requires your consent to access your address book.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Wecyn requires your consent to access reminders";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -1971,12 +1973,14 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
 				INFOPLIST_KEY_NFCReaderUsageDescription = "Use your device's NFC to read and write NFC Chip";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wecyn requires your consent to access the calendar";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload profile picture using camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Wecyn requires your consent to access your address book.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow location to serve you better";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Send voice message to  friend in app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload profile picture from photolibrary";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Wecyn requires your consent to access reminders";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;

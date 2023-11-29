@@ -45,6 +45,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 	<key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
 	<array>
 		<string>12FC</string>
@@ -59,10 +61,5 @@
 		<string>D2760000850101</string>
 		<string>D4100000030001</string>
 	</array>
-    <key>NSCalendarsUsageDescription</key>
-    <string>Wecyn requires your consent to access the calendar</string>
-
-    <key>NSRemindersUsageDescription</key>
-    <string>Wecyn requires your consent to access reminders</string>
 </dict>
 </plist>

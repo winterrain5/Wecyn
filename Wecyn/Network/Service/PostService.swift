@@ -13,10 +13,11 @@ class PostService {
     /// - Parameters:
     ///   - content: 文字内容
     ///   - images: 图片base64数组
+    ///   - video: 视频链接
     ///   - type: 类型 1 公开  2 仅好友可见 3 仅自己可见
     /// - Returns: PostAddedModel
-    static func addPost(content:String,images:[String] = [],type:Int = 1) -> Observable<PostListModel>{
-        let target = MultiTarget(PostApi.addPost(content,images,type))
+    static func addPost(content:String,images:[String]? = nil,video:String? = nil ,type:Int = 1) -> Observable<PostListModel>{
+        let target = MultiTarget(PostApi.addPost(content,images,video,type))
         return APIProvider.rx.request(target).asObservable().mapObject(PostListModel.self)
     }
     
@@ -87,6 +88,17 @@ class PostService {
         let target = MultiTarget(PostApi.repost(id, content,type))
         return APIProvider.rx.request(target).asObservable().mapObject(PostListModel.self)
     }
+    
+    static func getUploadVideoUrl() -> Observable<UploadVideoResponse> {
+        let target = MultiTarget(PostApi.getUploadVideoUrl)
+        return APIProvider.rx.request(target).asObservable().mapObject(UploadVideoResponse.self)
+    }
+}
+
+class UploadVideoResponse:BaseModel {
+    var url = ""
+    var video = ""
+    var outputURL:URL!
 }
 
 class PostUser :BaseModel {
@@ -115,6 +127,7 @@ class PostImageObject: BaseModel {
         return 160 * (width / height)
     }
 }
+
 class PostListModel :BaseModel {
     var images: [String] = []
     var images_obj:[PostImageObject] = []
@@ -126,7 +139,20 @@ class PostListModel :BaseModel {
     var type: Int = 0
     var repost_count: Int = 0
     var user: PostUser = PostUser()
-    
+    var video: String = ""
+    var video_thumbnail_image: UIImage? 
+    var video_thumbnail_image_size: CGSize {
+        let size:CGSize = CGSize(width: kScreenWidth - 32, height: (kScreenWidth - 32) * 3 / 4)
+//        guard let image = video_thumbnail_image else {
+//            return .zero
+//        }
+//        if image.size.width < (kScreenWidth - 32) {
+//            size = image.size
+//        } else {
+//            size = CGSize(width: kScreenWidth - 32, height: image.scaled(toWidth: kScreenWidth - 32)?.size.height ?? 0)
+//        }
+        return size
+    }
     var is_own_post:Bool {
         let userid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.id.int ?? 0
         return userid ==  user.id
@@ -142,16 +168,21 @@ class PostListModel :BaseModel {
     }
     var imgH:CGFloat {
         var imgH:CGFloat = 0
-        if images_obj.count == 0 {
-            imgH = 0
+        if video.isEmpty {
+            if images_obj.count == 0 {
+                imgH = 0
+            }
+            if images_obj.count == 1 {
+                imgH = images_obj.first?.heightForOneImage ?? 0
+                
+            }
+            if images_obj.count > 1 {
+                imgH = 160
+            }
+        } else {
+            imgH = video_thumbnail_image_size.height
         }
-        if images_obj.count == 1 {
-            imgH = images_obj.first?.heightForOneImage ?? 0
-            
-        }
-        if images_obj.count > 1 {
-            imgH = 160
-        }
+        
         return imgH
     }
     var cellHeight:CGFloat {
@@ -163,7 +194,7 @@ class PostListModel :BaseModel {
             sourceH = sourceDataContentH
             space += 8
         }
-        if images_obj.count > 0 {
+        if images_obj.count > 0 || !video.isEmpty{
             space += 8
         }
         space += 24
