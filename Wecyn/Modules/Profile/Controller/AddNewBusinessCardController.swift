@@ -47,12 +47,12 @@ class BusinessCardModel {
 class AddNewBusinessCardController: BaseTableController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
     var datas:[[BusinessCardModel]] = []
-    var model:ScanCardModel!
+    var model:ScanCardModel?
     var image:UIImage!
     var lange = "1"
-    required init(model:ScanCardModel,image:UIImage) {
+    var base64:String = ""
+    required init(image:UIImage) {
         super.init(nibName: nil, bundle: nil)
-        self.model = model
         self.image = image
     }
     
@@ -75,7 +75,27 @@ class AddNewBusinessCardController: BaseTableController {
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
        
-        configData()
+        Asyncs.async {
+            self.base64 = self.image.compressionImageToBase64(1000)
+        } mainTask: {
+            self.uploadBusinessCard()
+        }
+
+        
+      
+    }
+    
+    func uploadBusinessCard() {
+        Toast.showLoading(withStatus: "Recognizing...")
+        NetworkService.scanCard(photo: base64,lang: lange.int ?? 1).subscribe(onNext:{
+            Toast.dismiss()
+            self.model = $0
+            self.configData()
+        },onError: { e in
+            Toast.showError(e.asAPIError.errorInfo().message)
+            Toast.dismiss()
+        }).disposed(by: self.rx.disposeBag)
+        
     }
     
     func configData() {
@@ -93,6 +113,7 @@ class AddNewBusinessCardController: BaseTableController {
            "other": []
          }
          */
+        guard let model = self.model else { return }
         datas = [
             [BusinessCardModel(label: "Lang", type: .Lang,value: lange)],
             [BusinessCardModel(label: "Name",type: .Name,value: model.name)],
@@ -210,15 +231,7 @@ class AddNewBusinessCardController: BaseTableController {
                 guard let `self` = self else { return }
                 self.lange = lange
                 self.tableView?.reloadSections(IndexSet(integer: 0), with: .none)
-                let base64 = self.image.compressionImageToBase64(800)
-                Toast.showLoading()
-                NetworkService.scanCard(photo: base64,lang: lange.int ?? 1).subscribe(onNext:{
-                    Toast.dismiss()
-                    self.model = $0
-                    self.configData()
-                },onError: { e in
-                    Toast.showError(e.asAPIError.errorInfo().message)
-                }).disposed(by: self.rx.disposeBag)
+                self.uploadBusinessCard()
                 
             }
             return cell

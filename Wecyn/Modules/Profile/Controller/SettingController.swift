@@ -10,6 +10,7 @@ import RxLocalizer
 enum SettingType {
     case Logout
     case Language
+    case ColorRemark
     case Privacy
     case About
     case Contact
@@ -58,7 +59,8 @@ class SettingController: BaseTableController {
         // general preference
         let notification = SettingModel(title: Localizer.shared.localized("Notification"), type: .Notification)
         let language = SettingModel(title: Localizer.shared.localized("Language"),detail: getCurrentLanguage(), type: .Language)
-        datas.append([notification,language])
+        let colorRemark = SettingModel(title: Localizer.shared.localized("Color Remark"), type: .ColorRemark)
+        datas.append([notification,language,colorRemark])
         
         let account = SettingModel(title: Localizer.shared.localized("Account Manage"), type: .Account)
         datas.append([account])
@@ -73,17 +75,17 @@ class SettingController: BaseTableController {
     }
     
     func getCurrentLanguage() -> String {
-           let preferredLang = Bundle.main.preferredLocalizations.first! as NSString
-     
-           switch String(describing: preferredLang) {
-           case "en-US", "en-CN", "en":
-               return "English"//英文
-           case "zh-Hans-US","zh-Hans-CN","zh-Hant-CN","zh-TW","zh-HK","zh-Hans":
-               return "简体中文"//中文
-           default:
-               return "English"
-           }
-       }
+        let preferredLang = Bundle.main.preferredLocalizations.first! as NSString
+        
+        switch String(describing: preferredLang) {
+        case "en-US", "en-CN", "en":
+            return "English"//英文
+        case "zh-Hans-US","zh-Hans-CN","zh-Hant-CN","zh-TW","zh-HK","zh-Hans":
+            return "简体中文"//中文
+        default:
+            return "English"
+        }
+    }
     
     override func createListView() {
         configTableview(.insetGrouped)
@@ -117,7 +119,12 @@ class SettingController: BaseTableController {
         let model = datas[indexPath.section][indexPath.row]
         
         if model.type == .Language {
-          let vc = LanguageSettingController()
+            let vc = LanguageSettingController()
+            self.navigationController?.pushViewController(vc)
+        }
+        
+        if model.type == .ColorRemark {
+            let vc = ColorPickerController(selectColor: nil, isAllowEdit: true, action: nil)
             self.navigationController?.pushViewController(vc)
         }
         
@@ -145,7 +152,7 @@ class SettingController: BaseTableController {
             }
             alert.addAction(title: "Cancel",style: .cancel)
             alert.show()
-          
+            
         }
         
     }

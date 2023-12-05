@@ -161,10 +161,10 @@ public extension RecurrenceRule {
             return []
         }
         let format = "yyyy-MM-dd HH:mm"
-        guard let beginDate = date.adding(.day, value: 1).toString(format: format,isZero: true).split(separator: " ").first?.appending(" 00:00").toDate(format: format,isZero: true)  else {
+        guard let beginDate = date.toString(format: format,isZero: true).split(separator: " ").first?.appending(" 00:00").toDate(format: format,isZero: true)  else {
             return []
         }
-        guard let endDate = otherDate.adding(.day, value: 1).toString(format: format,isZero: true).split(separator: " ").first?.appending(" 23:59").toDate(format: format,isZero: true) else {
+        guard let endDate = otherDate.toString(format: format,isZero: true).split(separator: " ").first?.appending(" 23:59").toDate(format: format,isZero: true) else {
             return []
         }
  

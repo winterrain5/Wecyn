@@ -7,14 +7,17 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import RxLocalizer
 class ColorPickerModel {
     var color: String
     var remark: String
     var isSelect: Bool = false
-    init(color: String, remark: String = "" ,isSelect: Bool = false) {
+    var isAllowEdit = false
+    init(color: String, remark: String = "" ,isSelect: Bool = false,isAllowEdit: Bool = false) {
         self.color = color
         self.isSelect = isSelect
         self.remark = remark
+        self.isAllowEdit = isAllowEdit
     }
 }
 class ColorPickerController: BaseTableController {
@@ -22,10 +25,12 @@ class ColorPickerController: BaseTableController {
     var selectColor:String?
     typealias Action = (String?,String?) -> Void
     var action: Action?
-    required init(selectColor:String? = nil, action: Action?) {
+    var isAllowEdit = false
+    required init(selectColor:String? = nil, isAllowEdit:Bool = false, action: Action?) {
         super.init(nibName: nil, bundle: nil)
         
         self.action = action
+        self.isAllowEdit = isAllowEdit
         self.selectColor = selectColor
         
         getUserInfo()
@@ -38,7 +43,7 @@ class ColorPickerController: BaseTableController {
             UserDefaults.sk.set(object: model, for: UserInfoModel.className)
             
             self.models.append(contentsOf:  EventColor.allColor.map({
-                return ColorPickerModel(color: $0)
+                return ColorPickerModel(color: $0,isAllowEdit: self.isAllowEdit)
             }))
             self.models.forEach({
                 $0.isSelect = $0.color == self.selectColor
@@ -87,6 +92,9 @@ class ColorPickerController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enableAutoToolbar = true
+        if isAllowEdit {
+            self.navigation.item.title =  Localizer.shared.localized("Color Remark")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,7 +114,12 @@ class ColorPickerController: BaseTableController {
     }
     
     override func listViewFrame() -> CGRect {
-        CGRect(x: 0, y: 0, width: kScreenWidth, height: self.view.height)
+        if self.isAllowEdit {
+            return CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
+        } else {
+            return  CGRect(x: 0, y: 0, width: kScreenWidth, height: self.view.height)
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -120,6 +133,7 @@ class ColorPickerController: BaseTableController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: ColorPickerCell.self)
         let model = models[indexPath.row]
+        
         cell.model = model
         cell.accessoryType = model.isSelect ? .checkmark : .none
         cell.editDone = { [weak self] in
@@ -160,6 +174,8 @@ class ColorPickerCell:  UITableViewCell,UITextFieldDelegate  {
         didSet {
             imgView.image = R.image.tagFill()?.tintImage(UIColor(hexString: model.color)  ?? .red)
             input.text = model.remark
+            input.isUserInteractionEnabled = model.isAllowEdit
+            input.placeholder = model.isAllowEdit ? "remark" : ""
         }
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -171,7 +187,7 @@ class ColorPickerCell:  UITableViewCell,UITextFieldDelegate  {
         contentView.addSubview(input)
         input.returnKeyType = .done
         input.delegate = self
-        input.placeholder = "remark"
+       
         input.textColor = R.color.textColor33()
         input.font = UIFont.systemFont(ofSize: 15)
         input.rx.controlEvent(.editingChanged).subscribe(onNext:{ [weak self] in

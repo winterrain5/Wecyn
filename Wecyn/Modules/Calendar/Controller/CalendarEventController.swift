@@ -156,10 +156,12 @@ class CalendarEventController: BaseTableController {
         
         let eventList = ScheduleService.eventList(model: requestModel)
         
-        let sd = calendarChangeDate.startOfCurrentMonth()
-        let ed = sd.endOfCurrentMonth()
-        requestModel.start_date = sd.string(withFormat: DateFormat.ddMMyyyy.rawValue)
-        requestModel.end_date = ed.string(withFormat: DateFormat.ddMMyyyy.rawValue)
+        guard let sd = calendarChangeDate.beginning(of: .month)?.adding(.day, value: 1),let ed = sd.end(of: .month) else {
+            return
+        }
+       
+        requestModel.start_date = sd.toString(format: DateFormat.ddMMyyyy.rawValue)
+        requestModel.end_date = ed.toString(format: DateFormat.ddMMyyyy.rawValue)
         
         eventList.subscribe(onNext:{ events in
             Asyncs.async {
@@ -202,19 +204,31 @@ class CalendarEventController: BaseTableController {
                 /// 日历事件显示
                 var dict:[String:[EventListModel]] = [:]
                 datas.forEach { model in
-                    let key = model.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue)?.toString(format: DateFormat.ddMMyyyy.rawValue) ?? ""
+                    let key = model.start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.toString(format: DateFormat.ddMMyyyy.rawValue) ?? ""
                     if dict[key] != nil {
                         dict[key]?.append(model)
                     } else {
                         dict[key] = [model]
                     }
                 }
+                var firstSortedData:[[EventListModel]] = []
                 dict.values.sorted(by: {
-                    guard let start = $0.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue),let end = $1.first?.start_time.date(withFormat: DateFormat.ddMMyyyyHHmm.rawValue) else {
+                    guard let start = $0.first?.start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue),let end = $1.first?.start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else {
                         return false
                     }
                     return start.compare(end)  ==  .orderedAscending
-                }).forEach({ self.dataArray.append($0) })
+                }).forEach({ firstSortedData.append($0) })
+                
+                firstSortedData.forEach({ data in
+                    let secondSortedData = data.sorted(by: {
+                        guard let start = $0.start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue),let end = $1.start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else {
+                            return false
+                        }
+                        return start.compare(end)  ==  .orderedAscending
+                    })
+                    self.dataArray.append(secondSortedData)
+                })
+               
             } mainTask: {
                 
                 let eventDatas = self.dataArray as! [[EventListModel]]
