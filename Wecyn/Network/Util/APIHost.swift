@@ -12,7 +12,7 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
-    var buildType: AppBuildType = .Dev
+    var buildType: AppBuildType = .Uat
     
     enum AppBuildType: Int {
         case Dev
@@ -25,19 +25,19 @@ class APIHost: NSObject {
         case ImageClients
         case WebpageClients
     }
-     var BaseClients = ["Dev": "http://10.1.3.23:1213",
-                        "Uat": "https://uat.wecyn.com",
-                    "Release": ""]
+    var BaseClients = ["Dev": "http://10.1.3.23:1213",
+                       "Uat": "https://uat.wecyn.com",
+                       "Release": ""]
     
     var ImageClients = ["Dev": "http://10.1.3.23:1213",
                         "Uat": "https://uat.wecyn.com",
-                    "Release": ""]
+                        "Release": ""]
     
     var WebpageClients = ["Dev": "http://10.1.3.144:5173",
                           "Uat": "https://uat.wecyn.com",
-                      "Release": ""]
+                          "Release": ""]
     
-     func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {
+    func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {
         let buildType = "\(buildType)"
         var address: String
         switch serverType {
@@ -54,7 +54,7 @@ class APIHost: NSObject {
     @objc var BaseUrl: String {
         return getUrlAddress(buildType: buildType,serverType: .BaseClient)
     }
-   
+    
     @objc var ImageUrl: String {
         return getUrlAddress(buildType: buildType,serverType: .ImageClients)
     }
@@ -62,8 +62,8 @@ class APIHost: NSObject {
     @objc var WebpageUrl: String {
         return getUrlAddress(buildType: buildType,serverType: .WebpageClients)
     }
-   
-     var allBuildTypeCases:[AppBuildType] {
+    
+    var allBuildTypeCases:[AppBuildType] {
         return [.Dev,.Uat,.Release]
     }
     
@@ -82,8 +82,8 @@ extension APIHost.AppBuildType: CustomStringConvertible {
             return "Release"
         }
     }
-     var currentBuildType:String {
-         self.description
+    var currentBuildType:String {
+        self.description
     }
 }
 
