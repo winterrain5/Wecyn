@@ -401,6 +401,7 @@ class AssistantInfo: BaseModel {
     var id: Int = 0
     var name: String = ""
     var avatar: String = ""
+    var color_remark:[String] = []
 }
 
 class MeetingRoom: BaseModel,Codable {

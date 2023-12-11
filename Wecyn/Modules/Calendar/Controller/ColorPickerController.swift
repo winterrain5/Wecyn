@@ -33,32 +33,39 @@ class ColorPickerController: BaseTableController {
         self.isAllowEdit = isAllowEdit
         self.selectColor = selectColor
         
-        getUserInfo()
-        
+        configData()
     }
     
-    func getUserInfo() {
-        UserService.getUserInfo().subscribe(onNext:{ model in
-            
-            UserDefaults.sk.set(object: model, for: UserInfoModel.className)
-            
-            self.models.append(contentsOf:  EventColor.allColor.map({
-                return ColorPickerModel(color: $0,isAllowEdit: self.isAllowEdit)
-            }))
-            self.models.forEach({
-                $0.isSelect = $0.color == self.selectColor
-            })
-            
-            if model.color_remark.isEmpty {
-                model.color_remark = Array(repeating: "", count: 12)
+    func configData() {
+        
+        var colorRemark:[String] = []
+        
+        if isAllowEdit {
+            colorRemark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark ?? []
+        } else {
+            if let assistantColorRemark = UserDefaults.sk.value(for: "AssistantColorRemark") as?  [String],!assistantColorRemark.isEmpty{
+                colorRemark = assistantColorRemark
+            } else  {
+                colorRemark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark ?? []
             }
-            
-            self.models.enumerated().forEach { i,e in
-                e.remark = model.color_remark[i]
-            }
-            
-            self.tableView?.reloadData()
-        }).disposed(by: rx.disposeBag)
+        }
+        
+        self.models.append(contentsOf:  EventColor.allColor.map({
+            return ColorPickerModel(color: $0,isAllowEdit: self.isAllowEdit)
+        }))
+        self.models.forEach({
+            $0.isSelect = $0.color == self.selectColor
+        })
+        
+        if colorRemark.isEmpty {
+            colorRemark = Array(repeating: "", count: 12)
+        }
+        
+        self.models.enumerated().forEach { i,e in
+            e.remark = colorRemark[i]
+        }
+        
+        self.tableView?.reloadData()
     }
     
     func updateRemark() {

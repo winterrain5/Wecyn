@@ -39,6 +39,7 @@ class CalendarEventController: BaseTableController {
     var isWidgetLinkId: Int? = nil
     var showFilterView = false
     let filterView = CalendarFilterView()
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.WidgetItemSelected, object: nil, queue: .main) { noti in
@@ -86,12 +87,7 @@ class CalendarEventController: BaseTableController {
         filterButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
             Haptico.selection()
-            self.showFilterView.toggle()
-            if self.showFilterView {
-                self.filterView.display()
-            } else {
-                self.filterView.dismiss()
-            }
+            self.getAssistants()
         }).disposed(by: rx.disposeBag)
         let filterItem = UIBarButtonItem(customView: filterButton)
         
@@ -113,6 +109,21 @@ class CalendarEventController: BaseTableController {
             self.isBeginLoad = true
             self.refreshData()
             self.showFilterView = false
+            
+            let userId = self.UserModel?.id.int ?? 0
+            if userId == tupple.assistant.id {
+                UserDefaults.sk.set(value: [], for: "AssistantColorRemark")
+            } else {
+            
+                if tupple.assistant.color_remark.isEmpty {
+                    UserDefaults.sk.set(value: Array(repeating: "", count: 12), for: "AssistantColorRemark")
+                } else {
+                    UserDefaults.sk.set(value: tupple.assistant.color_remark, for: "AssistantColorRemark")
+                }
+                
+            }
+            
+            
             
         }
         
@@ -274,6 +285,26 @@ class CalendarEventController: BaseTableController {
         }).disposed(by: rx.disposeBag)
     }
     
+    
+    
+    func getAssistants() {
+        self.showFilterView.toggle()
+        if self.showFilterView {
+            
+            ScheduleService.recieveAssistantList().subscribe(onNext:{ models in
+                
+                self.filterView.display()
+                self.filterView.configAssistantData(models)
+                
+            },onError: { e in
+                self.showFilterView.toggle()
+            }).disposed(by: rx.disposeBag)
+            
+        } else {
+            self.filterView.dismiss()
+        }
+        
+    }
     
     func scrollToSection(_ animated:Bool = true){
         let datas = self.dataArray as! [[EventListModel]]

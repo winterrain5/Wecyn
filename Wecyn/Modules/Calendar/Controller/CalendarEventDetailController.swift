@@ -92,9 +92,17 @@ class CalendarEventDetailController: BaseTableController {
             model.isCrossDay = self.eventModel.isCrossDay
             model.isBySearch = self.eventModel.isBySearch
             model.creator_name = self.eventModel.creator_name
-            if let color_remark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark {
-                model.color_remark = color_remark[self.eventModel.color]
+            
+            var colorRemark:[String] = []
+            if let assistantColorRemark = UserDefaults.sk.value(for: "AssistantColorRemark") as?  [String],!assistantColorRemark.isEmpty{
+                colorRemark = assistantColorRemark
+            } else  {
+                colorRemark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark ?? []
             }
+            if colorRemark.count != 0  {
+                model.color_remark = colorRemark[self.eventModel.color]
+            }
+            
             
             if model.start_date == nil { // 不属于自己的room事件
                 model.start_time = self.eventModel.start_time
