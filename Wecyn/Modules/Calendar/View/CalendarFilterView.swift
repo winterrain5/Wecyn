@@ -53,28 +53,24 @@ class CalendarFilterView: UIView,UITableViewDelegate,UITableViewDataSource {
         addSubview(confirmButton)
         
         
-        
-        getAssistants()
         getRooms()
         
     }
     
-    func getAssistants() {
-        ScheduleService.recieveAssistantList().subscribe(onNext:{ models in
-            let userModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
-            let selfModel = AssistantInfo()
-            selfModel.id = userModel?.id.int ?? 0
-            selfModel.name = userModel?.full_name ?? ""
-            selfModel.avatar = userModel?.avatar ?? ""
-            self.assistants = models
-            self.assistants.insert(selfModel, at: 0)
-            
-            self.selectAssistantRow = UserDefaults.sk.value(for: "selectAssistantRow") as? Int ?? 0
-            self.selectRoomRow = UserDefaults.sk.value(for: "selectRoomRow") as? Int
-            
-            self.selectAssistantId =  self.assistants[self.selectAssistantRow].id
-            self.tableView.reloadData()
-        }).disposed(by: rx.disposeBag)
+    func configAssistantData(_ models:[AssistantInfo]) {
+        let userModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
+        let selfModel = AssistantInfo()
+        selfModel.id = userModel?.id.int ?? 0
+        selfModel.name = userModel?.full_name ?? ""
+        selfModel.avatar = userModel?.avatar ?? ""
+        self.assistants = models
+        self.assistants.insert(selfModel, at: 0)
+        
+        self.selectAssistantRow = UserDefaults.sk.value(for: "selectAssistantRow") as? Int ?? 0
+        self.selectRoomRow = UserDefaults.sk.value(for: "selectRoomRow") as? Int
+        
+        self.selectAssistantId =  self.assistants[self.selectAssistantRow].id
+        self.tableView.reloadData()
     }
     
     func getRooms() {
@@ -156,6 +152,7 @@ class CalendarFilterView: UIView,UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Haptico.selection()
         if indexPath.section == 0  {
             selectAssistantRow = indexPath.row
             UserDefaults.sk.set(value: indexPath.row, for: "selectAssistantRow")

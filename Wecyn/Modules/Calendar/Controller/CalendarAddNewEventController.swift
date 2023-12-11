@@ -290,20 +290,23 @@ class CalendarAddNewEventController: BaseTableController {
     func updateColorPlaceholder() {
 
         
-        guard let model = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className) else {
-            self.reloadData()
-            return
+        var colorRemark:[String] = []
+        if let assistantColorRemark = UserDefaults.sk.value(for: "AssistantColorRemark") as?  [String],!assistantColorRemark.isEmpty{
+            colorRemark = assistantColorRemark
+        } else  {
+            colorRemark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark ?? []
         }
         
-        
         if let event = self.editEventModel {
-            let remark = model.color_remark[event.color]
+            let remark = colorRemark[event.color]
             self.Color.placeholder = remark.isEmpty ? "Color" : remark
         } else {
-            self.Color.placeholder = model.color_remark.first ?? "Color"
+            self.Color.placeholder = colorRemark.first ?? "Color"
         }
         
         self.reloadData()
+        
+       
         
     }
     
