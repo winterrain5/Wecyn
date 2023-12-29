@@ -236,6 +236,14 @@ class ProfileController: BaseTableController {
                     }
                     self?.navigationController?.pushViewController(vc)
                 }
+                cell.applyForCertificationHandler = { [weak self] in
+                    let vc = ApplyForCertificationController(model: $0)
+                    let nav = BaseNavigationController(rootViewController: vc)
+                    UIViewController.sk.getTopVC()?.present(nav, animated: true)
+                    vc.updateComplete = {
+                        self?.tableView?.reloadData()
+                    }
+                }
             }
             return cell
         }
@@ -252,6 +260,14 @@ class ProfileController: BaseTableController {
                         self?.getUserInfo()
                     }
                     self?.navigationController?.pushViewController(vc)
+                }
+                cell.applyForCertificationHandler = { [weak self] in
+                    let vc = ApplyForCertificationController(model: $0)
+                    let nav = BaseNavigationController(rootViewController: vc)
+                    UIViewController.sk.getTopVC()?.present(nav, animated: true)
+                    vc.updateComplete = {
+                        self?.tableView?.reloadData()
+                    }
                 }
             }
             return cell

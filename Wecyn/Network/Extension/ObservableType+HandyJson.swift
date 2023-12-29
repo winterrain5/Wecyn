@@ -17,7 +17,6 @@ class ResponseStatus: BaseModel {
 }
 //解析路径
 private let DataKey = "data"
-private let ListKey = "list"
 
 extension ObservableType where Element == Moya.Response {
     

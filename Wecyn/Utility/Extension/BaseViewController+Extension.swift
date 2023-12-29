@@ -10,6 +10,8 @@ import Foundation
 import JXPagingView
 import JXSegmentedView
 extension BaseViewController: JXSegmentedListContainerViewListDelegate {
+
+    
     func listView() -> UIView {
         return view
     }
@@ -42,8 +44,7 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
 
 
 class BasePagingTableController: BaseTableController {
-    
-    var updateDataComplete:(()->())?
+   
     var listViewDidScrollCallback: ((UIScrollView) -> ())?
     
     override func viewDidLoad() {

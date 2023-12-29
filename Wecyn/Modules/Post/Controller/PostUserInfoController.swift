@@ -22,8 +22,6 @@ class PostUserInfoController: BaseViewController {
     
     var headerVc:PostUserHeaderController!
     
-    
-    
     var titleDataSource: JXSegmentedTitleDataSource = {
         let dataSource = JXSegmentedTitleDataSource()
         dataSource.titles = ["Post","Like"]

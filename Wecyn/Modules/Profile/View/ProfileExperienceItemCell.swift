@@ -31,7 +31,8 @@ class ProfileExperienceItemCell: UITableViewCell {
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
     }
-    
+    let certImgView = UIImageView()
+    var certImgViewWH:CGFloat = 0
     var model:UserExperienceInfoModel? {
         didSet {
             guard let model = model else { return }
@@ -47,12 +48,49 @@ class ProfileExperienceItemCell: UITableViewCell {
             jobLabel.text = model.title_name + " " + model.industry_name
             timeLabel.text = model.start_date_format + " - " + (model.is_current == 1 ? "Present" : model.end_date_format)
             descLabel.text = model.desc
+        
+            let action0 = UIAction(title: "Apply for certification",image: R.image.checkmarkSealFill()?.scaled(toWidth: 20)!) { [weak self]  _ in
+                guard let `self` = self,let model = self.model else { return }
+                self.applyForCertificationHandler?(model)
+                
+            }
+            let action1 = UIAction(title: "Edit",image: R.image.pencilLine()!) { [weak self] _ in
+                guard let `self` = self,let model = self.model else { return }
+                self.editHandler?(model)
+            }
+            let action2 = UIAction(title: "Delete",image: UIImage.trash?.tintImage(.red),attributes: .destructive) { [weak self] _ in
+                guard let `self` = self,let model = self.model else { return }
+                self.deleteHandler?(model)
+            }
+            if model.org_id > 0 && model.is_current == 1 {
+                moreButton.menu = UIMenu(children: [action0,action1,action2])
+            } else {
+                moreButton.menu = UIMenu(children: [action1,action2])
+            }
             
+            // 必须有org_id且必须在职（is_current=1）
+            moreButton.isHidden =  model.status != 0
+            certImgView.isHidden = model.status == 0
+            certImgViewWH = model.status == 0 ? 0 : 16
+            /// 0 未申请认证，1 已认证，2 待认证）
+            if model.status == 1 {
+                certImgView.image = R.image.checkmarkSealFill()?.scaled(toWidth: 12)
+            } else {
+                certImgView.image = R.image.checkmarkSealFillGray()
+            }
+            
+            self.isUserInteractionEnabled = model.status == 0
+            
+           
+         
+            setNeedsLayout()
+            layoutIfNeeded()
             
         }
     }
     var deleteHandler:((UserExperienceInfoModel)->())?
     var editHandler:((UserExperienceInfoModel)->())?
+    var applyForCertificationHandler:((UserExperienceInfoModel)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(imgView)
@@ -62,17 +100,8 @@ class ProfileExperienceItemCell: UITableViewCell {
         contentView.addSubview(timeLabel)
         contentView.addSubview(descLabel)
         
-        let action1 = UIAction(title: "Edit",image: R.image.pencilLine()!) { [weak self] _ in
-            guard let `self` = self,let model = self.model else { return }
-            self.editHandler?(model)
-        }
-        let action2 = UIAction(title: "Delete",image: UIImage.trash?.tintImage(.red),attributes: .destructive) { [weak self] _ in
-            guard let `self` = self,let model = self.model else { return }
-            self.deleteHandler?(model)
-        }
-        
-        moreButton.menu = UIMenu(children: [action1,action2])
-        
+        contentView.addSubview(certImgView)
+        certImgView.contentMode = .left
     }
     
     required init?(coder: NSCoder) {
@@ -102,9 +131,16 @@ class ProfileExperienceItemCell: UITableViewCell {
             make.centerY.equalTo(companyLabel)
         }
         
-        jobLabel.snp.makeConstraints { make in
+        certImgView.snp.remakeConstraints { make in
             make.left.equalTo(imgView.snp.right).offset(16)
-            make.top.equalTo(companyLabel.snp.bottom).offset(2)
+            make.top.equalTo(companyLabel.snp.bottom).offset(6)
+            make.width.equalTo(certImgViewWH)
+            make.height.equalTo(12)
+        }
+        
+        jobLabel.snp.makeConstraints { make in
+            make.left.equalTo(certImgView.snp.right)
+            make.centerY.equalTo(certImgView.snp.centerY)
             make.right.equalToSuperview().inset(16)
             make.height.equalTo(19)
         }

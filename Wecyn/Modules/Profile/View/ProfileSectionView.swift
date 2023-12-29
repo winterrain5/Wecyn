@@ -78,7 +78,6 @@ class ProfileSectionView: UIView {
             make.right.equalToSuperview().inset(16)
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(32)
-            make.width.equalTo(42)
         }
         
     

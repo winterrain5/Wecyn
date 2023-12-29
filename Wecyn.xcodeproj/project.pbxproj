@@ -82,6 +82,17 @@
 		4536533E2A413F270026EC8D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* NetworkService.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
+		45450CBD2B2AE8D300558C9D /* ApplyForCertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */; };
+		45450CC32B2C0D3200558C9D /* AdminApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC22B2C0D3200558C9D /* AdminApi.swift */; };
+		45450CC52B2C0E4500558C9D /* AdminService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC42B2C0E4500558C9D /* AdminService.swift */; };
+		45450CC92B2C40A200558C9D /* AdminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC82B2C40A200558C9D /* AdminController.swift */; };
+		45450CCC2B2C418200558C9D /* AdminRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CCB2B2C418200558C9D /* AdminRoleController.swift */; };
+		45450CCE2B2C419D00558C9D /* AdminDepartmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CCD2B2C419D00558C9D /* AdminDepartmentController.swift */; };
+		45450CD02B2C41AE00558C9D /* AdminStaffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CCF2B2C41AE00558C9D /* AdminStaffController.swift */; };
+		45450CD22B2C41C400558C9D /* AdminRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CD12B2C41C400558C9D /* AdminRoomController.swift */; };
+		45450CD62B2C4B3100558C9D /* AdminRoleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CD42B2C4B3100558C9D /* AdminRoleItemCell.swift */; };
+		45450CD72B2C4B3100558C9D /* AdminRoleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45450CD52B2C4B3100558C9D /* AdminRoleItemCell.xib */; };
+		45450CD92B300F3C00558C9D /* AdminDeleteRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CD82B300F3B00558C9D /* AdminDeleteRoleController.swift */; };
 		4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */; };
 		4549ECEC2AB40AF900EB9C4C /* UIMenuExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */; };
 		4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */; };
@@ -195,6 +206,7 @@
 		45A7E5A72A7265610002014D /* UpdateUserInfoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */; };
 		45A7E5A92A734C1C0002014D /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A82A734C1C0002014D /* LocationSearchController.swift */; };
 		45A7E5AB2A734DC30002014D /* NavbarSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5AA2A734DC30002014D /* NavbarSearchView.swift */; };
+		45AA6AE52B33EF3900BB4BF9 /* AdminDepartmentSelectParentNodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AA6AE42B33EF3900BB4BF9 /* AdminDepartmentSelectParentNodeController.swift */; };
 		45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB28E2A3FF00E00745F6F /* UserApi.swift */; };
 		45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2902A3FF0AD00745F6F /* UserService.swift */; };
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
@@ -212,6 +224,9 @@
 		45C781FC2A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F62A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift */; };
 		45C781FD2A98A0FB00D4E721 /* ImageCompress+DPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F72A98A0FB00D4E721 /* ImageCompress+DPI.swift */; };
 		45C781FE2A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C781F82A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift */; };
+		45C938052B3EAF7600621BED /* AdminStaffItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C938032B3EAF7600621BED /* AdminStaffItemCell.swift */; };
+		45C938062B3EAF7600621BED /* AdminStaffItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C938042B3EAF7600621BED /* AdminStaffItemCell.xib */; };
+		45C938092B3EB2C900621BED /* AdminStaffModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C938082B3EB2C900621BED /* AdminStaffModel.swift */; };
 		45C999F02AB05C7E0017CDC3 /* PostApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999EF2AB05C7E0017CDC3 /* PostApi.swift */; };
 		45C999F22AB05EBA0017CDC3 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F12AB05EBA0017CDC3 /* PostService.swift */; };
 		45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F32AB06C8D0017CDC3 /* PostTypeController.swift */; };
@@ -219,6 +234,17 @@
 		45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F72AB1C8A20017CDC3 /* PostUserHeaderController.swift */; };
 		45C999FA2AB1CBC80017CDC3 /* PostUserPostedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999F92AB1CBC80017CDC3 /* PostUserPostedController.swift */; };
 		45C999FC2AB1CBD70017CDC3 /* PostUserLikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C999FB2AB1CBD60017CDC3 /* PostUserLikeController.swift */; };
+		45D0AF742B31505D00C6FAFA /* AdiminAddRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF732B31505D00C6FAFA /* AdiminAddRoleController.swift */; };
+		45D0AF762B31507200C6FAFA /* AdminAddRoleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF752B31507200C6FAFA /* AdminAddRoleContainer.swift */; };
+		45D0AF782B31507B00C6FAFA /* AdminAddRoleContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D0AF772B31507B00C6FAFA /* AdminAddRoleContainer.xib */; };
+		45D0AF962B31A4F800C6FAFA /* MMNodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF912B31A4F800C6FAFA /* MMNodeCell.swift */; };
+		45D0AF972B31A4F800C6FAFA /* MMTreeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF922B31A4F800C6FAFA /* MMTreeTableView.swift */; };
+		45D0AF982B31A4F800C6FAFA /* MMNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF932B31A4F800C6FAFA /* MMNodeView.swift */; };
+		45D0AF992B31A4F800C6FAFA /* MMFileTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF942B31A4F800C6FAFA /* MMFileTree.swift */; };
+		45D0AF9A2B31A4F800C6FAFA /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF952B31A4F800C6FAFA /* UIView+Utilities.swift */; };
+		45D0AF9C2B32DA5600C6FAFA /* AdminDepartmentDetailContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF9B2B32DA5600C6FAFA /* AdminDepartmentDetailContainer.swift */; };
+		45D0AF9E2B32DA6200C6FAFA /* AdminDepartmentDetailContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D0AF9D2B32DA6200C6FAFA /* AdminDepartmentDetailContainer.xib */; };
+		45D0AFA02B32DA8E00C6FAFA /* AdminDepartmentDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0AF9F2B32DA8D00C6FAFA /* AdminDepartmentDetailController.swift */; };
 		45D4D9B32A3C2B2200D7ED04 /* ConnectionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */; };
 		45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */; };
 		45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */; };
@@ -340,6 +366,17 @@
 		4536533D2A413F270026EC8D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
+		45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForCertificationController.swift; sourceTree = "<group>"; };
+		45450CC22B2C0D3200558C9D /* AdminApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminApi.swift; sourceTree = "<group>"; };
+		45450CC42B2C0E4500558C9D /* AdminService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminService.swift; sourceTree = "<group>"; };
+		45450CC82B2C40A200558C9D /* AdminController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminController.swift; sourceTree = "<group>"; };
+		45450CCB2B2C418200558C9D /* AdminRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRoleController.swift; sourceTree = "<group>"; };
+		45450CCD2B2C419D00558C9D /* AdminDepartmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDepartmentController.swift; sourceTree = "<group>"; };
+		45450CCF2B2C41AE00558C9D /* AdminStaffController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStaffController.swift; sourceTree = "<group>"; };
+		45450CD12B2C41C400558C9D /* AdminRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRoomController.swift; sourceTree = "<group>"; };
+		45450CD42B2C4B3100558C9D /* AdminRoleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRoleItemCell.swift; sourceTree = "<group>"; };
+		45450CD52B2C4B3100558C9D /* AdminRoleItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminRoleItemCell.xib; sourceTree = "<group>"; };
+		45450CD82B300F3B00558C9D /* AdminDeleteRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDeleteRoleController.swift; sourceTree = "<group>"; };
 		4549ECE72AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserHeaderInfoView.swift; sourceTree = "<group>"; };
 		4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMenuExtension.swift; sourceTree = "<group>"; };
 		4549ECED2AB41CA000EB9C4C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -458,6 +495,7 @@
 		45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoRequestModel.swift; sourceTree = "<group>"; };
 		45A7E5A82A734C1C0002014D /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		45A7E5AA2A734DC30002014D /* NavbarSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavbarSearchView.swift; sourceTree = "<group>"; };
+		45AA6AE42B33EF3900BB4BF9 /* AdminDepartmentSelectParentNodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDepartmentSelectParentNodeController.swift; sourceTree = "<group>"; };
 		45ADB28E2A3FF00E00745F6F /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
 		45ADB2902A3FF0AD00745F6F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
@@ -475,6 +513,9 @@
 		45C781F62A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+ColorConfig.swift"; sourceTree = "<group>"; };
 		45C781F72A98A0FB00D4E721 /* ImageCompress+DPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+DPI.swift"; sourceTree = "<group>"; };
 		45C781F82A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageCompress+ImageFormat.swift"; sourceTree = "<group>"; };
+		45C938032B3EAF7600621BED /* AdminStaffItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStaffItemCell.swift; sourceTree = "<group>"; };
+		45C938042B3EAF7600621BED /* AdminStaffItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminStaffItemCell.xib; sourceTree = "<group>"; };
+		45C938082B3EB2C900621BED /* AdminStaffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStaffModel.swift; sourceTree = "<group>"; };
 		45C999EF2AB05C7E0017CDC3 /* PostApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostApi.swift; sourceTree = "<group>"; };
 		45C999F12AB05EBA0017CDC3 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		45C999F32AB06C8D0017CDC3 /* PostTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTypeController.swift; sourceTree = "<group>"; };
@@ -482,6 +523,17 @@
 		45C999F72AB1C8A20017CDC3 /* PostUserHeaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserHeaderController.swift; sourceTree = "<group>"; };
 		45C999F92AB1CBC80017CDC3 /* PostUserPostedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserPostedController.swift; sourceTree = "<group>"; };
 		45C999FB2AB1CBD60017CDC3 /* PostUserLikeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserLikeController.swift; sourceTree = "<group>"; };
+		45D0AF732B31505D00C6FAFA /* AdiminAddRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdiminAddRoleController.swift; sourceTree = "<group>"; };
+		45D0AF752B31507200C6FAFA /* AdminAddRoleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddRoleContainer.swift; sourceTree = "<group>"; };
+		45D0AF772B31507B00C6FAFA /* AdminAddRoleContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminAddRoleContainer.xib; sourceTree = "<group>"; };
+		45D0AF912B31A4F800C6FAFA /* MMNodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMNodeCell.swift; sourceTree = "<group>"; };
+		45D0AF922B31A4F800C6FAFA /* MMTreeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMTreeTableView.swift; sourceTree = "<group>"; };
+		45D0AF932B31A4F800C6FAFA /* MMNodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMNodeView.swift; sourceTree = "<group>"; };
+		45D0AF942B31A4F800C6FAFA /* MMFileTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMFileTree.swift; sourceTree = "<group>"; };
+		45D0AF952B31A4F800C6FAFA /* UIView+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
+		45D0AF9B2B32DA5600C6FAFA /* AdminDepartmentDetailContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDepartmentDetailContainer.swift; sourceTree = "<group>"; };
+		45D0AF9D2B32DA6200C6FAFA /* AdminDepartmentDetailContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminDepartmentDetailContainer.xib; sourceTree = "<group>"; };
+		45D0AF9F2B32DA8D00C6FAFA /* AdminDepartmentDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDepartmentDetailController.swift; sourceTree = "<group>"; };
 		45D4D9B12A3C2B2200D7ED04 /* ConnectionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionItemCell.swift; sourceTree = "<group>"; };
 		45D4D9B52A3C2B7B00D7ED04 /* ConnectionItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionItemCell.xib; sourceTree = "<group>"; };
 		45D4D9B72A3C3FB400D7ED04 /* ConnectionRecommendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRecommendController.swift; sourceTree = "<group>"; };
@@ -542,6 +594,7 @@
 		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
 			isa = PBXGroup;
 			children = (
+				45D0AF902B31A4F800C6FAFA /* MMTreeTableView */,
 				45C781F22A98A0FB00D4E721 /* ImageCompress */,
 				45C781EE2A95C2B500D4E721 /* VisualActivityViewController.swift */,
 				450F6CB12A613AFC0001AA1B /* RRuleSwif */,
@@ -683,6 +736,37 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		45450CC62B2C408A00558C9D /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				45450CC72B2C408E00558C9D /* Controller */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		45450CC72B2C408E00558C9D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45C938002B3EAF4D00621BED /* Staff */,
+				45D0AF7A2B31957600C6FAFA /* Department */,
+				45D0AF792B31872F00C6FAFA /* Role */,
+				45450CC82B2C40A200558C9D /* AdminController.swift */,
+				45450CD12B2C41C400558C9D /* AdminRoomController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45450CD32B2C4B1200558C9D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45450CD42B2C4B3100558C9D /* AdminRoleItemCell.swift */,
+				45450CD52B2C4B3100558C9D /* AdminRoleItemCell.xib */,
+				45D0AF752B31507200C6FAFA /* AdminAddRoleContainer.swift */,
+				45D0AF772B31507B00C6FAFA /* AdminAddRoleContainer.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4564BE272A8329A400464AFA /* calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +787,7 @@
 				45BBF52B2A4835440018992C /* ScheduleService.swift */,
 				458970612A78DAA100344B93 /* IMService.swift */,
 				45C999F12AB05EBA0017CDC3 /* PostService.swift */,
+				45450CC42B2C0E4500558C9D /* AdminService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -747,6 +832,25 @@
 				457C7D912A4D6A47002E50DF /* DatePickerView.swift */,
 			);
 			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		45817F862B32FDD2005C871A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45450CCD2B2C419D00558C9D /* AdminDepartmentController.swift */,
+				45D0AF9F2B32DA8D00C6FAFA /* AdminDepartmentDetailController.swift */,
+				45AA6AE42B33EF3900BB4BF9 /* AdminDepartmentSelectParentNodeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45817F872B32FDD8005C871A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45D0AF9B2B32DA5600C6FAFA /* AdminDepartmentDetailContainer.swift */,
+				45D0AF9D2B32DA6200C6FAFA /* AdminDepartmentDetailContainer.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		459209C32A26D5F4005871ED = {
@@ -827,6 +931,7 @@
 				4536533B2A413DF70026EC8D /* NetworkApi.swift */,
 				45BBF5272A4832EC0018992C /* ScheduleApi.swift */,
 				45C999EF2AB05C7E0017CDC3 /* PostApi.swift */,
+				45450CC22B2C0D3200558C9D /* AdminApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -834,13 +939,14 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				45E765BC2A31AB1B00BF6EEC /* Main */,
+				45450CC62B2C408A00558C9D /* Admin */,
 				45EAE8C72A8F1CEE00018C0D /* Post */,
 				450F6CD72A6E0FC00001AA1B /* NFC */,
 				457C7D8E2A4D69F8002E50DF /* UIComponents */,
 				45BBF5222A4832590018992C /* Message */,
 				45E85B152A3AE1ED00B820CD /* Calendar */,
 				450BA6C02A32B8D000764828 /* Login */,
-				45E765BC2A31AB1B00BF6EEC /* Main */,
 				45E765B92A31A9F000BF6EEC /* Job */,
 				45E765B62A31A9DC00BF6EEC /* Connection */,
 				45E765B02A31A94D00BF6EEC /* Profile */,
@@ -1039,6 +1145,7 @@
 		45A10A462A31B00F00726B66 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */,
 				45E765B42A31A99400BF6EEC /* SettingController.swift */,
 				45E765B12A31A97F00BF6EEC /* ProfileController.swift */,
 				458970632A7CDAB900344B93 /* LanguageSettingController.swift */,
@@ -1058,8 +1165,8 @@
 				450BA6B72A31C6EE00764828 /* ProfileNoActivitySectionView.swift */,
 				450BA6B92A31C76E00764828 /* ProfileSectionView.swift */,
 				457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */,
-				459C06582A36B9150066F85A /* ProfileInterestsItemsCell.swift */,
 				459C065A2A36BBED0066F85A /* ProfileEducationItemCell.swift */,
+				459C06582A36B9150066F85A /* ProfileInterestsItemsCell.swift */,
 				459C065C2A36C0540066F85A /* ProfileSkillsItemCell.swift */,
 				458870DF2AE66D6F00029353 /* AddUserWorkExperienceView.swift */,
 				458870E12AE66D7E00029353 /* AddUserWorkExperienceView.xib */,
@@ -1104,6 +1211,73 @@
 				45C781F82A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift */,
 			);
 			path = ImageCompress;
+			sourceTree = "<group>";
+		};
+		45C938002B3EAF4D00621BED /* Staff */ = {
+			isa = PBXGroup;
+			children = (
+				45C938072B3EB2B900621BED /* Model */,
+				45C938022B3EAF5800621BED /* View */,
+				45C938012B3EAF5200621BED /* Controller */,
+			);
+			path = Staff;
+			sourceTree = "<group>";
+		};
+		45C938012B3EAF5200621BED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				45450CCF2B2C41AE00558C9D /* AdminStaffController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45C938022B3EAF5800621BED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45C938032B3EAF7600621BED /* AdminStaffItemCell.swift */,
+				45C938042B3EAF7600621BED /* AdminStaffItemCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		45C938072B3EB2B900621BED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				45C938082B3EB2C900621BED /* AdminStaffModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		45D0AF792B31872F00C6FAFA /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				45450CD32B2C4B1200558C9D /* View */,
+				45450CCB2B2C418200558C9D /* AdminRoleController.swift */,
+				45450CD82B300F3B00558C9D /* AdminDeleteRoleController.swift */,
+				45D0AF732B31505D00C6FAFA /* AdiminAddRoleController.swift */,
+			);
+			path = Role;
+			sourceTree = "<group>";
+		};
+		45D0AF7A2B31957600C6FAFA /* Department */ = {
+			isa = PBXGroup;
+			children = (
+				45817F872B32FDD8005C871A /* View */,
+				45817F862B32FDD2005C871A /* Controller */,
+			);
+			path = Department;
+			sourceTree = "<group>";
+		};
+		45D0AF902B31A4F800C6FAFA /* MMTreeTableView */ = {
+			isa = PBXGroup;
+			children = (
+				45D0AF912B31A4F800C6FAFA /* MMNodeCell.swift */,
+				45D0AF922B31A4F800C6FAFA /* MMTreeTableView.swift */,
+				45D0AF932B31A4F800C6FAFA /* MMNodeView.swift */,
+				45D0AF942B31A4F800C6FAFA /* MMFileTree.swift */,
+				45D0AF952B31A4F800C6FAFA /* UIView+Utilities.swift */,
+			);
+			path = MMTreeTableView;
 			sourceTree = "<group>";
 		};
 		45D4D9AF2A3C2B0000D7ED04 /* Controller */ = {
@@ -1397,8 +1571,10 @@
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
 				4549ECF42AB837E300EB9C4C /* PostDetailCommentFooterView.xib in Resources */,
 				45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */,
+				45D0AF9E2B32DA6200C6FAFA /* AdminDepartmentDetailContainer.xib in Resources */,
 				45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */,
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
+				45450CD72B2C4B3100558C9D /* AdminRoleItemCell.xib in Resources */,
 				450F6CC62A613AFC0001AA1B /* rrule.js in Resources */,
 				450F6CC72A613AFC0001AA1B /* nlp.js in Resources */,
 				450F6CCF2A6508630001AA1B /* bundle.js in Resources */,
@@ -1408,7 +1584,9 @@
 				450BA6E32A3312EB00764828 /* RegistConfirmView.xib in Resources */,
 				45005C812A5E38ED00560E21 /* AttachmentDetailsViewController.storyboard in Resources */,
 				45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */,
+				45C938062B3EAF7600621BED /* AdminStaffItemCell.xib in Resources */,
 				450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */,
+				45D0AF782B31507B00C6FAFA /* AdminAddRoleContainer.xib in Resources */,
 				450BA6CB2A32B9D800764828 /* LoginView.xib in Resources */,
 				45920AF52A26E045005871ED /* LaunchScreen.storyboard in Resources */,
 			);
@@ -1497,6 +1675,7 @@
 				45C999F22AB05EBA0017CDC3 /* PostService.swift in Sources */,
 				45C999F62AB1C7C00017CDC3 /* PostUserInfoController.swift in Sources */,
 				45C999FA2AB1CBC80017CDC3 /* PostUserPostedController.swift in Sources */,
+				45C938092B3EB2C900621BED /* AdminStaffModel.swift in Sources */,
 				457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */,
 				45A0E6242AB841FF003C5153 /* PostCommentCell.swift in Sources */,
 				45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */,
@@ -1517,6 +1696,7 @@
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
+				45D0AF982B31A4F800C6FAFA /* MMNodeView.swift in Sources */,
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
 				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
 				458870E42AE67F0700029353 /* OrganizationSearchController.swift in Sources */,
@@ -1525,23 +1705,30 @@
 				457C509A2A38598100FCE8D0 /* AuthService.swift in Sources */,
 				45C781FA2A98A0FB00D4E721 /* ImageCompress+Property.swift in Sources */,
 				450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */,
+				45450CD92B300F3C00558C9D /* AdminDeleteRoleController.swift in Sources */,
 				450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */,
 				45C781FC2A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
 				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
+				45D0AF972B31A4F800C6FAFA /* MMTreeTableView.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
+				45D0AF962B31A4F800C6FAFA /* MMNodeCell.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
+				45C938052B3EAF7600621BED /* AdminStaffItemCell.swift in Sources */,
 				45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
 				45920AE72A26E045005871ED /* RefreshAnimationHeader.swift in Sources */,
+				45D0AF762B31507200C6FAFA /* AdminAddRoleContainer.swift in Sources */,
 				45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */,
 				457C50962A38582A00FCE8D0 /* RegistRequestModel.swift in Sources */,
+				45450CCE2B2C419D00558C9D /* AdminDepartmentController.swift in Sources */,
 				453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */,
 				45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */,
 				45920AE62A26E045005871ED /* RefreshAnimationFooter.swift in Sources */,
+				45D0AF9A2B31A4F800C6FAFA /* UIView+Utilities.swift in Sources */,
 				45C999F02AB05C7E0017CDC3 /* PostApi.swift in Sources */,
 				459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */,
 				45920AEB2A26E045005871ED /* WebBrowser+MessageHandler.swift in Sources */,
@@ -1550,6 +1737,7 @@
 				459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */,
 				45A7E5AB2A734DC30002014D /* NavbarSearchView.swift in Sources */,
 				458970622A78DAA100344B93 /* IMService.swift in Sources */,
+				45450CD62B2C4B3100558C9D /* AdminRoleItemCell.swift in Sources */,
 				4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */,
 				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
@@ -1575,6 +1763,7 @@
 				45920AF22A26E045005871ED /* Defaults.swift in Sources */,
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
 				450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */,
+				45450CC92B2C40A200558C9D /* AdminController.swift in Sources */,
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
 				45A0E6412AC29BF6003C5153 /* PostFollowController.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
@@ -1582,6 +1771,7 @@
 				45005C592A57FB8900560E21 /* GroupUpdateRequestModel.swift in Sources */,
 				45920AE82A26E045005871ED /* LoaddingButton.swift in Sources */,
 				45005C552A57DC5400560E21 /* ConnectionGroupController.swift in Sources */,
+				45AA6AE52B33EF3900BB4BF9 /* AdminDepartmentSelectParentNodeController.swift in Sources */,
 				450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */,
 				4564BE372A83840500464AFA /* RoomPickerController.swift in Sources */,
 				450F6CC32A613AFC0001AA1B /* RecurrenceRule.swift in Sources */,
@@ -1589,6 +1779,7 @@
 				45A0E6472AC2C149003C5153 /* PostFollowUserCell.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
+				45450CCC2B2C418200558C9D /* AdminRoleController.swift in Sources */,
 				458870DC2AE638AD00029353 /* AddUserExperienceRequestModel.swift in Sources */,
 				45A0E64C2AD10ECD003C5153 /* FriendAddRemarkController.swift in Sources */,
 				45A0E63F2AC14E25003C5153 /* PostReportController.swift in Sources */,
@@ -1605,6 +1796,7 @@
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
 				4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */,
+				45D0AF742B31505D00C6FAFA /* AdiminAddRoleController.swift in Sources */,
 				45C781F12A9858FE00D4E721 /* NFCNameCardEditHeadView.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45A7E5A92A734C1C0002014D /* LocationSearchController.swift in Sources */,
@@ -1628,6 +1820,7 @@
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
 				45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */,
+				45450CD02B2C41AE00558C9D /* AdminStaffController.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				458970602A7794EA00344B93 /* Asyncs.swift in Sources */,
@@ -1652,8 +1845,10 @@
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				45C781EF2A95C2B600D4E721 /* VisualActivityViewController.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
+				45450CBD2B2AE8D300558C9D /* ApplyForCertificationController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,
 				458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */,
+				45D0AF9C2B32DA5600C6FAFA /* AdminDepartmentDetailContainer.swift in Sources */,
 				450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
 				450F6CD32A6917590001AA1B /* CalendarEventHeadView.swift in Sources */,
@@ -1674,6 +1869,7 @@
 				450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */,
 				45920AFD2A26E045005871ED /* BaseCollectionController.swift in Sources */,
 				45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */,
+				45450CC32B2C0D3200558C9D /* AdminApi.swift in Sources */,
 				45A0E6352ABD3D65003C5153 /* PostRepostTypeSheetView.swift in Sources */,
 				45920AD62A26E045005871ED /* PKError.swift in Sources */,
 				450BA6DD2A330A3500764828 /* RegistProfileView.swift in Sources */,
@@ -1681,11 +1877,15 @@
 				45C781FD2A98A0FB00D4E721 /* ImageCompress+DPI.swift in Sources */,
 				450F6CC42A613AFC0001AA1B /* Iterators.swift in Sources */,
 				45A0E6292AB9619B003C5153 /* PostDraftsController.swift in Sources */,
+				45D0AF992B31A4F800C6FAFA /* MMFileTree.swift in Sources */,
+				45D0AFA02B32DA8E00C6FAFA /* AdminDepartmentDetailController.swift in Sources */,
 				45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */,
 				458870E02AE66D7000029353 /* AddUserWorkExperienceView.swift in Sources */,
 				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
+				45450CD22B2C41C400558C9D /* AdminRoomController.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,
+				45450CC52B2C0E4500558C9D /* AdminService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

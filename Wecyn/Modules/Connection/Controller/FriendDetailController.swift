@@ -138,7 +138,6 @@ class FriendDetailController: BaseTableController {
                
                 let vc = FriendAddRemarkController(model: model)
                 let nav = BaseNavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true)
                 vc.updateRemarkComplete = { [weak self] in
                     self?.tableView?.reloadData()

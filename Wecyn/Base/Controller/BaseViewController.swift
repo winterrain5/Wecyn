@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 class BaseViewController: UIViewController {
-    
+    var updateDataComplete:(()->())?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
