@@ -31,7 +31,7 @@ class MainController: UITabBarController {
         let connection = BaseNavigationController(rootViewController: ConnectionFriendController())
         let calendar = BaseNavigationController(rootViewController: CalendarEventController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
-        
+        let admin = BaseNavigationController(rootViewController: AdminController())
         func selectedImage(_ image: UIImage?) -> UIImage? {
             image?.withTintColor(R.color.theamColor()!).withRenderingMode(.alwaysOriginal)
         }
@@ -55,8 +55,12 @@ class MainController: UITabBarController {
             image: R.image.tab_person(),
             selectedImage: selectedImage(R.image.tab_person()))
         
+        admin.tabBarItem = UITabBarItem.init(
+            title: "Admin",
+            image: R.image.tab_admin(),
+            selectedImage: selectedImage(R.image.tab_admin()))
         
-        self.viewControllers = [home,calendar,connection,profile]
+        self.viewControllers = [home,calendar,connection,profile,admin]
         configAppearance()
     }
     

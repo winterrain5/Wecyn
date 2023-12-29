@@ -49,7 +49,7 @@ class FriendAddRemarkController: BaseViewController {
             NetworkService.updateRemark(id: self.model.id, remark: tf.text ?? "").subscribe(onNext:{
                 if $0.success == 1 {
                     self.model.remark = tf.text ?? ""
-                    Toast.showSuccess("You update \(self.model.full_name)'s remark")
+                    Toast.showSuccess("You updated \(self.model.full_name)'s remark")
                     self.updateRemarkComplete?()
                     self.returnBack()
                 } else {

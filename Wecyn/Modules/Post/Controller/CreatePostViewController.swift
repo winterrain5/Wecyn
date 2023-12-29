@@ -447,7 +447,7 @@ class CreatePostViewController: BaseViewController {
             var images:[String] = []
             Asyncs.async {
                 self.postMedias.forEach {
-                    images.append($0.image.compressionImageToBase64(400))
+                    images.append($0.image.compressionImageToBase64(200))
                 }
             } mainTask: {
                 let content = self.richTextView.text ?? ""
@@ -458,6 +458,7 @@ class CreatePostViewController: BaseViewController {
                     self.saveButton.stopAnimation()
                     self.addCompleteHandler?(model)
                 },onError: { e in
+                    Toast.dismiss()
                     self.saveButton.stopAnimation()
                     Toast.showError(e.asAPIError.errorInfo().message)
                 }).disposed(by: self.rx.disposeBag)
@@ -566,9 +567,11 @@ class CreatePostViewController: BaseViewController {
             }.then {
                 addPost(video: $0)
             }.done {
+                self.saveButton.stopAnimation()
                 Toast.dismiss()
             }.catch { e in
                 Toast.dismiss()
+                self.saveButton.stopAnimation()
                 Toast.showError(e.asAPIError.errorInfo().message)
             }
         }
@@ -641,23 +644,28 @@ extension CreatePostViewController: UICollectionViewDataSource,UICollectionViewD
             }
             cell.playItemHandler =  { [weak self] result in
                 guard let `self` = self else { return }
+                try? AVAudioSession.sharedInstance().setCategory(.playback)
                 if result.isEdited {
+                    
                     let controller = AVPlayerViewController()
                     guard let url = result.mediaURL else { return }
                     let player = AVPlayer(url: url)
                     player.playImmediately(atRate: 1)
                     controller.player = player
                     self.present(controller, animated: true)
+                    
                 } else {
                     result.asset?.fetchVideo { result, id in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let response):
+                    
                                 let controller = AVPlayerViewController()
                                 let player = AVPlayer(playerItem: response.playerItem)
                                 player.playImmediately(atRate: 1)
                                 controller.player = player
                                 self.present(controller, animated: true)
+                                
                             case .failure(let error):
                                 print(error)
                             }

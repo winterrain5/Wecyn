@@ -18,6 +18,7 @@ enum UserApi {
     case experienceInfo(_ id:Int,_ type:Int)
     case experienceList(_ type:Int,_ userId:Int? = nil)
     case organizationList(_ isEdu:Int = 0,_ keyword:String)
+    case applyForCertification(_ id:Int,_ type:Int,_ remark:String)
 }
 
 extension UserApi: TargetType {
@@ -43,6 +44,8 @@ extension UserApi: TargetType {
             return "/api/org/searchList/"
         case .updateExperience:
             return "/api/user/updateExperience/"
+        case .applyForCertification:
+            return "/api/user/applyCertification/"
         }
     }
     
@@ -79,6 +82,8 @@ extension UserApi: TargetType {
             return requestParametersByGet(["is_edu":isEdu,"keyword":keyword])
         case .updateExperience(let model):
             return requestToTaskByPost(model)
+        case .applyForCertification(let id,let type,let remark):
+            return requestParametersByPost(["id":id,"exp_type":type,"user_remark":remark])
+            
         }
-    }
-}
+    }}

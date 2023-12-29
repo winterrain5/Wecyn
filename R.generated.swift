@@ -289,7 +289,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 110 images.
+  /// This `_R.image` struct is generated, and contains static references to 117 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -335,6 +335,15 @@ struct _R {
     /// Image `checkmark`.
     var checkmark: RswiftResources.ImageResource { .init(name: "checkmark", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `checkmark.circle`.
+    var checkmarkCircle: RswiftResources.ImageResource { .init(name: "checkmark.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `checkmark.seal.fill`.
+    var checkmarkSealFill: RswiftResources.ImageResource { .init(name: "checkmark.seal.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `checkmark.seal.fill.gray`.
+    var checkmarkSealFillGray: RswiftResources.ImageResource { .init(name: "checkmark.seal.fill.gray", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `chevron.backward`.
     var chevronBackward: RswiftResources.ImageResource { .init(name: "chevron.backward", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -344,11 +353,17 @@ struct _R {
     /// Image `chevron.compact.up`.
     var chevronCompactUp: RswiftResources.ImageResource { .init(name: "chevron.compact.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `chevron.down`.
+    var chevronDown: RswiftResources.ImageResource { .init(name: "chevron.down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `chevron.right`.
     var chevronRight: RswiftResources.ImageResource { .init(name: "chevron.right", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `chevron.up`.
     var chevronUp: RswiftResources.ImageResource { .init(name: "chevron.up", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `circle`.
+    var circle: RswiftResources.ImageResource { .init(name: "circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `circle.fill`.
     var circleFill: RswiftResources.ImageResource { .init(name: "circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -400,6 +415,9 @@ struct _R {
 
     /// Image `house`.
     var house: RswiftResources.ImageResource { .init(name: "house", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `info.circle`.
+    var infoCircle: RswiftResources.ImageResource { .init(name: "info.circle", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `iphone.gen1.circle.fill`.
     var iphoneGen1CircleFill: RswiftResources.ImageResource { .init(name: "iphone.gen1.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -572,6 +590,9 @@ struct _R {
     /// Image `switch.2`.
     var switch2: RswiftResources.ImageResource { .init(name: "switch.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `tab_admin`.
+    var tab_admin: RswiftResources.ImageResource { .init(name: "tab_admin", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `tab_book`.
     var tab_book: RswiftResources.ImageResource { .init(name: "tab_book", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -654,7 +675,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 18 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 22 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -663,6 +684,18 @@ struct _R {
 
     /// Nib `AddUserWorkExperienceView`.
     var addUserWorkExperienceView: RswiftResources.NibReference<AddUserWorkExperienceView> { .init(name: "AddUserWorkExperienceView", bundle: bundle) }
+
+    /// Nib `AdminAddRoleContainer`.
+    var adminAddRoleContainer: RswiftResources.NibReference<AdminAddRoleContainer> { .init(name: "AdminAddRoleContainer", bundle: bundle) }
+
+    /// Nib `AdminDepartmentDetailContainer`.
+    var adminDepartmentDetailContainer: RswiftResources.NibReference<AdminDepartmentDetailContainer> { .init(name: "AdminDepartmentDetailContainer", bundle: bundle) }
+
+    /// Nib `AdminRoleItemCell`.
+    var adminRoleItemCell: RswiftResources.NibReference<AdminRoleItemCell> { .init(name: "AdminRoleItemCell", bundle: bundle) }
+
+    /// Nib `AdminStaffItemCell`.
+    var adminStaffItemCell: RswiftResources.NibReference<AdminStaffItemCell> { .init(name: "AdminStaffItemCell", bundle: bundle) }
 
     /// Nib `CaledarItemCell`.
     var caledarItemCell: RswiftResources.NibReference<CaledarItemCell> { .init(name: "CaledarItemCell", bundle: bundle) }
@@ -721,6 +754,19 @@ struct _R {
       if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'AddUserWorkExperienceView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AddUserWorkExperienceView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor99", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor99' is used in nib 'AddUserWorkExperienceView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminDepartmentDetailContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminDepartmentDetailContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'AdminDepartmentDetailContainer', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ellipsis", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ellipsis' is used in nib 'AdminRoleItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "IconColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconColor' is used in nib 'AdminRoleItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminRoleItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor77", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor77' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "person.fill.checkmark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'person.fill.checkmark' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "repeat", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'repeat' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CaledarItemCell', but couldn't be loaded.") }

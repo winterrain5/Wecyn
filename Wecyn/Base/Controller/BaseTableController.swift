@@ -76,6 +76,12 @@ class BaseTableController: BaseViewController,DataLoadable {
         return .init(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
     }
     
+    
+    func addSingleSeparator() {
+        tableView?.separatorColor = R.color.seperatorColor()
+        tableView?.separatorInset = .zero
+        tableView?.separatorStyle = .singleLine
+    }
     func registRefreshHeader(colorStyle:RefreshColorStyle = .gray) {
         let header = RefreshAnimationHeader{ [weak self] in
             self?.isBeginLoad = true

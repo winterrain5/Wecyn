@@ -110,6 +110,7 @@ extension HomePostItemCell: UICollectionViewDataSource,UICollectionViewDelegate,
             cell.setPlayButtonStatus(true)
             cell.imgView.kf.setImage(with: model?.images_obj[indexPath.item].url.url)
         } else if !(model?.video.isEmpty ?? false) {
+            cell.setPlayButtonStatus(false)
             cell.imgView.image = nil
             
         }
@@ -180,6 +181,7 @@ extension HomePostItemCell: UICollectionViewDataSource,UICollectionViewDelegate,
         }
         if !(model?.video.isEmpty ?? false) {
             guard let url = model?.video.url else { return }
+            try? AVAudioSession.sharedInstance().setCategory(.playback)
             let controller = AVPlayerViewController()
             let player = AVPlayer(url: url)
             player.playImmediately(atRate: 1)

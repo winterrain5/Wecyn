@@ -41,8 +41,7 @@ class CalendarEventDetailModel {
             descH = model.remarks.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
         }
        
-        
-        return descH >= 20 ? descH : 52
+        return descH >= 52 ? descH : 52
     }
     init(cellType: CalendarEventDetailCellType, model:EventInfoModel) {
         self.cellType = cellType
