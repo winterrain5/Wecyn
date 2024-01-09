@@ -19,6 +19,7 @@ enum UserApi {
     case experienceList(_ type:Int,_ userId:Int? = nil)
     case organizationList(_ isEdu:Int = 0,_ keyword:String)
     case applyForCertification(_ id:Int,_ type:Int,_ remark:String)
+    case userRoomList(_ currentUserId:Int? = nil, _ keyword:String? = nil)
 }
 
 extension UserApi: TargetType {
@@ -46,12 +47,14 @@ extension UserApi: TargetType {
             return "/api/user/updateExperience/"
         case .applyForCertification:
             return "/api/user/applyCertification/"
+        case .userRoomList:
+            return "/api/room/searchList/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .userInfo,.experienceInfo,.experienceList,.organizationList:
+        case .userInfo,.experienceInfo,.experienceList,.organizationList,.userRoomList:
             return Moya.Method.get
         case .updateUserInfo,.updateExperience:
             return Moya.Method.put
@@ -84,6 +87,7 @@ extension UserApi: TargetType {
             return requestToTaskByPost(model)
         case .applyForCertification(let id,let type,let remark):
             return requestParametersByPost(["id":id,"exp_type":type,"user_remark":remark])
-            
+        case .userRoomList(let currentUserId,let keyword):
+            return requestParametersByGet(["current_user_id":currentUserId,"keyword":keyword])
         }
     }}

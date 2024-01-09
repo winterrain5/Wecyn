@@ -119,6 +119,7 @@ PODS:
   - RxSwiftExt/RxCocoa (5.2.0):
     - RxCocoa (~> 5.0)
     - RxSwiftExt/Core
+  - SafeSFSymbols (2.0.0)
   - SectionIndexView (3.0.0)
   - SkeletonView (1.30.4)
   - SKPhotoBrowser (7.1.0)
@@ -198,6 +199,7 @@ DEPENDENCIES:
   - RxMoyaCache
   - RxSwift (= 5.1.2)
   - RxSwiftExt
+  - SafeSFSymbols
   - SectionIndexView
   - SkeletonView
   - SKPhotoBrowser
@@ -255,6 +257,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxSwiftExt
+    - SafeSFSymbols
     - SectionIndexView
     - SkeletonView
     - SKPhotoBrowser
@@ -319,6 +322,7 @@ SPEC CHECKSUMS:
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
+  SafeSFSymbols: c57c8752149b2ddc0213d3d519a3a31a8bd76340
   SectionIndexView: b5369b14500696aec99531cb9a390773d162929e
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SKPhotoBrowser: cd95b95a6f352fc2a50992721299f75ead77f9ab
@@ -335,6 +339,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: fe97e46a22c59e5be5b64e8ec017b471f699cc63
+PODFILE CHECKSUM: 6f30b1e05d3b1edf113f422925cadaaaefe2ec1b
 
 COCOAPODS: 1.11.2

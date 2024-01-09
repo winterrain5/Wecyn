@@ -113,6 +113,12 @@ class UserService {
         let target = MultiTarget(UserApi.applyForCertification(id, type, remark))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
+    
+    static func userRoomList(currentUserId:Int? = 0,keyword:String? = nil) -> Observable<[UserRoomModel]> {
+        let target = MultiTarget(UserApi.userRoomList(currentUserId,keyword))
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(UserRoomModel.self)
+    }
+    
 }
 
 
@@ -145,4 +151,15 @@ class OriganizationModel:BaseModel {
     var id:Int = 0
     var name:String = ""
     var avatar:String = ""
+}
+class UserRoomOptionModel :BaseModel {
+    var value: Int = 0
+    var label: String = ""
+    
+}
+
+class UserRoomModel :BaseModel {
+    var label: String = ""
+    var options: [UserRoomOptionModel] = []
+    
 }
