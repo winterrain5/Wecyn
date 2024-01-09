@@ -11,15 +11,6 @@ import Moya
 ///
 class AdminService {
     
-    static func userRoomList(orgId:Int? = 0,keyword:String? = nil) -> Observable<[AdminRoomModel]> {
-        let target = MultiTarget(AdminApi.userRoomList(orgId ?? 0, keyword))
-        return APIProvider.rx.request(target).asObservable().mapObjectArray(AdminRoomModel.self)
-    }
-    
-    static func adminRoomList(orgId:Int,keyword:String? = nil) -> Observable<[AdminRoomModel]> {
-        let target = MultiTarget(AdminApi.adminRoomList(orgId, keyword))
-        return APIProvider.rx.request(target).asObservable().mapObjectArray(AdminRoomModel.self)
-    }
     
     
     /// 角色列表
@@ -37,7 +28,7 @@ class AdminService {
     /// - Parameters:
     ///   - id: 角色ID
     ///   - toId: 分配到另外一个角色的ID
-    /// - Returns: 
+    /// - Returns:
     static func deleteRole(id:Int,toId:Int? = nil) -> Observable<ResponseStatus> {
         let target = MultiTarget(AdminApi.deleteRole(id,toId))
         return APIProvider.rx.request(target).asObservable().mapStatus()
@@ -133,20 +124,56 @@ class AdminService {
         let target = MultiTarget(AdminApi.staffList(orgId,deptId))
         return APIProvider.rx.request(target).asObservable().mapObjectArray(AdminStaffModel.self)
     }
-}
-
-
-class AdminRoomOptionModel :BaseModel {
-    var value: Int = 0
-    var label: String = ""
     
+    
+    /// 待认证员工
+    /// - Parameters:
+    ///   - orgId:
+    ///   - keyword:
+    /// - Returns:
+    static func pendingCertificateStaff(orgId:Int,keyword:String? = nil) -> Observable<[AdminNewStaffModel]> {
+        let target = MultiTarget(AdminApi.pendingCertificateStaff(orgId))
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(AdminNewStaffModel.self)
+    }
+    
+    
+    /// 认证员工
+    /// - Parameter model:
+    /// - Returns:
+    static func staffCertificate(model:AdminCertificatStaffRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.staffCertification(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
+    /// admin room list
+    /// - Parameters:
+    ///   - orgId:
+    ///   - keyword:
+    /// - Returns:
+    static func adminRoomList(orgId:Int,keyword:String? = nil) -> Observable<[AdminRoomModel]> {
+        let target = MultiTarget(AdminApi.adminRoomList(orgId,keyword))
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(AdminRoomModel.self)
+    }
+    
+    static func deleteRoom(id:Int) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.deleteRoom(id))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    static func addRoom(model:AdminAddRoomRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.addRoom(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    
+    static func updateRoom(model:AdminAddRoomRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.updateRoom(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
 }
 
-class AdminRoomModel :BaseModel {
-    var label: String = ""
-    var options: [AdminRoomOptionModel] = []
-    
-}
+
 
 
 class AdminRoleItemModel :BaseModel {
@@ -189,4 +216,27 @@ class AdminDepartmentAddRequestModel: BaseModel {
     var pid: Int?
     var remark: String?
     var id: String?
+}
+class AdminRoomDept :BaseModel {
+    var id: Int = 0
+    var name: String?
+    var addr: String?
+    
+}
+
+class AdminRoomModel :BaseModel {
+    var id: Int = 0
+    var org_id: Int = 0
+    var name: String = ""
+    var dept: AdminRoomDept = AdminRoomDept()
+    var remark: String = ""
+    
+}
+class AdminAddRoomRequestModel: BaseModel {
+    var org_id: Int = 0
+    var id: Int? = nil
+    var name: String?
+    var dept_id: Int = 0
+    var remark: String?
+    
 }

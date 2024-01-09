@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SafeSFSymbols
+
 class HomePostUserInfoView: UIView {
 
     var avatar = UIImageView()

@@ -70,6 +70,7 @@ extension BasePagingTableController: JXPagingViewListViewDelegate {
     }
     
     func listScrollView() -> UIScrollView {
+        
         return self.tableView!
     }
     

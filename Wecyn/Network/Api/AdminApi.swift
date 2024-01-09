@@ -15,7 +15,10 @@ enum AdminApi {
     case updateRole(_ id:Int,_ name:String? = nil,_ permission:[Int]? = [],_ remark:String? = nil)
     
     case adminRoomList(_ orgid:Int,_ keyword:String? = nil)
-    case userRoomList(_ orgid:Int,_ keyword:String? = nil)
+
+    case addRoom(_ model:AdminAddRoomRequestModel)
+    case updateRoom(_ model:AdminAddRoomRequestModel)
+    case deleteRoom(_ id:Int)
     
     case departmentList(_ orgid:Int,_ keyword:String? = nil)
     case deleteDepartment(_ id:Int,_ toId:Int? = nil)
@@ -23,6 +26,9 @@ enum AdminApi {
     case addDepartment(_ model:AdminDepartmentAddRequestModel)
     
     case staffList(_ orgId:Int,_ deptId:Int? = nil)
+    case pendingCertificateStaff(_ orgId:Int,_ keyword:String? = nil)
+    case staffCertification(_ model:AdminCertificatStaffRequestModel)
+    
     
     case adminOrgList
     case userOrgList
@@ -31,8 +37,6 @@ enum AdminApi {
 extension AdminApi:TargetType {
     var path: String {
         switch self {
-        case .userRoomList:
-            return "/api/room/searchList/"
         case .adminRoomList:
             return "/api/admin/room/searchList/"
         case .addRole:
@@ -57,14 +61,24 @@ extension AdminApi:TargetType {
             return "/api/admin/dept/updateDepartment/"
         case .staffList:
             return "/api/admin/staff/searchList/"
+        case .pendingCertificateStaff:
+            return "/api/admin/staff/certList/"
+        case .staffCertification:
+            return "/api/admin/staff/staffCertification/"
+        case .addRoom:
+            return "/api/admin/room/addRoom/"
+        case .deleteRoom:
+            return "/api/admin/room/deleteRoom/"
+        case .updateRoom:
+            return "/api/admin/room/updateRoom/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .addRole,.deleteRole,.deleteDepartment,.addDepartment:
+        case .addRole,.deleteRole,.deleteDepartment,.addDepartment,.staffCertification,.addRoom,.deleteRoom:
             return .post
-        case  .updateRole,.updateDepartment:
+        case  .updateRole,.updateDepartment,.updateRoom:
             return .put
         default:
             return .get
@@ -75,7 +89,7 @@ extension AdminApi:TargetType {
         switch self {
         case .addRole(let orgid, let name, let permission,let remark):
             return requestParametersByPost(["org_id":orgid,"name":name,"permission":permission,"remark":remark])
-        case .userRoomList(let orgid,let keyword),.adminRoomList(let orgid,let keyword):
+        case .adminRoomList(let orgid,let keyword):
             return requestParametersByGet(["org_id":orgid,"keyword":keyword])
         case .deleteRole(let id,let toId):
             return requestParametersByPost(["id":id,"to_id":toId])
@@ -95,6 +109,16 @@ extension AdminApi:TargetType {
             return requestToTaskByPost(model)
         case .staffList(let orgId,let deptId):
             return requestParametersByGet(["org_id":orgId,"dept_id":deptId])
+        case .pendingCertificateStaff(let orgId,let keyword):
+            return requestParametersByGet(["org_id":orgId,"keyword":keyword])
+        case .staffCertification(let model):
+            return requestToTaskByPost(model)
+        case .addRoom(let model):
+            return requestToTaskByPost(model)
+        case .deleteRoom(let id):
+            return requestParametersByPost(["id":id])
+        case .updateRoom(let model):
+            return requestToTaskByPost(model)
         }
     }
 }

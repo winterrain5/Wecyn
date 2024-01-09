@@ -29,7 +29,7 @@ class BaseTableController: BaseViewController,DataLoadable {
     var cellIdentifier:String = ""
     var numberOfSkeletonCell:Int = 10
     
-    public var tableView:UITableView?
+    public var tableView:UITableView? = UITableView(frame: .zero, style: .plain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,6 @@ class BaseTableController: BaseViewController,DataLoadable {
     func configTableview(_ style:UITableView.Style) {
         
         tableView = UITableView.init(frame: listViewFrame(), style: style)
-        
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.emptyDataSetSource = self
