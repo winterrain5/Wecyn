@@ -678,7 +678,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 27 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 28 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -699,6 +699,9 @@ struct _R {
 
     /// Nib `AdminEditStaffContainer`.
     var adminEditStaffContainer: RswiftResources.NibReference<AdminEditStaffContainer> { .init(name: "AdminEditStaffContainer", bundle: bundle) }
+
+    /// Nib `AdminEditStaffExpContainer`.
+    var adminEditStaffExpContainer: RswiftResources.NibReference<AdminEditStaffExpContainer> { .init(name: "AdminEditStaffExpContainer", bundle: bundle) }
 
     /// Nib `AdminNewStaffCell`.
     var adminNewStaffCell: RswiftResources.NibReference<AdminNewStaffCell> { .init(name: "AdminNewStaffCell", bundle: bundle) }
@@ -782,6 +785,13 @@ struct _R {
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminDepartmentDetailContainer', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminDepartmentDetailContainer', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'AdminDepartmentDetailContainer', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "chevron.right", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chevron.right' is used in nib 'AdminEditStaffContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminEditStaffContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminEditStaffContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'AdminEditStaffContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminEditStaffExpContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminEditStaffExpContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'AdminEditStaffExpContainer', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ellipsis", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ellipsis' is used in nib 'AdminNewStaffCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminNewStaffCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminNewStaffCell', but couldn't be loaded.") }
@@ -792,6 +802,7 @@ struct _R {
       if UIKit.UIImage(named: "ellipsis", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ellipsis' is used in nib 'AdminRoomCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "IconColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconColor' is used in nib 'AdminRoomCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminRoomCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "ellipsis", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ellipsis' is used in nib 'AdminStaffExpsCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminStaffExpsCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor77", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor77' is used in nib 'AdminStaffExpsCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "ellipsis", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'ellipsis' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }

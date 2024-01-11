@@ -49,13 +49,15 @@ extension TargetType {
                 "device_type":"ios",
                 "app_version":Device.appVersion,
                 "device_system_version":Device.sysVersion,
-                "Authorization": "Bearer " + token
+                "Authorization": "Bearer " + token,
+                "tz": TimeZone.current.identifier
             ]
         } else {
             return  [
                 "device_type":"ios",
                 "app_version":Device.appVersion,
                 "device_system_version":Device.sysVersion,
+                "tz": TimeZone.current.identifier
                     ]
         }
         

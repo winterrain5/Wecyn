@@ -22,6 +22,7 @@ class AdminDepartmentDetailContainer: UIView ,UITextFieldDelegate{
     @IBOutlet weak var selectParentNodeButton: UIButton!
     @IBOutlet weak var remark: KMPlaceholderTextView!
     
+    @IBOutlet weak var addrTitleLabel: UILabel!
     @IBOutlet weak var addrTf: UITextField!
     @IBOutlet weak var addrContainerHCons: NSLayoutConstraint!
     var mode:CheckMode = .Check
@@ -49,7 +50,8 @@ class AdminDepartmentDetailContainer: UIView ,UITextFieldDelegate{
             if mode == .Check {
                 setViewUserInteractionEnabled(false)
                 submitButton.isHidden = true
-                
+                hasAddressSwitch.isHidden = true
+                addrTitleLabel.text = "Address"
             }
             
             if mode == .Add {
@@ -58,6 +60,8 @@ class AdminDepartmentDetailContainer: UIView ,UITextFieldDelegate{
                 bottomView.isHidden = true
                 submitButton.backgroundColor  = R.color.disableColor()
                 submitButton.isEnabled = false
+                hasAddressSwitch.isHidden = false
+                addrTitleLabel.text = "Has Address"
             }
             
             if mode == .Edit {
@@ -65,6 +69,8 @@ class AdminDepartmentDetailContainer: UIView ,UITextFieldDelegate{
                 submitButton.isHidden = false
                 submitButton.isEnabled = true
                 bottomView.isHidden = true
+                hasAddressSwitch.isHidden = false
+                addrTitleLabel.text = "Has Address"
                 
                 self.requestModel.id = node.element.id.string
                 self.requestModel.pid = node.element.pid

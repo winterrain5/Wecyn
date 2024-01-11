@@ -58,17 +58,16 @@ class AdminDepartmentDetailController: BaseViewController {
             self?.returnBack()
         }
         
-        
+        container.frame = CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
         container.mode = self.mode
         if mode == .Check {
-            container.frame = self.view.bounds
+            self.navigation.item.title = "Department Detail"
             container.node = self.node
         }
         
-        container.frame = CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
+        
         if mode == .Add {
             self.navigation.item.title = "Add Department"
-           
         }
         
         if mode == .Edit {

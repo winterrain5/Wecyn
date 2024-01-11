@@ -112,6 +112,10 @@
 		456BB0492B4D36DD00BB7838 /* AdminAddRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BB0482B4D36DD00BB7838 /* AdminAddRoomController.swift */; };
 		456BB04B2B4D38E300BB7838 /* AdminAddRoomContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BB04A2B4D38E300BB7838 /* AdminAddRoomContainer.swift */; };
 		456BB04D2B4D38F400BB7838 /* AdminAddRoomContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 456BB04C2B4D38F400BB7838 /* AdminAddRoomContainer.xib */; };
+		456BB04F2B4E869B00BB7838 /* AdminSelectRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BB04E2B4E869B00BB7838 /* AdminSelectRoleController.swift */; };
+		456BB0512B4E929500BB7838 /* AdminEditStaffExpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BB0502B4E929500BB7838 /* AdminEditStaffExpController.swift */; };
+		456BB0532B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456BB0522B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift */; };
+		456BB0552B4E92D900BB7838 /* AdminEditStaffExpContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 456BB0542B4E92D900BB7838 /* AdminEditStaffExpContainer.xib */; };
 		457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457133B82A4D0E81007B783A /* EventSearchViewController.swift */; };
 		457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */; };
 		457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */; };
@@ -411,6 +415,10 @@
 		456BB0482B4D36DD00BB7838 /* AdminAddRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddRoomController.swift; sourceTree = "<group>"; };
 		456BB04A2B4D38E300BB7838 /* AdminAddRoomContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddRoomContainer.swift; sourceTree = "<group>"; };
 		456BB04C2B4D38F400BB7838 /* AdminAddRoomContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminAddRoomContainer.xib; sourceTree = "<group>"; };
+		456BB04E2B4E869B00BB7838 /* AdminSelectRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSelectRoleController.swift; sourceTree = "<group>"; };
+		456BB0502B4E929500BB7838 /* AdminEditStaffExpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditStaffExpController.swift; sourceTree = "<group>"; };
+		456BB0522B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditStaffExpContainer.swift; sourceTree = "<group>"; };
+		456BB0542B4E92D900BB7838 /* AdminEditStaffExpContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminEditStaffExpContainer.xib; sourceTree = "<group>"; };
 		457133B82A4D0E81007B783A /* EventSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSearchViewController.swift; sourceTree = "<group>"; };
 		457B2AF82A36B2610098013A /* ProfileExperienceItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileExperienceItemCell.swift; sourceTree = "<group>"; };
 		457C50892A38438800FCE8D0 /* HomeHeaderJobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderJobItemCell.swift; sourceTree = "<group>"; };
@@ -1279,6 +1287,8 @@
 				45C9380A2B3ECF6500621BED /* AdminStaffExpsController.swift */,
 				45C938102B3EDEF500621BED /* AdminNewStaffController.swift */,
 				45C938242B46AA9000621BED /* AdminEditStaffController.swift */,
+				456BB04E2B4E869B00BB7838 /* AdminSelectRoleController.swift */,
+				456BB0502B4E929500BB7838 /* AdminEditStaffExpController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1294,6 +1304,8 @@
 				45C938132B43FB3700621BED /* AdminNewStaffCell.xib */,
 				45C938262B46AAAB00621BED /* AdminEditStaffContainer.swift */,
 				45C938282B46AAB400621BED /* AdminEditStaffContainer.xib */,
+				456BB0522B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift */,
+				456BB0542B4E92D900BB7838 /* AdminEditStaffExpContainer.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1626,6 +1638,7 @@
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
 				458870E22AE66D7F00029353 /* AddUserWorkExperienceView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
+				456BB0552B4E92D900BB7838 /* AdminEditStaffExpContainer.xib in Resources */,
 				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
 				4549ECF42AB837E300EB9C4C /* PostDetailCommentFooterView.xib in Resources */,
@@ -1761,6 +1774,7 @@
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
 				45D0AF982B31A4F800C6FAFA /* MMNodeView.swift in Sources */,
+				456BB0532B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift in Sources */,
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
 				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
 				458870E42AE67F0700029353 /* OrganizationSearchController.swift in Sources */,
@@ -1862,6 +1876,7 @@
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
 				4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */,
 				45D0AF742B31505D00C6FAFA /* AdiminAddRoleController.swift in Sources */,
+				456BB0512B4E929500BB7838 /* AdminEditStaffExpController.swift in Sources */,
 				45C781F12A9858FE00D4E721 /* NFCNameCardEditHeadView.swift in Sources */,
 				45920AD52A26E045005871ED /* Macro.swift in Sources */,
 				45A7E5A92A734C1C0002014D /* LocationSearchController.swift in Sources */,
@@ -1888,6 +1903,7 @@
 				456BB0462B4D0DCF00BB7838 /* AdminRoomCell.swift in Sources */,
 				45450CD02B2C41AE00558C9D /* AdminStaffController.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
+				456BB04F2B4E869B00BB7838 /* AdminSelectRoleController.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
 				458970602A7794EA00344B93 /* Asyncs.swift in Sources */,
 				45C781FE2A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift in Sources */,

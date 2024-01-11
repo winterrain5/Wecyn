@@ -171,6 +171,22 @@ class AdminService {
         let target = MultiTarget(AdminApi.updateRoom(model))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
+    
+    
+    static func updateStaff(model:AdminUpdateStaffRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.updateStaff(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    static func updateStaffExp(model:AdminUpdateStaffExpRequestModel) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.updateStaffExp(model))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    static func deleteStaffExp(id:Int) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.deleteStaffExp(id))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
 }
 
 
@@ -239,4 +255,21 @@ class AdminAddRoomRequestModel: BaseModel {
     var dept_id: Int = 0
     var remark: String?
     
+}
+
+class AdminUpdateStaffRequestModel:BaseModel {
+    var id:Int = 0
+    
+    var dept_id:Int?
+    var role_dept_id:Int?
+    var role_id:Int?
+    var org_id:Int?
+}
+
+
+class AdminUpdateStaffExpRequestModel:BaseModel {
+    var id:Int = 0
+    var industry_name:String?
+    var title_name:String?
+    var desc:String?
 }

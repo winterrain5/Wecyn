@@ -36,15 +36,25 @@
                         <color key="textColor" name="TextColor77"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6j-mw-CtV">
+                        <rect key="frame" x="343" y="15.333333333333336" width="40" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="0Gv-7S-aUL"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="ellipsis"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ppx-Aq-fgA" secondAttribute="trailing" constant="16" id="03p-NI-bRg"/>
+                    <constraint firstAttribute="trailing" secondItem="i6j-mw-CtV" secondAttribute="trailing" constant="16" id="0aR-PE-d0u"/>
                     <constraint firstItem="ppx-Aq-fgA" firstAttribute="leading" secondItem="Nwr-Fy-PVd" secondAttribute="trailing" constant="8" id="3Jo-WB-cp1"/>
                     <constraint firstItem="Nwr-Fy-PVd" firstAttribute="top" secondItem="ZUI-kI-10T" secondAttribute="top" constant="16" id="5YS-Gu-49K"/>
                     <constraint firstItem="ppx-Aq-fgA" firstAttribute="centerY" secondItem="Nwr-Fy-PVd" secondAttribute="centerY" id="FEq-bh-4iS"/>
                     <constraint firstItem="784-AV-spo" firstAttribute="leading" secondItem="ZUI-kI-10T" secondAttribute="leading" constant="16" id="Iuu-hA-CKd"/>
                     <constraint firstItem="784-AV-spo" firstAttribute="top" secondItem="Nwr-Fy-PVd" secondAttribute="bottom" constant="16" id="N70-Us-NNU"/>
                     <constraint firstAttribute="trailing" secondItem="784-AV-spo" secondAttribute="trailing" constant="16" id="RKm-ib-9u9"/>
+                    <constraint firstItem="i6j-mw-CtV" firstAttribute="centerY" secondItem="Nwr-Fy-PVd" secondAttribute="centerY" id="SYE-mw-jhe"/>
                     <constraint firstItem="784-AV-spo" firstAttribute="leading" secondItem="ZUI-kI-10T" secondAttribute="leading" constant="16" id="X6h-Vc-mKW"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="784-AV-spo" secondAttribute="bottom" constant="16" id="l9j-uf-qcb"/>
                     <constraint firstAttribute="trailing" secondItem="784-AV-spo" secondAttribute="trailing" constant="16" id="oRN-zI-UxK"/>
@@ -55,12 +65,14 @@
             <connections>
                 <outlet property="dateLabel" destination="ppx-Aq-fgA" id="ebN-WX-g8U"/>
                 <outlet property="descLabel" destination="784-AV-spo" id="75U-Xb-HyZ"/>
+                <outlet property="moreButton" destination="i6j-mw-CtV" id="iUA-se-GIa"/>
                 <outlet property="nameLabel" destination="Nwr-Fy-PVd" id="pjd-S1-abh"/>
             </connections>
             <point key="canvasLocation" x="190.07633587786259" y="3.1690140845070425"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ellipsis" width="18.333333969116211" height="4"/>
         <namedColor name="TextColor33">
             <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -15,6 +15,7 @@ class AdminStaffItemCell: UITableViewCell {
     @IBOutlet weak var titlesLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     var editHandler:((AdminStaffModel)->())?
+    
     var model:AdminStaffModel? {
         didSet {
             guard let model = model else { return }
@@ -33,7 +34,11 @@ class AdminStaffItemCell: UITableViewCell {
         
         let action1 = UIAction(title: "Edit",image: R.image.pencilLine()!) { [weak self] _ in
             guard let `self` = self,let model = self.model else { return }
-            self.editHandler?(model)
+            
+            let vc = AdminEditStaffController(model: model)
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            UIViewController.sk.getTopVC()?.present(nav, animated:true)
         }
     
         moreButton.showsMenuAsPrimaryAction = true
