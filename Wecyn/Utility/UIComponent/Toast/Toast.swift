@@ -41,7 +41,7 @@ class Toast {
     
     
     static func showWarning(_ message: String) {
-        SPIndicatorView(title: message, preset: .custom(UIImage(.exclamationmark.triangleFill).tintImage(.hexStringColor(hexString: "#ff8a00")))).present()
+        SPIndicatorView(title: message, preset: .custom(UIImage(.exclamationmark.triangleFill).tintImage(.yellow))).present()
     }
     
   

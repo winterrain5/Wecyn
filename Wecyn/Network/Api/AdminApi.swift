@@ -28,7 +28,9 @@ enum AdminApi {
     case staffList(_ orgId:Int,_ deptId:Int? = nil)
     case pendingCertificateStaff(_ orgId:Int,_ keyword:String? = nil)
     case staffCertification(_ model:AdminCertificatStaffRequestModel)
-    
+    case updateStaff(_ model:AdminUpdateStaffRequestModel)
+    case updateStaffExp(_ model:AdminUpdateStaffExpRequestModel)
+    case deleteStaffExp(_ id:Int)
     
     case adminOrgList
     case userOrgList
@@ -71,14 +73,20 @@ extension AdminApi:TargetType {
             return "/api/admin/room/deleteRoom/"
         case .updateRoom:
             return "/api/admin/room/updateRoom/"
+        case .updateStaff:
+            return "/api/admin/staff/updateStaff/"
+        case .updateStaffExp:
+            return "/api/admin/staff/updateStaffExperience/"
+        case .deleteStaffExp:
+            return "/api/admin/staff/deleteStaffExperience/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .addRole,.deleteRole,.deleteDepartment,.addDepartment,.staffCertification,.addRoom,.deleteRoom:
+        case .addRole,.deleteRole,.deleteDepartment,.addDepartment,.staffCertification,.addRoom,.deleteRoom,.deleteStaffExp:
             return .post
-        case  .updateRole,.updateDepartment,.updateRoom:
+        case  .updateRole,.updateDepartment,.updateRoom,.updateStaff,.updateStaffExp:
             return .put
         default:
             return .get
@@ -119,6 +127,12 @@ extension AdminApi:TargetType {
             return requestParametersByPost(["id":id])
         case .updateRoom(let model):
             return requestToTaskByPost(model)
+        case .updateStaff(let model):
+            return requestToTaskByPost(model)
+        case .updateStaffExp(let model):
+            return requestToTaskByPost(model)
+        case .deleteStaffExp(let id):
+            return requestParametersByPost(["id":id])
         }
     }
 }

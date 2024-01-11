@@ -260,6 +260,7 @@
             <connections>
                 <outlet property="addrContainerHCons" destination="Wb0-9P-Pv9" id="lQS-ZH-vxs"/>
                 <outlet property="addrTf" destination="o5f-et-dgm" id="odb-KT-QXD"/>
+                <outlet property="addrTitleLabel" destination="1Zb-Wu-CM5" id="ppZ-oV-H2U"/>
                 <outlet property="bottomView" destination="MVz-Cb-End" id="fpl-7D-Yur"/>
                 <outlet property="deleteButton" destination="wa7-nZ-gL7" id="Rdd-cv-6JI"/>
                 <outlet property="editButton" destination="mz9-2i-jo8" id="jmS-yj-J8c"/>

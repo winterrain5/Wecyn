@@ -58,9 +58,63 @@ class AdminStaffExpsController: BaseTableController {
         
         if self.dataArray.count > 0 {
             cell.model = self.dataArray[indexPath.row] as? AdminStaffExps
+            cell.editHandler = {
+                let vc = AdminEditStaffExpController(model: $0)
+                let nav = BaseNavigationController(rootViewController: vc)
+                nav.modalPresentationStyle  = .fullScreen
+                UIViewController.sk.getTopVC()?.present(nav, animated: true)
+                vc.updateComplete = { [weak self] updated in
+                    let models = self?.dataArray as! [AdminStaffExps]
+                    models.forEach({
+                        if $0.id == updated.id {
+                            $0.industry_name = updated.industry_name
+                            $0.title_name = updated.title_name
+                            $0.desc = updated.desc
+                        }
+                    })
+                    self?.tableView?.reloadData()
+                }
+            }
+            
+            cell.deleteHandler = { [weak self] in
+                self?.deleteExp($0)
+            }
+            
         }
    
         return cell
+        
+    }
+    
+    func deleteExp(_ item:AdminStaffExps) {
+
+        func deleteRow(_ item:AdminStaffExps) {
+            let idx = (self.dataArray as! [AdminStaffExps]).firstIndex(of: item) ?? 0
+            self.dataArray.remove(at: idx)
+            self.tableView?.deleteRows(at: [IndexPath(row: idx, section: 0)], with: .automatic)
+        }
+        let alert = UIAlertController(title: "Are you sure you want to delete this experience?",message: nil, preferredStyle: .actionSheet)
+        alert.addAction(title: "Delete directly",style: .default) { [weak self] _ in
+            guard let `self` = self else { return }
+            AdminService.deleteStaffExp(id: item.id).subscribe(onNext:{
+                
+                if $0.success == 1 {
+                    deleteRow(item)
+                    Toast.showSuccess("successfully deleted")
+                } else {
+                    Toast.showError($0.message)
+                }
+                
+            },onError: { e in
+                Toast.showError(e.asAPIError.errorInfo().message)
+            }).disposed(by: self.rx.disposeBag)
+        }
+    
+        alert.addAction(title: "Cancel",style: .cancel) { _ in
+            
+        }
+        
+        alert.show()
         
     }
 

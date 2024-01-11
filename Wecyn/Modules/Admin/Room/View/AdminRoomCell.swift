@@ -43,7 +43,7 @@ class AdminRoomCell: UITableViewCell {
         }
         
         moreButton.showsMenuAsPrimaryAction = true
-        var menus = [action1,action2,action3]
+        let menus = [action1,action2,action3]
         moreButton.menu = UIMenu(children: menus)
     }
 
