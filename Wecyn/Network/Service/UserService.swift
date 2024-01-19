@@ -155,7 +155,7 @@ class OriganizationModel:BaseModel {
 class UserRoomOptionModel :BaseModel {
     var value: Int = 0
     var label: String = ""
-    
+    var isSelected = false
 }
 
 class UserRoomModel :BaseModel {

@@ -16,12 +16,13 @@ enum SettingType {
     case Contact
     case Notification
     case Account
+    case TimeZone
 }
 class SettingModel {
     var title:String
     var detail:String
     var type:SettingType
-    init(title: String, detail: String = "", type: SettingType) {
+    init(title: String, type: SettingType, detail: String = "") {
         self.title = title
         self.detail = detail
         self.type = type
@@ -56,11 +57,13 @@ class SettingController: BaseTableController {
         
         self.navigation.item.title = Localizer.shared.localized("Settings")
         
+        
         // general preference
         let notification = SettingModel(title: Localizer.shared.localized("Notification"), type: .Notification)
-        let language = SettingModel(title: Localizer.shared.localized("Language"),detail: getCurrentLanguage(), type: .Language)
+        let language = SettingModel(title: Localizer.shared.localized("Language"), type: .Language,detail: getCurrentLanguage())
         let colorRemark = SettingModel(title: Localizer.shared.localized("Color Remark"), type: .ColorRemark)
-        datas.append([notification,language,colorRemark])
+        let timezone = SettingModel(title: Localizer.shared.localized("TimeZone"), type: .TimeZone,detail: getTimezone())
+        datas.append([notification,language,colorRemark,timezone])
         
         let account = SettingModel(title: Localizer.shared.localized("Account Manage"), type: .Account)
         datas.append([account])
@@ -68,10 +71,22 @@ class SettingController: BaseTableController {
         let privacy = SettingModel(title: Localizer.shared.localized("Privacy Agreement"), type: .Privacy)
         let about = SettingModel(title: Localizer.shared.localized("About Wecyn"), type: .About)
         let contact = SettingModel(title: Localizer.shared.localized("Contact us"), type: .Contact)
+        
         datas.append([privacy,about,contact])
         
         let logout = SettingModel(title: Localizer.shared.localized("Logout"), type: .Logout)
         datas.append([logout])
+    }
+    func getTimezone() -> String {
+        let tz = TimeZone.current.secondsFromGMT() / 3600
+        
+        let name = TimeZone.current.identifier
+        if tz > 0 {
+            return name + "\nGMT+\(tz)"
+        } else {
+            return name + "\nGMT-\(tz)"
+        }
+        
     }
     
     func getCurrentLanguage() -> String {
@@ -189,6 +204,7 @@ class SettingCell:UITableViewCell {
         detailLabel.textColor = R.color.textColor77()
         detailLabel.font = UIFont.sk.pingFangRegular(14)
         detailLabel.textAlignment = .right
+        detailLabel.numberOfLines = 2
     }
     
     required init?(coder: NSCoder) {

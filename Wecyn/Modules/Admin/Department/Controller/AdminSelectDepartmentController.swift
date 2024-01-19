@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum SelectFrom {
+    case Room
+    case Other
+}
+
 class AdminSelectDepartmentController: BaseViewController {
 
     var selectComplete:((AdminDepartmentModel)->())?
@@ -23,9 +28,11 @@ class AdminSelectDepartmentController: BaseViewController {
         return result
     }()
 
-    required init(selectedNode:AdminDepartmentModel? = nil) {
+    var selectFrom:SelectFrom = .Other
+    required init(selectedNode:AdminDepartmentModel? = nil,selectFrom:SelectFrom = .Other) {
         super.init(nibName: nil, bundle: nil)
         self.selectedNode = selectedNode
+        self.selectFrom = selectFrom
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +98,9 @@ class AdminSelectDepartmentController: BaseViewController {
         if root.element.id == self.selectedNode?.id {
             root.element.isSelected = true
         }
+        if self.selectFrom == .Room {
+            root.element.isEnable = root.element.has_addr == 1
+        }
         root.add(nodes:generateSubModel(root))
         return root
     }
@@ -104,6 +114,9 @@ class AdminSelectDepartmentController: BaseViewController {
             let node = MMNode(element: e)
             if e.id == self.selectedNode?.id {
                 e.isSelected = true
+            }
+            if self.selectFrom == .Room {
+                e.isEnable = e.has_addr == 1
             }
             node.add(nodes:generateSubModel(node))
             subNode.append(node)
@@ -127,12 +140,15 @@ extension AdminSelectDepartmentController: MMTreeTableViewDelegate {
     }
 
     func tableView(_ treeTableView: MMTreeTableView<AdminDepartmentModel>, didSelectRowAt indexPath: IndexPath) {
+        let node = treeTableView.nodes[indexPath.item].element
+        
+        if !node.isEnable { return }
         
         treeTableView.nodes.forEach({
             $0.element.isSelected = false
         })
         
-        let node = treeTableView.nodes[indexPath.item].element
+        
         node.isSelected.toggle()
         
         treeTableView.reloadData()
@@ -186,13 +202,16 @@ class AdminDepartmentSelectCell:UIView {
                 selectButton.imageForNormal = R.image.circle()
                 backgroundColor = .white
             }
+            self.isUserInteractionEnabled = node.isEnable
+            self.nameLabel.textColor = node.isEnable ? R.color.textColor33()! : .lightGray
+            self.selectButton.isHidden = !node.isEnable
             setNeedsLayout()
             layoutIfNeeded()
         }
     }
     let nameLabel = UILabel().color(R.color.textColor33()!).font(UIFont.systemFont(ofSize: 15, weight: .semibold))
     let selectButton = UIButton()
-    var selectHandler:((AdminDepartmentModel)->())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

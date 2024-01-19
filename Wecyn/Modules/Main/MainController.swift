@@ -60,7 +60,13 @@ class MainController: UITabBarController {
             image: R.image.tab_admin(),
             selectedImage: selectedImage(R.image.tab_admin()))
         
-        self.viewControllers = [home,calendar,connection,profile,admin]
+        let is_admin = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_admin ?? 0
+        if is_admin == 1 {
+            self.viewControllers = [home,calendar,connection,profile,admin]
+        } else {
+            self.viewControllers = [home,calendar,connection,profile]
+        }
+        
         configAppearance()
     }
     
@@ -100,7 +106,6 @@ class MainController: UITabBarController {
         self.tabBar.layer.shadowOffset = CGSize(width: 0, height: -3)
         self.tabBar.layer.shadowOpacity = 1
         self.tabBar.layer.shadowRadius = 16
-        
         
     }
     

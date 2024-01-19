@@ -53,6 +53,7 @@ target 'Wecyn' do
   pod 'OpenIMSDK'
   pod 'SPIndicator'
   pod 'FYVideoCompressor'
+  pod 'TBDropdownMenu'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

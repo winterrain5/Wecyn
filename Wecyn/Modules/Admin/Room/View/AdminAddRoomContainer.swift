@@ -62,7 +62,7 @@ class AdminAddRoomContainer: UIView,UITextFieldDelegate {
         
         selectParentNodeButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            let vc = AdminSelectDepartmentController(selectedNode: self.selectNode)
+            let vc = AdminSelectDepartmentController(selectedNode: self.selectNode,selectFrom: .Room)
             let nav = BaseNavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             UIViewController.sk.getTopVC()?.present(nav, animated: true)

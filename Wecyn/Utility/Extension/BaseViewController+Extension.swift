@@ -24,7 +24,7 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
         notification.imageForNormal = R.image.bell()
         let notificationItem = UIBarButtonItem(customView: notification)
         notification.rx.tap.subscribe(onNext:{
-            
+           
         }).disposed(by: rx.disposeBag)
         
         let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)

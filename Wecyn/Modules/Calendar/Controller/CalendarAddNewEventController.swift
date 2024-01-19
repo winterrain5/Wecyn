@@ -119,7 +119,7 @@ class CalendarAddNewEventController: BaseTableController {
     var isEdit = false
     
     var alarmSelectIndex:Int = 1
-    var selectRoom:MeetingRoom?
+    var selectRoom:UserRoomOptionModel?
     var addedEmails:[String] = []
     
     init(editEventModel: EventInfoModel? = nil) {
@@ -749,8 +749,8 @@ class CalendarAddNewEventController: BaseTableController {
             let vc = RoomPickerController(selectRoom: self.selectRoom, action: { room in
                 guard let room = room else { return }
                 self.selectRoom = room
-                self.MeetingRoom.room = room.name
-                self.requestModel.room_id = room.id
+                self.MeetingRoom.room = room.label
+                self.requestModel.room_id = room.value
                 self.reloadData()
             })
             

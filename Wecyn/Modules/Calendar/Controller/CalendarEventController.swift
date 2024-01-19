@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import TBDropdownMenu
 import RxSwift
 import RxLocalizer
 import FSCalendar
@@ -22,7 +22,7 @@ enum DateFormat:String {
 
 var CalendarBelongUserId:Int = 0
 var CalendarBelongUserName:String = ""
-class CalendarEventController: BaseTableController {
+class CalendarEventController: BaseTableController,DropdownMenuDelegate {
     
     let headerView = CalendarEventHeadView()
     let requestModel = EventListRequestModel()
@@ -37,8 +37,16 @@ class CalendarEventController: BaseTableController {
     var isDataLoaded = false
     var latesMonth:Int = 0
     var isWidgetLinkId: Int? = nil
-    var showFilterView = false
-    let filterView = CalendarFilterView()
+    
+    let filterButton = UIButton()
+    
+    var roomItems:[UserRoomModel] = []
+    var roomSelectIndexPath:IndexPath?
+    var roomMenu:DropdownMenu?
+    
+    var assistantItems:[AssistantInfo] = []
+    var assistantSelectIndex = 0
+    var assistantMenu:DropdownMenu?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
@@ -82,12 +90,13 @@ class CalendarEventController: BaseTableController {
         let searchItem = UIBarButtonItem(customView: searchButton)
         
         
-        let filterButton = UIButton()
+        filterButton.showsMenuAsPrimaryAction = true
         filterButton.imageForNormal = R.image.calendar_filter()
         filterButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
             Haptico.selection()
-            self.getAssistants()
+            self.getRooms()
+            
         }).disposed(by: rx.disposeBag)
         let filterItem = UIBarButtonItem(customView: filterButton)
         
@@ -95,37 +104,6 @@ class CalendarEventController: BaseTableController {
         
         self.navigation.item.rightBarButtonItems = [searchItem,fixItem,filterItem]
         
-        self.filterView.filterHandler = { [weak self] tupple in
-            guard let `self` = self else { return }
-            
-            CalendarBelongUserId = tupple.assistant.id
-            CalendarBelongUserName = tupple.assistant.name
-            
-            self.requestModel.current_user_id = tupple.assistant.id
-            self.requestModel.room_id = tupple.room?.id
-            
-            self.userTitleView.update(tupple.assistant.name, tupple.assistant.avatar)
-            
-            self.isBeginLoad = true
-            self.refreshData()
-            self.showFilterView = false
-            
-            let userId = self.UserModel?.id.int ?? 0
-            if userId == tupple.assistant.id {
-                UserDefaults.sk.set(value: [], for: "AssistantColorRemark")
-            } else {
-            
-                if tupple.assistant.color_remark.isEmpty {
-                    UserDefaults.sk.set(value: Array(repeating: "", count: 12), for: "AssistantColorRemark")
-                } else {
-                    UserDefaults.sk.set(value: tupple.assistant.color_remark, for: "AssistantColorRemark")
-                }
-                
-            }
-            
-            
-            
-        }
         
         
         monthLabel.textColor = R.color.textColor33()!
@@ -136,8 +114,17 @@ class CalendarEventController: BaseTableController {
         self.navigation.item.leftBarButtonItem = UIBarButtonItem(customView: monthLabel)
         
         userTitleView.size = CGSize(width: kScreenWidth * 0.7, height: 40)
- 
         self.navigation.item.titleView = userTitleView
+        userTitleView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self else { return }
+            let items = self.assistantItems.map({
+                DropdownItem(title: $0.name)
+            })
+            self.assistantMenu = DropdownMenu(navigationController: self.navigationController!, items: items,selectedRow: self.assistantSelectIndex)
+            self.assistantMenu?.delegate = self
+            self.assistantMenu?.showMenu()
+            
+        }).disposed(by: rx.disposeBag)
         
         
         
@@ -151,10 +138,12 @@ class CalendarEventController: BaseTableController {
         latesMonth = 0
         refreshData()
         
+        getAssistants()
+        
     }
     
     override func refreshData() {
-        
+
         getUserInfo()
         
         if latesMonth == calendarChangeDate.month, isBeginLoad == false, self.isWidgetLinkId == nil {
@@ -174,7 +163,9 @@ class CalendarEventController: BaseTableController {
         requestModel.start_date = sd.toString(format: DateFormat.ddMMyyyy.rawValue)
         requestModel.end_date = ed.toString(format: DateFormat.ddMMyyyy.rawValue)
         
+        ToastUtil.default.show(delay: 3)
         eventList.subscribe(onNext:{ events in
+            ToastUtil.default.dismiss()
             Asyncs.async {
                 var datas = events
                 //重复事件处理
@@ -268,6 +259,7 @@ class CalendarEventController: BaseTableController {
 
             
         },onError: { e in
+            ToastUtil.default.dismiss()
             self.endRefresh(e.asAPIError.emptyDatatype,emptyString: e.asAPIError.errorInfo().message)
             self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
@@ -288,22 +280,48 @@ class CalendarEventController: BaseTableController {
     
     
     func getAssistants() {
-        self.showFilterView.toggle()
-        if self.showFilterView {
+        ScheduleService.recieveAssistantList().subscribe(onNext:{ models in
+            let userModel = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
+          
+            let selfModel = AssistantInfo()
+            selfModel.id = userModel?.id.int ?? 0
+            selfModel.name = userModel?.full_name ?? ""
+            selfModel.avatar = userModel?.avatar ?? ""
+      
+            self.assistantItems = models
             
-            ScheduleService.recieveAssistantList().subscribe(onNext:{ models in
-                
-                self.filterView.display()
-                self.filterView.configAssistantData(models)
-                
-            },onError: { e in
-                self.showFilterView.toggle()
-            }).disposed(by: rx.disposeBag)
+            self.assistantItems.insert(selfModel, at: 0)
             
-        } else {
-            self.filterView.dismiss()
-        }
+        },onError: { e in
+            
+        }).disposed(by: rx.disposeBag)
         
+    }
+    
+    func getRooms() {
+        Toast.showLoading()
+        UserService.userRoomList(currentUserId: CalendarBelongUserId).subscribe(onNext:{ rooms in
+            Toast.dismiss()
+            self.roomItems = rooms
+            let sections = self.roomItems.map({
+                DropdownSection(sectionIdentifier: $0.label, items: $0.options.map({
+                    DropdownItem(title: $0.label)
+                }))
+            })
+            if let index = self.roomSelectIndexPath {
+                self.roomMenu = DropdownMenu(navigationController: self.navigationController!, sections: sections,selectedIndexPath: index)
+                self.roomMenu?.displaySelected  = true
+            } else {
+                self.roomMenu = DropdownMenu(navigationController: self.navigationController!, sections: sections)
+                self.roomMenu?.displaySelected  = false
+            }
+            
+            self.roomMenu?.delegate = self
+            self.roomMenu?.showMenu()
+        },onError: { e in
+            Toast.dismiss()
+            Toast.showError(e.asAPIError.errorInfo().message)
+        }).disposed(by: rx.disposeBag)
     }
     
     func scrollToSection(_ animated:Bool = true){
@@ -450,6 +468,48 @@ class CalendarEventController: BaseTableController {
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return -headerHeight * 0.5
     }
+    
+    func dropdownMenu(_ dropdownMenu: DropdownMenu, didSelectRowAt indexPath: IndexPath) {
+        
+        if dropdownMenu == self.roomMenu {
+            self.roomSelectIndexPath = indexPath
+            
+            let item = roomItems[indexPath.section].options[indexPath.row]
+            self.requestModel.room_id = item.value
+        }
+        
+        if dropdownMenu == self.assistantMenu {
+            self.assistantSelectIndex = indexPath.row
+            
+            let item = assistantItems[indexPath.row]
+            CalendarBelongUserId = item.id
+            CalendarBelongUserName = item.name
+            
+            self.userTitleView.update(item.name, item.avatar)
+            
+            self.requestModel.current_user_id = item.id
+            let userId = self.UserModel?.id.int ?? 0
+            if userId == item.id {
+                UserDefaults.sk.set(value: [], for: "AssistantColorRemark")
+            } else {
+                
+                if item.color_remark.isEmpty {
+                    UserDefaults.sk.set(value: Array(repeating: "", count: 12), for: "AssistantColorRemark")
+                } else {
+                    UserDefaults.sk.set(value: item.color_remark, for: "AssistantColorRemark")
+                }
+                
+            }
+        }
+       
+        
+        
+        self.isBeginLoad = true
+        self.refreshData()
+   
+        
+
+    }
 }
 
 
@@ -476,10 +536,12 @@ class CalendarNavBarUserView: UIView {
             avatarImgView.kf.setImage(with: selectAssistant.avatar.url,placeholder: R.image.proile_user())
             nameLabel.text = selectAssistant.full_name
             nameLabel.width = selectAssistant.full_name.widthWithConstrainedWidth(height: 18, font: UIFont.sk.pingFangRegular(14)) + 10
+            self.update(selectAssistant.full_name, selectAssistant.avatar)
         }else{
             avatarImgView.kf.setImage(with: userModel?.avatar_url,placeholder: R.image.proile_user())
             nameLabel.width = userModel?.full_name.widthWithConstrainedWidth(height: 18, font: UIFont.sk.pingFangRegular(14)) ?? 0 + 10
             nameLabel.text = userModel?.full_name
+            self.update(userModel?.full_name ?? "", userModel?.avatar ?? "")
         }
        
     }

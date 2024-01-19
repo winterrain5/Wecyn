@@ -154,9 +154,9 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: locaIdentifier)
         dateFormatter.dateFormat = format
-        if isZero {
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        }
+//        if isZero {
+//            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//        }
         return dateFormatter.date(from: self)
     }
     
@@ -215,10 +215,11 @@ extension Date {
     func toString(format: String = DateFormat.ddMMyyyyHHmm.rawValue, locaIdentifier:String = LocaIdentifier, isZero:Bool = true) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale(identifier: locaIdentifier)
-        if isZero {
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        }
+//        if isZero {
+//            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//        }
         
         return dateFormatter.string(from: self)
     }

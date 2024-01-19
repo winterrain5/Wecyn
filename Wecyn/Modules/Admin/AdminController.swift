@@ -15,7 +15,7 @@ enum AdminPermission:String, CaseIterable {
     case Department
     case MeetingRoom
     case Staff
-    case NameCard
+    case BusinessCard
     
     static func allPermission(code:[Int]) -> String {
         let allCases = allCases.map({ $0.rawValue })
@@ -33,7 +33,7 @@ enum AdminPermission:String, CaseIterable {
 
 class AdminController: BaseViewController {
 
-    var controllers:[BasePagingTableController]  = [AdminRoleController(),AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
+    var controllers:[BasePagingTableController]  = []
     lazy var paggingView:JXPagingView = {
         let view = JXPagingView(delegate: self)
         return view
@@ -42,7 +42,6 @@ class AdminController: BaseViewController {
     
     var titleDataSource: JXSegmentedTitleDataSource = {
         let dataSource = JXSegmentedTitleDataSource()
-        dataSource.titles = ["Role","Department","Staff","Room"]
         dataSource.isTitleColorGradientEnabled = true
         dataSource.isTitleZoomEnabled = false
         dataSource.isTitleStrokeWidthEnabled = false
@@ -82,6 +81,15 @@ class AdminController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UpdateAdminData, object: nil, queue: OperationQueue.main) { _ in
             self.loadData()
+        }
+        
+        let is_super = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_super ?? 0
+        if is_super == 1{
+            controllers = [AdminRoleController(),AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
+            titleDataSource.titles = ["Role","Department","Staff","Room"]
+        } else {
+            controllers = [AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
+            titleDataSource.titles = ["Department","Staff","Room"]
         }
         
     }
@@ -131,7 +139,7 @@ class AdminController: BaseViewController {
     }
     
     func loadData() {
-        
+        Toast.showLoading()
         let vc  = controllers[segmentedView.selectedIndex]
         vc.loadNewData()
         vc.updateDataComplete  = {[weak self] in
@@ -141,7 +149,6 @@ class AdminController: BaseViewController {
     }
     
     func getOrgList() {
-        Toast.showLoading()
         AdminService.adminOrgList().subscribe(onNext:{
             self.orgList = $0
             if self.orgList.count > 0 {
