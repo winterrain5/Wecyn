@@ -156,6 +156,7 @@ PODS:
   - SwiftExtensionsLibrary (0.2.4)
   - SwiftyJSON (5.0.1)
   - TagListView (1.4.1)
+  - TBDropdownMenu (4.1.0)
   - Then (3.0.0)
   - WordPress-Aztec-iOS (1.19.8)
   - WordPress-Editor-iOS (1.19.8):
@@ -212,6 +213,7 @@ DEPENDENCIES:
   - SwiftExtensionsLibrary (from `https://github.com/winterrain5/SwiftExtensionsLibrary.git`)
   - SwiftyJSON
   - TagListView
+  - TBDropdownMenu
   - Then
   - WordPress-Aztec-iOS
   - WordPress-Editor-iOS
@@ -269,6 +271,7 @@ SPEC REPOS:
     - SwifterSwift
     - SwiftyJSON
     - TagListView
+    - TBDropdownMenu
     - Then
     - WordPress-Aztec-iOS
     - WordPress-Editor-iOS
@@ -335,10 +338,11 @@ SPEC CHECKSUMS:
   SwiftExtensionsLibrary: 80a9b716aa8348394cad31b0bff49e0adecd8d86
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TagListView: a1c236d17960a0cf64156725a76ce6d73ebce2be
+  TBDropdownMenu: 9201924bf459a3ae426b992f3db032d377020636
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: 6f30b1e05d3b1edf113f422925cadaaaefe2ec1b
+PODFILE CHECKSUM: 1be58cfe18a442f1354a7aafc7cf0098d883ff96
 
 COCOAPODS: 1.11.2

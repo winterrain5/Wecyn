@@ -36,6 +36,9 @@ import UIKit
     var color_remark:[String] = []
     var edu_exp:[UserExperienceInfoModel] = []
     var work_exp:[UserExperienceInfoModel] = []
+    
+    var is_admin = 0
+    var is_super = 0
 
     var full_name:String {
         get {

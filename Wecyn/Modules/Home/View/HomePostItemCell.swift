@@ -46,6 +46,7 @@ class HomePostItemCell: UITableViewCell {
         contentView.addSubview(postQuoteView)
         contentView.addSubview(contentLabel)
         
+        
         contentLabel.font = UIFont.sk.pingFangRegular(15)
         contentLabel.textColor = R.color.textColor33()!
         contentLabel.numberOfLines = 0
@@ -124,6 +125,7 @@ extension HomePostItemCell: UICollectionViewDataSource,UICollectionViewDelegate,
                 imgCell.imgView.fadeIn()
                 imgCell.setPlayButtonStatus(false)
             }
+            
         }
     }
     func getVideoThumbnaiImage(_ video:String,complete:@escaping (UIImage?)->()) {

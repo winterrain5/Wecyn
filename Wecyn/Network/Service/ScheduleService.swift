@@ -182,11 +182,11 @@ class iCSFileParsedModel: BaseModel {
     var emails:[String] = []
     var room_id:Int = 0
     var room_name:String = ""
-    var roomModel:MeetingRoom {
-        let m = MeetingRoom()
-        m.id = room_id
-        m.name = room_name
-        m.isSelect = true
+    var roomModel:UserRoomOptionModel {
+        let m = UserRoomOptionModel()
+        m.value = room_id
+        m.label = room_name
+        m.isSelected = true
         return m
     }
     

@@ -76,7 +76,7 @@ class AddNewBusinessCardController: BaseTableController {
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
        
         Asyncs.async {
-            self.base64 = self.image.compressionImageToBase64(1000)
+            self.base64 = self.image.compressionImageToBase64(2000)
         } mainTask: {
             self.uploadBusinessCard()
         }

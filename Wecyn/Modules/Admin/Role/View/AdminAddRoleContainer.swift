@@ -19,6 +19,7 @@ class AdminAddRoleContainer: UIView,UITextFieldDelegate {
     
     @IBOutlet weak var nameCardSeg: UISegmentedControl!
     
+    var segments:[UISegmentedControl] = []
     
     @IBOutlet weak var remark: KMPlaceholderTextView!
     
@@ -31,18 +32,15 @@ class AdminAddRoleContainer: UIView,UITextFieldDelegate {
             
             nameTf.text = editModel.name
             
-            if editModel.permission.count >= 1 {
-                departmentSeg.selectedSegmentIndex  = editModel.permission[0]
+            editModel.permission.enumerated().forEach { [weak self] i,e in
+                guard let `self` = self else { return }
+                self.segments[i].selectedSegmentIndex = e
+                self.permissons[i] = e
             }
-            if editModel.permission.count >= 2 {
-                meetingRoomSeg.selectedSegmentIndex  = editModel.permission[1]
-            }
-            if editModel.permission.count >= 3 {
-                staffSeg.selectedSegmentIndex  = editModel.permission[2]
-            }
-            if editModel.permission.count >= 4 {
-                nameCardSeg.selectedSegmentIndex  = editModel.permission[3]
-            }
+            
+           
+            print(self.permissons)
+            
             remark.text = editModel.remark
             self.submitButton.isEnabled = true
         }
@@ -56,10 +54,30 @@ class AdminAddRoleContainer: UIView,UITextFieldDelegate {
         nameTf.rx.text.orEmpty.map({ !$0.isEmpty }).bind(to: submitButton.rx.isEnabled).disposed(by: rx.disposeBag)
         nameTf.delegate = self
         
-        updatePermisson(departmentSeg, index: 0)
-        updatePermisson(meetingRoomSeg, index: 1)
-        updatePermisson(staffSeg, index: 2)
-        updatePermisson(nameCardSeg, index: 3)
+        departmentSeg.rx.controlEvent(.valueChanged).subscribe(onNext:{  [weak self] in
+            guard let `self` = self else { return }
+            print(self.departmentSeg.selectedSegmentIndex)
+            self.permissons[0] =  self.departmentSeg.selectedSegmentIndex
+            
+            print(self.permissons)
+        }).disposed(by: rx.disposeBag)
+        
+        meetingRoomSeg.rx.controlEvent(.valueChanged).subscribe(onNext:{  [weak self] in
+            guard let `self` = self else { return }
+            self.permissons[1] =  self.meetingRoomSeg.selectedSegmentIndex
+        }).disposed(by: rx.disposeBag)
+        
+        staffSeg.rx.controlEvent(.valueChanged).subscribe(onNext:{  [weak self] in
+            guard let `self` = self else { return }
+            self.permissons[2] =  self.staffSeg.selectedSegmentIndex
+        }).disposed(by: rx.disposeBag)
+        
+        nameCardSeg.rx.controlEvent(.valueChanged).subscribe(onNext:{  [weak self] in
+            guard let `self` = self else { return }
+            self.permissons[3] =  self.nameCardSeg.selectedSegmentIndex
+        }).disposed(by: rx.disposeBag)
+        
+        segments = [departmentSeg,meetingRoomSeg,staffSeg,nameCardSeg]
         
         submitButton.rx.tap.subscribe(onNext:{ [weak self] in
             
@@ -102,12 +120,7 @@ class AdminAddRoleContainer: UIView,UITextFieldDelegate {
         }).disposed(by: rx.disposeBag)
     }
     
-    func updatePermisson(_ seg:UISegmentedControl,index:Int) {
-        
-        seg.rx.controlEvent(.valueChanged).subscribe(onNext:{  [weak self] in
-            self?.permissons[index] =  seg.selectedSegmentIndex
-        }).disposed(by: rx.disposeBag)
-    }
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         endEditing(true)

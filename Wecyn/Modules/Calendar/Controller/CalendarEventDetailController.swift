@@ -27,7 +27,7 @@ class CalendarEventDetailModel {
     var cellType:CalendarEventDetailCellType
     var model:EventInfoModel
     var cellHeight:CGFloat {
-        let titleH = model.title.heightWithConstrainedWidth(width: kScreenWidth - 68, font: UIFont.sk.pingFangRegular(16))
+        let titleH = model.title.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(16))
         let descH = model.recurrenceDescription.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15))
         let space = 32
         return (titleH < 18 ? 18 : titleH) + (descH < 42 ? 42 : descH) + space.cgFloat
@@ -98,7 +98,7 @@ class CalendarEventDetailController: BaseTableController {
             } else  {
                 colorRemark = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.color_remark ?? []
             }
-            if colorRemark.count != 0  {
+            if colorRemark.count > 0 && colorRemark.count > self.eventModel.color  {
                 model.color_remark = colorRemark[self.eventModel.color]
             }
             
@@ -464,8 +464,6 @@ class CalendarEventDetailTitleCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.bottom.greaterThanOrEqualToSuperview().inset(16)
         }
-        
-        
     }
 }
 

@@ -221,6 +221,7 @@ class AdminDepartmentModel :BaseModel {
     var name: String = ""
     var pid: Int = 0
     var isSelected = false
+    var isEnable = true
 }
 
 

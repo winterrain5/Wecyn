@@ -50,14 +50,14 @@ extension TargetType {
                 "app_version":Device.appVersion,
                 "device_system_version":Device.sysVersion,
                 "Authorization": "Bearer " + token,
-                "tz": TimeZone.current.identifier
+                "tz": (TimeZone.current.secondsFromGMT() / 3600).string
             ]
         } else {
             return  [
                 "device_type":"ios",
                 "app_version":Device.appVersion,
                 "device_system_version":Device.sysVersion,
-                "tz": TimeZone.current.identifier
+                "tz": (TimeZone.current.secondsFromGMT() / 3600).string
                     ]
         }
         

@@ -8,6 +8,7 @@
 
 import Foundation
 import SVProgressHUD
+import RxSwift
 class Toast {
 
     static func showLoading() {
@@ -68,5 +69,42 @@ class Toast {
             completion()
         }
         SVProgressHUD.setDefaultMaskType(.none)
+    }
+}
+
+class ToastUtil {
+    static let `default` = ToastUtil()
+    private var timer:RxSwift.Disposable?
+    private var dataStatus:Bool = false
+    /// 延迟显示
+    /// - Parameter seconds: 秒
+    func show(delay seconds:Int) {
+        timer = Observable<Int>.interval(DispatchTimeInterval.milliseconds(1), scheduler: MainScheduler.instance).subscribe(onNext:{ [weak self] s in
+            
+            guard let `self` = self else { return }
+            // delay 时间后 如果数据仍为到达 toast 展示 等到数据状态更新定时器销毁
+            if s == (seconds / 1000) && self.dataStatus == false{
+                self.timer?.dispose()
+                Toast.showLoading()
+            }
+            // delay 时间后 数据已到达 定时器销毁
+            if s == (seconds / 1000) && self.dataStatus{
+                self.timer?.dispose()
+                Toast.dismiss()
+            }
+        })
+    }
+    
+    func dismiss() {
+        setDataStatus(status: true)
+    }
+    
+    private func setDataStatus(status:Bool) {
+        dataStatus = status
+        if dataStatus {
+            self.timer?.dispose()
+            dataStatus = false
+            Toast.dismiss()
+        }
     }
 }
