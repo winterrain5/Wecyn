@@ -11,11 +11,22 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
     var leftImgView = UIImageView()
     var rightTf = UITextField()
     var searching:((String)->())?
+    var searchTextChanged:((String)->())?
     var beginSearch:(()->())?
     var isSearchable = false
     var placeholder:String = ""
     var isBecomeFirstResponder = false
     var loadingView = UIActivityIndicatorView(style: .medium)
+    var searchText: String? {
+        didSet {
+            guard let text = searchText else { return }
+            rightTf.text = text
+            let work = DispatchWorkItem { [weak self] in
+                self?.rightTf.becomeFirstResponder()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: work)
+        }
+    }
     init(placeholder:String,isSearchable:Bool = false,isBecomeFirstResponder:Bool = false) {
        
         super.init(frame: .zero)
@@ -44,21 +55,18 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
                 self?.rightTf.becomeFirstResponder()
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: work)
-            
         }
         
         addSubview(loadingView)
         loadingView.hidesWhenStopped = true
         loadingView.isHidden = true
         
-    }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        rightTf.rx.text.orEmpty.changed.subscribe(onNext:{ [weak self] in
+            self?.searchTextChanged?($0)
+        }).disposed(by: rx.disposeBag)
         
-       
-     
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,13 +74,26 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         super.layoutSubviews()
         cornerRadius = frame.size.height * 0.5
 
-        leftImgView.frame = CGRect(x: 20, y: 0, width: 15, height: 15)
-        leftImgView.center.y = frame.center.y
-        rightTf.frame = CGRect(x: 43, y: 0, width: frame.width - 51, height: frame.height)
-        rightTf.center.y = frame.center.y
+        leftImgView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.width.height.equalTo(15)
+            make.centerY.equalToSuperview()
+        }
+      
         
-        loadingView.frame = CGRect(x: self.width - 24, y: 0, width: 8, height: 8)
-        loadingView.center.y = frame.center.y
+        loadingView.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.width.height.equalTo(8)
+            make.centerY.equalToSuperview()
+        }
+        
+        
+        rightTf.snp.makeConstraints { make in
+            make.left.equalTo(leftImgView.snp.right).offset(16)
+            make.right.equalTo(loadingView.snp.left).inset(16)
+            make.height.equalToSuperview()
+        }
+       
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -88,6 +109,8 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         beginSearch?()
     }
+    
+    
     
     func endSearching() {
         self.loadingView.stopAnimating()

@@ -736,12 +736,19 @@ class CalendarAddNewEventController: BaseTableController {
         }
         
         if model.type == .Location {
-            let vc = LocationSearchController()
-            self.navigationController?.pushViewController(vc)
+            var locModel:LocationModel?
+            if let loc = self.requestModel.location {
+                locModel = LocationModel(title: loc, detail: "")
+            }
+            let vc = LocationSearchController(editLocation: locModel)
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+            
             
             vc.selectLocationComplete = { [weak self] location in
-                self?.requestModel.location = location
-                self?.Location.location = location
+                self?.requestModel.location = location.title
+                self?.Location.location = location.title
                 self?.tableView?.reloadData()
             }
         }

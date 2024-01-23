@@ -302,6 +302,10 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         Toast.showLoading()
         UserService.userRoomList(currentUserId: CalendarBelongUserId).subscribe(onNext:{ rooms in
             Toast.dismiss()
+            if rooms.count == 0 {
+                Toast.showMessage("No Room")
+                return
+            }
             self.roomItems = rooms
             let sections = self.roomItems.map({
                 DropdownSection(sectionIdentifier: $0.label, items: $0.options.map({

@@ -10,7 +10,7 @@ import AddressBook
 import AddressBookUI
 import Contacts
 import ParallaxHeader
-
+import KMPlaceholderTextView
 enum BusinessCardField {
     case Lang
     
@@ -37,6 +37,10 @@ class BusinessCardModel {
     var label:String
     var value:String
     var type:BusinessCardField
+    var cellHeight:CGFloat {
+        let h = value.heightWithConstrainedWidth(width: kScreenWidth - 146, font: UIFont.systemFont(ofSize: 15, weight: .regular)) + 16
+        return h < 44 ? 44 : h
+    }
     init(label: String,type:BusinessCardField, value: String = "") {
         self.label = label
         self.type = type
@@ -213,8 +217,10 @@ class AddNewBusinessCardController: BaseTableController {
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == datas.count - 1 {
             return 200
+        } else {
+            return datas[indexPath.section][indexPath.row].cellHeight
         }
-        return 44
+        
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         datas.count
@@ -259,7 +265,7 @@ class AddNewBusinessCardController: BaseTableController {
 
 class AddNewBusinessCardCell:UITableViewCell {
     let label = UILabel().color(R.color.textColor77()!).font(UIFont.systemFont(ofSize: 15, weight: .regular))
-    let textField = UITextField().font(UIFont.systemFont(ofSize: 15, weight: .regular)).color(R.color.textColor22()!)
+    let textField = KMPlaceholderTextView()
     var model:BusinessCardModel! {
         didSet {
             label.text = model.label
@@ -271,12 +277,17 @@ class AddNewBusinessCardCell:UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
         contentView.addSubview(textField)
-        textField.clearButtonMode = .whileEditing
-        textField.rx.controlEvent(.editingChanged).subscribe(onNext:{ [weak self] in
+        
+        textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        textField.textColor = R.color.textColor22()!
+        textField.rx.didEndEditing.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
+            
             self.model.value = self.textField.text ?? ""
             self.editEndHandler?(self.model)
+            
         }).disposed(by: rx.disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {
