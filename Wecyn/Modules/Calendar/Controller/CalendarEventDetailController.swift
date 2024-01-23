@@ -32,7 +32,7 @@ class CalendarEventDetailModel {
         let space = 32
         return (titleH < 18 ? 18 : titleH) + (descH < 42 ? 42 : descH) + space.cgFloat
     }
-    var descHeight: CGFloat{
+    var itemHeight: CGFloat{
         var  descH:CGFloat = 0
         if cellType == .Description {
             descH = model.desc.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
@@ -40,9 +40,14 @@ class CalendarEventDetailModel {
         if cellType == .Remark {
             descH = model.remarks.heightWithConstrainedWidth(width: kScreenWidth - 100, font: UIFont.sk.pingFangRegular(15)) + 32
         }
+        
+        if cellType == .Location {
+            descH = model.location.heightWithConstrainedWidth(width: kScreenWidth - 127, font: UIFont.sk.pingFangRegular(15)) + 32
+        }
        
         return descH >= 52 ? descH : 52
     }
+   
     init(cellType: CalendarEventDetailCellType, model:EventInfoModel) {
         self.cellType = cellType
         self.model = model
@@ -273,8 +278,8 @@ class CalendarEventDetailController: BaseTableController {
         if model.cellType == .Title {
             return model.cellHeight
         }
-        if model.cellType == .Description || model.cellType == .Remark {
-            return model.descHeight
+        if model.cellType == .Description || model.cellType == .Remark  ||  model.cellType == .Location{
+            return model.itemHeight
         }
         return 52
     }
@@ -524,7 +529,7 @@ class CalendarEventDetailInfoCell: UITableViewCell {
                 titleLabel.text = model.model.location
                 imgView.image = R.image.location()
                 accessoryType = .disclosureIndicator
-                titleLabel.numberOfLines = 1
+                titleLabel.numberOfLines = 0
             case .Creator:
                 attendeesClv.isHidden = true
                 titleLabel.text = model.model.creator_name
@@ -570,6 +575,7 @@ class CalendarEventDetailInfoCell: UITableViewCell {
         titleLabel.textColor = R.color.textColor33()
         titleLabel.font = UIFont.sk.pingFangRegular(16)
         titleLabel.isCopyingEnabled = true
+        
         
         imgView.contentMode = .center
         

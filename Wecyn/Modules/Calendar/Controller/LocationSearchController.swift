@@ -19,15 +19,25 @@ class LocationModel {
 }
 class LocationSearchController: BaseTableController {
 
-    var searchView = NavbarSearchView()
+    var searchView:NavbarSearchView!
     var datas:[LocationModel] = []
-    var selectLocationComplete:((String)->())?
+    var selectLocationComplete:((LocationModel)->())?
     var selectLocation: BehaviorRelay = BehaviorRelay<LocationModel?>(value: nil)
+    var editLocation:LocationModel?
+    required init(editLocation:LocationModel? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        self.editLocation = editLocation
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let doneButton = UIButton()
-        doneButton.textColor(.black)
+        doneButton.imageForNormal = R.image.checkmark()
         let doneItem = UIBarButtonItem(customView: doneButton)
         
         let fixItem = UIBarButtonItem.fixedSpace(width: 16)
@@ -35,62 +45,89 @@ class LocationSearchController: BaseTableController {
         self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
         doneButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            self.selectLocationComplete?(self.selectLocation.value?.title ?? "")
+            
+            if let loc = self.selectLocation.value {
+                self.selectLocationComplete?(loc)
+            }
+        
             self.returnBack()
         }).disposed(by: rx.disposeBag)
         
-        selectLocation.map({ $0 != nil }).subscribe(onNext:{ $0 ? (doneButton.titleForNormal = "Done") : (doneButton.titleForNormal = "Cancel") }).disposed(by: rx.disposeBag)
+        selectLocation.map({ $0 != nil }).subscribe(onNext:{ doneButton.isEnabled = $0 }).disposed(by: rx.disposeBag)
         
         searchView = NavbarSearchView(placeholder: "Search Location",
                                       isSearchable: true,
-                                      isBecomeFirstResponder: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
-        self.navigation.item.titleView = searchView
-        searchView.searching = { [weak self] keyword in
+                                      isBecomeFirstResponder: true)
+        searchView.frame = CGRect(x: 16, y: kNavBarHeight, width: kScreenWidth - 32, height: 36)
+        view.addSubview(searchView)
+        searchView.searchText = editLocation?.title
+        searchView.searchTextChanged = {  [weak self] in
+            guard let `self` = self else { return }
+            if $0.isEmpty {
+                self.datas.removeAll()
+                self.tableView?.reloadData()
+                return
+            }
+            let first = LocationModel(title: $0, detail: "")
+            if self.datas.count  > 0 {
+                self.datas[0] = first
+            } else {
+                self.datas.append(first)
+            }
+            self.tableView?.reloadData()
+        }
+        
+        searchView.beginSearch = { [weak self] in
+            self?.datas.removeAll()
+            self?.tableView?.reloadData()
+        }
+        
+        
+        func requstLocation(text:String) {
+            
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = text
+            request.resultTypes = .address
+            let mls = MKLocalSearch(request: request)
+          
+            mls.start { response, e in
+                if e != nil {
+                    Toast.showError(e?.localizedDescription ?? "")
+                    return
+                }
+                
+                if !mls.isSearching {
+                    self.datas.append(contentsOf: response?.mapItems.map({ mapItem in
+                        let detail = (mapItem.placemark.administrativeArea ?? "") + (mapItem.placemark.locality ?? "") + (mapItem.placemark.subLocality ?? "") + (mapItem.placemark.thoroughfare ?? "")
+                        let title =  (mapItem.placemark.locality ?? "") + (mapItem.placemark.name ?? "")
+                        let model = LocationModel(title: title, detail: detail)
+                        return model
+                    }) ?? [])
+                    self.tableView?.reloadData()
+                    self.searchView.endSearching()
+                }
+            }
+        }
+        
+        searchView.searching = {  [weak self] text in
             guard let `self` = self else { return }
             self.datas.removeAll()
 
-            let request = MKLocalSearch.Request()
-            request.naturalLanguageQuery = keyword
-            request.resultTypes = .address
-            let localSearch = MKLocalSearch(request: request)
-            localSearch.start { response, e in
-                if e == nil {
-                    if !localSearch.isSearching {
-                        self.datas = response?.mapItems.map({ mapItem in
-                            /*
-                             (lldb) po mapItem.placemark.thoroughfare
-                             ▿ Optional<String>
-                               - some : "银湖北路80号(天柱山路地铁站1号口步行340米)"
-
-                             (lldb) po mapItem.placemark.locality
-                             ▿ Optional<String>
-                               - some : "芜湖市"
-
-                             (lldb) po mapItem.placemark.subLocality
-                             ▿ Optional<String>
-                               - some : "镜湖区"
-
-                             (lldb) po mapItem.placemark.administrativeArea
-                             ▿ Optional<String>
-                               - some : "安徽省"
-                             */
-                            let detail = (mapItem.placemark.administrativeArea ?? "") + (mapItem.placemark.locality ?? "") + (mapItem.placemark.subLocality ?? "") + (mapItem.placemark.thoroughfare ?? "")
-                            let model = LocationModel(title: (mapItem.placemark.locality ?? "") + (mapItem.placemark.name ?? ""), detail: detail)
-                            return model
-                        }) ?? []
-                        self.tableView?.reloadData()
-                        self.searchView.endSearching()
-                    }
-                }
-            }
-
+            requstLocation(text:text)
+            
         }
+        
+    
+        self.navigation.item.title = "Location"
         self.addLeftBarButtonItem()
         self.leftButtonDidClick = { [weak self] in
             self?.returnBack()
             
         }
     }
+    
+    
+    
  
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
@@ -104,9 +141,23 @@ class LocationSearchController: BaseTableController {
         tableView?.separatorStyle = .singleLine
         
         tableView?.register(cellWithClass: LocationItemCell.self)
-        tableView?.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: kTabBarHeight, right: 0)
+        tableView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: kTabBarHeight, right: 0)
         
-        tableView?.rowHeight = 62
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.datas.count > 0 {
+            if self.datas[indexPath.row].detail.isEmpty {
+                return 44
+            } else {
+                return 62
+            }
+        }
+        return 0
+    }
+    
+    override func listViewFrame() -> CGRect {
+        CGRect(x: 0, y: kNavBarHeight + 36, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - 36)
     }
     
 
@@ -140,6 +191,8 @@ class LocationSearchController: BaseTableController {
     }
   
 }
+
+
 
 class LocationItemCell: UITableViewCell {
     let imgView = UIImageView()

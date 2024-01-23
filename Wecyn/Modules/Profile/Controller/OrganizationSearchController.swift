@@ -9,7 +9,7 @@ import UIKit
 
 class OrganizationSearchController: BaseTableController {
 
-    var searchView = NavbarSearchView()
+    var searchView:NavbarSearchView!
     var datas:[OriganizationModel] = []
     var keyword:String = ""
     var selectComplete:((OriganizationModel)->())?

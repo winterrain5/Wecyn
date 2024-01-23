@@ -9,7 +9,7 @@ import UIKit
 import IQKeyboardManagerSwift
 class EventSearchViewController: BaseTableController {
     let requestModel = EventListRequestModel()
-    var searchView = NavbarSearchView()
+    var searchView:NavbarSearchView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
