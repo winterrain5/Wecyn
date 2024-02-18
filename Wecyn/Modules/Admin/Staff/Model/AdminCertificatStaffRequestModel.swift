@@ -13,4 +13,7 @@ class AdminCertificatStaffRequestModel: BaseModel {
     var org_id: Int = 0
     var admin_remark: String?
     var dept_id: Int = 0
+    var role_id: Int = 0
+    var role_dept_id: Int = 0
+    
 }

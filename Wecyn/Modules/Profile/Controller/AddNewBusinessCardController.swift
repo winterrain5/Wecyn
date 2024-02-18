@@ -11,8 +11,14 @@ import AddressBookUI
 import Contacts
 import ParallaxHeader
 import KMPlaceholderTextView
+import AnyImageKit
+
 enum BusinessCardField {
     case Lang
+    case Model
+    case OCRTime
+    case AITime
+    case AllTime
     
     case Name
     
@@ -48,13 +54,39 @@ class BusinessCardModel {
     }
 }
 
-class AddNewBusinessCardController: BaseTableController {
+class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDelegate {
+    func imageEditorDidCancel(_ editor: AnyImageKit.ImageEditorController) {
+        
+    }
+    
+    func imageEditor(_ editor: AnyImageKit.ImageEditorController, didFinishEditing result: AnyImageKit.EditorResult) {
+        
+        result.mediaURL.loadImage(completion: { res in
+            switch res {
+            case .success(let image):
+                editor.dismiss(animated: true)
+                let scaledImage = image.scaled(toWidth: kScreenWidth)
+                self.headImageView.image = scaledImage
+                self.tableView?.tableHeaderView = self.headImageView
+                self.headImageView.size = CGSize(width: kScreenWidth, height: scaledImage?.size.height ?? 0)
+                
+                self.image = image
+                self.imageToBase64()
+            case .failure(let e):
+                Toast.showError(e.localizedDescription)
+            }
+        })
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
     var datas:[[BusinessCardModel]] = []
     var model:ScanCardModel?
     var image:UIImage!
     var lange = "1"
+    /// 1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
+    var ai_model = "2"
     var base64:String = ""
+    var headImageView = UIImageView()
     required init(image:UIImage) {
         super.init(nibName: nil, bundle: nil)
         self.image = image
@@ -65,7 +97,7 @@ class AddNewBusinessCardController: BaseTableController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigation.item.title = "Edit BusinessCard"
+        self.navigation.item.title = "Add BusinessCard"
         
         let saveButton = UIButton()
         saveButton.size = CGSize(width: 30, height: 30)
@@ -78,20 +110,28 @@ class AddNewBusinessCardController: BaseTableController {
             
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
-       
-        Asyncs.async {
-            self.base64 = self.image.compressionImageToBase64(2000)
-        } mainTask: {
-            self.uploadBusinessCard()
-        }
-
-        
       
+        imageToBase64()
+    }
+    
+    func imageToBase64() {
+        
+         Asyncs.async {
+             if self.image.kilobytesSize  < 2000 {
+                 self.base64 = self.image.pngBase64String() ?? ""
+             } else {
+                 self.base64 = self.image.compressionImageToBase64(2000)
+             }
+             
+         } mainTask: {
+             self.uploadBusinessCard()
+         }
+
     }
     
     func uploadBusinessCard() {
         Toast.showLoading(withStatus: "Recognizing...")
-        NetworkService.scanCard(photo: base64,lang: lange.int ?? 1).subscribe(onNext:{
+        NetworkService.scanCard(photo: base64,lang: lange.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
             Toast.dismiss()
             self.model = $0
             self.configData()
@@ -120,20 +160,34 @@ class AddNewBusinessCardController: BaseTableController {
         guard let model = self.model else { return }
         datas = [
             [BusinessCardModel(label: "Lang", type: .Lang,value: lange)],
+          
+           
             [BusinessCardModel(label: "Name",type: .Name,value: model.name)],
-            [BusinessCardModel(label: "Phone",type: .Phone,value: model.tel_cell),
-             BusinessCardModel(label: "Office Number",type: .TelWork,value: model.tel_work)],
-            [BusinessCardModel(label: "Organization",type: .Organization,value: model.org_name),
-             BusinessCardModel(label: "Department",type: .Department),
+            [BusinessCardModel(label: "MB.",type: .Phone,value: model.tel_cell),
+             BusinessCardModel(label: "Tel.",type: .TelWork,value: model.tel_work)],
+            [BusinessCardModel(label: "Org.",type: .Organization,value: model.org_name),
+             BusinessCardModel(label: "Dept.",type: .Department),
              BusinessCardModel(label: "Job Title",type: .JobTitle,value: model.title)],
             [BusinessCardModel(label: "Address",type: .Address,value: model.adr_work),
-             BusinessCardModel(label: "Postal Code", type: .PostCode,value: model.postal_code),
+             BusinessCardModel(label: "P.C.", type: .PostCode,value: model.postal_code),
              BusinessCardModel(label: "Email",type: .Email,value: model.email),
              BusinessCardModel(label: "Url", type: .Url,value: model.url)],
             [BusinessCardModel(label: "Note", type: .Note)],
             [BusinessCardModel(label: "Other", type: .Other,value: model.other.joined(separator: "\n"))]
         ]
         
+        if APIHost.share.buildType == .Dev {
+            
+            let ai_model_section = [BusinessCardModel(label: "Model", type: .Model,value: ai_model),
+             BusinessCardModel(label: "ocr", type: .OCRTime,value: model.run_time?.ocr.string ?? ""),
+             BusinessCardModel(label: "ai", type: .AITime,value: model.run_time?.ai.string ?? ""),
+             BusinessCardModel(label: "all", type: .AllTime,value: model.run_time?.all.string ?? "")]
+            
+            datas.insert(ai_model_section, at: 1)
+                
+            
+        }
+       
         self.tableView?.reloadData()
     }
     
@@ -194,20 +248,45 @@ class AddNewBusinessCardController: BaseTableController {
         }
     }
     
+    
     override func createListView() {
         super.createListView()
         
 
         let scaledImage = image.scaled(toWidth: kScreenWidth)
-        let headImageView = UIImageView(image: scaledImage)
+        headImageView.image = scaledImage
         headImageView.contentMode = .scaleAspectFill
         tableView?.tableHeaderView = headImageView
         headImageView.size = CGSize(width: kScreenWidth, height: scaledImage?.size.height ?? 0)
-    
+        headImageView.isUserInteractionEnabled = true
+        
+        let cropButton = UIButton()
+        cropButton.imageForNormal = R.image.crop()?.scaled(toWidth: 16)
+        cropButton.backgroundColor = .white
+        cropButton.cornerRadius = 16
+        headImageView.addSubview(cropButton)
+        cropButton.snp.makeConstraints { make in
+            make.right.bottom.equalToSuperview().inset(16)
+            make.width.height.equalTo(32)
+        }
+        
+        cropButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            var photoOption = EditorPhotoOptionsInfo()
+            photoOption.toolOptions = [.crop]
+            
+            let scaledImage = self.image.scaled(toWidth: kScreenWidth)!
+            let vc = ImageEditorController(photo: scaledImage, options: photoOption, delegate: self)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+                
+        }).disposed(by: rx.disposeBag)
         
         tableView?.separatorStyle = .singleLine
         tableView?.separatorColor = R.color.seperatorColor()
         tableView?.separatorInset = UIEdgeInsets(horizontal: 16, vertical: 0)
+        
+        tableView?.register(cellWithClass: AddNewBusinessCardOptionCell.self)
         tableView?.register(cellWithClass: AddNewBusinessCardCell.self)
         tableView?.register(cellWithClass: AddNewBusinessCardOtherCell.self)
         
@@ -230,13 +309,19 @@ class AddNewBusinessCardController: BaseTableController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = datas[indexPath.section][indexPath.row]
-        if indexPath.section == 0 {
-            let cell = AddNewBusinessCardLangCell()
+        if data.type == .Model || data.type == .Lang{
+            let cell = AddNewBusinessCardOptionCell()
             cell.model = data
-            cell.changeLangHandler = { [weak self] lange in
+            cell.changeOptionHandler = { [weak self] model in
                 guard let `self` = self else { return }
-                self.lange = lange
-                self.tableView?.reloadSections(IndexSet(integer: 0), with: .none)
+                
+                if model.type == .Lang {
+                    self.lange = model.value
+                } else {
+                    self.ai_model = model.value
+                }
+                
+                self.tableView?.reloadData()
                 self.uploadBusinessCard()
                 
             }
@@ -301,7 +386,7 @@ class AddNewBusinessCardCell:UITableViewCell {
         label.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
-            make.width.equalTo(106)
+            make.width.equalTo(66)
         }
         
         textField.snp.makeConstraints { make in
@@ -312,18 +397,83 @@ class AddNewBusinessCardCell:UITableViewCell {
     }
 }
 
-class AddNewBusinessCardLangCell: UITableViewCell {
+class AddNewBusinessCardOptionCell: UITableViewCell {
     let label = UILabel().color(R.color.textColor77()!).font(UIFont.systemFont(ofSize: 15, weight: .regular)).text("Lang")
-    let langLabel = UILabel().color(R.color.textColor22()!).font(UIFont.systemFont(ofSize: 15, weight: .regular)).text("English")
+    let langLabel = UILabel().color(R.color.textColor22()!).font(UIFont.systemFont(ofSize: 15, weight: .regular)).text("中文")
     let button = UIButton()
-    var changeLangHandler:((String)->())?
+    var changeOptionHandler:((BusinessCardModel)->())?
     var model:BusinessCardModel! {
         didSet {
             label.text = model.label
-            langLabel.text = model.value.int == 1 ? "English" : "中文"
+            
+            if model.type == .Lang {
+                langLabel.text = model.value.int == 1 ? "中文" : "English"
+          
+                
+                // 1.1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
+                let action1 = UIAction(title: "中文",image: nil) { [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.model.value = "1"
+                    self.changeOptionHandler?(self.model)
+                }
+               
+                let action2 = UIAction(title: "English",image: nil) { [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.model.value = "2"
+                    self.changeOptionHandler?(self.model)
+                }
+                
+                
+                button.showsMenuAsPrimaryAction = true
+                let menus = [action1,action2]
+                button.menu = UIMenu(children: menus)
+                
+            } else {
+                if model.value.int == 2 {
+                    langLabel.text = "gpt-3.5-turbo-0613"
+                }
+                if APIHost.share.buildType == .Dev {
+                    if model.value.int == 1 {
+                        langLabel.text = "gpt-4-1106-preview"
+                    }
+                    
+                    if model.value.int == 2 {
+                        langLabel.text = "gpt-3.5-turbo-0613"
+                    }
+                    
+                    if model.value.int == 3 {
+                        langLabel.text = "gpt-3.5-turbo-1106"
+                    }
+                    
+                    // 1.1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
+                    let action1 = UIAction(title: "gpt-4-1106-preview",image: nil) { [weak self] _ in
+                        guard let `self` = self else { return }
+                        self.model.value = "1"
+                        self.changeOptionHandler?(self.model)
+                    }
+                   
+                    let action2 = UIAction(title: "gpt-3.5-turbo-0613",image: nil) { [weak self] _ in
+                        guard let `self` = self else { return }
+                        self.model.value = "2"
+                        self.changeOptionHandler?(self.model)
+                    }
+                    
+                    let action3 = UIAction(title: "gpt-3.5-turbo-1106",image: nil) { [weak self] _ in
+                        guard let `self` = self else { return }
+                        self.model.value = "3"
+                        self.changeOptionHandler?(self.model)
+                    }
+                    
+                    button.showsMenuAsPrimaryAction = true
+                    let menus = [action1,action2,action3]
+                    button.menu = UIMenu(children: menus)
+                }
+                
+            }
+            
+            
         }
     }
-    var editEndHandler:((BusinessCardModel)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
@@ -333,15 +483,7 @@ class AddNewBusinessCardLangCell: UITableViewCell {
         button.titleForNormal = "Change"
         button.titleColorForNormal = .systemBlue
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        button.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            if self.model.value.int == 1 {
-                self.model.value = "2"
-            } else {
-                self.model.value = "1"
-            }
-            self.changeLangHandler?(self.model.value)
-        }).disposed(by: rx.disposeBag)
+      
     }
     
     required init?(coder: NSCoder) {
@@ -355,7 +497,7 @@ class AddNewBusinessCardLangCell: UITableViewCell {
         label.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
-            make.width.equalTo(106)
+            make.width.equalTo(66)
         }
         
         button.snp.makeConstraints { make in
@@ -400,7 +542,7 @@ class AddNewBusinessCardOtherCell: UITableViewCell {
         label.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(8)
-            make.width.equalTo(106)
+            make.width.equalTo(66)
         }
         
         textField.snp.makeConstraints { make in

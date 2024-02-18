@@ -37,6 +37,11 @@ class ProfileController: BaseTableController {
         self.navigation.bar.alpha = 0
         
         refreshData()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UpdateUserInfo, object: nil, queue: OperationQueue.main) { _ in
+            self.refreshData()
+        }
+        
     }
     
     func addRightBarItem() {

@@ -35,13 +35,20 @@ class AdminSelectRoleController: BaseTableController {
     override func refreshData() {
         
         AdminService.roleList(orgId: Admin_Org_ID,keyword: "").subscribe(onNext:{
+            var data = $0
+            let normalStaff = AdminRoleItemModel()
+            normalStaff.id = 0
+            normalStaff.name = "Normal Staff"
+            data.insert(normalStaff, at: 0)
             
-            $0.forEach({
+            data.forEach({
                 if  $0.id == self.selectModel?.id {
                     $0.isSelected = true
                 }
             })
-            self.dataArray = $0
+            
+            
+            self.dataArray = data
             self.endRefresh($0.count,emptyString: "No Roles")
             
             

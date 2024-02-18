@@ -9,6 +9,7 @@ import UIKit
 import KMPlaceholderTextView
 class AddUserEducationExperienceView: UIView,UITextFieldDelegate,UITextViewDelegate {
 
+    @IBOutlet weak var currentSwitch: UISwitch!
     @IBOutlet weak var descTfHCons: NSLayoutConstraint!
     @IBOutlet weak var orgNameSelectButton: UIButton!
     @IBOutlet weak var descTf: KMPlaceholderTextView!
@@ -23,6 +24,8 @@ class AddUserEducationExperienceView: UIView,UITextFieldDelegate,UITextViewDeleg
         descTf.textColor = R.color.textColor33()
         descTf.returnKeyType = .done
         descTf.delegate = self
+        
+     
     }
     
     

@@ -156,7 +156,7 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         
         let eventList = ScheduleService.eventList(model: requestModel)
         
-        guard let sd = calendarChangeDate.beginning(of: .month)?.adding(.day, value: 1),let ed = sd.end(of: .month) else {
+        guard let sd = calendarChangeDate.beginning(of: .month),let ed = sd.end(of: .month) else {
             return
         }
        

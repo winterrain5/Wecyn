@@ -15,4 +15,5 @@ extension Notification.Name {
     static let WidgetItemSelected = Notification.Name("WidgetItemSelected")
     
     static let UpdateAdminData = Notification.Name("UpdateAdminData")
+    static let UpdateUserInfo = Notification.Name("UpdateUserInfo")
 }

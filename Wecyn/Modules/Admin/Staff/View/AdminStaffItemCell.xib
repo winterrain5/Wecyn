@@ -31,28 +31,29 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGu-0K-fk6">
-                        <rect key="frame" x="64" y="15.999999999999998" width="41.333333333333343" height="20.333333333333329"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGu-0K-fk6">
+                        <rect key="frame" x="64" y="15.999999999999998" width="259" height="19.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                         <color key="textColor" name="TextColor33"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-vJ-LgX">
-                        <rect key="frame" x="16" y="64" width="367" height="19.333333333333329"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-vJ-LgX">
+                        <rect key="frame" x="16" y="64.333333333333329" width="367" height="19.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" name="TextColor77"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB8-xg-dWj">
-                        <rect key="frame" x="64" y="38.333333333333336" width="319" height="17"/>
+                        <rect key="frame" x="64" y="37.333333333333336" width="319" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" name="TextColor77"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Dm-co-4yw">
-                        <rect key="frame" x="343" y="15.333333333333336" width="40" height="22"/>
+                        <rect key="frame" x="339" y="5.6666666666666679" width="44" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="a9z-Io-68G"/>
+                            <constraint firstAttribute="height" constant="40" id="6eH-Dk-cTC"/>
+                            <constraint firstAttribute="width" constant="44" id="a9z-Io-68G"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" image="ellipsis"/>
@@ -62,14 +63,15 @@
                     <constraint firstItem="lGu-0K-fk6" firstAttribute="leading" secondItem="Vvu-1K-1ki" secondAttribute="trailing" constant="8" symbolic="YES" id="6lh-NF-lVd"/>
                     <constraint firstItem="Vvu-1K-1ki" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Sox-xv-L5V"/>
                     <constraint firstItem="lGu-0K-fk6" firstAttribute="top" secondItem="Vvu-1K-1ki" secondAttribute="top" id="U5C-e1-ZCt"/>
+                    <constraint firstItem="2Dm-co-4yw" firstAttribute="leading" secondItem="lGu-0K-fk6" secondAttribute="trailing" constant="16" id="ULN-uG-TYV"/>
                     <constraint firstItem="ecP-vJ-LgX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="aTr-uq-yQK"/>
                     <constraint firstItem="2Dm-co-4yw" firstAttribute="centerY" secondItem="lGu-0K-fk6" secondAttribute="centerY" id="bS5-dq-3qE"/>
                     <constraint firstAttribute="trailing" secondItem="2Dm-co-4yw" secondAttribute="trailing" constant="16" id="dci-Qr-9fF"/>
                     <constraint firstAttribute="trailing" secondItem="ecP-vJ-LgX" secondAttribute="trailing" constant="16" id="fe0-ap-TdQ"/>
-                    <constraint firstItem="ecP-vJ-LgX" firstAttribute="top" secondItem="Vvu-1K-1ki" secondAttribute="bottom" constant="8" id="gLE-O4-2EW"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ecP-vJ-LgX" secondAttribute="bottom" constant="16" id="ghy-CC-STF"/>
                     <constraint firstAttribute="trailing" secondItem="hB8-xg-dWj" secondAttribute="trailing" constant="16" id="hOr-Re-Qjm"/>
                     <constraint firstItem="hB8-xg-dWj" firstAttribute="leading" secondItem="Vvu-1K-1ki" secondAttribute="trailing" constant="8" symbolic="YES" id="kan-Gd-wrF"/>
+                    <constraint firstItem="ecP-vJ-LgX" firstAttribute="top" secondItem="hB8-xg-dWj" secondAttribute="bottom" constant="10" id="l8b-ts-h3q"/>
                     <constraint firstItem="Vvu-1K-1ki" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="ufm-NB-m7r"/>
                     <constraint firstItem="hB8-xg-dWj" firstAttribute="top" secondItem="lGu-0K-fk6" secondAttribute="bottom" constant="2" id="xfV-5M-WOQ"/>
                 </constraints>

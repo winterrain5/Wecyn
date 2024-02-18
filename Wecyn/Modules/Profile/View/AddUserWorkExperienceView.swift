@@ -9,6 +9,7 @@ import UIKit
 import KMPlaceholderTextView
 class AddUserWorkExperienceView: UIView ,UITextFieldDelegate,UITextViewDelegate{
 
+    @IBOutlet weak var currentSwitch: UISwitch!
     @IBOutlet weak var descTfHCons: NSLayoutConstraint!
     @IBOutlet weak var orgNameSelectButton: UIButton!
     @IBOutlet weak var descTf: KMPlaceholderTextView!

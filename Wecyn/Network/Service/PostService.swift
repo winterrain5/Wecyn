@@ -247,7 +247,7 @@ class PostCommentReplyModel:BaseModel {
 }
 
 func formateTime(_ create_time:String) -> String {
-    guard let createTime = create_time.toDate(format: "dd-MM-yyyy HH:mm:ss",isZero: false) else {
+    guard let createTime = create_time.toDate(format: "dd-MM-yyyy HH:mm:ss") else {
         return ""
     }
     let now = Date()
@@ -257,7 +257,7 @@ func formateTime(_ create_time:String) -> String {
     let minitue = (duration % (60 * 60)) / (60)
     
     if day > 7 {
-        let dateStr = createTime.toString(format: "dd-MM-yyyy HH:mm",isZero: false)
+        let dateStr = createTime.toString(format: "dd-MM-yyyy HH:mm")
         return dateStr
     }
     if day > 0 && day < 7 {

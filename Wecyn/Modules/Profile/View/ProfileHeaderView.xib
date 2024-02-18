@@ -23,7 +23,7 @@
                         <constraint firstAttribute="height" constant="134" id="dex-0c-KG2"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proile_user" translatesAutoresizingMaskIntoConstraints="NO" id="ge2-9T-4dm">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proile_user" translatesAutoresizingMaskIntoConstraints="NO" id="ge2-9T-4dm">
                     <rect key="frame" x="195" y="78" width="94" height="94"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="94" id="Tvp-IW-0py"/>
