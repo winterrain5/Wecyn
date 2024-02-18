@@ -179,11 +179,15 @@ class NetworkService {
     }
     
     
+
     /// 扫描实体名片
-    /// - Parameter photo: base64 lange 1 英文 2 中文
+    /// - Parameters:
+    ///   - photo: base64
+    ///   - lang:   1 中文 2  英文
+    ///   - model: .1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
     /// - Returns: ScanCardModel
-    static func scanCard(photo:String,lang:Int = 1) -> Observable<ScanCardModel> {
-        let target = MultiTarget(NetworkApi.scanCard(photo,lang))
+    static func scanCard(photo:String,lang:Int = 1,model:Int = 1) -> Observable<ScanCardModel> {
+        let target = MultiTarget(NetworkApi.scanCard(photo,lang,model))
         return APIProvider.rx.request(target).asObservable().mapObject(ScanCardModel.self)
     }
     
@@ -200,7 +204,15 @@ class ScanCardModel:BaseModel  {
     var org_name: String = ""
     var name: String = ""
     var tel_cell: String = ""
+    var run_time:ScanCardRunTimeModel?
     
+}
+
+class ScanCardRunTimeModel:BaseModel {
+    var model = ""
+    var ai:Double = 0
+    var ocr:Double = 0
+    var all:Double = 0
 }
 
 class FriendFollowModel: BaseModel {

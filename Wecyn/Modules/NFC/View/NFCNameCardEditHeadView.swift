@@ -152,12 +152,13 @@ class NFCNameCardEditHeadView: UIView {
     
     func uploadAvatar(_ image:UIImage) {
         Toast.showLoading()
-        let base64 = image.compressionImageToBase64(500)
+        let base64 = image.compressionImageToBase64(150)
         UserService.updateAvatar(photo: base64).subscribe(onNext:{
             if $0.success != 1 {
                 Toast.showError($0.message)
             }else {
                 self.avtImgView.image = image
+                NotificationCenter.default.post(name: NSNotification.Name.UpdateUserInfo, object: nil)
                 Toast.dismiss()
             }
         },onError: { e in
@@ -168,12 +169,13 @@ class NFCNameCardEditHeadView: UIView {
     
     func uploadCover(_ image:UIImage) {
         Toast.showLoading()
-        let base64 = image.compressionImageToBase64(500)
+        let base64 = image.compressionImageToBase64(250)
         UserService.updateCover(photo: base64).subscribe(onNext:{
             if $0.success != 1 {
                 Toast.showError($0.message)
             } else {
                 self.coverImageView.image = image
+                NotificationCenter.default.post(name: NSNotification.Name.UpdateUserInfo, object: nil)
                 Toast.dismiss()
             }
             

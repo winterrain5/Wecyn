@@ -28,7 +28,7 @@ enum NetworkApi  {
     case cancelFollow(_ userId:Int)
     case followedList(_ type:Int,_ userId:Int,_ page:Int,_ pageSize:Int,_ keyword:String)
     case updateRemark(_ id:Int,_ remark:String)
-    case scanCard(_ photo:String,_ lang:Int)
+    case scanCard(_ photo:String,_ lang:Int,_ model:Int)
 }
 
 extension NetworkApi:TargetType, Cacheable {
@@ -140,8 +140,8 @@ extension NetworkApi:TargetType, Cacheable {
             return requestParametersByGet(["type":type,"user_id":userId,"page":page,"pagesize":pageSize,"keyword":keyword])
         case .updateRemark(let id, let remark):
             return requestParametersByPost(["user_id":id,"remark":remark])
-        case .scanCard(let photo,let lang):
-            return requestParametersByPost(["photo":photo,"lang":lang])
+        case .scanCard(let photo,let lang,let model):
+            return requestParametersByPost(["photo":photo,"lang":lang,"model":model])
         }
         
     }

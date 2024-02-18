@@ -38,8 +38,8 @@ class ProfileAddWorkExperienceController: BaseViewController {
         scrollView.contentSize = self.view.size
     
         scrollView.addSubview(container)
-        container.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 520)
-
+        container.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 580)
+        
         
         if let model = model {
             self.navigation.item.title = "Edit Work Experience"
@@ -48,6 +48,7 @@ class ProfileAddWorkExperienceController: BaseViewController {
             self.container.startButton.titleForNormal = model.start_date
             self.container.startButton.titleColorForNormal = R.color.textColor33()
             self.container.endButton.titleForNormal = model.end_date.isEmpty ? "Present" :  model.end_date
+            self.container.currentSwitch.isOn = model.end_date.isEmpty
             self.container.industryTf.text = model.industry_name
             self.container.descTf.text = model.desc
             
@@ -128,6 +129,8 @@ class ProfileAddWorkExperienceController: BaseViewController {
                 self.requestModel.end_date = dateStr
                 self.requestModel.is_current = 0
                 self.container.endButton.titleForNormal = dateStr
+                self.container.endButton.titleColorForNormal = R.color.textColor33()
+                self.container.currentSwitch.isOn = false
             }.show()
         }).disposed(by: rx.disposeBag)
         
@@ -149,6 +152,21 @@ class ProfileAddWorkExperienceController: BaseViewController {
             self.present(nav, animated: true)
         }).disposed(by: rx.disposeBag)
 
+        
+        container.currentSwitch.rx.controlEvent(.valueChanged).subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            
+            if self.container.currentSwitch.isOn {
+                self.container.endButton.titleForNormal = "Present"
+                self.container.endButton.titleColorForNormal = R.color.textColor33()
+                self.requestModel.end_date = nil
+                self.requestModel.is_current = 1
+            } else {
+                self.container.endButton.titleForNormal = "End Date"
+                self.container.endButton.titleColorForNormal = R.color.textColor99()
+            }
+            
+        }).disposed(by: rx.disposeBag)
         
     }
     

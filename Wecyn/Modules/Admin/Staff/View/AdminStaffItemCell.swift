@@ -21,7 +21,7 @@ class AdminStaffItemCell: UITableViewCell {
             guard let model = model else { return }
             
             avatarImgView.kf.setImage(with: model.user?.avatar.url)
-            let roleName = (model.role == nil) ? "Normal Staff" : (model.role?.name ?? "")
+            let roleName = (model.role == nil) ? "Normal Staff" : (model.role?.dept_full_path ?? "")
             nameLabel.text = (model.user?.first_name ?? "") + " "  + (model.user?.last_name ?? "") + "(\(roleName))"
             titlesLabel.text = model.titles
             departmentLabel.text = model.dept?.full_path

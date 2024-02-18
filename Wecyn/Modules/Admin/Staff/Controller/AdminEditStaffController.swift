@@ -10,11 +10,17 @@ import UIKit
 class AdminEditStaffController: BaseViewController {
 
     var model:AdminStaffModel?
+    var newModel:AdminNewStaffModel?
     var container = AdminEditStaffContainer.loadViewFromNib()
     
-    required init(model:AdminStaffModel) {
+    init(model:AdminStaffModel) {
         super.init(nibName: nil, bundle: nil)
         self.model = model
+    }
+    
+    init(newModel:AdminNewStaffModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.newModel = newModel
     }
     
     required init?(coder: NSCoder) {
@@ -26,9 +32,16 @@ class AdminEditStaffController: BaseViewController {
 
         view.addSubview(container)
         container.frame = CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
-        container.model = model
         
-        self.navigation.item.title = "Edit Staff"
+        
+        if newModel !=  nil  {
+            self.navigation.item.title = "New Staff"
+            container.newModel = newModel
+        } else {
+            self.navigation.item.title = "Edit Staff"
+            container.model = model
+        }
+       
         self.addLeftBarButtonItem(image: R.image.xmark()!)
         leftButtonDidClick = { [weak self] in
             self?.returnBack()

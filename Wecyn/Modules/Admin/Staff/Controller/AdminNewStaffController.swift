@@ -83,37 +83,15 @@ class AdminNewStaffController: BaseTableController {
     func accpet(_ model:AdminNewStaffModel) {
         let alert = UIAlertController(title: "Accept New Staff", message: "You should assign this staff to a department.", preferredStyle: .actionSheet)
         
-        alert.addAction(title: "Confirm") { [weak self] _ in
-            guard let `self` = self else { return }
-            let vc = AdminSelectDepartmentController()
+        alert.addAction(title: "Confirm") { _ in
+         
+       
+            let vc = AdminEditStaffController(newModel: model)
             let nav = BaseNavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
-            UIViewController.sk.getTopVC()?.present(nav, animated: true)
-            vc.selectComplete = { dept in
-                
-                self.showAlert(title: dept.name, message: "Please confirm assigned department", buttonTitles: ["Confirm","Cancel"], highlightedButtonIndex: 0) { idx in
-                    if idx == 0 {
-                        let requst = AdminCertificatStaffRequestModel()
-                        requst.id = model.id
-                        requst.org_id = model.org_id
-                        requst.status = 1
-                        requst.dept_id = dept.id
-                       
-                        AdminService.staffCertificate(model: requst).subscribe(onNext:{
-                            if $0.success == 1 {
-                                Toast.showSuccess("Successful operation")
-                                self.navigationController?.popViewController()
-                            } else {
-                                Toast.showError($0.message)
-                            }
-                        },onError: { e in
-                            Toast.showError(e.asAPIError.errorInfo().message)
-                        }).disposed(by: self.rx.disposeBag)
-                    }
-                }
-                
-            }
+            UIViewController.sk.getTopVC()?.present(nav, animated:true)
             
+           
         }
         alert.addAction(title: "Cancel",style: .cancel) { _ in
             
