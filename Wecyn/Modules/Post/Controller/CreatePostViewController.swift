@@ -363,7 +363,6 @@ class CreatePostViewController: BaseViewController {
         toolBar.moreButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            Toast.showLoading()
             self.addPost()
         }).disposed(by: rx.disposeBag)
         
@@ -440,7 +439,7 @@ class CreatePostViewController: BaseViewController {
     
     
     func addPost() {
-        
+        Toast.showLoading()
         if self.postMediaType == .Video {
             uploadVideoData()
         } else {
@@ -476,10 +475,13 @@ class CreatePostViewController: BaseViewController {
         
         func compressVideo(_ sourceURL:URL) ->  Promise<URL> {
             return Promise.init { resolver in
+//                resolver.fulfill(sourceURL)
+               
                 Toast.showLoading(withStatus: "compress video")
-                FYVideoCompressor().compressVideo(sourceURL, quality: .mediumQuality) { result in
+                FYVideoCompressor().compressVideo(sourceURL, quality: .highQuality) { result in
                     switch result {
                     case .success(let compressedVideoURL):
+                        Logger.debug(compressedVideoURL.sizePerMB(),label:"compressed video size")
                         resolver.fulfill(compressedVideoURL)
                     case .failure(let error):
                         resolver.reject(APIError.requestError(code: -1, message: error.localizedDescription))
@@ -581,11 +583,23 @@ class CreatePostViewController: BaseViewController {
                 Toast.showError("Get Video Data Failed")
                 return
             }
+            if url.sizePerMB() > 100 {
+                Toast.showError("The video size cannot exceed 100MB.")
+                Toast.dismiss()
+                return
+            }
             upload(url)
         } else {
+            
             media.asset?.fetchVideoURL(completion: { result, id in
                 switch result {
                 case .success(let response):
+                    Logger.debug(response.url.sizePerMB(),label:"video size")
+                    if response.url.sizePerMB() > 100 {
+                        Toast.showError("The video size cannot exceed 100MB.")
+                        Toast.dismiss()
+                        return
+                    }
                     upload(response.url)
                 case .failure(let e):
                     Toast.showError(e.localizedDescription)
@@ -711,6 +725,7 @@ extension CreatePostViewController: ImagePickerControllerDelegate {
         self.postMediaType = result.assets.first?.mediaType == .video ? .Video : .Image
         
         if self.postMediaType == .Image {
+            
             self.postMedias.append(contentsOf: result.assets.enumerated().map{
                 let media = PostMediaModel()
                 media.asset = $1
@@ -719,7 +734,9 @@ extension CreatePostViewController: ImagePickerControllerDelegate {
                 return media
             })
             self.postMedias.removeDuplicates(keyPath: \.asset)
+            
         } else {
+            
             self.postMedias = result.assets.enumerated().map{
                 let media = PostMediaModel()
                 media.asset = $1
@@ -727,6 +744,7 @@ extension CreatePostViewController: ImagePickerControllerDelegate {
                 media.image = $1.image
                 return media
             }
+            
         }
         
         self.updateScrollViewContentSize({

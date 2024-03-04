@@ -99,6 +99,11 @@ class LoginView: UIView {
         }).disposed(by: rx.disposeBag)
         
         self.passwordTf.rx.text.orEmpty.map({ $0.isEmpty }).asDriver(onErrorJustReturn: false).drive(passwordStateButton.rx.isHidden).disposed(by: rx.disposeBag)
+        
+        forgetPwdLabel.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
+            let vc = ForgetPwdController()
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+        }).disposed(by: rx.disposeBag)
     }
     
     

@@ -156,12 +156,15 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         
         let eventList = ScheduleService.eventList(model: requestModel)
         
-        guard let sd = calendarChangeDate.beginning(of: .month),let ed = sd.end(of: .month) else {
+        guard let sd = calendarChangeDate.beginning(of: .month),let ed = sd.end(of: .month)?.adding(.day, value: 1),let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else {
             return
         }
        
         requestModel.start_date = sd.toString(format: DateFormat.ddMMyyyy.rawValue)
-        requestModel.end_date = ed.toString(format: DateFormat.ddMMyyyy.rawValue)
+        requestModel.end_date = formatEd.toString(format: DateFormat.ddMMyyyy.rawValue)
+        
+        Logger.debug(requestModel.start_date,label: "startDate")
+        Logger.debug(requestModel.end_date,label: "endDate")
         
         ToastUtil.default.show(delay: 3)
         eventList.subscribe(onNext:{ events in

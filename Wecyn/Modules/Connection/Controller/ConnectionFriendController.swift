@@ -75,8 +75,8 @@ class ConnectionFriendController: BaseViewController {
         
         addRightBarItems()
         
-        let searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false)
-        searchView.size = CGSize(width: kScreenWidth * 0.7, height: 36)
+        let searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+        
         self.navigation.item.titleView = searchView
         searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             self.navigationController?.pushViewController(ConnectionController(),animated: false)
@@ -122,7 +122,16 @@ class ConnectionFriendController: BaseViewController {
         paggingView.mainTableView.mj_header = header
 
         getDatas()
+        getNotificationCount()
     }
+    
+    func getNotificationCount() {
+        NotificationService.getNotificationCount().subscribe(onNext:{
+            print("Count:\($0)")
+            self.updateBadge($0)
+        }).disposed(by: rx.disposeBag)
+    }
+    
     
     func getDatas() {
         
@@ -170,7 +179,7 @@ extension ConnectionFriendController:JXPagingMainTableViewGestureDelegate {
 extension ConnectionFriendController:JXSegmentedViewDelegate {
   func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = (index == 0)
-      rightButton.imageForNormal = index == 0 ? R.image.connection_search()! : R.image.calendar_add()!
+      rightButton.imageForNormal = index == 0 ? R.image.magnifyingglass()! : R.image.calendar_add()!
   }
 }
 

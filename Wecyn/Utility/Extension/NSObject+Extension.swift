@@ -73,35 +73,21 @@ extension String {
             return false
         }
     }
-    func isHasSpecialSymbol() -> Bool {
-        let rule = "#@!~%^&*"
-        var result = false
-        for c in self.charactersArray {
-            if rule.charactersArray.contains(c) {
-                result = true
-                break
-            }
-        }
-        return result
-    }
+
     
     func valiatePassword() -> (flag:Bool,message:String){
         var errorMessage = ""
-        if self.count < 8 {
-            /// ・Passwords need to be at least 6 characters ・At least one lowercase character ・At lease one uppercase character ・Must have numerical number
-            errorMessage += "Passwords need to be at least 6 characters\n"
+        if self.count < 6 {
+            errorMessage += "·Passwords need to be at least 6 characters\n"
         }
         if !self.isHasLowercaseCharacter() {
-            errorMessage += "At least one lowercase character \n"
+            errorMessage += "·At least one lowercase character \n"
         }
         if !self.isHasUppercaseCharacter() {
-            errorMessage += "At lease one uppercase character \n"
+            errorMessage += "·At lease one uppercase character \n"
         }
         if !self.hasNumbers {
-            errorMessage += "Must have numerical number\n"
-        }
-        if self.isHasSpecialSymbol() {
-            errorMessage += "Password cannot contain special characters such as \"#@!~%^&*\"\n"
+            errorMessage += "·Must have numerical number\n"
         }
         let result = errorMessage.isEmpty ? (flag: false,message: "") : (flag:true,message: errorMessage)
         return result
@@ -303,3 +289,4 @@ let kStatusBarHeight: CGFloat = UIDevice.statusBarHeight
 let kScreenHeight:CGFloat = UIScreen.main.bounds.size.height
 /// 屏幕宽度
 let kScreenWidth:CGFloat = UIScreen.main.bounds.size.width
+

@@ -27,8 +27,14 @@ class Toast {
         SVProgressHUD.show(withStatus: message)
     }
     
-    static func showMessage(_ message:String) {
-        SPIndicatorView(title: message, message: nil).present()
+    static func showMessage(_ message:String,multiLine:Bool = false) {
+        if multiLine {
+            defaultStyle()
+            SVProgressHUD.showError(withStatus: message)
+        } else {
+            SPIndicatorView(title: message, message: nil).present()
+        }
+        
     }
     
     

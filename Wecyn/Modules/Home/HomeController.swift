@@ -65,6 +65,8 @@ class HomeController: BaseTableController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNeedsStatusBarAppearanceUpdate()
+        
+        getNotificationCount()
     }
     
     override func createListView() {
@@ -101,6 +103,13 @@ class HomeController: BaseTableController {
         }, onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype,emptyString: e.asAPIError.errorInfo().message)
             self.hideSkeleton()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    func getNotificationCount() {
+        NotificationService.getNotificationCount().subscribe(onNext:{
+            print("Count:\($0)")
+            self.updateBadge($0)
         }).disposed(by: rx.disposeBag)
     }
     

@@ -16,30 +16,6 @@ extension BaseViewController: JXSegmentedListContainerViewListDelegate {
         return view
     }
     
-    @objc func addRightBarItems() {
-        
-        let fixItem1 = UIBarButtonItem.fixedSpace(width: 22)
-        
-        let notification = UIButton()
-        notification.imageForNormal = R.image.bell()
-        let notificationItem = UIBarButtonItem(customView: notification)
-        notification.rx.tap.subscribe(onNext:{
-           
-        }).disposed(by: rx.disposeBag)
-        
-        let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
-        
-        let message = UIButton()
-        message.imageForNormal = R.image.ellipsisMessage()
-        let messageItem = UIBarButtonItem(customView: message)
-        message.rx.tap.subscribe(onNext:{
-            
-        }).disposed(by: rx.disposeBag)
-        
-        
-        self.navigation.item.rightBarButtonItems = [notificationItem,fixItem1,messageItem,fixItem2]
-        
-    }
 }
 
 

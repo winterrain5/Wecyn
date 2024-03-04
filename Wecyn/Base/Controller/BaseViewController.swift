@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import BadgeControl
 import IQKeyboardManagerSwift
 class BaseViewController: UIViewController {
+    var badger:BadgeController!
     var updateDataComplete:(()->())?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     private lazy var leftButton = UIButton()
+    
+   
+    
     var leftButtonDidClick:(()->())?
     var interactivePopGestureRecognizerEnable:Bool = true{
         didSet {
@@ -59,6 +64,51 @@ class BaseViewController: UIViewController {
         }
     }
     
+    @objc func addRightBarItems() {
+        
+        
+        let fixItem1 = UIBarButtonItem.fixedSpace(width: 22)
+        
+        let notificationButton = UIButton()
+        notificationButton.imageForNormal = R.image.bell()
+        let notificationItem = UIBarButtonItem(customView: notificationButton)
+        notificationButton.rx.tap.subscribe(onNext:{
+            
+            let vc = NotificationController()
+            self.navigationController?.pushViewController(vc)
+           
+        }).disposed(by: rx.disposeBag)
+        
+        let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
+        
+        let message = UIButton()
+        message.imageForNormal = R.image.ellipsisMessage()
+        let messageItem = UIBarButtonItem(customView: message)
+        message.rx.tap.subscribe(onNext:{
+            
+        }).disposed(by: rx.disposeBag)
+        
+        
+        self.navigation.item.rightBarButtonItems = [notificationItem,fixItem1,messageItem,fixItem2]
+        
+        badger = BadgeController(for: notificationButton,
+                                 in: .upperLeftCorner,
+                                 badgeBackgroundColor: UIColor.red,
+                                 badgeTextColor: UIColor.white,
+                                 badgeHeight: 16)
+        
+        
+    }
+    
+    func updateBadge(_ count:Int) {
+        if count == 0 {
+            badger.remove(animated: false)
+            return
+        }
+        badger.addOrReplaceCurrent(with: count.string, animated: true)
+    }
+    
+
 
     
     func barTintColor(_ color:UIColor) {

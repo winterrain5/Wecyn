@@ -14,6 +14,7 @@ PODS:
     - AnyImageKit/Core
   - AnyImageKit/Picker (0.16.0):
     - AnyImageKit/Core
+  - BadgeControl (1.2.1)
   - Cache (6.0.0)
   - CocoaDebug (1.7.7)
   - CodeTextField (0.4.0)
@@ -26,7 +27,7 @@ PODS:
   - FYVideoCompressor (0.0.9)
   - HandyJSON (5.0.2)
   - ImagePickerSwift (0.3.1)
-  - IQKeyboardManagerSwift (6.5.11)
+  - IQKeyboardManagerSwift (6.5.12)
   - JXPagingView/Paging (2.1.2)
   - JXSegmentedView (1.3.0)
   - Kingfisher (7.9.1)
@@ -164,6 +165,7 @@ PODS:
 
 DEPENDENCIES:
   - AnyImageKit
+  - BadgeControl
   - Cache (~> 6.0.0)
   - CocoaDebug
   - CodeTextField (~> 0.4.0)
@@ -222,6 +224,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AnyImageKit
+    - BadgeControl
     - Cache
     - CocoaDebug
     - CodeTextField
@@ -288,6 +291,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   AnyImageKit: 5f30ce2cad2ffa9162c3e6d827ccb3a280553640
+  BadgeControl: 67036e7f586930bba15084dbf89ebce7aa2f2bc2
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
@@ -300,7 +304,7 @@ SPEC CHECKSUMS:
   FYVideoCompressor: 80e2a90bbc118044038b37b8442f23084c5698bf
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   ImagePickerSwift: 0328d670660823ff33529b58be08c7a13b686758
-  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
   JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
@@ -343,6 +347,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: 1be58cfe18a442f1354a7aafc7cf0098d883ff96
+PODFILE CHECKSUM: f47663f5a78e9d376a330c6de1162201a2da65b9
 
 COCOAPODS: 1.11.2

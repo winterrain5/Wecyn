@@ -252,7 +252,7 @@ struct _R {
     }
   }
 
-  /// This `_R.color` struct is generated, and contains static references to 13 colors.
+  /// This `_R.color` struct is generated, and contains static references to 14 colors.
   struct color {
     let bundle: Foundation.Bundle
 
@@ -273,6 +273,9 @@ struct _R {
 
     /// Color `TextColor33`.
     var textColor33: RswiftResources.ColorResource { .init(name: "TextColor33", path: [], bundle: bundle) }
+
+    /// Color `TextColor66`.
+    var textColor66: RswiftResources.ColorResource { .init(name: "TextColor66", path: [], bundle: bundle) }
 
     /// Color `TextColor77`.
     var textColor77: RswiftResources.ColorResource { .init(name: "TextColor77", path: [], bundle: bundle) }
@@ -688,7 +691,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 28 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 32 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -743,17 +746,26 @@ struct _R {
     /// Nib `CreatePostToolBar`.
     var createPostToolBar: RswiftResources.NibReference<CreatePostToolBar> { .init(name: "CreatePostToolBar", bundle: bundle) }
 
+    /// Nib `ForgetPwdContainer`.
+    var forgetPwdContainer: RswiftResources.NibReference<ForgetPwdContainer> { .init(name: "ForgetPwdContainer", bundle: bundle) }
+
     /// Nib `HomeHeaderJobItemCell`.
     var homeHeaderJobItemCell: RswiftResources.NibReference<HomeHeaderJobItemCell> { .init(name: "HomeHeaderJobItemCell", bundle: bundle) }
 
     /// Nib `HomeHeaderView`.
     var homeHeaderView: RswiftResources.NibReference<HomeHeaderView> { .init(name: "HomeHeaderView", bundle: bundle) }
 
+    /// Nib `InputCodeContainer`.
+    var inputCodeContainer: RswiftResources.NibReference<InputCodeContainer> { .init(name: "InputCodeContainer", bundle: bundle) }
+
     /// Nib `JobItemCell`.
     var jobItemCell: RswiftResources.NibReference<JobItemCell> { .init(name: "JobItemCell", bundle: bundle) }
 
     /// Nib `LoginView`.
     var loginView: RswiftResources.NibReference<LoginView> { .init(name: "LoginView", bundle: bundle) }
+
+    /// Nib `NotificationCell`.
+    var notificationCell: RswiftResources.NibReference<NotificationCell> { .init(name: "NotificationCell", bundle: bundle) }
 
     /// Nib `PostCommentCell`.
     var postCommentCell: RswiftResources.NibReference<PostCommentCell> { .init(name: "PostCommentCell", bundle: bundle) }
@@ -775,6 +787,9 @@ struct _R {
 
     /// Nib `RegistProfileView`.
     var registProfileView: RswiftResources.NibReference<RegistProfileView> { .init(name: "RegistProfileView", bundle: bundle) }
+
+    /// Nib `ResetPwdContainer`.
+    var resetPwdContainer: RswiftResources.NibReference<ResetPwdContainer> { .init(name: "ResetPwdContainer", bundle: bundle) }
 
     func validate() throws {
       if UIKit.UIImage(named: "chevron.right", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chevron.right' is used in nib 'AddUserEducationExperienceView', but couldn't be loaded.") }
@@ -837,6 +852,9 @@ struct _R {
       if UIKit.UIImage(named: "toolbar_icon_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_image' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_link", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_link' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "video", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'video' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AccentColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentColor' is used in nib 'ForgetPwdContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'ForgetPwdContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor22", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor22' is used in nib 'ForgetPwdContainer', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderJobItemCell', but couldn't be loaded.") }
@@ -844,6 +862,9 @@ struct _R {
       if UIKit.UIColor(named: "TextColor162C46", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor162C46' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'HomeHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AccentColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentColor' is used in nib 'InputCodeContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'InputCodeContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor22", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor22' is used in nib 'InputCodeContainer', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_location", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_location' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "job_mark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'job_mark' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'JobItemCell', but couldn't be loaded.") }
@@ -853,6 +874,9 @@ struct _R {
       if UIKit.UIImage(named: "password_invisible", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'password_invisible' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "password_visible", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'password_visible' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'LoginView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'NotificationCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor22", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor22' is used in nib 'NotificationCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor77", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor77' is used in nib 'NotificationCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "post_comment_comment", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'post_comment_comment' is used in nib 'PostCommentCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "post_comment_unlike", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'post_comment_unlike' is used in nib 'PostCommentCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "IconColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'IconColor' is used in nib 'PostCommentCell', but couldn't be loaded.") }
@@ -869,6 +893,9 @@ struct _R {
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistConfirmView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistInfoView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistProfileView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "AccentColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentColor' is used in nib 'ResetPwdContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'ResetPwdContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor22", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor22' is used in nib 'ResetPwdContainer', but couldn't be loaded.") }
     }
   }
 
