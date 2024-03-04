@@ -53,7 +53,7 @@ class RegistInfoView: UIView {
             guard let `self` = self else { return }
             guard let result = self.passwordTf.text?.valiatePassword() else { return }
             if result.flag{
-                Toast.showMessage(result.message)
+                Toast.showMessage(result.message, multiLine: true)
             }
         }.disposed(by: rx.disposeBag)
         let isEmpty = Observable.combineLatest(email,firstName,lastName,password,code).map({

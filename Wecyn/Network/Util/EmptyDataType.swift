@@ -50,7 +50,7 @@ public enum EmptyDataType:Equatable {
         default:
             imageName = EmptyStatus.Image.NoData.rawValue
         }
-        return UIImage(named: imageName) ?? UIImage(color: .white, size: .zero)
+        return UIImage(named: imageName) ?? UIImage()
     }
     
     static func emptyString(for type:EmptyDataType,noDataString: String) -> NSAttributedString {

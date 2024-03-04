@@ -1430,7 +1430,7 @@ open class TextView: UITextView {
         let formatter = LinkFormatter()
         apply(formatter: formatter, atRange: range, remove: true)
     }
-    
+
 
     // MARK: - Embeds
 

@@ -17,6 +17,7 @@ enum AuthApi {
     case getCityList(countryId:Int)
     case signup(model:RegistRequestModel)
     case signin(username:String,password:String)
+    case resetPassword(_ email:String,_ code:String,_ password:String)
 }
 
 extension AuthApi:  TargetType, Cacheable  {
@@ -24,7 +25,7 @@ extension AuthApi:  TargetType, Cacheable  {
     var path: String {
         switch self {
         case .emailSendeVerificationCode:
-            return "/api/auth/emailSendVerificationCode/"
+            return "/api/auth/sendVerificationCode/"
         case .emailVerification:
             return "/api/auth/emailVerification/"
         case .getCountryList:
@@ -35,6 +36,8 @@ extension AuthApi:  TargetType, Cacheable  {
             return "/api/auth/signUp/"
         case .signin:
             return "/api/auth/signIn/"
+        case .resetPassword:
+            return "/api/auth/resetPassword/"
         }
     }
     var method: Moya.Method {
@@ -59,6 +62,8 @@ extension AuthApi:  TargetType, Cacheable  {
             return requestToTaskByPost(model)
         case .signin(let username,let password):
             return requestParametersByPost(["username":username,"password":password])
+        case .resetPassword(let email, let code, let pwd):
+            return requestParametersByPost(["email":email,"code":code,"password":pwd])
         }
     }
     

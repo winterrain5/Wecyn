@@ -30,6 +30,16 @@
 		45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */; };
 		45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */; };
 		45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */; };
+		4509DAA02B91ACA6003CE3F6 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DA9F2B91ACA6003CE3F6 /* URLExtension.swift */; };
+		4509DAA22B91B5A3003CE3F6 /* ForgetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DAA12B91B5A3003CE3F6 /* ForgetPwdController.swift */; };
+		4509DAA42B91BC97003CE3F6 /* ForgetPwdContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DAA32B91BC97003CE3F6 /* ForgetPwdContainer.swift */; };
+		4509DAA62B91BCA0003CE3F6 /* ForgetPwdContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4509DAA52B91BCA0003CE3F6 /* ForgetPwdContainer.xib */; };
+		4509DAA82B91C44E003CE3F6 /* InputCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DAA72B91C44E003CE3F6 /* InputCodeController.swift */; };
+		4509DAAA2B91C477003CE3F6 /* InputCodeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DAA92B91C477003CE3F6 /* InputCodeContainer.swift */; };
+		4509DAAC2B91C480003CE3F6 /* InputCodeContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4509DAAB2B91C480003CE3F6 /* InputCodeContainer.xib */; };
+		4509DAAE2B91C872003CE3F6 /* ResetPwdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DAAD2B91C872003CE3F6 /* ResetPwdController.swift */; };
+		4509DAB02B91C881003CE3F6 /* ResetPwdContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509DAAF2B91C881003CE3F6 /* ResetPwdContainer.swift */; };
+		4509DAB22B91C888003CE3F6 /* ResetPwdContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4509DAB12B91C888003CE3F6 /* ResetPwdContainer.xib */; };
 		450B6C7E2A371733008B0C4A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C7D2A371733008B0C4A /* Operators.swift */; };
 		450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C832A37FFAB008B0C4A /* JobItemCell.swift */; };
 		450B6C862A37FFAB008B0C4A /* JobItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450B6C842A37FFAB008B0C4A /* JobItemCell.xib */; };
@@ -99,6 +109,11 @@
 		4549ECF02AB45B4400EB9C4C /* PostCommentToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */; };
 		4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549ECF12AB817EF00EB9C4C /* PostDetailCommentFooterView.swift */; };
 		4549ECF42AB837E300EB9C4C /* PostDetailCommentFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4549ECF32AB837E300EB9C4C /* PostDetailCommentFooterView.xib */; };
+		454BA37C2B8D70ED006B47BA /* NotificatonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA37B2B8D70ED006B47BA /* NotificatonApi.swift */; };
+		454BA37E2B8D7192006B47BA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA37D2B8D7192006B47BA /* NotificationService.swift */; };
+		454BA3802B8D72E5006B47BA /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA37F2B8D72E5006B47BA /* NotificationController.swift */; };
+		454BA3832B8D72FE006B47BA /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA3812B8D72FE006B47BA /* NotificationCell.swift */; };
+		454BA3842B8D72FE006B47BA /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 454BA3822B8D72FE006B47BA /* NotificationCell.xib */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
 		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
 		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
@@ -330,6 +345,16 @@
 		45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatController.swift; sourceTree = "<group>"; };
 		45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventSingelChooseController.swift; sourceTree = "<group>"; };
 		45005C912A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventRepeatUntilController.swift; sourceTree = "<group>"; };
+		4509DA9F2B91ACA6003CE3F6 /* URLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
+		4509DAA12B91B5A3003CE3F6 /* ForgetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdController.swift; sourceTree = "<group>"; };
+		4509DAA32B91BC97003CE3F6 /* ForgetPwdContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwdContainer.swift; sourceTree = "<group>"; };
+		4509DAA52B91BCA0003CE3F6 /* ForgetPwdContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPwdContainer.xib; sourceTree = "<group>"; };
+		4509DAA72B91C44E003CE3F6 /* InputCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCodeController.swift; sourceTree = "<group>"; };
+		4509DAA92B91C477003CE3F6 /* InputCodeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCodeContainer.swift; sourceTree = "<group>"; };
+		4509DAAB2B91C480003CE3F6 /* InputCodeContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputCodeContainer.xib; sourceTree = "<group>"; };
+		4509DAAD2B91C872003CE3F6 /* ResetPwdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdController.swift; sourceTree = "<group>"; };
+		4509DAAF2B91C881003CE3F6 /* ResetPwdContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwdContainer.swift; sourceTree = "<group>"; };
+		4509DAB12B91C888003CE3F6 /* ResetPwdContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPwdContainer.xib; sourceTree = "<group>"; };
 		4509FEE32A86146B005E3708 /* calendarExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calendarExtension.entitlements; sourceTree = "<group>"; };
 		450B6C7D2A371733008B0C4A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		450B6C832A37FFAB008B0C4A /* JobItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobItemCell.swift; sourceTree = "<group>"; };
@@ -401,6 +426,11 @@
 		4549ECEF2AB45B4400EB9C4C /* PostCommentToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentToolBarView.swift; sourceTree = "<group>"; };
 		4549ECF12AB817EF00EB9C4C /* PostDetailCommentFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailCommentFooterView.swift; sourceTree = "<group>"; };
 		4549ECF32AB837E300EB9C4C /* PostDetailCommentFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailCommentFooterView.xib; sourceTree = "<group>"; };
+		454BA37B2B8D70ED006B47BA /* NotificatonApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificatonApi.swift; sourceTree = "<group>"; };
+		454BA37D2B8D7192006B47BA /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		454BA37F2B8D72E5006B47BA /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		454BA3812B8D72FE006B47BA /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		454BA3822B8D72FE006B47BA /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -696,6 +726,9 @@
 				450BA6E62A36A96800764828 /* RegistAddAvatarController.swift */,
 				450BA6DA2A330A2300764828 /* RegistProfileController.swift */,
 				457C509E2A3949E400FCE8D0 /* CountryListController.swift */,
+				4509DAA12B91B5A3003CE3F6 /* ForgetPwdController.swift */,
+				4509DAA72B91C44E003CE3F6 /* InputCodeController.swift */,
+				4509DAAD2B91C872003CE3F6 /* ResetPwdController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -713,6 +746,12 @@
 				450BA6E22A3312EB00764828 /* RegistConfirmView.xib */,
 				450BA6E82A36A97700764828 /* RegistAddAvatarView.swift */,
 				450BA6EA2A36A98F00764828 /* RegistAddAvatarView.xib */,
+				4509DAA32B91BC97003CE3F6 /* ForgetPwdContainer.swift */,
+				4509DAA52B91BCA0003CE3F6 /* ForgetPwdContainer.xib */,
+				4509DAA92B91C477003CE3F6 /* InputCodeContainer.swift */,
+				4509DAAB2B91C480003CE3F6 /* InputCodeContainer.xib */,
+				4509DAAF2B91C881003CE3F6 /* ResetPwdContainer.swift */,
+				4509DAB12B91C888003CE3F6 /* ResetPwdContainer.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -795,6 +834,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		454BA3782B8D70C4006B47BA /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				454BA37A2B8D70CE006B47BA /* View */,
+				454BA3792B8D70C8006B47BA /* Controller */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		454BA3792B8D70C8006B47BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				454BA37F2B8D72E5006B47BA /* NotificationController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		454BA37A2B8D70CE006B47BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				454BA3812B8D72FE006B47BA /* NotificationCell.swift */,
+				454BA3822B8D72FE006B47BA /* NotificationCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4564BE272A8329A400464AFA /* calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -845,6 +910,7 @@
 				458970612A78DAA100344B93 /* IMService.swift */,
 				45C999F12AB05EBA0017CDC3 /* PostService.swift */,
 				45450CC42B2C0E4500558C9D /* AdminService.swift */,
+				454BA37D2B8D7192006B47BA /* NotificationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -989,6 +1055,7 @@
 				45BBF5272A4832EC0018992C /* ScheduleApi.swift */,
 				45C999EF2AB05C7E0017CDC3 /* PostApi.swift */,
 				45450CC22B2C0D3200558C9D /* AdminApi.swift */,
+				454BA37B2B8D70ED006B47BA /* NotificatonApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -996,6 +1063,7 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				454BA3782B8D70C4006B47BA /* Notification */,
 				45E765BC2A31AB1B00BF6EEC /* Main */,
 				45450CC62B2C408A00558C9D /* Admin */,
 				45EAE8C72A8F1CEE00018C0D /* Post */,
@@ -1058,6 +1126,7 @@
 				45920A9A2A26E045005871ED /* Permission+Extension.swift */,
 				450BA6BE2A32B4B700764828 /* UIViewExtension.swift */,
 				4549ECEB2AB40AF800EB9C4C /* UIMenuExtension.swift */,
+				4509DA9F2B91ACA6003CE3F6 /* URLExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1628,17 +1697,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454BA3842B8D72FE006B47BA /* NotificationCell.xib in Resources */,
 				450BA6DF2A330B8400764828 /* RegistProfileView.xib in Resources */,
 				45A0E6252AB841FF003C5153 /* PostCommentCell.xib in Resources */,
 				456BB04D2B4D38F400BB7838 /* AdminAddRoomContainer.xib in Resources */,
 				456BB0472B4D0DCF00BB7838 /* AdminRoomCell.xib in Resources */,
 				453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */,
 				45005C5F2A57FF0100560E21 /* CreateGroupHeaderView.xib in Resources */,
+				4509DAAC2B91C480003CE3F6 /* InputCodeContainer.xib in Resources */,
 				45920B332A2DB43D005871ED /* Localizable.strings in Resources */,
 				450BA6D92A32F07600764828 /* RegistInfoView.xib in Resources */,
 				458870E22AE66D7F00029353 /* AddUserWorkExperienceView.xib in Resources */,
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
 				456BB0552B4E92D900BB7838 /* AdminEditStaffExpContainer.xib in Resources */,
+				4509DAA62B91BCA0003CE3F6 /* ForgetPwdContainer.xib in Resources */,
 				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
 				4549ECF42AB837E300EB9C4C /* PostDetailCommentFooterView.xib in Resources */,
@@ -1648,6 +1720,7 @@
 				45C938152B43FB3700621BED /* AdminNewStaffCell.xib in Resources */,
 				45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */,
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
+				4509DAB22B91C888003CE3F6 /* ResetPwdContainer.xib in Resources */,
 				45450CD72B2C4B3100558C9D /* AdminRoleItemCell.xib in Resources */,
 				450F6CC62A613AFC0001AA1B /* rrule.js in Resources */,
 				450F6CC72A613AFC0001AA1B /* nlp.js in Resources */,
@@ -1790,11 +1863,13 @@
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
 				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
+				4509DAA22B91B5A3003CE3F6 /* ForgetPwdController.swift in Sources */,
 				45D0AF972B31A4F800C6FAFA /* MMTreeTableView.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				45D0AF962B31A4F800C6FAFA /* MMNodeCell.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
+				4509DAA42B91BC97003CE3F6 /* ForgetPwdContainer.swift in Sources */,
 				45C938052B3EAF7600621BED /* AdminStaffItemCell.swift in Sources */,
 				45C999F42AB06C8D0017CDC3 /* PostTypeController.swift in Sources */,
 				450B6C7E2A371733008B0C4A /* Operators.swift in Sources */,
@@ -1826,6 +1901,7 @@
 				45A0E6452AC29C5F003C5153 /* PostFollowersController.swift in Sources */,
 				45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */,
 				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
+				454BA3832B8D72FE006B47BA /* NotificationCell.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
 				45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */,
 				45A0E63B2ABD7A1B003C5153 /* HomePostFootToolView.swift in Sources */,
@@ -1842,6 +1918,7 @@
 				45920AD12A26E045005871ED /* DataParseErrorType.swift in Sources */,
 				450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */,
 				45450CC92B2C40A200558C9D /* AdminController.swift in Sources */,
+				4509DAAE2B91C872003CE3F6 /* ResetPwdController.swift in Sources */,
 				45920AD42A26E045005871ED /* Exported.swift in Sources */,
 				45A0E6412AC29BF6003C5153 /* PostFollowController.swift in Sources */,
 				45920AF32A26E045005871ED /* Haptico.swift in Sources */,
@@ -1874,6 +1951,7 @@
 				45005C7E2A5E38B400560E21 /* UIImage+SaveTo.swift in Sources */,
 				45C938272B46AAAB00621BED /* AdminEditStaffContainer.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
+				4509DAA82B91C44E003CE3F6 /* InputCodeController.swift in Sources */,
 				4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */,
 				45D0AF742B31505D00C6FAFA /* AdiminAddRoleController.swift in Sources */,
 				456BB0512B4E929500BB7838 /* AdminEditStaffExpController.swift in Sources */,
@@ -1916,6 +1994,7 @@
 				45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */,
 				45A0E6332ABC0A29003C5153 /* PostCommentFullScreenController.swift in Sources */,
 				45C9380E2B3ECF7D00621BED /* AdminStaffExpsCell.swift in Sources */,
+				4509DAB02B91C881003CE3F6 /* ResetPwdContainer.swift in Sources */,
 				45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */,
 				45A0E6272AB95987003C5153 /* PostReturnBackSheetView.swift in Sources */,
 				45920AD22A26E045005871ED /* MainApi.swift in Sources */,
@@ -1926,6 +2005,7 @@
 				45E765BE2A31ABA200BF6EEC /* MainController.swift in Sources */,
 				450F6CBE2A613AFC0001AA1B /* NSDate+Comparison.swift in Sources */,
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
+				4509DAAA2B91C477003CE3F6 /* InputCodeContainer.swift in Sources */,
 				45C781EF2A95C2B600D4E721 /* VisualActivityViewController.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45450CBD2B2AE8D300558C9D /* ApplyForCertificationController.swift in Sources */,
@@ -1949,9 +2029,11 @@
 				4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */,
 				45920ACD2A26E045005871ED /* NetworkLogPlugin.swift in Sources */,
 				45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */,
+				454BA3802B8D72E5006B47BA /* NotificationController.swift in Sources */,
 				450F6CBF2A613AFC0001AA1B /* ExclusionDate.swift in Sources */,
 				450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */,
 				45C938252B46AA9000621BED /* AdminEditStaffController.swift in Sources */,
+				4509DAA02B91ACA6003CE3F6 /* URLExtension.swift in Sources */,
 				45920AFD2A26E045005871ED /* BaseCollectionController.swift in Sources */,
 				45C938172B43FFAC00621BED /* AdminCertificatStaffRequestModel.swift in Sources */,
 				45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */,
@@ -1972,7 +2054,9 @@
 				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
 				45450CD22B2C41C400558C9D /* AdminRoomController.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
+				454BA37E2B8D7192006B47BA /* NotificationService.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,
+				454BA37C2B8D70ED006B47BA /* NotificatonApi.swift in Sources */,
 				45450CC52B2C0E4500558C9D /* AdminService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2206,6 +2290,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
@@ -2238,6 +2323,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
@@ -2257,6 +2343,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
@@ -2289,6 +2376,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;

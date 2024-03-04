@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="deI-ia-wgQ" customClass="InputCodeContainer" customModule="Wecyn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a 6-digit verification code, valid for 10 minutes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaI-6k-8Nt">
+                    <rect key="frame" x="16" y="119.99999999999999" width="361" height="38.333333333333329"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" name="TextColor22"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tde-To-zPN">
+                    <rect key="frame" x="16" y="188.33333333333334" width="361" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="b0z-IN-MIb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iuk-DS-VWx">
+                    <rect key="frame" x="16" y="222.33333333333334" width="361" height="1"/>
+                    <color key="backgroundColor" name="SeperatorColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="hXY-7z-AY7"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMv-SN-7OH">
+                    <rect key="frame" x="177.66666666666666" y="267.33333333333331" width="38" height="34"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" name="AccentColor"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mD8-fp-IOJ">
+                    <rect key="frame" x="16" y="44" width="134" height="32"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="dLQ-Nx-sxg"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="dLQ-Nx-sxg" firstAttribute="trailing" secondItem="NaI-6k-8Nt" secondAttribute="trailing" constant="16" id="5MK-Mc-Hq6"/>
+                <constraint firstItem="mD8-fp-IOJ" firstAttribute="top" secondItem="deI-ia-wgQ" secondAttribute="top" constant="44" id="5oH-Jc-32N"/>
+                <constraint firstItem="Tde-To-zPN" firstAttribute="leading" secondItem="dLQ-Nx-sxg" secondAttribute="leading" constant="16" id="Ebo-re-GOJ"/>
+                <constraint firstItem="Iuk-DS-VWx" firstAttribute="leading" secondItem="dLQ-Nx-sxg" secondAttribute="leading" constant="16" id="NHe-5R-npM"/>
+                <constraint firstItem="NaI-6k-8Nt" firstAttribute="top" secondItem="mD8-fp-IOJ" secondAttribute="bottom" constant="44" id="Ogv-TD-NZJ"/>
+                <constraint firstItem="VMv-SN-7OH" firstAttribute="centerX" secondItem="deI-ia-wgQ" secondAttribute="centerX" id="UqU-xD-ThT"/>
+                <constraint firstItem="Iuk-DS-VWx" firstAttribute="top" secondItem="Tde-To-zPN" secondAttribute="bottom" id="b5L-z9-l8X"/>
+                <constraint firstItem="mD8-fp-IOJ" firstAttribute="leading" secondItem="dLQ-Nx-sxg" secondAttribute="leading" constant="16" id="h4M-JW-Wrg"/>
+                <constraint firstItem="Tde-To-zPN" firstAttribute="top" secondItem="NaI-6k-8Nt" secondAttribute="bottom" constant="30" id="qEu-8r-ghI"/>
+                <constraint firstItem="dLQ-Nx-sxg" firstAttribute="trailing" secondItem="Tde-To-zPN" secondAttribute="trailing" constant="16" id="t4O-ZL-suI"/>
+                <constraint firstItem="dLQ-Nx-sxg" firstAttribute="trailing" secondItem="Iuk-DS-VWx" secondAttribute="trailing" constant="16" id="tZR-B2-XGp"/>
+                <constraint firstItem="VMv-SN-7OH" firstAttribute="top" secondItem="Iuk-DS-VWx" secondAttribute="bottom" constant="44" id="vY8-Ix-5po"/>
+                <constraint firstItem="NaI-6k-8Nt" firstAttribute="leading" secondItem="dLQ-Nx-sxg" secondAttribute="leading" constant="16" id="y2G-o9-Wj4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="codeTf" destination="Tde-To-zPN" id="6eb-MC-VdN"/>
+                <outlet property="nextButton" destination="VMv-SN-7OH" id="9ev-n6-9Fh"/>
+            </connections>
+            <point key="canvasLocation" x="112" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SeperatorColor">
+            <color red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor22">
+            <color red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -45,4 +45,10 @@ class AuthService {
         let target = MultiTarget(AuthApi.signin(username: username, password: password))
         return APIProvider.rx.request(target).asObservable().mapObject(TokenModel.self)
     }
+    
+    // 重置密码
+    static func resetPassword(email:String,code:String,password:String) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AuthApi.resetPassword(email, code, password))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
 }

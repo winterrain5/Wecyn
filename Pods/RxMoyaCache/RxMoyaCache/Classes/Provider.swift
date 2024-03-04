@@ -11,7 +11,7 @@ import RxSwift
 
 public struct CacheProvider<Provider: MoyaProviderType> where Provider.Target: Cacheable {
     
-    public let provider: Provider
+    public var provider: Provider
     
     public func request(
         _ target: Provider.Target,
