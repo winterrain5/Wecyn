@@ -475,8 +475,6 @@ class CreatePostViewController: BaseViewController {
         
         func compressVideo(_ sourceURL:URL) ->  Promise<URL> {
             return Promise.init { resolver in
-//                resolver.fulfill(sourceURL)
-               
                 Toast.showLoading(withStatus: "compress video")
                 FYVideoCompressor().compressVideo(sourceURL, quality: .highQuality) { result in
                     switch result {

@@ -12,4 +12,6 @@ class TokenModel: BaseModel,Codable {
     var refresh_token: String = ""
     var token: String = ""
     var expiry_time: String = ""
+    var im_token: String = ""
+    var is_logined:Bool = false
 }

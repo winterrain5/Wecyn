@@ -85,8 +85,8 @@ class AdminController: BaseViewController {
         
         let is_super = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_super ?? 0
         if is_super == 1{
-            controllers = [AdminRoleController(),AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
-            titleDataSource.titles = ["Role","Department","Staff","Room"]
+            controllers = [AdminRoleController(),AdminDepartmentController(),AdminStaffController(),AdminRoomController(),AdminDomainController()]
+            titleDataSource.titles = ["Role","Department","Staff","Room","Domain"]
         } else {
             controllers = [AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
             titleDataSource.titles = ["Department","Staff","Room"]
@@ -133,9 +133,12 @@ class AdminController: BaseViewController {
         filterButton.showsMenuAsPrimaryAction = true
         let filterItem = UIBarButtonItem(customView: filterButton)
         self.navigation.item.rightBarButtonItem = filterItem
-        
-        
         getOrgList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     func loadData() {
@@ -145,6 +148,10 @@ class AdminController: BaseViewController {
         vc.updateDataComplete  = {[weak self] in
             Toast.dismiss()
             self?.paggingView.mainTableView.mj_header?.endRefreshing()
+        }
+        
+        if self.orgList.count == 0 {
+            getOrgList()
         }
     }
     

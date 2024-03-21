@@ -87,6 +87,12 @@
 		450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */; };
 		450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
+		452A7A202BAA7CA5009312F7 /* AdminDomainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A1F2BAA7CA4009312F7 /* AdminDomainController.swift */; };
+		452A7A222BAA8668009312F7 /* AdminDomainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A212BAA8668009312F7 /* AdminDomainCell.swift */; };
+		452A7A242BAAAF74009312F7 /* AdminAddDomainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */; };
+		452A7A262BAAAF87009312F7 /* AdminAddDomainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A252BAAAF87009312F7 /* AdminAddDomainContainer.swift */; };
+		452A7A282BAAAF90009312F7 /* AdminAddDomainContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A7A272BAAAF90009312F7 /* AdminAddDomainContainer.xib */; };
+		452A7A4D2BABD4CA009312F7 /* IMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A4C2BABD4CA009312F7 /* IMManager.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* NetworkApi.swift */; };
 		4536533E2A413F270026EC8D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* NetworkService.swift */; };
@@ -404,6 +410,12 @@
 		450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardView.swift; sourceTree = "<group>"; };
 		450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardController.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
+		452A7A1F2BAA7CA4009312F7 /* AdminDomainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDomainController.swift; sourceTree = "<group>"; };
+		452A7A212BAA8668009312F7 /* AdminDomainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDomainCell.swift; sourceTree = "<group>"; };
+		452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddDomainController.swift; sourceTree = "<group>"; };
+		452A7A252BAAAF87009312F7 /* AdminAddDomainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddDomainContainer.swift; sourceTree = "<group>"; };
+		452A7A272BAAAF90009312F7 /* AdminAddDomainContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminAddDomainContainer.xib; sourceTree = "<group>"; };
+		452A7A4C2BABD4CA009312F7 /* IMManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMManager.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* NetworkApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApi.swift; sourceTree = "<group>"; };
 		4536533D2A413F270026EC8D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -803,6 +815,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		452A7A1C2BAA773F009312F7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				452A7A1E2BAA7747009312F7 /* Controller */,
+				452A7A1D2BAA7744009312F7 /* View */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		452A7A1D2BAA7744009312F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				452A7A212BAA8668009312F7 /* AdminDomainCell.swift */,
+				452A7A252BAAAF87009312F7 /* AdminAddDomainContainer.swift */,
+				452A7A272BAAAF90009312F7 /* AdminAddDomainContainer.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		452A7A1E2BAA7747009312F7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				452A7A1F2BAA7CA4009312F7 /* AdminDomainController.swift */,
+				452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		452A7A4B2BABD4B5009312F7 /* IM */ = {
+			isa = PBXGroup;
+			children = (
+				452A7A4C2BABD4CA009312F7 /* IMManager.swift */,
+			);
+			path = IM;
+			sourceTree = "<group>";
+		};
 		453653382A41369D0026EC8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -814,6 +862,7 @@
 		45450CC62B2C408A00558C9D /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				452A7A1C2BAA773F009312F7 /* Domain */,
 				456BB0412B4D0D9E00BB7838 /* Room */,
 				45C938002B3EAF4D00621BED /* Staff */,
 				45D0AF7A2B31957600C6FAFA /* Department */,
@@ -1063,6 +1112,7 @@
 		45920A872A26E045005871ED /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				452A7A4B2BABD4B5009312F7 /* IM */,
 				454BA3782B8D70C4006B47BA /* Notification */,
 				45E765BC2A31AB1B00BF6EEC /* Main */,
 				45450CC62B2C408A00558C9D /* Admin */,
@@ -1720,6 +1770,7 @@
 				45C938152B43FB3700621BED /* AdminNewStaffCell.xib in Resources */,
 				45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */,
 				45920B2D2A2DB3A2005871ED /* InfoPlist.strings in Resources */,
+				452A7A282BAAAF90009312F7 /* AdminAddDomainContainer.xib in Resources */,
 				4509DAB22B91C888003CE3F6 /* ResetPwdContainer.xib in Resources */,
 				45450CD72B2C4B3100558C9D /* AdminRoleItemCell.xib in Resources */,
 				450F6CC62A613AFC0001AA1B /* rrule.js in Resources */,
@@ -1836,7 +1887,9 @@
 				45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */,
 				45920ACE2A26E045005871ED /* APIHost.swift in Sources */,
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
+				452A7A242BAAAF74009312F7 /* AdminAddDomainController.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
+				452A7A4D2BABD4CA009312F7 /* IMManager.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
 				45A0E6432AC29C49003C5153 /* PostFollowingController.swift in Sources */,
 				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
@@ -1901,6 +1954,7 @@
 				45A0E6452AC29C5F003C5153 /* PostFollowersController.swift in Sources */,
 				45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */,
 				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
+				452A7A222BAA8668009312F7 /* AdminDomainCell.swift in Sources */,
 				454BA3832B8D72FE006B47BA /* NotificationCell.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,
 				45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */,
@@ -1909,6 +1963,7 @@
 				45A0E6372ABD428C003C5153 /* PostQuoteView.swift in Sources */,
 				45A13F5D2AD68BB2005A3993 /* CalendarFilterView.swift in Sources */,
 				45E85B112A398EBA00B820CD /* CityModel.swift in Sources */,
+				452A7A262BAAAF87009312F7 /* AdminAddDomainContainer.swift in Sources */,
 				45A0E63D2ABD7E7C003C5153 /* HomePostItemCell.swift in Sources */,
 				450BA6CF2A32C62D00764828 /* SwiftFitSize.swift in Sources */,
 				45920AFF2A26E045005871ED /* DataLoadable.swift in Sources */,
@@ -1952,6 +2007,7 @@
 				45C938272B46AAAB00621BED /* AdminEditStaffContainer.swift in Sources */,
 				45920AF12A26E045005871ED /* DefaultsExtension.swift in Sources */,
 				4509DAA82B91C44E003CE3F6 /* InputCodeController.swift in Sources */,
+				452A7A202BAA7CA5009312F7 /* AdminDomainController.swift in Sources */,
 				4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */,
 				45D0AF742B31505D00C6FAFA /* AdiminAddRoleController.swift in Sources */,
 				456BB0512B4E929500BB7838 /* AdminEditStaffExpController.swift in Sources */,

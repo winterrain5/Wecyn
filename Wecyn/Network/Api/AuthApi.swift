@@ -61,7 +61,7 @@ extension AuthApi:  TargetType, Cacheable  {
         case .signup(let model):
             return requestToTaskByPost(model)
         case .signin(let username,let password):
-            return requestParametersByPost(["username":username,"password":password])
+            return requestParametersByPost(["username":username,"password":password,"platform":1])
         case .resetPassword(let email, let code, let pwd):
             return requestParametersByPost(["email":email,"code":code,"password":pwd])
         }

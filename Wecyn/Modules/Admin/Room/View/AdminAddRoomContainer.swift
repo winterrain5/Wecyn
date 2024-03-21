@@ -93,7 +93,7 @@ class AdminAddRoomContainer: UIView,UITextFieldDelegate {
         
         AdminService.addRoom(model: requestModel).subscribe(onNext:{
             if $0.success == 1 {
-                Toast.showSuccess("successfully added")
+                Toast.showSuccess("Added successfully")
                 UIViewController.sk.getTopVC()?.dismiss(animated: true)
                 NotificationCenter.default.post(name: NSNotification.Name.UpdateAdminData, object: nil)
             } else {

@@ -159,11 +159,18 @@ class SettingController: BaseTableController {
         }
         
         if model.type == .Logout {
+            
             let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
             alert.addAction(title: "Confirm",style: .destructive) { _ in
-                UserDefaults.sk.removeAllKeyValue()
-                let nav = BaseNavigationController(rootViewController: LoginController())
-                UIApplication.shared.keyWindow?.rootViewController = nav
+                IMManager.shared.login {
+                    UserDefaults.sk.removeAllKeyValue()
+                    let nav = BaseNavigationController(rootViewController: LoginController())
+                    UIApplication.shared.keyWindow?.rootViewController = nav
+                } error: { e in
+                    Toast.showError(e.asAPIError.errorInfo().message)
+                }
+
+             
             }
             alert.addAction(title: "Cancel",style: .cancel)
             alert.show()

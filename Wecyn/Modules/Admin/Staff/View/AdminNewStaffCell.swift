@@ -15,6 +15,7 @@ class AdminNewStaffCell: UITableViewCell {
     @IBOutlet weak var titlesLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
     var model:AdminNewStaffModel? {
         didSet {
@@ -22,9 +23,10 @@ class AdminNewStaffCell: UITableViewCell {
             
             avatarImgView.kf.setImage(with: model.user?.avatar.url)
             nameLabel.text = (model.user?.first_name ?? "") + " "  + (model.user?.last_name ?? "")
-            titlesLabel.text = model.title_name
+            titlesLabel.text = "job title: " + (model.title_name ?? "")
             messageLabel.text = model.user_remark
-            dateLabel.text = model.apply_time
+            dateLabel.text = "start date: " + (model.start_date ?? "")
+            timeLabel.text = "apply time: " + (model.apply_time ?? "")
         }
     }
     var operateHandler:((Int,AdminNewStaffModel)->())?

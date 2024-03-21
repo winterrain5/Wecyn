@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="145" id="pgF-ps-wJu" customClass="AdminNewStaffCell" customModule="Wecyn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="399" height="145"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="268" id="pgF-ps-wJu" customClass="AdminNewStaffCell" customModule="Wecyn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="268"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pgF-ps-wJu" id="nTW-ed-TX8">
-                <rect key="frame" x="0.0" y="0.0" width="399" height="145"/>
+                <rect key="frame" x="0.0" y="0.0" width="399" height="268"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EfR-vw-SqL">
@@ -38,19 +38,19 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htv-e4-waN">
-                        <rect key="frame" x="16" y="64" width="367" height="19.333333333333329"/>
+                        <rect key="frame" x="64" y="127.33333333333333" width="319" height="19.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" name="TextColor77"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwc-IU-I20">
-                        <rect key="frame" x="113.33333333333333" y="17.666666666666668" width="35.333333333333329" height="17.000000000000004"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="job title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwc-IU-I20">
+                        <rect key="frame" x="64" y="44.333333333333336" width="49" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" name="TextColor77"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RN1-CP-aGZ">
-                        <rect key="frame" x="64" y="40.333333333333336" width="35.333333333333343" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RN1-CP-aGZ">
+                        <rect key="frame" x="64" y="69.333333333333329" width="299" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" name="TextColor77"/>
                         <nil key="highlightedColor"/>
@@ -63,22 +63,33 @@
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" image="ellipsis"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="apply time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBb-i9-5ke">
+                        <rect key="frame" x="64" y="94.333333333333329" width="299" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" name="TextColor77"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="RN1-CP-aGZ" firstAttribute="leading" secondItem="uxJ-On-wii" secondAttribute="leading" id="3Z2-Jd-J0c"/>
-                    <constraint firstItem="Iwc-IU-I20" firstAttribute="centerY" secondItem="uxJ-On-wii" secondAttribute="centerY" id="5Sn-yA-NEs"/>
                     <constraint firstItem="uxJ-On-wii" firstAttribute="leading" secondItem="EfR-vw-SqL" secondAttribute="trailing" constant="8" symbolic="YES" id="6c1-df-ZRP"/>
-                    <constraint firstItem="8WR-pW-Tum" firstAttribute="centerY" secondItem="Iwc-IU-I20" secondAttribute="centerY" id="9eO-e0-aAA"/>
                     <constraint firstAttribute="trailing" secondItem="htv-e4-waN" secondAttribute="trailing" constant="16" id="E5Z-YL-DV3"/>
-                    <constraint firstItem="RN1-CP-aGZ" firstAttribute="top" secondItem="uxJ-On-wii" secondAttribute="bottom" constant="4" id="JfM-pg-hVZ"/>
+                    <constraint firstItem="RN1-CP-aGZ" firstAttribute="top" secondItem="Iwc-IU-I20" secondAttribute="bottom" constant="8" id="G0j-lT-Jug"/>
+                    <constraint firstItem="oBb-i9-5ke" firstAttribute="top" secondItem="RN1-CP-aGZ" secondAttribute="bottom" constant="8" id="HUx-VB-g9D"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RN1-CP-aGZ" secondAttribute="trailing" constant="16" id="TBR-Mi-SPg"/>
+                    <constraint firstItem="Iwc-IU-I20" firstAttribute="top" secondItem="uxJ-On-wii" secondAttribute="bottom" constant="8" id="TEB-zK-i7Q"/>
                     <constraint firstAttribute="trailing" secondItem="8WR-pW-Tum" secondAttribute="trailing" constant="16" id="X69-Tw-Tdp"/>
                     <constraint firstItem="uxJ-On-wii" firstAttribute="top" secondItem="EfR-vw-SqL" secondAttribute="top" id="Xqz-QU-62R"/>
                     <constraint firstItem="EfR-vw-SqL" firstAttribute="leading" secondItem="nTW-ed-TX8" secondAttribute="leading" constant="16" id="YtW-us-aGS"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="htv-e4-waN" secondAttribute="bottom" constant="16" id="am4-pb-cS6"/>
                     <constraint firstItem="EfR-vw-SqL" firstAttribute="top" secondItem="nTW-ed-TX8" secondAttribute="top" constant="16" id="bH8-RV-BXl"/>
-                    <constraint firstItem="htv-e4-waN" firstAttribute="top" secondItem="EfR-vw-SqL" secondAttribute="bottom" constant="8" id="kiZ-ys-PQX"/>
-                    <constraint firstItem="htv-e4-waN" firstAttribute="leading" secondItem="nTW-ed-TX8" secondAttribute="leading" constant="16" id="mjx-XE-rjS"/>
-                    <constraint firstItem="Iwc-IU-I20" firstAttribute="leading" secondItem="uxJ-On-wii" secondAttribute="trailing" constant="8" id="v35-0a-GxV"/>
+                    <constraint firstItem="RN1-CP-aGZ" firstAttribute="leading" secondItem="Iwc-IU-I20" secondAttribute="leading" id="cs0-xt-NMI"/>
+                    <constraint firstItem="htv-e4-waN" firstAttribute="top" secondItem="oBb-i9-5ke" secondAttribute="bottom" constant="16" id="dnT-Ol-tI0"/>
+                    <constraint firstItem="htv-e4-waN" firstAttribute="leading" secondItem="oBb-i9-5ke" secondAttribute="leading" id="eoQ-Qx-kCg"/>
+                    <constraint firstItem="oBb-i9-5ke" firstAttribute="leading" secondItem="RN1-CP-aGZ" secondAttribute="leading" id="hgf-cq-MNW"/>
+                    <constraint firstItem="Iwc-IU-I20" firstAttribute="leading" secondItem="uxJ-On-wii" secondAttribute="leading" id="i5E-CC-wjf"/>
+                    <constraint firstItem="8WR-pW-Tum" firstAttribute="centerY" secondItem="uxJ-On-wii" secondAttribute="centerY" id="kVB-5k-MKb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oBb-i9-5ke" secondAttribute="trailing" constant="16" id="r9i-WU-67Y"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="RDp-HI-FSP"/>
@@ -88,9 +99,10 @@
                 <outlet property="messageLabel" destination="htv-e4-waN" id="jal-CW-do6"/>
                 <outlet property="moreButton" destination="8WR-pW-Tum" id="v1E-4n-fbT"/>
                 <outlet property="nameLabel" destination="uxJ-On-wii" id="sKN-YB-HX1"/>
+                <outlet property="timeLabel" destination="oBb-i9-5ke" id="0r2-sh-Mpj"/>
                 <outlet property="titlesLabel" destination="Iwc-IU-I20" id="6kh-IF-j37"/>
             </connections>
-            <point key="canvasLocation" x="-199.23664122137404" y="-19.366197183098592"/>
+            <point key="canvasLocation" x="-199.23664122137404" y="23.943661971830988"/>
         </tableViewCell>
     </objects>
     <resources>
