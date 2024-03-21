@@ -15,7 +15,7 @@ enum AdminApi {
     case updateRole(_ id:Int,_ name:String? = nil,_ permission:[Int]? = [],_ remark:String? = nil)
     
     case adminRoomList(_ orgid:Int,_ keyword:String? = nil)
-
+    
     case addRoom(_ model:AdminAddRoomRequestModel)
     case updateRoom(_ model:AdminAddRoomRequestModel)
     case deleteRoom(_ id:Int)
@@ -31,6 +31,11 @@ enum AdminApi {
     case updateStaff(_ model:AdminUpdateStaffRequestModel)
     case updateStaffExp(_ model:AdminUpdateStaffExpRequestModel)
     case deleteStaffExp(_ id:Int)
+    
+    case domainList(_ orgId:Int,_ keyword:String? = nil)
+    case deleteDomain(_ id:Int)
+    case domainVerification( orgId:Int,_ email:String,_ code:Int)
+    case sendVerificationCode(_ email:String)
     
     case adminOrgList
     case userOrgList
@@ -79,12 +84,30 @@ extension AdminApi:TargetType {
             return "/api/admin/staff/updateStaffExperience/"
         case .deleteStaffExp:
             return "/api/admin/staff/deleteStaffExperience/"
+        case .sendVerificationCode:
+            return "/api/admin/domain/sendVerificationCode/"
+        case .domainList:
+            return "/api/admin/domain/searchList/"
+        case .domainVerification:
+            return "/api/admin/domain/domainVerification/"
+        case .deleteDomain:
+            return "/api/admin/domain/deleteDomain/"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .addRole,.deleteRole,.deleteDepartment,.addDepartment,.staffCertification,.addRoom,.deleteRoom,.deleteStaffExp:
+        case .addRole,
+                .deleteRole,
+                .deleteDepartment,
+                .addDepartment,
+                .staffCertification,
+                .addRoom,
+                .deleteRoom,
+                .deleteStaffExp,
+                .deleteDomain,
+                .domainVerification,
+                .sendVerificationCode:
             return .post
         case  .updateRole,.updateDepartment,.updateRoom,.updateStaff,.updateStaffExp:
             return .put
@@ -133,6 +156,15 @@ extension AdminApi:TargetType {
             return requestToTaskByPost(model)
         case .deleteStaffExp(let id):
             return requestParametersByPost(["id":id])
+        case .deleteDomain(let id):
+            return requestParametersByPost(["id":id])
+        case .domainVerification(let orgId,let email, let code):
+            return requestParametersByPost(["org_id":orgId,"email":email,"code":code.string])
+        case .domainList(let orgId,let keyword):
+            return requestParametersByGet(["org_id":orgId,"keyword":keyword])
+        case .sendVerificationCode(let email):
+            return requestParametersByPost(["email":email])
+            
         }
     }
 }

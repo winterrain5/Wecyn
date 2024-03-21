@@ -299,7 +299,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 119 images.
+  /// This `_R.image` struct is generated, and contains static references to 120 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -645,6 +645,9 @@ struct _R {
     /// Image `toolbar_link`.
     var toolbar_link: RswiftResources.ImageResource { .init(name: "toolbar_link", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `trash.fill`.
+    var trashFill: RswiftResources.ImageResource { .init(name: "trash.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `triangle.fill`.
     var triangleFill: RswiftResources.ImageResource { .init(name: "triangle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -691,7 +694,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 32 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 33 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -700,6 +703,9 @@ struct _R {
 
     /// Nib `AddUserWorkExperienceView`.
     var addUserWorkExperienceView: RswiftResources.NibReference<AddUserWorkExperienceView> { .init(name: "AddUserWorkExperienceView", bundle: bundle) }
+
+    /// Nib `AdminAddDomainContainer`.
+    var adminAddDomainContainer: RswiftResources.NibReference<AdminAddDomainContainer> { .init(name: "AdminAddDomainContainer", bundle: bundle) }
 
     /// Nib `AdminAddRoleContainer`.
     var adminAddRoleContainer: RswiftResources.NibReference<AdminAddRoleContainer> { .init(name: "AdminAddRoleContainer", bundle: bundle) }
@@ -800,6 +806,9 @@ struct _R {
       if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'AddUserWorkExperienceView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AddUserWorkExperienceView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor99", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor99' is used in nib 'AddUserWorkExperienceView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminAddDomainContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminAddDomainContainer', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'AdminAddDomainContainer', but couldn't be loaded.") }
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminAddRoleContainer', but couldn't be loaded.") }

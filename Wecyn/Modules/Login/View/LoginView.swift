@@ -5,6 +5,7 @@
 //  Created by Derrick on 2023/6/9.
 //
 
+import PromiseKit
 import UIKit
 import Cache
 import RxSwift
@@ -52,35 +53,30 @@ class LoginView: UIView {
         signInButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             guard let username = self.userNameTf.text,let password = self.passwordTf.text else { return }
+            
             self.signInButton.startAnimation()
-            AuthService.signin(username: username, password: MD5(password + "wecyn").lowercased()).subscribe(onNext:{ model in
-                
-                UserDefaults.sk.set(object: model, for: TokenModel.className)
-                
-                let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
-                userDefaults?.setValue(model.token, forKey: "token")
-                userDefaults?.synchronize()
-                
-                
-                UserService.getUserInfo().retry(3).subscribe(onNext:{ model in
-                    self.signInButton.stopAnimation()
+            
+            let md5pwd = MD5(password + "wecyn").lowercased()
+            self.signin(username: username, password: md5pwd)
+                .then { _ in
+                    self.getUserInfo()
+                }
+                .then { _ in
+                    self.imLogin()
+                }
+                .done { _ in
+                    let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)
+                    tokenModel?.is_logined = true
                     
-                    UserDefaults.sk.set(object: model, for: UserInfoModel.className)
-                    
-                    userDefaults?.setValue(model.id, forKey: "userId")
-                    userDefaults?.synchronize()
+                    UserDefaults.sk.set(object: tokenModel, for: TokenModel.className)
                     
                     let main = MainController()
                     UIApplication.shared.keyWindow?.rootViewController = main
-                },onError: { e in
+                }
+                .catch { e in
                     self.signInButton.stopAnimation()
-                    Toast.showError(e.asAPIError.errorInfo().message)
-                }).disposed(by: self.rx.disposeBag)
-               
-            },onError: { e in
-                self.signInButton.stopAnimation()
-                Toast.showError((e as! APIError).errorInfo().message)
-            }).disposed(by: self.rx.disposeBag)
+                    Toast.showError((e as! APIError).errorInfo().message)
+                }
 
         }).disposed(by: rx.disposeBag)
         
@@ -112,4 +108,58 @@ class LoginView: UIView {
         
     }
 
+    
+    func signin(username:String,password:String) -> Promise<Void>{
+        Promise { resolver in
+            AuthService.signin(username: username, password: password).subscribe(onNext:{ model in
+                
+                UserDefaults.sk.set(object: model, for: TokenModel.className)
+                
+                let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
+                userDefaults?.setValue(model.token, forKey: "token")
+                userDefaults?.synchronize()
+                
+                resolver.fulfill_()
+               
+            },onError: { e in
+                self.signInButton.stopAnimation()
+                Toast.showError((e as! APIError).errorInfo().message)
+                resolver.reject(APIError.networkError(e))
+            }).disposed(by: self.rx.disposeBag)
+        }
+    }
+    
+    func getUserInfo() -> Promise<Void> {
+        Promise.init { resolver in
+            UserService.getUserInfo().retry(3).subscribe(onNext:{ model in
+                self.signInButton.stopAnimation()
+                
+                UserDefaults.sk.set(object: model, for: UserInfoModel.className)
+                
+                let userDefaults = UserDefaults(suiteName: APIHost.share.suitName)
+                userDefaults?.setValue(model.id, forKey: "userId")
+                userDefaults?.synchronize()
+      
+                resolver.fulfill_()
+            },onError: { e in
+                self.signInButton.stopAnimation()
+                Toast.showError(e.asAPIError.errorInfo().message)
+                resolver.reject(e)
+            }).disposed(by: self.rx.disposeBag)
+           
+        }
+    }
+    
+    func imLogin() -> Promise<Void> {
+        Promise { reslover in
+            IMManager.shared.login {
+                reslover.fulfill_()
+            } error: { e in
+                reslover.reject(e)
+                self.signInButton.stopAnimation()
+                Toast.showError(e.asAPIError.errorInfo().message)
+            }
+
+        }
+    }
 }

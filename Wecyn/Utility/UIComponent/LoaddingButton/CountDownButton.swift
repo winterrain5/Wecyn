@@ -34,7 +34,7 @@ class CountDownButton: LoadingButton {
     private var totalSecond = 0
     private var timer: Timer?
     private var startDate:Date?
-    
+    private var title:String?
     // MARK: touch action
     // 倒计时按钮点击回调
     public func countDownButtonHandler(_ handler:@escaping (_ sender:CountDownButton,_ second: Int) -> ()) {
@@ -50,8 +50,11 @@ class CountDownButton: LoadingButton {
     
     // MARK: count down method
     public func startCountDownWithSecond(_ totalSecond: Int) {
+        stopAnimation()
         stopCountDown()
+        
         self.totalSecond = totalSecond
+        
         self.isUserInteractionEnabled = false
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerStart(timer:)), userInfo: nil, repeats: true)
         RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
@@ -84,8 +87,8 @@ class CountDownButton: LoadingButton {
                     self.setTitle(countDownFinished!(self,totalSecond), for: .normal)
                     self.setTitle(countDownFinished!(self,totalSecond), for: .disabled)
                 }else{
-                    self.setTitle("获取验证码", for: .normal)
-                    self.setTitle("获取验证码", for: .disabled)
+                    self.setTitle(title, for: .normal)
+                    self.setTitle(title, for: .disabled)
                 }
             }
 
@@ -102,18 +105,19 @@ class CountDownButton: LoadingButton {
         countDownFinished = handler
     }
     
-    override func stopAnimation() {
-        super.stopAnimation()
-        self.setTitle("", for: .normal)
-        self.setTitle("", for: .disabled)
+    func stopAnimation(title:String = "") {
+        self.stopAnimation()
+        self.setTitle(title, for: .normal)
+        self.setTitle(title, for: .disabled)
         if timer != nil {
             if (timer?.isValid)! {
                 timer?.invalidate()
             }
         }
     }
-    override func startAnimation() {
-        super.startAnimation()
+    func startAnimation(title:String) {
+        self.startAnimation()
+        self.title = title
         self.setTitle("", for: .normal)
         self.setTitle("", for: .disabled)
         if timer != nil {

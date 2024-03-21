@@ -191,6 +191,14 @@ class NetworkService {
         return APIProvider.rx.request(target).asObservable().mapObject(ScanCardModel.self)
     }
     
+    
+    /// 添加好友和删除好友时，会将好友信息同步到OpenIM
+    /// - Returns: ResponseStatus
+    static func checkOpenIMStatus() -> Observable<ResponseStatus> {
+        let target = MultiTarget(NetworkApi.checkOpenIMFriend)
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
 }
 
 class ScanCardModel:BaseModel  {

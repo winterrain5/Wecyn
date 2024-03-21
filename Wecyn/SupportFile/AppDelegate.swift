@@ -28,8 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Localizer.shared.changeLanguage.accept(getCurrentLanguage())
         
+        IMManager.shared.config()
         
-        if let _ = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)  {
+        let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)
+        if tokenModel?.is_logined ?? false  {
             let main = MainController()
             window?.rootViewController = main
             main.setSelectedIndex(at: 0)

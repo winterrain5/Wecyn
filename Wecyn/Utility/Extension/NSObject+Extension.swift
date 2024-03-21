@@ -77,8 +77,8 @@ extension String {
     
     func valiatePassword() -> (flag:Bool,message:String){
         var errorMessage = ""
-        if self.count < 6 {
-            errorMessage += "·Passwords need to be at least 6 characters\n"
+        if self.count < 8 {
+            errorMessage += "·Passwords need to be at least 8 characters\n"
         }
         if !self.isHasLowercaseCharacter() {
             errorMessage += "·At least one lowercase character \n"

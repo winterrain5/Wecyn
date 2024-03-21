@@ -245,7 +245,7 @@ class CalendarAddNewEventController: BaseTableController {
         requestModel.is_repeat = event.is_repeat
         requestModel.rrule_str = event.rrule_str
         requestModel.desc = event.desc
-        requestModel.remarks = event.remarks
+        requestModel.remarks = event.remarks.htmlToString
         requestModel.url = event.url
         requestModel.location = event.location
         requestModel.color = event.color
@@ -273,7 +273,7 @@ class CalendarAddNewEventController: BaseTableController {
        
         Duplicate.duplicate = event.recurrenceType
         Desc.desc = event.desc.htmlToString
-        Remark.remarks = event.remarks
+        Remark.remarks = event.remarks.htmlToString
         Location.location = event.location
         Link.url = event.url
         EmailCc.emails = event.emails
@@ -672,7 +672,7 @@ class CalendarAddNewEventController: BaseTableController {
             vc.editComplete = { [weak self] text,html in
                 Logger.debug(html)
                
-                self?.requestModel.remarks = html
+                self?.requestModel.remarks = html.htmlToString
                 self?.Remark.remarks = text
                 
                 self?.reloadData()

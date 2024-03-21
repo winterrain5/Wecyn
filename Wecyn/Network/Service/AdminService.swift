@@ -187,6 +187,33 @@ class AdminService {
         let target = MultiTarget(AdminApi.deleteStaffExp(id))
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
+    
+    static func deleteDomain(id:Int) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.deleteDomain(id))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    static func domainVerification(orgId:Int,email:String,code:Int) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.domainVerification(orgId: orgId, email, code))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+    
+    static func domainList(orgId:Int,keyword:String = "") -> Observable<[AdminDomainModel]> {
+        let target = MultiTarget(AdminApi.domainList(orgId,keyword))
+        return APIProvider.rx.request(target).asObservable().mapObjectArray(AdminDomainModel.self)
+    }
+    
+    static func sendVerificationCode(email:String) -> Observable<ResponseStatus> {
+        let target = MultiTarget(AdminApi.sendVerificationCode(email))
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
+}
+
+class AdminDomainModel:BaseModel {
+    var id:Int = 0
+    var org_id:Int = 0
+    var domain:String = ""
+    var create_time:String = ""
 }
 
 
