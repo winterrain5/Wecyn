@@ -44,10 +44,15 @@
         }
     } onFailure:onFailure];
     
-    Open_im_sdkGetOneConversation(callback, [self operationId], sessionType, sourceID);
+    Open_im_sdkGetOneConversation(callback, [self operationId], (int32_t)sessionType, sourceID);
 }
 
-- (void)getMultipleConversation:(NSArray<NSString *> *)ids
+- (NSString *)getConversationIDBySessionType:(OIMConversationType)sessionType
+                                    sourceID:(NSString *)sourceID {
+    return Open_im_sdkGetConversationIDBySessionType([self operationId], sourceID, sessionType);
+}
+
+- (void)getMultipleConversation:(NSArray<NSString *> *)conversationIDs
                       onSuccess:(OIMConversationsInfoCallback)onSuccess
                       onFailure:(OIMFailureCallback)onFailure {
     CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:^(NSString * _Nullable data) {
@@ -56,7 +61,7 @@
         }
     } onFailure:onFailure];
     
-    Open_im_sdkGetMultipleConversation(callback, [self operationId], ids.mj_JSONString);
+    Open_im_sdkGetMultipleConversation(callback, [self operationId], conversationIDs.mj_JSONString);
 }
 
 - (void)deleteConversationAndDeleteAllMsg:(NSString *)conversationID
@@ -78,9 +83,6 @@
 
 - (void)deleteAllConversationFromLocalWithOnSuccess:(OIMSuccessCallback)onSuccess
                                           onFailure:(OIMFailureCallback)onFailure {
-    CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:onSuccess onFailure:onFailure];
-    
-    Open_im_sdkDeleteAllConversationFromLocal(callback, [self operationId]);
 }
 
 - (void)setConversationDraft:(NSString *)conversationID
@@ -167,11 +169,39 @@
     Open_im_sdkHideConversation(callback, [self operationId], conversationID);
 }
 
+- (void)hideAllConversationsWithOnSuccess:(OIMSuccessCallback)onSuccess
+                               onFailure:(OIMFailureCallback)onFailure {
+    CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:onSuccess onFailure:onFailure];
+    
+    Open_im_sdkHideAllConversations(callback, [self operationId]);
+}
+
 - (void)markConversationMessageAsRead:(NSString *)conversationID
                             onSuccess:(nullable OIMSuccessCallback)onSuccess
                             onFailure:(nullable OIMFailureCallback)onFailure {
     CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:onSuccess onFailure:onFailure];
 
     Open_im_sdkMarkConversationMessageAsRead(callback, [self operationId], conversationID);
+}
+
+- (void)setConversationEx:(NSString *)conversationID
+                       ex:(NSString *)ex
+                onSuccess:(nullable OIMSuccessCallback)onSuccess
+                onFailure:(nullable OIMFailureCallback)onFailure {
+    CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:onSuccess onFailure:onFailure];
+
+    Open_im_sdkSetConversationEx(callback, [self operationId], conversationID, ex);
+}
+
+- (void)searchConversation:(NSString *)name
+                onSuccess:(nullable OIMConversationsInfoCallback)onSuccess
+                 onFailure:(nullable OIMFailureCallback)onFailure {
+    CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:^(NSString * _Nullable data) {
+        if (onSuccess) {
+            onSuccess([OIMConversationInfo mj_objectArrayWithKeyValuesArray:data]);
+        }
+    } onFailure:onFailure];
+    
+    Open_im_sdkSearchConversation(callback, [self operationId], name);
 }
 @end

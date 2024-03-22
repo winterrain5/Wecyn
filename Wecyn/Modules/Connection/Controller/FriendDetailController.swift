@@ -147,7 +147,8 @@ class FriendDetailController: BaseTableController {
         
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                Toast.showWarning("Function under development")
+                let vc = ChatViewController(user: model)
+                self.navigationController?.pushViewController(vc)
             }
             if indexPath.row == 1 {
                 deleteUser()
@@ -297,7 +298,7 @@ class FriendDetailSendMessageCell: UITableViewCell {
         btn.titleColorForNormal = R.color.textColor22()
         btn.titleLabel?.font = UIFont.sk.pingFangSemibold(15)
         btn.imageForNormal = R.image.message()
-        
+        btn.isUserInteractionEnabled = false
         contentView.backgroundColor = .white
     }
     

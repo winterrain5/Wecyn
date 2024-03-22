@@ -19,10 +19,7 @@
         self.logFilePath = self.dataDir;
         self.isLogStandardOutput = YES;
         self.logLevel = 6;
-        self.objectStorage = @"minio";
-        self.encryption = NO;
         self.compression = NO;
-        self.isExternal = NO;
     }
     
     return self;
@@ -53,15 +50,10 @@
     param[@"wsAddr"]  = config.wsAddr;
     param[@"dataDir"] = config.dataDir;
     param[@"logLevel"] = @(config.logLevel);
-    param[@"objectStorage"] = config.objectStorage;
-    param[@"isNeedEncryption"] = @(config.encryption);
     param[@"isCompression"] = @(config.compression);
-    param[@"isExternalExtensions"] = @(config.isExternal);
     param[@"logFilePath"] = config.logFilePath;
     param[@"isLogStandardOutput"] = @(config.isLogStandardOutput);
-    
-    self.objectStorage = config.objectStorage;
-    
+        
     return Open_im_sdkInitSDK([self class].callbacker, [self operationId], param.mj_JSONString);
 }
 
@@ -69,4 +61,18 @@
     Open_im_sdkSetHeartbeatInterval(heartbeatInterval);
 }
 
+- (void)unInitSDK {
+    Open_im_sdkUnInitSDK([self operationId]);
+}
+
+- (void)uploadLogsWithProgress:(OIMUploadProgressCallback)onProgress
+                            ex:(NSString *)ex
+                     onSuccess:(OIMSuccessCallback)onSuccess
+                     onFailure:(OIMFailureCallback)onFailure {
+    CallbackProxy *callback = [[CallbackProxy alloc]initWithOnSuccess:onSuccess onFailure:onFailure];
+    
+    UploadLogsCallbackProxy *progress = [[UploadLogsCallbackProxy alloc] initWithOnProgress:onProgress];
+    
+    Open_im_sdkUploadLogs(callback, [self operationId], ex, progress);
+}
 @end

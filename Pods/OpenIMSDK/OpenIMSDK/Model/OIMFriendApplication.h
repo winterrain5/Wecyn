@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 好友申请信息，谁申请添加谁为好友，以及对申请的处理结果
+/// Friend application information, indicating who is applying to add whom as a friend and the result of handling the application.
 ///
 @interface OIMFriendApplication : NSObject
 
@@ -21,15 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable, copy) NSString *fromFaceURL;
 
-@property (nonatomic, assign) OIMGender fromGender;
-
 @property (nonatomic, nullable, copy) NSString *toUserID;
 
 @property (nonatomic, nullable, copy) NSString *toNickname;
 
 @property (nonatomic, nullable, copy) NSString *toFaceURL;
-
-@property (nonatomic, assign) OIMGender toGender;
 
 @property (nonatomic, assign) OIMApplicationStatus handleResult;
 

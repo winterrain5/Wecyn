@@ -41,7 +41,7 @@ install_framework()
 
   if [ -L "${source}" ]; then
     echo "Symlinked..."
-    source="$(readlink -f "${source}")"
+    source="$(readlink "${source}")"
   fi
 
   if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then
@@ -192,6 +192,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ImagePickerSwift/ImagePickerSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JXPagingView/JXPagingView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JXSegmentedView/JXSegmentedView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KMPlaceholderTextView/KMPlaceholderTextView.framework"
@@ -200,6 +201,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NFCReaderWriter/NFCReaderWriter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework"
@@ -248,6 +250,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ImagePickerSwift/ImagePickerSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JXPagingView/JXPagingView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JXSegmentedView/JXSegmentedView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KMPlaceholderTextView/KMPlaceholderTextView.framework"
@@ -255,6 +258,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NFCReaderWriter/NFCReaderWriter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework"

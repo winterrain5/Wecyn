@@ -1,54 +1,117 @@
+# iOS Client SDK for OpenIM 👨‍💻💬
 
-## 可以免费商用，必须在app启动页加上 (由OpenIM提供技术支持)
-![avatar](https://github.com/OpenIMSDK/OpenIM-Docs/blob/main/docs/images/WechatIMG20.jpeg)
-# OpenIMSDK
+Use this SDK to add instant messaging capabilities to your app. By connecting to a self-hosted [OpenIM](https://www.openim.online/) server, you can quickly integrate instant messaging capabilities into your app with just a few lines of code.
 
-[![Version](https://img.shields.io/cocoapods/v/OpenIMSDK.svg?style=flat)](https://cocoapods.org/pods/OpenIMSDK)
-[![License](https://img.shields.io/cocoapods/l/OpenIMSDK.svg?style=flat)](https://cocoapods.org/pods/OpenIMSDK)
-[![Platform](https://img.shields.io/cocoapods/p/OpenIMSDK.svg?style=flat)](https://cocoapods.org/pods/OpenIMSDK)
+The underlying SDK core is implemented in [OpenIM SDK Core](https://github.com/openimsdk/openim-sdk-core). Using [gomobile](https://github.com/golang/mobile), it can be compiled into an XCFramework for iOS integration. iOS interacts with the [OpenIM SDK Core](https://github.com/openimsdk/openim-sdk-core) through JSON, and the SDK exposes a re-encapsulated API for easy usage. In terms of data storage, iOS utilizes the SQLite layer provided internally by the [OpenIM SDK Core](https://github.com/openimsdk/openim-sdk-core).
 
-#### [中文文档](https://doc.rentsoft.cn/#/ios_v2/sdk_integrate/development)
 
-## Example
+## Documentation 📚
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Visit [https://docs.openim.io/](https://docs.openim.io/) for detailed documentation and guides.
 
-## Requirements
+For the SDK reference, see [Quick Start guide](https://docs.openim.io/sdks/quickstart/ios).
 
-## Installation
+## Installation 💻
 
-Open-IM-SDK-iOS is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### Adding Dependencies
 
 ```ruby
 pod 'OpenIMSDK'
 ```
 
-## 已知的几个问题
-```ruby
-问题1: The 'Pods-xxx' target has transitive dependencies that include statically linked binaries: (xxx/Pods/OpenIMSDKCore/Framework/OpenIMCore.xcframework)
+## Usage 🚀
 
-处理Podfile内容（a、b选择其一， 升级2.0.7.4不需要处理）:
-  a. 删除
-      use_frameworks!
-  b. 增加 
-      pre_install do |installer|
-        Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
-      end
+The following examples demonstrate how to use the SDK. Objective-C is used, providing complete type hints.
+
+### Importing the SDK
+
+```swift
+@import OpenIMSDK;
 ```
 
-```ruby
-问题2: SDK 不支持amrv7架构，注意Xcode的设置。
+### Logging In and Listening for Connection Status
+
+> Note: You need to [Deploy OpenIM Server](https://github.com/openimsdk/open-im-server#rocket-quick-start)  first, the default port of OpenIM Server is 10001, 10002.
+
+```swift
+OIMInitConfig *config = [OIMInitConfig new];
+config.apiAddr = @"";
+config.wsAddr = @"";
+config.objectStorage = @"";
+
+BOOL success = [OIMManager.manager initSDKWithConfig:config
+                                        onConnecting:^{
+    // The SDK is currently connecting to the IM server.
+} onConnectFailure:^(NSInteger code, NSString * _Nullable msg) {
+    // Callback function for connection failure
+    // code: Error code
+    // error: Error message
+} onConnectSuccess:^{
+    // The SDK has successfully connected to the IM server.
+} onKickedOffline:^{
+    // Kicked offline.
+} onUserTokenExpired:^{
+    // Token expired while online: In this situation, you need to generate a new token and then call the `login()` function again to log in.
+}];
 ```
 
-```ruby
-问题3: 升级2.0.7.4后恢复问题1的原有内容。
+To log into the IM server, you need to create an account and obtain a user ID and token. Refer to the [access token documentation](https://doc.rentsoft.cn/restapi/userManagement/userRegister) for details.
+
+### Receiving and Sending Messages 💬
+
+OpenIM makes it easy to send and receive messages. By default, there is no restriction on having a friend relationship to send messages (although you can configure other policies on the server). If you know the user ID of the recipient, you can conveniently send a message to them.
+
+```swift
+@import OpenIMSDK;
+
+// Listenfor new messages 📩
+[OIMManager.callbacker setAdvancedMsgListenerWithOnRecvMessageRevoked:^(OIMMessageRevokedInfo * _Nullable msgRovoked) {
+} onRecvC2CReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable msgReceiptList) {
+} onRecvGroupReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable msgReceiptList) {
+} onRecvNewMessage:^(OIMMessageInfo * _Nullable message) {
+}];
+
+OIMMessageInfo *testMessage = [OIMMessageInfo createTextMessage:@"Hello!"];
+
+[OIMManager.manager sendMessage:testMessage
+                         recvID:@""
+                        groupID:@""
+                offlinePushInfo:nil
+                      onSuccess:^(OIMMessageInfo * _Nullable message) {
+            // Please note here that the returned message needs to be replaced with the data source.
+            testMessage = message;
+} onProgress:^(NSInteger number) {
+} onFailure:^(NSInteger code, NSString * _Nullable msg) {
+}];
 ```
 
-```ruby
-问题4: 有开发者发现使用swift实现sdk的代理API未传递到业务层，需要使用@objc符号修饰。
-例如： @objc public func onFriendApplicationAdded:
-```
-## License
+## Examples 🌟
 
-OpenIMSDK is available under the MIT license. See the LICENSE file for more info.
+You can find a demo app that uses the SDK in the [open-im-ios-demo](https://github.com/openimsdk/open-im-ios-demo) repository.
+
+## Requirements 🌐
+
++ The minimum deployment target is iOS 11.0.
+
+## Community :busts_in_silhouette:
+
+- 📚 [OpenIM Community](https://github.com/OpenIMSDK/community)
+- 💕 [OpenIM Interest Group](https://github.com/Openim-sigs)
+- 🚀 [Join our Slack community](https://join.slack.com/t/openimsdk/shared_invite/zt-22720d66b-o_FvKxMTGXtcnnnHiMqe9Q)
+- :eyes: [Join our wechat (微信群)](https://openim-1253691595.cos.ap-nanjing.myqcloud.com/WechatIMG20.jpeg)
+
+## Community Meetings :calendar:
+
+We want anyone to get involved in our community and contributing code, we offer gifts and rewards, and we welcome you to join us every Thursday night.
+
+Our conference is in the [OpenIM Slack](https://join.slack.com/t/openimsdk/shared_invite/zt-22720d66b-o_FvKxMTGXtcnnnHiMqe9Q) 🎯, then you can search the Open-IM-Server pipeline to join
+
+We take notes of each [biweekly meeting](https://github.com/orgs/OpenIMSDK/discussions/categories/meeting) in [GitHub discussions](https://github.com/openimsdk/open-im-server/discussions/categories/meeting), Our historical meeting notes, as well as replays of the meetings are available at [Google Docs :bookmark_tabs:](https://docs.google.com/document/d/1nx8MDpuG74NASx081JcCpxPgDITNTpIIos0DS6Vr9GU/edit?usp=sharing).
+
+## Who are using OpenIM :eyes:
+
+Check out our [user case studies](https://github.com/OpenIMSDK/community/blob/main/ADOPTERS.md) page for a list of the project users. Don't hesitate to leave a [📝comment](https://github.com/openimsdk/open-im-server/issues/379) and share your use case.
+
+## License :page_facing_up:
+
+OpenIM is licensed under the Apache 2.0 license. See [LICENSE](https://github.com/openimsdk/open-im-server/tree/main/LICENSE) for the full license text.

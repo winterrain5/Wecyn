@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-///申请进群信息
+/// Group joining application information
 ///
 @interface OIMGroupApplicationInfo : NSObject
 
@@ -28,7 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable, copy) NSString *userID;
 @property (nonatomic, nullable, copy) NSString *nickname;
 @property (nonatomic, nullable, copy) NSString *userFaceURL;
-@property (nonatomic, assign) OIMGender gender;
 @property (nonatomic, assign) OIMApplicationStatus handleResult;
 @property (nonatomic, nullable, copy) NSString *reqMsg;
 @property (nonatomic, nullable, copy) NSString *handledMsg;
@@ -40,5 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) OIMJoinType joinSource;
 
 @end
+
 
 NS_ASSUME_NONNULL_END

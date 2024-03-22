@@ -10,7 +10,7 @@
 
 @implementation OIMManager (Login)
 
-- (void)login:(NSString *)uid
+- (void)login:(NSString *)userID
         token:(NSString *)token
     onSuccess:(OIMSuccessCallback)onSuccess
     onFailure:(OIMFailureCallback)onFailure {
@@ -25,10 +25,10 @@
     
     [[self class].callbacker setListener];
     
-    Open_im_sdkLogin(callback, [self operationId], uid, token);
+    Open_im_sdkLogin(callback, [self operationId], userID, token);
 }
 
-- (NSInteger)getLoginStatus {
+- (OIMLoginStatus)getLoginStatus {
     return Open_im_sdkGetLoginStatus([self operationId]);
 }
 
