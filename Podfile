@@ -55,6 +55,7 @@ target 'Wecyn' do
   pod 'FYVideoCompressor'
   pod 'TBDropdownMenu'
   pod 'BadgeControl'
+  pod 'MessageKit'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

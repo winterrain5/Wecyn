@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/// 群组信息
+/// Group Information
 ///
 @interface OIMGroupInfo : OIMGroupBaseInfo
 
@@ -41,10 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *creatorUserID;
 @property (nonatomic, copy, readonly) NSString *ownerUserID;
 @property (nonatomic, assign) OIMGroupVerificationType needVerification;
-@property (nonatomic, assign) NSInteger lookMemberInfo;
-@property (nonatomic, assign) NSInteger applyMemberFriend;
-@property (nonatomic, assign, readonly) NSInteger notificationUpdateTime;
-@property (nonatomic, copy, readonly) NSString *notificationUserID;
+@property (nonatomic, assign) OIMAllowType lookMemberInfo;
+@property (nonatomic, assign) OIMAllowType applyMemberFriend;
+@property (nonatomic, assign) NSInteger notificationUpdateTime;
+@property (nonatomic, nullable, copy) NSString *notificationUserID;
 
 @end
 

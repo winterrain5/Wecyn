@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-///个人信息，所有信息都包括
+/// Personal information, including all details
 ///
 @interface OIMUserInfo : NSObject
 
@@ -21,6 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable, copy) NSString *ex;
 @property (nonatomic, nullable, copy) NSString *attachedInfo;
 @property (nonatomic, assign) OIMReceiveMessageOpt globalRecvMsgOpt;
+@end
+
+@interface OIMUserStatusInfo : NSObject
+
+@property (nonatomic, nullable, copy) NSString *userID;
+@property (nonatomic, nullable, copy) NSArray *platformIDs;
+@property (nonatomic, assign) NSInteger status;
 @end
 
 NS_ASSUME_NONNULL_END

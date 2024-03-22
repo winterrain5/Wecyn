@@ -29,3 +29,5 @@ import Foundation
 @_exported import Kingfisher
 @_exported import SPIndicator
 @_exported import SafeSFSymbols
+@_exported import MessageKit
+@_exported import InputBarAccessoryView

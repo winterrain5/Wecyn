@@ -162,7 +162,7 @@ class SettingController: BaseTableController {
             
             let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
             alert.addAction(title: "Confirm",style: .destructive) { _ in
-                IMManager.shared.login {
+                IMManager.shared.logout {
                     UserDefaults.sk.removeAllKeyValue()
                     let nav = BaseNavigationController(rootViewController: LoginController())
                     UIApplication.shared.keyWindow?.rootViewController = nav
