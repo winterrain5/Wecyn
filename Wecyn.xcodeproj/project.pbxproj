@@ -100,7 +100,7 @@
 		452A7A242BAAAF74009312F7 /* AdminAddDomainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */; };
 		452A7A262BAAAF87009312F7 /* AdminAddDomainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A252BAAAF87009312F7 /* AdminAddDomainContainer.swift */; };
 		452A7A282BAAAF90009312F7 /* AdminAddDomainContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452A7A272BAAAF90009312F7 /* AdminAddDomainContainer.xib */; };
-		452A7A4D2BABD4CA009312F7 /* IMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A4C2BABD4CA009312F7 /* IMManager.swift */; };
+		452A7A4D2BABD4CA009312F7 /* IMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A4C2BABD4CA009312F7 /* IMController.swift */; };
 		452A7AA92BAC1665009312F7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7AA82BAC1665009312F7 /* ChatViewController.swift */; };
 		4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653392A4136BA0026EC8D /* UserInfoModel.swift */; };
 		4536533C2A413DF70026EC8D /* NetworkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533B2A413DF70026EC8D /* NetworkApi.swift */; };
@@ -310,6 +310,12 @@
 		45EAE8CA2A8F1D4B00018C0D /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */; };
 		45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */; };
 		45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */; };
+		45F07C1C2BB10D770070813D /* String_IM_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C1B2BB10D770070813D /* String_IM_Extension.swift */; };
+		45F07C1F2BB10ECC0070813D /* JsonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C1E2BB10ECC0070813D /* JsonTool.swift */; };
+		45F07C212BB10FB80070813D /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C202BB10FB80070813D /* MessageHelper.swift */; };
+		45F07C232BB110080070813D /* FormatUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C222BB110080070813D /* FormatUtil.swift */; };
+		45F07C252BB110740070813D /* StandarUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C242BB110740070813D /* StandarUI.swift */; };
+		45F07C282BB143FA0070813D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C272BB143FA0070813D /* Message.swift */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
 /* End PBXBuildFile section */
 
@@ -433,7 +439,7 @@
 		452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddDomainController.swift; sourceTree = "<group>"; };
 		452A7A252BAAAF87009312F7 /* AdminAddDomainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddDomainContainer.swift; sourceTree = "<group>"; };
 		452A7A272BAAAF90009312F7 /* AdminAddDomainContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminAddDomainContainer.xib; sourceTree = "<group>"; };
-		452A7A4C2BABD4CA009312F7 /* IMManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMManager.swift; sourceTree = "<group>"; };
+		452A7A4C2BABD4CA009312F7 /* IMController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMController.swift; sourceTree = "<group>"; };
 		452A7AA82BAC1665009312F7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		453653392A4136BA0026EC8D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4536533B2A413DF70026EC8D /* NetworkApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApi.swift; sourceTree = "<group>"; };
@@ -649,6 +655,12 @@
 		45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostToolBar.swift; sourceTree = "<group>"; };
 		45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostToolBar.xib; sourceTree = "<group>"; };
+		45F07C1B2BB10D770070813D /* String_IM_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_IM_Extension.swift; sourceTree = "<group>"; };
+		45F07C1E2BB10ECC0070813D /* JsonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonTool.swift; sourceTree = "<group>"; };
+		45F07C202BB10FB80070813D /* MessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
+		45F07C222BB110080070813D /* FormatUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatUtil.swift; sourceTree = "<group>"; };
+		45F07C242BB110740070813D /* StandarUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandarUI.swift; sourceTree = "<group>"; };
+		45F07C272BB143FA0070813D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85753C0B8E9CA6B5BCF3B27A /* Pods-Wecyn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wecyn.release.xcconfig"; path = "Target Support Files/Pods-Wecyn/Pods-Wecyn.release.xcconfig"; sourceTree = "<group>"; };
 		F6737696186A89881164CB5A /* Pods-Wecyn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wecyn.debug.xcconfig"; path = "Target Support Files/Pods-Wecyn/Pods-Wecyn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -882,11 +894,13 @@
 		452A7A4B2BABD4B5009312F7 /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				45F07C1D2BB10EC40070813D /* Util */,
+				45F07C1A2BB10D650070813D /* Extension */,
 				4513F61B2BAD5A500080756F /* View */,
 				45086B292BAD27D100A8215D /* AudioController */,
 				45CB924F2BAD13BC00C7B95D /* Model */,
 				452A7AA72BAC1643009312F7 /* Controller */,
-				452A7A4C2BABD4CA009312F7 /* IMManager.swift */,
+				452A7A4C2BABD4CA009312F7 /* IMController.swift */,
 			);
 			path = IM;
 			sourceTree = "<group>";
@@ -1496,6 +1510,7 @@
 			isa = PBXGroup;
 			children = (
 				45CB92502BAD13C700C7B95D /* IMMessage.swift */,
+				45F07C272BB143FA0070813D /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1691,6 +1706,25 @@
 				45A0E6462AC2C149003C5153 /* PostFollowUserCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		45F07C1A2BB10D650070813D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				45F07C1B2BB10D770070813D /* String_IM_Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		45F07C1D2BB10EC40070813D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				45F07C1E2BB10ECC0070813D /* JsonTool.swift */,
+				45F07C202BB10FB80070813D /* MessageHelper.swift */,
+				45F07C222BB110080070813D /* FormatUtil.swift */,
+				45F07C242BB110740070813D /* StandarUI.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		58E99C64972A237AA00869D0 /* Pods */ = {
@@ -1952,7 +1986,7 @@
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				452A7A242BAAAF74009312F7 /* AdminAddDomainController.swift in Sources */,
 				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
-				452A7A4D2BABD4CA009312F7 /* IMManager.swift in Sources */,
+				452A7A4D2BABD4CA009312F7 /* IMController.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
 				45A0E6432AC29C49003C5153 /* PostFollowingController.swift in Sources */,
 				450F6CC02A613AFC0001AA1B /* InclusionDate.swift in Sources */,
@@ -1961,12 +1995,14 @@
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
+				45F07C282BB143FA0070813D /* Message.swift in Sources */,
 				4513F61A2BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift in Sources */,
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
 				45D0AF982B31A4F800C6FAFA /* MMNodeView.swift in Sources */,
 				456BB0532B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift in Sources */,
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
 				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
+				45F07C1C2BB10D770070813D /* String_IM_Extension.swift in Sources */,
 				458870E42AE67F0700029353 /* OrganizationSearchController.swift in Sources */,
 				45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
@@ -2010,6 +2046,7 @@
 				458970622A78DAA100344B93 /* IMService.swift in Sources */,
 				45450CD62B2C4B3100558C9D /* AdminRoleItemCell.swift in Sources */,
 				4549ECE82AB2B4E700EB9C4C /* PostUserHeaderInfoView.swift in Sources */,
+				45F07C1F2BB10ECC0070813D /* JsonTool.swift in Sources */,
 				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
 				45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */,
@@ -2089,12 +2126,14 @@
 				450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */,
 				458870E62AE7BD2000029353 /* AddUserEducationExperienceView.swift in Sources */,
 				450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */,
+				45F07C212BB10FB80070813D /* MessageHelper.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
 				45005C5D2A57FEEF00560E21 /* CreateGroupHeaderView.swift in Sources */,
 				45920AEA2A26E045005871ED /* ZoomImageScrollView.swift in Sources */,
+				45F07C252BB110740070813D /* StandarUI.swift in Sources */,
 				45A7E5A12A71128F0002014D /* NFCNameCardEditController.swift in Sources */,
 				45A7E5A32A7212040002014D /* MapViewController.swift in Sources */,
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
@@ -2125,6 +2164,7 @@
 				45EAE8CA2A8F1D4B00018C0D /* CreatePostViewController.swift in Sources */,
 				450BA6D72A32F06B00764828 /* RegistInfoView.swift in Sources */,
 				45086B2B2BAD27E400A8215D /* BasicAudioController.swift in Sources */,
+				45F07C232BB110080070813D /* FormatUtil.swift in Sources */,
 				457C7DD02A52976D002E50DF /* CalendarAssistantMenu.swift in Sources */,
 				4513F61D2BAD5A5C0080756F /* iMessageInputBar.swift in Sources */,
 				4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */,

@@ -152,7 +152,7 @@ class LoginView: UIView {
     
     func imLogin() -> Promise<Void> {
         Promise { reslover in
-            IMManager.shared.login {
+            IMController.shared.login {
                 reslover.fulfill_()
             } error: { e in
                 reslover.reject(e)

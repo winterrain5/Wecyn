@@ -28,7 +28,7 @@ target 'Wecyn' do
   pod 'Kingfisher'
   pod 'NFCReaderWriter'
   pod 'SafeSFSymbols'
-
+  pod 'DifferenceKit'
 
   #UI
   pod 'IQKeyboardManagerSwift'

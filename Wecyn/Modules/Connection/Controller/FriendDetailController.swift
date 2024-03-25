@@ -147,7 +147,7 @@ class FriendDetailController: BaseTableController {
         
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let vc = ChatViewController(user: model)
+                let vc = ChatViewController(replyuser: model)
                 self.navigationController?.pushViewController(vc)
             }
             if indexPath.row == 1 {
