@@ -10,6 +10,7 @@ import InputBarAccessoryView
 import MessageKit
 import Kingfisher
 import MapKit
+import OpenIMSDK
 
 class ChatViewController: MessagesViewController {
     private(set) lazy var refreshControl: UIRefreshControl = {
@@ -27,11 +28,11 @@ class ChatViewController: MessagesViewController {
     lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
     var messageList:[IMMessage] = []
     
-    var user:FriendUserInfoModel!
-    var replyUser:IMUser!
-    required init (user:FriendUserInfoModel) {
+    var replyuser:FriendUserInfoModel!
+    var replyIMUser:IMUser!
+    required init (replyuser:FriendUserInfoModel) {
         super.init(nibName: nil, bundle: nil)
-        self.user = user
+        self.replyuser = replyuser
     }
     
     required init?(coder: NSCoder) {
@@ -44,8 +45,10 @@ class ChatViewController: MessagesViewController {
         configureMessageCollectionView()
         configureMessageInputBar()
         
-        replyUser = IMUser(senderId: user.id.string, displayName: user.full_name)
-        navigation.item.title = user.full_name
+        replyIMUser = IMUser(senderId: replyuser.id.string, displayName: replyuser.full_name)
+        navigation.item.title = replyuser.full_name
+        
+        addObserver()
     }
     
     
@@ -68,12 +71,19 @@ class ChatViewController: MessagesViewController {
         
         messageInputBar = iMessageInputBar()
         messageInputBar.delegate = self
-
+        
     }
     
     @objc func loadMoreMessages() {
         self.messagesCollectionView.reloadDataAndKeepOffset()
         self.refreshControl.endRefreshing()
+    }
+    
+    func addObserver() {
+        
+        IMController.shared.newMsgReceivedSubject.subscribe(onNext:{ [weak self] in
+            print($0)
+        }).disposed(by: rx.disposeBag)
     }
 }
 

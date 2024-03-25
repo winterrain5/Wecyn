@@ -18,6 +18,12 @@ PODS:
   - Cache (6.0.0)
   - CocoaDebug (1.7.7)
   - CodeTextField (0.4.0)
+  - DifferenceKit (1.3.0):
+    - DifferenceKit/Core (= 1.3.0)
+    - DifferenceKit/UIKitExtension (= 1.3.0)
+  - DifferenceKit/Core (1.3.0)
+  - DifferenceKit/UIKitExtension (1.3.0):
+    - DifferenceKit/Core
   - DKEmptyDataSet (0.1.0)
   - DKLogger (0.4.0)
   - DZNEmptyDataSet (1.8.1)
@@ -174,6 +180,7 @@ DEPENDENCIES:
   - Cache (~> 6.0.0)
   - CocoaDebug
   - CodeTextField (~> 0.4.0)
+  - DifferenceKit
   - DKEmptyDataSet
   - DKLogger
   - DZNEmptyDataSet
@@ -234,6 +241,7 @@ SPEC REPOS:
     - Cache
     - CocoaDebug
     - CodeTextField
+    - DifferenceKit
     - DKEmptyDataSet
     - DKLogger
     - DZNEmptyDataSet
@@ -303,6 +311,7 @@ SPEC CHECKSUMS:
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
+  DifferenceKit: ab185c4d7f9cef8af3fcf593e5b387fb81e999ca
   DKEmptyDataSet: 3cca8b2435bec8a8265d238012f0f99ab112c91f
   DKLogger: 4db2407d09a97241fbb81ea2f2b7f3190f032769
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -357,6 +366,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: 96e91e1a6e3ccffb7485422b629c2fa5dae69f3f
+PODFILE CHECKSUM: e3ac05b44dab9b4cc731f1894229a1f3163d460f
 
 COCOAPODS: 1.11.2

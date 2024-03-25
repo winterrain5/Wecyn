@@ -7,6 +7,7 @@ ${BUILT_PRODUCTS_DIR}/CodeTextField/CodeTextField.framework
 ${BUILT_PRODUCTS_DIR}/DKEmptyDataSet/DKEmptyDataSet.framework
 ${BUILT_PRODUCTS_DIR}/DKLogger/DKLogger.framework
 ${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework
+${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework
 ${BUILT_PRODUCTS_DIR}/EachNavigationBar/EachNavigationBar.framework
 ${BUILT_PRODUCTS_DIR}/EntryKit/EntryKit.framework
 ${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework

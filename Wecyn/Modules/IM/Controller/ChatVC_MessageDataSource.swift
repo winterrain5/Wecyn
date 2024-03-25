@@ -10,7 +10,7 @@ import MessageKit
 // MARK: MessagesDataSource
 extension ChatViewController:  MessagesDataSource {
     func currentSender() -> any SenderType {
-        IMManager.shared.currentSender
+        IMController.shared.currentSender
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {

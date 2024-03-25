@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Localizer.shared.changeLanguage.accept(getCurrentLanguage())
         
-        IMManager.shared.config()
+        IMController.shared.config()
         
         let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)
         if tokenModel?.is_logined ?? false  {
