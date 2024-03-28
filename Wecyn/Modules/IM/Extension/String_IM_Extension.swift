@@ -8,7 +8,7 @@
 import Foundation
 import CryptoKit
 import OpenIMSDK
-
+import Localize_Swift
 extension String {
     /// 根据下标获取某个下标字符
     subscript(of index: Int) -> String {
@@ -88,7 +88,9 @@ extension String {
     }
     
     func innerLocalized() -> String  {
-        return self
+        let bundle = BundleUtil.getResourceBundle()
+        let str = localized(using: nil, in: bundle)
+        return str
     }
 
     

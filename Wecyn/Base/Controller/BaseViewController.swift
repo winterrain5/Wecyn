@@ -10,7 +10,8 @@ import UIKit
 import BadgeControl
 import IQKeyboardManagerSwift
 class BaseViewController: UIViewController {
-    var badger:BadgeController!
+    var notificationBadger:BadgeController!
+    var messageBadger:BadgeController!
     var updateDataComplete:(()->())?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -85,30 +86,42 @@ class BaseViewController: UIViewController {
         message.imageForNormal = R.image.ellipsisMessage()
         let messageItem = UIBarButtonItem(customView: message)
         message.rx.tap.subscribe(onNext:{
-            
+            let vc = ChatListController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
         
         
         self.navigation.item.rightBarButtonItems = [notificationItem,fixItem1,messageItem,fixItem2]
         
-        badger = BadgeController(for: notificationButton,
+        notificationBadger = BadgeController(for: notificationButton,
                                  in: .upperLeftCorner,
                                  badgeBackgroundColor: UIColor.red,
                                  badgeTextColor: UIColor.white,
                                  badgeHeight: 16)
         
-        
+        messageBadger = BadgeController(for: message,
+                                 in: .upperLeftCorner,
+                                 badgeBackgroundColor: UIColor.red,
+                                 badgeTextColor: UIColor.white,
+                                 badgeHeight: 16)
     }
     
-    func updateBadge(_ count:Int) {
+    func updateNotificationBadge(_ count:Int) {
         if count == 0 {
-            badger.remove(animated: false)
+            notificationBadger.remove(animated: false)
             return
         }
-        badger.addOrReplaceCurrent(with: count.string, animated: true)
+        notificationBadger.addOrReplaceCurrent(with: count.string, animated: true)
     }
     
 
+    func updateMessageBadge(_ count:Int) {
+        if count == 0 {
+            messageBadger.remove(animated: false)
+            return
+        }
+        messageBadger.addOrReplaceCurrent(with: count.string, animated: true)
+    }
 
     
     func barTintColor(_ color:UIColor) {

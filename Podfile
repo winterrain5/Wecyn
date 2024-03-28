@@ -56,6 +56,7 @@ target 'Wecyn' do
   pod 'TBDropdownMenu'
   pod 'BadgeControl'
   pod 'MessageKit'
+  pod 'Localize-Swift', '~> 3.2'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

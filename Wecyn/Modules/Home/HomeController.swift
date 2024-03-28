@@ -17,7 +17,66 @@ class HomeController: BaseTableController {
         self.view.isSkeletonable = true
         
         addRightBarItems()
+        addCreatePostButton()
+        addTitleLabel()
+        addIMObserver()
         
+       
+        refreshData()
+        
+        getNotificationCount()
+        getIMNotification()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setNeedsStatusBarAppearanceUpdate()
+        
+     
+    }
+    
+    override func createListView() {
+        super.createListView()
+        pageSize = 10
+        numberOfSkeletonCell = 5
+        tableView?.isSkeletonable = true
+        cellIdentifier = HomePostItemCell.className
+        
+        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
+        
+        tableView?.register(cellWithClass: HomePostItemCell.self)
+        
+        tableView?.separatorColor = R.color.seperatorColor()
+        tableView?.separatorInset = .zero
+        tableView?.separatorStyle = .singleLine
+        
+        registRefreshHeader(colorStyle: .gray)
+        registRefreshFooter()
+    }
+    
+    func addIMObserver() {
+        IMController.shared.totalUnreadSubject.subscribe(onNext:{ [weak self] in
+            self?.updateMessageBadge($0)
+        }).disposed(by: rx.disposeBag)
+        
+        let status = IMController.shared.getLoginStatus()
+        if status == .logout {
+            IMController.shared.login()
+        }
+
+    }
+    
+    func addTitleLabel() {
+        let wecynLabel = UILabel()
+        wecynLabel.text = "Wecyn"
+        wecynLabel.textColor = R.color.textColor22()!
+        wecynLabel.font = UIFont(name: "Zapfino", size: 16)
+        let leftItem = UIBarButtonItem(customView: wecynLabel)
+        self.navigation.item.leftBarButtonItem = leftItem
+        
+    }
+    
+    func addCreatePostButton() {
         self.view.addSubview(createPostButton)
         createPostButton.backgroundColor = R.color.theamColor()
         createPostButton.titleForNormal = "+"
@@ -46,46 +105,6 @@ class HomeController: BaseTableController {
             }
            
         }).disposed(by: rx.disposeBag)
-        
-        let wecynLabel = UILabel()
-        wecynLabel.text = "Wecyn"
-        wecynLabel.textColor = R.color.textColor22()!
-        wecynLabel.font = UIFont(name: "Zapfino", size: 16)
-        let leftItem = UIBarButtonItem(customView: wecynLabel)
-        self.navigation.item.leftBarButtonItem = leftItem
-        
-        Logger.info("kNavBarHeight:\(kNavBarHeight)")
-        Logger.info("kTabBarHeight:\(kTabBarHeight)")
-        Logger.info("UIDevice.tabbarHeight:\(UIDevice.tabbarHeight)")
-        Logger.info("UIDevice.bottomSafeAreaMargin:\(UIDevice.topSafeAreaMargin)")
-        
-        refreshData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setNeedsStatusBarAppearanceUpdate()
-        
-        getNotificationCount()
-    }
-    
-    override func createListView() {
-        super.createListView()
-        pageSize = 10
-        numberOfSkeletonCell = 5
-        tableView?.isSkeletonable = true
-        cellIdentifier = HomePostItemCell.className
-        
-        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
-        
-        tableView?.register(cellWithClass: HomePostItemCell.self)
-        
-        tableView?.separatorColor = R.color.seperatorColor()
-        tableView?.separatorInset = .zero
-        tableView?.separatorStyle = .singleLine
-        
-        registRefreshHeader(colorStyle: .gray)
-        registRefreshFooter()
     }
     
     override func listViewFrame() -> CGRect {
@@ -109,11 +128,16 @@ class HomeController: BaseTableController {
     func getNotificationCount() {
         NotificationService.getNotificationCount().subscribe(onNext:{
             print("Count:\($0)")
-            self.updateBadge($0)
+            self.updateNotificationBadge($0)
         }).disposed(by: rx.disposeBag)
     }
     
-  
+    func getIMNotification() {
+        
+        IMController.shared.getTotalUnreadMsgCount { [weak self] count in
+            self?.updateMessageBadge(count)
+        }
+    }
     
     override func loadNewData() {
         lastId = 0

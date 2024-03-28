@@ -299,7 +299,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 120 images.
+  /// This `_R.image` struct is generated, and contains static references to 121 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -522,6 +522,9 @@ struct _R {
     /// Image `phone.circle.fill`.
     var phoneCircleFill: RswiftResources.ImageResource { .init(name: "phone.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `pin`.
+    var pin: RswiftResources.ImageResource { .init(name: "pin", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `placeholder`.
     var placeholder: RswiftResources.ImageResource { .init(name: "placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -680,9 +683,15 @@ struct _R {
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 3 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 5 resource files.
   struct file {
     let bundle: Foundation.Bundle
+
+    /// Resource file `OIMUIEmoji.bundle`.
+    var oimuiEmojiBundle: RswiftResources.FileResource { .init(name: "OIMUIEmoji", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `OIMUIResource.bundle`.
+    var oimuiResourceBundle: RswiftResources.FileResource { .init(name: "OIMUIResource", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `bundle.js`.
     var bundleJs: RswiftResources.FileResource { .init(name: "bundle", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
@@ -694,7 +703,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 33 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 34 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -739,6 +748,9 @@ struct _R {
 
     /// Nib `CaledarItemCell`.
     var caledarItemCell: RswiftResources.NibReference<CaledarItemCell> { .init(name: "CaledarItemCell", bundle: bundle) }
+
+    /// Nib `ChatListCell`.
+    var chatListCell: RswiftResources.NibReference<ChatListCell> { .init(name: "ChatListCell", bundle: bundle) }
 
     /// Nib `ConnectAuditItemCell`.
     var connectAuditItemCell: RswiftResources.NibReference<ConnectAuditItemCell> { .init(name: "ConnectAuditItemCell", bundle: bundle) }
@@ -847,6 +859,7 @@ struct _R {
       if UIKit.UIImage(named: "repeat", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'repeat' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "chat_status_muted_icon.png", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chat_status_muted_icon.png' is used in nib 'ChatListCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ConnectAuditItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }

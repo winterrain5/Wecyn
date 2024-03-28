@@ -41,6 +41,12 @@ PODS:
   - JXSegmentedView (1.3.0)
   - Kingfisher (7.9.1)
   - KMPlaceholderTextView (1.4.0)
+  - Localize-Swift (3.2.0):
+    - Localize-Swift/LocalizeSwiftCore (= 3.2.0)
+    - Localize-Swift/UIKit (= 3.2.0)
+  - Localize-Swift/LocalizeSwiftCore (3.2.0)
+  - Localize-Swift/UIKit (3.2.0):
+    - Localize-Swift/LocalizeSwiftCore
   - LookinServer (1.1.7):
     - LookinServer/Core (= 1.1.7)
   - LookinServer/Core (1.1.7)
@@ -195,6 +201,7 @@ DEPENDENCIES:
   - JXSegmentedView
   - Kingfisher
   - KMPlaceholderTextView
+  - Localize-Swift (~> 3.2)
   - LookinServer
   - MarqueeLabel
   - MessageKit
@@ -257,6 +264,7 @@ SPEC REPOS:
     - JXSegmentedView
     - Kingfisher
     - KMPlaceholderTextView
+    - Localize-Swift
     - LookinServer
     - MarqueeLabel
     - MessageKit
@@ -327,6 +335,7 @@ SPEC CHECKSUMS:
   JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
+  Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
   LookinServer: 4ce0469b066871525611d009d8d16a7a50c23491
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
@@ -366,6 +375,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
 
-PODFILE CHECKSUM: e3ac05b44dab9b4cc731f1894229a1f3163d460f
+PODFILE CHECKSUM: b8b2b03cb7f98b357ef700d3cdbfb8d02fc9f5ef
 
 COCOAPODS: 1.11.2

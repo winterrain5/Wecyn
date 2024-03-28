@@ -26,7 +26,7 @@ class ConnectionItemCell: UICollectionViewCell {
         shadowView.addShadow(cornerRadius: 13)
         connectButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            
+
             NetworkService.addFriend(userId: self.model?.id ?? 0).subscribe(onNext:{ status in
                 if status.success == 1 {
                     Toast.showSuccess( "Send Apply Success")

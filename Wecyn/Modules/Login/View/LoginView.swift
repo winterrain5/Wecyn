@@ -65,6 +65,7 @@ class LoginView: UIView {
                     self.imLogin()
                 }
                 .done { _ in
+                    
                     let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)
                     tokenModel?.is_logined = true
                     
@@ -160,6 +161,19 @@ class LoginView: UIView {
                 Toast.showError(e.asAPIError.errorInfo().message)
             }
 
+        }
+    }
+    
+    func setImUser() -> Promise<Void> {
+        Promise.init { resolver in
+            guard let user = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.toIMUserInfo() else {
+                resolver.reject(APIError.requestError(code: -1, message: "get UserInfoModel failure"))
+                return
+            }
+            
+            IMController.shared.setSelfInfo(userInfo: user) { str in
+                resolver.fulfill_()
+            }
         }
     }
 }

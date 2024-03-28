@@ -54,3 +54,9 @@ import UIKit
     }
     
 }
+
+extension UserInfoModel {
+    func toIMUserInfo() -> UserInfo {
+        return UserInfo(userID: id,nickname: full_name,email: email,faceURL: avatar)
+    }
+}

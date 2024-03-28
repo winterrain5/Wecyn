@@ -19,6 +19,7 @@ enum SettingType {
     case TimeZone
 }
 class SettingModel {
+    
     var title:String
     var detail:String
     var type:SettingType
@@ -160,14 +161,22 @@ class SettingController: BaseTableController {
         
         if model.type == .Logout {
             
+            func toLoginVc()  {
+                Toast.dismiss()
+                UserDefaults.sk.removeAllKeyValue()
+                let nav = BaseNavigationController(rootViewController: LoginController())
+                UIApplication.shared.keyWindow?.rootViewController = nav
+            }
+            
             let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
             alert.addAction(title: "Confirm",style: .destructive) { _ in
+                Toast.showLoading()
                 IMController.shared.logout {
-                    UserDefaults.sk.removeAllKeyValue()
-                    let nav = BaseNavigationController(rootViewController: LoginController())
-                    UIApplication.shared.keyWindow?.rootViewController = nav
+                    toLoginVc()
                 } error: { e in
+                    toLoginVc()
                     Toast.showError(e.asAPIError.errorInfo().message)
+                    print(e.asAPIError.errorInfo().message)
                 }
 
              
