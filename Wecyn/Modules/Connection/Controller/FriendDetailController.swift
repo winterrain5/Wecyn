@@ -45,6 +45,7 @@ class FriendDetailController: BaseTableController {
                 if status.success == 1 {
                     Toast.showSuccess( "Delete Success")
                     self.deleteUserComplete?(self.model?.id ?? 0)
+                    self.navigationController?.popViewController()
                 } else {
                     Toast.showError(status.message)
                 }
@@ -147,8 +148,8 @@ class FriendDetailController: BaseTableController {
         
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let vc = ChatViewController(replyuser: model)
-                self.navigationController?.pushViewController(vc)
+//                let vc = ChatViewController(reciverUser: model)
+//                self.navigationController?.pushViewController(vc)
             }
             if indexPath.row == 1 {
                 deleteUser()

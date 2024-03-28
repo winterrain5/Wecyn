@@ -15,6 +15,7 @@ class EventSearchViewController: BaseTableController {
         
         searchView = NavbarSearchView(placeholder: "Search Event Title",isSearchable: true,isBecomeFirstResponder: true).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
         self.navigation.item.titleView = searchView
+        
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
             self.requestModel.keyword = keyword.trimmed

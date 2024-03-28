@@ -82,7 +82,7 @@ public struct MessageHelper {
         default:
             tmpAttr = getSystemNotificationOf(message: message, isSingleChat: isSingleChat)
         }
-        var ret = NSMutableAttributedString(string: abstruct, attributes: defaultAttr)
+        let ret = NSMutableAttributedString(string: abstruct, attributes: defaultAttr)
         if let tmpAttr = tmpAttr {
             ret.append(tmpAttr)
         }
@@ -161,7 +161,7 @@ public struct MessageHelper {
         if offset <= 0 {
             let now = Date().timeIntervalSince1970
             if fabs(now - current) < 3 * 60 {
-                desc = "刚刚".innerLocalized()
+                desc = "a moment ago".innerLocalized()
             } else {
                 desc = formatter.string(from: date)
             }
@@ -170,28 +170,7 @@ public struct MessageHelper {
 
         if offset <= 1 * secondsPerDay {
             let m = formatter.string(from: date)
-            desc = "昨天".innerLocalized() + " " + "\(m)"
-            return desc
-        }
-
-        let calendar = Calendar.current
-        if offset <= 7 * secondsPerDay {
-            let flag = Calendar.Component.weekday
-            let currentCompo = calendar.dateComponents([flag], from: date)
-            guard let week = currentCompo.weekday else {
-                return desc
-            }
-            switch week {
-            case 1: desc = "星期日".innerLocalized()
-            case 2: desc = "星期一".innerLocalized()
-            case 3: desc = "星期二".innerLocalized()
-            case 4: desc = "星期三".innerLocalized()
-            case 5: desc = "星期四".innerLocalized()
-            case 6: desc = "星期五".innerLocalized()
-            case 7: desc = "星期日".innerLocalized()
-            default:
-                break
-            }
+            desc = "yesterday".innerLocalized() + " " + "\(m)"
             return desc
         }
 
@@ -214,7 +193,7 @@ public struct MessageHelper {
             return NSAttributedString(string: " ", attributes: contentAttributes)
         }
         func getOpUserName(message: MessageInfo) -> NSAttributedString {
-            var ret = NSMutableAttributedString()
+            let ret = NSMutableAttributedString()
             if let opUser = message.notificationElem?.opUser {
                 if opUser.userID == IMController.shared.uid {
                     ret.append(NSAttributedString(string: "你".innerLocalized(), attributes: contentAttributes))
@@ -232,7 +211,7 @@ public struct MessageHelper {
             return content
         case .memberQuit:
             if let elem = message.notificationElem?.quitUser {
-                var ret = NSMutableAttributedString()
+                let ret = NSMutableAttributedString()
                 if elem.userID == IMController.shared.uid {
                     ret.append(NSAttributedString(string: "你".innerLocalized(), attributes: contentAttributes))
                 } else {
@@ -246,7 +225,7 @@ public struct MessageHelper {
             }
         case .memberEnter:
             if let elem = message.notificationElem?.entrantUser {
-                var ret = NSMutableAttributedString()
+                let ret = NSMutableAttributedString()
                 if elem.userID == IMController.shared.uid {
                     let name = NSAttributedString(string: "你".innerLocalized(), attributes: contentAttributes)
                     ret.append(name)
@@ -377,7 +356,7 @@ public struct MessageHelper {
                     let mutedUser = detail["mutedUser"] as? [String: Any],
                     let mutedSeconds = detail["mutedSeconds"] as? Int else {return ret}
             
-            var dispalySeconds = FormatUtil.getMutedFormat(of: mutedSeconds)
+            let dispalySeconds = FormatUtil.getMutedFormat(of: mutedSeconds)
             ret.append(NSAttributedString(string: "\(mutedUser["nickname"] ?? "")被\(getOpUserName(message: message).string)禁言 \(dispalySeconds)", attributes: contentAttributes))
             return ret
         case .groupMemberCancelMuted:
@@ -385,7 +364,7 @@ public struct MessageHelper {
             let detail = message.notificationElem?.detailObject
             guard let detail = detail,
                     let mutedUser = detail["mutedUser"] as? [String: Any],
-                    let opUser = detail["opUser"] as? [String: Any] else {return ret}
+                  let _ = detail["opUser"] as? [String: Any] else {return ret}
             
             ret.append(NSAttributedString(string: "\(getOpUserName(message: message).string)取消了\(mutedUser["nickname"] ?? "")的禁言", attributes: contentAttributes))
             return ret
@@ -406,7 +385,7 @@ public struct MessageHelper {
 
         let Lmax: CGFloat = kScreenWidth * 0.5
         var barLen: CGFloat = 0
-        var barCanChangeLen: CGFloat = Lmax - Lmin
+        let barCanChangeLen: CGFloat = Lmax - Lmin
         var unitWidth: CGFloat = barCanChangeLen / 58
 
         switch duration {

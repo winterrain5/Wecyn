@@ -28,7 +28,7 @@ class MainController: UITabBarController {
     
     func setupChildController() {
         let home = BaseNavigationController(rootViewController: HomeController())
-        let connection = BaseNavigationController(rootViewController: ConnectionFriendController())
+        let connection = BaseNavigationController(rootViewController: ConnectionController())
         let calendar = BaseNavigationController(rootViewController: CalendarEventController())
         let profile = BaseNavigationController(rootViewController: ProfileController())
         let admin = BaseNavigationController(rootViewController: AdminController())

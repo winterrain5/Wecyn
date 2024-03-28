@@ -17,3 +17,8 @@ extension Notification.Name {
     static let UpdateAdminData = Notification.Name("UpdateAdminData")
     static let UpdateUserInfo = Notification.Name("UpdateUserInfo")
 }
+
+extension Notification.Name {
+    static let UpdateConversation = Notification.Name("UpdateConversation")
+    static let ClearC2CHistory = Notification.Name("ClearC2CHistory")
+}
