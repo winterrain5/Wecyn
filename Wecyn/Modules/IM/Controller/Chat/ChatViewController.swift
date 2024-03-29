@@ -109,7 +109,7 @@ class ChatViewController: MessagesViewController {
         
         messageInputBar = iMessageInputBar()
         messageInputBar.delegate = self
-        
+
     }
     
     func addOBserver() {

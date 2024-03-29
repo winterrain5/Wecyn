@@ -56,7 +56,7 @@ class ChatUserSettingController: BaseTableController {
             if $0.type == .mute {
                 var status:ReceiveMessageOpt!
                 if $0.isOn {
-                    status = .notReceive
+                    status = .notNotify
                 } else {
                     status = .receive
                 }

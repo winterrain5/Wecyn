@@ -49,7 +49,7 @@ class NFCNameCardEditController: BaseTableController {
         lastname.value = user.last_name
         jobTitle.value = user.title
         companyName.value = user.org_name
-        datas.append([firstname,lastname,companyName,jobTitle,mobile])
+        datas.append([firstname,lastname,jobTitle,mobile])
         
         mobile.value  = user.tel_cell
         officeNo.value = user.tel_work

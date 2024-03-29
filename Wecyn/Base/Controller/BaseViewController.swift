@@ -6,6 +6,7 @@
 //  Copyright © 2020 OneOnline. All rights reserved.
 //
 
+import SwiftEntryKit
 import UIKit
 import BadgeControl
 import IQKeyboardManagerSwift
@@ -104,6 +105,8 @@ class BaseViewController: UIViewController {
                                  badgeBackgroundColor: UIColor.red,
                                  badgeTextColor: UIColor.white,
                                  badgeHeight: 16)
+        
+        
     }
     
     func updateNotificationBadge(_ count:Int) {

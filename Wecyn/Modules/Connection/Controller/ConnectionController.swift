@@ -60,7 +60,7 @@ class ConnectionController: BaseViewController {
         btn.imageForNormal = R.image.connection_search()
     }
     
-    let searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false).frame(CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36))
+    let searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -76,17 +76,23 @@ class ConnectionController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configPageView()
         addRightBarItems()
+        addTitleView()
+        getDatas()
+        getNotificationCount()
+        getIMNotification()
         
-        
-       
-        self.navigation.item.titleView = searchView
-        searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
-            self.navigationController?.pushViewController(ConnectionUsersController(),animated: false)
-        }).disposed(by: rx.disposeBag)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchView.size = CGSize(width: kScreenWidth * 0.75, height: 36)
+        navigation.item.titleView = searchView
+    }
+    
+    func configPageView() {
         self.addChild(headerVc)
-        
         
         segmentedView.dataSource = titleDataSource
         segmentedView.listContainer = paggingView.listContainerView
@@ -123,16 +129,13 @@ class ConnectionController: BaseViewController {
         }
         header.colorStyle = .gray
         paggingView.mainTableView.mj_header = header
-
-        getDatas()
-        getNotificationCount()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        searchView.frame = CGRect(x: 0, y: 0, width: kScreenWidth * 0.75, height: 36)
-        
+    func addTitleView() {
+        self.navigation.item.titleView = searchView
+        searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
+            self.navigationController?.pushViewController(ConnectionUsersController(),animated: false)
+        }).disposed(by: rx.disposeBag)
     }
     
     func getNotificationCount() {
@@ -141,7 +144,12 @@ class ConnectionController: BaseViewController {
             self.updateNotificationBadge($0)
         }).disposed(by: rx.disposeBag)
     }
-    
+    func getIMNotification() {
+        
+        IMController.shared.getTotalUnreadMsgCount { [weak self] count in
+            self?.updateMessageBadge(count)
+        }
+    }
     
     func getDatas() {
         

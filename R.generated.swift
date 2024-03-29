@@ -243,12 +243,12 @@ struct _R {
       /// Locales: en, zh-Hans
       var view_calendar: RswiftResources.StringResource { .init(key: "view_calendar", tableName: "Localizable", source: source, developmentValue: "View Calendar", comment: nil) }
 
-      /// en translation: View NameCard
+      /// en translation: View BusinessCard
       ///
       /// Key: view_namecard
       ///
       /// Locales: en, zh-Hans
-      var view_namecard: RswiftResources.StringResource { .init(key: "view_namecard", tableName: "Localizable", source: source, developmentValue: "View NameCard", comment: nil) }
+      var view_namecard: RswiftResources.StringResource { .init(key: "view_namecard", tableName: "Localizable", source: source, developmentValue: "View BusinessCard", comment: nil) }
     }
   }
 
@@ -859,7 +859,6 @@ struct _R {
       if UIKit.UIImage(named: "repeat", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'repeat' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "chat_status_muted_icon.png", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'chat_status_muted_icon.png' is used in nib 'ChatListCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ConnectAuditItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'ConnectionItemCell', but couldn't be loaded.") }

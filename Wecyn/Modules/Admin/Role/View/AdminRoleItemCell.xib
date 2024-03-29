@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -77,23 +77,50 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remark:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB7-gm-P8t">
+                        <rect key="frame" x="16" y="67.666666666666671" width="90" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="lyZ-jy-7K8"/>
+                            <constraint firstAttribute="width" constant="90" id="zXK-cc-8kP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" name="TextColor33"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terra" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdE-XX-LvF">
+                        <rect key="frame" x="114" y="67.666666666666671" width="327" height="17.666666666666671"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" name="TextColor33"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="HFp-40-HeJ" firstAttribute="top" secondItem="b9S-I8-znN" secondAttribute="bottom" constant="8" id="4Jv-7g-0s3"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HFp-40-HeJ" secondAttribute="bottom" constant="16" id="7nU-UC-dLl"/>
                     <constraint firstItem="RCl-NN-jCO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="8jR-9Q-6KB"/>
                     <constraint firstItem="RCl-NN-jCO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="E7P-LB-td1"/>
                     <constraint firstItem="S1W-Ir-uv9" firstAttribute="leading" secondItem="b9S-I8-znN" secondAttribute="trailing" constant="16" id="FYZ-Gf-Wtk"/>
                     <constraint firstItem="Avp-lA-aj4" firstAttribute="top" secondItem="RCl-NN-jCO" secondAttribute="bottom" constant="8" id="Gai-OU-a1f"/>
+                    <constraint firstItem="rdE-XX-LvF" firstAttribute="top" secondItem="HFp-40-HeJ" secondAttribute="bottom" constant="8" id="Gzz-uE-nwp"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rdE-XX-LvF" secondAttribute="bottom" constant="16" id="Ngq-DF-lYZ"/>
                     <constraint firstItem="b9S-I8-znN" firstAttribute="leading" secondItem="RCl-NN-jCO" secondAttribute="trailing" constant="8" id="Q9o-tx-3Fr"/>
                     <constraint firstAttribute="trailing" secondItem="S1W-Ir-uv9" secondAttribute="trailing" constant="16" id="RKy-dx-Xoc"/>
                     <constraint firstItem="b9S-I8-znN" firstAttribute="top" secondItem="RCl-NN-jCO" secondAttribute="top" id="RUk-ZV-Eai"/>
+                    <constraint firstItem="fB7-gm-P8t" firstAttribute="top" secondItem="rdE-XX-LvF" secondAttribute="top" id="SXy-0o-Wlg"/>
                     <constraint firstItem="Avp-lA-aj4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="XcV-pR-oyD"/>
                     <constraint firstItem="HFp-40-HeJ" firstAttribute="trailing" secondItem="b9S-I8-znN" secondAttribute="trailing" id="Y2T-x9-Biu"/>
                     <constraint firstItem="HFp-40-HeJ" firstAttribute="leading" secondItem="Avp-lA-aj4" secondAttribute="trailing" constant="8" id="cSr-J8-mkb"/>
+                    <constraint firstItem="fB7-gm-P8t" firstAttribute="leading" secondItem="Avp-lA-aj4" secondAttribute="leading" id="cgV-OH-Wzx"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fB7-gm-P8t" secondAttribute="bottom" constant="16" id="dxR-Sb-jL5"/>
+                    <constraint firstAttribute="trailing" secondItem="rdE-XX-LvF" secondAttribute="trailing" constant="16" id="eA7-Od-Bjm"/>
+                    <constraint firstItem="rdE-XX-LvF" firstAttribute="leading" secondItem="HFp-40-HeJ" secondAttribute="leading" id="jiD-se-9h5"/>
                     <constraint firstItem="S1W-Ir-uv9" firstAttribute="centerY" secondItem="b9S-I8-znN" secondAttribute="centerY" id="lnM-Y4-RTb"/>
                     <constraint firstItem="HFp-40-HeJ" firstAttribute="top" secondItem="Avp-lA-aj4" secondAttribute="top" id="pF8-4e-IKE"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Avp-lA-aj4" secondAttribute="bottom" constant="16" id="yfZ-GO-WHS"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -107,6 +134,7 @@
                 <outlet property="moreButton" destination="S1W-Ir-uv9" id="Jzg-Jb-lEw"/>
                 <outlet property="nameLabel" destination="b9S-I8-znN" id="pTs-vC-2oh"/>
                 <outlet property="permissionLabel" destination="HFp-40-HeJ" id="Wu6-yB-dsU"/>
+                <outlet property="remarkLabel" destination="rdE-XX-LvF" id="dx2-Tz-thh"/>
             </connections>
             <point key="canvasLocation" x="-626.71755725190837" y="82.042253521126767"/>
         </tableViewCell>

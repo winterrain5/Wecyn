@@ -9,6 +9,7 @@ import UIKit
 
 class AdminRoleItemCell: UITableViewCell {
 
+    @IBOutlet weak var remarkLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var permissionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -28,16 +29,11 @@ class AdminRoleItemCell: UITableViewCell {
                 self.deleteHandler?(model)
             }
             
-            let action3 = UIAction(title: model?.remark ?? "",image: nil) { [weak self] _ in
-              
-            }
-            
+            remarkLabel.text = model?.remark
             
             moreButton.showsMenuAsPrimaryAction = true
-            var menus = [action1,action2]
-            if !(model?.remark.isEmpty ?? false) {
-                menus.append(action3)
-            }
+            let menus = [action1,action2]
+        
             moreButton.menu = UIMenu(children: menus)
             
         }

@@ -9,9 +9,13 @@ import Foundation
 extension ChatViewController:DataProviderDelegate  {
     
     func received(message: MessageInfo) {
-        
-        let message = IMMessage.build(messageInfo: message)
-        insertMessage(message)
+        // message.sendID receiverId 一致
+        let flag1 = message.sendID == dataProvider.receiverId
+        if flag1 {
+            let message = IMMessage.build(messageInfo: message)
+            insertMessage(message)
+        }
+     
     }
     
     func typingStateChanged(to state: TypingState) {
