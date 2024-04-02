@@ -11,6 +11,7 @@ import Foundation
 import MessageKit
 import UIKit
 
+let MessageMaxHeight = 180.cgFloat
 
 struct IMMessage:MessageType {
     
@@ -21,7 +22,7 @@ struct IMMessage:MessageType {
         sentDate = date
     }
     
-    static func build(messageInfo:MessageInfo) -> IMMessage{
+    static func build(messageInfo:MessageInfo) -> IMMessage?{
         
         let date = Date.init(unixTimestamp: messageInfo.sendTime / 1000)
         let messageId = messageInfo.seq.string
@@ -38,6 +39,10 @@ struct IMMessage:MessageType {
         case .text:
             let text = messageInfo.textElem?.content ?? ""
             return IMMessage.init(text: text, user: sender, messageId: messageId, date: date)
+        case .image:
+            guard let url = messageInfo.pictureElem?.sourcePicture?.url?.url else { return nil }
+            let imageSize = CGSize(width: messageInfo.pictureElem?.sourcePicture?.width ?? 180, height: messageInfo.pictureElem?.sourcePicture?.height ?? 180)
+            return IMMessage.init(imageURL: url,imageSize:imageSize, user: sender, messageId: messageId, date: date)
         case .friendAppApproved:
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
         default:
@@ -62,8 +67,8 @@ struct IMMessage:MessageType {
         self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
     }
     
-    init(imageURL: URL, user: IMUser, messageId: String, date: Date) {
-        let mediaItem = ImageMediaItem(imageURL: imageURL)
+    init(imageURL: URL,imageSize: CGSize, user: IMUser, messageId: String, date: Date) {
+        let mediaItem = ImageMediaItem(imageURL: imageURL,imageSize: imageSize)
         self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
     }
     
@@ -127,7 +132,7 @@ private struct CoordinateItem: LocationItem {
     
     init(location: CLLocation) {
         self.location = location
-        size = CGSize(width: 240, height: 240)
+        size = CGSize(width: MessageMaxHeight, height: MessageMaxHeight)
     }
 }
 
@@ -141,13 +146,20 @@ private struct ImageMediaItem: MediaItem {
     
     init(image: UIImage) {
         self.image = image
-        size = CGSize(width: 240, height: 240)
+        // 0.7
+        let scale = image.size.width / image.size.height
+        let width = image.size.width >= MessageMaxHeight ? MessageMaxHeight * scale : image.size.width
+        let height = image.size.height >= MessageMaxHeight ? MessageMaxHeight : image.size.height
+        size = CGSize(width: width, height: height)
         placeholderImage = UIImage()
     }
     
-    init(imageURL: URL) {
+    init(imageURL: URL,imageSize:CGSize) {
         url = imageURL
-        size = CGSize(width: 240, height: 240)
+        let scale = imageSize.width / imageSize.height
+        let width = imageSize.width >= MessageMaxHeight ? MessageMaxHeight * scale : imageSize.width
+        let height = imageSize.height >= MessageMaxHeight ? MessageMaxHeight : imageSize.height
+        size = CGSize(width: width, height: height)
         placeholderImage = UIImage(imageLiteralResourceName: "image_message_placeholder")
     }
 }
@@ -182,4 +194,18 @@ struct IMContactItem: ContactItem {
         self.phoneNumbers = phoneNumbers
         self.emails = emails
     }
+}
+
+
+struct MediaMessageSource: Hashable {
+    
+    struct Info: Hashable {
+        var url: URL!
+        var relativePath: String?
+    }
+    
+    var image: UIImage?
+    var source: Info
+    var thumb: Info?
+    var duration: Int?
 }

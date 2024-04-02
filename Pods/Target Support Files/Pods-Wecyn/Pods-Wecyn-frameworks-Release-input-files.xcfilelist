@@ -56,3 +56,4 @@ ${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework
 ${BUILT_PRODUCTS_DIR}/Then/Then.framework
 ${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework
 ${BUILT_PRODUCTS_DIR}/WordPress-Editor-iOS/WordPressEditor.framework
+${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework

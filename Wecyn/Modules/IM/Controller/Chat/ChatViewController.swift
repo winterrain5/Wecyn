@@ -5,12 +5,14 @@
 //  Created by Derrick on 2024/3/21.
 //
 
+import IQKeyboardManagerSwift
 import UIKit
 import InputBarAccessoryView
 import MessageKit
 import Kingfisher
 import MapKit
 import OpenIMSDK
+import RxKeyboard
 
 class ChatViewController: MessagesViewController {
     private(set) lazy var refreshControl: UIRefreshControl = {
@@ -47,28 +49,16 @@ class ChatViewController: MessagesViewController {
         
         IMController.shared.chatingConversationID = dataProvider.conversation.conversationID
         
-        configureMessageCollectionView()
         configureMessageInputBar()
+        configureMessageCollectionView()
         configTitle()
         configBarButtonItem()
         markAsRead()
+        addOBserver()
         
         dataProvider.delegate = self
         
-        DispatchQueue.global().async {
-            self.dataProvider.loadInitialMessages { mgs in
-                let messages = mgs.map({ IMMessage.build(messageInfo: $0) })
-                self.messageList = messages
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0) {
-                        self.messagesCollectionView.reloadData()
-                    } completion: { flat in
-                        self.messagesCollectionView.scrollToLastItem(animated: false)
-                    }
-                }
-               
-            }
-        }
+        loadHistoryMessage()
         
     }
     
@@ -110,14 +100,34 @@ class ChatViewController: MessagesViewController {
         messageInputBar = iMessageInputBar()
         messageInputBar.delegate = self
 
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
     }
     
     func addOBserver() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.ClearC2CHistory, object: self, queue: OperationQueue.main) {  [weak self] noti in
             guard let `self` = self else { return }
-            self.messageList.removeAll()
-            self.messagesCollectionView.reloadData()
-           
+            self.loadHistoryMessage()
+        }
+        
+     
+    }
+    
+    func loadHistoryMessage() {
+        DispatchQueue.global().async {
+            self.dataProvider.loadInitialMessages { mgs in
+                let messages = mgs.map({ IMMessage.build(messageInfo: $0) }).compactMap({  $0 })
+                self.messageList = messages
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0) {
+                        self.messagesCollectionView.reloadData()
+                    } completion: { flat in
+                        self.messagesCollectionView.scrollToLastItem(animated: false)
+                    }
+                }
+            }
         }
     }
     
@@ -134,7 +144,7 @@ class ChatViewController: MessagesViewController {
     
     func insertMessage(_ message: IMMessage) {
         messageList.append(message)
-        messageInputBar.sendButton.stopAnimating()
+        
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
             messagesCollectionView.insertSections([messageList.count - 1])
@@ -154,6 +164,23 @@ class ChatViewController: MessagesViewController {
         let lastIndexPath = IndexPath(item: 0, section: messageList.count - 1)
         
         return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
+    }
+    
+    
+    func revokeMessage() {
+        if messageList.count > 0 {
+            messageList.removeLast()
+            messagesCollectionView.reloadDataAndKeepOffset()
+            self.messagesCollectionView.scrollToLastItem(animated: false)
+        }
+    }
+    
+    func startAnimation() {
+        self.messageInputBar.sendButton.startAnimating()
+    }
+    
+    func stopAnimation() {
+        self.messageInputBar.sendButton.stopAnimating()
     }
     
     deinit {

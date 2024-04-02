@@ -107,6 +107,12 @@
 		4536533E2A413F270026EC8D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536533D2A413F270026EC8D /* NetworkService.swift */; };
 		453653432A47E8C70026EC8D /* ConnectAuditItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */; };
 		453653442A47E8C70026EC8D /* ConnectAuditItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */; };
+		45381DED2BB6686C007EE954 /* ChatVC_InputBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DEC2BB6686C007EE954 /* ChatVC_InputBarDelegate.swift */; };
+		45381DEF2BB695D9007EE954 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DEE2BB695D9007EE954 /* CommonApi.swift */; };
+		45381DF12BB69670007EE954 /* CommonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF02BB69670007EE954 /* CommonService.swift */; };
+		45381DF32BBA9474007EE954 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF22BBA9474007EE954 /* FileHelper.swift */; };
+		45381DF52BBA9551007EE954 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF42BBA9551007EE954 /* PhotoHelper.swift */; };
+		45381DF72BBA9799007EE954 /* InputPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF62BBA9799007EE954 /* InputPadView.swift */; };
 		45450CBD2B2AE8D300558C9D /* ApplyForCertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */; };
 		45450CC32B2C0D3200558C9D /* AdminApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC22B2C0D3200558C9D /* AdminApi.swift */; };
 		45450CC52B2C0E4500558C9D /* AdminService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC42B2C0E4500558C9D /* AdminService.swift */; };
@@ -459,6 +465,12 @@
 		4536533D2A413F270026EC8D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		453653412A47E8C70026EC8D /* ConnectAuditItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAuditItemCell.swift; sourceTree = "<group>"; };
 		453653422A47E8C70026EC8D /* ConnectAuditItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectAuditItemCell.xib; sourceTree = "<group>"; };
+		45381DEC2BB6686C007EE954 /* ChatVC_InputBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_InputBarDelegate.swift; sourceTree = "<group>"; };
+		45381DEE2BB695D9007EE954 /* CommonApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
+		45381DF02BB69670007EE954 /* CommonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonService.swift; sourceTree = "<group>"; };
+		45381DF22BBA9474007EE954 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
+		45381DF42BBA9551007EE954 /* PhotoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
+		45381DF62BBA9799007EE954 /* InputPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPadView.swift; sourceTree = "<group>"; };
 		45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForCertificationController.swift; sourceTree = "<group>"; };
 		45450CC22B2C0D3200558C9D /* AdminApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminApi.swift; sourceTree = "<group>"; };
 		45450CC42B2C0E4500558C9D /* AdminService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminService.swift; sourceTree = "<group>"; };
@@ -885,6 +897,7 @@
 			isa = PBXGroup;
 			children = (
 				4513F61C2BAD5A5C0080756F /* iMessageInputBar.swift */,
+				45381DF62BBA9799007EE954 /* InputPadView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1051,6 +1064,7 @@
 				45C999F12AB05EBA0017CDC3 /* PostService.swift */,
 				45450CC42B2C0E4500558C9D /* AdminService.swift */,
 				454BA37D2B8D7192006B47BA /* NotificationService.swift */,
+				45381DF02BB69670007EE954 /* CommonService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1196,6 +1210,7 @@
 				45C999EF2AB05C7E0017CDC3 /* PostApi.swift */,
 				45450CC22B2C0D3200558C9D /* AdminApi.swift */,
 				454BA37B2B8D70ED006B47BA /* NotificatonApi.swift */,
+				45381DEE2BB695D9007EE954 /* CommonApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1756,6 +1771,8 @@
 				45F07C222BB110080070813D /* FormatUtil.swift */,
 				45F07C242BB110740070813D /* StandarUI.swift */,
 				45FC5D242BB3F30A00D0EDB3 /* BundleUtil.swift */,
+				45381DF22BBA9474007EE954 /* FileHelper.swift */,
+				45381DF42BBA9551007EE954 /* PhotoHelper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1770,6 +1787,7 @@
 				4513F6152BAD54140080756F /* ChatVC_MessageCellDelegate.swift */,
 				4513F6172BAD542B0080756F /* ChatVC_MessageLabelDelegate.swift */,
 				4513F6192BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift */,
+				45381DEC2BB6686C007EE954 /* ChatVC_InputBarDelegate.swift */,
 				45B6FFBE2BB3B347006E5D02 /* ChatVC_DataProviderDelegate.swift */,
 				45F07C332BB2760C0070813D /* DataProvider.swift */,
 				45F07C352BB2763F0070813D /* DataProviderDelegate.swift */,
@@ -2071,6 +2089,7 @@
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
+				45381DF52BBA9551007EE954 /* PhotoHelper.swift in Sources */,
 				4513F61A2BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift in Sources */,
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
 				45D0AF982B31A4F800C6FAFA /* MMNodeView.swift in Sources */,
@@ -2092,7 +2111,9 @@
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
 				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
 				4509DAA22B91B5A3003CE3F6 /* ForgetPwdController.swift in Sources */,
+				45381DF72BBA9799007EE954 /* InputPadView.swift in Sources */,
 				45D0AF972B31A4F800C6FAFA /* MMTreeTableView.swift in Sources */,
+				45381DED2BB6686C007EE954 /* ChatVC_InputBarDelegate.swift in Sources */,
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				45D0AF962B31A4F800C6FAFA /* MMNodeCell.swift in Sources */,
@@ -2165,6 +2186,7 @@
 				45005C552A57DC5400560E21 /* ConnectionGroupController.swift in Sources */,
 				45AA6AE52B33EF3900BB4BF9 /* AdminSelectDepartmentController.swift in Sources */,
 				450F6CC82A613AFC0001AA1B /* JavaScriptBridge.swift in Sources */,
+				45381DF12BB69670007EE954 /* CommonService.swift in Sources */,
 				4564BE372A83840500464AFA /* RoomPickerController.swift in Sources */,
 				450F6CC32A613AFC0001AA1B /* RecurrenceRule.swift in Sources */,
 				45F07C2F2BB25C6A0070813D /* ChatListCell.swift in Sources */,
@@ -2222,6 +2244,7 @@
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
 				45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */,
+				45381DEF2BB695D9007EE954 /* CommonApi.swift in Sources */,
 				456BB0462B4D0DCF00BB7838 /* AdminRoomCell.swift in Sources */,
 				45450CD02B2C41AE00558C9D /* AdminStaffController.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
@@ -2238,6 +2261,7 @@
 				45005C532A57D9A200560E21 /* ConnectAuditController.swift in Sources */,
 				45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */,
 				45A0E6332ABC0A29003C5153 /* PostCommentFullScreenController.swift in Sources */,
+				45381DF32BBA9474007EE954 /* FileHelper.swift in Sources */,
 				45C9380E2B3ECF7D00621BED /* AdminStaffExpsCell.swift in Sources */,
 				4509DAB02B91C881003CE3F6 /* ResetPwdContainer.swift in Sources */,
 				45D4D9B82A3C3FB400D7ED04 /* ConnectionRecommendController.swift in Sources */,

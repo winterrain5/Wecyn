@@ -125,6 +125,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
                 UserDefaults.sk.set(object: $0, for: UserInfoModel.className)
                 self.addWriteToNFCTagFooter()
                 self.addDatas($0)
+                Logger.debug($0, label: "getUserInfo")
             },onError: { e in
             }).disposed(by: rx.disposeBag)
             return

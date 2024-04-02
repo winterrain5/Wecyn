@@ -80,12 +80,40 @@ extension ObservableType where Element == Moya.Response {
             })
     }
     
+    func mapObject<T: HandyJSON>(designatedPath: String = DataKey,toast:Bool = true) -> Observable<T> {
+        return filterNetworkErrorAndMapJSON(toast:toast)
+            .map({ (response) in
+                //服务器返回格式解析错误
+                guard let obj = T.deserialize(from: response, designatedPath: designatedPath) else {
+                    throw APIError.serviceError(.unableHandyJsonNotObject)
+                }
+                return obj
+            })
+    }
+    
     
     /// 解析数组模型
     /// - Parameters:
     ///   - type: 模型类型
     /// - Returns: 数组模型
     func mapObjectArray<T: HandyJSON>(_ type: T.Type, designatedPath: String? = nil,toast:Bool = true) -> Observable<[T]> {
+        return filterNetworkErrorAndMapJSON(toast:toast)
+            .map({ (response)  in
+                var jsonArray:[Any] = []
+                if let path = designatedPath {
+                    jsonArray = JSON(response)[DataKey][path].arrayObject ?? []
+                } else {
+                    jsonArray = JSON(response)[DataKey].arrayObject ?? []
+                }
+                
+                guard let array = Array<T>.deserialize(from: jsonArray) as? [T] else {
+                    throw APIError.serviceError(.unableHandyJsonNotArray)
+                }
+                return array
+            })
+    }
+    
+    func mapObjectArray<T: HandyJSON>(designatedPath: String? = nil,toast:Bool = true) -> Observable<[T]> {
         return filterNetworkErrorAndMapJSON(toast:toast)
             .map({ (response)  in
                 var jsonArray:[Any] = []
@@ -133,6 +161,16 @@ extension ObservableType where Element == Moya.Response {
                 }
                 guard let value = dict[key] as? T else{
                     throw APIError.serviceError(.unableParse)
+                }
+                return value
+            })
+    }
+    
+    func mapDataValue<T>() -> Observable<T> {
+        return filterNetworkErrorAndMapJSON(toast:false)
+            .map({ (response)  in
+                guard let value = response[DataKey] as? T else {
+                    throw APIError.serviceError(.unableHandyJsonNotObject)
                 }
                 return value
             })

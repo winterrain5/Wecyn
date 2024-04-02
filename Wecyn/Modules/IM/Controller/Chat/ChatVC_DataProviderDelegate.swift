@@ -12,7 +12,7 @@ extension ChatViewController:DataProviderDelegate  {
         // message.sendID receiverId 一致
         let flag1 = message.sendID == dataProvider.receiverId
         if flag1 {
-            let message = IMMessage.build(messageInfo: message)
+            guard let message = IMMessage.build(messageInfo: message) else  { return }
             insertMessage(message)
         }
      

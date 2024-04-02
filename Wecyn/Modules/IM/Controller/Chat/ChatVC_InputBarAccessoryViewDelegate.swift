@@ -49,7 +49,10 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 IMController.shared.sendTextMessage(text: str, to: dataProvider.receiverId, conversationType: .c2c) { info in
                     print(info)
                 } onComplete: { info in
-                    let message = IMMessage.build(messageInfo: info)
+                    self.messageInputBar.sendButton.stopAnimating()
+                    guard let message = IMMessage.build(messageInfo: info) else {
+                        return
+                    }
                     self.insertMessage(message)
                 }
 

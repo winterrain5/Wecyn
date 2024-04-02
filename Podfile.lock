@@ -179,6 +179,9 @@ PODS:
   - WordPress-Aztec-iOS (1.19.8)
   - WordPress-Editor-iOS (1.19.8):
     - WordPress-Aztec-iOS (= 1.19.8)
+  - ZLPhotoBrowser (4.3.0):
+    - ZLPhotoBrowser/Core (= 4.3.0)
+  - ZLPhotoBrowser/Core (4.3.0)
 
 DEPENDENCIES:
   - AnyImageKit
@@ -239,6 +242,7 @@ DEPENDENCIES:
   - Then
   - WordPress-Aztec-iOS
   - WordPress-Editor-iOS
+  - ZLPhotoBrowser (= 4.3.0)
 
 SPEC REPOS:
   trunk:
@@ -302,6 +306,7 @@ SPEC REPOS:
     - Then
     - WordPress-Aztec-iOS
     - WordPress-Editor-iOS
+    - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
   SwiftExtensionsLibrary:
@@ -374,7 +379,8 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
+  ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: b8b2b03cb7f98b357ef700d3cdbfb8d02fc9f5ef
+PODFILE CHECKSUM: 29c25a21473d664c9c20d2e846d5c409c0c1a542
 
 COCOAPODS: 1.11.2

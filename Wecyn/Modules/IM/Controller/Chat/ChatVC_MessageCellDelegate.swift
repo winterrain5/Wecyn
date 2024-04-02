@@ -7,6 +7,7 @@
 
 import Foundation
 import MessageKit
+import SKPhotoBrowser
 // MARK: MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
     func didTapAvatar(in _: MessageCollectionViewCell) {
@@ -17,8 +18,29 @@ extension ChatViewController: MessageCellDelegate {
         print("Message tapped")
     }
     
-    func didTapImage(in _: MessageCollectionViewCell) {
+    func didTapImage(in cell: MessageCollectionViewCell) {
         print("Image tapped")
+        guard
+            let indexPath = messagesCollectionView.indexPath(for: cell),
+            let mediaCell = messagesCollectionView.cellForItem(at: indexPath) as? MediaMessageCell
+        else {
+            print("Failed to identify message when audio cell receive tap gesture")
+            return
+        }
+        var photos:[SKPhoto] = []
+        messageList.forEach { message in
+            if case MessageKind.photo(let media) = message.kind, let imageURL = media.url?.absoluteString {
+                photos.append(SKPhoto.photoWithImageURL(imageURL))
+            }
+        }
+        if case MessageKind.photo(let media) = messageList[indexPath.section].kind,let imageUrl = media.url?.absoluteString {
+            let initialPageIndex = photos.firstIndex(where: { imageUrl == $0.photoURL }) ?? 0
+            let browser = SKPhotoBrowser(photos: photos, initialPageIndex: initialPageIndex)
+            UIViewController.sk.getTopVC()?.present(browser, animated: true, completion: {})
+        }
+        
+        
+        
     }
     
     func didTapCellTopLabel(in _: MessageCollectionViewCell) {

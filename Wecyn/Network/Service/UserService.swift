@@ -30,7 +30,7 @@ class UserService {
     /// - Returns: UserInfoModel
     static func getUserInfo() -> Observable<UserInfoModel> {
         let target = MultiTarget(UserApi.userInfo)
-        return APIProvider.rx.request(target).asObservable().mapObject(UserInfoModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObject()
     }
     
     

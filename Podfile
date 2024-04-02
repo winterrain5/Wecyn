@@ -57,6 +57,7 @@ target 'Wecyn' do
   pod 'BadgeControl'
   pod 'MessageKit'
   pod 'Localize-Swift', '~> 3.2'
+  pod 'ZLPhotoBrowser', '4.3.0'
   
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

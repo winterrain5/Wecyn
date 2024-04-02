@@ -28,7 +28,7 @@ class PostService {
     
     static func postFeedList(lastId:Int? = nil) -> Observable<[PostListModel]> {
         let target = MultiTarget(PostApi.feedList(lastPostId: lastId))
-        return APIProvider.rx.request(target).asObservable().mapObjectArray(PostListModel.self)
+        return APIProvider.rx.request(target).asObservable().mapObjectArray()
     }
     
     

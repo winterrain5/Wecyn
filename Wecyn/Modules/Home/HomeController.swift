@@ -26,6 +26,7 @@ class HomeController: BaseTableController {
         
         getNotificationCount()
         getIMNotification()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

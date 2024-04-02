@@ -675,6 +675,63 @@ extension IMController {
         }
     }
     
+    private func sendHelperNotOss(message: OIMMessageInfo,
+                            to recvID: String,
+                            conversationType: ConversationType,
+                            onComplete: @escaping CallBack.MessageReturnVoid) {
+        let model = message.toMessageInfo()
+        model.isRead = false
+        if conversationType == .c2c {
+            Self.shared.imManager.sendMessageNotOss(message, recvID: recvID, groupID: nil, offlinePushInfo: message.offlinePush) { (newMessage: OIMMessageInfo?) in
+                if let respMessage = newMessage {
+                    onComplete(respMessage.toMessageInfo())
+                } else {
+                    model.status = .sendSuccess
+                    onComplete(model)
+                }
+            } onProgress: { (progress: Int) in
+                print("sending message progress: \(progress)")
+            } onFailure: { [weak self] (errCode: Int, msg: String?) in
+                print("send message error:", msg)
+                var customMessage: MessageInfo?
+                
+                if conversationType == .c2c {
+                    if errCode == SDKError.blockedByFriend.rawValue {
+                        customMessage = self?.createCustomMessage(customType: .blockedByFriend, data: [:])
+                    } else if errCode == SDKError.deletedByFriend.rawValue {
+                        customMessage = self?.createCustomMessage(customType: .deletedByFriend, data: [:])
+                    }
+                }
+                model.status = .sendFailure
+                onComplete(model)
+                
+                if customMessage != nil {
+                    Self.shared.imManager.insertSingleMessage(toLocalStorage: customMessage!.toOIMMessageInfo(), recvID: recvID, sendID: model.sendID, onSuccess: nil, onFailure: nil)
+                    customMessage?.recvID = recvID
+                    print("type:\(customMessage?.customElem?.type)")
+                    onComplete(customMessage!)
+                }
+            }
+        }
+        
+        if conversationType == .group || conversationType == .superGroup {
+            Self.shared.imManager.sendMessage(message, recvID: nil, groupID: recvID, offlinePushInfo: message.offlinePush) { (newMessage: OIMMessageInfo?) in
+                if let respMessage = newMessage {
+                    onComplete(respMessage.toMessageInfo())
+                } else {
+                    model.status = .sendSuccess
+                    onComplete(model)
+                }
+            } onProgress: { (progress: Int) in
+                print("sending message progress: \(progress)")
+            } onFailure: { (_: Int, msg: String?) in
+                print("send message error:", msg)
+                model.status = .sendFailure
+                onComplete(model)
+            }
+        }
+    }
+    
     private func sendOIMMessage(message: OIMMessageInfo,
                                 to recvID: String,
                                 conversationType: ConversationType,
@@ -761,6 +818,26 @@ extension IMController {
         sending(message.toMessageInfo())
         sendOIMMessage(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
     }
+    
+    
+    public func sendImageMessage(byURL: String,
+                                 sourcePicture:OIMPictureInfo,
+                                 to recvID: String,
+                                 conversationType: ConversationType,
+                                 sending: CallBack.MessageReturnVoid,
+                                 onComplete: @escaping CallBack.MessageReturnVoid) {
+  
+        let bigPic = OIMPictureInfo()
+        bigPic.url = byURL
+        let snapshotPic = OIMPictureInfo()
+        snapshotPic.url = byURL
+        let message = OIMMessageInfo.createImageMessage(byURL: byURL, sourcePicture: sourcePicture, bigPicture: bigPic, snapshotPicture: snapshotPic)
+        message.status = .sending
+        sending(message.toMessageInfo())
+        sendHelperNotOss(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
+       
+    }
+    
     
     public func sendVideoMessage(path: String,
                                  duration: Int,
