@@ -30,11 +30,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         let components = inputBar.inputTextView.components
         inputBar.inputTextView.text = String()
         inputBar.invalidatePlugins()
-        // Send button activity animation
-        inputBar.sendButton.startAnimating()
-        inputBar.inputTextView.placeholder = "Sending..."
-        // Resign first responder for iPad split view
-//        inputBar.inputTextView.resignFirstResponder()
+  
         inputBar.inputTextView.placeholder = "Aa"
         self.insertMessages(components)
         
@@ -45,15 +41,14 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     private func insertMessages(_ data: [Any]) {
         for component in data {
             if let str = component as? String {
-                
+                let message = IMMessage(text: str, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+                message.sendStatus = .sending
+                self.insertMessage(message)
                 IMController.shared.sendTextMessage(text: str, to: dataProvider.receiverId, conversationType: .c2c) { info in
                     print(info)
                 } onComplete: { info in
-                    self.messageInputBar.sendButton.stopAnimating()
-                    guard let message = IMMessage.build(messageInfo: info) else {
-                        return
-                    }
-                    self.insertMessage(message)
+                    message.sendStatus = .sendSuccess
+                    self.messagesCollectionView.reloadSections([self.messageList.count - 1])
                 }
 
                 

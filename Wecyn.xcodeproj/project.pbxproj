@@ -113,6 +113,9 @@
 		45381DF32BBA9474007EE954 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF22BBA9474007EE954 /* FileHelper.swift */; };
 		45381DF52BBA9551007EE954 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF42BBA9551007EE954 /* PhotoHelper.swift */; };
 		45381DF72BBA9799007EE954 /* InputPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF62BBA9799007EE954 /* InputPadView.swift */; };
+		45381DFB2BC22A84007EE954 /* MCProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF82BC22A83007EE954 /* MCProgressView.swift */; };
+		45381DFC2BC22A84007EE954 /* MCVolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DF92BC22A83007EE954 /* MCVolumeView.swift */; };
+		45381DFD2BC22A84007EE954 /* MCRecordHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45381DFA2BC22A84007EE954 /* MCRecordHUD.swift */; };
 		45450CBD2B2AE8D300558C9D /* ApplyForCertificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */; };
 		45450CC32B2C0D3200558C9D /* AdminApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC22B2C0D3200558C9D /* AdminApi.swift */; };
 		45450CC52B2C0E4500558C9D /* AdminService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45450CC42B2C0E4500558C9D /* AdminService.swift */; };
@@ -471,6 +474,9 @@
 		45381DF22BBA9474007EE954 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		45381DF42BBA9551007EE954 /* PhotoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 		45381DF62BBA9799007EE954 /* InputPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPadView.swift; sourceTree = "<group>"; };
+		45381DF82BC22A83007EE954 /* MCProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCProgressView.swift; sourceTree = "<group>"; };
+		45381DF92BC22A83007EE954 /* MCVolumeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCVolumeView.swift; sourceTree = "<group>"; };
+		45381DFA2BC22A84007EE954 /* MCRecordHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCRecordHUD.swift; sourceTree = "<group>"; };
 		45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyForCertificationController.swift; sourceTree = "<group>"; };
 		45450CC22B2C0D3200558C9D /* AdminApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminApi.swift; sourceTree = "<group>"; };
 		45450CC42B2C0E4500558C9D /* AdminService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminService.swift; sourceTree = "<group>"; };
@@ -896,6 +902,9 @@
 		4513F61B2BAD5A500080756F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45381DF82BC22A83007EE954 /* MCProgressView.swift */,
+				45381DFA2BC22A84007EE954 /* MCRecordHUD.swift */,
+				45381DF92BC22A83007EE954 /* MCVolumeView.swift */,
 				4513F61C2BAD5A5C0080756F /* iMessageInputBar.swift */,
 				45381DF62BBA9799007EE954 /* InputPadView.swift */,
 			);
@@ -2164,6 +2173,7 @@
 				45A13F5D2AD68BB2005A3993 /* CalendarFilterView.swift in Sources */,
 				45E85B112A398EBA00B820CD /* CityModel.swift in Sources */,
 				452A7A262BAAAF87009312F7 /* AdminAddDomainContainer.swift in Sources */,
+				45381DFB2BC22A84007EE954 /* MCProgressView.swift in Sources */,
 				45A0E63D2ABD7E7C003C5153 /* HomePostItemCell.swift in Sources */,
 				45D591B52BB3FE5300B6E673 /* UIImage_IM_Extension.swift in Sources */,
 				450BA6CF2A32C62D00764828 /* SwiftFitSize.swift in Sources */,
@@ -2255,6 +2265,7 @@
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,
 				45FC5D252BB3F30A00D0EDB3 /* BundleUtil.swift in Sources */,
 				45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */,
+				45381DFC2BC22A84007EE954 /* MCVolumeView.swift in Sources */,
 				45E765BB2A31A9FD00BF6EEC /* JobController.swift in Sources */,
 				45DC5EE92B144E17005C6848 /* UIImage+System.swift in Sources */,
 				450BA6E12A3312D500764828 /* RegistConfirmController.swift in Sources */,
@@ -2326,6 +2337,7 @@
 				45D0AFA02B32DA8E00C6FAFA /* AdminDepartmentDetailController.swift in Sources */,
 				45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */,
 				458870E02AE66D7000029353 /* AddUserWorkExperienceView.swift in Sources */,
+				45381DFD2BC22A84007EE954 /* MCRecordHUD.swift in Sources */,
 				456BB04B2B4D38E300BB7838 /* AdminAddRoomContainer.swift in Sources */,
 				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
 				45450CD22B2C41C400558C9D /* AdminRoomController.swift in Sources */,

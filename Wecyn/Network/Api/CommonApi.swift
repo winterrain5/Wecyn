@@ -9,7 +9,7 @@ import Foundation
 import Moya
 enum CommonApi {
     // 获取文件上传url
-    case getUploadFileUrl(_ ext:String)
+    case getUploadFileUrl(_ ext:String,_ contentType:String)
     case getAccessFileUrl(_ name:String)
 }
 
@@ -30,8 +30,8 @@ extension CommonApi:TargetType {
     
     var task: Task {
         switch self {
-        case .getUploadFileUrl(let ext):
-            return requestParametersByGet(["ext":ext])
+        case .getUploadFileUrl(let ext,let contentType):
+            return requestParametersByGet(["ext":ext,"content_type":contentType])
         case .getAccessFileUrl(let name):
             return requestParametersByGet(["name":name])
         }

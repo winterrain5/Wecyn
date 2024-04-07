@@ -148,14 +148,24 @@ class FriendDetailController: BaseTableController {
         
         if indexPath.section == 1 {
             if indexPath.row == 0 {
-//                let vc = ChatViewController(reciverUser: model)
-//                self.navigationController?.pushViewController(vc)
+                createConversation(model.id,model.full_name)
             }
             if indexPath.row == 1 {
                 deleteUser()
             }
         }
         
+    }
+    
+    func createConversation(_ id:Int,_ name:String) {
+        IMController.shared.getConversation(sourceId:id.string) { conversation in
+            guard var conversation = conversation else { return }
+            conversation.userID = id.string
+            conversation.showName = name
+            let dataProvider = DefaultDataProvider(conversation: conversation)
+            let vc = ChatViewController(dataProvider: dataProvider)
+            self.navigationController?.pushViewController(vc)
+        }
     }
 }
 

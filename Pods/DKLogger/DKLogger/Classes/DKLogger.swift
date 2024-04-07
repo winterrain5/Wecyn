@@ -103,18 +103,19 @@ open class Logger {
     }
     
     private static func writeToFile(_ logString:String) {
-        
-        let fileManager = FileManager.default
-        do {
-            try fileManager.createDirectory(atPath: cacheDirectory,
-                                            withIntermediateDirectories: true, attributes: nil)
-            let filePath = dateFormater("yyyy.MM.dd").appending("-\(cacheTxtName).txt")
-            guard let logURL = URL(string: asNSString(cacheDirectory).appendingPathComponent(filePath)) else { return }
-            appendText(fileURL: logURL, string: logString)
-        } catch {
-            print("failed to crateDirectory: \(error)")
+        DispatchQueue.global().async {
+            let fileManager = FileManager.default
+            do {
+                try fileManager.createDirectory(atPath: cacheDirectory,
+                                                withIntermediateDirectories: true, attributes: nil)
+                let filePath = dateFormater("yyyy.MM.dd").appending("-\(cacheTxtName).txt")
+                guard let logURL = URL(string: asNSString(cacheDirectory).appendingPathComponent(filePath)) else { return }
+                appendText(fileURL: logURL, string: logString)
+            } catch {
+                print("failed to crateDirectory: \(error)")
+            }
         }
-        
+      
     }
     
     private static func appendText(fileURL: URL, string: String) {

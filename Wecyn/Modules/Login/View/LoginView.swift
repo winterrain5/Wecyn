@@ -133,7 +133,6 @@ class LoginView: UIView {
     func getUserInfo() -> Promise<Void> {
         Promise.init { resolver in
             UserService.getUserInfo().retry(3).subscribe(onNext:{ model in
-                self.signInButton.stopAnimation()
                 
                 UserDefaults.sk.set(object: model, for: UserInfoModel.className)
                 

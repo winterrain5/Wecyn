@@ -144,7 +144,6 @@ public class FileHelper {
             return FileWriteResult(relativeFilePath: "", fullPath: "", isSuccess: false)
         }
 
-        let data = NSData(data: imageData)
         let fileName = getImageName(with: fileType)
         let filePath = documents + imageDirectory + fileName
 
@@ -224,7 +223,7 @@ public class FileHelper {
 
     private func getCurrentTime() -> String {
         let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd-mm-ss.SSS"
+        format.dateFormat = "yyyy-MM-dd-hh-mm-ss"
         let fileName = format.string(from: Date())
         return fileName
     }

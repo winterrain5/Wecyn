@@ -839,33 +839,31 @@ extension IMController {
     }
     
     
-    public func sendVideoMessage(path: String,
+    public func sendVideoMessage(byURL: String,
                                  duration: Int,
+                                 size: Int,
                                  snapshotPath: String,
                                  to recvID: String,
                                  conversationType: ConversationType,
                                  sending: CallBack.MessageReturnVoid,
                                  onComplete: @escaping CallBack.MessageReturnVoid) {
-        
-        let message = OIMMessageInfo.createVideoMessage(path,
-                                                        videoType: String(path.split(separator: ".").last!),
-                                                        duration: duration,
-                                                        snapshotPath: snapshotPath)
+        let message = OIMMessageInfo.createVideoMessage(byURL: byURL, videoType: "mp4", duration: duration, size: size, snapshot: snapshotPath)
         message.status = .sending
         sending(message.toMessageInfo())
-        sendOIMMessage(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
+        sendHelperNotOss(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
     }
     
-    public func sendAudioMessage(path: String,
+    public func sendAudioMessage(byURL: String,
                                  duration: Int,
+                                 size: Int,
                                  to recvID: String,
                                  conversationType: ConversationType,
                                  sending: CallBack.MessageReturnVoid,
                                  onComplete: @escaping CallBack.MessageReturnVoid) {
-        let message = OIMMessageInfo.createSoundMessage(path, duration: duration)
+        let message = OIMMessageInfo.createSoundMessage(byURL: byURL, duration: duration, size: size)
         message.status = .sending
         sending(message.toMessageInfo())
-        sendOIMMessage(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
+        sendHelperNotOss(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
     }
     
     public func sendCardMessage(card: CardElem,
@@ -1620,21 +1618,21 @@ public enum MessageContentType: Int, Codable {
     public var abstruct: String? {
         switch self {
         case .image:
-            return "[图片]"
+            return "[图片]".innerLocalized()
         case .audio:
-            return "[语音]"
+            return "[语音]".innerLocalized()
         case .video:
-            return "[视频]"
+            return "[视频]".innerLocalized()
         case .file:
-            return "[文件]"
+            return "[文件]".innerLocalized()
         case .card:
-            return "[名片]"
+            return "[名片]".innerLocalized()
         case .location:
-            return "[定位]"
+            return "[定位]".innerLocalized()
         case .face:
-            return "[自定义表情]"
+            return "[自定义表情]".innerLocalized()
         case .custom:
-            return "[自定义消息]"
+            return "[自定义消息]".innerLocalized()
         default:
             return nil
         }

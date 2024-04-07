@@ -206,4 +206,13 @@
 "消息免打扰" = "Mute Notifications";
 "置顶聊天" = "Sticky on Top";
 "提醒" = "Alert";
-"清空聊天记录" = "Clear Chat History"
+"清空聊天记录" = "Clear Chat History";
+"[图片]" = "[Image]";
+"[语音]" = "[Audio]";
+"[视频]" = "[Video]";
+"[文件]" = "[File]";
+"[名片]" = "[Carte]";
+"[定位]" = "[Location]";
+"[自定义表情]" = "[Custom Expressions]";
+"[自定义消息]" = "[Custom Message]";
+"按住说话" = "Hold to talk"

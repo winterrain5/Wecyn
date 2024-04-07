@@ -11,16 +11,27 @@ enum UploadContentType:String {
     case Image = "image/png"
     case video = "video/mp4"
     case audio = "audio/mp3"
+    
+    var ext:String {
+        switch self {
+        case .Image:
+            return "jpeg"
+        case .video:
+            return "mp4"
+        case .audio:
+            return "mp3"
+        }
+    }
 }
 class CommonService:NSObject {
     
     static let share = CommonService()
-    static func getUploadFileUrl(_ ext:String) -> Observable<UploadMediaModel> {
-        let target = MultiTarget(CommonApi.getUploadFileUrl(ext))
+    static func getUploadFileUrl(_ ext:String,_ contentType:UploadContentType) -> Observable<UploadMediaModel> {
+        let target = MultiTarget(CommonApi.getUploadFileUrl(ext,contentType.rawValue))
         return APIProvider.rx.request(target).asObservable().mapObject()
     }
     
-    func uploadMedia(_ uploadUrl:String,_ data:Data,_ contentType:UploadContentType = .Image,complete:@escaping (String)->(),failure:@escaping (Error)->()){
+    func uploadMedia(_ uploadUrl:String,_ data:Data,_ contentType:UploadContentType,complete:@escaping (String)->(),failure:@escaping (Error)->()){
         
         let url = URL(string:uploadUrl)
         var request = URLRequest(url: url!, cachePolicy: .reloadIgnoringCacheData)

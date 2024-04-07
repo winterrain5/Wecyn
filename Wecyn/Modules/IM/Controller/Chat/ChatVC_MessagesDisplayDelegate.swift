@@ -115,4 +115,24 @@ extension ChatViewController:MessagesDisplayDelegate {
                 cell,
                 message: message) // this is needed especially when the cell is reconfigure while is playing sound
     }
+    
+    func configureAccessoryView(_ accessoryView: UIView, for message: any MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        
+        accessoryView.subviews.forEach { $0.removeFromSuperview() }
+        
+        guard messageList.count > 0 else { return }
+        let message = messageList[indexPath.section]
+ 
+        if message.sendStatus == .sending{
+            let indictor = UIActivityIndicatorView(style: .medium)
+            indictor.tintColor = .lightGray
+            accessoryView.size = CGSize(width: 20, height: 20)
+            accessoryView.addSubview(indictor)
+            indictor.frame = accessoryView.bounds
+            indictor.startAnimating()
+        } else {
+            accessoryView.subviews.forEach { $0.removeFromSuperview() }
+        }
+        
+    }
 }

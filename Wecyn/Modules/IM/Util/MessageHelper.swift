@@ -37,13 +37,13 @@ public struct MessageHelper {
         case .text:
             abstruct += message.textElem?.content ?? ""
         case .image:
-            abstruct += "[图片]"
+            abstruct += "[图片]".innerLocalized()
         case .audio:
-            abstruct += "[语音]"
+            abstruct += "[语音]".innerLocalized()
         case .video:
-            abstruct += "[视频]"
+            abstruct += "[视频]".innerLocalized()
         case .file:
-            abstruct += "[文件]"
+            abstruct += "[文件]".innerLocalized()
         case .at:
             // TODO:
             if let atElem = message.atTextElem {

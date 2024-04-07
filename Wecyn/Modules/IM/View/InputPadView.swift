@@ -10,6 +10,7 @@ import Foundation
 public enum PadItemType: CaseIterable {
     case album
     case camera
+    case file
 
     var name: String {
         switch self {
@@ -17,6 +18,8 @@ public enum PadItemType: CaseIterable {
             return "相册".innerLocalized()
         case .camera:
             return "拍摄".innerLocalized()
+        case .file:
+            return "文件".innerLocalized()
         }
     }
 
@@ -27,6 +30,8 @@ public enum PadItemType: CaseIterable {
             imageName = "inputbar_pad_album_icon"
         case .camera:
             imageName = "inputbar_pad_camera_icon"
+        case .file:
+            imageName = "inputbar_pad_file_icon"
         }
         return UIImage(nameInBundle: imageName)
     }
@@ -97,7 +102,7 @@ class InputPadView: UIView, InputItem {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = R.color.backgroundColor()
 
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false

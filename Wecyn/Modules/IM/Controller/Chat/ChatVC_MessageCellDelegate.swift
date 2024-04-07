@@ -8,6 +8,8 @@
 import Foundation
 import MessageKit
 import SKPhotoBrowser
+import AVFAudio
+import AVKit
 // MARK: MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
     func didTapAvatar(in _: MessageCollectionViewCell) {
@@ -20,26 +22,37 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapImage(in cell: MessageCollectionViewCell) {
         print("Image tapped")
+        
+        
         guard
-            let indexPath = messagesCollectionView.indexPath(for: cell),
-            let mediaCell = messagesCollectionView.cellForItem(at: indexPath) as? MediaMessageCell
+            let indexPath = messagesCollectionView.indexPath(for: cell)
         else {
             print("Failed to identify message when audio cell receive tap gesture")
             return
         }
-        var photos:[SKPhoto] = []
-        messageList.forEach { message in
-            if case MessageKind.photo(let media) = message.kind, let imageURL = media.url?.absoluteString {
-                photos.append(SKPhoto.photoWithImageURL(imageURL))
-            }
-        }
+      
+        
+        
         if case MessageKind.photo(let media) = messageList[indexPath.section].kind,let imageUrl = media.url?.absoluteString {
+            var photos:[SKPhoto] = []
+            messageList.forEach { message in
+                if case MessageKind.photo(let media) = message.kind, let imageURL = media.url?.absoluteString {
+                    photos.append(SKPhoto.photoWithImageURL(imageURL))
+                }
+            }
             let initialPageIndex = photos.firstIndex(where: { imageUrl == $0.photoURL }) ?? 0
             let browser = SKPhotoBrowser(photos: photos, initialPageIndex: initialPageIndex)
             UIViewController.sk.getTopVC()?.present(browser, animated: true, completion: {})
         }
         
-        
+        if case MessageKind.video(let media) = messageList[indexPath.section].kind,let url = media.url {
+            try? AVAudioSession.sharedInstance().setCategory(.playback)
+            let controller = AVPlayerViewController()
+            let player = AVPlayer(url: url)
+            player.playImmediately(atRate: 1)
+            controller.player = player
+            UIViewController.sk.getTopVC()?.present(controller, animated: true)
+        }
         
     }
     

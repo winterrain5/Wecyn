@@ -81,6 +81,14 @@ class ChatViewController: MessagesViewController {
     
     
     func configureMessageCollectionView() {
+        let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
+        layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
+        layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
+        layout?.setMessageIncomingAccessoryViewPosition(.messageBottom)
+        layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
+        layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
+
+        
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -175,12 +183,8 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    func startAnimation() {
-        self.messageInputBar.sendButton.startAnimating()
-    }
-    
-    func stopAnimation() {
-        self.messageInputBar.sendButton.stopAnimating()
+    func reloadCollectionView() {
+        messagesCollectionView.reloadSections([messageList.count - 1])
     }
     
     deinit {
