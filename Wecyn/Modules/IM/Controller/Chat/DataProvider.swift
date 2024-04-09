@@ -95,15 +95,17 @@ final class DefaultDataProvider: DataProvider {
                 group.leave()
             }
             
-            group.notify(queue: .main) { [weak self] in
+            group.notify(queue: .global()) { [weak self] in
                 guard let `self` = self else { return }
-                r = r.reduce([]) { partialResult, element in
-                    return partialResult.contains(where: { $0.clientMsgID == element.clientMsgID }) ? partialResult : partialResult + [element]
+                Asyncs.async {
+                    r = r.reduce([]) { partialResult, element in
+                        return partialResult.contains(where: { $0.clientMsgID == element.clientMsgID }) ? partialResult : partialResult + [element]
+                    }
+                    r.sort(by: { $0.sendTime < $1.sendTime })
+                    r.first(where: { $0.clientMsgID == self.anchorID })?.isAnchor = true
+                } mainTask: {
+                    completion(r)
                 }
-                r.sort(by: { $0.sendTime < $1.sendTime })
-                r.first(where: { $0.clientMsgID == self.anchorID })?.isAnchor = true
-                
-                completion(r)
             }
         } else {
             

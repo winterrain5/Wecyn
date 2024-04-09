@@ -46,15 +46,23 @@ class IMMessage:MessageType {
             guard let url = messageInfo.pictureElem?.sourcePicture?.url?.url else { return nil }
             let imageSize = CGSize(width: messageInfo.pictureElem?.sourcePicture?.width ?? 180, height: messageInfo.pictureElem?.sourcePicture?.height ?? 180)
             return IMMessage.init(imageURL: url,imageSize:imageSize, user: sender, messageId: messageId, date: date)
-//        case .video:
-//            
-//            guard let url = messageInfo.videoElem?.videoUrl?.url else { return nil}
-//            let thumbnail = getVideoThumbnaiImage(url.absoluteString)
-//            return IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, user: sender, messageId: messageId, date: date)
+        case .video:
+            
+            guard let url = messageInfo.videoElem?.videoUrl?.url else { return nil}
+            let thumbnail = UIImage(color: .lightGray, size: CGSize(width: 120, height: 160))
+            return IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, user: sender, messageId: messageId, date: date)
+            
+        case .audio:
+            
+            guard let url = messageInfo.soundElem?.sourceUrl?.url else { return nil }
+            return IMMessage.init(audioURL: url, user: sender, messageId: messageId, date: date)
             
         case .file:
             
-            return IMMessage(text: "\(messageInfo.contentType)", user: sender, messageId: messageId, date: date)
+            guard let url = messageInfo.fileElem?.sourceUrl?.url,let title = messageInfo.fileElem?.fileName,let size = messageInfo.fileElem?.fileSize else { return  nil }
+            let item = FileItem(title: title, url: url,image: UIImage(nameInBundle: "msg_file"),size: size)
+            return IMMessage(fileItem: item, user: sender, messageId: messageId, date: date)
+            
         case .friendAppApproved:
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
         default:
@@ -124,8 +132,12 @@ class IMMessage:MessageType {
         self.init(kind: .contact(contact), user: user, messageId: messageId, date: date)
     }
     
-    convenience init(linkItem: LinkItem, user: IMUser, messageId: String, date: Date) {
+    convenience init(linkItem: LinkMediaItem, user: IMUser, messageId: String, date: Date) {
         self.init(kind: .linkPreview(linkItem), user: user, messageId: messageId, date: date)
+    }
+    
+    convenience init(fileItem: FileItem, user: IMUser, messageId: String, date: Date) {
+        self.init(custom: fileItem, user: user, messageId: messageId, date: date)
     }
     
     // MARK: Internal
@@ -143,7 +155,6 @@ class IMMessage:MessageType {
     
     var sendStatus:MessageStatus = .undefine
 }
-
 
 
 struct IMUser: SenderType, Equatable {
@@ -191,6 +202,29 @@ private struct ImageMediaItem: MediaItem {
         placeholderImage = UIImage(imageLiteralResourceName: "image_message_placeholder")
     }
 }
+ 
+struct LinkMediaItem: LinkItem {
+    var text: String?
+    
+    var attributedText: NSAttributedString?
+    
+    var url: URL
+    
+    var title: String?
+    
+    var teaser: String
+    
+    var thumbnailImage: UIImage
+    
+    init(text: String? = nil, attributedText: NSAttributedString? = nil, url: URL, title: String? = nil, teaser: String, thumbnailImage: UIImage) {
+        self.text = text
+        self.attributedText = attributedText
+        self.url = url
+        self.title = title
+        self.teaser = teaser
+        self.thumbnailImage = thumbnailImage
+    }
+}
 
 private struct VideoMediaItem: MediaItem {
     var url: URL?
@@ -209,6 +243,18 @@ private struct VideoMediaItem: MediaItem {
     }
 }
 
+struct FileItem {
+    var title: String?
+    var url: URL?
+    var image:UIImage?
+    var size:Int?
+    init(title: String? = nil, url: URL? = nil, image: UIImage? = nil, size: Int? = nil) {
+        self.title = title
+        self.url = url
+        self.image = image
+        self.size = size
+    }
+}
 
 
 // MARK: - MockAudioItem
@@ -256,6 +302,8 @@ struct MediaMessageSource: Hashable {
     var thumb: Info?
     var duration: Int?
     var size:Int?
+    var ext: String?
+    var fileName: String?
 }
 
 

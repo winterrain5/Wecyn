@@ -112,18 +112,52 @@ open class BasicAudioController: NSObject, AVAudioPlayerDelegate {
     case .audio(let item):
       playingCell = audioCell
       playingMessage = message
-      guard let player = try? AVAudioPlayer(contentsOf: item.url) else {
-        print("Failed to create audio player for URL: \(item.url)")
-        return
-      }
-      audioPlayer = player
-      audioPlayer?.prepareToPlay()
-      audioPlayer?.delegate = self
-      audioPlayer?.play()
-      state = .playing
-      audioCell.playButton.isSelected = true // show pause button on audio cell
-      startProgressTimer()
-      audioCell.delegate?.didStartAudio(in: audioCell)
+        Haptico.light()
+        func play() {
+            
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.delegate = self
+            audioPlayer?.play()
+            state = .playing
+            audioCell.playButton.isSelected = true // show pause button on audio cell
+            startProgressTimer()
+            audioCell.delegate?.didStartAudio(in: audioCell)
+        }
+        
+        if item.url.isFileURL {
+            guard let player = try? AVAudioPlayer(contentsOf: item.url) else {
+              print("Failed to create audio player for URL: \(item.url)")
+              return
+            }
+            audioPlayer = player
+            play()
+        } else {
+            
+            func getPlayer(complete:@escaping (AVAudioPlayer) -> ()) {
+                var player:AVAudioPlayer?
+                Asyncs.async {
+                    guard let data = try? Data.init(contentsOf: item.url),let temp = try? AVAudioPlayer(data: data) else {
+                        print("Failed to create audio player for URL: \(item.url)")
+                        return
+                    }
+                    player = temp
+                } mainTask: {
+                    if let player = player {
+                        complete(player)
+                    }
+                }
+            }
+            getPlayer {[weak self]   player in
+                guard let `self` = self else { return }
+                self.audioPlayer = player
+                play()
+            }
+           
+            
+        }
+      
+      
+      
     default:
       print("BasicAudioPlayer failed play sound because given message kind is not Audio")
     }
@@ -246,4 +280,8 @@ open class BasicAudioController: NSObject, AVAudioPlayerDelegate {
       userInfo: nil,
       repeats: true)
   }
+    
+    deinit {
+        stopAnyOngoingPlaying()
+    }
 }

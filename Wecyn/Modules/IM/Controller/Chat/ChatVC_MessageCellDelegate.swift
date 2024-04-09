@@ -10,14 +10,30 @@ import MessageKit
 import SKPhotoBrowser
 import AVFAudio
 import AVKit
+import SafariServices
 // MARK: MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
     func didTapAvatar(in _: MessageCollectionViewCell) {
         print("Avatar tapped")
     }
     
-    func didTapMessage(in _: MessageCollectionViewCell) {
+    func didTapMessage(in cell: MessageCollectionViewCell) {
         print("Message tapped")
+        guard
+            let indexPath = messagesCollectionView.indexPath(for: cell)
+        else {
+            print("Failed to identify message when audio cell receive tap gesture")
+            return
+        }
+        
+        if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let fileItem = custom as? FileItem,let url = fileItem.url {
+            if url.isFileURL {
+                
+                return
+            }
+            let vc  = SFSafariViewController(url: url)
+            self.present(vc, animated: true)
+        }
     }
     
     func didTapImage(in cell: MessageCollectionViewCell) {
@@ -30,9 +46,6 @@ extension ChatViewController: MessageCellDelegate {
             print("Failed to identify message when audio cell receive tap gesture")
             return
         }
-      
-        
-        
         if case MessageKind.photo(let media) = messageList[indexPath.section].kind,let imageUrl = media.url?.absoluteString {
             var photos:[SKPhoto] = []
             messageList.forEach { message in
@@ -113,5 +126,11 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapAccessoryView(in _: MessageCollectionViewCell) {
         print("Accessory view tapped")
+        
+        self.showAlert(title: "重发该消息".innerLocalized(), message: nil,buttonTitles: ["取消".innerLocalized(),"重发".innerLocalized()],highlightedButtonIndex: 1) { idx in
+            if idx == 1 {
+                
+            }
+        }
     }
 }

@@ -673,16 +673,26 @@ struct _R {
     var xmarkCircleFill: RswiftResources.ImageResource { .init(name: "xmark.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.entitlements` struct is generated, and contains static references to 3 properties.
+  /// This `_R.entitlements` struct is generated, and contains static references to 6 properties.
   struct entitlements {
     let comAppleDeveloperAssociatedDomains = comAppleDeveloperAssociatedDomains()
+    let comAppleDeveloperIcloudContainerIdentifiers = comAppleDeveloperIcloudContainerIdentifiers()
+    let comAppleDeveloperIcloudServices = comAppleDeveloperIcloudServices()
     let comAppleDeveloperNfcReadersessionFormats = comAppleDeveloperNfcReadersessionFormats()
+    let comAppleDeveloperUbiquityContainerIdentifiers = comAppleDeveloperUbiquityContainerIdentifiers()
     let comAppleSecurityApplicationGroups = comAppleSecurityApplicationGroups()
     struct comAppleDeveloperAssociatedDomains {
       let applinksWwwTerrabyteSg: String = "applinks:www.terrabyte.sg"
     }
+    struct comAppleDeveloperIcloudContainerIdentifiers {
+    }
+    struct comAppleDeveloperIcloudServices {
+      let cloudDocuments: String = "CloudDocuments"
+    }
     struct comAppleDeveloperNfcReadersessionFormats {
       let taG: String = "TAG"
+    }
+    struct comAppleDeveloperUbiquityContainerIdentifiers {
     }
     struct comAppleSecurityApplicationGroups {
       let groupWidgetCalendar: String = "group.widget.calendar"

@@ -27,6 +27,11 @@ class ChatViewController: MessagesViewController {
         formatter.timeZone = TimeZone.current
         return formatter
     }()
+    
+    lazy var fileMessageSizeCalculator = FileMessageLayoutSizeCalculator(
+      layout: self.messagesCollectionView
+        .messagesCollectionViewFlowLayout)
+    
     lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
     var messageList:[IMMessage] = []
     
@@ -81,10 +86,12 @@ class ChatViewController: MessagesViewController {
     
     
     func configureMessageCollectionView() {
+        messagesCollectionView.register(FileMessageCell.self)
+        
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
         layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
-        layout?.setMessageIncomingAccessoryViewPosition(.messageBottom)
+        layout?.setMessageIncomingAccessoryViewPosition(.messageCenter)
         layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
         layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
 
@@ -93,7 +100,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        
+        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         scrollsToLastItemOnKeyboardBeginsEditing = true // default false
 //              maintainPositionOnInputBarHeightChanged = true // default false
         showMessageTimestampOnSwipeLeft = true // default false
@@ -179,12 +186,15 @@ class ChatViewController: MessagesViewController {
         if messageList.count > 0 {
             messageList.removeLast()
             messagesCollectionView.reloadDataAndKeepOffset()
-            self.messagesCollectionView.scrollToLastItem(animated: false)
+            reloadCollectionView()
         }
     }
     
     func reloadCollectionView() {
-        messagesCollectionView.reloadSections([messageList.count - 1])
+        self.messagesCollectionView.reloadSections([self.messageList.count - 1])
+        if self.isLastSectionVisible() == true {
+            self.messagesCollectionView.scrollToLastItem(animated: true)
+        }
     }
     
     deinit {

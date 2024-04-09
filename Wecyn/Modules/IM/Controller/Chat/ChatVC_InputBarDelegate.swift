@@ -35,6 +35,7 @@ extension ChatViewController {
 }
 
 extension ChatViewController:CustomInputBarAccessoryViewDelegate {
+    
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith attachments: [CustomAttachment]) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             
@@ -54,10 +55,48 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 case .audio(let path,let duration):
                     let source = MediaMessageSource(source: MediaMessageSource.Info(relativePath: path),duration: duration)
                     self.sendAudio(source: source)
+                case  .file(let fileName,let url,let ext,let data,let size):
+                    let source = MediaMessageSource(source: MediaMessageSource.Info(url: url),size: size,ext: ext,fileName: fileName)
+                    self.sendFile(source: source, data: data)
                 }
             }
         }
     }
+    
+    private func sendFile(source: MediaMessageSource,data:Data) {
+        let ext = source.ext ?? ""
+        let size = source.size ?? 0
+        let fileName = source.fileName ?? ""
+        
+        var message:IMMessage?
+        firstly {
+            self.getUploadFileUrl(.file(ext: ext))
+        }
+        .then {
+            let item = FileItem(title:fileName,url: $0.downUrl.url,image: UIImage(nameInBundle: "msg_file"),size: size)
+            message = IMMessage(fileItem: item, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+            message?.sendStatus = .sending
+            self.insertMessage(message!)
+            return self.uploadMedia($0, data, .file(ext: ext))
+        }
+        .done { result in
+            IMController.shared.sendFileMessage(byURL: result, fileName: fileName, size: size, to: self.dataProvider.receiverId, conversationType: .c2c) { info in
+                
+            } onComplete: { info in
+                message?.sendStatus = info.status
+                self.reloadCollectionView()
+            }
+
+        }.catch { e in
+            
+            message?.sendStatus = .sendFailure
+            self.reloadCollectionView()
+            Toast.showError(e.asAPIError.errorInfo().message)
+            
+        }
+        
+    }
+    
     
     private func sendImage(source: MediaMessageSource) {
 
@@ -65,15 +104,19 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
             let image = UIImage.init(path: source.source.url.absoluteString),
             let data = image.compressedData()
         else { return }
-        let message = IMMessage(image: image, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
-        message.sendStatus = .sending
-        self.insertMessage(message)
-        self.messagesCollectionView.scrollToLastItem(animated: true)
+     
+        var message:IMMessage?
         firstly {
             getUploadFileUrl(.Image)
         }
         .then {
-            self.uploadMedia($0,data,.Image)
+            if let url = $0.downUrl.url {
+                message = IMMessage(imageURL: url, imageSize: image.size, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+                message?.sendStatus = .sending
+                self.insertMessage(message!)
+            }
+          
+            return self.uploadMedia($0,data,.Image)
         }.done { result in
             let sourcePic = OIMPictureInfo()
             sourcePic.url = result
@@ -84,15 +127,15 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                                                  to: self.dataProvider.receiverId,
                                                  conversationType: .c2c) { messageInfo in
                 
-            } onComplete: { messageinfo in
-                message.sendStatus = .sendSuccess
+            } onComplete: { info in
+                message?.sendStatus = info.status
                 self.reloadCollectionView()
             }
             
         }.catch { e in
-            message.sendStatus = .sendFailure
+            message?.sendStatus = .sendFailure
             self.reloadCollectionView()
-            self.revokeMessage()
+            Toast.showError(e.asAPIError.errorInfo().message)
             
         }
       
@@ -106,30 +149,35 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
             let data = try? Data.init(contentsOf:  NSURL(fileURLWithPath: path) as URL)
                 
         else { return }
-        let message = IMMessage(thumbnail: thumbnail, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
-        self.insertMessage(message)
-        self.messagesCollectionView.scrollToLastItem(animated: true)
         
+        var message:IMMessage?
         firstly {
             self.getUploadFileUrl(.video)
         }
         .then {
-            self.uploadMedia($0,data,.video)
+           
+            if let url = $0.downUrl.url {
+                message = IMMessage(videoThumbnail: thumbnail,videoUrl: url, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+                message?.sendStatus = .sending
+                self.insertMessage(message!)
+            }
+         
+            return self.uploadMedia($0,data,.video)
         }
         .done { result in
             
             IMController.shared.sendVideoMessage(byURL: result, duration: source.duration ?? 0, size: 0, snapshotPath: "", to: self.dataProvider.receiverId, conversationType: .c2c) { info in
                 
             } onComplete: { info in
-                message.sendStatus = .sendSuccess
+                message?.sendStatus = info.status
                 self.reloadCollectionView()
             }
 
         }.catch { e in
             
-            message.sendStatus = .sendFailure
+            message?.sendStatus = .sendFailure
             self.reloadCollectionView()
-            self.revokeMessage()
+            Toast.showError(e.asAPIError.errorInfo().message)
             
         }
     }
@@ -143,31 +191,36 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 
         else { return }
         
-        let url = NSURL(fileURLWithPath: path) as URL
-        let message = IMMessage(audioURL: url, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
-        self.insertMessage(message)
-        self.messagesCollectionView.scrollToLastItem(animated: true)
-        
+        var message:IMMessage?
         firstly {
             self.getUploadFileUrl(.audio)
         }
         .then {
-            self.uploadMedia($0, data, .audio)
+            if let url = $0.downUrl.url {
+                message = IMMessage(audioURL: url, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+                message?.sendStatus = .sending
+                self.insertMessage(message!)
+            }
+           
+            return self.uploadMedia($0, data, .audio)
         }
         .done { result in
             IMController.shared.sendAudioMessage(byURL: result, duration: source.duration ?? 0, size: 0, to: self.dataProvider.receiverId, conversationType: .c2c) { info in
                 
             } onComplete: { info in
-                message.sendStatus = .sendSuccess
+                message?.sendStatus = info.status
                 self.reloadCollectionView()
             }
 
         }.catch { e in
             
-            message.sendStatus = .sendFailure
+            message?.sendStatus = .sendFailure
             self.reloadCollectionView()
-            self.revokeMessage()
+            Toast.showError(e.asAPIError.errorInfo().message)
             
         }
     }
 }
+
+
+

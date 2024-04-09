@@ -19,7 +19,7 @@ class BaseViewController: UIViewController {
     }
     private lazy var leftButton = UIButton()
     
-   
+    
     
     var leftButtonDidClick:(()->())?
     var interactivePopGestureRecognizerEnable:Bool = true{
@@ -39,7 +39,7 @@ class BaseViewController: UIViewController {
         self.becomeFirstResponder()
         
         IQKeyboardManager.shared.enableAutoToolbar = false
-
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -62,7 +62,7 @@ class BaseViewController: UIViewController {
         if self.presentingViewController == nil {
             self.navigationController?.popViewController(animated: true)
         }else {
-          self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -78,7 +78,7 @@ class BaseViewController: UIViewController {
             
             let vc = NotificationController()
             self.navigationController?.pushViewController(vc)
-           
+            
         }).disposed(by: rx.disposeBag)
         
         let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
@@ -95,16 +95,16 @@ class BaseViewController: UIViewController {
         self.navigation.item.rightBarButtonItems = [notificationItem,fixItem1,messageItem,fixItem2]
         
         notificationBadger = BadgeController(for: notificationButton,
-                                 in: .upperLeftCorner,
-                                 badgeBackgroundColor: UIColor.red,
-                                 badgeTextColor: UIColor.white,
-                                 badgeHeight: 16)
+                                             in: .upperLeftCorner,
+                                             badgeBackgroundColor: UIColor.red,
+                                             badgeTextColor: UIColor.white,
+                                             badgeHeight: 16)
         
         messageBadger = BadgeController(for: message,
-                                 in: .upperLeftCorner,
-                                 badgeBackgroundColor: UIColor.red,
-                                 badgeTextColor: UIColor.white,
-                                 badgeHeight: 16)
+                                        in: .upperLeftCorner,
+                                        badgeBackgroundColor: UIColor.red,
+                                        badgeTextColor: UIColor.white,
+                                        badgeHeight: 16)
         
         
     }
@@ -117,7 +117,7 @@ class BaseViewController: UIViewController {
         notificationBadger.addOrReplaceCurrent(with: count.string, animated: true)
     }
     
-
+    
     func updateMessageBadge(_ count:Int) {
         if count == 0 {
             messageBadger.remove(animated: false)
@@ -125,7 +125,7 @@ class BaseViewController: UIViewController {
         }
         messageBadger.addOrReplaceCurrent(with: count.string, animated: true)
     }
-
+    
     
     func barTintColor(_ color:UIColor) {
         self.navigation.bar.tintColor = color
@@ -134,7 +134,7 @@ class BaseViewController: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         Logger.debug("摇一摇结束")
-        #if DEBUG
+#if DEBUG
         self.showAlertController(title: "LookInServer", message: nil, buttonTitles: ["导出当前UI结构","审查元素","3D视图","取消"], highlightedButtonIndex: nil, preferredStyle: .alert, completion: { idx in
             if idx == 0 {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Lookin_Export"), object: nil)
@@ -146,10 +146,11 @@ class BaseViewController: UIViewController {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Lookin_3D"), object: nil)
             }
         })
-        #endif
+#endif
     }
     
     deinit {
         Logger.info("\(self.className)销毁" )
     }
 }
+

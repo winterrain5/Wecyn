@@ -47,12 +47,7 @@ extension ChatViewController:  MessagesDataSource {
     }
     
     func cellBottomLabelAttributedText(for _: MessageType, at _: IndexPath) -> NSAttributedString? {
-        NSAttributedString(
-            string: "Read",
-            attributes: [
-                NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10),
-                NSAttributedString.Key.foregroundColor: UIColor.darkGray,
-            ])
+       return nil
     }
     
     func messageTopLabelAttributedText(for message: MessageType, at _: IndexPath) -> NSAttributedString? {
@@ -70,8 +65,18 @@ extension ChatViewController:  MessagesDataSource {
         return nil
     }
     
-    func textCell(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> UICollectionViewCell? {
-        nil
+    func customCell(for message: any MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UICollectionViewCell {
+        let cell = messagesCollectionView.dequeueReusableCell(
+          FileMessageCell.self,
+          for: indexPath)
+        cell.configure(
+          with: message,
+          at: indexPath,
+          in: messagesCollectionView,
+          dataSource: self,
+          and: fileMessageSizeCalculator)
+        cell.delegate = self
+        return cell
     }
     
     

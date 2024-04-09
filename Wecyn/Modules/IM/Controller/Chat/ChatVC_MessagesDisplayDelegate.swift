@@ -126,13 +126,16 @@ extension ChatViewController:MessagesDisplayDelegate {
         if message.sendStatus == .sending{
             let indictor = UIActivityIndicatorView(style: .medium)
             indictor.tintColor = .lightGray
-            accessoryView.size = CGSize(width: 20, height: 20)
             accessoryView.addSubview(indictor)
             indictor.frame = accessoryView.bounds
             indictor.startAnimating()
-        } else {
+        } else  if message.sendStatus  == .sendFailure {
+            let image = UIImageView(image: UIImage.init(systemName: "exclamationmark.circle.fill")?.tintImage(.red))
+            accessoryView.addSubview(image)
+            image.frame = accessoryView.bounds
+        }  else {
             accessoryView.subviews.forEach { $0.removeFromSuperview() }
         }
-        
+
     }
 }

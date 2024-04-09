@@ -623,7 +623,7 @@ extension IMController {
                             conversationType: ConversationType,
                             onComplete: @escaping CallBack.MessageReturnVoid) {
         let model = message.toMessageInfo()
-        model.isRead = false
+        model.isRead = true
         if conversationType == .c2c {
             Self.shared.imManager.sendMessage(message, recvID: recvID, groupID: nil, offlinePushInfo: message.offlinePush) { (newMessage: OIMMessageInfo?) in
                 if let respMessage = newMessage {
@@ -891,16 +891,18 @@ extension IMController {
     }
     
     
-    public func sendFileMessage(filePath: String,
+    public func sendFileMessage(byURL: String,
+                                fileName: String,
+                                size:Int,
                                 to recvID: String,
                                 conversationType: ConversationType,
                                 sending: CallBack.MessageReturnVoid,
                                 onComplete: @escaping CallBack.MessageReturnVoid) {
-        let message = OIMMessageInfo.createFileMessage(fromFullPath: filePath,
-                                                       fileName: (filePath as NSString).lastPathComponent)
+        let message = OIMMessageInfo.createFileMessage(byURL: byURL, fileName: fileName, size: size)
+       
         message.status = .sending
         sending(message.toMessageInfo())
-        sendOIMMessage(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
+        sendHelperNotOss(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
     }
     
     public func sendMergeMessage(messages: [MessageInfo],

@@ -47,8 +47,8 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 IMController.shared.sendTextMessage(text: str, to: dataProvider.receiverId, conversationType: .c2c) { info in
                     print(info)
                 } onComplete: { info in
-                    message.sendStatus = .sendSuccess
-                    self.messagesCollectionView.reloadSections([self.messageList.count - 1])
+                    message.sendStatus = info.status
+                    self.reloadCollectionView()
                 }
 
                 

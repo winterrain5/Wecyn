@@ -16,6 +16,7 @@ enum CustomAttachment {
     case image(String, String)
     case video(String, String, String, Int)
     case audio(String,Int)
+    case file(String,URL,String,Data,Int)
 }
 
 // MARK: - CameraInputBarAccessoryViewDelegate
@@ -408,6 +409,26 @@ extension iMessageInputBar:AVAudioRecorderDelegate {
             NotificationCenter.default.post(name: NSNotification.Name.init("updateMeters"), object: soundMeters)
         }
     }
+    
+    func selectUploadFileFromICouldDrive()  {
+        let documentTypes = ["public.content",
+                             "public.text",
+                             "public.source-code",
+                             "public.image",
+                             "public.audiovisual-content",
+                             "com.adobe.pdf",
+                             "com.apple.keynote.key",
+                             "com.microsoft.word.doc",
+                             "com.microsoft.excel.xls",
+                             "com.microsoft.powerpoint.ppt"]
+        
+
+        let document = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
+        
+         document.delegate = self  //UIDocumentPickerDelegate
+        UIViewController.sk.getTopVC()?.present(document, animated:true, completion:nil)
+    }
+    
 }
 extension iMessageInputBar:UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -451,10 +472,74 @@ extension iMessageInputBar: InputPadViewDelegate {
             showImagePickerController(sourceType: .photoLibrary)
         case .camera:
             showImagePickerController(sourceType: .camera)
-        default:
-            break
+        case .file:
+            selectUploadFileFromICouldDrive()
         }
     }
+    
 }
 
-
+extension iMessageInputBar: UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        print(urls)
+        guard let url = urls.last else { return }
+        let fileName = url.lastPathComponent
+        let ext = String(fileName.split(separator: ".").last ?? "")
+        guard url.startAccessingSecurityScopedResource() else {
+            print("startAccessingSecurityScopedResource failed")
+            return
+        }
+        
+        let coordinator = NSFileCoordinator()
+        func read(url: URL) throws -> Data {
+            var coordinationError: NSError?
+            var readData: Data?
+            var readError: Error?
+            
+            coordinator.coordinate(readingItemAt: url, options: [], error: &coordinationError) { url in
+                do {
+                    readData = try Data(contentsOf: url)
+                } catch {
+                    readError = error
+                }
+            }
+            
+            // 检查读取过程中是否发生了错误
+            if let error = readError {
+                throw error
+            }
+            
+            // 检查协调过程中是否发生了错误
+            if let coordinationError = coordinationError {
+                throw coordinationError
+            }
+            
+            // 确保读取到的数据不为空
+            guard let data = readData else {
+                throw NSError(domain: "CloudDocumentsHandlerError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data was read from the file."])
+            }
+            
+            return data
+        }
+        guard let data = try? read(url: url) else {
+            Logger.debug("read data failed")
+            return
+        }
+        var sizeInByte:Double = 0
+        do {
+            let attribute = try FileManager.default.attributesOfItem(atPath: url.path)
+            if let size = attribute[FileAttributeKey.size] as? NSNumber {
+                sizeInByte = size.doubleValue
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        self.sendAttachments(attachments: [.file(fileName,url,ext,data,sizeInByte.int)])
+        url.stopAccessingSecurityScopedResource()
+        
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+}

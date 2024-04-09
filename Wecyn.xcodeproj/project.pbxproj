@@ -87,6 +87,7 @@
 		450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD82A6E0FDA0001AA1B /* NFCController.swift */; };
 		450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */; };
 		450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */; };
+		4513AD802BC28FA100A360B2 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */; };
 		4513F6102BAD53A50080756F /* ChatVC_MessageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */; };
 		4513F6122BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */; };
 		4513F6142BAD53ED0080756F /* ChatVC_MessagesDisplayDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F6132BAD53ED0080756F /* ChatVC_MessagesDisplayDelegate.swift */; };
@@ -448,6 +449,7 @@
 		450F6CDB2A6E6BCC0001AA1B /* Wecyn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wecyn.entitlements; sourceTree = "<group>"; };
 		450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardView.swift; sourceTree = "<group>"; };
 		450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardController.swift; sourceTree = "<group>"; };
+		4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessageDataSource.swift; sourceTree = "<group>"; };
 		4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessagesLayoutDelegate.swift; sourceTree = "<group>"; };
 		4513F6132BAD53ED0080756F /* ChatVC_MessagesDisplayDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessagesDisplayDelegate.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 				45381DF92BC22A83007EE954 /* MCVolumeView.swift */,
 				4513F61C2BAD5A5C0080756F /* iMessageInputBar.swift */,
 				45381DF62BBA9799007EE954 /* InputPadView.swift */,
+				4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2081,6 +2084,7 @@
 				45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */,
 				45920AED2A26E045005871ED /* WebView.swift in Sources */,
 				457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */,
+				4513AD802BC28FA100A360B2 /* FileMessageCell.swift in Sources */,
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
 				45D591BA2BB4031100B6E673 /* ChatUserSettingController.swift in Sources */,
 				450BA6D52A32F05B00764828 /* RegistInfoController.swift in Sources */,
@@ -2628,9 +2632,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4F6LM54QKY;
+				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;

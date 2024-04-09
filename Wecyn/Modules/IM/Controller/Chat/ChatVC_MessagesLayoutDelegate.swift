@@ -9,6 +9,11 @@ import Foundation
 import MessageKit
 // MARK: MessagesLayoutDelegate
 extension ChatViewController:MessagesLayoutDelegate {
+    
+    func customCellSizeCalculator(for message: any MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CellSizeCalculator {
+        fileMessageSizeCalculator
+    }
+
     func textCellSizeCalculator(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> CellSizeCalculator? {
       nil
     }
@@ -27,4 +32,7 @@ extension ChatViewController:MessagesLayoutDelegate {
     func messageBottomLabelHeight(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> CGFloat {
       8
     }
+    
+    
+   
 }
