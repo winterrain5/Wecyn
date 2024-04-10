@@ -216,7 +216,7 @@ open class MessageLabel: UILabel {
     // MARK: - Private Methods
 
     private func setTextStorage(_ newText: NSAttributedString?, shouldParse: Bool) {
-
+        
         guard let newText = newText, newText.length > 0 else {
             textStorage.setAttributedString(NSAttributedString())
             setNeedsDisplay()

@@ -56,17 +56,48 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                     let source = MediaMessageSource(source: MediaMessageSource.Info(relativePath: path),duration: duration)
                     self.sendAudio(source: source)
                 case  .file(let fileName,let url,let ext,let data,let size):
-                    let source = MediaMessageSource(source: MediaMessageSource.Info(url: url),size: size,ext: ext,fileName: fileName)
+                    let source = MediaMessageSource(source: MediaMessageSource.Info(url: url),size: size,ext: ext,name: fileName)
                     self.sendFile(source: source, data: data)
+                case .carte(name: let name, avatar: let avatar, id: let id, wid: let wid):
+                    let source = MediaMessageSource(source: MediaMessageSource.Info(url: avatar.url),name: name,id: id,wid: wid)
+                    self.sendCarte(source: source)
                 }
             }
         }
     }
     
+    private func sendCarte(source: MediaMessageSource) {
+        guard
+            let name = source.name,
+            let userID = source.id?.string,
+            let wid = source.wid
+        else { return }
+        
+        var faceUrl:String? = nil
+        if source.source.url != nil {
+            faceUrl = source.source.url.absoluteString
+        }
+        
+        let card = CardElem(userID: userID, nickname: name, faceURL: faceUrl,ex: wid)
+        
+        let item = IMContactItem(displayName: name, faceUrl: faceUrl, id: userID.int ?? 0, wid: wid)
+        let message = IMMessage(contact: item, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+        message.sendStatus = .sending
+        self.insertMessage(message)
+        
+        IMController.shared.sendCardMessage(card: card, to: dataProvider.receiverId, conversationType: .c2c) { info in
+            
+        } onComplete: { info in
+            message.sendStatus = info.status
+            self.reloadCollectionView()
+        }
+
+    }
+    
     private func sendFile(source: MediaMessageSource,data:Data) {
         let ext = source.ext ?? ""
         let size = source.size ?? 0
-        let fileName = source.fileName ?? ""
+        let fileName = source.name ?? ""
         
         var message:IMMessage?
         firstly {
@@ -197,7 +228,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
         }
         .then {
             if let url = $0.downUrl.url {
-                message = IMMessage(audioURL: url, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+                message = IMMessage(audioURL: url,duration: source.duration?.float ?? 0 ,user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
                 message?.sendStatus = .sending
                 self.insertMessage(message!)
             }

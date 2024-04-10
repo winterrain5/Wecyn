@@ -66,17 +66,35 @@ extension ChatViewController:  MessagesDataSource {
     }
     
     func customCell(for message: any MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UICollectionViewCell {
-        let cell = messagesCollectionView.dequeueReusableCell(
-          FileMessageCell.self,
-          for: indexPath)
-        cell.configure(
-          with: message,
-          at: indexPath,
-          in: messagesCollectionView,
-          dataSource: self,
-          and: fileMessageSizeCalculator)
-        cell.delegate = self
-        return cell
+        if case MessageKind.custom(let custom) = message.kind {
+            if custom is FileItem {
+                let cell = messagesCollectionView.dequeueReusableCell(
+                  FileMessageCell.self,
+                  for: indexPath)
+                cell.configure(
+                  with: message,
+                  at: indexPath,
+                  in: messagesCollectionView,
+                  dataSource: self,
+                  and: fileMessageSizeCalculator)
+                cell.delegate = self
+                return cell
+            }
+            if custom is IMContactItem {
+                let cell = messagesCollectionView.dequeueReusableCell(
+                  CustomContactMessageCell.self,
+                  for: indexPath)
+                cell.configure(
+                  with: message,
+                  at: indexPath,
+                  in: messagesCollectionView,
+                  dataSource: self,
+                  and: contactMessageSizeCalculator)
+                cell.delegate = self
+                return cell
+            }
+        }
+       return UICollectionViewCell()
     }
     
     

@@ -11,7 +11,15 @@ import MessageKit
 extension ChatViewController:MessagesLayoutDelegate {
     
     func customCellSizeCalculator(for message: any MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CellSizeCalculator {
-        fileMessageSizeCalculator
+        if case MessageKind.custom(let custom) = message.kind {
+            if custom is FileItem {
+                 return fileMessageSizeCalculator
+            }
+            if custom is IMContactItem {
+                return  contactMessageSizeCalculator
+            }
+        }
+        return CellSizeCalculator()
     }
 
     func textCellSizeCalculator(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> CellSizeCalculator? {

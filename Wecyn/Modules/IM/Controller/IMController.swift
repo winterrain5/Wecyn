@@ -1921,10 +1921,11 @@ public class CardElem: Codable {
     public var faceURL: String?
     public var ex: String?
     
-    public init(userID: String, nickname: String, faceURL: String?) {
+    public init(userID: String, nickname: String, faceURL: String?,ex:String?) {
         self.userID = userID
         self.nickname = nickname
         self.faceURL = faceURL
+        self.ex = ex
     }
 }
 
@@ -2550,8 +2551,7 @@ extension OIMTextElem {
 
 extension OIMCardElem {
     func toCardElem() -> CardElem {
-        let item = CardElem(userID: userID, nickname: nickname, faceURL: faceURL)
-        item.ex = ex
+        let item = CardElem(userID: userID, nickname: nickname, faceURL: faceURL,ex: ex)
         
         return item
     }

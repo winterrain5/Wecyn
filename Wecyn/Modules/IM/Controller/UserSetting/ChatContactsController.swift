@@ -1,23 +1,18 @@
 //
-//  ConnectionOfMyController.swift
+//  ChatConnectionsController.swift
 //  Wecyn
 //
-//  Created by Derrick on 2023/6/19.
+//  Created by Derrick on 2024/4/9.
 //
 
-import UIKit
+import Foundation
 import SectionIndexView
-class ConnectionOfMyController: BasePagingTableController {
-    
+
+class ChatContactsController:BaseTableController {
     var friends:[[FriendListModel]] = []
-    var models:[FriendListModel] = [] {
-        didSet {
-            configData(models: models)
-        }
-    }
-    var connections:[FriendRecieveModel] = []
+    var models:[FriendListModel] = []
     var sectionCharacters:[String] = []
-    
+    var didSelectContact:((FriendListModel)->())?
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -30,8 +25,22 @@ class ConnectionOfMyController: BasePagingTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isSkeletonable = true
+        self.addLeftBarButtonItem(image: R.image.xmark())
+        self.leftButtonDidClick = { [weak self] in
+            self?.returnBack()
+        }
+        refreshData()
     }
-
+    
+    
+    override func refreshData() {
+        NetworkService.friendList().subscribe(onNext:{
+            self.models = $0
+            self.configData(models: $0)
+        },onError: { e in
+            self.endRefresh(e.asAPIError.emptyDatatype, emptyString: e.asAPIError.errorInfo().message)
+        }).disposed(by: rx.disposeBag)
+    }
     
     func configData(models:[FriendListModel]) {
         self.showSkeleton()
@@ -77,7 +86,7 @@ class ConnectionOfMyController: BasePagingTableController {
     }
     
     override func listViewFrame() -> CGRect {
-        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - ConnectFriendHeaderInSectionHeight.cgFloat - kNavBarHeight - kTabBarHeight)
+        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavBarHeight)
     }
     
     
@@ -126,13 +135,8 @@ class ConnectionOfMyController: BasePagingTableController {
         tableView.deselectRow(at: indexPath, animated: true)
         if friends.count > 0,friends[indexPath.section].count > 0 {
             let model = friends[indexPath.section][indexPath.row]
-            let vc = ChatFriendDetailController(id: model.id)
-            vc.deleteUserComplete = { [weak self] id in
-                guard let `self` = self else { return }
-                self.models.removeAll(where: { $0.id == id  })
-                self.configData(models: self.models)
-            }
-            self.navigationController?.pushViewController(vc)
+            self.didSelectContact?(model)
+            self.dismiss(animated: true)
         }
        
     }

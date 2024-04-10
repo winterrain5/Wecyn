@@ -13,10 +13,11 @@ import Photos
 import MobileCoreServices
 
 enum CustomAttachment {
-    case image(String, String)
-    case video(String, String, String, Int)
-    case audio(String,Int)
-    case file(String,URL,String,Data,Int)
+    case image(relativeFilePath:String,fullPath:String)
+    case video(thumbRelativeFilePath:String,thumbFullPath:String,fullPath:String,duration:Int)
+    case audio(url:String,duration:Int)
+    case file(fileName:String,url:URL,ext:String,data:Data,sizeInByte:Int)
+    case carte(name:String,avatar:String,id:Int,wid:String)
 }
 
 // MARK: - CameraInputBarAccessoryViewDelegate
@@ -64,15 +65,15 @@ final class iMessageInputBar: InputBarAccessoryView {
                 switch asset.mediaType {
                 case .video:
                     PhotoHelper.compressVideoToMp4(asset: asset, thumbnail: images[index]) { main, thumb, duration in
-                        self.sendAttachments(attachments: [.video(thumb.relativeFilePath,
-                                                                  thumb.fullPath,
-                                                                  main.fullPath,
-                                                                  duration)])
+                        self.sendAttachments(attachments: [.video(thumbRelativeFilePath: thumb.relativeFilePath,
+                                                                  thumbFullPath: thumb.fullPath,
+                                                                  fullPath: main.fullPath,
+                                                                  duration: duration)])
                     }
                 case .image:
                     let r = FileHelper.shared.saveImage(image: images[index])
-                    self.sendAttachments(attachments: [.image(r.relativeFilePath,
-                                                              r.fullPath)])
+                    self.sendAttachments(attachments: [.image(relativeFilePath: r.relativeFilePath,
+                                                              fullPath: r.fullPath)])
                 default:
                     break
                 }
@@ -85,16 +86,16 @@ final class iMessageInputBar: InputBarAccessoryView {
             
             if let photo {
                 let r = FileHelper.shared.saveImage(image: photo)
-                self.sendAttachments(attachments: [.image(r.relativeFilePath,
-                                                          r.fullPath)])
+                self.sendAttachments(attachments: [.image(relativeFilePath: r.relativeFilePath,
+                                                          fullPath: r.fullPath)])
             }
 
             if let videoPath {
                 PhotoHelper.getVideoAt(url: videoPath) { main, thumb, duration in
-                    self.sendAttachments(attachments: [.video(thumb.relativeFilePath,
-                                                              thumb.fullPath,
-                                                              main.fullPath,
-                                                              duration)])
+                    self.sendAttachments(attachments: [.video(thumbRelativeFilePath: thumb.relativeFilePath,
+                                                              thumbFullPath: thumb.fullPath,
+                                                              fullPath: main.fullPath,
+                                                              duration: duration)])
                 }
             }
         }
@@ -113,8 +114,7 @@ final class iMessageInputBar: InputBarAccessoryView {
             .configure {
                 $0.tintColor = .black
                 $0.spacing = .fixed(8)
-                $0.image = UIImage(systemName: "plus.circle")?.scaled(toWidth: 28)
-                $0.setImage(UIImage(systemName: "keyboard")?.scaled(toWidth: 28), for: .selected)
+                $0.image = UIImage(nameInBundle: "inputbar_more_normal_icon")?.scaled(toWidth: 28)
                 $0.setSize(CGSize(width: 32, height: 32), animated: false)
             }.onTouchUpInside { [weak self] item in
                 guard let self else { return }
@@ -130,8 +130,8 @@ final class iMessageInputBar: InputBarAccessoryView {
             .configure {
                 $0.tintColor = .black
                 $0.spacing = .fixed(8)
-                $0.image = UIImage(systemName: "mic.fill")?.scaled(toWidth: 24)
-                $0.setImage(UIImage(systemName: "keyboard")?.scaled(toWidth: 28), for: .selected)
+                $0.image = UIImage(nameInBundle: "inputbar_audio_btn_normal_icon")?.scaled(toWidth: 28)
+                $0.setImage(UIImage(nameInBundle: "inputbar_keyboard_btn_icon")?.scaled(toWidth: 28), for: .selected)
                 $0.setSize(CGSize(width: 32, height: 32), animated: false)
             }.onTouchUpInside { [weak self] item in
                
@@ -201,13 +201,13 @@ final class iMessageInputBar: InputBarAccessoryView {
         setStackViewItems([micButton], forStack: .left, animated: false)
         leftStackView.alignment = .center
         
+        rightStackView.alignment = .center
         setRightStackViewWidthConstant(to: 32, animated: false)
         setStackViewItems([moreButton], forStack: .right, animated: false)
-        rightStackView.alignment = .center
         
         middleContentViewPadding.top = 6
         middleContentViewPadding.bottom = 6
-        middleContentViewPadding.left = 12
+        middleContentViewPadding.left = 8
         separatorLine.isHidden = false
         isTranslucent = true
         maxTextViewHeight = 44
@@ -234,7 +234,6 @@ final class iMessageInputBar: InputBarAccessoryView {
         if show {
             inputTextView.resignFirstResponder()
         } else {
-            inputTextView.becomeFirstResponder()
             moreButton.isSelected = false
         }
         configBottomButtons(show)
@@ -337,7 +336,7 @@ extension iMessageInputBar:AVAudioRecorderDelegate {
                     let exists = try recorder.url.checkResourceIsReachable()
                     if exists {
                         print("finish record")
-                        self.sendAttachments(attachments: [.audio(recorder.url.absoluteString.removingPrefix("file://"), Int(self.recordTime))])
+                        self.sendAttachments(attachments: [.audio(url: recorder.url.absoluteString.removingPrefix("file://"), duration: Int(self.recordTime))])
                         self.recorder = nil
                     }
                 }
@@ -429,6 +428,17 @@ extension iMessageInputBar:AVAudioRecorderDelegate {
         UIViewController.sk.getTopVC()?.present(document, animated:true, completion:nil)
     }
     
+    func showContactsVc() {
+        let vc = ChatContactsController()
+        vc.didSelectContact = { [weak self] in
+            print($0)
+            self?.sendAttachments(attachments: [.carte(name: $0.full_name, avatar: $0.avatar, id: $0.id, wid: $0.wid)])
+        }
+        let nav = BaseNavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        UIViewController.sk.getTopVC()?.present(nav, animated: true)
+    }
+    
 }
 extension iMessageInputBar:UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -474,6 +484,8 @@ extension iMessageInputBar: InputPadViewDelegate {
             showImagePickerController(sourceType: .camera)
         case .file:
             selectUploadFileFromICouldDrive()
+        case .carte:
+            showContactsVc()
         }
     }
     
@@ -535,7 +547,7 @@ extension iMessageInputBar: UIDocumentPickerDelegate {
         } catch {
             print("Error: \(error)")
         }
-        self.sendAttachments(attachments: [.file(fileName,url,ext,data,sizeInByte.int)])
+        self.sendAttachments(attachments: [.file(fileName: fileName,url: url,ext: ext,data: data,sizeInByte: sizeInByte.int)])
         url.stopAccessingSecurityScopedResource()
         
         

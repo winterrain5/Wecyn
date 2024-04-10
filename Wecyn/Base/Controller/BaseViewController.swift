@@ -87,8 +87,10 @@ class BaseViewController: UIViewController {
         message.imageForNormal = R.image.ellipsisMessage()
         let messageItem = UIBarButtonItem(customView: message)
         message.rx.tap.subscribe(onNext:{
+            
             let vc = ChatListController()
             self.navigationController?.pushViewController(vc, animated: true)
+            
         }).disposed(by: rx.disposeBag)
         
         

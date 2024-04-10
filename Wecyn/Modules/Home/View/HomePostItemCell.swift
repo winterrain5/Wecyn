@@ -135,9 +135,8 @@ extension HomePostItemCell: UICollectionViewDataSource,UICollectionViewDelegate,
         }
         var image:UIImage?
         Asyncs.async(task: {
-            image = video.url?.thumbnail()
+            image = video.url?.thumbnail()?.rotateImageByOrientation()
         }, mainTask: {
-            
             if let image = image {
                 PostImageCache.shared.setImage(image: image, key: self.model?.id.string ?? "")
             }

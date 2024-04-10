@@ -28,6 +28,19 @@ class ChatUserSettingController: BaseTableController {
              ChatSettingModel(title:"置顶聊天".innerLocalized(),type: .pin,isOn:chatSticky, hasSwitch:true)],
             [ChatSettingModel(title: "清空聊天记录".innerLocalized(),type: .clear)]
         ]
+        configBarButtonItem()
+    }
+    
+    func configBarButtonItem() {
+        let button = UIButton()
+        button.imageForNormal = .init(nameInBundle: "common_more_btn_icon")
+        self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: button)
+        
+        button.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            let vc = ChatFriendDetailController(id: conversation.userID?.int ?? 0,conversation: conversation)
+            self.navigationController?.pushViewController(vc)
+        }).disposed(by: rx.disposeBag)
     }
     
     override func createListView() {

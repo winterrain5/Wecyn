@@ -74,7 +74,6 @@
 "转文字" = "Trans to text";
 "相册" = "Album";
 "拍摄" = "Camera";
-"名片" = "Cards";
 "按住开始说话" = "Press to speak";
 "正在说话" = "Speaking";
 "发送" = "Send";
@@ -87,7 +86,7 @@
 "翻译" = "Translate";
 "已读" = "Readed";
 "未读" = "Unread";
-"名片" = "Card";
+"名片" = "Carte";
 "图片" = "Image";
 "视频" = "Video";
 "文件" = "File";
@@ -215,4 +214,9 @@
 "[定位]" = "[Location]";
 "[自定义表情]" = "[Custom Expressions]";
 "[自定义消息]" = "[Custom Message]";
-"按住说话" = "Hold to talk"
+"按住说话" = "Hold to talk";
+"设置备注" = "Set notes";
+"添加到通讯录" =  "Add to address book";
+"你需要发送验证申请，等对方通过" = "You need to send a verification application and wait for the other party to pass it";
+"备注" = "Remark";
+"申请添加朋友" = "Apply to add friends";

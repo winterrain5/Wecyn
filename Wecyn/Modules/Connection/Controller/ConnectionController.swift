@@ -133,6 +133,7 @@ class ConnectionController: BaseViewController {
     
     func addTitleView() {
         self.navigation.item.titleView = searchView
+        searchView.frame = CGRect(origin: .zero, size: CGSize(width: kScreenWidth * 0.75, height: 36))
         searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             self.navigationController?.pushViewController(ConnectionUsersController(),animated: false)
         }).disposed(by: rx.disposeBag)

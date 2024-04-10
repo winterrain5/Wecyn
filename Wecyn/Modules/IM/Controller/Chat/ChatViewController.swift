@@ -28,14 +28,12 @@ class ChatViewController: MessagesViewController {
         return formatter
     }()
     
-    lazy var fileMessageSizeCalculator = FileMessageLayoutSizeCalculator(
-      layout: self.messagesCollectionView
-        .messagesCollectionViewFlowLayout)
+    lazy var fileMessageSizeCalculator = FileMessageLayoutSizeCalculator(layout: self.messagesCollectionView.messagesCollectionViewFlowLayout)
+    
+    lazy var contactMessageSizeCalculator = CustomContactMessageLayoutSizeCalculator(layout: self.messagesCollectionView.messagesCollectionViewFlowLayout)
     
     lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
     var messageList:[IMMessage] = []
-    
-    
     
     private(set) var dataProvider:DefaultDataProvider
     
@@ -87,6 +85,7 @@ class ChatViewController: MessagesViewController {
     
     func configureMessageCollectionView() {
         messagesCollectionView.register(FileMessageCell.self)
+        messagesCollectionView.register(CustomContactMessageCell.self)
         
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
@@ -94,20 +93,35 @@ class ChatViewController: MessagesViewController {
         layout?.setMessageIncomingAccessoryViewPosition(.messageCenter)
         layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
         layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
+        layout?.setMessageIncomingAvatarPosition(AvatarPosition(vertical: .messageTop))
+        layout?.setMessageOutgoingAvatarPosition(AvatarPosition(vertical: .messageTop))
 
         
+        additionalBottomInset = 10
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        messagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         scrollsToLastItemOnKeyboardBeginsEditing = true // default false
 //              maintainPositionOnInputBarHeightChanged = true // default false
         showMessageTimestampOnSwipeLeft = true // default false
         
         messagesCollectionView.refreshControl = refreshControl
         
+        let longGesture = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPressGesture(_:)))
+        longGesture.minimumPressDuration = 1
+        messagesCollectionView.addGestureRecognizer(longGesture)
+    }
+    
+    @objc
+    func handleLongPressGesture(_ gesture:UILongPressGestureRecognizer) {
+        guard gesture.state == .ended else { return }
         
+        let touchLocation = gesture.location(in: messagesCollectionView)
+        guard let indexPath = messagesCollectionView.indexPathForItem(at: touchLocation) else { return }
+        
+        let cell = messagesCollectionView.cellForItem(at: indexPath) as? MessageCollectionViewCell
+        print(cell)
     }
     
     func configureMessageInputBar() {
@@ -157,21 +171,7 @@ class ChatViewController: MessagesViewController {
         self.refreshControl.endRefreshing()
     }
     
-    func insertMessage(_ message: IMMessage) {
-        messageList.append(message)
-        
-        // Reload last section to update header/footer labels and insert a new one
-        messagesCollectionView.performBatchUpdates({
-            messagesCollectionView.insertSections([messageList.count - 1])
-            if messageList.count >= 2 {
-                messagesCollectionView.reloadSections([messageList.count - 2])
-            }
-        }, completion: { [weak self] _ in
-            if self?.isLastSectionVisible() == true {
-                self?.messagesCollectionView.scrollToLastItem(animated: true)
-            }
-        })
-    }
+   
     
     func isLastSectionVisible() -> Bool {
         guard !messageList.isEmpty else { return false }
@@ -190,11 +190,30 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+    func insertMessage(_ message: IMMessage) {
+        messageList.append(message)
+        
+        // Reload last section to update header/footer labels and insert a new one
+        messagesCollectionView.performBatchUpdates({
+            messagesCollectionView.insertSections([messageList.count - 1])
+            if messageList.count >= 2 {
+                messagesCollectionView.reloadSections([messageList.count - 2])
+            }
+        }, completion: { [weak self] _ in
+            if self?.isLastSectionVisible() == true {
+                self?.messagesCollectionView.scrollToLastItem(animated: true)
+            }
+        })
+    }
+    
     func reloadCollectionView() {
-        self.messagesCollectionView.reloadSections([self.messageList.count - 1])
-        if self.isLastSectionVisible() == true {
-            self.messagesCollectionView.scrollToLastItem(animated: true)
+        if self.messageList.count >= 1 {
+            self.messagesCollectionView.reloadSections([self.messageList.count - 1])
+            if self.isLastSectionVisible() == true {
+                self.messagesCollectionView.scrollToLastItem(animated: true)
+            }
         }
+        
     }
     
     deinit {

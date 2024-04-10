@@ -243,7 +243,7 @@ class FriendListModel: BaseModel {
      "ln": string # 好友的last_name
      "avt": int # 用户头像
      */
-    var uuid:  String = ""
+    var wid = ""
     var id: Int = 0
     var first_name: String = ""
     var last_name: String = ""
@@ -279,7 +279,7 @@ class FriendListModel: BaseModel {
     // 本地字段
     var isSelected: Bool = false
     var status = 0
-    var wid = ""
+    var uuid:  String = ""
 }
 
 class FriendUserInfoModel: BaseModel {

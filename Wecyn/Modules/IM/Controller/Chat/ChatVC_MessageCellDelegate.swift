@@ -13,8 +13,19 @@ import AVKit
 import SafariServices
 // MARK: MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
-    func didTapAvatar(in _: MessageCollectionViewCell) {
+    func didTapAvatar(in cell: MessageCollectionViewCell) {
         print("Avatar tapped")
+        guard
+            let indexPath = messagesCollectionView.indexPath(for: cell),
+            let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView)
+        else {
+            print("Failed to identify message when audio cell receive tap gesture")
+            return
+        }
+        guard let sender = message.sender as? IMUser else { return }
+        let vc = ChatFriendDetailController(id: sender.senderId.int ?? 0)
+        self.navigationController?.pushViewController(vc)
+        
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
@@ -34,6 +45,11 @@ extension ChatViewController: MessageCellDelegate {
             let vc  = SFSafariViewController(url: url)
             self.present(vc, animated: true)
         }
+        if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let contact = custom as? IMContactItem {
+            let vc = ChatFriendDetailController(id: contact.id)
+            self.navigationController?.pushViewController(vc)
+        }
+        
     }
     
     func didTapImage(in cell: MessageCollectionViewCell) {
@@ -124,13 +140,27 @@ extension ChatViewController: MessageCellDelegate {
         print("Did stop audio sound")
     }
     
-    func didTapAccessoryView(in _: MessageCollectionViewCell) {
+    func didTapAccessoryView(in cell: MessageCollectionViewCell) {
         print("Accessory view tapped")
-        
-        self.showAlert(title: "重发该消息".innerLocalized(), message: nil,buttonTitles: ["取消".innerLocalized(),"重发".innerLocalized()],highlightedButtonIndex: 1) { idx in
-            if idx == 1 {
-                
+        guard
+            let indexPath = messagesCollectionView.indexPath(for: cell),
+            let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView)
+        else {
+            print("Failed to identify message when audio cell receive tap gesture")
+            return
+        }
+        if (message as! IMMessage).sendStatus == .sendFailure {
+            self.showAlert(title: "重发该消息".innerLocalized(), message: nil,buttonTitles: ["取消".innerLocalized(),"重发".innerLocalized()],highlightedButtonIndex: 1) { idx in
+                if idx == 1 {
+                    
+                }
             }
         }
+       
     }
+    
+    func didTapBackground(in cell: MessageCollectionViewCell) {
+        self.view.endEditing(true)
+    }
+    
 }

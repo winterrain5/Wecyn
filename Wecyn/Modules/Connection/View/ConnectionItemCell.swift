@@ -25,15 +25,10 @@ class ConnectionItemCell: UICollectionViewCell {
         nameLabel.textAlignment = .center
         shadowView.addShadow(cornerRadius: 13)
         connectButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
+            guard let `self` = self,let model = self.model else { return }
 
-            NetworkService.addFriend(userId: self.model?.id ?? 0).subscribe(onNext:{ status in
-                if status.success == 1 {
-                    Toast.showSuccess( "Send Apply Success")
-                } else {
-                    Toast.showMessage(status.message)
-                }
-            }).disposed(by: self.rx.disposeBag)
+            let vc = ChatSendAddFriendRequestController(model: model)
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
             
         }).disposed(by: rx.disposeBag)
     }

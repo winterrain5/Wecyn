@@ -18,7 +18,7 @@
 		45005C5F2A57FF0100560E21 /* CreateGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */; };
 		45005C622A5B8FD200560E21 /* GroupHeadeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */; };
 		45005C652A5B94A100560E21 /* GroupItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C642A5B94A100560E21 /* GroupItemCell.swift */; };
-		45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C662A5BCF9B00560E21 /* FriendDetailController.swift */; };
+		45005C672A5BCF9B00560E21 /* ChatFriendDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C662A5BCF9B00560E21 /* ChatFriendDetailController.swift */; };
 		45005C732A5D027D00560E21 /* CalendarAddNewEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */; };
 		45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C772A5E384600560E21 /* EditorDemoController.swift */; };
 		45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45005C792A5E388100560E21 /* MediaInserter.swift */; };
@@ -255,6 +255,9 @@
 		45A7E5A92A734C1C0002014D /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A82A734C1C0002014D /* LocationSearchController.swift */; };
 		45A7E5AB2A734DC30002014D /* NavbarSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5AA2A734DC30002014D /* NavbarSearchView.swift */; };
 		45AA6AE52B33EF3900BB4BF9 /* AdminSelectDepartmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AA6AE42B33EF3900BB4BF9 /* AdminSelectDepartmentController.swift */; };
+		45ACB1FA2BC51ECB00CEC091 /* ChatContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACB1F92BC51ECB00CEC091 /* ChatContactsController.swift */; };
+		45ACB1FC2BC530D200CEC091 /* CustomContactMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACB1FB2BC530D200CEC091 /* CustomContactMessageCell.swift */; };
+		45ACB1FE2BC6278200CEC091 /* ChatSendAddFriendRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ACB1FD2BC6278200CEC091 /* ChatSendAddFriendRequestController.swift */; };
 		45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB28E2A3FF00E00745F6F /* UserApi.swift */; };
 		45ADB2912A3FF0AD00745F6F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2902A3FF0AD00745F6F /* UserService.swift */; };
 		45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */; };
@@ -378,7 +381,7 @@
 		45005C5E2A57FF0100560E21 /* CreateGroupHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupHeaderView.xib; sourceTree = "<group>"; };
 		45005C602A5B8FD200560E21 /* GroupHeadeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupHeadeCell.swift; sourceTree = "<group>"; };
 		45005C642A5B94A100560E21 /* GroupItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupItemCell.swift; sourceTree = "<group>"; };
-		45005C662A5BCF9B00560E21 /* FriendDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailController.swift; sourceTree = "<group>"; };
+		45005C662A5BCF9B00560E21 /* ChatFriendDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFriendDetailController.swift; sourceTree = "<group>"; };
 		45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddNewEventController.swift; sourceTree = "<group>"; };
 		45005C772A5E384600560E21 /* EditorDemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorDemoController.swift; sourceTree = "<group>"; };
 		45005C792A5E388100560E21 /* MediaInserter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaInserter.swift; sourceTree = "<group>"; };
@@ -623,6 +626,9 @@
 		45A7E5A82A734C1C0002014D /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		45A7E5AA2A734DC30002014D /* NavbarSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavbarSearchView.swift; sourceTree = "<group>"; };
 		45AA6AE42B33EF3900BB4BF9 /* AdminSelectDepartmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSelectDepartmentController.swift; sourceTree = "<group>"; };
+		45ACB1F92BC51ECB00CEC091 /* ChatContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContactsController.swift; sourceTree = "<group>"; };
+		45ACB1FB2BC530D200CEC091 /* CustomContactMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactMessageCell.swift; sourceTree = "<group>"; };
+		45ACB1FD2BC6278200CEC091 /* ChatSendAddFriendRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendAddFriendRequestController.swift; sourceTree = "<group>"; };
 		45ADB28E2A3FF00E00745F6F /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
 		45ADB2902A3FF0AD00745F6F /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyController.swift; sourceTree = "<group>"; };
@@ -910,6 +916,7 @@
 				4513F61C2BAD5A5C0080756F /* iMessageInputBar.swift */,
 				45381DF62BBA9799007EE954 /* InputPadView.swift */,
 				4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */,
+				45ACB1FB2BC530D200CEC091 /* CustomContactMessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1607,7 +1614,6 @@
 				45ADB2982A4038E800745F6F /* ConnectionOfMyController.swift */,
 				45005C542A57DC5400560E21 /* ConnectionGroupController.swift */,
 				45005C5A2A57FC8200560E21 /* CreateGroupController.swift */,
-				45005C662A5BCF9B00560E21 /* FriendDetailController.swift */,
 				45A0E64B2AD10ECD003C5153 /* FriendAddRemarkController.swift */,
 			);
 			path = Controller;
@@ -1634,6 +1640,9 @@
 			children = (
 				45D591B92BB4031100B6E673 /* ChatUserSettingController.swift */,
 				45D591BB2BB40F8A00B6E673 /* ChatSettingCell.swift */,
+				45ACB1F92BC51ECB00CEC091 /* ChatContactsController.swift */,
+				45ACB1FD2BC6278200CEC091 /* ChatSendAddFriendRequestController.swift */,
+				45005C662A5BCF9B00560E21 /* ChatFriendDetailController.swift */,
 			);
 			path = UserSetting;
 			sourceTree = "<group>";
@@ -2119,8 +2128,10 @@
 				45450CD92B300F3C00558C9D /* AdminDeleteRoleController.swift in Sources */,
 				450F6CD12A6909570001AA1B /* CalendarEventController.swift in Sources */,
 				45C781FC2A98A0FB00D4E721 /* ImageCompress+ColorConfig.swift in Sources */,
+				45ACB1FE2BC6278200CEC091 /* ChatSendAddFriendRequestController.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
+				45ACB1FC2BC530D200CEC091 /* CustomContactMessageCell.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
 				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
 				4509DAA22B91B5A3003CE3F6 /* ForgetPwdController.swift in Sources */,
@@ -2159,7 +2170,7 @@
 				45F07C1F2BB10ECC0070813D /* JsonTool.swift in Sources */,
 				45005C5B2A57FC8200560E21 /* CreateGroupController.swift in Sources */,
 				450B6C852A37FFAB008B0C4A /* JobItemCell.swift in Sources */,
-				45005C672A5BCF9B00560E21 /* FriendDetailController.swift in Sources */,
+				45005C672A5BCF9B00560E21 /* ChatFriendDetailController.swift in Sources */,
 				45005C8B2A5E86BD00560E21 /* CalendarEventRepeatController.swift in Sources */,
 				45920AEF2A26E045005871ED /* YBTapLabel.swift in Sources */,
 				450F6CCC2A64E04F0001AA1B /* CalendarEventDetailController.swift in Sources */,
@@ -2182,6 +2193,7 @@
 				45D591B52BB3FE5300B6E673 /* UIImage_IM_Extension.swift in Sources */,
 				450BA6CF2A32C62D00764828 /* SwiftFitSize.swift in Sources */,
 				45920AFF2A26E045005871ED /* DataLoadable.swift in Sources */,
+				45ACB1FA2BC51ECB00CEC091 /* ChatContactsController.swift in Sources */,
 				450BA6BF2A32B4B700764828 /* UIViewExtension.swift in Sources */,
 				45CB92512BAD13C800C7B95D /* IMMessage.swift in Sources */,
 				45A7E5A72A7265610002014D /* UpdateUserInfoRequestModel.swift in Sources */,

@@ -6,14 +6,17 @@
 //
 
 import UIKit
-class FriendDetailController: BaseTableController {
+class ChatFriendDetailController: BaseTableController {
     
     var id:Int = 0
     var model:FriendUserInfoModel?
+    var conversation:ConversationInfo?
     var deleteUserComplete:((Int)->())?
-    init(id:Int) {
+    
+    init(id:Int,conversation:ConversationInfo? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.id = id
+        self.conversation = conversation
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +31,7 @@ class FriendDetailController: BaseTableController {
             self.model = $0
             self.reloadData()
             self.hideSkeleton()
+            
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
             self.hideSkeleton()
@@ -36,30 +40,10 @@ class FriendDetailController: BaseTableController {
        
     }
     
-    func deleteUser() {
-        let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this friend?")
-        alert.addAction(title: "Confirm",style: .destructive) { _ in
-            Toast.showLoading()
-            NetworkService.deleteFriend(friend_id: self.model?.id ?? 0).subscribe(onNext:{ status in
-                Toast.dismiss()
-                if status.success == 1 {
-                    Toast.showSuccess( "Delete Success")
-                    self.deleteUserComplete?(self.model?.id ?? 0)
-                    self.navigationController?.popViewController()
-                } else {
-                    Toast.showError(status.message)
-                }
-                
-            },onError: { e in
-                Toast.showError(e.asAPIError.errorInfo().message)
-            }).disposed(by: self.rx.disposeBag)
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.show()
-    }
+   
     
     override func createListView() {
-        configTableview(.insetGrouped)
+        super.createListView()
         numberOfSkeletonCell = 1
         cellIdentifier  = FriendDetailHeadCell.className
         tableView?.separatorStyle = .singleLine
@@ -83,7 +67,17 @@ class FriendDetailController: BaseTableController {
         return 44
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 2
+        if section == 0 {
+            return 2
+        } else {
+            if model?.friend_status == 1 {
+                return 1
+            } else if model?.friend_status == 3  {
+              return 0
+            } else {
+                return 2
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,7 +92,7 @@ class FriendDetailController: BaseTableController {
             }
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withClass: FriendDetailNomalCell.self)
-                cell.label.text = "Remark"
+                cell.label.text = "设置备注".innerLocalized()
                 cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .none
                 return cell
@@ -106,24 +100,45 @@ class FriendDetailController: BaseTableController {
           
         }
         if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withClass: FriendDetailSendMessageCell.self)
+            if model?.friend_status == 1 { // 不是好友
+                let cell = tableView.dequeueReusableCell(withClass: FriendDetailNomalCell.self)
+                cell.label.text = "添加到通讯录".innerLocalized()
+                cell.textLabel?.textAlignment = .center
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .none
                 return cell
+            } else {
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCell(withClass: FriendDetailSendMessageCell.self)
+                    return cell
+                }
+                if indexPath.row == 1 {
+                    let cell = tableView.dequeueReusableCell(withClass: FriendDetailDeleteCell.self)
+                    return cell
+                }
             }
-            if indexPath.row == 1 {
-                let cell = tableView.dequeueReusableCell(withClass: FriendDetailDeleteCell.self)
-                return cell
-            }
+            
         }
       return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 && model?.friend_status == 3 {
+            return 40
+        }
         return 20
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView().backgroundColor(R.color.backgroundColor()!)
+        if section == 0 && model?.friend_status == 3 {
+            let label = UILabel()
+            label.text = "等待对方验证好友申请".innerLocalized()
+            label.textColor  = .gray
+            label.font = .systemFont(ofSize: 16)
+            label.frame = CGRect(x: 16, y: 0, width: kScreenWidth - 32, height: 40)
+            view.addSubview(label)
+        }
         return view
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -147,25 +162,67 @@ class FriendDetailController: BaseTableController {
         }
         
         if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                createConversation(model.id,model.full_name)
+            if model.friend_status == 1 {
+                let vc = ChatSendAddFriendRequestController(model: model)
+                let nav = BaseNavigationController(rootViewController: vc)
+                self.present(nav, animated: true)
+            } else {
+                if indexPath.row == 0 {
+                    createConversation(model.id,model.full_name)
+                }
+                if indexPath.row == 1 {
+                    deleteUser()
+                }
             }
-            if indexPath.row == 1 {
-                deleteUser()
-            }
+           
         }
         
     }
     
+    
     func createConversation(_ id:Int,_ name:String) {
-        IMController.shared.getConversation(sourceId:id.string) { conversation in
-            guard var conversation = conversation else { return }
-            conversation.userID = id.string
-            conversation.showName = name
-            let dataProvider = DefaultDataProvider(conversation: conversation)
-            let vc = ChatViewController(dataProvider: dataProvider)
+        if let conversation = conversation {
+            
+            let vc = ChatViewControllerBuilder().build(conversation)
             self.navigationController?.pushViewController(vc)
+            
+        } else {
+            
+            IMController.shared.getConversation(sourceId:id.string) { conversation in
+                guard let conversation = conversation else { return }
+                conversation.userID = id.string
+                conversation.showName = name
+                conversation.faceURL = self.model?.avatar
+                conversation.conversationType = .c2c
+                let dataProvider = DefaultDataProvider(conversation: conversation)
+                let vc = ChatViewController(dataProvider: dataProvider)
+                self.navigationController?.pushViewController(vc)
+            }
+           
         }
+       
+    }
+    
+    func deleteUser() {
+        let alert = UIAlertController(style: .actionSheet,title: "Are you sure you want to delete this friend?")
+        alert.addAction(title: "Confirm",style: .destructive) { _ in
+            Toast.showLoading()
+            NetworkService.deleteFriend(friend_id: self.model?.id ?? 0).subscribe(onNext:{ status in
+                Toast.dismiss()
+                if status.success == 1 {
+                    Toast.showSuccess( "Delete Success")
+                    self.deleteUserComplete?(self.model?.id ?? 0)
+                    self.navigationController?.popViewController()
+                } else {
+                    Toast.showError(status.message)
+                }
+                
+            },onError: { e in
+                Toast.showError(e.asAPIError.errorInfo().message)
+            }).disposed(by: self.rx.disposeBag)
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.show()
     }
 }
 

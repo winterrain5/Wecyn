@@ -35,7 +35,7 @@ extension ChatViewController:MessagesDisplayDelegate {
     }
     
     func messageStyle(for message: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> MessageStyle {
-        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .topRight : .topLeft
         return .bubbleTail(tail, .pointedEdge)
     }
     
@@ -56,6 +56,10 @@ extension ChatViewController:MessagesDisplayDelegate {
     {
         if case MessageKind.photo(let media) = message.kind, let imageURL = media.url {
             imageView.kf.setImage(with: imageURL)
+        } else if case MessageKind.video(let media) = message.kind,let videoURL = media.url {
+            getVideoThumbnaiImage(videoURL) { image in
+                imageView.image = image
+            }
         } else {
             imageView.kf.cancelDownloadTask()
         }
@@ -137,5 +141,23 @@ extension ChatViewController:MessagesDisplayDelegate {
             accessoryView.subviews.forEach { $0.removeFromSuperview() }
         }
 
+    }
+    
+ 
+    
+    func getVideoThumbnaiImage(_ video:URL,complete:@escaping (UIImage?)->()) {
+        if let image = MessageImageCache.shared.getImage(for: video.absoluteString)  {
+            complete(image)
+            return
+        }
+        var image:UIImage?
+        Asyncs.async(task: {
+            image = video.thumbnail()?.rotateImageByOrientation()
+        }, mainTask: {
+            if let image = image {
+                MessageImageCache.shared.setImage(image: image, key: video.absoluteString)
+            }
+            complete(image)
+        })
     }
 }

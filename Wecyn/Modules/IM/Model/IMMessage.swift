@@ -49,13 +49,13 @@ class IMMessage:MessageType {
         case .video:
             
             guard let url = messageInfo.videoElem?.videoUrl?.url else { return nil}
-            let thumbnail = UIImage(color: .lightGray, size: CGSize(width: 120, height: 160))
+            let thumbnail = UIImage.init(color: R.color.backgroundColor()!, size: CGSize(width: 120, height: 160))
             return IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, user: sender, messageId: messageId, date: date)
             
         case .audio:
             
-            guard let url = messageInfo.soundElem?.sourceUrl?.url else { return nil }
-            return IMMessage.init(audioURL: url, user: sender, messageId: messageId, date: date)
+            guard let url = messageInfo.soundElem?.sourceUrl?.url,let duration = messageInfo.soundElem?.duration.float else { return nil }
+            return IMMessage.init(audioURL: url,duration: duration, user: sender, messageId: messageId, date: date)
             
         case .file:
             
@@ -63,23 +63,17 @@ class IMMessage:MessageType {
             let item = FileItem(title: title, url: url,image: UIImage(nameInBundle: "msg_file"),size: size)
             return IMMessage(fileItem: item, user: sender, messageId: messageId, date: date)
             
+        case .card:
+            
+            guard let name = messageInfo.cardElem?.nickname,let faceUrl = messageInfo.cardElem?.faceURL, let id = messageInfo.cardElem?.userID.int,let wid = messageInfo.cardElem?.ex  else { return nil }
+            let item = IMContactItem(displayName: name, faceUrl: faceUrl, id: id, wid: wid)
+            return IMMessage(contact: item, user: sender, messageId: messageId, date: date)
+            
         case .friendAppApproved:
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
         default:
             return IMMessage(text: "\(messageInfo.contentType)", user: sender, messageId: messageId, date: date)
         }
-    }
-    
-    static func getVideoThumbnaiImage(_ video:String) -> UIImage {
-        if let image = MessageImageCache.shared.getImage(for: video) {
-            return image
-        }
-        let image = video.url?.thumbnail()
-        if let image = image {
-            PostImageCache.shared.setImage(image: image, key: video)
-        }
-        return image ?? UIImage()
-        
     }
     
     convenience init(custom: Any?, user: IMUser, messageId: String, date: Date) {
@@ -123,13 +117,13 @@ class IMMessage:MessageType {
         self.init(kind: .emoji(emoji), user: user, messageId: messageId, date: date)
     }
     
-    convenience init(audioURL: URL, user: IMUser, messageId: String, date: Date) {
-        let audioItem = IMAudioItem(url: audioURL)
+    convenience init(audioURL: URL,duration:Float, user: IMUser, messageId: String, date: Date) {
+        let audioItem = IMAudioItem(url: audioURL,duration: duration)
         self.init(kind: .audio(audioItem), user: user, messageId: messageId, date: date)
     }
     
     convenience init(contact: IMContactItem, user: IMUser, messageId: String, date: Date) {
-        self.init(kind: .contact(contact), user: user, messageId: messageId, date: date)
+        self.init(custom: contact, user: user, messageId: messageId, date: date)
     }
     
     convenience init(linkItem: LinkMediaItem, user: IMUser, messageId: String, date: Date) {
@@ -264,28 +258,25 @@ private struct IMAudioItem: AudioItem {
     var size: CGSize
     var duration: Float
     
-    init(url: URL) {
+    init(url: URL,duration: Float) {
         self.url = url
         size = CGSize(width: 160, height: 35)
-        // compute duration
-        let audioAsset = AVURLAsset(url: url)
-        duration = Float(CMTimeGetSeconds(audioAsset.duration))
+        self.duration = duration
     }
 }
 
 // MARK: - MockContactItem
 
-struct IMContactItem: ContactItem {
+struct IMContactItem {
     var displayName: String
-    var initials: String
-    var phoneNumbers: [String]
-    var emails: [String]
-    
-    init(name: String, initials: String, phoneNumbers: [String] = [], emails: [String] = []) {
-        displayName = name
-        self.initials = initials
-        self.phoneNumbers = phoneNumbers
-        self.emails = emails
+    var faceUrl: String?
+    var id: Int
+    var wid: String
+    init(displayName: String, faceUrl: String?, id: Int, wid: String) {
+        self.displayName = displayName
+        self.faceUrl = faceUrl
+        self.id = id
+        self.wid = wid
     }
 }
 
@@ -303,7 +294,9 @@ struct MediaMessageSource: Hashable {
     var duration: Int?
     var size:Int?
     var ext: String?
-    var fileName: String?
+    var name: String?
+    var id: Int?
+    var wid: String?
 }
 
 
