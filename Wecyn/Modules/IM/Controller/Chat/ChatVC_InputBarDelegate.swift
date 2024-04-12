@@ -89,6 +89,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
             
         } onComplete: { info in
             message.sendStatus = info.status
+            message.messageId = info.clientMsgID
             self.reloadCollectionView()
         }
 
@@ -115,6 +116,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 
             } onComplete: { info in
                 message?.sendStatus = info.status
+                message?.messageId = info.clientMsgID
                 self.reloadCollectionView()
             }
 
@@ -160,6 +162,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 
             } onComplete: { info in
                 message?.sendStatus = info.status
+                message?.messageId = info.clientMsgID
                 self.reloadCollectionView()
             }
             
@@ -201,6 +204,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 
             } onComplete: { info in
                 message?.sendStatus = info.status
+                message?.messageId = info.clientMsgID
                 self.reloadCollectionView()
             }
 
@@ -240,6 +244,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 
             } onComplete: { info in
                 message?.sendStatus = info.status
+                message?.messageId = info.clientMsgID
                 self.reloadCollectionView()
             }
 

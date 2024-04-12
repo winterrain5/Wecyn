@@ -15,6 +15,7 @@ import OpenIMSDK
 import RxKeyboard
 
 class ChatViewController: MessagesViewController {
+    override var canBecomeFirstResponder: Bool { true }
     private(set) lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
@@ -31,6 +32,8 @@ class ChatViewController: MessagesViewController {
     lazy var fileMessageSizeCalculator = FileMessageLayoutSizeCalculator(layout: self.messagesCollectionView.messagesCollectionViewFlowLayout)
     
     lazy var contactMessageSizeCalculator = CustomContactMessageLayoutSizeCalculator(layout: self.messagesCollectionView.messagesCollectionViewFlowLayout)
+    
+    lazy var revokeMessageSizeCalculator = RevokeMessageLayoutSizeCalculator(layout: self.messagesCollectionView.messagesCollectionViewFlowLayout)
     
     lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
     var messageList:[IMMessage] = []
@@ -84,8 +87,10 @@ class ChatViewController: MessagesViewController {
     
     
     func configureMessageCollectionView() {
+        
         messagesCollectionView.register(FileMessageCell.self)
         messagesCollectionView.register(CustomContactMessageCell.self)
+        messagesCollectionView.register(RevokeMessageCell.self)
         
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
@@ -107,31 +112,16 @@ class ChatViewController: MessagesViewController {
         showMessageTimestampOnSwipeLeft = true // default false
         
         messagesCollectionView.refreshControl = refreshControl
-        
-        let longGesture = UILongPressGestureRecognizer(target: self, action:#selector(handleLongPressGesture(_:)))
-        longGesture.minimumPressDuration = 1
-        messagesCollectionView.addGestureRecognizer(longGesture)
+       
     }
     
-    @objc
-    func handleLongPressGesture(_ gesture:UILongPressGestureRecognizer) {
-        guard gesture.state == .ended else { return }
-        
-        let touchLocation = gesture.location(in: messagesCollectionView)
-        guard let indexPath = messagesCollectionView.indexPathForItem(at: touchLocation) else { return }
-        
-        let cell = messagesCollectionView.cellForItem(at: indexPath) as? MessageCollectionViewCell
-        print(cell)
-    }
+ 
     
     func configureMessageInputBar() {
         
         messageInputBar = iMessageInputBar()
         messageInputBar.delegate = self
 
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
     }
     
@@ -182,23 +172,36 @@ class ChatViewController: MessagesViewController {
     }
     
     
-    func revokeMessage() {
+    func revokeMessage(index:IndexPath? = nil) {
         if messageList.count > 0 {
-            messageList.removeLast()
-            messagesCollectionView.reloadDataAndKeepOffset()
-            reloadCollectionView()
+            if let index = index {
+                messageList.remove(at: index.section)
+                messagesCollectionView.deleteSections(IndexSet(integer: index.section))
+            } else {
+                messageList.removeLast()
+                messagesCollectionView.deleteSections(IndexSet(integer: messageList.count - 1))
+            }
+            
         }
     }
     
-    func insertMessage(_ message: IMMessage) {
-        messageList.append(message)
+    func insertMessage(_ message: IMMessage,at indexPath:IndexPath? = nil) {
+        
+        if let indexPath = indexPath {
+            messageList.insert(message, at: indexPath.section)
+        } else {
+            messageList.append(message)
+        }
+        
         
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
-            messagesCollectionView.insertSections([messageList.count - 1])
-            if messageList.count >= 2 {
-                messagesCollectionView.reloadSections([messageList.count - 2])
+            if let index = indexPath {
+                messagesCollectionView.insertItems(at: [index])
+            } else {
+                messagesCollectionView.insertSections([messageList.count - 1])
             }
+            
         }, completion: { [weak self] _ in
             if self?.isLastSectionVisible() == true {
                 self?.messagesCollectionView.scrollToLastItem(animated: true)
@@ -206,20 +209,109 @@ class ChatViewController: MessagesViewController {
         })
     }
     
-    func reloadCollectionView() {
+    func reloadCollectionView(at indexPath:IndexPath? = nil) {
         if self.messageList.count >= 1 {
-            self.messagesCollectionView.reloadSections([self.messageList.count - 1])
-            if self.isLastSectionVisible() == true {
-                self.messagesCollectionView.scrollToLastItem(animated: true)
+            if let indexPath = indexPath {
+                self.messagesCollectionView.reloadItems(at: [indexPath])
+            } else {
+                self.messagesCollectionView.reloadSections([self.messageList.count - 1])
+                if self.isLastSectionVisible() == true {
+                    self.messagesCollectionView.scrollToLastItem(animated: true)
+                }
             }
+           
         }
         
     }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+      
+        return false
+    }
+
+  
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let messagesDataSource = messagesCollectionView.messagesDataSource,let indexPath = indexPaths.first else {
+            return nil
+        }
+        let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView) as! IMMessage
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            
+            let copy = UIAction(title: "拷贝".innerLocalized()) { _ in
+                let pasteBoard = UIPasteboard.general
+                switch message.kind {
+                case .text(let text), .emoji(let text):
+                    pasteBoard.string = text
+                case .attributedText(let attributedText):
+                    pasteBoard.string = attributedText.string
+                default:
+                    break
+                }
+            }
+            
+            let currendUser = IMController.shared.currentSender
+            if message.user.senderId == currendUser.senderId {
+                let delete = UIAction(title: "删除".innerLocalized()) { _ in
+                    
+                    let alert = UIAlertController(title: "确定删除该条消息？".innerLocalized(), message: nil, preferredStyle: .actionSheet)
+                    let action1 = UIAlertAction(title: "确定".innerLocalized(), style: .destructive) { _ in
+                        if message.sendStatus == .sendFailure {
+                            self.revokeMessage(index: indexPath)
+                        } else {
+                            IMController.shared.deleteMessage(conversation: self.dataProvider.conversation.conversationID, clientMsgID: message.messageId) { data in
+                                self.revokeMessage(index: indexPath)
+                            } onFailure: { errCode, errMsg in
+                                print(errMsg)
+                            }
+                        }
+                       
+                    }
+                    let action2 = UIAlertAction(title: "取消".innerLocalized(), style: .cancel) { _ in
+                        
+                    }
+                    
+                    alert.addAction(action1)
+                    alert.addAction(action2)
+                    
+                    alert.show()
+                   
+
+                    
+                }
+                let retweet = UIAction(title: "转发".innerLocalized()) { _ in
+                    
+                }
+                let revoke = UIAction(title: "撤回".innerLocalized()) { _ in
+                    let alert = UIAlertController(title: "确定撤回该条消息？".innerLocalized(), message: nil, preferredStyle: .actionSheet)
+                    let action1 = UIAlertAction(title: "确定".innerLocalized(), style: .destructive) { _ in
+                        IMController.shared.revokeMessage(conversationID: self.dataProvider.conversation.conversationID, clientMsgID: message.messageId) { data in
+                            self.revokeMessage(index: indexPath)
+                        }
+                    }
+                    let action2 = UIAlertAction(title: "取消".innerLocalized(), style: .cancel) { _ in
+                        
+                    }
+                    
+                    alert.addAction(action1)
+                    alert.addAction(action2)
+                    
+                    alert.show()
+                   
+                }
+               return UIMenu(title: "Options", children: [copy, delete,retweet,revoke])
+            } else {
+               return UIMenu(title: "Options", children: [copy])
+            }
+                
+            
+        })
+    }
+   
     
     deinit {
         print("chat view controller - deinit")
     }
 }
-
-
 

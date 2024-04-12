@@ -17,6 +17,8 @@ protocol DataProviderDelegate: AnyObject {
     func lastReceivedIdChanged(to id: String)
     
     func isInGroup(with isIn: Bool)
+    
+    func isRevokeMessage(revoke: MessageRevoked)
 }
 enum TypingState {
 

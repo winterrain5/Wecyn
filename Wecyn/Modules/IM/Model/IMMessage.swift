@@ -27,7 +27,7 @@ class IMMessage:MessageType {
     static func build(messageInfo:MessageInfo) -> IMMessage?{
         
         let date = Date.init(unixTimestamp: messageInfo.sendTime / 1000)
-        let messageId = messageInfo.seq.string
+        
         
         let currendUser = IMController.shared.currentSender
         var sender:IMUser!
@@ -36,7 +36,7 @@ class IMMessage:MessageType {
         } else {
             sender = IMUser(senderId: messageInfo.sendID, displayName: messageInfo.senderNickname ?? "",faceUrl: messageInfo.senderFaceUrl ?? "")
         }
-        
+        let messageId = messageInfo.clientMsgID
         
         switch messageInfo.contentType {
         case .text:
@@ -68,6 +68,20 @@ class IMMessage:MessageType {
             guard let name = messageInfo.cardElem?.nickname,let faceUrl = messageInfo.cardElem?.faceURL, let id = messageInfo.cardElem?.userID.int,let wid = messageInfo.cardElem?.ex  else { return nil }
             let item = IMContactItem(displayName: name, faceUrl: faceUrl, id: id, wid: wid)
             return IMMessage(contact: item, user: sender, messageId: messageId, date: date)
+            
+        case .revoke:
+        
+            let text:String
+            if messageInfo.sendID == currendUser.senderId {
+                text = "你撤回了一条消息".innerLocalized()
+            } else {
+                sender = IMUser(senderId: messageInfo.sendID, displayName: messageInfo.senderNickname ?? "",faceUrl: nil)
+                text = (messageInfo.senderNickname ?? "")  + "撤回了一条消息".innerLocalized()
+            }
+            let item = RevokeItem(title: text)
+            let message = IMMessage(revokeItem: item, user: sender, messageId: messageId, date: Date())
+//            return IMMessage(revokeItem: item, user: sender, messageId: messageId, date: date)
+             return message
             
         case .friendAppApproved:
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
@@ -134,6 +148,10 @@ class IMMessage:MessageType {
         self.init(custom: fileItem, user: user, messageId: messageId, date: date)
     }
     
+    convenience init(revokeItem:RevokeItem, user: IMUser, messageId: String, date: Date) {
+        self.init(custom: revokeItem, user: user, messageId: messageId, date: date)
+    }
+    
     // MARK: Internal
     var user: IMUser
     
@@ -154,7 +172,7 @@ class IMMessage:MessageType {
 struct IMUser: SenderType, Equatable {
     var senderId: String
     var displayName: String
-    var faceUrl: String
+    var faceUrl: String?
 }
 
 
@@ -247,6 +265,13 @@ struct FileItem {
         self.url = url
         self.image = image
         self.size = size
+    }
+}
+
+struct RevokeItem {
+    var title: String?
+    init(title: String? = nil) {
+        self.title = title
     }
 }
 

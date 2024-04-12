@@ -222,6 +222,7 @@ class FileMessageLayoutSizeCalculator: CellSizeCalculator {
     var cellAvatarViewWidth: CGFloat = 30
     var cellAvatarViewHorizontalPadding: CGFloat = 8
     var cellDateHeight:CGFloat = 20
+    var messageBottomPadding: CGFloat = 8
     
     var messagesLayout: MessagesCollectionViewFlowLayout {
         layout as! MessagesCollectionViewFlowLayout
@@ -237,7 +238,7 @@ class FileMessageLayoutSizeCalculator: CellSizeCalculator {
         let message = dataSource.messageForItem(
             at: indexPath,
             in: messagesLayout.messagesCollectionView)
-        let itemHeight = messageContainerSize(for: message, at: indexPath).height + cellDateHeight
+        let itemHeight = messageContainerSize(for: message, at: indexPath).height + cellDateHeight + messageBottomPadding
        
         return CGSize(
             width: messagesLayout.itemWidth,

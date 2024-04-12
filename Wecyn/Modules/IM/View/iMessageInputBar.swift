@@ -114,7 +114,8 @@ final class iMessageInputBar: InputBarAccessoryView {
             .configure {
                 $0.tintColor = .black
                 $0.spacing = .fixed(8)
-                $0.image = UIImage(nameInBundle: "inputbar_more_normal_icon")?.scaled(toWidth: 28)
+                $0.setImage(UIImage(nameInBundle: "inputbar_more_normal_icon")?.scaled(toWidth: 28), for: .normal)
+                $0.setImage(UIImage(nameInBundle: "inputbar_more_normal_icon")?.scaled(toWidth: 28), for: .selected)
                 $0.setSize(CGSize(width: 32, height: 32), animated: false)
             }.onTouchUpInside { [weak self] item in
                 guard let self else { return }
@@ -130,7 +131,7 @@ final class iMessageInputBar: InputBarAccessoryView {
             .configure {
                 $0.tintColor = .black
                 $0.spacing = .fixed(8)
-                $0.image = UIImage(nameInBundle: "inputbar_audio_btn_normal_icon")?.scaled(toWidth: 28)
+                $0.setImage(UIImage(nameInBundle: "inputbar_audio_btn_normal_icon")?.scaled(toWidth: 28), for: .normal)
                 $0.setImage(UIImage(nameInBundle: "inputbar_keyboard_btn_icon")?.scaled(toWidth: 28), for: .selected)
                 $0.setSize(CGSize(width: 32, height: 32), animated: false)
             }.onTouchUpInside { [weak self] item in
@@ -147,12 +148,12 @@ final class iMessageInputBar: InputBarAccessoryView {
         let v = InputBarButtonItem()
             .configure {
                 $0.setTitleColor(.black, for: .normal)
+                $0.setTitleColor(.black, for: .selected)
                 $0.setTitle("按住说话".innerLocalized(), for: .normal)
                 $0.layer.borderWidth = 0
                 $0.layer.cornerRadius = 4
                 $0.layer.masksToBounds = true
                 $0.backgroundColor = .white
-                $0.titleColorForNormal = .black
                 $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
             }.onTouchUpInside { [weak self] item in
@@ -410,19 +411,10 @@ extension iMessageInputBar:AVAudioRecorderDelegate {
     }
     
     func selectUploadFileFromICouldDrive()  {
-        let documentTypes = ["public.content",
-                             "public.text",
-                             "public.source-code",
-                             "public.image",
-                             "public.audiovisual-content",
-                             "com.adobe.pdf",
-                             "com.apple.keynote.key",
-                             "com.microsoft.word.doc",
-                             "com.microsoft.excel.xls",
-                             "com.microsoft.powerpoint.ppt"]
-        
+   
+        let documentTypes:[UTType] =  UTType.allUTITypes()
 
-        let document = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
+        let document = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
         
          document.delegate = self  //UIDocumentPickerDelegate
         UIViewController.sk.getTopVC()?.present(document, animated:true, completion:nil)
@@ -554,4 +546,149 @@ extension iMessageInputBar: UIDocumentPickerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension UTType {
+    static func allUTITypes() -> [UTType] {
+            let types : [UTType] =
+                [.item,
+                 .content,
+                 .compositeContent,
+                 .diskImage,
+                 .data,
+                 .directory,
+                 .resolvable,
+                 .symbolicLink,
+                 .executable,
+                 .mountPoint,
+                 .aliasFile,
+                 .urlBookmarkData,
+                 .url,
+                 .fileURL,
+                 .text,
+                 .plainText,
+                 .utf8PlainText,
+                 .utf16ExternalPlainText,
+                 .utf16PlainText,
+                 .delimitedText,
+                 .commaSeparatedText,
+                 .tabSeparatedText,
+                 .utf8TabSeparatedText,
+                 .rtf,
+                 .html,
+                 .xml,
+                 .yaml,
+                 .sourceCode,
+                 .assemblyLanguageSource,
+                 .cSource,
+                 .objectiveCSource,
+                 .swiftSource,
+                 .cPlusPlusSource,
+                 .objectiveCPlusPlusSource,
+                 .cHeader,
+                 .cPlusPlusHeader]
+
+            let types_1: [UTType] =
+                [.script,
+                 .appleScript,
+                 .osaScript,
+                 .osaScriptBundle,
+                 .javaScript,
+                 .shellScript,
+                 .perlScript,
+                 .pythonScript,
+                 .rubyScript,
+                 .phpScript,
+                 .makefile, //'makefile' is only available in iOS 15.0 or newer
+                 .json,
+                 .propertyList,
+                 .xmlPropertyList,
+                 .binaryPropertyList,
+                 .pdf,
+                 .rtfd,
+                 .flatRTFD,
+                 .webArchive,
+                 .image,
+                 .jpeg,
+                 .tiff,
+                 .gif,
+                 .png,
+                 .icns,
+                 .bmp,
+                 .ico,
+                 .rawImage,
+                 .svg,
+                 .livePhoto,
+                 .heif,
+                 .heic,
+                 .webP,
+                 .threeDContent,
+                 .usd,
+                 .usdz,
+                 .realityFile,
+                 .sceneKitScene,
+                 .arReferenceObject,
+                 .audiovisualContent]
+
+            let types_2: [UTType] =
+                [.movie,
+                 .video,
+                 .audio,
+                 .quickTimeMovie,
+                 UTType("com.apple.quicktime-image"),
+                 .mpeg,
+                 .mpeg2Video,
+                 .mpeg2TransportStream,
+                 .mp3,
+                 .mpeg4Movie,
+                 .mpeg4Audio,
+                 .appleProtectedMPEG4Audio,
+                 .appleProtectedMPEG4Video,
+                 .avi,
+                 .aiff,
+                 .wav,
+                 .midi,
+                 .playlist,
+                 .m3uPlaylist,
+                 .folder,
+                 .volume,
+                 .package,
+                 .bundle,
+                 .pluginBundle,
+                 .spotlightImporter,
+                 .quickLookGenerator,
+                 .xpcService,
+                 .framework,
+                 .application,
+                 .applicationBundle,
+                 .applicationExtension,
+                 .unixExecutable,
+                 .exe,
+                 .systemPreferencesPane,
+                 .archive,
+                 .gzip,
+                 .bz2,
+                 .zip,
+                 .appleArchive,
+                 .spreadsheet,
+                 .presentation,
+                 .database,
+                 .message,
+                 .contact,
+                 .vCard,
+                 .toDoItem,
+                 .calendarEvent,
+                 .emailMessage,
+                 .internetLocation,
+                 .internetShortcut,
+                 .font,
+                 .bookmark,
+                 .pkcs12,
+                 .x509Certificate,
+                 .epub,
+                 .log]
+                    .compactMap({ $0 })
+
+            return types + types_1 + types_2
+        }
 }

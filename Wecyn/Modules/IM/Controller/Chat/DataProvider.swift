@@ -221,6 +221,14 @@ final class DefaultDataProvider: DataProvider {
         }).disposed(by: _disposeBag)
         
         IMController.shared.msgRevokeReceived.subscribe(onNext: { [weak self] revokedInfo in
+            Logger.debug(revokedInfo, label: "msgRevokeReceived")
+            
+            self?.delegate?.isRevokeMessage(revoke: revokedInfo)
+            
+        }).disposed(by: _disposeBag)
+        
+        IMController.shared.conversationChangedSubject.subscribe(onNext:{ [weak self] conversation in
+            Logger.debug(conversation, label: "conversationChangedSubject")
         }).disposed(by: _disposeBag)
         
         IMController.shared.friendInfoChangedSubject.subscribe { [weak self] (friendInfo: FriendInfo?) in

@@ -93,6 +93,19 @@ extension ChatViewController:  MessagesDataSource {
                 cell.delegate = self
                 return cell
             }
+            if custom is RevokeItem {
+                let cell = messagesCollectionView.dequeueReusableCell(
+                  RevokeMessageCell.self,
+                  for: indexPath)
+                cell.configure(
+                  with: message,
+                  at: indexPath,
+                  in: messagesCollectionView,
+                  dataSource: self,
+                  and: revokeMessageSizeCalculator)
+                cell.delegate = self
+                return cell
+            }
         }
        return UICollectionViewCell()
     }

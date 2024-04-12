@@ -16,7 +16,10 @@ extension ChatViewController:MessagesLayoutDelegate {
                  return fileMessageSizeCalculator
             }
             if custom is IMContactItem {
-                return  contactMessageSizeCalculator
+                return contactMessageSizeCalculator
+            }
+            if custom is RevokeItem {
+                return revokeMessageSizeCalculator
             }
         }
         return CellSizeCalculator()
@@ -40,7 +43,6 @@ extension ChatViewController:MessagesLayoutDelegate {
     func messageBottomLabelHeight(for _: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> CGFloat {
       8
     }
-    
     
    
 }

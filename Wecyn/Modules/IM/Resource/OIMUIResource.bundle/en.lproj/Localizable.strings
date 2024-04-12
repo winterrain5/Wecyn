@@ -79,7 +79,7 @@
 "发送" = "Send";
 "复制" = "Copy";
 "删除" = "Delete";
-"转发" = "Retransmit";
+"转发" = "Forward";
 "回复" = "Reply";
 "撤回" = "Revoke";
 "多选" = "Multi-select";
@@ -220,3 +220,6 @@
 "你需要发送验证申请，等对方通过" = "You need to send a verification application and wait for the other party to pass it";
 "备注" = "Remark";
 "申请添加朋友" = "Apply to add friends";
+"确定删除该条消息？" = "Confirm to delete this message?";
+"确定撤回该条消息？" = "Confirm to delete this message?";
+"你撤回了一条消息" = "you revoked a message";

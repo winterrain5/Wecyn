@@ -118,8 +118,8 @@ class IMController:NSObject {
     func config() {
         
         let config = OIMInitConfig()
-        config.apiAddr = "http://27.54.57.6:10002"
-        config.wsAddr = "ws://27.54.57.6:10001"
+        config.apiAddr = APIHost.share.OpenImApiUrl
+        config.wsAddr = APIHost.share.OpenImWsUrl
         config.logLevel = 1
         
         let manager = OIMManager.manager

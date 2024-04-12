@@ -23,6 +23,8 @@ class APIHost: NSObject {
     enum BackgroundServerType: Int {
         case BaseClient
         case ImageClients
+        case OpenIMApiClints
+        case OpenIMWSClients
         case WebpageClients
     }
     var BaseClients = ["Dev": "http://10.1.3.23:1213",
@@ -37,6 +39,14 @@ class APIHost: NSObject {
                           "Uat": "https://uat.wecyn.com",
                           "Release": ""]
     
+    var OpenIMApiClients = ["Dev": "http://27.54.57.6:10002",
+                           "Uat": "",
+                           "Release": ""]
+    
+    var OpenIMWSClients = ["Dev": "ws://27.54.57.6:10001",
+                           "Uat": "",
+                           "Release": ""]
+    
     func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {
         let buildType = "\(buildType)"
         var address: String
@@ -47,6 +57,10 @@ class APIHost: NSObject {
             address = ImageClients[buildType]!
         case .WebpageClients:
             address = WebpageClients[buildType]!
+        case .OpenIMApiClints:
+            address = OpenIMApiClients[buildType]!
+        case .OpenIMWSClients:
+            address = OpenIMWSClients[buildType]!
         }
         return address
     }
@@ -61,6 +75,14 @@ class APIHost: NSObject {
     
     @objc var WebpageUrl: String {
         return getUrlAddress(buildType: buildType,serverType: .WebpageClients)
+    }
+    
+    @objc var OpenImApiUrl: String {
+        return getUrlAddress(buildType: buildType, serverType: .OpenIMApiClints)
+    }
+    
+    @objc var OpenImWsUrl: String {
+        return getUrlAddress(buildType: buildType, serverType: .OpenIMWSClients)
     }
     
     var allBuildTypeCases:[AppBuildType] {
