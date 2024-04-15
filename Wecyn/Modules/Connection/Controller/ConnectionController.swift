@@ -146,10 +146,12 @@ class ConnectionController: BaseViewController {
         }).disposed(by: rx.disposeBag)
     }
     func getIMNotification() {
-        
-        IMController.shared.getTotalUnreadMsgCount { [weak self] count in
-            self?.updateMessageBadge(count)
+        IMController.shared.getTotalUnreadMsgCount { [weak self] in
+            self?.updateMessageBadge($0)
         }
+        IMController.shared.totalUnreadSubject.subscribe(onNext:{ [weak self] in
+            self?.updateMessageBadge($0)
+        }).disposed(by: rx.disposeBag)
     }
     
     func getDatas() {

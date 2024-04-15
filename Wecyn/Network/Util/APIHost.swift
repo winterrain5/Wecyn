@@ -39,11 +39,11 @@ class APIHost: NSObject {
                           "Uat": "https://uat.wecyn.com",
                           "Release": ""]
     
-    var OpenIMApiClients = ["Dev": "http://27.54.57.6:10002",
+    var OpenIMApiClients = ["Dev": "http://10.1.3.83:10002",
                            "Uat": "",
                            "Release": ""]
     
-    var OpenIMWSClients = ["Dev": "ws://27.54.57.6:10001",
+    var OpenIMWSClients = ["Dev": "ws://10.1.3.83:10001",
                            "Uat": "",
                            "Release": ""]
     

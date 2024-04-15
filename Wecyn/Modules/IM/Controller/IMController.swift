@@ -8,7 +8,7 @@
 import Foundation
 import OpenIMSDK
 import AudioToolbox
-
+import MessageKit
 let IMLoggerLabel = "OpenIMSDK"
 
 // -1 链接失败 0 链接中 1 链接成功 2 同步开始 3 同步结束 4 同步错误
@@ -1245,6 +1245,25 @@ extension IMController: OIMAdvancedMsgListener {
             })
         }
         newMsgReceivedSubject.onNext(msg.toMessageInfo())
+        
+        let topVc = UIViewController.sk.getTopVC()
+        if topVc is ChatViewController || topVc is ChatListController {
+            return
+        }
+        let date = Date.init(unixTimestamp: msg.sendTime / 1000)
+        
+        let notiData = HDNotificationData(
+            iconImage: R.image.appicon()!,
+            appTitle: "Wecyn",
+            title: msg.senderNickname,
+            message: msg.toMessageInfo().getAbstruct(),
+            time: MessageKitDateFormatter.shared.string(from: date))
+        
+        HDNotificationView.show(data: notiData,onTap: {
+            
+        }, onDidDismiss:  {
+            
+        })
     }
     
     public func onRecvC2CReadReceipt(_ receiptList: [OIMReceiptInfo]) {
@@ -1428,7 +1447,7 @@ open class MessageInfo: Encodable {
     public func getAbstruct() -> String? {
         switch contentType {
         case .text:
-            return content
+            return textElem?.content
         case .quote:
             return quoteElem?.text
         case .at:

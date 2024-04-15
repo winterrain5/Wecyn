@@ -56,6 +56,9 @@ class HomeController: BaseTableController {
     }
     
     func addIMObserver() {
+        IMController.shared.getTotalUnreadMsgCount { [weak self] in
+            self?.updateMessageBadge($0)
+        }
         IMController.shared.totalUnreadSubject.subscribe(onNext:{ [weak self] in
             self?.updateMessageBadge($0)
         }).disposed(by: rx.disposeBag)
@@ -65,6 +68,7 @@ class HomeController: BaseTableController {
             IMController.shared.login()
         }
 
+       
     }
     
     func addTitleLabel() {

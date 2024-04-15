@@ -87,6 +87,9 @@
 		450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CD82A6E0FDA0001AA1B /* NFCController.swift */; };
 		450F6CDE2A70AE6E0001AA1B /* NFCNameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */; };
 		450F6CE02A70AE8B0001AA1B /* NFCNameCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */; };
+		45124B0C2BC92B5C00045CF7 /* HDNotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124B092BC92B5B00045CF7 /* HDNotificationData.swift */; };
+		45124B0D2BC92B5C00045CF7 /* HDNotificationViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124B0A2BC92B5B00045CF7 /* HDNotificationViewAppearance.swift */; };
+		45124B0E2BC92B5C00045CF7 /* HDNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124B0B2BC92B5C00045CF7 /* HDNotificationView.swift */; };
 		4513AD802BC28FA100A360B2 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */; };
 		4513F6102BAD53A50080756F /* ChatVC_MessageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */; };
 		4513F6122BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */; };
@@ -453,6 +456,9 @@
 		450F6CDB2A6E6BCC0001AA1B /* Wecyn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wecyn.entitlements; sourceTree = "<group>"; };
 		450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardView.swift; sourceTree = "<group>"; };
 		450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardController.swift; sourceTree = "<group>"; };
+		45124B092BC92B5B00045CF7 /* HDNotificationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDNotificationData.swift; sourceTree = "<group>"; };
+		45124B0A2BC92B5B00045CF7 /* HDNotificationViewAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDNotificationViewAppearance.swift; sourceTree = "<group>"; };
+		45124B0B2BC92B5C00045CF7 /* HDNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDNotificationView.swift; sourceTree = "<group>"; };
 		4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessageDataSource.swift; sourceTree = "<group>"; };
 		4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessagesLayoutDelegate.swift; sourceTree = "<group>"; };
@@ -909,9 +915,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		45124B082BC92B4A00045CF7 /* NotificaitonView */ = {
+			isa = PBXGroup;
+			children = (
+				45124B092BC92B5B00045CF7 /* HDNotificationData.swift */,
+				45124B0B2BC92B5C00045CF7 /* HDNotificationView.swift */,
+				45124B0A2BC92B5B00045CF7 /* HDNotificationViewAppearance.swift */,
+			);
+			path = NotificaitonView;
+			sourceTree = "<group>";
+		};
 		4513F61B2BAD5A500080756F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				45124B082BC92B4A00045CF7 /* NotificaitonView */,
 				45381DF82BC22A83007EE954 /* MCProgressView.swift */,
 				45381DFA2BC22A84007EE954 /* MCRecordHUD.swift */,
 				45381DF92BC22A83007EE954 /* MCVolumeView.swift */,
@@ -2226,6 +2243,7 @@
 				45450CCC2B2C418200558C9D /* AdminRoleController.swift in Sources */,
 				458870DC2AE638AD00029353 /* AddUserExperienceRequestModel.swift in Sources */,
 				45A0E64C2AD10ECD003C5153 /* FriendAddRemarkController.swift in Sources */,
+				45124B0C2BC92B5C00045CF7 /* HDNotificationData.swift in Sources */,
 				45A0E63F2AC14E25003C5153 /* PostReportController.swift in Sources */,
 				45920AD32A26E045005871ED /* HomeController.swift in Sources */,
 				457B2AFA2A36B2610098013A /* ProfileExperienceItemCell.swift in Sources */,
@@ -2260,6 +2278,7 @@
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
+				45124B0E2BC92B5C00045CF7 /* HDNotificationView.swift in Sources */,
 				450BA6E52A33130B00764828 /* RegistConfirmView.swift in Sources */,
 				45005C5D2A57FEEF00560E21 /* CreateGroupHeaderView.swift in Sources */,
 				45920AEA2A26E045005871ED /* ZoomImageScrollView.swift in Sources */,
@@ -2310,6 +2329,7 @@
 				457C508B2A38438800FCE8D0 /* HomeHeaderJobItemCell.swift in Sources */,
 				4509DAAA2B91C477003CE3F6 /* InputCodeContainer.swift in Sources */,
 				45C781EF2A95C2B600D4E721 /* VisualActivityViewController.swift in Sources */,
+				45124B0D2BC92B5C00045CF7 /* HDNotificationViewAppearance.swift in Sources */,
 				45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */,
 				45450CBD2B2AE8D300558C9D /* ApplyForCertificationController.swift in Sources */,
 				45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */,

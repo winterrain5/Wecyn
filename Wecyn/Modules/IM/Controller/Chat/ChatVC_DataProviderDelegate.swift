@@ -17,18 +17,8 @@ extension ChatViewController:DataProviderDelegate  {
             insertMessage(message)
         }
         
-        let topVc = UIViewController.sk.getTopVC()
-        if topVc is ChatViewController || topVc is ChatListController {
-            return
-        }
+       
         
-//        let notificationView = NotificationView()
-//        notificationView.title = message.senderNickname
-//        let date = Date.init(unixTimestamp: message.sendTime / 1000)
-//        notificationView.date = MessageKitDateFormatter.shared.string(from: date)
-//        notificationView.body = message.getAbstruct()
-//        notificationView.show()
-     
     }
     
     func typingStateChanged(to state: TypingState) {
@@ -69,7 +59,7 @@ extension ChatViewController:DataProviderDelegate  {
         let indexPath = IndexPath(item: 0, section: section)
         insertMessage(message, at: indexPath)
         reloadCollectionView(at: indexPath)
-       
+        
         
     }
     
