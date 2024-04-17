@@ -32,7 +32,7 @@ class ProfileController: BaseTableController {
     var eduExperiences:[UserExperienceInfoModel] = []
     private lazy var _photoHelper: PhotoHelper = {
         let v = PhotoHelper()
-        v.setConfigToPickCard()
+        v.setConfigToPickBusinessCard()
         v.didPhotoSelected = { [weak self, weak v] (images: [UIImage], assets: [PHAsset], _: Bool) in
             guard let self else { return }
             

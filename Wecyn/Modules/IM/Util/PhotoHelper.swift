@@ -71,7 +71,7 @@ open class PhotoHelper {
             }
     }
     
-    public func setConfigToPickCard() {
+    public func setConfigToPickBusinessCard() {
         let editConfig = ZLPhotoConfiguration.default().editImageConfiguration
         editConfig.tools([.clip])
             .clipRatios([ZLImageClipRatio.custom])
@@ -84,7 +84,7 @@ open class PhotoHelper {
             .allowSelectVideo(false)
             .allowSelectImage(true)
             .allowSelectLivePhoto(false)
-            .allowTakePhotoInLibrary(true)
+            .allowTakePhotoInLibrary(false)
             .allowSelectOriginal(true)
             .editImageConfiguration(editConfig)
             .showClipDirectlyIfOnlyHasClipTool(true)
