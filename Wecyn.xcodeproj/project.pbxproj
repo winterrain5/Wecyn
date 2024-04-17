@@ -90,6 +90,10 @@
 		45124B0C2BC92B5C00045CF7 /* HDNotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124B092BC92B5B00045CF7 /* HDNotificationData.swift */; };
 		45124B0D2BC92B5C00045CF7 /* HDNotificationViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124B0A2BC92B5B00045CF7 /* HDNotificationViewAppearance.swift */; };
 		45124B0E2BC92B5C00045CF7 /* HDNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124B0B2BC92B5C00045CF7 /* HDNotificationView.swift */; };
+		45124B772BCE120800045CF7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45124B762BCE120800045CF7 /* CoreMedia.framework */; };
+		45124B792BCE121A00045CF7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45124B782BCE121A00045CF7 /* AVFoundation.framework */; };
+		45124B7B2BCE122200045CF7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45124B7A2BCE122200045CF7 /* AssetsLibrary.framework */; };
+		45124BA82BCE5E4200045CF7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45124BA72BCE5E4200045CF7 /* CoreAudio.framework */; };
 		4513AD802BC28FA100A360B2 /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */; };
 		4513F6102BAD53A50080756F /* ChatVC_MessageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */; };
 		4513F6122BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */; };
@@ -459,6 +463,12 @@
 		45124B092BC92B5B00045CF7 /* HDNotificationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDNotificationData.swift; sourceTree = "<group>"; };
 		45124B0A2BC92B5B00045CF7 /* HDNotificationViewAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDNotificationViewAppearance.swift; sourceTree = "<group>"; };
 		45124B0B2BC92B5C00045CF7 /* HDNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDNotificationView.swift; sourceTree = "<group>"; };
+		45124B252BCE0EE500045CF7 /* Wecyn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wecyn-Bridging-Header.h"; sourceTree = "<group>"; };
+		45124B762BCE120800045CF7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		45124B782BCE121A00045CF7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		45124B7A2BCE122200045CF7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		45124B7C2BCE125000045CF7 /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = SDKROOT; };
+		45124BA72BCE5E4200045CF7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessageDataSource.swift; sourceTree = "<group>"; };
 		4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessagesLayoutDelegate.swift; sourceTree = "<group>"; };
@@ -740,6 +750,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45124BA82BCE5E4200045CF7 /* CoreAudio.framework in Frameworks */,
+				45124B772BCE120800045CF7 /* CoreMedia.framework in Frameworks */,
+				45124B792BCE121A00045CF7 /* AVFoundation.framework in Frameworks */,
+				45124B7B2BCE122200045CF7 /* AssetsLibrary.framework in Frameworks */,
 				C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1423,6 +1437,7 @@
 		45920AB72A26E045005871ED /* SupportFile */ = {
 			isa = PBXGroup;
 			children = (
+				45124B252BCE0EE500045CF7 /* Wecyn-Bridging-Header.h */,
 				450BA6BC2A31CDAB00764828 /* R.generated.swift */,
 				45920AB82A26E045005871ED /* Assets.xcassets */,
 				45920AB92A26E045005871ED /* LaunchScreen.storyboard */,
@@ -1869,6 +1884,11 @@
 		E5E07ACF7CCE3FCFA3B7A7F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45124BA72BCE5E4200045CF7 /* CoreAudio.framework */,
+				45124B7C2BCE125000045CF7 /* CoreAudioTypes.framework */,
+				45124B7A2BCE122200045CF7 /* AssetsLibrary.framework */,
+				45124B782BCE121A00045CF7 /* AVFoundation.framework */,
+				45124B762BCE120800045CF7 /* CoreMedia.framework */,
 				5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */,
 				4564BE232A8329A300464AFA /* WidgetKit.framework */,
 				4564BE252A8329A300464AFA /* SwiftUI.framework */,
@@ -1907,6 +1927,7 @@
 				459209CA2A26D5F4005871ED /* Resources */,
 				7ADA8EE899883EEC9D8C8070 /* [CP] Embed Pods Frameworks */,
 				4564BE322A8329A700464AFA /* Embed Foundation Extensions */,
+				F9EFBB0B9DB43DA0E1E972E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1914,8 +1935,6 @@
 				4564BE302A8329A700464AFA /* PBXTargetDependency */,
 			);
 			name = Wecyn;
-			packageProductDependencies = (
-			);
 			productName = Wecyn;
 			productReference = 459209CC2A26D5F4005871ED /* Wecyn.app */;
 			productType = "com.apple.product-type.application";
@@ -1935,6 +1954,7 @@
 					};
 					459209CB2A26D5F4005871ED = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -1948,8 +1968,6 @@
 				"zh-Hans",
 			);
 			mainGroup = 459209C32A26D5F4005871ED;
-			packageReferences = (
-			);
 			productRefGroup = 459209CD2A26D5F4005871ED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2079,6 +2097,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9EFBB0B9DB43DA0E1E972E9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2613,12 +2648,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4F6LM54QKY;
 				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
@@ -2644,6 +2685,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party/PaddleLite/lib",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib/PaddleLite/lib",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2654,6 +2701,8 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Wecyn/SupportFile/Wecyn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2666,12 +2715,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wecyn;
@@ -2697,6 +2752,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party/PaddleLite/lib",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib/PaddleLite/lib",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2707,6 +2768,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Wecyn/SupportFile/Wecyn-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -11,7 +11,9 @@ import AddressBookUI
 import Contacts
 import ParallaxHeader
 import KMPlaceholderTextView
+import PaddleOCR
 import AnyImageKit
+import GPUImage
 
 enum BusinessCardField {
     case Lang
@@ -71,7 +73,8 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
                 self.headImageView.size = CGSize(width: kScreenWidth, height: scaledImage?.size.height ?? 0)
                 
                 self.image = image
-                self.imageToBase64()
+                self.imageOCRByPaddle()
+                
             case .failure(let e):
                 Toast.showError(e.localizedDescription)
             }
@@ -85,7 +88,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     var lange = "1"
     /// 1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
     var ai_model = "2"
-    var base64:String = ""
+    var ocrText:String = ""
     var headImageView = UIImageView()
     required init(image:UIImage) {
         super.init(nibName: nil, bundle: nil)
@@ -110,28 +113,35 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
             
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
-      
-        imageToBase64()
-    }
-    
-    func imageToBase64() {
         
-         Asyncs.async {
-             if self.image.kilobytesSize  < 2000 {
-                 self.base64 = self.image.pngBase64String() ?? ""
-             } else {
-                 self.base64 = self.image.compressionImageToBase64(2000)
-             }
-             
-         } mainTask: {
-             self.uploadBusinessCard()
-         }
-
+        imageOCRByPaddle()
     }
     
-    func uploadBusinessCard() {
+    func imageOCRByPaddle() {
+        
+        let scaledImage = image.scaledImage(1000) ?? image
+        let preprocessedImage = scaledImage?.preprocessedImage() ?? scaledImage
+        MLPaddleOCR().scanText(from: preprocessedImage, complete: { (result) in
+            guard let ocrResultList = result else { return }
+            var resultString = ""
+            for ocrData in ocrResultList {
+                if !ocrData.label.isEmpty {
+                    resultString = resultString + ocrData.label + "\n"
+                }
+            }
+            self.ocrText = resultString
+            DispatchQueue.main.async {
+                Logger.debug(resultString,label: "PaddleOCR")
+                self.uploadBusinessCard(resultString)
+            }
+        })
+        
+        
+    }
+    
+    func uploadBusinessCard(_ cardText:String) {
         Toast.showLoading(withStatus: "Recognizing...")
-        NetworkService.scanCard(photo: base64,lang: lange.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
+        NetworkService.scanCard(cardText:cardText,lang: lange.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
             Toast.dismiss()
             self.model = $0
             self.configData()
@@ -145,23 +155,23 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     func configData() {
         /*
          {
-           "email": "user@example.com",
-           "tel_cell": "",
-           "name": "",
-           "postal_code": "",
-           "title": "",
-           "org_name": "",
-           "adr_work": "",
-           "tel_work": "",
-           "url": "https://www.example.com",
-           "other": []
+         "email": "user@example.com",
+         "tel_cell": "",
+         "name": "",
+         "postal_code": "",
+         "title": "",
+         "org_name": "",
+         "adr_work": "",
+         "tel_work": "",
+         "url": "https://www.example.com",
+         "other": []
          }
          */
         guard let model = self.model else { return }
         datas = [
             [BusinessCardModel(label: "Lang", type: .Lang,value: lange)],
-          
-           
+            
+            
             [BusinessCardModel(label: "Name",type: .Name,value: model.name)],
             [BusinessCardModel(label: "MB.",type: .Phone,value: model.tel_cell),
              BusinessCardModel(label: "Tel.",type: .TelWork,value: model.tel_work)],
@@ -179,19 +189,19 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
         if APIHost.share.buildType == .Dev {
             
             let ai_model_section = [BusinessCardModel(label: "Model", type: .Model,value: ai_model),
-             BusinessCardModel(label: "ocr", type: .OCRTime,value: model.run_time?.ocr.string ?? ""),
-             BusinessCardModel(label: "ai", type: .AITime,value: model.run_time?.ai.string ?? ""),
-             BusinessCardModel(label: "all", type: .AllTime,value: model.run_time?.all.string ?? "")]
+                                    BusinessCardModel(label: "ocr", type: .OCRTime,value: model.run_time?.ocr.string ?? ""),
+                                    BusinessCardModel(label: "ai", type: .AITime,value: model.run_time?.ai.string ?? ""),
+                                    BusinessCardModel(label: "all", type: .AllTime,value: model.run_time?.all.string ?? "")]
             
             datas.insert(ai_model_section, at: 1)
-                
+            
             
         }
-       
+        
         self.tableView?.reloadData()
     }
     
-   
+    
     func addContact() {
         
         
@@ -199,7 +209,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
         
         
         let flapData = datas.flatMap({ $0 })
-
+        
         func getValue(_ type:BusinessCardField) -> String {
             return flapData.filter({ $0.type == type }).first?.value ?? ""
         }
@@ -215,7 +225,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
         //电话
         let mobileNumber = CNPhoneNumber(stringValue:  getValue(.Phone) )
         let mobileValue = CNLabeledValue (label:CNLabelPhoneNumberMobile ,
-                                            value:mobileNumber)
+                                          value:mobileNumber)
         
         let tel_work = CNPhoneNumber(stringValue: getValue(.TelWork))
         let tel_work_value = CNLabeledValue(label: CNLabelWork, value: tel_work)
@@ -252,9 +262,9 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     override func createListView() {
         super.createListView()
         
-
+        
         let scaledImage = image.scaled(toWidth: kScreenWidth)
-        headImageView.image = scaledImage
+        headImageView.image = image
         headImageView.contentMode = .scaleAspectFill
         tableView?.tableHeaderView = headImageView
         headImageView.size = CGSize(width: kScreenWidth, height: scaledImage?.size.height ?? 0)
@@ -279,7 +289,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
             let vc = ImageEditorController(photo: scaledImage, options: photoOption, delegate: self)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
-                
+            
         }).disposed(by: rx.disposeBag)
         
         tableView?.separatorStyle = .singleLine
@@ -292,8 +302,8 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
         
     }
     
-   
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == datas.count - 1 {
             return 200
         } else {
@@ -322,7 +332,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
                 }
                 
                 self.tableView?.reloadData()
-                self.uploadBusinessCard()
+                self.uploadBusinessCard(self.ocrText)
                 
             }
             return cell
@@ -345,7 +355,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 22
     }
-  
+    
 }
 
 class AddNewBusinessCardCell:UITableViewCell {
@@ -408,7 +418,7 @@ class AddNewBusinessCardOptionCell: UITableViewCell {
             
             if model.type == .Lang {
                 langLabel.text = model.value.int == 1 ? "中文" : "English"
-          
+                
                 
                 // 1.1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
                 let action1 = UIAction(title: "中文",image: nil) { [weak self] _ in
@@ -416,7 +426,7 @@ class AddNewBusinessCardOptionCell: UITableViewCell {
                     self.model.value = "1"
                     self.changeOptionHandler?(self.model)
                 }
-               
+                
                 let action2 = UIAction(title: "English",image: nil) { [weak self] _ in
                     guard let `self` = self else { return }
                     self.model.value = "2"
@@ -451,7 +461,7 @@ class AddNewBusinessCardOptionCell: UITableViewCell {
                         self.model.value = "1"
                         self.changeOptionHandler?(self.model)
                     }
-                   
+                    
                     let action2 = UIAction(title: "gpt-3.5-turbo-0613",image: nil) { [weak self] _ in
                         guard let `self` = self else { return }
                         self.model.value = "2"
@@ -483,7 +493,7 @@ class AddNewBusinessCardOptionCell: UITableViewCell {
         button.titleForNormal = "Change"
         button.titleColorForNormal = .systemBlue
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-      
+        
     }
     
     required init?(coder: NSCoder) {
@@ -551,4 +561,32 @@ class AddNewBusinessCardOtherCell: UITableViewCell {
             make.right.equalToSuperview().offset(-16)
         }
     }
+}
+
+
+// MARK: - UIImage extension
+extension UIImage {
+  func scaledImage(_ maxDimension: CGFloat) -> UIImage? {
+    var scaledSize = CGSize(width: maxDimension, height: maxDimension)
+
+    if size.width > size.height {
+      scaledSize.height = size.height / size.width * scaledSize.width
+    } else {
+      scaledSize.width = size.width / size.height * scaledSize.height
+    }
+
+    UIGraphicsBeginImageContext(scaledSize)
+    draw(in: CGRect(origin: .zero, size: scaledSize))
+    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return scaledImage
+  }
+  
+  func preprocessedImage() -> UIImage? {
+    let stillImageFilter = GPUImageAdaptiveThresholdFilter()
+    stillImageFilter.blurRadiusInPixels = 15.0
+    let filteredImage = stillImageFilter.image(byFilteringImage: self)
+    return filteredImage
+  }
 }

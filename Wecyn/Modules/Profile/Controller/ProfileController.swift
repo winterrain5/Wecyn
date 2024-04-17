@@ -9,7 +9,8 @@ import UIKit
 import ParallaxHeader
 import PromiseKit
 import ImagePickerSwift
-import AnyImageKit
+import PaddleOCR
+import Photos
 enum SectionType: Int {
     case Activity
     case Work
@@ -29,6 +30,39 @@ class ProfileController: BaseTableController {
     var userPosts:[PostListModel] =  []
     var workExperiences:[UserExperienceInfoModel] = []
     var eduExperiences:[UserExperienceInfoModel] = []
+    private lazy var _photoHelper: PhotoHelper = {
+        let v = PhotoHelper()
+        v.setConfigToPickCard()
+        v.didPhotoSelected = { [weak self, weak v] (images: [UIImage], assets: [PHAsset], _: Bool) in
+            guard let self else { return }
+            
+            for (index, asset) in assets.enumerated() {
+                switch asset.mediaType {
+                case .image:
+                    
+                    let vc = AddNewBusinessCardController(image: images[index])
+                    self.navigationController?.pushViewController(vc)
+                    
+                default:
+                    break
+                }
+            }
+        }
+
+        v.didCameraFinished = { [weak self] (photo: UIImage?, videoPath: URL?) in
+            guard let self else { return }
+            
+            if let photo {
+                
+                let vc = AddNewBusinessCardController(image: photo)
+                self.navigationController?.pushViewController(vc)
+                
+            }
+        }
+        return v
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addRightBarItem()
@@ -65,30 +99,15 @@ class ProfileController: BaseTableController {
             
             
             let alert = UIAlertController.init(title: "Scan BusinessCard", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
-           
-            alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
-                var option = PickerOptionsInfo()
-                option.selectLimit = 1
-               
-                let vc = ImagePickerController(options: option, delegate: self)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
             
             alert.addAction(title: "Camera",style: .destructive) { _ in
-                var option = CaptureOptionsInfo()
-               
-                var photoOption = EditorPhotoOptionsInfo()
-                photoOption.toolOptions = [.crop]
-                
-                option.editorPhotoOptions = photoOption
-                
-                let vc = ImageCaptureController(options: option, delegate: self)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
+                self.showImagePickerController(sourceType: .camera)
+            }
+            alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
+                self.showImagePickerController(sourceType: .photoLibrary)
             }
             
-           
+            
             alert.addAction(title: "Cancel",style: .cancel)
             
             alert.show()
@@ -422,46 +441,14 @@ class ProfileController: BaseTableController {
         setNeedsStatusBarAppearanceUpdate()
         
     }
+    
+    private func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
+        if case .camera = sourceType {
+            _photoHelper.presentCamera(byController: UIViewController.sk.getTopVC()!)
+        } else {
+            _photoHelper.presentPhotoLibrary(byController: UIViewController.sk.getTopVC()!)
+        }
+    }
+    
    
-}
-extension ProfileController: ImageCaptureControllerDelegate {
-    func imageCapture(_ capture: ImageCaptureController, didFinishCapturing result: CaptureResult) {
-        if result.type == .photo {
-            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
-            guard let image = UIImage(data: photoData) else { return }
- 
-            capture.dismiss(animated: true) {
-                let vc = AddNewBusinessCardController(image: image)
-                self.navigationController?.pushViewController(vc)
-            }
-        }
-    }
-}
-extension ProfileController: ImagePickerControllerDelegate {
-    func imagePicker(_ picker: ImagePickerController, didFinishPicking result: PickerResult) {
-        guard let image = result.assets.first?.image else  { return }
-        var option =  EditorPhotoOptionsInfo()
-        option.toolOptions = [.crop]
-        
-        let vc = ImageEditorController(photo: image, options: option, delegate: self)
-        picker.dismiss(animated: true) { [weak self] in
-            self?.present(vc, animated: true)
-        }
-    }
-}
-
-extension ProfileController: ImageEditorControllerDelegate {
-    func imageEditor(_ editor: ImageEditorController, didFinishEditing result: EditorResult) {
-        if result.type == .photo {
-            guard let photoData = try? Data(contentsOf: result.mediaURL) else { return }
-            guard let image = UIImage(data: photoData) else { return }
-           
-            editor.dismiss(animated: true) {
-                let vc = AddNewBusinessCardController(image: image)
-                self.navigationController?.pushViewController(vc)
-            }
-        }
-    }
-    
-    
 }

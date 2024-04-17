@@ -186,8 +186,8 @@ class NetworkService {
     ///   - lang:   1 中文 2  英文
     ///   - model: .1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
     /// - Returns: ScanCardModel
-    static func scanCard(photo:String,lang:Int = 1,model:Int = 1) -> Observable<ScanCardModel> {
-        let target = MultiTarget(NetworkApi.scanCard(photo,lang,model))
+    static func scanCard(cardText:String,photo:String? = nil,lang:Int = 1,model:Int = 1) -> Observable<ScanCardModel> {
+        let target = MultiTarget(NetworkApi.scanCard(cardText,photo,lang,model))
         return APIProvider.rx.request(target).asObservable().mapObject(ScanCardModel.self)
     }
     

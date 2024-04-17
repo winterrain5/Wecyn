@@ -124,19 +124,28 @@ class IMController:NSObject {
         
         let manager = OIMManager.manager
         manager.initSDK(with: config) { [weak self] in
-            Logger.debug("im onConnecting",label: IMLoggerLabel)
+            
+            print("im onConnecting")
             self?.connectionRelay.accept(.connecting)
+            
         } onConnectFailure: { [weak self] code, string in
-            Logger.error("code:\(code),message:\(string ?? "")", label: IMLoggerLabel)
+            
+            print("code:\(code),message:\(string ?? "")")
             self?.connectionRelay.accept(.connectFailure)
+            
         } onConnectSuccess: { [weak self] in
-            Logger.debug("im onConnectSuccess",label: IMLoggerLabel)
+            
+            print("im onConnectSuccess")
             self?.connectionRelay.accept(.connected)
+            
         } onKickedOffline: { [weak self] in
-            Logger.debug("im onKickedOffline",label: IMLoggerLabel)
+            
+            print("im onKickedOffline")
             self?.connectionRelay.accept(.kickedOffline)
+            
         } onUserTokenExpired: {
-            Logger.debug("im onUserTokenExpired",label: IMLoggerLabel)
+            
+            print("im onUserTokenExpired")
             Self.shared.login()
         }
         
@@ -1250,6 +1259,8 @@ extension IMController: OIMAdvancedMsgListener {
         if topVc is ChatViewController || topVc is ChatListController {
             return
         }
+        
+        
         let date = Date.init(unixTimestamp: msg.sendTime / 1000)
         
         let notiData = HDNotificationData(
@@ -1277,6 +1288,7 @@ extension IMController: OIMAdvancedMsgListener {
     
     // 启用新的撤回操作
     public func onRecvMessageRevoked(_ messageRevoked: OIMMessageRevokedInfo) {
+        Logger.debug(messageRevoked.description, label: "msgRevokeReceived")
         msgRevokeReceived.onNext(messageRevoked.toMessageRevoked())
     }
 }

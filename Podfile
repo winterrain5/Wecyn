@@ -29,6 +29,8 @@ target 'Wecyn' do
   pod 'NFCReaderWriter'
   pod 'SafeSFSymbols'
   pod 'DifferenceKit'
+  pod 'PaddleOCR'
+  pod 'GPUImage'
 
   #UI
   pod 'IQKeyboardManagerSwift'
@@ -58,8 +60,7 @@ target 'Wecyn' do
   pod 'MessageKit'
   pod 'Localize-Swift', '~> 3.2'
   pod 'ZLPhotoBrowser', '4.3.0'
-  pod 'NotificationView'
-  
+    
   pod 'Permission/Camera'
   pod 'Permission/Microphone'
   pod 'Permission/Photos'

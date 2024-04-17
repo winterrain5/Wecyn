@@ -221,7 +221,6 @@ final class DefaultDataProvider: DataProvider {
         }).disposed(by: _disposeBag)
         
         IMController.shared.msgRevokeReceived.subscribe(onNext: { [weak self] revokedInfo in
-            Logger.debug(revokedInfo, label: "msgRevokeReceived")
             
             self?.delegate?.isRevokeMessage(revoke: revokedInfo)
             

@@ -31,6 +31,7 @@ PODS:
   - EntryKit (0.8.0)
   - FSCalendar (2.8.4)
   - FYVideoCompressor (0.0.9)
+  - GPUImage (0.1.7)
   - HandyJSON (5.0.2)
   - ImagePickerSwift (0.3.1)
   - InputBarAccessoryView (5.5.0):
@@ -61,6 +62,7 @@ PODS:
     - Moya/Core
     - RxSwift (~> 5.0)
   - NFCReaderWriter (1.1.4)
+  - OpenCV2 (3.4.10)
   - OpenIMSDK (3.5.1):
     - MJExtension
     - OpenIMSDK/Callbacker (= 3.5.1)
@@ -92,6 +94,8 @@ PODS:
     - MJExtension
     - OpenIMSDKCore (= 3.5.1)
   - OpenIMSDKCore (3.5.1)
+  - PaddleOCR (0.2.4):
+    - OpenCV2 (~> 3.4)
   - ParallaxHeader (3.0.0)
   - Permission/Camera (3.1.2):
     - Permission/Core
@@ -197,6 +201,7 @@ DEPENDENCIES:
   - EntryKit
   - FSCalendar
   - FYVideoCompressor
+  - GPUImage
   - HandyJSON
   - ImagePickerSwift
   - IQKeyboardManagerSwift
@@ -211,6 +216,7 @@ DEPENDENCIES:
   - MJRefresh
   - NFCReaderWriter
   - OpenIMSDK
+  - PaddleOCR
   - ParallaxHeader
   - Permission/Camera
   - Permission/Microphone
@@ -260,6 +266,7 @@ SPEC REPOS:
     - EntryKit
     - FSCalendar
     - FYVideoCompressor
+    - GPUImage
     - HandyJSON
     - ImagePickerSwift
     - InputBarAccessoryView
@@ -276,8 +283,10 @@ SPEC REPOS:
     - MJRefresh
     - Moya
     - NFCReaderWriter
+    - OpenCV2
     - OpenIMSDK
     - OpenIMSDKCore
+    - PaddleOCR
     - ParallaxHeader
     - Permission
     - PromiseKit
@@ -332,6 +341,7 @@ SPEC CHECKSUMS:
   EntryKit: eca0306497a948fa9c81ff665bf6895309c7d67e
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   FYVideoCompressor: 80e2a90bbc118044038b37b8442f23084c5698bf
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   ImagePickerSwift: 0328d670660823ff33529b58be08c7a13b686758
   InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
@@ -348,8 +358,10 @@ SPEC CHECKSUMS:
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NFCReaderWriter: b21965d1b3b8c53f7648f58f597b77a13f6ecdc5
+  OpenCV2: 508d6c0ce3bb343591ef2375036ea60511cbd187
   OpenIMSDK: 9050804353c52289d4eb02f4c69c19028c30849d
   OpenIMSDKCore: 002ccd940d261619d117eedcb8e6236aae718aaa
+  PaddleOCR: 92c5815a5032f33cdbfbdaca2fc5b188c0e11748
   ParallaxHeader: a343f55eb38f52a89c5820a77e14cf975b84e6aa
   Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
@@ -381,6 +393,6 @@ SPEC CHECKSUMS:
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
   ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: 29c25a21473d664c9c20d2e846d5c409c0c1a542
+PODFILE CHECKSUM: 89d1c9435c1f7431e8db903a6241ddf5c66f8f15
 
 COCOAPODS: 1.11.2

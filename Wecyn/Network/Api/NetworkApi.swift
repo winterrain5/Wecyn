@@ -28,7 +28,7 @@ enum NetworkApi  {
     case cancelFollow(_ userId:Int)
     case followedList(_ type:Int,_ userId:Int,_ page:Int,_ pageSize:Int,_ keyword:String)
     case updateRemark(_ id:Int,_ remark:String)
-    case scanCard(_ photo:String,_ lang:Int,_ model:Int)
+    case scanCard(_ cardText:String,  _ photo:String? = nil,_ lang:Int,_ model:Int)
     case checkOpenIMFriend
 }
 
@@ -144,8 +144,8 @@ extension NetworkApi:TargetType, Cacheable {
             return requestParametersByGet(["type":type,"user_id":userId,"page":page,"pagesize":pageSize,"keyword":keyword])
         case .updateRemark(let id, let remark):
             return requestParametersByPost(["user_id":id,"remark":remark])
-        case .scanCard(let photo,let lang,let model):
-            return requestParametersByPost(["photo":photo,"lang":lang,"model":model])
+        case .scanCard(let cardText,let photo,let lang,let model):
+            return requestParametersByPost(["card_text":cardText,"photo":photo,"lang":lang,"model":model])
         case .checkOpenIMFriend:
             return .requestPlain
         }
