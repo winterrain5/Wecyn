@@ -17,6 +17,22 @@ class ConnectionUsersController: BaseCollectionController,UICollectionViewDelega
         super.viewDidLoad()
         
        
+
+        loadNewData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = false
+        addTitleView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = true
+    }
+    
+    func addTitleView() {
         self.navigation.item.titleView = searchView
         
         searchView.searching = { [weak self] keyword in
@@ -25,7 +41,7 @@ class ConnectionUsersController: BaseCollectionController,UICollectionViewDelega
                 $0.last_name.lowercased().contains(keyword.trimmed.lowercased()) ||
                 $0.full_name.lowercased().contains(keyword.trimmed.lowercased()) }) ?? []
             self.reloadData()
-            searchView.endSearching()
+            self.searchView.endSearching()
         }
         
         searchView.beginSearch = { [weak self] in
@@ -33,18 +49,6 @@ class ConnectionUsersController: BaseCollectionController,UICollectionViewDelega
             self.searchResults = []
             self.reloadData()
         }
-        
-        loadNewData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar  = false
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        IQKeyboardManager.shared.enableAutoToolbar  = true
     }
     
     override func refreshData() {

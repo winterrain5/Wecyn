@@ -31,3 +31,4 @@ import Foundation
 @_exported import SafeSFSymbols
 @_exported import MessageKit
 @_exported import InputBarAccessoryView
+@_exported import Localize_Swift

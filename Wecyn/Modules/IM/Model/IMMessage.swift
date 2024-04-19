@@ -17,7 +17,7 @@ let MessageMaxHeight = 180.cgFloat
 
 class IMMessage:MessageType {
     
-    private init(kind: MessageKind, user: IMUser, messageId: String, date: Date) {
+    init(kind: MessageKind, user: IMUser, messageId: String, date: Date) {
         self.kind = kind
         self.user = user
         self.messageId = messageId
@@ -40,34 +40,49 @@ class IMMessage:MessageType {
         
         switch messageInfo.contentType {
         case .text:
+            
             let text = messageInfo.textElem?.content ?? ""
-            return IMMessage.init(text: text, user: sender, messageId: messageId, date: date)
+            let message = IMMessage.init(text: text, user: sender, messageId: messageId, date: date)
+            message.sendStatus = messageInfo.status
+            return message
+            
         case .image:
             guard let url = messageInfo.pictureElem?.sourcePicture?.url?.url else { return nil }
             let imageSize = CGSize(width: messageInfo.pictureElem?.sourcePicture?.width ?? 180, height: messageInfo.pictureElem?.sourcePicture?.height ?? 180)
-            return IMMessage.init(imageURL: url,imageSize:imageSize, user: sender, messageId: messageId, date: date)
+            let message = IMMessage.init(imageURL: url,imageSize:imageSize, user: sender, messageId: messageId, date: date)
+            message.sendStatus = messageInfo.status
+            return message
+            
         case .video:
             
             guard let url = messageInfo.videoElem?.videoUrl?.url else { return nil}
             let thumbnail = UIImage.init(color: R.color.backgroundColor()!, size: CGSize(width: 120, height: 160))
-            return IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, user: sender, messageId: messageId, date: date)
+            let message = IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, user: sender, messageId: messageId, date: date)
+            message.sendStatus = messageInfo.status
+            return message
             
         case .audio:
             
             guard let url = messageInfo.soundElem?.sourceUrl?.url,let duration = messageInfo.soundElem?.duration.float else { return nil }
-            return IMMessage.init(audioURL: url,duration: duration, user: sender, messageId: messageId, date: date)
+            let message = IMMessage.init(audioURL: url,duration: duration, user: sender, messageId: messageId, date: date)
+            message.sendStatus = messageInfo.status
+            return message
             
         case .file:
             
             guard let url = messageInfo.fileElem?.sourceUrl?.url,let title = messageInfo.fileElem?.fileName,let size = messageInfo.fileElem?.fileSize else { return  nil }
             let item = FileItem(title: title, url: url,image: UIImage(nameInBundle: "msg_file"),size: size)
-            return IMMessage(fileItem: item, user: sender, messageId: messageId, date: date)
+            let message = IMMessage(fileItem: item, user: sender, messageId: messageId, date: date)
+            message.sendStatus = messageInfo.status
+            return message
             
         case .card:
             
             guard let name = messageInfo.cardElem?.nickname,let faceUrl = messageInfo.cardElem?.faceURL, let id = messageInfo.cardElem?.userID.int,let wid = messageInfo.cardElem?.ex  else { return nil }
             let item = IMContactItem(displayName: name, faceUrl: faceUrl, id: id, wid: wid)
-            return IMMessage(contact: item, user: sender, messageId: messageId, date: date)
+            let message = IMMessage(contact: item, user: sender, messageId: messageId, date: date)
+            message.sendStatus = messageInfo.status
+            return message
             
         case .revoke:
         
@@ -80,11 +95,14 @@ class IMMessage:MessageType {
             }
             let item = RevokeItem(title: text)
             let message = IMMessage(revokeItem: item, user: sender, messageId: messageId, date: Date())
-//            return IMMessage(revokeItem: item, user: sender, messageId: messageId, date: date)
-             return message
+            message.sendStatus = messageInfo.status
+            return message
             
         case .friendAppApproved:
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
+            
+        case .oaNotification:
+            return nil
         default:
             return IMMessage(text: "\(messageInfo.contentType)", user: sender, messageId: messageId, date: date)
         }
@@ -178,7 +196,7 @@ struct IMUser: SenderType, Equatable {
 
 // MARK: - CoordinateItem
 
-private struct CoordinateItem: LocationItem {
+struct CoordinateItem: LocationItem {
     var location: CLLocation
     var size: CGSize
     
@@ -190,7 +208,7 @@ private struct CoordinateItem: LocationItem {
 
 // MARK: - ImageMediaItem
 
-private struct ImageMediaItem: MediaItem {
+struct ImageMediaItem: MediaItem {
     var url: URL?
     var image: UIImage?
     var placeholderImage: UIImage
@@ -238,7 +256,7 @@ struct LinkMediaItem: LinkItem {
     }
 }
 
-private struct VideoMediaItem: MediaItem {
+struct VideoMediaItem: MediaItem {
     var url: URL?
     var image: UIImage?
     var placeholderImage: UIImage
@@ -278,7 +296,7 @@ struct RevokeItem {
 
 // MARK: - MockAudioItem
 
-private struct IMAudioItem: AudioItem {
+struct IMAudioItem: AudioItem {
     var url: URL
     var size: CGSize
     var duration: Float

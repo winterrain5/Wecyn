@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import IQKeyboardManagerSwift
 class ChatSendAddFriendRequestController: BaseViewController {
     let label = UILabel()
     let tf = UITextField()
@@ -22,6 +22,7 @@ class ChatSendAddFriendRequestController: BaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.navigation.item.title = "申请添加朋友".innerLocalized()
        
@@ -62,7 +63,7 @@ class ChatSendAddFriendRequestController: BaseViewController {
                 saveButton.stopAnimation()
                 if $0.success == 1 {
                     Toast.showSuccess( "加好友请求已发送".innerLocalized())
-                    self.dismiss(animated: true)
+                    self.returnBack()
                 } else {
                     Toast.showError($0.message)
                 }
@@ -79,7 +80,10 @@ class ChatSendAddFriendRequestController: BaseViewController {
                 
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enableAutoToolbar  = false
+    }
 
 
 

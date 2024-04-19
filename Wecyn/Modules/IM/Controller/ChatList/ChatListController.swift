@@ -24,8 +24,17 @@ class ChatListController: BaseTableController {
         button.imageForNormal = R.image.plusCircle()?.tintImage(.darkGray)
         button.showsMenuAsPrimaryAction = true
         
+        let action0 = UIAction(title: "Chat",image: .init(nameInBundle: "chat_menu_create_group_icon")) { [weak self] _ in
+            guard let `self` = self else { return }
+            let vc = ChatContactsController(selectType: .chat)
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
+        
         let action1 = UIAction(title: "Scan",image: .init(nameInBundle: "chat_menu_scan_icon")) { [weak self] _ in
             guard let `self` = self else { return }
+            Toast.showWarning("功能开发中")
         }
         
         let action2 = UIAction(title: "Add Friend",image: .init(nameInBundle: "chat_menu_add_friend_icon")){ [weak self] _ in
@@ -35,9 +44,9 @@ class ChatListController: BaseTableController {
         
         let action3 = UIAction(title: "Group Chat",image: .init(nameInBundle: "chat_menu_add_group_icon")) { [weak self] _ in
             guard let `self` = self else { return }
-            
+            Toast.showWarning("功能开发中")
         }
-        let items = [action1,action2,action3]
+        let items = [action0,action1,action2,action3]
         button.menu = UIMenu(children: items)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: button)
     }
@@ -45,7 +54,9 @@ class ChatListController: BaseTableController {
     func bindData() {
         IMController.shared.connectionRelay.subscribe(onNext:{ [weak self] status in
             if status == .syncComplete {
-                let count = self?._viewModel.conversationsRelay.value.count ?? 0
+                var conversation = self?._viewModel.conversationsRelay.value
+                conversation?.removeAll(where: { $0.conversationType == .notification })
+                let count = conversation?.count ?? 0
                 self?.navigation.item.title =  count > 0 ? "Wecyn(\(count))" : "Wecyn"
             } else {
                 self?.navigation.item.title = status.title
@@ -53,30 +64,29 @@ class ChatListController: BaseTableController {
             
         }).disposed(by: rx.disposeBag)
         
+        
+        
+        
         _viewModel.conversationsRelay.asObservable().subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.conversations = $0
+            self.conversations.removeFirst(where: { $0.conversationType == .notification })
             
-            self?.conversations = $0
-            self?.endRefresh($0.count, emptyString: "No Conversations")
+            if conversations.filter({ $0.userID == IMController.shared.currentSender.senderId }).count == 0 {
+                let fileTrans = ConversationInfo(conversationID: "")
+                fileTrans.userID = IMController.shared.currentSender.senderId
+                conversations.insert(fileTrans, at: 0)
+            }
             
-            self?.navigation.item.title = $0.count > 0 ? "Wecyn(\($0.count))" : "Wecyn"
+            let count = self.conversations.count
+            self.endRefresh(count, emptyString: "No Conversations")
+            self.navigation.item.title = count > 0 ? "Wecyn(\(count))" : "Wecyn"
             
         },onError: { e in
             self.endRefresh(.NoData, emptyString: "No Conversations")
         }).disposed(by: rx.disposeBag)
         
-        
-        let status = IMController.shared.getLoginStatus()
-        switch status {
-        case .logged:
-            Logger.debug("im logged",label: IMLoggerLabel)
-        case .logging:
-            Logger.debug("im logging",label: IMLoggerLabel)
-        case .logout:
-            Logger.debug("im logout",label: IMLoggerLabel)
-        @unknown default:
-            fatalError()
-        }
-        
+
     }
     
     func addObserver() {
@@ -114,14 +124,43 @@ class ChatListController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         let conversation = conversations[indexPath.row]
-        let vc = ChatViewControllerBuilder().build(conversation)
-        self.navigationController?.pushViewController(vc)
+        
+        if conversation.conversationID.isEmpty {
+            createConversation(conversation:  nil)
+        } else {
+            createConversation(conversation: conversation)
+        }
+        
+    }
+    
+    func createConversation(conversation:ConversationInfo?) {
+        if let conversation = conversation {
+            
+            let vc = ChatViewControllerBuilder().build(conversation)
+            self.navigationController?.pushViewController(vc)
+            
+        } else {
+            let sourceId = IMController.shared.currentSender.senderId
+            let name = IMController.shared.currentSender.displayName
+            let faceUrl = IMController.shared.currentSender.faceUrl
+            IMController.shared.getConversation(sourceId:sourceId) { conversation in
+                guard let conversation = conversation else { return }
+                conversation.userID = sourceId
+                conversation.showName = name
+                conversation.faceURL = faceUrl
+                conversation.conversationType = .c2c
+                let vc = ChatViewControllerBuilder().build(conversation)
+                self.navigationController?.pushViewController(vc)
+            }
+           
+        }
+       
     }
     
     public func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let item = _viewModel.conversationsRelay.value[indexPath.row]
-        
+        let item = conversations[indexPath.row]
         
         let markReadTitle = "标为已读".innerLocalized()
         let markReadAction = UIContextualAction(style: .normal, title: markReadTitle) { [weak self] _, _, completion in
@@ -133,6 +172,8 @@ class ChatListController: BaseTableController {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "删除".innerLocalized()) { [weak self] _, _, completion in
             self?._viewModel.deleteConversation(conversationID: item.conversationID, completion: { _ in
+                self?.conversations.remove(at: indexPath.row)
+                self?.tableView?.deleteRows(at: [indexPath], with: .automatic)
                 completion(true)
             })
         }

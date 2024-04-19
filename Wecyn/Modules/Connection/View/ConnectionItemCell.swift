@@ -28,7 +28,8 @@ class ConnectionItemCell: UICollectionViewCell {
             guard let `self` = self,let model = self.model else { return }
 
             let vc = ChatSendAddFriendRequestController(model: model)
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+            let nav = BaseNavigationController(rootViewController: vc)
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
             
         }).disposed(by: rx.disposeBag)
     }

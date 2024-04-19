@@ -13,6 +13,7 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
     var searching:((String)->())?
     var searchTextChanged:((String)->())?
     var beginSearch:(()->())?
+    
     var isSearchable = false
     var placeholder:String = ""
     var isBecomeFirstResponder = false

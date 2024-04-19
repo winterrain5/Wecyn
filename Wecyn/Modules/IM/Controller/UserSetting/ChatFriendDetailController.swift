@@ -188,14 +188,9 @@ class ChatFriendDetailController: BaseTableController {
             
         } else {
             
-            IMController.shared.getConversation(sourceId:id.string) { conversation in
+            IMController.shared.getConversation(sessionType:.c2c, sourceId:id.string) { conversation in
                 guard let conversation = conversation else { return }
-                conversation.userID = id.string
-                conversation.showName = name
-                conversation.faceURL = self.model?.avatar
-                conversation.conversationType = .c2c
-                let dataProvider = DefaultDataProvider(conversation: conversation)
-                let vc = ChatViewController(dataProvider: dataProvider)
+                let vc = ChatViewControllerBuilder().build(conversation)
                 self.navigationController?.pushViewController(vc)
             }
            

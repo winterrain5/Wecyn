@@ -60,12 +60,29 @@ class ConnectionController: BaseViewController {
         btn.imageForNormal = R.image.connection_search()
     }
     
-    let searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false)
+    var searchView:NavbarSearchView!
+    var isFilterOANotification = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.ConnectionAuditUser, object: nil, queue: .main) { noti in
             self.getDatas()
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UpdateConnectionCount, object: nil, queue: .main) { noti in
+            self.getDatas()
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UpdateFriendRecieve, object: nil, queue: .main) { noti in
+            self.getDatas()
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UpdateNotificationCount, object: nil, queue: .main) { noti in
+           
+            if let objc = noti.object as? String,objc == "filterOANotificationCount" {
+                self.isFilterOANotification = true
+            } else {
+                self.isFilterOANotification = false
+            }
+            
+            self.getNotificationCount()
         }
     }
     
@@ -78,7 +95,7 @@ class ConnectionController: BaseViewController {
         
         configPageView()
         addRightBarItems()
-        addTitleView()
+        
         getDatas()
         getNotificationCount()
         getIMNotification()
@@ -87,8 +104,8 @@ class ConnectionController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        searchView.size = CGSize(width: kScreenWidth * 0.75, height: 36)
-        navigation.item.titleView = searchView
+  
+        addTitleView()
     }
     
     func configPageView() {
@@ -132,8 +149,10 @@ class ConnectionController: BaseViewController {
     }
     
     func addTitleView() {
-        self.navigation.item.titleView = searchView
+        searchView = NavbarSearchView(placeholder: "Search User",isSearchable: false)
         searchView.frame = CGRect(origin: .zero, size: CGSize(width: kScreenWidth * 0.75, height: 36))
+        self.navigation.item.titleView = searchView
+        
         searchView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
             self.navigationController?.pushViewController(ConnectionUsersController(),animated: false)
         }).disposed(by: rx.disposeBag)
@@ -141,16 +160,23 @@ class ConnectionController: BaseViewController {
     
     func getNotificationCount() {
         NotificationService.getNotificationCount().subscribe(onNext:{
-            print("Count:\($0)")
             self.updateNotificationBadge($0)
         }).disposed(by: rx.disposeBag)
     }
     func getIMNotification() {
         IMController.shared.getTotalUnreadMsgCount { [weak self] in
-            self?.updateMessageBadge($0)
+            guard let `self` = self else { return }
+            if self.isFilterOANotification {
+                return
+            }
+            self.updateMessageBadge($0)
         }
         IMController.shared.totalUnreadSubject.subscribe(onNext:{ [weak self] in
-            self?.updateMessageBadge($0)
+            guard let `self` = self else { return }
+            if self.isFilterOANotification {
+                return
+            }
+            self.updateMessageBadge($0)
         }).disposed(by: rx.disposeBag)
     }
     

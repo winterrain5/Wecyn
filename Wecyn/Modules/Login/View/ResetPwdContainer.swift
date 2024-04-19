@@ -30,7 +30,7 @@ class ResetPwdContainer: UIView,UITextFieldDelegate {
         let pwd1 = pwd1Tf.rx.text.orEmpty
         let pwd2 = pwd2Tf.rx.text.orEmpty
         
-        Observable.combineLatest(pwd1,pwd2).map({ !$0.1.isEmpty && $0.0.isEmpty }).subscribe(onNext:{
+        Observable.combineLatest(pwd1,pwd2).map({ !$0.1.isEmpty && !$0.0.isEmpty && ($0.1 == $0.0)}).subscribe(onNext:{
             [weak self] in
             self?.submitButton.isEnabled = $0
             self?.submitButton.titleColorForNormal = $0 ?  R.color.theamColor() :  R.color.disableColor()

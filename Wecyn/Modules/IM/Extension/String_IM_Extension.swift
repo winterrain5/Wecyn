@@ -88,9 +88,8 @@ extension String {
     }
     
     func innerLocalized() -> String  {
-        let bundle = BundleUtil.getResourceBundle()
-        let str = localized(using: nil, in: bundle)
-        return str
+        
+        return self.localized()
     }
 
     

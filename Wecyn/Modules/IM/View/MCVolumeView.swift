@@ -64,7 +64,7 @@ class MCVolumeView: UIView {
     }
     
     @objc private func updateView(notice: Notification) {
-        soundMeters = notice.object as! [Float]
+        soundMeters = notice.object as? [Float]
         setNeedsDisplay()
     }
 

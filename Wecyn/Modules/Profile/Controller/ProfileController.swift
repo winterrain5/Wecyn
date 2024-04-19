@@ -23,7 +23,7 @@ class ProfileController: BaseTableController {
     
    
     private var headerView = ProfileHeaderView.loadViewFromNib()
-    private let sectionTitleMap:[Int:LocalizerKey] = [0:.Activity,1:.Experience,2:.Education]
+    private let sectionTitleMap:[Int:String] = [0:"最近发布".innerLocalized(),1:"工作经历".innerLocalized(),2:"教育经历".innerLocalized()]
     private let sectionTypes:[SectionType] = [.Activity,.Work,.Education]
     override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio <= 0 ? .lightContent : .darkContent }
     var ratio:CGFloat = 0

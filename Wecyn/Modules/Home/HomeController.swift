@@ -10,8 +10,26 @@ import UIKit
 class HomeController: BaseTableController {
     var lastId:Int = 0
     var createPostButton = UIButton()
+    var isFilterOANotification = false
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
     var cellHeightCache:[Int:CGFloat] = [:]
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nil, bundle: nil)
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UpdateNotificationCount, object: nil, queue: .main) { noti in
+            if let objc = noti.object as? String,objc == "filterOANotificationCount" {
+                self.isFilterOANotification = true
+            } else {
+                self.isFilterOANotification = false
+            }
+            self.getNotificationCount()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isSkeletonable = true
@@ -19,9 +37,13 @@ class HomeController: BaseTableController {
         addRightBarItems()
         addCreatePostButton()
         addTitleLabel()
-        addIMObserver()
         
-       
+        
+        let status = IMController.shared.getLoginStatus()
+        if status == .logout {
+            IMController.shared.login()
+        }
+        
         refreshData()
         
         getNotificationCount()
@@ -54,23 +76,7 @@ class HomeController: BaseTableController {
         registRefreshHeader(colorStyle: .gray)
         registRefreshFooter()
     }
-    
-    func addIMObserver() {
-        IMController.shared.getTotalUnreadMsgCount { [weak self] in
-            self?.updateMessageBadge($0)
-        }
-        IMController.shared.totalUnreadSubject.subscribe(onNext:{ [weak self] in
-            self?.updateMessageBadge($0)
-        }).disposed(by: rx.disposeBag)
-        
-        let status = IMController.shared.getLoginStatus()
-        if status == .logout {
-            IMController.shared.login()
-        }
 
-       
-    }
-    
     func addTitleLabel() {
         let wecynLabel = UILabel()
         wecynLabel.text = "Wecyn"
@@ -138,10 +144,24 @@ class HomeController: BaseTableController {
     }
     
     func getIMNotification() {
-        
+       
         IMController.shared.getTotalUnreadMsgCount { [weak self] count in
-            self?.updateMessageBadge(count)
+            
+            guard let `self` = self else { return }
+            if self.isFilterOANotification {
+                return
+            }
+            self.updateMessageBadge(count)
+            
         }
+        IMController.shared.totalUnreadSubject.subscribe(onNext:{ [weak self] count in
+            guard let `self` = self else { return }
+            if self.isFilterOANotification {
+                return
+            }
+            self.updateMessageBadge(count)
+        }).disposed(by: self.rx.disposeBag)
+       
     }
     
     override func loadNewData() {

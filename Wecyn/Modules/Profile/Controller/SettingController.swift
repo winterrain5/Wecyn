@@ -40,7 +40,7 @@ class SettingController: BaseTableController {
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"] as? String ?? ""//主程序版本号
         
-        versionLabel.text = "\(Localizer.shared.localized("Version")) \(majorVersion)\nTerra Systems Pte Ltd"
+        versionLabel.text = "版本号".innerLocalized() + "\(majorVersion)\nTerra Systems Pte Ltd"
         versionLabel.font = UIFont.sk.pingFangRegular(14)
         versionLabel.textColor = UIColor(hexString: "828282")
         versionLabel.numberOfLines = 2
@@ -56,26 +56,26 @@ class SettingController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigation.item.title = Localizer.shared.localized("Settings")
+        self.navigation.item.title = "设置".innerLocalized()
         
         
         // general preference
-        let notification = SettingModel(title: Localizer.shared.localized("Notification"), type: .Notification)
-        let language = SettingModel(title: Localizer.shared.localized("Language"), type: .Language,detail: getCurrentLanguage())
-        let colorRemark = SettingModel(title: Localizer.shared.localized("Color Remark"), type: .ColorRemark)
-        let timezone = SettingModel(title: Localizer.shared.localized("TimeZone"), type: .TimeZone,detail: getTimezone())
+        let notification = SettingModel(title: "通知".innerLocalized(), type: .Notification)
+        let language = SettingModel(title: "语言".innerLocalized(), type: .Language,detail: getCurrentLanguage())
+        let colorRemark = SettingModel(title: "颜色备注".innerLocalized(), type: .ColorRemark)
+        let timezone = SettingModel(title: "时区".innerLocalized(), type: .TimeZone,detail: getTimezone())
         datas.append([notification,language,colorRemark,timezone])
         
-        let account = SettingModel(title: Localizer.shared.localized("Account Manage"), type: .Account)
+        let account = SettingModel(title: "账户管理".innerLocalized(), type: .Account)
         datas.append([account])
         
-        let privacy = SettingModel(title: Localizer.shared.localized("Privacy Agreement"), type: .Privacy)
-        let about = SettingModel(title: Localizer.shared.localized("About Wecyn"), type: .About)
-        let contact = SettingModel(title: Localizer.shared.localized("Contact us"), type: .Contact)
+        let privacy = SettingModel(title: "隐私协议".innerLocalized(), type: .Privacy)
+        let about = SettingModel(title: "关于Wecyn".innerLocalized(), type: .About)
+        let contact = SettingModel(title: "联系我们".innerLocalized(), type: .Contact)
         
         datas.append([privacy,about,contact])
         
-        let logout = SettingModel(title: Localizer.shared.localized("Logout"), type: .Logout)
+        let logout = SettingModel(title: "登出".innerLocalized(), type: .Logout)
         datas.append([logout])
     }
     func getTimezone() -> String {
@@ -168,8 +168,8 @@ class SettingController: BaseTableController {
                 UIApplication.shared.keyWindow?.rootViewController = nav
             }
             
-            let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(title: "Confirm",style: .destructive) { _ in
+            let alert = UIAlertController(title: "你确定要登出吗？".innerLocalized(), message: nil, preferredStyle: .actionSheet)
+            alert.addAction(title: "确认".innerLocalized(),style: .destructive) { _ in
                 Toast.showLoading()
                 IMController.shared.logout {
                     toLoginVc()
@@ -181,7 +181,7 @@ class SettingController: BaseTableController {
 
              
             }
-            alert.addAction(title: "Cancel",style: .cancel)
+            alert.addAction(title: "取消".innerLocalized(),style: .cancel)
             alert.show()
             
         }

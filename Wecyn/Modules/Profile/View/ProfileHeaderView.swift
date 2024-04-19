@@ -39,9 +39,9 @@ class ProfileHeaderView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        viewNamecardButton.titleForNormal = Localizer.localized(for: .view_namecard)
-        viewCalendarButton.titleForNormal = Localizer.localized(for: .view_calendar)
-        addNewSectionButton.titleForNormal = Localizer.localized(for: .add_new_section)
+        viewNamecardButton.titleForNormal = "名片".innerLocalized()
+        viewCalendarButton.titleForNormal = "日历".innerLocalized()
+        addNewSectionButton.titleForNormal = "new section"
         
         viewNamecardButton.rx.tap.subscribe(onNext: {
             let vc = NFCNameCardController()

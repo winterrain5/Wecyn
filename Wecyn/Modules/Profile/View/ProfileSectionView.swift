@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileSectionView: UIView {
     
-    private var title: LocalizerKey!
+    private var title: String!
     private var type: SectionType!
     private let titleLabel = UILabel().then {
         $0.font = UIFont.boldSystemFont(ofSize: 16)
@@ -20,14 +20,14 @@ class ProfileSectionView: UIView {
     private lazy var editButton = UIButton()
     var profileAddDataHandler:((SectionType)->())?
     
-    required init(title:LocalizerKey,type:SectionType) {
+    required init(title:String,type:SectionType) {
         super.init(frame: .zero)
         
         self.title = title
         self.type = type
         
         addSubview(titleLabel)
-        titleLabel.text = Localizer.localized(for: title)
+        titleLabel.text = title
         
         
         addSubview(editButton)

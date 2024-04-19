@@ -16,7 +16,7 @@ extension ChatViewController {
             CommonService.getUploadFileUrl(type.ext,type).subscribe(onNext:{
                 resolver.fulfill($0)
             },onError: { e in
-                resolver.reject(e.asAPIError)
+                resolver.reject(APIError.requestError(code: -1, message: e.localizedDescription))
             }).disposed(by: rx.disposeBag)
         }
     }
@@ -26,7 +26,7 @@ extension ChatViewController {
             CommonService.share.uploadMedia(model.upUrl, data, type) { result in
                 resolver.fulfill(model.downUrl)
             } failure: { e in
-                resolver.reject(e)
+                resolver.reject(APIError.requestError(code: -1, message: e.localizedDescription))
             }
             
         }
@@ -45,7 +45,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
             attachments.forEach { attachment in
                 switch attachment {
                 case .image(let relativePath, let path):
-                    let source = MediaMessageSource(source: MediaMessageSource.Info(url: URL(string: path)!, relativePath: relativePath))
+                    let source = MediaMessageSource(source: MediaMessageSource.Info(url: URL(string: path)!))
                     self.sendImage(source: source)
                 case .video(let thumbRelativePath, let thumbPath, let fullPath, let duration):
                     let source = MediaMessageSource(source: MediaMessageSource.Info(relativePath: fullPath),
@@ -66,7 +66,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
         }
     }
     
-    private func sendCarte(source: MediaMessageSource) {
+    func sendCarte(source: MediaMessageSource) {
         guard
             let name = source.name,
             let userID = source.id?.string,
@@ -95,7 +95,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
 
     }
     
-    private func sendFile(source: MediaMessageSource,data:Data) {
+    func sendFile(source: MediaMessageSource,data:Data) {
         let ext = source.ext ?? ""
         let size = source.size ?? 0
         let fileName = source.name ?? ""
@@ -131,7 +131,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
     }
     
     
-    private func sendImage(source: MediaMessageSource) {
+    func sendImage(source: MediaMessageSource) {
 
         guard
             let image = UIImage.init(path: source.source.url.absoluteString),
@@ -175,7 +175,11 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
       
     }
     
-    private func sendVideo(source: MediaMessageSource) {
+    func sendImageMessage(byURL:String) {
+        
+    }
+    
+    func sendVideo(source: MediaMessageSource) {
         guard 
             
             let thumbnail = UIImage.init(path: source.thumb?.url.absoluteString),
@@ -217,7 +221,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
         }
     }
     
-    private func sendAudio(source: MediaMessageSource) {
+    func sendAudio(source: MediaMessageSource) {
         Logger.debug(source.source.relativePath, label: "Record Path")
         guard
             
@@ -254,6 +258,19 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
             self.reloadCollectionView()
             Toast.showError(e.asAPIError.errorInfo().message)
             
+        }
+    }
+    
+    func sendText(_ str:String) {
+        let message = IMMessage(text: str, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+        message.sendStatus = .sending
+        self.insertMessage(message)
+        IMController.shared.sendTextMessage(text: str, to: dataProvider.receiverId, conversationType: .c2c) { info in
+            print(info)
+        } onComplete: { info in
+            message.messageId = info.clientMsgID
+            message.sendStatus = info.status
+            self.reloadCollectionView()
         }
     }
 }

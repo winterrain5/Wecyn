@@ -8,33 +8,3 @@
 
 /****Profile*****/
 
-"view_namecard" = "名片";
-"view_calendar" = "日历";
-"add_new_section" = "添加新分区";
-
-"Activity" = "最近发布";
-"Skills" = "主要技能";
-"Experience" = "工作经历";
-"Education"  = "教育经历";
-"Interests"  = "兴趣爱好";
-
-"Settings" = "设置";
-"Notification" = "通知";
-"Language" = "语言";
-"Color Remark" = "颜色备注";
-"TimeZone" = "时区";
-"Privacy Agreement" = "隐私协议";
-"Account Manage" = "账户管理";
-"About Wecyn" = "关于Wecyn";
-"Contact us" = "联系我们";
-"Logout" = "登出";
-"Version" = "版本号";
-
-/****Profile*****/
-
-
-//
-"pull_down_to_refresh" = "下拉刷新";
-"pull_up_to_refresh" = "上拉加载更多";
-"release_refresh" = "松手刷新";
-//

@@ -7,6 +7,7 @@
 
 import UIKit
 import BadgeControl
+import Localize_Swift
 class ChatListCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -22,13 +23,25 @@ class ChatListCell: UITableViewCell {
     var model:ConversationInfo? {
         didSet {
             guard let model = model else { return }
+            if model.userID == IMController.shared.currentSender.senderId {
+                avatarImgView.image = R.image.file_trans()
+                nameLabel.text = "文件传输助手".innerLocalized()
+            } else {
+                avatarImgView.kf.setImage(with: model.faceURL?.url,placeholder: UIImage(nameInBundle: "ic_avatar_01"))
+                nameLabel.text = model.showName
+            }
             
-            avatarImgView.kf.setImage(with: model.faceURL?.url,placeholder: UIImage(nameInBundle: "ic_avatar_01"))
-            nameLabel.text = model.showName
+           
+            
             if !(model.draftText?.isEmpty ?? false )  {
                 lastMsgLabel.text = model.draftText
             } else {
                 lastMsgLabel.attributedText = MessageHelper.getAbstructOf(conversation: model)
+            }
+            
+            if model.latestMsgSendTime  == 0 {
+                timeLabel.text = ""
+            } else {
                 timeLabel.text = MessageHelper.convertList(timestamp_ms: model.latestMsgSendTime)
             }
             

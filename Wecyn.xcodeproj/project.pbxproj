@@ -47,7 +47,6 @@
 		450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C872A380CC9008B0C4A /* JobSavedController.swift */; };
 		450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450B6C8B2A383D24008B0C4A /* HomeHeaderView.swift */; };
 		450B6C8E2A383D8F008B0C4A /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 450B6C8D2A383D8F008B0C4A /* HomeHeaderView.xib */; };
-		450BA6B62A31B9B000764828 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6B52A31B9B000764828 /* Localizer.swift */; };
 		450BA6B82A31C6EE00764828 /* ProfileNoActivitySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6B72A31C6EE00764828 /* ProfileNoActivitySectionView.swift */; };
 		450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6B92A31C76E00764828 /* ProfileSectionView.swift */; };
 		450BA6BD2A31CDAB00764828 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA6BC2A31CDAB00764828 /* R.generated.swift */; };
@@ -272,7 +271,6 @@
 		45ADB29C2A40390100745F6F /* ConnectionOfMyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */; };
 		45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B643DF2A84863300C79D13 /* EmailCcAddController.swift */; };
 		45B6FFBF2BB3B347006E5D02 /* ChatVC_DataProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6FFBE2BB3B347006E5D02 /* ChatVC_DataProviderDelegate.swift */; };
-		45BBF5262A48328D0018992C /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5252A48328D0018992C /* MessageController.swift */; };
 		45BBF5282A4832EC0018992C /* ScheduleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5272A4832EC0018992C /* ScheduleApi.swift */; };
 		45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF5292A4833B00018992C /* AddEventRequestModel.swift */; };
 		45BBF52C2A4835440018992C /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBF52B2A4835440018992C /* ScheduleService.swift */; };
@@ -419,7 +417,6 @@
 		450B6C872A380CC9008B0C4A /* JobSavedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSavedController.swift; sourceTree = "<group>"; };
 		450B6C8B2A383D24008B0C4A /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		450B6C8D2A383D8F008B0C4A /* HomeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderView.xib; sourceTree = "<group>"; };
-		450BA6B52A31B9B000764828 /* Localizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
 		450BA6B72A31C6EE00764828 /* ProfileNoActivitySectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNoActivitySectionView.swift; sourceTree = "<group>"; };
 		450BA6B92A31C76E00764828 /* ProfileSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionView.swift; sourceTree = "<group>"; };
 		450BA6BC2A31CDAB00764828 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -469,6 +466,7 @@
 		45124B7A2BCE122200045CF7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		45124B7C2BCE125000045CF7 /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = SDKROOT; };
 		45124BA72BCE5E4200045CF7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		45124C1D2BCFA37B00045CF7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
 		4513F60F2BAD53A50080756F /* ChatVC_MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessageDataSource.swift; sourceTree = "<group>"; };
 		4513F6112BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_MessagesLayoutDelegate.swift; sourceTree = "<group>"; };
@@ -653,7 +651,6 @@
 		45ADB29A2A40390100745F6F /* ConnectionOfMyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOfMyCell.swift; sourceTree = "<group>"; };
 		45B643DF2A84863300C79D13 /* EmailCcAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCcAddController.swift; sourceTree = "<group>"; };
 		45B6FFBE2BB3B347006E5D02 /* ChatVC_DataProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_DataProviderDelegate.swift; sourceTree = "<group>"; };
-		45BBF5252A48328D0018992C /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		45BBF5272A4832EC0018992C /* ScheduleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleApi.swift; sourceTree = "<group>"; };
 		45BBF5292A4833B00018992C /* AddEventRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventRequestModel.swift; sourceTree = "<group>"; };
 		45BBF52B2A4835440018992C /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
@@ -1278,7 +1275,6 @@
 				45EAE8C72A8F1CEE00018C0D /* Post */,
 				450F6CD72A6E0FC00001AA1B /* NFC */,
 				457C7D8E2A4D69F8002E50DF /* UIComponents */,
-				45BBF5222A4832590018992C /* Message */,
 				45E85B152A3AE1ED00B820CD /* Calendar */,
 				450BA6C02A32B8D000764828 /* Login */,
 				45E765B92A31A9F000BF6EEC /* Job */,
@@ -1320,7 +1316,6 @@
 				45920A8E2A26E045005871ED /* PKError.swift */,
 				45920A8F2A26E045005871ED /* Device.swift */,
 				45920A902A26E045005871ED /* AppKey.swift */,
-				450BA6B52A31B9B000764828 /* Localizer.swift */,
 			);
 			path = Contants;
 			sourceTree = "<group>";
@@ -1508,30 +1503,6 @@
 				458870E12AE66D7E00029353 /* AddUserWorkExperienceView.xib */,
 				458870E52AE7BD2000029353 /* AddUserEducationExperienceView.swift */,
 				458870E72AE7BD2D00029353 /* AddUserEducationExperienceView.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		45BBF5222A4832590018992C /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				45BBF5242A4832630018992C /* View */,
-				45BBF5232A48325D0018992C /* Controller */,
-			);
-			path = Message;
-			sourceTree = "<group>";
-		};
-		45BBF5232A48325D0018992C /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				45BBF5252A48328D0018992C /* MessageController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		45BBF5242A4832630018992C /* View */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1884,6 +1855,7 @@
 		E5E07ACF7CCE3FCFA3B7A7F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45124C1D2BCFA37B00045CF7 /* libc++.tbd */,
 				45124BA72BCE5E4200045CF7 /* CoreAudio.framework */,
 				45124B7C2BCE125000045CF7 /* CoreAudioTypes.framework */,
 				45124B7A2BCE122200045CF7 /* AssetsLibrary.framework */,
@@ -1927,7 +1899,7 @@
 				459209CA2A26D5F4005871ED /* Resources */,
 				7ADA8EE899883EEC9D8C8070 /* [CP] Embed Pods Frameworks */,
 				4564BE322A8329A700464AFA /* Embed Foundation Extensions */,
-				F9EFBB0B9DB43DA0E1E972E9 /* [CP] Copy Pods Resources */,
+				BDD1C169B5CBC806199B6971 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2099,7 +2071,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F9EFBB0B9DB43DA0E1E972E9 /* [CP] Copy Pods Resources */ = {
+		BDD1C169B5CBC806199B6971 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2156,7 +2128,6 @@
 				45920ACE2A26E045005871ED /* APIHost.swift in Sources */,
 				45920AD82A26E045005871ED /* AppKey.swift in Sources */,
 				452A7A242BAAAF74009312F7 /* AdminAddDomainController.swift in Sources */,
-				45BBF5262A48328D0018992C /* MessageController.swift in Sources */,
 				452A7A4D2BABD4CA009312F7 /* IMController.swift in Sources */,
 				457C7D972A52644D002E50DF /* AddAssitantsRequestModel.swift in Sources */,
 				45A0E6432AC29C49003C5153 /* PostFollowingController.swift in Sources */,
@@ -2216,7 +2187,6 @@
 				459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */,
 				45920AEB2A26E045005871ED /* WebBrowser+MessageHandler.swift in Sources */,
 				45005C732A5D027D00560E21 /* CalendarAddNewEventController.swift in Sources */,
-				450BA6B62A31B9B000764828 /* Localizer.swift in Sources */,
 				459C065D2A36C0540066F85A /* ProfileSkillsItemCell.swift in Sources */,
 				45A7E5AB2A734DC30002014D /* NavbarSearchView.swift in Sources */,
 				458970622A78DAA100344B93 /* IMService.swift in Sources */,
@@ -2659,6 +2629,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/PaddleOCR",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/Paddle",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
@@ -2726,6 +2698,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/PaddleOCR",
+					"$(PROJECT_DIR)/Wecyn/Modules/NFC/Paddle",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;

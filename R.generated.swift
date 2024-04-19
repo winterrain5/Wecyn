@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 22 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 242 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -100,155 +100,1695 @@ struct _R {
       ///
       /// Key: About Wecyn
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var aboutWecyn: RswiftResources.StringResource { .init(key: "About Wecyn", tableName: "Localizable", source: source, developmentValue: "About Wecyn", comment: nil) }
 
       /// en translation: Account Manage
       ///
       /// Key: Account Manage
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var accountManage: RswiftResources.StringResource { .init(key: "Account Manage", tableName: "Localizable", source: source, developmentValue: "Account Manage", comment: nil) }
 
       /// en translation: Activity
       ///
       /// Key: Activity
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var activity: RswiftResources.StringResource { .init(key: "Activity", tableName: "Localizable", source: source, developmentValue: "Activity", comment: nil) }
 
       /// en translation: Color Remark
       ///
       /// Key: Color Remark
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var colorRemark: RswiftResources.StringResource { .init(key: "Color Remark", tableName: "Localizable", source: source, developmentValue: "Color Remark", comment: nil) }
 
       /// en translation: Contact us
       ///
       /// Key: Contact us
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var contactUs: RswiftResources.StringResource { .init(key: "Contact us", tableName: "Localizable", source: source, developmentValue: "Contact us", comment: nil) }
 
       /// en translation: Education
       ///
       /// Key: Education
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var education: RswiftResources.StringResource { .init(key: "Education", tableName: "Localizable", source: source, developmentValue: "Education", comment: nil) }
 
       /// en translation: Experience
       ///
       /// Key: Experience
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var experience: RswiftResources.StringResource { .init(key: "Experience", tableName: "Localizable", source: source, developmentValue: "Experience", comment: nil) }
+
+      /// en translation: ID number
+      ///
+      /// Key: ID号
+      ///
+      /// Locales: en
+      var id号: RswiftResources.StringResource { .init(key: "ID号", tableName: "Localizable", source: source, developmentValue: "ID number", comment: nil) }
+
+      /// en translation: ID copied
+      ///
+      /// Key: ID已复制
+      ///
+      /// Locales: en
+      var id已复制: RswiftResources.StringResource { .init(key: "ID已复制", tableName: "Localizable", source: source, developmentValue: "ID copied", comment: nil) }
 
       /// en translation: Interests
       ///
       /// Key: Interests
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var interests: RswiftResources.StringResource { .init(key: "Interests", tableName: "Localizable", source: source, developmentValue: "Interests", comment: nil) }
 
       /// en translation: Language
       ///
       /// Key: Language
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var language: RswiftResources.StringResource { .init(key: "Language", tableName: "Localizable", source: source, developmentValue: "Language", comment: nil) }
 
       /// en translation: Logout
       ///
       /// Key: Logout
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var logout: RswiftResources.StringResource { .init(key: "Logout", tableName: "Localizable", source: source, developmentValue: "Logout", comment: nil) }
 
       /// en translation: Notification
       ///
       /// Key: Notification
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var notification: RswiftResources.StringResource { .init(key: "Notification", tableName: "Localizable", source: source, developmentValue: "Notification", comment: nil) }
 
       /// en translation: Privacy Agreement
       ///
       /// Key: Privacy Agreement
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var privacyAgreement: RswiftResources.StringResource { .init(key: "Privacy Agreement", tableName: "Localizable", source: source, developmentValue: "Privacy Agreement", comment: nil) }
 
       /// en translation: Settings
       ///
       /// Key: Settings
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var settings: RswiftResources.StringResource { .init(key: "Settings", tableName: "Localizable", source: source, developmentValue: "Settings", comment: nil) }
 
       /// en translation: Skills
       ///
       /// Key: Skills
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var skills: RswiftResources.StringResource { .init(key: "Skills", tableName: "Localizable", source: source, developmentValue: "Skills", comment: nil) }
 
       /// en translation: TimeZone
       ///
       /// Key: TimeZone
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var timeZone: RswiftResources.StringResource { .init(key: "TimeZone", tableName: "Localizable", source: source, developmentValue: "TimeZone", comment: nil) }
 
       /// en translation: Version
       ///
       /// Key: Version
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var version: RswiftResources.StringResource { .init(key: "Version", tableName: "Localizable", source: source, developmentValue: "Version", comment: nil) }
+
+      /// en translation: [offline]
+      ///
+      /// Key: [离线]
+      ///
+      /// Locales: en
+      var 离线: RswiftResources.StringResource { .init(key: "[离线]", tableName: "Localizable", source: source, developmentValue: "[offline]", comment: nil) }
+
+      /// en translation: [Custom Message]
+      ///
+      /// Key: [自定义消息]
+      ///
+      /// Locales: en
+      var 自定义消息: RswiftResources.StringResource { .init(key: "[自定义消息]", tableName: "Localizable", source: source, developmentValue: "[Custom Message]", comment: nil) }
+
+      /// en translation: [Custom Expressions]
+      ///
+      /// Key: [自定义表情]
+      ///
+      /// Locales: en
+      var 自定义表情: RswiftResources.StringResource { .init(key: "[自定义表情]", tableName: "Localizable", source: source, developmentValue: "[Custom Expressions]", comment: nil) }
+
+      /// en translation: [Audio]
+      ///
+      /// Key: [语音]
+      ///
+      /// Locales: en
+      var 语音: RswiftResources.StringResource { .init(key: "[语音]", tableName: "Localizable", source: source, developmentValue: "[Audio]", comment: nil) }
 
       /// en translation: Add new section
       ///
       /// Key: add_new_section
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var add_new_section: RswiftResources.StringResource { .init(key: "add_new_section", tableName: "Localizable", source: source, developmentValue: "Add new section", comment: nil) }
 
-      /// en translation: Pull down to refresh
+      /// en translation: 下拉刷新
       ///
       /// Key: pull_down_to_refresh
       ///
-      /// Locales: en, zh-Hans
-      var pull_down_to_refresh: RswiftResources.StringResource { .init(key: "pull_down_to_refresh", tableName: "Localizable", source: source, developmentValue: "Pull down to refresh", comment: nil) }
+      /// Locales: en
+      var pull_down_to_refresh: RswiftResources.StringResource { .init(key: "pull_down_to_refresh", tableName: "Localizable", source: source, developmentValue: "下拉刷新", comment: nil) }
 
-      /// en translation: Pull up to load more
+      /// en translation: 上拉加载更多
       ///
       /// Key: pull_up_to_refresh
       ///
-      /// Locales: en, zh-Hans
-      var pull_up_to_refresh: RswiftResources.StringResource { .init(key: "pull_up_to_refresh", tableName: "Localizable", source: source, developmentValue: "Pull up to load more", comment: nil) }
+      /// Locales: en
+      var pull_up_to_refresh: RswiftResources.StringResource { .init(key: "pull_up_to_refresh", tableName: "Localizable", source: source, developmentValue: "上拉加载更多", comment: nil) }
 
-      /// en translation: Release to refresh
+      /// en translation: 松手刷新
       ///
       /// Key: release_refresh
       ///
-      /// Locales: en, zh-Hans
-      var release_refresh: RswiftResources.StringResource { .init(key: "release_refresh", tableName: "Localizable", source: source, developmentValue: "Release to refresh", comment: nil) }
+      /// Locales: en
+      var release_refresh: RswiftResources.StringResource { .init(key: "release_refresh", tableName: "Localizable", source: source, developmentValue: "松手刷新", comment: nil) }
 
       /// en translation: View Calendar
       ///
       /// Key: view_calendar
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var view_calendar: RswiftResources.StringResource { .init(key: "view_calendar", tableName: "Localizable", source: source, developmentValue: "View Calendar", comment: nil) }
 
       /// en translation: View BusinessCard
       ///
       /// Key: view_namecard
       ///
-      /// Locales: en, zh-Hans
+      /// Locales: en
       var view_namecard: RswiftResources.StringResource { .init(key: "view_namecard", tableName: "Localizable", source: source, developmentValue: "View BusinessCard", comment: nil) }
+
+      /// en translation: unsupported message type
+      ///
+      /// Key: 不支持的消息类型
+      ///
+      /// Locales: en
+      var 不支持的消息类型: RswiftResources.StringResource { .init(key: "不支持的消息类型", tableName: "Localizable", source: source, developmentValue: "unsupported message type", comment: nil) }
+
+      /// en translation: Communicate and collaborate with members
+      ///
+      /// Key: 与成员一起沟通协作
+      ///
+      /// Locales: en
+      var 与成员一起沟通协作: RswiftResources.StringResource { .init(key: "与成员一起沟通协作", tableName: "Localizable", source: source, developmentValue: "Communicate and collaborate with members", comment: nil) }
+
+      /// en translation: Profile
+      ///
+      /// Key: 个人资料
+      ///
+      /// Locales: en
+      var 个人资料: RswiftResources.StringResource { .init(key: "个人资料", tableName: "Localizable", source: source, developmentValue: "Profile", comment: nil) }
+
+      /// en translation: Skills
+      ///
+      /// Key: 主要技能
+      ///
+      /// Locales: en
+      var 主要技能: RswiftResources.StringResource { .init(key: "主要技能", tableName: "Localizable", source: source, developmentValue: "Skills", comment: nil) }
+
+      /// en translation: QR code business card
+      ///
+      /// Key: 二维码名片
+      ///
+      /// Locales: en
+      var 二维码名片: RswiftResources.StringResource { .init(key: "二维码名片", tableName: "Localizable", source: source, developmentValue: "QR code business card", comment: nil) }
+
+      /// en translation: you 
+      ///
+      /// Key: 你
+      ///
+      /// Locales: en
+      var 你: RswiftResources.StringResource { .init(key: "你", tableName: "Localizable", source: source, developmentValue: "you ", comment: nil) }
+
+      /// en translation: You have been added as friends
+      ///
+      /// Key: 你们已成功加为好友
+      ///
+      /// Locales: en
+      var 你们已成功加为好友: RswiftResources.StringResource { .init(key: "你们已成功加为好友", tableName: "Localizable", source: source, developmentValue: "You have been added as friends", comment: nil) }
+
+      /// en translation: you have set the conversation no disturb off
+      ///
+      /// Key: 你已关闭此会话消息免打扰
+      ///
+      /// Locales: en
+      var 你已关闭此会话消息免打扰: RswiftResources.StringResource { .init(key: "你已关闭此会话消息免打扰", tableName: "Localizable", source: source, developmentValue: "you have set the conversation no disturb off", comment: nil) }
+
+      /// en translation: you have blocked the chat
+      ///
+      /// Key: 你已屏蔽该群聊
+      ///
+      /// Locales: en
+      var 你已屏蔽该群聊: RswiftResources.StringResource { .init(key: "你已屏蔽该群聊", tableName: "Localizable", source: source, developmentValue: "you have blocked the chat", comment: nil) }
+
+      /// en translation: you have set the conversation no disturb on
+      ///
+      /// Key: 你已开启此会话消息免打扰
+      ///
+      /// Locales: en
+      var 你已开启此会话消息免打扰: RswiftResources.StringResource { .init(key: "你已开启此会话消息免打扰", tableName: "Localizable", source: source, developmentValue: "you have set the conversation no disturb on", comment: nil) }
+
+      /// en translation: you have unblocked the chat
+      ///
+      /// Key: 你已解除屏蔽该群聊
+      ///
+      /// Locales: en
+      var 你已解除屏蔽该群聊: RswiftResources.StringResource { .init(key: "你已解除屏蔽该群聊", tableName: "Localizable", source: source, developmentValue: "you have unblocked the chat", comment: nil) }
+
+      /// en translation: you revoked a message
+      ///
+      /// Key: 你撤回了一条消息
+      ///
+      /// Locales: en
+      var 你撤回了一条消息: RswiftResources.StringResource { .init(key: "你撤回了一条消息", tableName: "Localizable", source: source, developmentValue: "you revoked a message", comment: nil) }
+
+      /// en translation: Are you sure you want to log out?
+      ///
+      /// Key: 你确定要登出吗？
+      ///
+      /// Locales: en
+      var 你确定要登出吗: RswiftResources.StringResource { .init(key: "你确定要登出吗？", tableName: "Localizable", source: source, developmentValue: "Are you sure you want to log out?", comment: nil) }
+
+      /// en translation: You need to send a verification application and wait for the other party to pass it
+      ///
+      /// Key: 你需要发送验证申请，等对方通过
+      ///
+      /// Locales: en
+      var 你需要发送验证申请等对方通过: RswiftResources.StringResource { .init(key: "你需要发送验证申请，等对方通过", tableName: "Localizable", source: source, developmentValue: "You need to send a verification application and wait for the other party to pass it", comment: nil) }
+
+      /// en translation: secrecy
+      ///
+      /// Key: 保密
+      ///
+      /// Locales: en
+      var 保密: RswiftResources.StringResource { .init(key: "保密", tableName: "Localizable", source: source, developmentValue: "secrecy", comment: nil) }
+
+      /// en translation: modify nickname
+      ///
+      /// Key: 修改昵称
+      ///
+      /// Locales: en
+      var 修改昵称: RswiftResources.StringResource { .init(key: "修改昵称", tableName: "Localizable", source: source, developmentValue: "modify nickname", comment: nil) }
+
+      /// en translation: Modify group chat name
+      ///
+      /// Key: 修改群聊名称
+      ///
+      /// Locales: en
+      var 修改群聊名称: RswiftResources.StringResource { .init(key: "修改群聊名称", tableName: "Localizable", source: source, developmentValue: "Modify group chat name", comment: nil) }
+
+      /// en translation: After modifying the group chat name, other members will be notified in the group.
+      ///
+      /// Key: 修改群聊名称后，将在群内通知其他成员。
+      ///
+      /// Locales: en
+      var 修改群聊名称后将在群内通知其他成员: RswiftResources.StringResource { .init(key: "修改群聊名称后，将在群内通知其他成员。", tableName: "Localizable", source: source, developmentValue: "After modifying the group chat name, other members will be notified in the group.", comment: nil) }
+
+      /// en translation: Group entry application
+      ///
+      /// Key: 入群申请
+      ///
+      /// Locales: en
+      var 入群申请: RswiftResources.StringResource { .init(key: "入群申请", tableName: "Localizable", source: source, developmentValue: "Group entry application", comment: nil) }
+
+      /// en translation: About Wecyn
+      ///
+      /// Key: 关于Wecyn
+      ///
+      /// Locales: en
+      var 关于Wecyn: RswiftResources.StringResource { .init(key: "关于Wecyn", tableName: "Localizable", source: source, developmentValue: "About Wecyn", comment: nil) }
+
+      /// en translation: about us
+      ///
+      /// Key: 关于我们
+      ///
+      /// Locales: en
+      var 关于我们: RswiftResources.StringResource { .init(key: "关于我们", tableName: "Localizable", source: source, developmentValue: "about us", comment: nil) }
+
+      /// en translation: Interests
+      ///
+      /// Key: 兴趣爱好
+      ///
+      /// Locales: en
+      var 兴趣爱好: RswiftResources.StringResource { .init(key: "兴趣爱好", tableName: "Localizable", source: source, developmentValue: "Interests", comment: nil) }
+
+      /// en translation: minutes
+      ///
+      /// Key: 分钟
+      ///
+      /// Locales: en
+      var 分钟: RswiftResources.StringResource { .init(key: "分钟", tableName: "Localizable", source: source, developmentValue: "minutes", comment: nil) }
+
+      /// en translation: a moment ago
+      ///
+      /// Key: 刚刚
+      ///
+      /// Locales: en
+      var 刚刚: RswiftResources.StringResource { .init(key: "刚刚", tableName: "Localizable", source: source, developmentValue: "a moment ago", comment: nil) }
+
+      /// en translation: created the chat
+      ///
+      /// Key: 创建了群聊
+      ///
+      /// Locales: en
+      var 创建了群聊: RswiftResources.StringResource { .init(key: "创建了群聊", tableName: "Localizable", source: source, developmentValue: "created the chat", comment: nil) }
+
+      /// en translation: Create and join group chat
+      ///
+      /// Key: 创建和加入群聊
+      ///
+      /// Locales: en
+      var 创建和加入群聊: RswiftResources.StringResource { .init(key: "创建和加入群聊", tableName: "Localizable", source: source, developmentValue: "Create and join group chat", comment: nil) }
+
+      /// en translation: Create Work Group
+      ///
+      /// Key: 创建工作群
+      ///
+      /// Locales: en
+      var 创建工作群: RswiftResources.StringResource { .init(key: "创建工作群", tableName: "Localizable", source: source, developmentValue: "Create Work Group", comment: nil) }
+
+      /// en translation: Group chat created
+      ///
+      /// Key: 创建的群聊
+      ///
+      /// Locales: en
+      var 创建的群聊: RswiftResources.StringResource { .init(key: "创建的群聊", tableName: "Localizable", source: source, developmentValue: "Group chat created", comment: nil) }
+
+      /// en translation: Group created
+      ///
+      /// Key: 创建群组成功
+      ///
+      /// Locales: en
+      var 创建群组成功: RswiftResources.StringResource { .init(key: "创建群组成功", tableName: "Localizable", source: source, developmentValue: "Group created", comment: nil) }
+
+      /// en translation: Create a group chat
+      ///
+      /// Key: 创建群聊
+      ///
+      /// Locales: en
+      var 创建群聊: RswiftResources.StringResource { .init(key: "创建群聊", tableName: "Localizable", source: source, developmentValue: "Create a group chat", comment: nil) }
+
+      /// en translation: Create a group chat, full use of OpenIM
+      ///
+      /// Key: 创建群聊，全面使用OpenIM
+      ///
+      /// Locales: en
+      var 创建群聊全面使用OpenIM: RswiftResources.StringResource { .init(key: "创建群聊，全面使用OpenIM", tableName: "Localizable", source: source, developmentValue: "Create a group chat, full use of OpenIM", comment: nil) }
+
+      /// en translation: Delete
+      ///
+      /// Key: 删除
+      ///
+      /// Locales: en
+      var 删除: RswiftResources.StringResource { .init(key: "删除", tableName: "Localizable", source: source, developmentValue: "Delete", comment: nil) }
+
+      /// en translation: joined the chat
+      ///
+      /// Key: 加入群聊
+      ///
+      /// Locales: en
+      var 加入群聊: RswiftResources.StringResource { .init(key: "加入群聊", tableName: "Localizable", source: source, developmentValue: "joined the chat", comment: nil) }
+
+      /// en translation: joined this group
+      ///
+      /// Key: 加入该群聊
+      ///
+      /// Locales: en
+      var 加入该群聊: RswiftResources.StringResource { .init(key: "加入该群聊", tableName: "Localizable", source: source, developmentValue: "joined this group", comment: nil) }
+
+      /// en translation: Blocked
+      ///
+      /// Key: 加入黑名单
+      ///
+      /// Locales: en
+      var 加入黑名单: RswiftResources.StringResource { .init(key: "加入黑名单", tableName: "Localizable", source: source, developmentValue: "Blocked", comment: nil) }
+
+      /// en translation: Add Friends
+      ///
+      /// Key: 加好友
+      ///
+      /// Locales: en
+      var 加好友: RswiftResources.StringResource { .init(key: "加好友", tableName: "Localizable", source: source, developmentValue: "Add Friends", comment: nil) }
+
+      /// en translation: Request sent
+      ///
+      /// Key: 加好友请求已发送
+      ///
+      /// Locales: en
+      var 加好友请求已发送: RswiftResources.StringResource { .init(key: "加好友请求已发送", tableName: "Localizable", source: source, developmentValue: "Request sent", comment: nil) }
+
+      /// en translation: Request sent
+      ///
+      /// Key: 加群申请已发送
+      ///
+      /// Locales: en
+      var 加群申请已发送: RswiftResources.StringResource { .init(key: "加群申请已发送", tableName: "Localizable", source: source, developmentValue: "Request sent", comment: nil) }
+
+      /// en translation: ToDo
+      ///
+      /// Key: 去处理
+      ///
+      /// Locales: en
+      var 去处理: RswiftResources.StringResource { .init(key: "去处理", tableName: "Localizable", source: source, developmentValue: "ToDo", comment: nil) }
+
+      /// en translation: Please refer to the commercial version
+      ///
+      /// Key: 参考商业版本
+      ///
+      /// Locales: en
+      var 参考商业版本: RswiftResources.StringResource { .init(key: "参考商业版本", tableName: "Localizable", source: source, developmentValue: "Please refer to the commercial version", comment: nil) }
+
+      /// en translation: Publish
+      ///
+      /// Key: 发布
+      ///
+      /// Locales: en
+      var 发布: RswiftResources.StringResource { .init(key: "发布", tableName: "Localizable", source: source, developmentValue: "Publish", comment: nil) }
+
+      /// en translation: Send Msg
+      ///
+      /// Key: 发消息
+      ///
+      /// Locales: en
+      var 发消息: RswiftResources.StringResource { .init(key: "发消息", tableName: "Localizable", source: source, developmentValue: "Send Msg", comment: nil) }
+
+      /// en translation: Create a chat
+      ///
+      /// Key: 发起群聊
+      ///
+      /// Locales: en
+      var 发起群聊: RswiftResources.StringResource { .init(key: "发起群聊", tableName: "Localizable", source: source, developmentValue: "Create a chat", comment: nil) }
+
+      /// en translation: Send
+      ///
+      /// Key: 发送
+      ///
+      /// Locales: en
+      var 发送: RswiftResources.StringResource { .init(key: "发送", tableName: "Localizable", source: source, developmentValue: "Send", comment: nil) }
+
+      /// en translation: Cancel
+      ///
+      /// Key: 取消
+      ///
+      /// Locales: en
+      var 取消: RswiftResources.StringResource { .init(key: "取消", tableName: "Localizable", source: source, developmentValue: "Cancel", comment: nil) }
+
+      /// en translation: UnPin
+      ///
+      /// Key: 取消置顶
+      ///
+      /// Locales: en
+      var 取消置顶: RswiftResources.StringResource { .init(key: "取消置顶", tableName: "Localizable", source: source, developmentValue: "UnPin", comment: nil) }
+
+      /// en translation: Only group administer can modify
+      ///
+      /// Key: 只有群主可以修改
+      ///
+      /// Locales: en
+      var 只有群主可以修改: RswiftResources.StringResource { .init(key: "只有群主可以修改", tableName: "Localizable", source: source, developmentValue: "Only group administer can modify", comment: nil) }
+
+      /// en translation: Agree
+      ///
+      /// Key: 同意
+      ///
+      /// Locales: en
+      var 同意: RswiftResources.StringResource { .init(key: "同意", tableName: "Localizable", source: source, developmentValue: "Agree", comment: nil) }
+
+      /// en translation: Reply
+      ///
+      /// Key: 回复
+      ///
+      /// Locales: en
+      var 回复: RswiftResources.StringResource { .init(key: "回复", tableName: "Localizable", source: source, developmentValue: "Reply", comment: nil) }
+
+      /// en translation: Remark
+      ///
+      /// Key: 备注
+      ///
+      /// Locales: en
+      var 备注: RswiftResources.StringResource { .init(key: "备注", tableName: "Localizable", source: source, developmentValue: "Remark", comment: nil) }
+
+      /// en translation: Copy
+      ///
+      /// Key: 复制
+      ///
+      /// Locales: en
+      var 复制: RswiftResources.StringResource { .init(key: "复制", tableName: "Localizable", source: source, developmentValue: "Copy", comment: nil) }
+
+      /// en translation: Multi-select
+      ///
+      /// Key: 多选
+      ///
+      /// Locales: en
+      var 多选: RswiftResources.StringResource { .init(key: "多选", tableName: "Localizable", source: source, developmentValue: "Multi-select", comment: nil) }
+
+      /// en translation: day
+      ///
+      /// Key: 天
+      ///
+      /// Locales: en
+      var 天: RswiftResources.StringResource { .init(key: "天", tableName: "Localizable", source: source, developmentValue: "day", comment: nil) }
+
+      /// en translation: avatar
+      ///
+      /// Key: 头像
+      ///
+      /// Locales: en
+      var 头像: RswiftResources.StringResource { .init(key: "头像", tableName: "Localizable", source: source, developmentValue: "avatar", comment: nil) }
+
+      /// en translation: Avatar uploaded
+      ///
+      /// Key: 头像上传成功
+      ///
+      /// Locales: en
+      var 头像上传成功: RswiftResources.StringResource { .init(key: "头像上传成功", tableName: "Localizable", source: source, developmentValue: "Avatar uploaded", comment: nil) }
+
+      /// en translation: female
+      ///
+      /// Key: 女
+      ///
+      /// Locales: en
+      var 女: RswiftResources.StringResource { .init(key: "女", tableName: "Localizable", source: source, developmentValue: "female", comment: nil) }
+
+      /// en translation: The other party has turned on friend verification, and you are not his (her) friend yet, please send a friend verification request first, and the other party can only chat after the verification is passed.
+      ///
+      /// Key: 对方开启了朋友验证，你还不是他（她）朋友，请先发送朋友验证请求，对方验证通过后才能聊天。
+      ///
+      /// Locales: en
+      var 对方开启了朋友验证你还不是他她朋友请先发送朋友验证请求对方验证通过后才能聊天: RswiftResources.StringResource { .init(key: "对方开启了朋友验证，你还不是他（她）朋友，请先发送朋友验证请求，对方验证通过后才能聊天。", tableName: "Localizable", source: source, developmentValue: "The other party has turned on friend verification, and you are not his (her) friend yet, please send a friend verification request first, and the other party can only chat after the verification is passed.", comment: nil) }
+
+      /// en translation: hours
+      ///
+      /// Key: 小时
+      ///
+      /// Locales: en
+      var 小时: RswiftResources.StringResource { .init(key: "小时", tableName: "Localizable", source: source, developmentValue: "hours", comment: nil) }
+
+      /// en translation: Not receive message any more
+      ///
+      /// Key: 屏蔽群消息
+      ///
+      /// Locales: en
+      var 屏蔽群消息: RswiftResources.StringResource { .init(key: "屏蔽群消息", tableName: "Localizable", source: source, developmentValue: "Not receive message any more", comment: nil) }
+
+      /// en translation: Experience
+      ///
+      /// Key: 工作经历
+      ///
+      /// Locales: en
+      var 工作经历: RswiftResources.StringResource { .init(key: "工作经历", tableName: "Localizable", source: source, developmentValue: "Experience", comment: nil) }
+
+      /// en translation: Work Group
+      ///
+      /// Key: 工作群
+      ///
+      /// Locales: en
+      var 工作群: RswiftResources.StringResource { .init(key: "工作群", tableName: "Localizable", source: source, developmentValue: "Work Group", comment: nil) }
+
+      /// en translation: joined the group
+      ///
+      /// Key: 已加入群聊
+      ///
+      /// Locales: en
+      var 已加入群聊: RswiftResources.StringResource { .init(key: "已加入群聊", tableName: "Localizable", source: source, developmentValue: "joined the group", comment: nil) }
+
+      /// en translation: Agreed
+      ///
+      /// Key: 已同意
+      ///
+      /// Locales: en
+      var 已同意: RswiftResources.StringResource { .init(key: "已同意", tableName: "Localizable", source: source, developmentValue: "Agreed", comment: nil) }
+
+      /// en translation: Rejected
+      ///
+      /// Key: 已拒绝
+      ///
+      /// Locales: en
+      var 已拒绝: RswiftResources.StringResource { .init(key: "已拒绝", tableName: "Localizable", source: source, developmentValue: "Rejected", comment: nil) }
+
+      /// en translation: has been 
+      ///
+      /// Key: 已被
+      ///
+      /// Locales: en
+      var 已被: RswiftResources.StringResource { .init(key: "已被", tableName: "Localizable", source: source, developmentValue: "has been ", comment: nil) }
+
+      /// en translation: Readed
+      ///
+      /// Key: 已读
+      ///
+      /// Locales: en
+      var 已读: RswiftResources.StringResource { .init(key: "已读", tableName: "Localizable", source: source, developmentValue: "Readed", comment: nil) }
+
+      /// en translation: have already quit the group
+      ///
+      /// Key: 已退出群聊
+      ///
+      /// Locales: en
+      var 已退出群聊: RswiftResources.StringResource { .init(key: "已退出群聊", tableName: "Localizable", source: source, developmentValue: "have already quit the group", comment: nil) }
+
+      /// en translation: Selected:
+      ///
+      /// Key: 已选择：
+      ///
+      /// Locales: en
+      var 已选择: RswiftResources.StringResource { .init(key: "已选择：", tableName: "Localizable", source: source, developmentValue: "Selected:", comment: nil) }
+
+      /// en translation: Top contacts
+      ///
+      /// Key: 常用联系人
+      ///
+      /// Locales: en
+      var 常用联系人: RswiftResources.StringResource { .init(key: "常用联系人", tableName: "Localizable", source: source, developmentValue: "Top contacts", comment: nil) }
+
+      /// en translation: gender
+      ///
+      /// Key: 性别
+      ///
+      /// Locales: en
+      var 性别: RswiftResources.StringResource { .init(key: "性别", tableName: "Localizable", source: source, developmentValue: "gender", comment: nil) }
+
+      /// en translation: Are you sure you to log out?
+      ///
+      /// Key: 您确定要退出登录吗？
+      ///
+      /// Locales: en
+      var 您确定要退出登录吗: RswiftResources.StringResource { .init(key: "您确定要退出登录吗？", tableName: "Localizable", source: source, developmentValue: "Are you sure you to log out?", comment: nil) }
+
+      /// en translation: Created by myself
+      ///
+      /// Key: 我创建的
+      ///
+      /// Locales: en
+      var 我创建的: RswiftResources.StringResource { .init(key: "我创建的", tableName: "Localizable", source: source, developmentValue: "Created by myself", comment: nil) }
+
+      /// en translation: Joined
+      ///
+      /// Key: 我加入的
+      ///
+      /// Locales: en
+      var 我加入的: RswiftResources.StringResource { .init(key: "我加入的", tableName: "Localizable", source: source, developmentValue: "Joined", comment: nil) }
+
+      /// en translation: my nickname in the chat
+      ///
+      /// Key: 我在群里的昵称
+      ///
+      /// Locales: en
+      var 我在群里的昵称: RswiftResources.StringResource { .init(key: "我在群里的昵称", tableName: "Localizable", source: source, developmentValue: "my nickname in the chat", comment: nil) }
+
+      /// en translation: my info
+      ///
+      /// Key: 我的信息
+      ///
+      /// Locales: en
+      var 我的信息: RswiftResources.StringResource { .init(key: "我的信息", tableName: "Localizable", source: source, developmentValue: "my info", comment: nil) }
+
+      /// en translation: My friends
+      ///
+      /// Key: 我的好友
+      ///
+      /// Locales: en
+      var 我的好友: RswiftResources.StringResource { .init(key: "我的好友", tableName: "Localizable", source: source, developmentValue: "My friends", comment: nil) }
+
+      /// en translation: My Groups
+      ///
+      /// Key: 我的群组
+      ///
+      /// Locales: en
+      var 我的群组: RswiftResources.StringResource { .init(key: "我的群组", tableName: "Localizable", source: source, developmentValue: "My Groups", comment: nil) }
+
+      /// en translation: I passed your friend verification request and now we can start chatting
+      ///
+      /// Key: 我通过了您的好友验证请求，现在我们可以开始聊天了
+      ///
+      /// Locales: en
+      var 我通过了您的好友验证请求现在我们可以开始聊天了: RswiftResources.StringResource { .init(key: "我通过了您的好友验证请求，现在我们可以开始聊天了", tableName: "Localizable", source: source, developmentValue: "I passed your friend verification request and now we can start chatting", comment: nil) }
+
+      /// en translation: phone number
+      ///
+      /// Key: 手机号码
+      ///
+      /// Locales: en
+      var 手机号码: RswiftResources.StringResource { .init(key: "手机号码", tableName: "Localizable", source: source, developmentValue: "phone number", comment: nil) }
+
+      /// en translation: phone on line
+      ///
+      /// Key: 手机在线
+      ///
+      /// Locales: en
+      var 手机在线: RswiftResources.StringResource { .init(key: "手机在线", tableName: "Localizable", source: source, developmentValue: "phone on line", comment: nil) }
+
+      /// en translation: say hello
+      ///
+      /// Key: 打招呼
+      ///
+      /// Locales: en
+      var 打招呼: RswiftResources.StringResource { .init(key: "打招呼", tableName: "Localizable", source: source, developmentValue: "say hello", comment: nil) }
+
+      /// en translation: Scan
+      ///
+      /// Key: 扫一扫
+      ///
+      /// Locales: en
+      var 扫一扫: RswiftResources.StringResource { .init(key: "扫一扫", tableName: "Localizable", source: source, developmentValue: "Scan", comment: nil) }
+
+      /// en translation: scan to join in
+      ///
+      /// Key: 扫一扫群二维码，立刻加入该群。
+      ///
+      /// Locales: en
+      var 扫一扫群二维码立刻加入该群: RswiftResources.StringResource { .init(key: "扫一扫群二维码，立刻加入该群。", tableName: "Localizable", source: source, developmentValue: "scan to join in", comment: nil) }
+
+      /// en translation: Scan QR code business card
+      ///
+      /// Key: 扫描二维码名片
+      ///
+      /// Locales: en
+      var 扫描二维码名片: RswiftResources.StringResource { .init(key: "扫描二维码名片", tableName: "Localizable", source: source, developmentValue: "Scan QR code business card", comment: nil) }
+
+      /// en translation: Recommend
+      ///
+      /// Key: 把他推荐给朋友
+      ///
+      /// Locales: en
+      var 把他推荐给朋友: RswiftResources.StringResource { .init(key: "把他推荐给朋友", tableName: "Localizable", source: source, developmentValue: "Recommend", comment: nil) }
+
+      /// en translation: complaint
+      ///
+      /// Key: 投诉
+      ///
+      /// Locales: en
+      var 投诉: RswiftResources.StringResource { .init(key: "投诉", tableName: "Localizable", source: source, developmentValue: "complaint", comment: nil) }
+
+      /// en translation: Camera
+      ///
+      /// Key: 拍摄
+      ///
+      /// Locales: en
+      var 拍摄: RswiftResources.StringResource { .init(key: "拍摄", tableName: "Localizable", source: source, developmentValue: "Camera", comment: nil) }
+
+      /// en translation: Reject
+      ///
+      /// Key: 拒绝
+      ///
+      /// Locales: en
+      var 拒绝: RswiftResources.StringResource { .init(key: "拒绝", tableName: "Localizable", source: source, developmentValue: "Reject", comment: nil) }
+
+      /// en translation: Press to speak
+      ///
+      /// Key: 按住开始说话
+      ///
+      /// Locales: en
+      var 按住开始说话: RswiftResources.StringResource { .init(key: "按住开始说话", tableName: "Localizable", source: source, developmentValue: "Press to speak", comment: nil) }
+
+      /// en translation: Hold to talk
+      ///
+      /// Key: 按住说话
+      ///
+      /// Locales: en
+      var 按住说话: RswiftResources.StringResource { .init(key: "按住说话", tableName: "Localizable", source: source, developmentValue: "Hold to talk", comment: nil) }
+
+      /// en translation: accept
+      ///
+      /// Key: 接受
+      ///
+      /// Locales: en
+      var 接受: RswiftResources.StringResource { .init(key: "接受", tableName: "Localizable", source: source, developmentValue: "accept", comment: nil) }
+
+      /// en translation: Receive message but not notify
+      ///
+      /// Key: 接收消息但不提示
+      ///
+      /// Locales: en
+      var 接收消息但不提示: RswiftResources.StringResource { .init(key: "接收消息但不提示", tableName: "Localizable", source: source, developmentValue: "Receive message but not notify", comment: nil) }
+
+      /// en translation: Alert
+      ///
+      /// Key: 提醒
+      ///
+      /// Locales: en
+      var 提醒: RswiftResources.StringResource { .init(key: "提醒", tableName: "Localizable", source: source, developmentValue: "Alert", comment: nil) }
+
+      /// en translation: Search
+      ///
+      /// Key: 搜索
+      ///
+      /// Locales: en
+      var 搜索: RswiftResources.StringResource { .init(key: "搜索", tableName: "Localizable", source: source, developmentValue: "Search", comment: nil) }
+
+      /// en translation: Search friends
+      ///
+      /// Key: 搜索好友
+      ///
+      /// Locales: en
+      var 搜索好友: RswiftResources.StringResource { .init(key: "搜索好友", tableName: "Localizable", source: source, developmentValue: "Search friends", comment: nil) }
+
+      /// en translation: search members
+      ///
+      /// Key: 搜索成员
+      ///
+      /// Locales: en
+      var 搜索成员: RswiftResources.StringResource { .init(key: "搜索成员", tableName: "Localizable", source: source, developmentValue: "search members", comment: nil) }
+
+      /// en translation: Search for specified content
+      ///
+      /// Key: 搜索指定内容
+      ///
+      /// Locales: en
+      var 搜索指定内容: RswiftResources.StringResource { .init(key: "搜索指定内容", tableName: "Localizable", source: source, developmentValue: "Search for specified content", comment: nil) }
+
+      /// en translation: Revoke
+      ///
+      /// Key: 撤回
+      ///
+      /// Locales: en
+      var 撤回: RswiftResources.StringResource { .init(key: "撤回", tableName: "Localizable", source: source, developmentValue: "Revoke", comment: nil) }
+
+      /// en translation: revoked a message
+      ///
+      /// Key: 撤回了一条消息
+      ///
+      /// Locales: en
+      var 撤回了一条消息: RswiftResources.StringResource { .init(key: "撤回了一条消息", tableName: "Localizable", source: source, developmentValue: "revoked a message", comment: nil) }
+
+      /// en translation: Education
+      ///
+      /// Key: 教育经历
+      ///
+      /// Locales: en
+      var 教育经历: RswiftResources.StringResource { .init(key: "教育经历", tableName: "Localizable", source: source, developmentValue: "Education", comment: nil) }
+
+      /// en translation: File Transfer Assistant
+      ///
+      /// Key: 文件传输助手
+      ///
+      /// Locales: en
+      var 文件传输助手: RswiftResources.StringResource { .init(key: "文件传输助手", tableName: "Localizable", source: source, developmentValue: "File Transfer Assistant", comment: nil) }
+
+      /// en translation: new notification
+      ///
+      /// Key: 新消息通知
+      ///
+      /// Locales: en
+      var 新消息通知: RswiftResources.StringResource { .init(key: "新消息通知", tableName: "Localizable", source: source, developmentValue: "new notification", comment: nil) }
+
+      /// en translation: New friends
+      ///
+      /// Key: 新的好友
+      ///
+      /// Locales: en
+      var 新的好友: RswiftResources.StringResource { .init(key: "新的好友", tableName: "Localizable", source: source, developmentValue: "New friends", comment: nil) }
+
+      /// en translation: New friend request
+      ///
+      /// Key: 新的好友请求
+      ///
+      /// Locales: en
+      var 新的好友请求: RswiftResources.StringResource { .init(key: "新的好友请求", tableName: "Localizable", source: source, developmentValue: "New friend request", comment: nil) }
+
+      /// en translation: Can not find the 
+      ///
+      /// Key: 无法找到该
+      ///
+      /// Locales: en
+      var 无法找到该: RswiftResources.StringResource { .init(key: "无法找到该", tableName: "Localizable", source: source, developmentValue: "Can not find the ", comment: nil) }
+
+      /// en translation: Calendar
+      ///
+      /// Key: 日历
+      ///
+      /// Locales: en
+      var 日历: RswiftResources.StringResource { .init(key: "日历", tableName: "Localizable", source: source, developmentValue: "Calendar", comment: nil) }
+
+      /// en translation: TimeZone
+      ///
+      /// Key: 时区
+      ///
+      /// Locales: en
+      var 时区: RswiftResources.StringResource { .init(key: "时区", tableName: "Localizable", source: source, developmentValue: "TimeZone", comment: nil) }
+
+      /// en translation: Monday
+      ///
+      /// Key: 星期一
+      ///
+      /// Locales: en
+      var 星期一: RswiftResources.StringResource { .init(key: "星期一", tableName: "Localizable", source: source, developmentValue: "Monday", comment: nil) }
+
+      /// en translation: Wednesday
+      ///
+      /// Key: 星期三
+      ///
+      /// Locales: en
+      var 星期三: RswiftResources.StringResource { .init(key: "星期三", tableName: "Localizable", source: source, developmentValue: "Wednesday", comment: nil) }
+
+      /// en translation: Tuesday
+      ///
+      /// Key: 星期二
+      ///
+      /// Locales: en
+      var 星期二: RswiftResources.StringResource { .init(key: "星期二", tableName: "Localizable", source: source, developmentValue: "Tuesday", comment: nil) }
+
+      /// en translation: Friday
+      ///
+      /// Key: 星期五
+      ///
+      /// Locales: en
+      var 星期五: RswiftResources.StringResource { .init(key: "星期五", tableName: "Localizable", source: source, developmentValue: "Friday", comment: nil) }
+
+      /// en translation: Saturday
+      ///
+      /// Key: 星期六
+      ///
+      /// Locales: en
+      var 星期六: RswiftResources.StringResource { .init(key: "星期六", tableName: "Localizable", source: source, developmentValue: "Saturday", comment: nil) }
+
+      /// en translation: Thursday
+      ///
+      /// Key: 星期四
+      ///
+      /// Locales: en
+      var 星期四: RswiftResources.StringResource { .init(key: "星期四", tableName: "Localizable", source: source, developmentValue: "Thursday", comment: nil) }
+
+      /// en translation: Sunday
+      ///
+      /// Key: 星期日
+      ///
+      /// Locales: en
+      var 星期日: RswiftResources.StringResource { .init(key: "星期日", tableName: "Localizable", source: source, developmentValue: "Sunday", comment: nil) }
+
+      /// en translation: Yesterday
+      ///
+      /// Key: 昨天
+      ///
+      /// Locales: en
+      var 昨天: RswiftResources.StringResource { .init(key: "昨天", tableName: "Localizable", source: source, developmentValue: "Yesterday", comment: nil) }
+
+      /// en translation: nickname
+      ///
+      /// Key: 昵称
+      ///
+      /// Locales: en
+      var 昵称: RswiftResources.StringResource { .init(key: "昵称", tableName: "Localizable", source: source, developmentValue: "nickname", comment: nil) }
+
+      /// en translation: After the nickname is modified, it will only be displayed in this group, and all members of the group can see it
+      ///
+      /// Key: 昵称修改后，只会在此群内显示，群内成员都可以看见
+      ///
+      /// Locales: en
+      var 昵称修改后只会在此群内显示群内成员都可以看见: RswiftResources.StringResource { .init(key: "昵称修改后，只会在此群内显示，群内成员都可以看见", tableName: "Localizable", source: source, developmentValue: "After the nickname is modified, it will only be displayed in this group, and all members of the group can see it", comment: nil) }
+
+      /// en translation: Normal Group
+      ///
+      /// Key: 普通群
+      ///
+      /// Locales: en
+      var 普通群: RswiftResources.StringResource { .init(key: "普通群", tableName: "Localizable", source: source, developmentValue: "Normal Group", comment: nil) }
+
+      /// en translation: More Info
+      ///
+      /// Key: 更多资料
+      ///
+      /// Locales: en
+      var 更多资料: RswiftResources.StringResource { .init(key: "更多资料", tableName: "Localizable", source: source, developmentValue: "More Info", comment: nil) }
+
+      /// en translation: updated the group info
+      ///
+      /// Key: 更新了群信息
+      ///
+      /// Locales: en
+      var 更新了群信息: RswiftResources.StringResource { .init(key: "更新了群信息", tableName: "Localizable", source: source, developmentValue: "updated the group info", comment: nil) }
+
+      /// en translation: Activity
+      ///
+      /// Key: 最近发布
+      ///
+      /// Locales: en
+      var 最近发布: RswiftResources.StringResource { .init(key: "最近发布", tableName: "Localizable", source: source, developmentValue: "Activity", comment: nil) }
+
+      /// en translation: Unread
+      ///
+      /// Key: 未读
+      ///
+      /// Locales: en
+      var 未读: RswiftResources.StringResource { .init(key: "未读", tableName: "Localizable", source: source, developmentValue: "Unread", comment: nil) }
+
+      /// en translation: this week
+      ///
+      /// Key: 本周
+      ///
+      /// Locales: en
+      var 本周: RswiftResources.StringResource { .init(key: "本周", tableName: "Localizable", source: source, developmentValue: "this week", comment: nil) }
+
+      /// en translation: this month
+      ///
+      /// Key: 本月
+      ///
+      /// Locales: en
+      var 本月: RswiftResources.StringResource { .init(key: "本月", tableName: "Localizable", source: source, developmentValue: "this month", comment: nil) }
+
+      /// en translation: Join source:
+      ///
+      /// Key: 来源：
+      ///
+      /// Locales: en
+      var 来源: RswiftResources.StringResource { .init(key: "来源：", tableName: "Localizable", source: source, developmentValue: "Join source:", comment: nil) }
+
+      /// en translation: Release to cancel
+      ///
+      /// Key: 松开取消
+      ///
+      /// Locales: en
+      var 松开取消: RswiftResources.StringResource { .init(key: "松开取消", tableName: "Localizable", source: source, developmentValue: "Release to cancel", comment: nil) }
+
+      /// en translation: Search Chat History
+      ///
+      /// Key: 查找聊天内容
+      ///
+      /// Locales: en
+      var 查找聊天内容: RswiftResources.StringResource { .init(key: "查找聊天内容", tableName: "Localizable", source: source, developmentValue: "Search Chat History", comment: nil) }
+
+      /// en translation: find record of chat
+      ///
+      /// Key: 查找聊天记录
+      ///
+      /// Locales: en
+      var 查找聊天记录: RswiftResources.StringResource { .init(key: "查找聊天记录", tableName: "Localizable", source: source, developmentValue: "find record of chat", comment: nil) }
+
+      /// en translation: view chat records
+      ///
+      /// Key: 查看聊天记录
+      ///
+      /// Locales: en
+      var 查看聊天记录: RswiftResources.StringResource { .init(key: "查看聊天记录", tableName: "Localizable", source: source, developmentValue: "view chat records", comment: nil) }
+
+      /// en translation: Mark as read
+      ///
+      /// Key: 标为已读
+      ///
+      /// Locales: en
+      var 标为已读: RswiftResources.StringResource { .init(key: "标为已读", tableName: "Localizable", source: source, developmentValue: "Mark as read", comment: nil) }
+
+      /// en translation: Mark as unread
+      ///
+      /// Key: 标为未读
+      ///
+      /// Locales: en
+      var 标为未读: RswiftResources.StringResource { .init(key: "标为未读", tableName: "Localizable", source: source, developmentValue: "Mark as unread", comment: nil) }
+
+      /// en translation: Speaking
+      ///
+      /// Key: 正在说话
+      ///
+      /// Locales: en
+      var 正在说话: RswiftResources.StringResource { .init(key: "正在说话", tableName: "Localizable", source: source, developmentValue: "Speaking", comment: nil) }
+
+      /// en translation: Mute Notifications
+      ///
+      /// Key: 消息免打扰
+      ///
+      /// Locales: en
+      var 消息免打扰: RswiftResources.StringResource { .init(key: "消息免打扰", tableName: "Localizable", source: source, developmentValue: "Mute Notifications", comment: nil) }
+
+      /// en translation: The message was sent, but was rejected by the other party.
+      ///
+      /// Key: 消息已发出，但被对方拒收了
+      ///
+      /// Locales: en
+      var 消息已发出但被对方拒收了: RswiftResources.StringResource { .init(key: "消息已发出，但被对方拒收了", tableName: "Localizable", source: source, developmentValue: "The message was sent, but was rejected by the other party.", comment: nil) }
+
+      /// en translation: Add
+      ///
+      /// Key: 添加
+      ///
+      /// Locales: en
+      var 添加: RswiftResources.StringResource { .init(key: "添加", tableName: "Localizable", source: source, developmentValue: "Add", comment: nil) }
+
+      /// en translation: Add to address book
+      ///
+      /// Key: 添加到通讯录
+      ///
+      /// Locales: en
+      var 添加到通讯录: RswiftResources.StringResource { .init(key: "添加到通讯录", tableName: "Localizable", source: source, developmentValue: "Add to address book", comment: nil) }
+
+      /// en translation: Add Friends
+      ///
+      /// Key: 添加好友
+      ///
+      /// Locales: en
+      var 添加好友: RswiftResources.StringResource { .init(key: "添加好友", tableName: "Localizable", source: source, developmentValue: "Add Friends", comment: nil) }
+
+      /// en translation: Friend request sent.
+      ///
+      /// Key: 添加好友请求已发送
+      ///
+      /// Locales: en
+      var 添加好友请求已发送: RswiftResources.StringResource { .init(key: "添加好友请求已发送", tableName: "Localizable", source: source, developmentValue: "Friend request sent.", comment: nil) }
+
+      /// en translation: add_new_section
+      ///
+      /// Key: 添加新分区
+      ///
+      /// Locales: en
+      var 添加新分区: RswiftResources.StringResource { .init(key: "添加新分区", tableName: "Localizable", source: source, developmentValue: "add_new_section", comment: nil) }
+
+      /// en translation: Add group chat
+      ///
+      /// Key: 添加群聊
+      ///
+      /// Locales: en
+      var 添加群聊: RswiftResources.StringResource { .init(key: "添加群聊", tableName: "Localizable", source: source, developmentValue: "Add group chat", comment: nil) }
+
+      /// en translation: clear success
+      ///
+      /// Key: 清空成功
+      ///
+      /// Locales: en
+      var 清空成功: RswiftResources.StringResource { .init(key: "清空成功", tableName: "Localizable", source: source, developmentValue: "clear success", comment: nil) }
+
+      /// en translation: Clear Chat History
+      ///
+      /// Key: 清空聊天记录
+      ///
+      /// Locales: en
+      var 清空聊天记录: RswiftResources.StringResource { .init(key: "清空聊天记录", tableName: "Localizable", source: source, developmentValue: "Clear Chat History", comment: nil) }
+
+      /// en translation: Version
+      ///
+      /// Key: 版本号
+      ///
+      /// Locales: en
+      var 版本号: RswiftResources.StringResource { .init(key: "版本号", tableName: "Localizable", source: source, developmentValue: "Version", comment: nil) }
+
+      /// en translation: birthday
+      ///
+      /// Key: 生日
+      ///
+      /// Locales: en
+      var 生日: RswiftResources.StringResource { .init(key: "生日", tableName: "Localizable", source: source, developmentValue: "birthday", comment: nil) }
+
+      /// en translation: User
+      ///
+      /// Key: 用户
+      ///
+      /// Locales: en
+      var 用户: RswiftResources.StringResource { .init(key: "用户", tableName: "Localizable", source: source, developmentValue: "User", comment: nil) }
+
+      /// en translation: Request to:
+      ///
+      /// Key: 申请加入
+      ///
+      /// Locales: en
+      var 申请加入: RswiftResources.StringResource { .init(key: "申请加入", tableName: "Localizable", source: source, developmentValue: "Request to:", comment: nil) }
+
+      /// en translation: Join in
+      ///
+      /// Key: 申请加入群聊
+      ///
+      /// Locales: en
+      var 申请加入群聊: RswiftResources.StringResource { .init(key: "申请加入群聊", tableName: "Localizable", source: source, developmentValue: "Join in", comment: nil) }
+
+      /// en translation: Descreption:
+      ///
+      /// Key: 申请描述：
+      ///
+      /// Locales: en
+      var 申请描述: RswiftResources.StringResource { .init(key: "申请描述：", tableName: "Localizable", source: source, developmentValue: "Descreption:", comment: nil) }
+
+      /// en translation: Apply to add friends
+      ///
+      /// Key: 申请添加朋友
+      ///
+      /// Locales: en
+      var 申请添加朋友: RswiftResources.StringResource { .init(key: "申请添加朋友", tableName: "Localizable", source: source, developmentValue: "Apply to add friends", comment: nil) }
+
+      /// en translation: Reasons for application
+      ///
+      /// Key: 申请理由
+      ///
+      /// Locales: en
+      var 申请理由: RswiftResources.StringResource { .init(key: "申请理由", tableName: "Localizable", source: source, developmentValue: "Reasons for application", comment: nil) }
+
+      /// en translation: male
+      ///
+      /// Key: 男
+      ///
+      /// Locales: en
+      var 男: RswiftResources.StringResource { .init(key: "男", tableName: "Localizable", source: source, developmentValue: "male", comment: nil) }
+
+      /// en translation: Logout
+      ///
+      /// Key: 登出
+      ///
+      /// Locales: en
+      var 登出: RswiftResources.StringResource { .init(key: "登出", tableName: "Localizable", source: source, developmentValue: "Logout", comment: nil) }
+
+      /// en translation: Album
+      ///
+      /// Key: 相册
+      ///
+      /// Locales: en
+      var 相册: RswiftResources.StringResource { .init(key: "相册", tableName: "Localizable", source: source, developmentValue: "Album", comment: nil) }
+
+      /// en translation: Confirm
+      ///
+      /// Key: 确定
+      ///
+      /// Locales: en
+      var 确定: RswiftResources.StringResource { .init(key: "确定", tableName: "Localizable", source: source, developmentValue: "Confirm", comment: nil) }
+
+      /// en translation: Confirm to delete this message?
+      ///
+      /// Key: 确定删除该条消息？
+      ///
+      /// Locales: en
+      var 确定删除该条消息: RswiftResources.StringResource { .init(key: "确定删除该条消息？", tableName: "Localizable", source: source, developmentValue: "Confirm to delete this message?", comment: nil) }
+
+      /// en translation: Confirm to delete this message?
+      ///
+      /// Key: 确定撤回该条消息？
+      ///
+      /// Locales: en
+      var 确定撤回该条消息: RswiftResources.StringResource { .init(key: "确定撤回该条消息？", tableName: "Localizable", source: source, developmentValue: "Confirm to delete this message?", comment: nil) }
+
+      /// en translation: confirm
+      ///
+      /// Key: 确认
+      ///
+      /// Locales: en
+      var 确认: RswiftResources.StringResource { .init(key: "确认", tableName: "Localizable", source: source, developmentValue: "confirm", comment: nil) }
+
+      /// en translation: Are you sure to clear all chat records?
+      ///
+      /// Key: 确认清空所有聊天记录吗？
+      ///
+      /// Locales: en
+      var 确认清空所有聊天记录吗: RswiftResources.StringResource { .init(key: "确认清空所有聊天记录吗？", tableName: "Localizable", source: source, developmentValue: "Are you sure to clear all chat records?", comment: nil) }
+
+      /// en translation: s
+      ///
+      /// Key: 秒
+      ///
+      /// Locales: en
+      var 秒: RswiftResources.StringResource { .init(key: "秒", tableName: "Localizable", source: source, developmentValue: "s", comment: nil) }
+
+      /// en translation: delete
+      ///
+      /// Key: 移除
+      ///
+      /// Locales: en
+      var 移除: RswiftResources.StringResource { .init(key: "移除", tableName: "Localizable", source: source, developmentValue: "delete", comment: nil) }
+
+      /// en translation: Simplified Chinese
+      ///
+      /// Key: 简体中文
+      ///
+      /// Locales: en
+      var 简体中文: RswiftResources.StringResource { .init(key: "简体中文", tableName: "Localizable", source: source, developmentValue: "Simplified Chinese", comment: nil) }
+
+      /// en translation: All
+      ///
+      /// Key: 综合
+      ///
+      /// Locales: en
+      var 综合: RswiftResources.StringResource { .init(key: "综合", tableName: "Localizable", source: source, developmentValue: "All", comment: nil) }
+
+      /// en translation: edit
+      ///
+      /// Key: 编辑
+      ///
+      /// Locales: en
+      var 编辑: RswiftResources.StringResource { .init(key: "编辑", tableName: "Localizable", source: source, developmentValue: "edit", comment: nil) }
+
+      /// en translation: Pin
+      ///
+      /// Key: 置顶
+      ///
+      /// Locales: en
+      var 置顶: RswiftResources.StringResource { .init(key: "置顶", tableName: "Localizable", source: source, developmentValue: "Pin", comment: nil) }
+
+      /// en translation: Sticky on Top
+      ///
+      /// Key: 置顶聊天
+      ///
+      /// Locales: en
+      var 置顶聊天: RswiftResources.StringResource { .init(key: "置顶聊天", tableName: "Localizable", source: source, developmentValue: "Sticky on Top", comment: nil) }
+
+      /// en translation: top contact
+      ///
+      /// Key: 置顶联系人
+      ///
+      /// Locales: en
+      var 置顶联系人: RswiftResources.StringResource { .init(key: "置顶联系人", tableName: "Localizable", source: source, developmentValue: "top contact", comment: nil) }
+
+      /// en translation: group QR code
+      ///
+      /// Key: 群二维码
+      ///
+      /// Locales: en
+      var 群二维码: RswiftResources.StringResource { .init(key: "群二维码", tableName: "Localizable", source: source, developmentValue: "group QR code", comment: nil) }
+
+      /// en translation: Group announcement
+      ///
+      /// Key: 群公告
+      ///
+      /// Locales: en
+      var 群公告: RswiftResources.StringResource { .init(key: "群公告", tableName: "Localizable", source: source, developmentValue: "Group announcement", comment: nil) }
+
+      /// en translation: members
+      ///
+      /// Key: 群成员
+      ///
+      /// Locales: en
+      var 群成员: RswiftResources.StringResource { .init(key: "群成员", tableName: "Localizable", source: source, developmentValue: "members", comment: nil) }
+
+      /// en translation: Group Type
+      ///
+      /// Key: 群类型
+      ///
+      /// Locales: en
+      var 群类型: RswiftResources.StringResource { .init(key: "群类型", tableName: "Localizable", source: source, developmentValue: "Group Type", comment: nil) }
+
+      /// en translation: Groups
+      ///
+      /// Key: 群组
+      ///
+      /// Locales: en
+      var 群组: RswiftResources.StringResource { .init(key: "群组", tableName: "Localizable", source: source, developmentValue: "Groups", comment: nil) }
+
+      /// en translation: group chat ID number
+      ///
+      /// Key: 群聊ID号
+      ///
+      /// Locales: en
+      var 群聊ID号: RswiftResources.StringResource { .init(key: "群聊ID号", tableName: "Localizable", source: source, developmentValue: "group chat ID number", comment: nil) }
+
+      /// en translation: group id copied
+      ///
+      /// Key: 群聊ID已复制
+      ///
+      /// Locales: en
+      var 群聊ID已复制: RswiftResources.StringResource { .init(key: "群聊ID已复制", tableName: "Localizable", source: source, developmentValue: "group id copied", comment: nil) }
+
+      /// en translation: chat name
+      ///
+      /// Key: 群聊名称
+      ///
+      /// Locales: en
+      var 群聊名称: RswiftResources.StringResource { .init(key: "群聊名称", tableName: "Localizable", source: source, developmentValue: "chat name", comment: nil) }
+
+      /// en translation: Group chat setting
+      ///
+      /// Key: 群聊设置
+      ///
+      /// Locales: en
+      var 群聊设置: RswiftResources.StringResource { .init(key: "群聊设置", tableName: "Localizable", source: source, developmentValue: "Group chat setting", comment: nil) }
+
+      /// en translation: Group notification
+      ///
+      /// Key: 群通知
+      ///
+      /// Locales: en
+      var 群通知: RswiftResources.StringResource { .init(key: "群通知", tableName: "Localizable", source: source, developmentValue: "Group notification", comment: nil) }
+
+      /// en translation: Translate
+      ///
+      /// Key: 翻译
+      ///
+      /// Locales: en
+      var 翻译: RswiftResources.StringResource { .init(key: "翻译", tableName: "Localizable", source: source, developmentValue: "Translate", comment: nil) }
+
+      /// en translation: set chat top
+      ///
+      /// Key: 聊天置顶
+      ///
+      /// Locales: en
+      var 聊天置顶: RswiftResources.StringResource { .init(key: "聊天置顶", tableName: "Localizable", source: source, developmentValue: "set chat top", comment: nil) }
+
+      /// en translation: Text
+      ///
+      /// Key: 聊天记录
+      ///
+      /// Locales: en
+      var 聊天记录: RswiftResources.StringResource { .init(key: "聊天记录", tableName: "Localizable", source: source, developmentValue: "Text", comment: nil) }
+
+      /// en translation: chat setting
+      ///
+      /// Key: 聊天设置
+      ///
+      /// Locales: en
+      var 聊天设置: RswiftResources.StringResource { .init(key: "聊天设置", tableName: "Localizable", source: source, developmentValue: "chat setting", comment: nil) }
+
+      /// en translation: Friends
+      ///
+      /// Key: 联系人
+      ///
+      /// Locales: en
+      var 联系人: RswiftResources.StringResource { .init(key: "联系人", tableName: "Localizable", source: source, developmentValue: "Friends", comment: nil) }
+
+      /// en translation: Contact us
+      ///
+      /// Key: 联系我们
+      ///
+      /// Locales: en
+      var 联系我们: RswiftResources.StringResource { .init(key: "联系我们", tableName: "Localizable", source: source, developmentValue: "Contact us", comment: nil) }
+
+      /// en translation: English
+      ///
+      /// Key: 英文
+      ///
+      /// Locales: en
+      var 英文: RswiftResources.StringResource { .init(key: "英文", tableName: "Localizable", source: source, developmentValue: "English", comment: nil) }
+
+      /// en translation: you have dismissed the group chat
+      ///
+      /// Key: 解散了群聊
+      ///
+      /// Locales: en
+      var 解散了群聊: RswiftResources.StringResource { .init(key: "解散了群聊", tableName: "Localizable", source: source, developmentValue: "you have dismissed the group chat", comment: nil) }
+
+      /// en translation: dismiss the chat
+      ///
+      /// Key: 解散群聊
+      ///
+      /// Locales: en
+      var 解散群聊: RswiftResources.StringResource { .init(key: "解散群聊", tableName: "Localizable", source: source, developmentValue: "dismiss the chat", comment: nil) }
+
+      /// en translation: After the group chat is dissolved, you will lose contact with the group members.
+      ///
+      /// Key: 解散群聊后，将失去和群成员的联系。
+      ///
+      /// Locales: en
+      var 解散群聊后将失去和群成员的联系: RswiftResources.StringResource { .init(key: "解散群聊后，将失去和群成员的联系。", tableName: "Localizable", source: source, developmentValue: "After the group chat is dissolved, you will lose contact with the group members.", comment: nil) }
+
+      /// en translation: Settings
+      ///
+      /// Key: 设置
+      ///
+      /// Locales: en
+      var 设置: RswiftResources.StringResource { .init(key: "设置", tableName: "Localizable", source: source, developmentValue: "Settings", comment: nil) }
+
+      /// en translation: Set notes
+      ///
+      /// Key: 设置备注
+      ///
+      /// Locales: en
+      var 设置备注: RswiftResources.StringResource { .init(key: "设置备注", tableName: "Localizable", source: source, developmentValue: "Set notes", comment: nil) }
+
+      /// en translation: The announcement will inform all group members. Do you want to publish it?
+      ///
+      /// Key: 该公告会通知全部群成员，是否发布？
+      ///
+      /// Locales: en
+      var 该公告会通知全部群成员是否发布: RswiftResources.StringResource { .init(key: "该公告会通知全部群成员，是否发布？", tableName: "Localizable", source: source, developmentValue: "The announcement will inform all group members. Do you want to publish it?", comment: nil) }
+
+      /// en translation: The user has been set and cannot be added!
+      ///
+      /// Key: 该用户已设置不可添加！
+      ///
+      /// Locales: en
+      var 该用户已设置不可添加: RswiftResources.StringResource { .init(key: "该用户已设置不可添加！", tableName: "Localizable", source: source, developmentValue: "The user has been set and cannot be added!", comment: nil) }
+
+      /// en translation: Language
+      ///
+      /// Key: 语言
+      ///
+      /// Locales: en
+      var 语言: RswiftResources.StringResource { .init(key: "语言", tableName: "Localizable", source: source, developmentValue: "Language", comment: nil) }
+
+      /// en translation: Language setting
+      ///
+      /// Key: 语言设置
+      ///
+      /// Locales: en
+      var 语言设置: RswiftResources.StringResource { .init(key: "语言设置", tableName: "Localizable", source: source, developmentValue: "Language setting", comment: nil) }
+
+      /// en translation: app setting
+      ///
+      /// Key: 账号设置
+      ///
+      /// Locales: en
+      var 账号设置: RswiftResources.StringResource { .init(key: "账号设置", tableName: "Localizable", source: source, developmentValue: "app setting", comment: nil) }
+
+      /// en translation: Account Manage
+      ///
+      /// Key: 账户管理
+      ///
+      /// Locales: en
+      var 账户管理: RswiftResources.StringResource { .init(key: "账户管理", tableName: "Localizable", source: source, developmentValue: "Account Manage", comment: nil) }
+
+      /// en translation: Super Group
+      ///
+      /// Key: 超级群
+      ///
+      /// Locales: en
+      var 超级群: RswiftResources.StringResource { .init(key: "超级群", tableName: "Localizable", source: source, developmentValue: "Super Group", comment: nil) }
+
+      /// en translation: System
+      ///
+      /// Key: 跟随系统
+      ///
+      /// Locales: en
+      var 跟随系统: RswiftResources.StringResource { .init(key: "跟随系统", tableName: "Localizable", source: source, developmentValue: "System", comment: nil) }
+
+      /// en translation: removed from group chat
+      ///
+      /// Key: 踢出群聊
+      ///
+      /// Locales: en
+      var 踢出群聊: RswiftResources.StringResource { .init(key: "踢出群聊", tableName: "Localizable", source: source, developmentValue: "removed from group chat", comment: nil) }
+
+      /// en translation: Forward
+      ///
+      /// Key: 转发
+      ///
+      /// Locales: en
+      var 转发: RswiftResources.StringResource { .init(key: "转发", tableName: "Localizable", source: source, developmentValue: "Forward", comment: nil) }
+
+      /// en translation: Trans to text
+      ///
+      /// Key: 转文字
+      ///
+      /// Locales: en
+      var 转文字: RswiftResources.StringResource { .init(key: "转文字", tableName: "Localizable", source: source, developmentValue: "Trans to text", comment: nil) }
+
+      /// en translation: Typing...
+      ///
+      /// Key: 输入中...
+      ///
+      /// Locales: en
+      var 输入中: RswiftResources.StringResource { .init(key: "输入中...", tableName: "Localizable", source: source, developmentValue: "Typing...", comment: nil) }
+
+      /// en translation: Enter group chat
+      ///
+      /// Key: 进入群聊
+      ///
+      /// Locales: en
+      var 进入群聊: RswiftResources.StringResource { .init(key: "进入群聊", tableName: "Localizable", source: source, developmentValue: "Enter group chat", comment: nil) }
+
+      /// en translation: Connect Failed
+      ///
+      /// Key: 连接失败
+      ///
+      /// Locales: en
+      var 连接失败: RswiftResources.StringResource { .init(key: "连接失败", tableName: "Localizable", source: source, developmentValue: "Connect Failed", comment: nil) }
+
+      /// en translation: log out
+      ///
+      /// Key: 退出登录
+      ///
+      /// Locales: en
+      var 退出登录: RswiftResources.StringResource { .init(key: "退出登录", tableName: "Localizable", source: source, developmentValue: "log out", comment: nil) }
+
+      /// en translation: quit the chat
+      ///
+      /// Key: 退出群聊
+      ///
+      /// Locales: en
+      var 退出群聊: RswiftResources.StringResource { .init(key: "退出群聊", tableName: "Localizable", source: source, developmentValue: "quit the chat", comment: nil) }
+
+      /// en translation: After you quit group chat, you will no longer receive this group chat information.
+      ///
+      /// Key: 退出群聊后，将不再接收此群聊信息。
+      ///
+      /// Locales: en
+      var 退出群聊后将不再接收此群聊信息: RswiftResources.StringResource { .init(key: "退出群聊后，将不再接收此群聊信息。", tableName: "Localizable", source: source, developmentValue: "After you quit group chat, you will no longer receive this group chat information.", comment: nil) }
+
+      /// en translation: Notification
+      ///
+      /// Key: 通知
+      ///
+      /// Locales: en
+      var 通知: RswiftResources.StringResource { .init(key: "通知", tableName: "Localizable", source: source, developmentValue: "Notification", comment: nil) }
+
+      /// en translation: Contact List
+      ///
+      /// Key: 通讯录
+      ///
+      /// Locales: en
+      var 通讯录: RswiftResources.StringResource { .init(key: "通讯录", tableName: "Localizable", source: source, developmentValue: "Contact List", comment: nil) }
+
+      /// en translation: Search and add by user ID number/mobile phone number/email/nickname
+      ///
+      /// Key: 通过用户ID号/手机号/邮箱/昵称搜索添加
+      ///
+      /// Locales: en
+      var 通过用户ID号手机号邮箱昵称搜索添加: RswiftResources.StringResource { .init(key: "通过用户ID号/手机号/邮箱/昵称搜索添加", tableName: "Localizable", source: source, developmentValue: "Search and add by user ID number/mobile phone number/email/nickname", comment: nil) }
+
+      /// en translation: Search and add an user by user ID number
+      ///
+      /// Key: 通过用户ID号搜索添加
+      ///
+      /// Locales: en
+      var 通过用户ID号搜索添加: RswiftResources.StringResource { .init(key: "通过用户ID号搜索添加", tableName: "Localizable", source: source, developmentValue: "Search and add an user by user ID number", comment: nil) }
+
+      /// en translation: invited 
+      ///
+      /// Key: 邀请
+      ///
+      /// Locales: en
+      var 邀请: RswiftResources.StringResource { .init(key: "邀请", tableName: "Localizable", source: source, developmentValue: "invited ", comment: nil) }
+
+      /// en translation: Burn time setting:
+      ///
+      /// Key: 阅后即焚时间设置
+      ///
+      /// Locales: en
+      var 阅后即焚时间设置: RswiftResources.StringResource { .init(key: "阅后即焚时间设置", tableName: "Localizable", source: source, developmentValue: "Burn time setting:", comment: nil) }
+
+      /// en translation: Privacy Agreement
+      ///
+      /// Key: 隐私协议
+      ///
+      /// Locales: en
+      var 隐私协议: RswiftResources.StringResource { .init(key: "隐私协议", tableName: "Localizable", source: source, developmentValue: "Privacy Agreement", comment: nil) }
+
+      /// en translation: Media
+      ///
+      /// Key: 音视频
+      ///
+      /// Locales: en
+      var 音视频: RswiftResources.StringResource { .init(key: "音视频", tableName: "Localizable", source: source, developmentValue: "Media", comment: nil) }
+
+      /// en translation: Color Remark
+      ///
+      /// Key: 颜色备注
+      ///
+      /// Locales: en
+      var 颜色备注: RswiftResources.StringResource { .init(key: "颜色备注", tableName: "Localizable", source: source, developmentValue: "Color Remark", comment: nil) }
     }
   }
 
@@ -299,7 +1839,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 123 images.
+  /// This `_R.image` struct is generated, and contains static references to 124 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -410,6 +1950,9 @@ struct _R {
 
     /// Image `envelope.circle.fill`.
     var envelopeCircleFill: RswiftResources.ImageResource { .init(name: "envelope.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `file_trans`.
+    var file_trans: RswiftResources.ImageResource { .init(name: "file_trans", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `gear.circle.fill`.
     var gearCircleFill: RswiftResources.ImageResource { .init(name: "gear.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

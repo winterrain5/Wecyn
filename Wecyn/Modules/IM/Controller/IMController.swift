@@ -9,6 +9,7 @@ import Foundation
 import OpenIMSDK
 import AudioToolbox
 import MessageKit
+import SwiftyJSON
 let IMLoggerLabel = "OpenIMSDK"
 
 // -1 链接失败 0 链接中 1 链接成功 2 同步开始 3 同步结束 4 同步错误
@@ -150,15 +151,15 @@ class IMController:NSObject {
         }
         
         Self.shared.imManager = manager
-        // set listenner
+   
         // Set listener
         OpenIMSDK.OIMManager.callbacker.addFriendListener(listener: self)
         OpenIMSDK.OIMManager.callbacker.addGroupListener(listener: self)
         OpenIMSDK.OIMManager.callbacker.addConversationListener(listener: self)
         OpenIMSDK.OIMManager.callbacker.addAdvancedMsgListener(listener: self)
         
-        
     }
+    
     
     func login(success: (()->())? = nil,error: ((Error) -> ())? = nil) {
         let model = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)
@@ -199,6 +200,16 @@ class IMController:NSObject {
     var currentSender:IMUser {
         let model = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)
         return IMUser(senderId: model?.id ?? "", displayName: model?.full_name ?? "",faceUrl: model?.avatar ?? "")
+    }
+    
+    func createFileTransfer() {
+        let sourceId = IMController.shared.currentSender.senderId
+        IMController.shared.getConversation(sessionType:.c2c, sourceId:sourceId) { conversation in
+            guard let conversation = conversation else { return }
+           
+            let vc = ChatViewControllerBuilder().build(conversation)
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+        }
     }
     
     // 响铃或者震动
@@ -645,24 +656,26 @@ extension IMController {
                 print("sending message progress: \(progress)")
             } onFailure: { [weak self] (errCode: Int, msg: String?) in
                 print("send message error:", msg)
-                var customMessage: MessageInfo?
-                
-                if conversationType == .c2c {
-                    if errCode == SDKError.blockedByFriend.rawValue {
-                        customMessage = self?.createCustomMessage(customType: .blockedByFriend, data: [:])
-                    } else if errCode == SDKError.deletedByFriend.rawValue {
-                        customMessage = self?.createCustomMessage(customType: .deletedByFriend, data: [:])
-                    }
-                }
+              
                 model.status = .sendFailure
                 onComplete(model)
                 
-                if customMessage != nil {
-                    Self.shared.imManager.insertSingleMessage(toLocalStorage: customMessage!.toOIMMessageInfo(), recvID: recvID, sendID: model.sendID, onSuccess: nil, onFailure: nil)
-                    customMessage?.recvID = recvID
-                    print("type:\(customMessage?.customElem?.type)")
-                    onComplete(customMessage!)
-                }
+                //  插入到本地数据库
+//                var customMessage: MessageInfo?
+//                
+//                if conversationType == .c2c {
+//                    if errCode == SDKError.blockedByFriend.rawValue {
+//                        customMessage = self?.createCustomMessage(customType: .blockedByFriend, data: [:])
+//                    } else if errCode == SDKError.deletedByFriend.rawValue {
+//                        customMessage = self?.createCustomMessage(customType: .deletedByFriend, data: [:])
+//                    }
+//                }
+//                if customMessage != nil {
+//                    Self.shared.imManager.insertSingleMessage(toLocalStorage: customMessage!.toOIMMessageInfo(), recvID: recvID, sendID: model.sendID, onSuccess: nil, onFailure: nil)
+//                    customMessage?.recvID = recvID
+//                    print("type:\(customMessage?.customElem?.type)")
+//                    onComplete(customMessage!)
+//                }
             }
         }
         
@@ -1071,7 +1084,8 @@ extension IMController {
 extension IMController {
     
     public func getConversation(sessionType: ConversationType = .undefine, sourceId: String = "", conversationID: String = "", onSuccess: @escaping CallBack.ConversationInfoOptionalReturnVoid) {
-        
+        let conversationType = OIMConversationType(rawValue: sessionType.rawValue) ?? OIMConversationType.undefine
+       
         if !conversationID.isEmpty {
             
             Self.shared.imManager.getMultipleConversation([conversationID]) { conversations in
@@ -1081,8 +1095,6 @@ extension IMController {
             }
             
         } else {
-            
-            let conversationType = OIMConversationType(rawValue: sessionType.rawValue) ?? OIMConversationType.undefine
             
             Self.shared.imManager.getOneConversation(withSessionType: conversationType, sourceID: sourceId) { (conversation: OIMConversationInfo?) in
                 onSuccess(conversation?.toConversationInfo())
@@ -1244,7 +1256,7 @@ extension IMController: OIMAdvancedMsgListener {
             Self.shared.imManager.getOneConversation(withSessionType: msg.sessionType,
                                                      sourceID: msg.sessionType == .C2C ? msg.sendID! : msg.groupID!,
                                                      onSuccess: { conversation in
-                
+               
                 if conversation!.conversationID != self.chatingConversationID,
                    conversation!.unreadCount > 0,
                    conversation!.recvMsgOpt == .receive {
@@ -1255,11 +1267,44 @@ extension IMController: OIMAdvancedMsgListener {
         }
         newMsgReceivedSubject.onNext(msg.toMessageInfo())
         
+        if msg.contentType == .oaNotification {
+            
+            IMController.shared.imManager.getOneConversation(withSessionType: .notification, sourceID: msg.sendID!) { conversation in
+                IMController.shared.imManager.markConversationMessage(asRead: conversation?.conversationID ?? "") { result in
+                    NotificationCenter.default.post(name: NSNotification.Name.UpdateNotificationCount, object: "filterOANotificationCount")
+                }
+            }
+            
+            // "{\"mixType\":0,\"notificationName\":\"Wecyn Notification\",\"notificationType\":1,\"text\":\"3\"}"
+            let json = JSON.init(parseJSON: msg.notificationElem?.detail ?? "")
+            let text = json["text"].string
+            // text : 1 通知数量变化 ，2 加好友请求 3.删好友
+            if text == "1" {
+                NotificationCenter.default.post(name: NSNotification.Name.UpdateNotificationCount, object: "filterOANotificationCount")
+            }
+            if text == "2" {
+                NotificationCenter.default.post(name: NSNotification.Name.UpdateFriendRecieve, object: nil)
+            }
+            if text == "3" {
+                NotificationCenter.default.post(name: NSNotification.Name.UpdateConnectionCount, object: nil)
+            }
+        }
+        
         let topVc = UIViewController.sk.getTopVC()
         if topVc is ChatViewController || topVc is ChatListController {
             return
         }
         
+        let message = msg.toMessageInfo().getAbstruct()
+        if message?.isEmpty ?? true {
+            return
+        }
+        guard msg.contentType == .text,
+              msg.contentType == .image,
+              msg.contentType == .audio,
+              msg.contentType == .video,
+              msg.contentType == .file
+        else { return }
         
         let date = Date.init(unixTimestamp: msg.sendTime / 1000)
         
@@ -1267,7 +1312,7 @@ extension IMController: OIMAdvancedMsgListener {
             iconImage: R.image.appicon()!,
             appTitle: "Wecyn",
             title: msg.senderNickname,
-            message: msg.toMessageInfo().getAbstruct(),
+            message: message,
             time: MessageKitDateFormatter.shared.string(from: date))
         
         HDNotificationView.show(data: notiData,onTap: {
@@ -1389,7 +1434,7 @@ public enum ReceiveMessageOpt: Int, Codable {
 }
 
 public class ConversationInfo {
-    public let conversationID: String
+    public var conversationID: String
     public var userID: String?
     public var groupID: String?
     public var showName: String?

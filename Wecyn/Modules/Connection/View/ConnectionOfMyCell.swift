@@ -14,8 +14,14 @@ class ConnectionOfMyCell: UITableViewCell {
     var model: FriendListModel? {
         didSet {
             guard let model = model else { return }
-            imgView.kf.setImage(with: model.avatar_url,placeholder: R.image.proile_user()!)
-            nameLabel.text = model.remark.isEmpty ? model.full_name : "\(model.full_name) (\(model.remark))"
+            if model.id == 0 {
+                imgView.image = R.image.file_trans()
+                nameLabel.text = "文件传输助手".innerLocalized()
+            } else {
+                imgView.kf.setImage(with: model.avatar_url,placeholder: R.image.proile_user()!)
+                nameLabel.text = model.remark.isEmpty ? model.full_name : "\(model.full_name) (\(model.remark))"
+            }
+            
             nameLabel.sk.setSpecificTextColor("(\(model.remark))", color: R.color.textColor77()!)
         }
     }

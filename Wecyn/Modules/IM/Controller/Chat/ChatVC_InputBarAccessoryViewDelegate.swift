@@ -41,24 +41,13 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     private func insertMessages(_ data: [Any]) {
         for component in data {
             if let str = component as? String {
-                let message = IMMessage(text: str, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
-                message.sendStatus = .sending
-                self.insertMessage(message)
-                IMController.shared.sendTextMessage(text: str, to: dataProvider.receiverId, conversationType: .c2c) { info in
-                    print(info)
-                } onComplete: { info in
-                    message.messageId = info.clientMsgID
-                    message.sendStatus = info.status
-                    self.reloadCollectionView()
-                }
-
-                
+                self.sendText(str)
             }
-            
         }
       
     }
     
 
+    
    
 }

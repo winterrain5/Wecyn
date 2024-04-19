@@ -45,7 +45,6 @@ class ConnectionOfMyController: BasePagingTableController {
                 item.indicator = SectionIndexViewItemIndicator(title: title)
                 return item
             }
-            
             self.tableView?.sectionIndexView(items: items)
         }
         var dict:[String:[FriendListModel]] = [:]
@@ -67,9 +66,20 @@ class ConnectionOfMyController: BasePagingTableController {
     
     override func createListView() {
         super.createListView()
+        
         cellIdentifier = ConnectionOfMyCell.className
         tableView?.isSkeletonable = true
         registRefreshHeader()
+        
+        let headView = ConnectionOfMyCell()
+        let model = FriendListModel()
+        headView.model = model
+        headView.size = CGSize(width: kScreenWidth, height: 52)
+        tableView?.tableHeaderView = headView
+        headView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
+            IMController.shared.createFileTransfer()
+        }).disposed(by: rx.disposeBag)
+        
         tableView?.showsVerticalScrollIndicator = false
         tableView?.register(cellWithClass: ConnectionOfMyCell.self)
         tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  10, right: 0)

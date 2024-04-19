@@ -82,7 +82,12 @@ class ChatViewController: MessagesViewController {
     
     func configTitle() {
         let name = dataProvider.conversation.showName
-        self.navigation.item.title = name
+        if dataProvider.conversation.userID == IMController.shared.currentSender.senderId {
+            self.navigation.item.title = "文件传输助手".innerLocalized()
+        } else {
+            self.navigation.item.title = name
+        }
+        
     }
     
     
@@ -93,10 +98,10 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.register(RevokeMessageCell.self)
         
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
-        layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
+        layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 20, height: 20))
         layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
         layout?.setMessageIncomingAccessoryViewPosition(.messageCenter)
-        layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
+        layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 20, height: 20))
         layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
         layout?.setMessageIncomingAvatarPosition(AvatarPosition(vertical: .messageTop))
         layout?.setMessageOutgoingAvatarPosition(AvatarPosition(vertical: .messageTop))
@@ -107,7 +112,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        scrollsToLastItemOnKeyboardBeginsEditing = true // default false
+        scrollsToLastItemOnKeyboardBeginsEditing = true
 //              maintainPositionOnInputBarHeightChanged = true // default false
         showMessageTimestampOnSwipeLeft = true // default false
         
@@ -131,7 +136,6 @@ class ChatViewController: MessagesViewController {
             self.loadHistoryMessage()
         }
         
-     
     }
     
     func loadHistoryMessage() {
@@ -157,8 +161,17 @@ class ChatViewController: MessagesViewController {
     }
     
     @objc func loadMoreMessages() {
-        self.messagesCollectionView.reloadDataAndKeepOffset()
-        self.refreshControl.endRefreshing()
+        self.dataProvider.loadPreviousMessages { msgs in
+            let messages = msgs.map({ IMMessage.build(messageInfo: $0) }).compactMap({  $0 })
+            self.messageList = messages
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0) {
+                    self.messagesCollectionView.reloadData()
+                } completion: { flat in
+                    self.messagesCollectionView.scrollToLastItem(animated: false)
+                }
+            }
+        }
     }
     
    

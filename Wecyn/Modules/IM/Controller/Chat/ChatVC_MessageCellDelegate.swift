@@ -150,11 +150,32 @@ extension ChatViewController: MessageCellDelegate {
             return
         }
         if (message as! IMMessage).sendStatus == .sendFailure {
-            self.showAlert(title: "重发该消息".innerLocalized(), message: nil,buttonTitles: ["取消".innerLocalized(),"重发".innerLocalized()],highlightedButtonIndex: 1) { idx in
-                if idx == 1 {
+            let alert = UIAlertController(title: "重发该消息".innerLocalized(), message: nil, preferredStyle: .actionSheet)
+            alert.addAction(title: "重发".innerLocalized(),style: .default) { _ in
+                if case MessageKind.text(let text) =  message.kind {
+                    self.sendText(text)
+                }
+                if case MessageKind.photo(let item) =  message.kind {
+                    let imageMedia = item as! ImageMediaItem
+                   
+                }
+                
+                if case MessageKind.video(let item) =  message.kind {
+                    
+                }
+                
+                if case MessageKind.audio(let item) =  message.kind {
+                    
+                }
+                
+                if case MessageKind.contact(let item) =  message.kind {
                     
                 }
             }
+            alert.addAction(title: "取消".innerLocalized(),style: .cancel)
+            
+            alert.show()
+            
         }
        
     }

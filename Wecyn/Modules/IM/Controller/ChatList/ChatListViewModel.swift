@@ -50,10 +50,14 @@ class ChatListViewModel {
     }
 
     func deleteConversation(conversationID: String, completion: ((String?) -> Void)?) {
-        IMController.shared.deleteConversation(conversationID: conversationID) { [weak self] r in
-            self?.getAllConversations()
-            completion?(r)
+
+        IMController.shared.imManager.deleteConversationAndDeleteAllMsg(conversationID) { text in
+            completion?(text)
+        } onFailure: { code, msg in
+            Toast.showError("Delete Conversation Failed")
+            print("清除指定会话失败:\(code) - \(msg ?? "")")
         }
+
     }
 
     init() {

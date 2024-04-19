@@ -66,17 +66,17 @@ public struct MessageHelper {
                 }
             }
         case .card:
-            abstruct += "[名片]"
+            abstruct += "[名片]".innerLocalized()
         case .location:
-            abstruct += "[位置]"
+            abstruct += "[位置]".innerLocalized()
         case .face:
-            abstruct += "[自定义表情]"
+            abstruct += "[自定义表情]".innerLocalized()
         case .quote:
             abstruct += message.quoteElem?.text ?? ""
         case .privateMessage:
-            abstruct += conversation.isPrivateChat ? "开启了阅后即焚" : "关闭了阅后即焚"
+            abstruct += conversation.isPrivateChat ? "开启了阅后即焚".innerLocalized() : "关闭了阅后即焚".innerLocalized()
         case .merge:
-            abstruct = "[转发]"
+            abstruct = "[转发]".innerLocalized()
         case .custom:
             abstruct += customMessageAbstruct(message: message)
         default:
@@ -97,19 +97,19 @@ public struct MessageHelper {
         case .text:
             abstruct += message.textElem?.content ?? ""
         case .image:
-            abstruct += "[图片]"
+            abstruct += "[图片]".innerLocalized()
         case .audio:
-            abstruct += "[语音]"
+            abstruct += "[语音]".innerLocalized()
         case .video:
-            abstruct += "[视频]"
+            abstruct += "[视频]".innerLocalized()
         case .file:
-            abstruct += "[文件]"
+            abstruct += "[文件]".innerLocalized()
         case .at:
             // TODO:
             if let atElem = message.atTextElem {
                 
                 if atElem.isAtSelf {
-                    abstruct += "[有人@我]"
+                    abstruct += "[有人@我]".innerLocalized()
                 } else {
                     let names = atElem.atUsersInfo?.compactMap { $0.groupNickname } ?? []
                     var desc: String = ""
@@ -121,15 +121,15 @@ public struct MessageHelper {
                 }
             }
         case .card:
-            abstruct += "[名片]"
+            abstruct += "[名片]".innerLocalized()
         case .location:
-            abstruct += "[位置]"
+            abstruct += "[位置]".innerLocalized()
         case .face:
-            abstruct += "[自定义表情]"
+            abstruct += "[自定义表情]".innerLocalized()
         case .quote:
             abstruct += message.quoteElem?.text ?? ""
         case .merge:
-            abstruct = "[转发]"
+            abstruct = "[转发]".innerLocalized()
         case .custom:
             abstruct += customMessageAbstruct(message: message)
         default:
@@ -161,7 +161,7 @@ public struct MessageHelper {
         if offset <= 0 {
             let now = Date().timeIntervalSince1970
             if fabs(now - current) < 3 * 60 {
-                desc = "a moment ago".innerLocalized()
+                desc = "刚刚".innerLocalized()
             } else {
                 desc = formatter.string(from: date)
             }
@@ -170,7 +170,7 @@ public struct MessageHelper {
 
         if offset <= 1 * secondsPerDay {
             let m = formatter.string(from: date)
-            desc = "yesterday".innerLocalized() + " " + "\(m)"
+            desc = "昨天".innerLocalized() + " " + "\(m)"
             return desc
         }
 

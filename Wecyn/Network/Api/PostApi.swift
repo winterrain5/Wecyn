@@ -21,6 +21,7 @@ enum PostApi {
     case likedList(_ userId:Int? = nil,_ lastId:Int? = nil)
     case repost(_ id:Int,_ content:String,_ type:Int = 1)
     case getUploadVideoUrl
+    case test
 }
 
 extension PostApi: TargetType {
@@ -52,13 +53,15 @@ extension PostApi: TargetType {
             return "/api/post/repost/"
         case .getUploadVideoUrl:
             return "/api/post/getUploadVideoUrl/"
+        case .test:
+            return "/api/test/imNotificationTest/"
         }
     }
     var method: Moya.Method {
         switch self{
         case .addPost,.addReply,.cancelLike,.setLike,.addComment,.repost:
             return .post
-        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl:
+        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl,.test:
             return .get
         case .updatePostType:
             return .put
@@ -92,6 +95,8 @@ extension PostApi: TargetType {
             return requestParametersByPost(["id":id,"content":content,"type":type])
         case .getUploadVideoUrl:
             return .requestPlain
+        case .test:
+            return requestParametersByGet(["is_online_only":1,"not_offline_push":1])
         }
     }
 }

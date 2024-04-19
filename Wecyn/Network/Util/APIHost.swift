@@ -12,7 +12,7 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
-    var buildType: AppBuildType = .Dev
+    var buildType: AppBuildType = .Uat
     
     enum AppBuildType: Int {
         case Dev
@@ -40,11 +40,11 @@ class APIHost: NSObject {
                           "Release": ""]
     
     var OpenIMApiClients = ["Dev": "http://10.1.3.83:10002",
-                           "Uat": "",
+                           "Uat": "https://im.uat.wecyn.com/api",
                            "Release": ""]
     
     var OpenIMWSClients = ["Dev": "ws://10.1.3.83:10001",
-                           "Uat": "",
+                           "Uat": "wss://im.uat.wecyn.com/msg_gateway",
                            "Release": ""]
     
     func getUrlAddress(buildType:AppBuildType,serverType:BackgroundServerType) -> String {

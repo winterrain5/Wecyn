@@ -93,6 +93,10 @@ class PostService {
         let target = MultiTarget(PostApi.getUploadVideoUrl)
         return APIProvider.rx.request(target).asObservable().mapObject(UploadVideoResponse.self)
     }
+    static func testNotification() -> Observable<ResponseStatus> {
+        let target = MultiTarget(PostApi.test)
+        return APIProvider.rx.request(target).asObservable().mapStatus()
+    }
 }
 
 class UploadVideoResponse:BaseModel {
