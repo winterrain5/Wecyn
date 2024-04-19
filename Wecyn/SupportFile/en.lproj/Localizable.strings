@@ -295,7 +295,7 @@
 
 
 //
-"pull_down_to_refresh" = "下拉刷新";
-"pull_up_to_refresh" = "上拉加载更多";
-"release_refresh" = "松手刷新";
+"下拉刷新" = "pull down to refresh";
+"上拉加载更多"  = "pull up to refresh";
+"松手刷新" = "release to refresh";
 //

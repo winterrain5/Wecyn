@@ -1899,7 +1899,6 @@
 				459209CA2A26D5F4005871ED /* Resources */,
 				7ADA8EE899883EEC9D8C8070 /* [CP] Embed Pods Frameworks */,
 				4564BE322A8329A700464AFA /* Embed Foundation Extensions */,
-				BDD1C169B5CBC806199B6971 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2048,7 +2047,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				"$SRCROOT/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2069,23 +2068,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BDD1C169B5CBC806199B6971 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

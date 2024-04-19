@@ -44,12 +44,12 @@ class RefreshAnimationFooter: MJRefreshAutoFooter {
             case .idle:
                 activity?.stopAnimating()
                 messageLabel?.isHidden = false
-                messageLabel?.text = Localizer.shared.localized("pull_up_to_refresh")
+                messageLabel?.text = "上拉加载更多".innerLocalized()
                 break
             case .pulling:
                 activity?.stopAnimating()
                 messageLabel?.isHidden = false
-                messageLabel?.text = Localizer.shared.localized("release_refresh")
+                messageLabel?.text = "松手刷新".innerLocalized()
                 break
             case .refreshing:
                 activity?.startAnimating()

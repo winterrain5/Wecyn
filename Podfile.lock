@@ -62,7 +62,6 @@ PODS:
     - Moya/Core
     - RxSwift (~> 5.0)
   - NFCReaderWriter (1.1.4)
-  - OpenCV2 (3.4.10)
   - OpenIMSDK (3.5.1):
     - MJExtension
     - OpenIMSDK/Callbacker (= 3.5.1)
@@ -94,8 +93,6 @@ PODS:
     - MJExtension
     - OpenIMSDKCore (= 3.5.1)
   - OpenIMSDKCore (3.5.1)
-  - PaddleOCR (0.2.4):
-    - OpenCV2 (~> 3.4)
   - ParallaxHeader (3.0.0)
   - Permission/Camera (3.1.2):
     - Permission/Core
@@ -216,7 +213,6 @@ DEPENDENCIES:
   - MJRefresh
   - NFCReaderWriter
   - OpenIMSDK
-  - PaddleOCR
   - ParallaxHeader
   - Permission/Camera
   - Permission/Microphone
@@ -283,10 +279,8 @@ SPEC REPOS:
     - MJRefresh
     - Moya
     - NFCReaderWriter
-    - OpenCV2
     - OpenIMSDK
     - OpenIMSDKCore
-    - PaddleOCR
     - ParallaxHeader
     - Permission
     - PromiseKit
@@ -358,10 +352,8 @@ SPEC CHECKSUMS:
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NFCReaderWriter: b21965d1b3b8c53f7648f58f597b77a13f6ecdc5
-  OpenCV2: 508d6c0ce3bb343591ef2375036ea60511cbd187
   OpenIMSDK: 9050804353c52289d4eb02f4c69c19028c30849d
   OpenIMSDKCore: 002ccd940d261619d117eedcb8e6236aae718aaa
-  PaddleOCR: 92c5815a5032f33cdbfbdaca2fc5b188c0e11748
   ParallaxHeader: a343f55eb38f52a89c5820a77e14cf975b84e6aa
   Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
@@ -393,6 +385,6 @@ SPEC CHECKSUMS:
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
   ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: 89d1c9435c1f7431e8db903a6241ddf5c66f8f15
+PODFILE CHECKSUM: b921357cad7a3a295472e117425e2cf517cc74c0
 
 COCOAPODS: 1.11.2

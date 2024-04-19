@@ -60,13 +60,13 @@ class RefreshAnimationHeader: MJRefreshHeader {
             case .idle:
                 activity.stopAnimating()
                 messageLabel.isHidden = false
-                messageLabel.text = Localizer.shared.localized("pull_down_to_refresh")
+                messageLabel.text = "下拉刷新".innerLocalized()
                 break
             case .pulling:
                 activity.stopAnimating()
                 Haptico.selection()
                 messageLabel.isHidden = false
-                messageLabel.text = Localizer.shared.localized("release_refresh")
+                messageLabel.text = "松手刷新".innerLocalized()
                 break
             case .refreshing:
                 activity.startAnimating()

@@ -11,7 +11,7 @@ import AddressBookUI
 import Contacts
 import ParallaxHeader
 import KMPlaceholderTextView
-import PaddleOCR
+//import PaddleOCR
 import AnyImageKit
 import GPUImage
 
@@ -121,20 +121,20 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
         
         let scaledImage = image.scaledImage(1000) ?? image
         let preprocessedImage = scaledImage?.preprocessedImage() ?? scaledImage
-        MLPaddleOCR().scanText(from: preprocessedImage, complete: { (result) in
-            guard let ocrResultList = result else { return }
-            var resultString = ""
-            for ocrData in ocrResultList {
-                if !ocrData.label.isEmpty {
-                    resultString = resultString + ocrData.label + "\n"
-                }
-            }
-            self.ocrText = resultString
-            DispatchQueue.main.async {
-                Logger.debug(resultString,label: "PaddleOCR")
-                self.uploadBusinessCard(resultString)
-            }
-        })
+//        MLPaddleOCR().scanText(from: preprocessedImage, complete: { (result) in
+//            guard let ocrResultList = result else { return }
+//            var resultString = ""
+//            for ocrData in ocrResultList {
+//                if !ocrData.label.isEmpty {
+//                    resultString = resultString + ocrData.label + "\n"
+//                }
+//            }
+//            self.ocrText = resultString
+//            DispatchQueue.main.async {
+//                Logger.debug(resultString,label: "PaddleOCR")
+//                self.uploadBusinessCard(resultString)
+//            }
+//        })
         
         
     }

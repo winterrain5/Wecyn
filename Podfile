@@ -29,7 +29,6 @@ target 'Wecyn' do
   pod 'NFCReaderWriter'
   pod 'SafeSFSymbols'
   pod 'DifferenceKit'
-  pod 'PaddleOCR'
   pod 'GPUImage'
 
   #UI

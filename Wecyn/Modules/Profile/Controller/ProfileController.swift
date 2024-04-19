@@ -9,7 +9,7 @@ import UIKit
 import ParallaxHeader
 import PromiseKit
 import ImagePickerSwift
-import PaddleOCR
+
 import Photos
 enum SectionType: Int {
     case Activity

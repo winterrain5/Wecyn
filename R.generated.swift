@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 242 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 245 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -100,49 +100,49 @@ struct _R {
       ///
       /// Key: About Wecyn
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var aboutWecyn: RswiftResources.StringResource { .init(key: "About Wecyn", tableName: "Localizable", source: source, developmentValue: "About Wecyn", comment: nil) }
 
       /// en translation: Account Manage
       ///
       /// Key: Account Manage
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var accountManage: RswiftResources.StringResource { .init(key: "Account Manage", tableName: "Localizable", source: source, developmentValue: "Account Manage", comment: nil) }
 
       /// en translation: Activity
       ///
       /// Key: Activity
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var activity: RswiftResources.StringResource { .init(key: "Activity", tableName: "Localizable", source: source, developmentValue: "Activity", comment: nil) }
 
       /// en translation: Color Remark
       ///
       /// Key: Color Remark
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var colorRemark: RswiftResources.StringResource { .init(key: "Color Remark", tableName: "Localizable", source: source, developmentValue: "Color Remark", comment: nil) }
 
       /// en translation: Contact us
       ///
       /// Key: Contact us
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var contactUs: RswiftResources.StringResource { .init(key: "Contact us", tableName: "Localizable", source: source, developmentValue: "Contact us", comment: nil) }
 
       /// en translation: Education
       ///
       /// Key: Education
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var education: RswiftResources.StringResource { .init(key: "Education", tableName: "Localizable", source: source, developmentValue: "Education", comment: nil) }
 
       /// en translation: Experience
       ///
       /// Key: Experience
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var experience: RswiftResources.StringResource { .init(key: "Experience", tableName: "Localizable", source: source, developmentValue: "Experience", comment: nil) }
 
       /// en translation: ID number
@@ -163,63 +163,63 @@ struct _R {
       ///
       /// Key: Interests
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var interests: RswiftResources.StringResource { .init(key: "Interests", tableName: "Localizable", source: source, developmentValue: "Interests", comment: nil) }
 
       /// en translation: Language
       ///
       /// Key: Language
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var language: RswiftResources.StringResource { .init(key: "Language", tableName: "Localizable", source: source, developmentValue: "Language", comment: nil) }
 
       /// en translation: Logout
       ///
       /// Key: Logout
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var logout: RswiftResources.StringResource { .init(key: "Logout", tableName: "Localizable", source: source, developmentValue: "Logout", comment: nil) }
 
       /// en translation: Notification
       ///
       /// Key: Notification
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var notification: RswiftResources.StringResource { .init(key: "Notification", tableName: "Localizable", source: source, developmentValue: "Notification", comment: nil) }
 
       /// en translation: Privacy Agreement
       ///
       /// Key: Privacy Agreement
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var privacyAgreement: RswiftResources.StringResource { .init(key: "Privacy Agreement", tableName: "Localizable", source: source, developmentValue: "Privacy Agreement", comment: nil) }
 
       /// en translation: Settings
       ///
       /// Key: Settings
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var settings: RswiftResources.StringResource { .init(key: "Settings", tableName: "Localizable", source: source, developmentValue: "Settings", comment: nil) }
 
       /// en translation: Skills
       ///
       /// Key: Skills
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var skills: RswiftResources.StringResource { .init(key: "Skills", tableName: "Localizable", source: source, developmentValue: "Skills", comment: nil) }
 
       /// en translation: TimeZone
       ///
       /// Key: TimeZone
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var timeZone: RswiftResources.StringResource { .init(key: "TimeZone", tableName: "Localizable", source: source, developmentValue: "TimeZone", comment: nil) }
 
       /// en translation: Version
       ///
       /// Key: Version
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var version: RswiftResources.StringResource { .init(key: "Version", tableName: "Localizable", source: source, developmentValue: "Version", comment: nil) }
 
       /// en translation: [offline]
@@ -254,43 +254,57 @@ struct _R {
       ///
       /// Key: add_new_section
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var add_new_section: RswiftResources.StringResource { .init(key: "add_new_section", tableName: "Localizable", source: source, developmentValue: "Add new section", comment: nil) }
 
-      /// en translation: 下拉刷新
+      /// en translation: Pull down to refresh
       ///
       /// Key: pull_down_to_refresh
       ///
-      /// Locales: en
-      var pull_down_to_refresh: RswiftResources.StringResource { .init(key: "pull_down_to_refresh", tableName: "Localizable", source: source, developmentValue: "下拉刷新", comment: nil) }
+      /// Locales: en, zh-Hans
+      var pull_down_to_refresh: RswiftResources.StringResource { .init(key: "pull_down_to_refresh", tableName: "Localizable", source: source, developmentValue: "Pull down to refresh", comment: nil) }
 
-      /// en translation: 上拉加载更多
+      /// en translation: Pull up to load more
       ///
       /// Key: pull_up_to_refresh
       ///
-      /// Locales: en
-      var pull_up_to_refresh: RswiftResources.StringResource { .init(key: "pull_up_to_refresh", tableName: "Localizable", source: source, developmentValue: "上拉加载更多", comment: nil) }
+      /// Locales: en, zh-Hans
+      var pull_up_to_refresh: RswiftResources.StringResource { .init(key: "pull_up_to_refresh", tableName: "Localizable", source: source, developmentValue: "Pull up to load more", comment: nil) }
 
-      /// en translation: 松手刷新
+      /// en translation: Release to refresh
       ///
       /// Key: release_refresh
       ///
-      /// Locales: en
-      var release_refresh: RswiftResources.StringResource { .init(key: "release_refresh", tableName: "Localizable", source: source, developmentValue: "松手刷新", comment: nil) }
+      /// Locales: en, zh-Hans
+      var release_refresh: RswiftResources.StringResource { .init(key: "release_refresh", tableName: "Localizable", source: source, developmentValue: "Release to refresh", comment: nil) }
 
       /// en translation: View Calendar
       ///
       /// Key: view_calendar
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var view_calendar: RswiftResources.StringResource { .init(key: "view_calendar", tableName: "Localizable", source: source, developmentValue: "View Calendar", comment: nil) }
 
       /// en translation: View BusinessCard
       ///
       /// Key: view_namecard
       ///
-      /// Locales: en
+      /// Locales: en, zh-Hans
       var view_namecard: RswiftResources.StringResource { .init(key: "view_namecard", tableName: "Localizable", source: source, developmentValue: "View BusinessCard", comment: nil) }
+
+      /// en translation: pull up to refresh
+      ///
+      /// Key: 上拉加载更多
+      ///
+      /// Locales: en
+      var 上拉加载更多: RswiftResources.StringResource { .init(key: "上拉加载更多", tableName: "Localizable", source: source, developmentValue: "pull up to refresh", comment: nil) }
+
+      /// en translation: pull down to refresh
+      ///
+      /// Key: 下拉刷新
+      ///
+      /// Locales: en
+      var 下拉刷新: RswiftResources.StringResource { .init(key: "下拉刷新", tableName: "Localizable", source: source, developmentValue: "pull down to refresh", comment: nil) }
 
       /// en translation: unsupported message type
       ///
@@ -1173,6 +1187,13 @@ struct _R {
       ///
       /// Locales: en
       var 松开取消: RswiftResources.StringResource { .init(key: "松开取消", tableName: "Localizable", source: source, developmentValue: "Release to cancel", comment: nil) }
+
+      /// en translation: release to refresh
+      ///
+      /// Key: 松手刷新
+      ///
+      /// Locales: en
+      var 松手刷新: RswiftResources.StringResource { .init(key: "松手刷新", tableName: "Localizable", source: source, developmentValue: "release to refresh", comment: nil) }
 
       /// en translation: Search Chat History
       ///

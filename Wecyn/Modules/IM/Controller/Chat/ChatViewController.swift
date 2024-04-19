@@ -38,6 +38,7 @@ class ChatViewController: MessagesViewController {
     lazy var audioController = BasicAudioController(messageCollectionView: messagesCollectionView)
     var messageList:[IMMessage] = []
     
+    
     private(set) var dataProvider:DefaultDataProvider
     
     init(dataProvider:DefaultDataProvider) {
@@ -250,6 +251,11 @@ class ChatViewController: MessagesViewController {
             return nil
         }
         let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView) as! IMMessage
+        if case MessageKind.custom(let custom) = message.kind {
+            if custom is RevokeItem {
+                return nil
+            }
+        }
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
             
             let copy = UIAction(title: "拷贝".innerLocalized()) { _ in
@@ -263,7 +269,9 @@ class ChatViewController: MessagesViewController {
                     break
                 }
             }
-            
+            let retweet = UIAction(title: "转发".innerLocalized()) { _ in
+                
+            }
             let currendUser = IMController.shared.currentSender
             if message.user.senderId == currendUser.senderId {
                 let delete = UIAction(title: "删除".innerLocalized()) { _ in
@@ -293,14 +301,21 @@ class ChatViewController: MessagesViewController {
 
                     
                 }
-                let retweet = UIAction(title: "转发".innerLocalized()) { _ in
-                    
-                }
+                
                 let revoke = UIAction(title: "撤回".innerLocalized()) { _ in
                     let alert = UIAlertController(title: "确定撤回该条消息？".innerLocalized(), message: nil, preferredStyle: .actionSheet)
                     let action1 = UIAlertAction(title: "确定".innerLocalized(), style: .destructive) { _ in
                         IMController.shared.revokeMessage(conversationID: self.dataProvider.conversation.conversationID, clientMsgID: message.messageId) { data in
-                            self.revokeMessage(index: indexPath)
+                            
+                            let currendUser = IMController.shared.currentSender
+                            let text = "你撤回了一条消息".innerLocalized()
+                            let item = RevokeItem(title: text)
+                            let message = IMMessage(revokeItem: item, user: currendUser, messageId: UUID().uuidString, date: Date())
+                            
+                            self.messageList[indexPath.section] = message
+                            
+                            self.reloadCollectionView(at: indexPath)
+                            
                         }
                     }
                     let action2 = UIAlertAction(title: "取消".innerLocalized(), style: .cancel) { _ in
