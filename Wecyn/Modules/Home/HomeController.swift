@@ -202,7 +202,7 @@ class HomeController: BaseTableController {
         }
         cell.footerView.commentHandler = { [weak self] in
             guard let `self` = self else { return }
-            let vc = PostDetailViewController(postModel: $0,isBeginEdit: true)
+            let vc = PostDetailViewController(postId: $0.id,isBeginEdit: true)
             self.navigationController?.pushViewController(vc)
         }
        
@@ -243,7 +243,7 @@ class HomeController: BaseTableController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if dataArray.count > 0 {
             let model = dataArray[indexPath.row] as! PostListModel
-            let vc = PostDetailViewController(postModel: model)
+            let vc = PostDetailViewController(postId: model.id)
             self.navigationController?.pushViewController(vc)
             vc.deletePostFromDetailComplete = { [weak self] in
                 self?.deleteRow($0)

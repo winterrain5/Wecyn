@@ -30,8 +30,8 @@ class FileMessageCell: MessageCollectionViewCell {
     weak var delegate: MessageCellDelegate?
     
     /// The container used for styling and holding the message's content view.
-    var messageContainerView: UIView = {
-        let containerView = UIView()
+    var messageContainerView: MessageContainerView = {
+        let containerView = MessageContainerView()
         containerView.clipsToBounds = true
         containerView.layer.masksToBounds = true
         return containerView
@@ -186,6 +186,7 @@ class FileMessageCell: MessageCollectionViewCell {
             for: message,
             at: indexPath,
             in: messagesCollectionView)
+        messageContainerView.style = displayDelegate.messageStyle(for: message, at: indexPath, in: messagesCollectionView)
     }
     
     /// Handle `ContentView`'s tap gesture, return false when `ContentView` doesn't needs to handle gesture
@@ -362,7 +363,7 @@ class FileMessageLayoutSizeCalculator: CellSizeCalculator {
         let avatarSize = cellAvatarSize()
         let origin: CGPoint
         if fromCurrentSender {
-            let x = frame.maxX + cellAvatarViewHorizontalPadding
+            let x = frame.maxX + cellAvatarViewHorizontalPadding / 2
             origin = CGPoint(x: x, y: cellDateHeight)
         } else {
             origin = CGPoint(x: 0, y: cellDateHeight)
@@ -408,10 +409,10 @@ class FileMessageLayoutSizeCalculator: CellSizeCalculator {
             at: indexPath)
         let origin: CGPoint
         if fromCurrentSender {
-            let x = messagesLayout.itemWidth - cellAvatarViewWidth - cellAvatarViewHorizontalPadding - size.width
+            let x = messagesLayout.itemWidth - cellAvatarViewWidth - cellAvatarViewHorizontalPadding - size.width + 4
             origin = CGPoint(x: x, y: y)
         } else {
-            let x = cellAvatarViewWidth + cellAvatarViewHorizontalPadding
+            let x = cellAvatarViewWidth + (cellAvatarViewHorizontalPadding / 2)
             origin = CGPoint(x: x, y: y)
         }
         

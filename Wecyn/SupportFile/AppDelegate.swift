@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         SwiftyFitsize.shared.referenceW = 375
         
-        Localizer.shared.changeLanguage.accept(getCurrentLanguage())
         Localize.setCurrentLanguage(getCurrentLanguage())
         
         IMController.shared.config()
@@ -51,6 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         UNUserNotificationCenter.current().delegate = self
         
+        
+        if let licenseFile = Bundle.main.path(forResource: "aip", ofType: "license") {
+            if let licenseData = NSData(contentsOfFile: licenseFile) {
+                AipOcrService.shard().auth(withLicenseFileData: licenseData as Data)
+            }
+        }
         
         
         return true

@@ -41,13 +41,14 @@ class CountryListController: BaseTableController {
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
+            self.searchView.startLoading()
             if self.dataType == .City {
                 self.searchResult = (self.dataArray as! [CityModel]).filter({ $0.city_name.lowercased().contains(keyword.trimmed.lowercased())})
             } else {
                 self.searchResult = (self.dataArray as! [CountryModel]).filter({ $0.country_name.lowercased().contains(keyword.trimmed.lowercased())})
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.searchView.endSearching()
+                self.searchView.stoploading()
             }
             
             self.reloadData()

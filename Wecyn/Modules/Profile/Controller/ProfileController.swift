@@ -53,7 +53,6 @@ class ProfileController: BaseTableController {
             guard let self else { return }
             
             if let photo {
-                
                 let vc = AddNewBusinessCardController(image: photo)
                 self.navigationController?.pushViewController(vc)
                 
@@ -95,7 +94,6 @@ class ProfileController: BaseTableController {
         scan.imageForNormal = R.image.viewfinderCircleFill()
         scan.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            
             
             
             let alert = UIAlertController.init(title: "Scan BusinessCard", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
@@ -314,7 +312,7 @@ class ProfileController: BaseTableController {
             }
             cell.footerView.commentHandler = { [weak self] in
                 guard let `self` = self else { return }
-                let vc = PostDetailViewController(postModel: $0,isBeginEdit: true)
+                let vc = PostDetailViewController(postId: $0.id,isBeginEdit: true)
                 self.navigationController?.pushViewController(vc)
             }
             return cell
@@ -393,7 +391,7 @@ class ProfileController: BaseTableController {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section  == SectionType.Activity.rawValue {
             guard let model = userPosts.first else { return }
-            let vc = PostDetailViewController(postModel: model)
+            let vc = PostDetailViewController(postId: model.id)
             self.navigationController?.pushViewController(vc)
             vc.deletePostFromDetailComplete = { [weak self] _ in
                 self?.deletePost()

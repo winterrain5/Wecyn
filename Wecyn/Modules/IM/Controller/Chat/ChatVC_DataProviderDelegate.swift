@@ -11,10 +11,19 @@ extension ChatViewController:DataProviderDelegate  {
     
     func received(message: MessageInfo) {
         // message.sendID receiverId 一致
-        let flag1 = message.sendID == dataProvider.receiverId
+        let flag1 = (message.sendID == dataProvider.receiverId || message.sendID == IMController.shared.currentSender.senderId)
         if flag1 {
-            guard let message = IMMessage.build(messageInfo: message) else  { return }
-            insertMessage(message)
+            
+            guard let msg = IMMessage.build(messageInfo: message) else  { return }
+            if let idx = self.messageList.firstIndex(where: { $0.messageId == message.clientMsgID }) {
+                let indexPath = IndexPath(item: 0, section: idx)
+                self.messageList[idx] = msg
+                self.reloadCollectionView(at: indexPath)
+            } else {
+                insertMessage(msg)
+            }
+            
+            
         }
         
        
@@ -39,11 +48,20 @@ extension ChatViewController:DataProviderDelegate  {
     
     func isRevokeMessage(revoke: MessageRevoked) {
         
-        if self.messageList.contains(where: { $0.messageId == revoke.clientMsgID }) {
-            return
+        if revoke.revokerIsSelf {
+           return
         }
-   
         
+        guard let index = self.messageList.firstIndex(where: { $0.messageId == revoke.clientMsgID }) else { return }
+        let text = (revoke.revokerNickname ?? "") + "撤回了一条消息".innerLocalized()
+        let item = RevokeItem(title: text)
+        let user = IMUser(senderId: revoke.revokerID ?? "", displayName: revoke.revokerNickname ?? "", faceUrl: nil)
+        let message = IMMessage(revokeItem: item, user: user, messageId: revoke.clientMsgID  ?? "", date: Date())
+        
+        let indexPath = IndexPath(item: 0, section: index)
+        self.messageList[indexPath.section] = message
+        
+        self.reloadCollectionView(at: indexPath)
         
     }
     

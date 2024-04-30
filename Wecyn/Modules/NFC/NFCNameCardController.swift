@@ -12,7 +12,7 @@ import MessageUI
 enum NameCardDataType {
     case FirstName
     case LastName
-    case JobTitle
+    case Headline
     case CompanyName
     case Mobile
     case OfficeNumber

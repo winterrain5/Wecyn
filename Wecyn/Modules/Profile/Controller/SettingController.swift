@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxLocalizer
 enum SettingType {
     case Logout
     case Language

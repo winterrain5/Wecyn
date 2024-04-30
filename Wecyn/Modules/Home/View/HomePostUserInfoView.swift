@@ -26,6 +26,37 @@ class HomePostUserInfoView: UIView {
             postTimeLabel.text = model.post_time
             headlineLabel.text = model.user.headline
             
+            let shareAction = UIAction(title: "Share with Wecyn Chat",image: R.image.arrowUpMessage()?.tintImage(.black)) { _ in
+                let vc = ChatContactsController(selectType: .select)
+                let nav = BaseNavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                UIViewController.sk.getTopVC()?.present(nav, animated: true)
+                vc.didSelectContact = { [weak self] contact in
+                    guard let `self` = self else { return }
+                    let alert = UIAlertController(style: .actionSheet,title: "share this post to \(contact.full_name)")
+                    alert.addAction(title: "确定".innerLocalized(),style: .destructive) { _ in
+                        
+                        IMController.shared.getConversation(sessionType:.c2c, sourceId:contact.id.string) { conversation in
+                            guard let conversation = conversation else { return }
+                            let ext = model.toJSONString()
+                            
+                            IMController.shared.sendCustomMessage(data: "1",ext: ext, to:contact.id.string, conversationType: .c2c) { info in
+                                
+                            } onComplete: { info in
+                                
+                                let vc = ChatViewControllerBuilder().build(conversation)
+                                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+                            }
+                           
+                        }
+                       
+                        
+
+                    }
+                    alert.addAction(title: "取消".innerLocalized(),style: .cancel)
+                    alert.show()
+                }
+            }
             if model.is_own_post {
                 let action1 = UIAction(title: "Delete post",image: UIImage.trash?.tintImage(.red),attributes: .destructive) { _ in
                     PostService.updatePostType(id: model.id, type: 0).subscribe(onNext:{
@@ -53,7 +84,7 @@ class HomePostUserInfoView: UIView {
                     })
                 ])
                 
-                moreButton.menu = UIMenu(children: [action1,submenu])
+                moreButton.menu = UIMenu(children: [action1,shareAction,submenu])
             } else {
                 let followImage = model.user.is_following ? UIImage.person_fill_xmark : UIImage.person_fill_checkmark
                 let followTitle = "\(model.user.is_following ? "Unfollow" : "Follow")@\(model.user.full_name)"
@@ -78,7 +109,7 @@ class HomePostUserInfoView: UIView {
                     }
                     UIViewController.sk.getTopVC()?.present(nav, animated: true)
                 }
-                moreButton.menu = UIMenu(children: [action1,action4])
+                moreButton.menu = UIMenu(children: [action1,shareAction,action4])
             }
             
          

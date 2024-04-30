@@ -8,7 +8,6 @@
 
 import UIKit
 import MJRefresh
-import RxLocalizer
 enum RefreshColorStyle {
     case white,gray
 }

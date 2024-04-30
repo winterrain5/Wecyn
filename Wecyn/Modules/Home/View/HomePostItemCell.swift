@@ -16,11 +16,14 @@ class HomePostItemCell: UITableViewCell {
     var postQuoteView = PostQuoteView()
     var model:PostListModel?  {
         didSet {
+            guard let model = model else { return }
             userInfoView.postModel = model
             footerView.postModel = model
-            postQuoteView.postModel = model?.source_data
-            contentLabel.text = model?.content 
+            postQuoteView.postModel = model.source_data
+            contentLabel.text = model.content 
+            
             imageClvView.reloadData()
+            
             setNeedsLayout()
             layoutIfNeeded()
         }

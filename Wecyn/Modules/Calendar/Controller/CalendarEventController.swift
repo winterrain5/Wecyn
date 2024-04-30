@@ -8,7 +8,6 @@
 import UIKit
 import TBDropdownMenu
 import RxSwift
-import RxLocalizer
 import FSCalendar
 
 enum DateFormat:String {

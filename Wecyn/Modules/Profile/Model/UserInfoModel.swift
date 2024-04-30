@@ -32,6 +32,7 @@ import UIKit
     var last_name: String = ""
     var email: String = ""
     var adr_work: String = ""
+    var headline: String = ""
     
     var color_remark:[String] = []
     var edu_exp:[UserExperienceInfoModel] = []

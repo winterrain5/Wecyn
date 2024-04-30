@@ -18,6 +18,7 @@ class EventSearchViewController: BaseTableController {
         
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
+            self.searchView.startLoading()
             self.requestModel.keyword = keyword.trimmed
             self.loadNewData()
         }
@@ -50,10 +51,10 @@ class EventSearchViewController: BaseTableController {
             
             self.endRefresh(events.count)
             
-            self.searchView.endSearching()
+            self.searchView.stoploading()
             
         },onError: { e in
-            self.searchView.endSearching()
+            self.searchView.stoploading()
             self.endRefresh(.NoData, emptyString: "No Events")
         }).disposed(by: rx.disposeBag)
         

@@ -50,6 +50,14 @@ extension ChatViewController: MessageCellDelegate {
             self.navigationController?.pushViewController(vc)
         }
         
+        if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let content = (custom as? PostItem)?.content {
+            guard let model = PostListModel.deserialize(from: JSON.init(parseJSON: content).dictionaryObject) else {
+                return
+            }
+            let vc = PostDetailViewController(postId: model.id)
+            self.navigationController?.pushViewController(vc)
+        }
+        
     }
     
     func didTapImage(in cell: MessageCollectionViewCell) {

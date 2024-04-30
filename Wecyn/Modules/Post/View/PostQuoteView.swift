@@ -62,7 +62,7 @@ class PostQuoteView: UIView {
         rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
             guard let model = self.postModel else { return }
-            let vc = PostDetailViewController(postModel: model)
+            let vc = PostDetailViewController(postId: model.id)
             UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: rx.disposeBag)
         

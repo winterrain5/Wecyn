@@ -20,7 +20,6 @@ extension Notification.Name {
 
 extension Notification.Name {
     static let UpdateConversation = Notification.Name("UpdateConversation")
-    static let ClearC2CHistory = Notification.Name("ClearC2CHistory")
     static let UpdateNotificationCount = Notification.Name("UpdateNotificationCount")
     static let UpdateConnectionCount = Notification.Name("UpdateConnectionCount")
     static let UpdateFriendRecieve = Notification.Name("UpdateFriendRecieve")

@@ -174,10 +174,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
         }
       
     }
-    
-    func sendImageMessage(byURL:String) {
-        
-    }
+
     
     func sendVideo(source: MediaMessageSource) {
         guard 
@@ -195,7 +192,7 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
         .then {
            
             if let url = $0.downUrl.url {
-                message = IMMessage(videoThumbnail: thumbnail,videoUrl: url, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
+                message = IMMessage(videoThumbnail: thumbnail,videoUrl: url, duration: source.duration ?? 0, user: IMController.shared.currentSender, messageId: UUID().uuidString, date: Date())
                 message?.sendStatus = .sending
                 self.insertMessage(message!)
             }

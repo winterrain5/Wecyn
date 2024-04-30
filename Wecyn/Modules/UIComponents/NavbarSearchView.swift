@@ -101,8 +101,6 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         let test = self.rightTf.text ?? ""
         if test.isEmpty { return true }
         self.searching?(test)
-        self.loadingView.startAnimating()
-        self.loadingView.isHidden = false
         self.endEditing(true)
         Logger.debug("search text:\(test)")
         return true
@@ -111,9 +109,13 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
         beginSearch?()
     }
     
+    func startLoading() {
+        self.loadingView.startAnimating()
+        self.loadingView.isHidden = false
+    }
     
     
-    func endSearching() {
+    func stoploading() {
         self.loadingView.stopAnimating()
         self.loadingView.isHidden = true
     }

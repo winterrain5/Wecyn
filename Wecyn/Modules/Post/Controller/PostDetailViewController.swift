@@ -10,7 +10,8 @@ import IQKeyboardManagerSwift
 import RxKeyboard
 class PostDetailViewController: BaseTableController {
 
-    var postModel:PostListModel!
+    var postModel:PostListModel?
+    var postId:Int?
     var postBar = PostCommentToolBarView()
     let postBarH = 48.cgFloat
     let commentFooterView = PostDetailCommentFooterView.loadViewFromNib()
@@ -19,9 +20,10 @@ class PostDetailViewController: BaseTableController {
     var isBeginEdit = false
     var deletePostFromDetailComplete:((PostListModel)->())?
     override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
-    required init(postModel:PostListModel,isBeginEdit:Bool = false) {
+   
+    required init(postId:Int,isBeginEdit:Bool = false) {
         super.init(nibName: nil, bundle: nil)
-        self.postModel = postModel
+        self.postId = postId
         self.isBeginEdit = isBeginEdit
     }
     
@@ -47,9 +49,8 @@ class PostDetailViewController: BaseTableController {
             }
         }).disposed(by: rx.disposeBag)
         postBar.expendButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            
-            let vc = PostCommentFullScreenController(name: self.postModel.user.full_name, id: self.postModel.id, type: 1)
+            guard let `self` = self,let model = self.postModel else { return }
+            let vc = PostCommentFullScreenController(name: model.user.full_name, id: model.id, type: 1)
             let nav = BaseNavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
@@ -60,8 +61,8 @@ class PostDetailViewController: BaseTableController {
         }).disposed(by: rx.disposeBag)
         
         postBar.sendButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            PostService.addComment(postId: self.postModel.id, content: self.postBar.tv.text).subscribe(onNext:{ model in
+            guard let `self` = self,let model = self.postModel else { return }
+            PostService.addComment(postId: model.id, content: self.postBar.tv.text).subscribe(onNext:{ model in
                 self.updateData(model: model)
             }).disposed(by: self.rx.disposeBag)
         }).disposed(by: rx.disposeBag)
@@ -75,10 +76,11 @@ class PostDetailViewController: BaseTableController {
         commentFooterView.addCommentButton.rx.tap.subscribe(onNext:{ [weak self] in
             self?.postBar.tv.becomeFirstResponder()
         }).disposed(by: rx.disposeBag)
-        commentFooterView.postCountLabel.text = self.postModel.comment_count.string
         
-       
+        commentFooterView.postCountLabel.text = self.postModel?.comment_count.string
         
+        
+        self.getPostInfo()
         self.refreshData()
         
     }
@@ -91,12 +93,22 @@ class PostDetailViewController: BaseTableController {
     }
     
     override func refreshData() {
-        PostService.commentList(postId: self.postModel.id,lastCommentId: lastCommentId).subscribe(onNext:{
+      
+        PostService.commentList(postId: self.postModel?.id ?? 0,lastCommentId: lastCommentId).subscribe(onNext:{
             self.commentList.append(contentsOf: $0)
             self.endRefresh()
             self.lastCommentId = $0.last?.id ?? 0
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
+        }).disposed(by: rx.disposeBag)
+        
+    }
+    
+    func getPostInfo() {
+        guard let id = postId else { return }
+        PostService.postInfo(id: id).subscribe(onNext:{
+            self.postModel = $0
+            self.endRefresh()
         }).disposed(by: rx.disposeBag)
     }
     
@@ -143,7 +155,7 @@ class PostDetailViewController: BaseTableController {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return self.postModel.cellHeight
+            return self.postModel?.cellHeight ?? 0
         }
         return UITableView.automaticDimension
     }
@@ -154,7 +166,10 @@ class PostDetailViewController: BaseTableController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withClass: HomePostItemCell.self)
-            cell.model = self.postModel
+            if let model = self.postModel {
+                cell.model = model
+            }
+            
             cell.selectionStyle = .none
             cell.footerView.commentHandler = { [weak self] _ in
                 self?.postBar.tv.becomeFirstResponder()

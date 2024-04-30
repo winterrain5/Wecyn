@@ -49,6 +49,7 @@ public enum SDKError: Int {
 }
 
 public enum CustomMessageType: Int {
+    case post = 1 // 帖子
     case call = 901 // 音视频
     case customEmoji = 902 // emoji
     case tagMessage = 903 // 标签消息
@@ -127,22 +128,30 @@ class IMController:NSObject {
         manager.initSDK(with: config) { [weak self] in
             
             print("im onConnecting")
-            self?.connectionRelay.accept(.connecting)
+            DispatchQueue.main.async {
+                self?.connectionRelay.accept(.connecting)
+            }
+            
             
         } onConnectFailure: { [weak self] code, string in
             
             print("code:\(code),message:\(string ?? "")")
-            self?.connectionRelay.accept(.connectFailure)
+            DispatchQueue.main.async {
+                self?.connectionRelay.accept(.connectFailure)
+            }
             
         } onConnectSuccess: { [weak self] in
             
             print("im onConnectSuccess")
-            self?.connectionRelay.accept(.connected)
-            
+            DispatchQueue.main.async {
+                self?.connectionRelay.accept(.connected)
+            }
         } onKickedOffline: { [weak self] in
             
             print("im onKickedOffline")
-            self?.connectionRelay.accept(.kickedOffline)
+            DispatchQueue.main.async {
+                self?.connectionRelay.accept(.kickedOffline)
+            }
             
         } onUserTokenExpired: {
             
@@ -180,18 +189,20 @@ class IMController:NSObject {
             if let error = error {
                 error(APIError.requestError(code: code, message: message ?? ""))
             }
-            
+            if code == 10102 {//  LoginRepeatError
+                Self.shared.logout()
+            }
             Logger.error("login failure code:\(code),message:\(message ?? "")", label: IMLoggerLabel)
         }
 
     }
     
-    func logout(success:@escaping ()->(),error:@escaping (Error) -> ()) {
+    func logout(success: (()->())? = nil,error:((Error) -> ())?  = nil) {
         OIMManager.manager.logoutWith { message in
             Logger.info("logout data:\(message ?? "")", label: IMLoggerLabel)
-            success()
+            success?()
         } onFailure: { code, message in
-            error(APIError.requestError(code: code, message: message ?? ""))
+            error?(APIError.requestError(code: code, message: message ?? ""))
             Logger.error("code:\(code),message:\(message ?? "")", label: IMLoggerLabel)
         }
 
@@ -923,8 +934,28 @@ extension IMController {
         let message = OIMMessageInfo.createFileMessage(byURL: byURL, fileName: fileName, size: size)
        
         message.status = .sending
+        
         sending(message.toMessageInfo())
+        
         sendHelperNotOss(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
+        
+    }
+    
+    public func sendCustomMessage(data: String,
+                                  ext: String? = nil,
+                                  description: String? = nil,
+                                  to recvID: String,
+                                  conversationType: ConversationType,
+                                  sending: CallBack.MessageReturnVoid,
+                                  onComplete: @escaping CallBack.MessageReturnVoid) {
+        let message  = OIMMessageInfo.createCustomMessage(data, extension: ext, description: description)
+        
+        message.status = .sending
+    
+        sending(message.toMessageInfo())
+        
+        sendHelper(message: message, to: recvID, conversationType: conversationType, onComplete: onComplete)
+        
     }
     
     public func sendMergeMessage(messages: [MessageInfo],
@@ -964,7 +995,7 @@ extension IMController {
     }
     
     
-    public func markMessageAsReaded(byConID: String, msgIDList: [String], onSuccess: @escaping CallBack.StringOptionalReturnVoid) {
+    public func markMessageAsReaded(byConID: String, onSuccess: @escaping CallBack.StringOptionalReturnVoid) {
         Self.shared.imManager.markConversationMessage(asRead: byConID, onSuccess: onSuccess) { code, msg in
             
         }
@@ -992,7 +1023,7 @@ extension IMController {
     
     public func clearC2CHistoryMessages(conversationID: String, onSuccess: @escaping CallBack.StringOptionalReturnVoid) {
         Self.shared.imManager.clearConversationAndDeleteAllMsg(conversationID) { r in
-            
+            onSuccess(r)
         } onFailure: { code, msg in
             print("清空群聊天记录失败:\(code), \(msg ?? "")")
         }
@@ -1000,7 +1031,7 @@ extension IMController {
     
     public func clearGroupHistoryMessages(conversationID: String, onSuccess: @escaping CallBack.StringOptionalReturnVoid) {
         Self.shared.imManager.clearConversationAndDeleteAllMsg(conversationID) { r in
-            
+            onSuccess(r)
         } onFailure: { code, msg in
             print("清空群聊天记录失败:\(code), \(msg ?? "")")
         }
@@ -1151,11 +1182,6 @@ extension IMController {
         }
     }
     
-    public func logout(onSuccess: @escaping CallBack.StringOptionalReturnVoid) {
-        Self.shared.imManager.logoutWith(onSuccess: onSuccess) { code, msg in
-            print("退出登录失败:\(code), \(msg ?? "")")
-        }
-    }
     
     public func getLoginUserID() -> String {
         return imManager.getLoginUserID()
@@ -1303,7 +1329,8 @@ extension IMController: OIMAdvancedMsgListener {
               msg.contentType == .image,
               msg.contentType == .audio,
               msg.contentType == .video,
-              msg.contentType == .file
+              msg.contentType == .file,
+              msg.contentType == .custom
         else { return }
         
         let date = Date.init(unixTimestamp: msg.sendTime / 1000)
@@ -2154,10 +2181,10 @@ public class CustomElem: Encodable {
     
     public var type: CustomMessageType? {
         if let data = data {
-            let obj = try! JSONSerialization.jsonObject(with: data.data(using: .utf8)!) as! [String: Any]
-            let t = obj["customType"] as! Int
-            
-            return CustomMessageType.init(rawValue: t)
+            if let t = data.int {
+                return CustomMessageType.init(rawValue: t)
+            }
+           
         }
         
         return nil

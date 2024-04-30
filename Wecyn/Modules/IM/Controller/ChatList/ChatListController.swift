@@ -172,8 +172,7 @@ class ChatListController: BaseTableController {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "删除".innerLocalized()) { [weak self] _, _, completion in
             self?._viewModel.deleteConversation(conversationID: item.conversationID, completion: { _ in
-                self?.conversations.remove(at: indexPath.row)
-                self?.tableView?.deleteRows(at: [indexPath], with: .automatic)
+                self?.refreshData()
                 completion(true)
             })
         }

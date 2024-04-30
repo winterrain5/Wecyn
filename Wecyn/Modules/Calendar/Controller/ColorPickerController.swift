@@ -7,7 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import RxLocalizer
+
 class ColorPickerModel {
     var color: String
     var remark: String
@@ -100,7 +100,7 @@ class ColorPickerController: BaseTableController {
         super.viewDidLoad()
         IQKeyboardManager.shared.enableAutoToolbar = true
         if isAllowEdit {
-            self.navigation.item.title =  Localizer.shared.localized("Color Remark")
+            self.navigation.item.title =  "颜色备注".innerLocalized()
         }
     }
     

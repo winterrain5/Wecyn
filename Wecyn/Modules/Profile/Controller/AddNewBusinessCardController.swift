@@ -11,10 +11,10 @@ import AddressBookUI
 import Contacts
 import ParallaxHeader
 import KMPlaceholderTextView
-//import PaddleOCR
+import AipOcrSdk
 import AnyImageKit
 import GPUImage
-
+import SwiftyJSON
 enum BusinessCardField {
     case Lang
     case Model
@@ -73,7 +73,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
                 self.headImageView.size = CGSize(width: kScreenWidth, height: scaledImage?.size.height ?? 0)
                 
                 self.image = image
-                self.imageOCRByPaddle()
+                self.imageOCRByBaidu()
                 
             case .failure(let e):
                 Toast.showError(e.localizedDescription)
@@ -114,37 +114,44 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
         }).disposed(by: rx.disposeBag)
         self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         
-        imageOCRByPaddle()
+        imageOCRByBaidu()
     }
     
-    func imageOCRByPaddle() {
+    func imageOCRByBaidu() {
         
         let scaledImage = image.scaledImage(1000) ?? image
-        let preprocessedImage = scaledImage?.preprocessedImage() ?? scaledImage
-//        MLPaddleOCR().scanText(from: preprocessedImage, complete: { (result) in
-//            guard let ocrResultList = result else { return }
-//            var resultString = ""
-//            for ocrData in ocrResultList {
-//                if !ocrData.label.isEmpty {
-//                    resultString = resultString + ocrData.label + "\n"
-//                }
-//            }
-//            self.ocrText = resultString
-//            DispatchQueue.main.async {
-//                Logger.debug(resultString,label: "PaddleOCR")
-//                self.uploadBusinessCard(resultString)
-//            }
-//        })
-        
+        guard let preprocessedImage = scaledImage?.preprocessedImage() ?? scaledImage else { return }
+
+        let options:[AnyHashable:Any] = ["language_type":"CHN_ENG","detect_direction":"true"]
+        AipOcrService.shard().detectTextAccurateBasic(from: preprocessedImage, withOptions: options) { result in
+            
+            guard let result = result else { return }
+            let json = JSON.init(result)
+            guard let words = json["words_result"].arrayObject as? [[String:String]] else { return }
+            let messages = words.compactMap({ $0["words"] })
+            let ocrString = messages.map({ $0 }).joined(separator: "\n")
+            self.ocrText = ocrString
+            print(ocrString)
+
+            self.uploadBusinessCard()
+            
+        } failHandler: { error in
+            Toast.showError(error.debugDescription)
+        }
+
         
     }
     
-    func uploadBusinessCard(_ cardText:String) {
+    func uploadBusinessCard() {
         Toast.showLoading(withStatus: "Recognizing...")
-        NetworkService.scanCard(cardText:cardText,lang: lange.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
-            Toast.dismiss()
+        NetworkService.scanCard(cardText:ocrText,lang: lange.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
             self.model = $0
-            self.configData()
+            DispatchQueue.main.async {
+                Toast.dismiss()
+                
+                self.configData()
+            }
+           
         },onError: { e in
             Toast.showError(e.asAPIError.errorInfo().message)
             Toast.dismiss()
@@ -332,7 +339,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
                 }
                 
                 self.tableView?.reloadData()
-                self.uploadBusinessCard(self.ocrText)
+                self.uploadBusinessCard()
                 
             }
             return cell
@@ -587,6 +594,6 @@ extension UIImage {
     let stillImageFilter = GPUImageAdaptiveThresholdFilter()
     stillImageFilter.blurRadiusInPixels = 15.0
     let filteredImage = stillImageFilter.image(byFilteringImage: self)
-    return filteredImage
+    return self
   }
 }

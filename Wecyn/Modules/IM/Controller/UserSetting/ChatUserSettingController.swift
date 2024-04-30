@@ -10,6 +10,7 @@ import UIKit
 class ChatUserSettingController: BaseTableController {
     var models:[[ChatSettingModel]] = []
     var conversation:ConversationInfo!
+    var clearMessage: (()->())?
     init(conversation:ConversationInfo) {
         super.init(nibName: nil, bundle: nil)
         self.conversation = conversation
@@ -96,10 +97,12 @@ class ChatUserSettingController: BaseTableController {
         let model = models[indexPath.section][indexPath.row]
         if model.type == .clear {
             let alert = UIAlertController(style: .actionSheet)
-            alert.addAction(title: "清空聊天记录",style: .destructive) { _ in
+            alert.addAction(title: "清空聊天记录",style: .destructive) {[weak self] _ in
+                guard let `self` = self else { return }
                 IMController.shared.clearC2CHistoryMessages(conversationID: self.conversation.conversationID) { _ in
-                    NotificationCenter.default.post(name: NSNotification.Name.ClearC2CHistory,object: nil)
+                    self.clearMessage?()
                     print("clear history success")
+                    Toast.showSuccess("聊天记录已清除".innerLocalized())
                 }
                
             }

@@ -20,6 +20,7 @@ class OrganizationSearchController: BaseTableController {
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
+            self.searchView.startLoading()
             self.keyword = keyword
             self.loadNewData()
             
@@ -41,10 +42,10 @@ class OrganizationSearchController: BaseTableController {
             input.id = -1
             self.datas.insert(input, at: 0)
             self.endRefresh()
-            self.searchView.endSearching()
+            self.searchView.stoploading()
         },onError: { e in
             self.endRefresh(e.asAPIError.emptyDatatype)
-            self.searchView.endSearching()
+            self.searchView.stoploading()
         }).disposed(by: rx.disposeBag)
      
     }

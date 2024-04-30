@@ -78,9 +78,9 @@ class EventSetAssistantsController: BaseTableController {
             } else {
                 Toast.showError($0.message)
             }
-            self.searchView.endSearching()
+            self.searchView.stoploading()
         },onError: { e in
-            self.searchView.endSearching()
+            self.searchView.stoploading()
             Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: self.rx.disposeBag)
     }

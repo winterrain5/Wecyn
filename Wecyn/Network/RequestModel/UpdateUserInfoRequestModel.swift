@@ -27,4 +27,5 @@ import UIKit
     var email: String?
     var adr_work: String?
     var color_remark:[String] = []
+    var headline: String?
 }

@@ -41,7 +41,7 @@ class ConnectionUsersController: BaseCollectionController,UICollectionViewDelega
                 $0.last_name.lowercased().contains(keyword.trimmed.lowercased()) ||
                 $0.full_name.lowercased().contains(keyword.trimmed.lowercased()) }) ?? []
             self.reloadData()
-            self.searchView.endSearching()
+            self.searchView.stoploading()
         }
         
         searchView.beginSearch = { [weak self] in

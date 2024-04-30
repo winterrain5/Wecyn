@@ -79,6 +79,8 @@ public struct MessageHelper {
             abstruct = "[转发]".innerLocalized()
         case .custom:
             abstruct += customMessageAbstruct(message: message)
+        case .revoke:
+            abstruct += (message.senderNickname ?? "" + "撤回了一条消息".innerLocalized())
         default:
             tmpAttr = getSystemNotificationOf(message: message, isSingleChat: isSingleChat)
         }
@@ -451,9 +453,9 @@ public struct MessageHelper {
         case .call:
             return "[" + "音视频".innerLocalized() + "]"
         case .customEmoji:
-            return "[表情]".innerLocalized()
+            return "[" + "表情".innerLocalized() + "]"
         case .tagMessage:
-            return "[标签]".innerLocalized()
+            return "[标签]"
         case .blockedByFriend:
             return "消息已发出，但被对方拒收了".innerLocalized()
         case .deletedByFriend:
@@ -462,6 +464,8 @@ public struct MessageHelper {
             return "[朋友圈]"
         case .meeting:
             return "[视频会议]"
+        case .post:
+            return "[" + "帖子".innerLocalized() + "]"
         }
     }
 }

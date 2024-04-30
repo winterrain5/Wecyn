@@ -10,7 +10,6 @@ target 'Wecyn' do
   pod 'RxSwiftExt'
   pod 'RxCocoa'
   pod 'RxMoyaCache'
-  pod 'RxLocalizer'
   pod 'RxKeyboard'
   pod 'Cache', '~> 6.0.0'
   
@@ -28,7 +27,6 @@ target 'Wecyn' do
   pod 'Kingfisher'
   pod 'NFCReaderWriter'
   pod 'SafeSFSymbols'
-  pod 'DifferenceKit'
   pod 'GPUImage'
 
   #UI
@@ -59,6 +57,7 @@ target 'Wecyn' do
   pod 'MessageKit'
   pod 'Localize-Swift', '~> 3.2'
   pod 'ZLPhotoBrowser', '4.3.0'
+  pod 'MenuItemKit'
     
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

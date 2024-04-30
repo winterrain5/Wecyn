@@ -18,12 +18,6 @@ PODS:
   - Cache (6.0.0)
   - CocoaDebug (1.7.7)
   - CodeTextField (0.4.0)
-  - DifferenceKit (1.3.0):
-    - DifferenceKit/Core (= 1.3.0)
-    - DifferenceKit/UIKitExtension (= 1.3.0)
-  - DifferenceKit/Core (1.3.0)
-  - DifferenceKit/UIKitExtension (1.3.0):
-    - DifferenceKit/Core
   - DKEmptyDataSet (0.1.0)
   - DKLogger (0.4.0)
   - DZNEmptyDataSet (1.8.1)
@@ -52,6 +46,7 @@ PODS:
     - LookinServer/Core (= 1.1.7)
   - LookinServer/Core (1.1.7)
   - MarqueeLabel (4.3.0)
+  - MenuItemKit (4.0.1)
   - MessageKit (3.8.0):
     - InputBarAccessoryView (~> 5.5.0)
   - MJExtension (3.4.2)
@@ -122,9 +117,6 @@ PODS:
   - RxKeyboard (1.0.0):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxLocalizer (1.5.0):
-    - RxCocoa (~> 5.1.1)
-    - RxSwift (~> 5.1.1)
   - RxMoyaCache (0.2.1):
     - Moya/RxSwift
   - RxRelay (5.1.3):
@@ -190,7 +182,6 @@ DEPENDENCIES:
   - Cache (~> 6.0.0)
   - CocoaDebug
   - CodeTextField (~> 0.4.0)
-  - DifferenceKit
   - DKEmptyDataSet
   - DKLogger
   - DZNEmptyDataSet
@@ -209,6 +200,7 @@ DEPENDENCIES:
   - Localize-Swift (~> 3.2)
   - LookinServer
   - MarqueeLabel
+  - MenuItemKit
   - MessageKit
   - MJRefresh
   - NFCReaderWriter
@@ -223,7 +215,6 @@ DEPENDENCIES:
   - RxCocoa
   - RxGesture
   - RxKeyboard
-  - RxLocalizer
   - RxMoyaCache
   - RxSwift (= 5.1.2)
   - RxSwiftExt
@@ -254,7 +245,6 @@ SPEC REPOS:
     - Cache
     - CocoaDebug
     - CodeTextField
-    - DifferenceKit
     - DKEmptyDataSet
     - DKLogger
     - DZNEmptyDataSet
@@ -274,6 +264,7 @@ SPEC REPOS:
     - Localize-Swift
     - LookinServer
     - MarqueeLabel
+    - MenuItemKit
     - MessageKit
     - MJExtension
     - MJRefresh
@@ -288,7 +279,6 @@ SPEC REPOS:
     - RxCocoa
     - RxGesture
     - RxKeyboard
-    - RxLocalizer
     - RxMoyaCache
     - RxRelay
     - RxSwift
@@ -327,7 +317,6 @@ SPEC CHECKSUMS:
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
   CodeTextField: c6217e79c8f98655b0cde955475af06484f2c72a
-  DifferenceKit: ab185c4d7f9cef8af3fcf593e5b387fb81e999ca
   DKEmptyDataSet: 3cca8b2435bec8a8265d238012f0f99ab112c91f
   DKLogger: 4db2407d09a97241fbb81ea2f2b7f3190f032769
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -347,6 +336,7 @@ SPEC CHECKSUMS:
   Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
   LookinServer: 4ce0469b066871525611d009d8d16a7a50c23491
   MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
+  MenuItemKit: 1459920e984d823e1bcc858b7a964f94e6bfa0f6
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
   MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -361,7 +351,6 @@ SPEC CHECKSUMS:
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
-  RxLocalizer: 7db2f964848a885d996d36f47f0e88a477cd627a
   RxMoyaCache: 38823d584cdfbea48d2ffdae32676f81e0dd06a6
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
@@ -385,6 +374,6 @@ SPEC CHECKSUMS:
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
   ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: b921357cad7a3a295472e117425e2cf517cc74c0
+PODFILE CHECKSUM: 1c0ee0f4087d4c3ade8c33641d6fe765aeadcadc
 
 COCOAPODS: 1.11.2

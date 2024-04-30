@@ -27,7 +27,7 @@ class NFCNameCardEditController: BaseTableController {
     
     let firstname = NameCardEditModel(placeholder: "First Name", type:.FirstName)
     let lastname = NameCardEditModel(placeholder: "Last Name", type:.LastName)
-    let jobTitle = NameCardEditModel(placeholder: "Job Title", type:.JobTitle)
+    let headline = NameCardEditModel(placeholder: "Headline", type:.Headline)
     let companyName = NameCardEditModel(placeholder: "Organization Name", type:.CompanyName)
     
     let mobile = NameCardEditModel(placeholder: "Mobile Number", type:.Mobile)
@@ -47,9 +47,9 @@ class NFCNameCardEditController: BaseTableController {
         }
         firstname.value = user.first_name
         lastname.value = user.last_name
-        jobTitle.value = user.title
+        headline.value = user.headline
         companyName.value = user.org_name
-        datas.append([firstname,lastname,jobTitle,mobile])
+        datas.append([firstname,lastname,headline,mobile])
         
         mobile.value  = user.tel_cell
         officeNo.value = user.tel_work
@@ -128,8 +128,8 @@ class NFCNameCardEditController: BaseTableController {
                 self.request.last_name = e.value
             case .CompanyName:
                 self.request.org_name = e.value
-            case .JobTitle:
-                self.request.title = e.value
+            case .Headline:
+                self.request.headline = e.value
             case .Mobile:
                 self.request.tel_cell = e.value
             case .OfficeNumber:

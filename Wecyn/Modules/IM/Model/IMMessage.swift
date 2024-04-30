@@ -47,6 +47,7 @@ class IMMessage:MessageType {
             return message
             
         case .image:
+            
             guard let url = messageInfo.pictureElem?.sourcePicture?.url?.url else { return nil }
             let imageSize = CGSize(width: messageInfo.pictureElem?.sourcePicture?.width ?? 180, height: messageInfo.pictureElem?.sourcePicture?.height ?? 180)
             let message = IMMessage.init(imageURL: url,imageSize:imageSize, user: sender, messageId: messageId, date: date)
@@ -55,9 +56,9 @@ class IMMessage:MessageType {
             
         case .video:
             
-            guard let url = messageInfo.videoElem?.videoUrl?.url else { return nil}
+            guard let url = messageInfo.videoElem?.videoUrl?.url,let duration = messageInfo.videoElem?.duration.cgFloat.int else { return nil}
             let thumbnail = UIImage.init(color: R.color.backgroundColor()!, size: CGSize(width: 120, height: 160))
-            let message = IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, user: sender, messageId: messageId, date: date)
+            let message = IMMessage.init(videoThumbnail: thumbnail, videoUrl: url, duration: duration, user: sender, messageId: messageId, date: date)
             message.sendStatus = messageInfo.status
             return message
             
@@ -94,7 +95,7 @@ class IMMessage:MessageType {
                 text = (messageInfo.senderNickname ?? "")  + "撤回了一条消息".innerLocalized()
             }
             let item = RevokeItem(title: text)
-            let message = IMMessage(revokeItem: item, user: sender, messageId: messageId, date: Date())
+            let message = IMMessage(revokeItem: item, user: sender, messageId: messageId, date: date)
             message.sendStatus = messageInfo.status
             return message
             
@@ -102,6 +103,17 @@ class IMMessage:MessageType {
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
             
         case .oaNotification:
+            return nil
+            
+        case .custom:
+            guard let data = messageInfo.customElem?.data?.int else { return nil }
+            if data == 1 { // post
+                let content = messageInfo.customElem?.ext ?? ""
+                let item = PostItem(content: content)
+                let message = IMMessage(postItem: item, user: sender, messageId: messageId, date: date)
+                message.sendStatus = messageInfo.status
+                return message
+            }
             return nil
         default:
             return IMMessage(text: "\(messageInfo.contentType)", user: sender, messageId: messageId, date: date)
@@ -135,8 +147,9 @@ class IMMessage:MessageType {
         self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
     }
     
-    convenience init(videoThumbnail: UIImage,videoUrl:URL, user: IMUser, messageId: String, date: Date) {
+    convenience init(videoThumbnail: UIImage,videoUrl:URL,duration:Int, user: IMUser, messageId: String, date: Date) {
         let mediaItem = VideoMediaItem(image: videoThumbnail, url: videoUrl)
+        mediaItem.duration = duration
         self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
     }
     
@@ -168,6 +181,10 @@ class IMMessage:MessageType {
     
     convenience init(revokeItem:RevokeItem, user: IMUser, messageId: String, date: Date) {
         self.init(custom: revokeItem, user: user, messageId: messageId, date: date)
+    }
+    
+    convenience init(postItem:PostItem, user: IMUser, messageId: String, date: Date) {
+        self.init(custom: postItem, user: user, messageId: messageId, date: date)
     }
     
     // MARK: Internal
@@ -256,9 +273,10 @@ struct LinkMediaItem: LinkItem {
     }
 }
 
-struct VideoMediaItem: MediaItem {
+class VideoMediaItem: MediaItem {
     var url: URL?
     var image: UIImage?
+    var duration: Int?
     var placeholderImage: UIImage
     var size: CGSize
     
@@ -290,6 +308,13 @@ struct RevokeItem {
     var title: String?
     init(title: String? = nil) {
         self.title = title
+    }
+}
+
+struct PostItem {
+    var content: String?
+    init(content: String? = nil) {
+        self.content = content
     }
 }
 

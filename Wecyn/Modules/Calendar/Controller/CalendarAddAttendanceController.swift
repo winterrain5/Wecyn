@@ -86,10 +86,10 @@ class CalendarAddAttendanceController: BaseTableController {
                 }
             })
             self.friends.append(contentsOf: models)
-            self.searchView.endSearching()
+            self.searchView.stoploading()
             self.endRefresh()
         },onError: { e in
-            self.searchView.endSearching()
+            self.searchView.stoploading()
             self.endRefresh(e.asAPIError.emptyDatatype)
         }).disposed(by: rx.disposeBag)
         

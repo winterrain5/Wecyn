@@ -21,6 +21,9 @@ extension ChatViewController:MessagesLayoutDelegate {
             if custom is RevokeItem {
                 return revokeMessageSizeCalculator
             }
+            if custom is PostItem {
+                return postMessageSizeCalculator
+            }
         }
         return CellSizeCalculator()
     }

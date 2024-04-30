@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -321,6 +321,13 @@
 		45D591BA2BB4031100B6E673 /* ChatUserSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D591B92BB4031100B6E673 /* ChatUserSettingController.swift */; };
 		45D591BD2BB40F8A00B6E673 /* ChatSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D591BB2BB40F8A00B6E673 /* ChatSettingCell.swift */; };
 		45DC5EE92B144E17005C6848 /* UIImage+System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DC5EE82B144E17005C6848 /* UIImage+System.swift */; };
+		45DC865F2BD5F07500CC32CB /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DC865B2BD5F07400CC32CB /* AipBase.framework */; };
+		45DC86602BD5F07500CC32CB /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DC865C2BD5F07400CC32CB /* AipOcrSdk.framework */; };
+		45DC86612BD5F07500CC32CB /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DC865D2BD5F07400CC32CB /* IdcardQuality.framework */; };
+		45DC86632BD5F13E00CC32CB /* AipBase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DC865B2BD5F07400CC32CB /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45DC86642BD5F13E00CC32CB /* AipOcrSdk.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DC865C2BD5F07400CC32CB /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45DC86652BD5F13E00CC32CB /* IdcardQuality.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DC865D2BD5F07400CC32CB /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45DC86672BD5F17300CC32CB /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 45DC86662BD5F17200CC32CB /* aip.license */; };
 		45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B12A31A97F00BF6EEC /* ProfileController.swift */; };
 		45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B42A31A99400BF6EEC /* SettingController.swift */; };
 		45E765B82A31A9EE00BF6EEC /* ConnectionUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B72A31A9EE00BF6EEC /* ConnectionUsersController.swift */; };
@@ -333,6 +340,8 @@
 		45EAE8CA2A8F1D4B00018C0D /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */; };
 		45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */; };
 		45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */; };
+		45EBFAC52BD7876D00ABBCD2 /* PostMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBFAC42BD7876D00ABBCD2 /* PostMessageCell.swift */; };
+		45EC1D982BE0809A0091FCD5 /* ChatRetweetAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EC1D972BE0809A0091FCD5 /* ChatRetweetAlertView.swift */; };
 		45F07C1C2BB10D770070813D /* String_IM_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C1B2BB10D770070813D /* String_IM_Extension.swift */; };
 		45F07C1F2BB10ECC0070813D /* JsonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C1E2BB10ECC0070813D /* JsonTool.swift */; };
 		45F07C212BB10FB80070813D /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C202BB10FB80070813D /* MessageHelper.swift */; };
@@ -371,6 +380,18 @@
 				4564BE312A8329A700464AFA /* calendarExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45DC86622BD5F12400CC32CB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				45DC86632BD5F13E00CC32CB /* AipBase.framework in CopyFiles */,
+				45DC86642BD5F13E00CC32CB /* AipOcrSdk.framework in CopyFiles */,
+				45DC86652BD5F13E00CC32CB /* IdcardQuality.framework in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -701,6 +722,10 @@
 		45D591B92BB4031100B6E673 /* ChatUserSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserSettingController.swift; sourceTree = "<group>"; };
 		45D591BB2BB40F8A00B6E673 /* ChatSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingCell.swift; sourceTree = "<group>"; };
 		45DC5EE82B144E17005C6848 /* UIImage+System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+System.swift"; sourceTree = "<group>"; };
+		45DC865B2BD5F07400CC32CB /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
+		45DC865C2BD5F07400CC32CB /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
+		45DC865D2BD5F07400CC32CB /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
+		45DC86662BD5F17200CC32CB /* aip.license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aip.license; sourceTree = "<group>"; };
 		45E765B12A31A97F00BF6EEC /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		45E765B42A31A99400BF6EEC /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		45E765B72A31A9EE00BF6EEC /* ConnectionUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionUsersController.swift; sourceTree = "<group>"; };
@@ -713,6 +738,8 @@
 		45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostToolBar.swift; sourceTree = "<group>"; };
 		45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostToolBar.xib; sourceTree = "<group>"; };
+		45EBFAC42BD7876D00ABBCD2 /* PostMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageCell.swift; sourceTree = "<group>"; };
+		45EC1D972BE0809A0091FCD5 /* ChatRetweetAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRetweetAlertView.swift; sourceTree = "<group>"; };
 		45F07C1B2BB10D770070813D /* String_IM_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_IM_Extension.swift; sourceTree = "<group>"; };
 		45F07C1E2BB10ECC0070813D /* JsonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonTool.swift; sourceTree = "<group>"; };
 		45F07C202BB10FB80070813D /* MessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
@@ -747,9 +774,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45DC865F2BD5F07500CC32CB /* AipBase.framework in Frameworks */,
 				45124BA82BCE5E4200045CF7 /* CoreAudio.framework in Frameworks */,
 				45124B772BCE120800045CF7 /* CoreMedia.framework in Frameworks */,
+				45DC86612BD5F07500CC32CB /* IdcardQuality.framework in Frameworks */,
 				45124B792BCE121A00045CF7 /* AVFoundation.framework in Frameworks */,
+				45DC86602BD5F07500CC32CB /* AipOcrSdk.framework in Frameworks */,
 				45124B7B2BCE122200045CF7 /* AssetsLibrary.framework in Frameworks */,
 				C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */,
 			);
@@ -775,6 +805,7 @@
 		45005C8C2A5E87FF00560E21 /* 3rdDepandence */ = {
 			isa = PBXGroup;
 			children = (
+				45DC865E2BD5F07400CC32CB /* BaiDuOCR */,
 				45D0AF902B31A4F800C6FAFA /* MMTreeTableView */,
 				45C781F22A98A0FB00D4E721 /* ImageCompress */,
 				45C781EE2A95C2B500D4E721 /* VisualActivityViewController.swift */,
@@ -948,6 +979,8 @@
 				4513AD7F2BC28FA100A360B2 /* FileMessageCell.swift */,
 				45ACB1FB2BC530D200CEC091 /* CustomContactMessageCell.swift */,
 				45ACB2022BC7BE6B00CEC091 /* RevokeMessageCell.swift */,
+				45EBFAC42BD7876D00ABBCD2 /* PostMessageCell.swift */,
+				45EC1D972BE0809A0091FCD5 /* ChatRetweetAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1653,6 +1686,17 @@
 			path = UserSetting;
 			sourceTree = "<group>";
 		};
+		45DC865E2BD5F07400CC32CB /* BaiDuOCR */ = {
+			isa = PBXGroup;
+			children = (
+				45DC86662BD5F17200CC32CB /* aip.license */,
+				45DC865B2BD5F07400CC32CB /* AipBase.framework */,
+				45DC865C2BD5F07400CC32CB /* AipOcrSdk.framework */,
+				45DC865D2BD5F07400CC32CB /* IdcardQuality.framework */,
+			);
+			path = BaiDuOCR;
+			sourceTree = "<group>";
+		};
 		45E765B02A31A94D00BF6EEC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1899,6 +1943,7 @@
 				459209CA2A26D5F4005871ED /* Resources */,
 				7ADA8EE899883EEC9D8C8070 /* [CP] Embed Pods Frameworks */,
 				4564BE322A8329A700464AFA /* Embed Foundation Extensions */,
+				45DC86622BD5F12400CC32CB /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1930,7 +1975,7 @@
 				};
 			};
 			buildConfigurationList = 459209C72A26D5F4005871ED /* Build configuration list for PBXProject "Wecyn" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -2006,6 +2051,7 @@
 				45C9380F2B3ECF7D00621BED /* AdminStaffExpsCell.xib in Resources */,
 				450BA6CB2A32B9D800764828 /* LoginView.xib in Resources */,
 				45920AF52A26E045005871ED /* LaunchScreen.storyboard in Resources */,
+				45DC86672BD5F17300CC32CB /* aip.license in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2047,7 +2093,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2323,6 +2369,7 @@
 				45C938142B43FB3700621BED /* AdminNewStaffCell.swift in Sources */,
 				458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */,
 				45D0AF9C2B32DA5600C6FAFA /* AdminDepartmentDetailContainer.swift in Sources */,
+				45EC1D982BE0809A0091FCD5 /* ChatRetweetAlertView.swift in Sources */,
 				450F6CD92A6E0FDB0001AA1B /* NFCController.swift in Sources */,
 				457C509F2A3949E400FCE8D0 /* CountryListController.swift in Sources */,
 				4513F6142BAD53ED0080756F /* ChatVC_MessagesDisplayDelegate.swift in Sources */,
@@ -2337,6 +2384,7 @@
 				45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */,
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,
 				4549ECF02AB45B4400EB9C4C /* PostCommentToolBarView.swift in Sources */,
+				45EBFAC52BD7876D00ABBCD2 /* PostMessageCell.swift in Sources */,
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,
 				4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */,
 				45920ACD2A26E045005871ED /* NetworkLogPlugin.swift in Sources */,
@@ -2613,6 +2661,7 @@
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/PaddleOCR",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/Paddle",
+					"$(PROJECT_DIR)/Wecyn/3rdDepandence/BaiDuOCR",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;
@@ -2672,9 +2721,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4F6LM54QKY;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2682,6 +2731,7 @@
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/PaddleOCR",
 					"$(PROJECT_DIR)/Wecyn/Modules/NFC/Paddle",
+					"$(PROJECT_DIR)/Wecyn/3rdDepandence/BaiDuOCR",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wecyn/SupportFile/Info.plist;

@@ -43,7 +43,7 @@ class ChatListViewModel {
     
     
     func markReaded(id: String, onSuccess: @escaping CallBack.StringOptionalReturnVoid) {
-        IMController.shared.markMessageAsReaded(byConID: id, msgIDList: []) { [weak self] msg in
+        IMController.shared.markMessageAsReaded(byConID: id) { [weak self] msg in
             self?.getAllConversations()
             onSuccess(msg)
         }

@@ -33,18 +33,10 @@ class NFCNameCardView: UIView {
             qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: nil)
             
             nameLabel.text = model.full_name
-         
-            var text = ""
-            if !model.title.isEmpty {
-               text = text + model.title
-            }
-            if !model.org_name.isEmpty {
-                text = text + "  " + model.org_name
-            }
             
-            subLabel.text = text
+            subLabel.text = model.headline
             
-            if text.isEmpty == false {
+            if model.headline.isEmpty == false {
                 subLabel.isHidden = false
                 subLabel.snp.makeConstraints { make in
                     make.left.equalToSuperview().offset(16)
@@ -102,7 +94,7 @@ class NFCNameCardView: UIView {
         avtContentView.borderColor = .white
         avtContentView.borderWidth = 2
         
-        avtImgView.contentMode = .scaleAspectFit
+        avtImgView.contentMode = .scaleAspectFill
         avtImgView.cornerRadius = 40
        
         

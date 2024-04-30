@@ -26,6 +26,11 @@ class PostService {
         return APIProvider.rx.request(target).asObservable().mapObjectArray(PostListModel.self)
     }
     
+    static func postInfo(id:Int) -> Observable<PostListModel> {
+        let target = MultiTarget(PostApi.postInfo(id))
+        return APIProvider.rx.request(target).asObservable().mapObject()
+    }
+    
     static func postFeedList(lastId:Int? = nil) -> Observable<[PostListModel]> {
         let target = MultiTarget(PostApi.feedList(lastPostId: lastId))
         return APIProvider.rx.request(target).asObservable().mapObjectArray()
@@ -105,7 +110,7 @@ class UploadVideoResponse:BaseModel {
     var outputURL:URL!
 }
 
-class PostUser :BaseModel {
+class PostUser :BaseModel,Codable {
     var avatar: String = ""
     var id: Int = 0
     var last_name: String = ""
@@ -118,18 +123,27 @@ class PostUser :BaseModel {
 }
 
 class PostImageObject: BaseModel {
+    
     var url:String = ""
-    var width:CGFloat = 0
-    var height:CGFloat = 0
+    var img_w:CGFloat = 0
+    var img_h:CGFloat = 0
     
     var heightForOneImage:CGFloat {
-        var imgH = (kScreenWidth - 32) * (height / width)
+        var imgH = (kScreenWidth - 32) * (img_h / img_w)
         imgH = imgH >= kScreenHeight * 0.6 ? kScreenHeight * 0.6 : imgH
         return imgH
     }
     var widhtForMoreThanOneImage:CGFloat {
-        return 160 * (width / height)
+        return 160 * (img_w / img_h)
     }
+    
+    override func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.img_w <-- "width"
+        mapper <<<
+            self.img_h <-- "height"
+    }
+    
 }
 
 class PostListModel :BaseModel {

@@ -7,7 +7,6 @@ ${BUILT_PRODUCTS_DIR}/CodeTextField/CodeTextField.framework
 ${BUILT_PRODUCTS_DIR}/DKEmptyDataSet/DKEmptyDataSet.framework
 ${BUILT_PRODUCTS_DIR}/DKLogger/DKLogger.framework
 ${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework
-${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework
 ${BUILT_PRODUCTS_DIR}/EachNavigationBar/EachNavigationBar.framework
 ${BUILT_PRODUCTS_DIR}/EntryKit/EntryKit.framework
 ${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework
@@ -25,6 +24,7 @@ ${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework
 ${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework
 ${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
 ${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework
+${BUILT_PRODUCTS_DIR}/MenuItemKit/MenuItemKit.framework
 ${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework
 ${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
 ${BUILT_PRODUCTS_DIR}/NFCReaderWriter/NFCReaderWriter.framework
@@ -35,7 +35,6 @@ ${BUILT_PRODUCTS_DIR}/R.swift/RswiftResources.framework
 ${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
 ${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework
 ${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework
-${BUILT_PRODUCTS_DIR}/RxLocalizer/RxLocalizer.framework
 ${BUILT_PRODUCTS_DIR}/RxMoyaCache/RxMoyaCache.framework
 ${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework
 ${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework

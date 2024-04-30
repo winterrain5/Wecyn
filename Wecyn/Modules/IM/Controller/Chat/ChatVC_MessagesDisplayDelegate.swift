@@ -59,6 +59,7 @@ extension ChatViewController:MessagesDisplayDelegate {
         } else if case MessageKind.video(let media) = message.kind,let videoURL = media.url {
             getVideoThumbnaiImage(videoURL) { image in
                 imageView.image = image
+                (media as! VideoMediaItem).image = image
             }
         } else {
             imageView.kf.cancelDownloadTask()

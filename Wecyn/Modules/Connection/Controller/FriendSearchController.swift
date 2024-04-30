@@ -17,6 +17,7 @@ class FriendSearchController: BaseTableController {
         self.navigation.item.titleView = searchView
         searchView.searching = { [weak self] keyword in
             guard let `self` = self else { return }
+            self.searchView.startLoading()
             self.keword = keyword.trimmed
             self.loadNewData()
         }
@@ -50,9 +51,9 @@ class FriendSearchController: BaseTableController {
                 return model
             })
             self.endRefresh(models.count)
-            self.searchView.endSearching()
+            self.searchView.stoploading()
         },onError: { e in
-            self.searchView.endSearching()
+            self.searchView.stoploading()
             self.endRefresh(e.asAPIError.emptyDatatype)
         }).disposed(by: rx.disposeBag)
     }

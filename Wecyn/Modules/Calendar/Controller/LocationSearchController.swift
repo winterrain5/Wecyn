@@ -22,8 +22,11 @@ class LocationSearchController: BaseTableController {
     var searchView:NavbarSearchView!
     var datas:[LocationModel] = []
     var selectLocationComplete:((LocationModel)->())?
-    var selectLocation: BehaviorRelay = BehaviorRelay<LocationModel?>(value: nil)
     var editLocation:LocationModel?
+    
+    
+    var searchCompleter = MKLocalSearchCompleter()
+    
     required init(editLocation:LocationModel? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.editLocation = editLocation
@@ -36,24 +39,7 @@ class LocationSearchController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let doneButton = UIButton()
-        doneButton.imageForNormal = R.image.checkmark()
-        let doneItem = UIBarButtonItem(customView: doneButton)
-        
-        let fixItem = UIBarButtonItem.fixedSpace(width: 16)
-        
-        self.navigation.item.rightBarButtonItems = [doneItem,fixItem]
-        doneButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            
-            if let loc = self.selectLocation.value {
-                self.selectLocationComplete?(loc)
-            }
-        
-            self.returnBack()
-        }).disposed(by: rx.disposeBag)
-        
-        selectLocation.map({ $0 != nil }).subscribe(onNext:{ doneButton.isEnabled = $0 }).disposed(by: rx.disposeBag)
+        searchCompleter.delegate = self
         
         searchView = NavbarSearchView(placeholder: "Search Location",
                                       isSearchable: true,
@@ -75,6 +61,8 @@ class LocationSearchController: BaseTableController {
                 self.datas.append(first)
             }
             self.tableView?.reloadData()
+            
+            self.searchCompleter.queryFragment = $0
         }
         
         searchView.beginSearch = { [weak self] in
@@ -83,37 +71,12 @@ class LocationSearchController: BaseTableController {
         }
         
         
-        func requstLocation(text:String) {
-            
-            let request = MKLocalSearch.Request()
-            request.naturalLanguageQuery = text
-            request.resultTypes = .address
-            let mls = MKLocalSearch(request: request)
-          
-            mls.start { response, e in
-                if e != nil {
-                    Toast.showError(e?.localizedDescription ?? "")
-                    return
-                }
-                
-                if !mls.isSearching {
-                    self.datas.append(contentsOf: response?.mapItems.map({ mapItem in
-                        let detail = (mapItem.placemark.administrativeArea ?? "") + (mapItem.placemark.locality ?? "") + (mapItem.placemark.subLocality ?? "") + (mapItem.placemark.thoroughfare ?? "")
-                        let title =  (mapItem.placemark.locality ?? "") + (mapItem.placemark.name ?? "")
-                        let model = LocationModel(title: title, detail: detail)
-                        return model
-                    }) ?? [])
-                    self.tableView?.reloadData()
-                    self.searchView.endSearching()
-                }
-            }
-        }
-        
+       
         searchView.searching = {  [weak self] text in
             guard let `self` = self else { return }
             self.datas.removeAll()
 
-            requstLocation(text:text)
+            self.searchCompleter.queryFragment = text
             
         }
         
@@ -131,7 +94,7 @@ class LocationSearchController: BaseTableController {
  
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        self.searchView.endSearching()
+        self.searchView.stoploading()
     }
     override func createListView() {
         super.createListView()
@@ -187,12 +150,31 @@ class LocationSearchController: BaseTableController {
         
         self.reloadData()
         
-        self.selectLocation.accept(datas.filter({ $0.isSelect }).first)
+        
+        self.selectLocationComplete?(model)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            self.dismiss(animated: true)
+        }
     }
   
 }
 
-
+extension LocationSearchController:MKLocalSearchCompleterDelegate {
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        let results = completer.results.map({
+            return LocationModel(title: $0.title, detail: $0.subtitle)
+        })
+        if self.datas.count > 0 {
+            self.datas.replaceSubrange(1..<datas.count, with: results)
+        } else {
+            self.datas = results
+        }
+        
+        self.endRefresh()
+    }
+    
+}
 
 class LocationItemCell: UITableViewCell {
     let imgView = UIImageView()
@@ -244,3 +226,4 @@ class LocationItemCell: UITableViewCell {
         }
     }
 }
+

@@ -106,6 +106,19 @@ extension ChatViewController:  MessagesDataSource {
                 cell.delegate = self
                 return cell
             }
+            if custom is PostItem {
+                let cell = messagesCollectionView.dequeueReusableCell(
+                  PostMessageCell.self,
+                  for: indexPath)
+                cell.configure(
+                  with: message,
+                  at: indexPath,
+                  in: messagesCollectionView,
+                  dataSource: self,
+                  and: postMessageSizeCalculator)
+                cell.delegate = self
+                return cell
+            }
         }
        return UICollectionViewCell()
     }

@@ -75,9 +75,7 @@ class BaseViewController: UIViewController {
         notificationButton.imageForNormal = R.image.bell()
         let notificationItem = UIBarButtonItem(customView: notificationButton)
         notificationButton.rx.tap.subscribe(onNext:{
-//            PostService.testNotification().subscribe(onNext:{
-//                print($0)
-//            }).disposed(by: self.rx.disposeBag)
+
             let vc = NotificationController()
             self.navigationController?.pushViewController(vc)
             
@@ -120,19 +118,25 @@ class BaseViewController: UIViewController {
             }
             return
         }
-        notificationBadger.addOrReplaceCurrent(with: count.string, animated: false)
+        if notificationBadger != nil {
+            notificationBadger.addOrReplaceCurrent(with: count.string, animated: false)
+        }
     }
     
     
     func updateMessageBadge(_ count:Int) {
         if count == 0 {
-            if notificationBadger != nil {
-                notificationBadger.remove(animated: false)
+            if messageBadger != nil {
+                messageBadger.remove(animated: false)
             }
             return
         }
-        messageBadger.addOrReplaceCurrent(with: count.string, animated: false)
+        if messageBadger != nil {
+            messageBadger.addOrReplaceCurrent(with: count.string, animated: false)
+        }
     }
+    
+
     
     
     func barTintColor(_ color:UIColor) {

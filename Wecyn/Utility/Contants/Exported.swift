@@ -24,7 +24,6 @@ import Foundation
 @_exported import MJRefresh
 @_exported import DKLogger
 @_exported import MarqueeLabel
-@_exported import RxLocalizer
 @_exported import SwiftExtensionsLibrary
 @_exported import Kingfisher
 @_exported import SPIndicator

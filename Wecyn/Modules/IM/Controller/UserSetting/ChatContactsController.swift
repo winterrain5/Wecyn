@@ -8,8 +8,8 @@
 import Foundation
 import SectionIndexView
 enum SelectContactType {
-    case shareContact
     case chat
+    case select
 }
 class ChatContactsController:BaseTableController {
     var friends:[[FriendListModel]] = []
@@ -19,9 +19,9 @@ class ChatContactsController:BaseTableController {
     var searchResults:[FriendListModel] = []
     var isSearching = false
     
-    var selectType: SelectContactType = .shareContact
+    var selectType: SelectContactType = .select
     
-    init(selectType: SelectContactType = .shareContact) {
+    init(selectType: SelectContactType = .select) {
         super.init(nibName: nil, bundle: nil)
         self.selectType = selectType
     }
@@ -68,7 +68,7 @@ class ChatContactsController:BaseTableController {
                 $0.full_name.lowercased().contains(keyword.trimmed.lowercased()) })
             
             self.reloadData()
-            searchView.endSearching()
+            searchView.stoploading()
         }
         
         searchView.beginSearch = { [weak self] in
@@ -131,11 +131,23 @@ class ChatContactsController:BaseTableController {
         
         let headView = ConnectionOfMyCell()
         let model = FriendListModel()
+    
         headView.model = model
         headView.size = CGSize(width: kScreenWidth, height: 52)
         tableView?.tableHeaderView = headView
-        headView.rx.tapGesture().when(.recognized).subscribe(onNext:{ _ in
-            IMController.shared.createFileTransfer()
+        headView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self else { return }
+            if self.selectType == .select {
+                self.dismiss(animated: true) {
+                    DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.5) {
+                        model.id = IMController.shared.currentSender.senderId.int ?? 0
+                        model.full_name = "文件传输助手".innerLocalized()
+                        self.didSelectContact?(model)
+                    }
+                }
+            } else {
+                IMController.shared.createFileTransfer()
+            }
         }).disposed(by: rx.disposeBag)
         
         tableView?.showsVerticalScrollIndicator = false
@@ -210,7 +222,7 @@ class ChatContactsController:BaseTableController {
             model = friends[indexPath.section][indexPath.row]
         }
         if isSearching, searchResults.count > 0 {
-            let model = searchResults[indexPath.row]
+            model = searchResults[indexPath.row]
         }
         
         if selectType == .chat {
@@ -224,8 +236,13 @@ class ChatContactsController:BaseTableController {
             self.navigationController?.pushViewController(vc)
             
         } else {
-            self.didSelectContact?(model)
-            self.dismiss(animated: true)
+            
+            self.dismiss(animated: true) {
+                DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.5) {
+                    self.didSelectContact?(model)
+                }
+            }
+            
         }
        
        

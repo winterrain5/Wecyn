@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 245 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 247 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -781,6 +781,13 @@ struct _R {
       ///
       /// Locales: en
       var 已选择: RswiftResources.StringResource { .init(key: "已选择：", tableName: "Localizable", source: source, developmentValue: "Selected:", comment: nil) }
+
+      /// en translation: Post
+      ///
+      /// Key: 帖子
+      ///
+      /// Locales: en
+      var 帖子: RswiftResources.StringResource { .init(key: "帖子", tableName: "Localizable", source: source, developmentValue: "Post", comment: nil) }
 
       /// en translation: Top contacts
       ///
@@ -1566,6 +1573,13 @@ struct _R {
       /// Locales: en
       var 聊天记录: RswiftResources.StringResource { .init(key: "聊天记录", tableName: "Localizable", source: source, developmentValue: "Text", comment: nil) }
 
+      /// en translation: Chat history cleareds
+      ///
+      /// Key: 聊天记录已清除
+      ///
+      /// Locales: en
+      var 聊天记录已清除: RswiftResources.StringResource { .init(key: "聊天记录已清除", tableName: "Localizable", source: source, developmentValue: "Chat history cleareds", comment: nil) }
+
       /// en translation: chat setting
       ///
       /// Key: 聊天设置
@@ -1860,7 +1874,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 124 images.
+  /// This `_R.image` struct is generated, and contains static references to 125 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -1869,6 +1883,9 @@ struct _R {
 
     /// Image `appicon`.
     var appicon: RswiftResources.ImageResource { .init(name: "appicon", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `arrow.up.message`.
+    var arrowUpMessage: RswiftResources.ImageResource { .init(name: "arrow.up.message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `attendace_delete`.
     var attendace_delete: RswiftResources.ImageResource { .init(name: "attendace_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2249,6 +2266,7 @@ struct _R {
       let applinksWwwTerrabyteSg: String = "applinks:www.terrabyte.sg"
     }
     struct comAppleDeveloperIcloudContainerIdentifiers {
+      let iCloudWecynCom: String = "iCloud.wecyn.com"
     }
     struct comAppleDeveloperIcloudServices {
       let cloudDocuments: String = "CloudDocuments"
@@ -2257,13 +2275,14 @@ struct _R {
       let taG: String = "TAG"
     }
     struct comAppleDeveloperUbiquityContainerIdentifiers {
+      let iCloudWecynCom: String = "iCloud.wecyn.com"
     }
     struct comAppleSecurityApplicationGroups {
       let groupWidgetCalendar: String = "group.widget.calendar"
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 5 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 6 resource files.
   struct file {
     let bundle: Foundation.Bundle
 
@@ -2272,6 +2291,9 @@ struct _R {
 
     /// Resource file `OIMUIResource.bundle`.
     var oimuiResourceBundle: RswiftResources.FileResource { .init(name: "OIMUIResource", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
+
+    /// Resource file `aip.license`.
+    var aipLicense: RswiftResources.FileResource { .init(name: "aip", pathExtension: "license", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `bundle.js`.
     var bundleJs: RswiftResources.FileResource { .init(name: "bundle", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }

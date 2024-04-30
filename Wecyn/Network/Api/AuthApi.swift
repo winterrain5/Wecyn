@@ -53,7 +53,7 @@ extension AuthApi:  TargetType, Cacheable  {
         case .emailSendeVerificationCode(let email):
             return requestParametersByPost(["email":email])
         case .emailVerification(let email,let code):
-            return requestParametersByPost(["email":email,"code":code])
+            return requestParametersByPost(["email":email,"code":code,"platform":1])
         case .getCountryList:
             return .requestPlain
         case .getCityList(let countryID):

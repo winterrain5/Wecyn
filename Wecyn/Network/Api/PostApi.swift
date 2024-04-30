@@ -10,6 +10,7 @@ import Moya
 enum PostApi {
     case addPost(_ content:String,_ images:[String]? = nil,_ video:String? = nil, _ type:Int = 1)
     case postList(_ userId:Int? = nil,_ lastPostId:Int? = nil)
+    case postInfo(_ id:Int)
     case updatePostType(_ id:Int,_ type:Int)
     case feedList(lastPostId:Int? = nil)
     case addComment(_ id:Int,_ content:String)
@@ -53,6 +54,8 @@ extension PostApi: TargetType {
             return "/api/post/repost/"
         case .getUploadVideoUrl:
             return "/api/post/getUploadVideoUrl/"
+        case .postInfo:
+            return "/api/post/getPostInfo/"
         case .test:
             return "/api/test/imNotificationTest/"
         }
@@ -61,7 +64,7 @@ extension PostApi: TargetType {
         switch self{
         case .addPost,.addReply,.cancelLike,.setLike,.addComment,.repost:
             return .post
-        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl,.test:
+        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl,.test,.postInfo:
             return .get
         case .updatePostType:
             return .put
@@ -95,6 +98,8 @@ extension PostApi: TargetType {
             return requestParametersByPost(["id":id,"content":content,"type":type])
         case .getUploadVideoUrl:
             return .requestPlain
+        case .postInfo(let id):
+            return requestParametersByGet(["id":id])
         case .test:
             return requestParametersByGet(["is_online_only":1,"not_offline_push":1])
         }

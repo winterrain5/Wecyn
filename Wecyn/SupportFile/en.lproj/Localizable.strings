@@ -266,7 +266,8 @@
 "确定撤回该条消息？" = "Confirm to delete this message?";
 "你撤回了一条消息" = "you revoked a message";
 "文件传输助手" = "File Transfer Assistant";
-
+"帖子" = "Post";
+"聊天记录已清除" = "Chat history cleareds";
 
 "名片" = "Carte";
 "日历" = "Calendar";
