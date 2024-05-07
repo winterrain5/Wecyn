@@ -11,6 +11,7 @@ import SKPhotoBrowser
 import AVFAudio
 import AVKit
 import SafariServices
+import SwiftyJSON
 // MARK: MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
     func didTapAvatar(in cell: MessageCollectionViewCell) {
@@ -56,6 +57,18 @@ extension ChatViewController: MessageCellDelegate {
             }
             let vc = PostDetailViewController(postId: model.id)
             self.navigationController?.pushViewController(vc)
+        }
+        
+        //https://www.google.com/maps/search/?api=1&query=47.5951518%2C-122.3316393&query_place_id=ChIJKxjxuaNqkFQR3CK6O1HNNqY
+        // "{\"name\":\"泰鑫商务中心停车场\",\"place_id\":\"ChIJ-5D9bDm3yjURocnDun6cZYY\"}"
+        if case MessageKind.location(let item) = messageList[indexPath.section].kind {
+            let locationItem = item as! CoordinateItem
+            let json = JSON.init(parseJSON: locationItem.desc)
+            let name = json["name"].string ?? ""
+            let placeId = json["place_id"].string ?? ""
+            guard let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(name.urlEncoded)&query_place_id=\(placeId)") else { return }
+            let vc  = SFSafariViewController(url: url)
+            self.present(vc, animated: true)
         }
         
     }

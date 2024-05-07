@@ -72,7 +72,7 @@ class PostUserHeaderInfoView: UIView {
         avtContentView.borderColor = .white
         avtContentView.borderWidth = 2
         
-        avtImgView.contentMode = .scaleAspectFit
+        avtImgView.contentMode = .scaleAspectFill
         avtImgView.cornerRadius = 40
         
         

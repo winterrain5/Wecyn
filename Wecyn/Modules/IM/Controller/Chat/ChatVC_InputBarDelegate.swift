@@ -9,6 +9,7 @@ import Foundation
 import MessageKit
 import PromiseKit
 import OpenIMSDK
+import CoreLocation
 extension ChatViewController {
     
     func getUploadFileUrl(_ type:UploadContentType) -> Promise<UploadMediaModel> {
@@ -61,9 +62,32 @@ extension ChatViewController:CustomInputBarAccessoryViewDelegate {
                 case .carte(name: let name, avatar: let avatar, id: let id, wid: let wid):
                     let source = MediaMessageSource(source: MediaMessageSource.Info(url: avatar.url),name: name,id: id,wid: wid)
                     self.sendCarte(source: source)
+                case .location(let latitude,let longitude,let desc,let pid):
+                    self.sendLocation(latitude,longitude,desc,pid)
                 }
             }
         }
+    }
+    
+    func sendLocation(_ latitude:Double,_ longitude:Double,_ desc:String,_ pid:String) {
+        
+        let json = ["name":desc,"place_id":pid].jsonString() ?? ""
+        let message = IMMessage(location: CLLocation(latitude: latitude, longitude: longitude),
+                                desc: json,
+                                user: IMController.shared.currentSender,
+                                messageId: UUID().uuidString,
+                                date: Date())
+        message.sendStatus = .sending
+        self.insertMessage(message)
+       
+        IMController.shared.sendLocation(latitude: latitude, longitude: longitude, desc: json, to: dataProvider.receiverId, conversationType: .c2c) { info in
+            
+        } onComplete: { info in
+            message.sendStatus = info.status
+            message.messageId = info.clientMsgID
+            self.reloadCollectionView()
+        }
+
     }
     
     func sendCarte(source: MediaMessageSource) {

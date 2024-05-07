@@ -2282,12 +2282,9 @@ struct _R {
     }
   }
 
-  /// This `_R.file` struct is generated, and contains static references to 6 resource files.
+  /// This `_R.file` struct is generated, and contains static references to 5 resource files.
   struct file {
     let bundle: Foundation.Bundle
-
-    /// Resource file `OIMUIEmoji.bundle`.
-    var oimuiEmojiBundle: RswiftResources.FileResource { .init(name: "OIMUIEmoji", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
 
     /// Resource file `OIMUIResource.bundle`.
     var oimuiResourceBundle: RswiftResources.FileResource { .init(name: "OIMUIResource", pathExtension: "bundle", bundle: bundle, locale: LocaleReference.none) }
@@ -2471,9 +2468,9 @@ struct _R {
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'CreateGroupHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "paperplane.fill", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'paperplane.fill' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "toolbar_icon_at", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_at' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_hashtag", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_hashtag' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "toolbar_icon_image", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_icon_image' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
-      if UIKit.UIImage(named: "toolbar_link", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'toolbar_link' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIImage(named: "video", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'video' is used in nib 'CreatePostToolBar', but couldn't be loaded.") }
       if UIKit.UIColor(named: "AccentColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'AccentColor' is used in nib 'ForgetPwdContainer', but couldn't be loaded.") }
       if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'ForgetPwdContainer', but couldn't be loaded.") }

@@ -55,15 +55,51 @@ class PostMediaModel: BaseModel {
     }
 }
 class PostDraftModel:BaseModel, Codable {
+   
     var content:String = ""
     var images:[String] = []
     
 }
 class CreatePostViewController: BaseViewController {
     
+    var CommentReplyTextViewStyle : [NSAttributedString.Key : Any] {
+        get {
+            
+            let paraStyle = NSMutableParagraphStyle()
+            
+            paraStyle.lineBreakMode = .byWordWrapping
+            
+            return [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15.0),
+                NSAttributedString.Key.paragraphStyle: paraStyle
+            ]
+        }
+    }
+    
+    var richTextViewDelegate = RichTextViewDelegateHandler()
+    
+    lazy var richTextView: RichTextView = {
+        let view = RichTextView(frame: CGRect.zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textContainer.lineBreakMode = .byWordWrapping
+        
+        view.delaysContentTouches = false
+        
+        //        richTextView.textContainer.lineFragmentPadding = 0
+        
+        view.font = UIFont.systemFont(ofSize: 15.0)
+        
+        view.isScrollEnabled = true
+        view.textContainerInset = UIEdgeInsets.zero
+        view.isEditable = true // true for realtime editing
+        
+        view.isSelectable = true
+         (view.textStorage as! RichTextStorage).defaultTextStyle = CommentReplyTextViewStyle
+        return view
+    }()
+    
+    
     var toolBar = CreatePostToolBar.loadViewFromNib()
     
-    var richTextView = KMPlaceholderTextView()
     lazy var imageClvView:UICollectionView  = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -80,22 +116,24 @@ class CreatePostViewController: BaseViewController {
     let toolBarH = 44.cgFloat  + UIDevice.bottomSafeAreaMargin
     var postMedias:[PostMediaModel] = []
     var isOriginal = true
-    var postType:PostType = .Public
+    
     let postTypeButton = UIButton()
     let saveButton = LoadingButton()
     let draftButton = UIButton()
     let scrollView = UIScrollView()
+   
+    private var postType:PostType = .Public
+    private let postDraft = PostDraftModel()
+    private var isEnablePost:BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    private var editMedia:PostMediaModel?
+    private var postModel:PostListModel?
+    private var quotepostView:PostQuoteView?
+    private let requestModel = AddPostRequestModel()
+    private lazy var content = self.richTextView.text
+    private var postMediaType:PostMediaType = .None
+    private var task: URLSessionUploadTask?
+    
     var addCompleteHandler:((PostListModel)->())?
-    let postDraft = PostDraftModel()
-    var isEnablePost:BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var editMedia:PostMediaModel?
-    
-    var postModel:PostListModel?
-    var quotepostView:PostQuoteView?
-    
-    var postMediaType:PostMediaType = .None
-    
-    var task: URLSessionUploadTask?
     
     convenience init(postModel:PostListModel) {
         self.init(nibName: nil, bundle: nil)
@@ -105,6 +143,215 @@ class CreatePostViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configScrollView()
+        configToolbar()
+        configNavBar()
+        updateScrollViewContentSize()
+        
+        if let postModel = self.postModel {
+            quotepostView = PostQuoteView(frame: CGRect(x: 16, y: imageClvView.frame.maxY + (postMedias.count > 0 ? 16 : 0), width: kScreenWidth - 32, height: 0))
+            quotepostView?.postModel = postModel
+            scrollView.addSubview(quotepostView!)
+            quotepostView?.height = quotepostView?.viewHeight ?? 0
+            toolBar.isHidden = true
+        }
+        
+        
+    }
+    
+    func configScrollView() {
+        self.view.addSubview(scrollView)
+        scrollView.rx.didEndDragging.observeOn(MainScheduler.asyncInstance).subscribe(onNext:{ [weak self] _ in
+            self?.view.endEditing(true)
+        }).disposed(by: rx.disposeBag)
+        scrollView.frame = self.view.bounds
+        
+        scrollView.addSubview(postTypeButton)
+        postTypeButton.titleForNormal = "Public "
+        postTypeButton.imageForNormal = R.image.post_type_down()!
+        postTypeButton.titleLabel?.font = UIFont.sk.pingFangRegular(12)
+        postTypeButton.titleColorForNormal = R.color.theamColor()!
+        postTypeButton.borderColor = R.color.theamColor()!
+        postTypeButton.cornerRadius = 12
+        postTypeButton.borderWidth = 1
+        postTypeButton.frame = CGRect(x: 16, y:  16, width: 80, height: 24)
+        postTypeButton.sk.setImageTitleLayout(.imgRight)
+        postTypeButton.showsMenuAsPrimaryAction = true
+        
+        func remakeConstraints(type:PostType){
+            Haptico.selection()
+            self.postType = type
+            self.postTypeButton.titleForNormal = type.description + " "
+            self.postTypeButton.frame.size.width = type == .Public ? 80 : 180
+            
+        }
+        
+        var menuData: [(String, [(String, UIImage?)])] {
+            return [
+                ("PostType", [
+                    (title: "Public", image: nil),
+                    (title: "Visible only to yourself", image: nil),
+                    (title: "Visible only to followers", image: nil),
+                ]
+                )
+            ]
+        }
+        
+        let menu = UIMenu.map(data: menuData, handler: { [weak self] action in
+            guard let `self` = self else { return }
+            action.handleStateChange(self.postTypeButton, section: 0, isSingleChoose: true) { [weak self] in
+                guard let `self` = self else { return }
+                let index = self.postTypeButton.checkRow(by: 0)
+                switch  index {
+                case 0:
+                    remakeConstraints(type: .Public)
+                case 1:
+                    remakeConstraints(type: .OnlySelf)
+                case 2:
+                    remakeConstraints(type: .OnlyFans)
+                default:
+                    remakeConstraints(type: .Public)
+                }
+            }
+        })
+        postTypeButton.menu = menu
+        
+        
+        scrollView.addSubview(richTextView)
+        richTextView.placeholder = "What happend today?"
+        richTextView.textColor = R.color.textColor33()!
+        richTextView.font = UIFont.sk.pingFangRegular(15)
+        richTextView.delegate = richTextViewDelegate
+        richTextView.frame = CGRect(x: 16, y: postTypeButton.frame.maxY + 8, width: kScreenWidth - 32, height: 40)
+        richTextView.rx.didChange.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            self.updateScrollViewContentSize()
+        }).disposed(by: rx.disposeBag)
+        
+        
+        richTextView.becomeFirstResponder()
+        
+        scrollView.addSubview(imageClvView)
+        imageClvView.frame = CGRect(x: 0, y: richTextView.frame.maxY + 16, width: kScreenWidth, height: 260)
+    }
+    
+    func configToolbar() {
+        self.view.addSubview(toolBar)
+        toolBar.frame = CGRect(x: 0, y: kScreenHeight - toolBarH, width: kScreenWidth, height: toolBarH)
+        RxKeyboard.instance.visibleHeight.drive(onNext:{ [weak self] keyboardVisibleHeight in
+            guard let `self` = self else { return }
+            self.toolBar.frame.origin.y = kScreenHeight - keyboardVisibleHeight - self.toolBarH
+        }).disposed(by: rx.disposeBag)
+        
+        toolBar.imageButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            Haptico.selection()
+            
+            func presentController() {
+                var options = PickerOptionsInfo()
+                options.selectOptions = [.photo]
+                options.selectLimit  = 9
+                options.preselectAssets = self.postMedias.map({ $0.asset?.identifier ?? "" })
+                let vc = ImagePickerController(options: options, delegate: self)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            
+            if self.postMediaType == .Video {
+                self.showAlert(title: "Only supports uploading 1 video or 9 pictures. If you need to upload pictures, you need to delete the selected video.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
+                    if idx == 1 {
+                        self.postMedias.removeAll()
+                        
+                        self.updateScrollViewContentSize({
+                            presentController()
+                        })
+                        
+                    }
+                }
+               
+            } else {
+                presentController()
+            }
+        }).disposed(by: rx.disposeBag)
+        
+        
+        
+        toolBar.linkButton.rx.tap.subscribe(onNext:{ [weak self] in
+            Haptico.selection()
+            Toast.showWarning("Function under development")
+        }).disposed(by: rx.disposeBag)
+        
+        toolBar.videoButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            Haptico.selection()
+            
+            func presentController() {
+                var options = PickerOptionsInfo()
+                options.selectOptions = [.video]
+                options.selectLimit  = 1
+                
+                let vc = ImagePickerController(options: options, delegate: self)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            
+            
+            if self.postMediaType == .Image {
+                
+                self.showAlert(title: "Only supports uploading 1 video or 9 pictures. If you need to upload video, you need to delete the selected images.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
+                    if idx == 1 {
+                        self.postMedias.removeAll()
+                        self.updateScrollViewContentSize({
+                            presentController()
+                        })
+                        
+                    }
+                }
+            } else {
+                presentController()
+            }
+            
+           
+            
+        }).disposed(by: rx.disposeBag)
+        
+        toolBar.moreButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            Haptico.selection()
+            self.addPost()
+        }).disposed(by: rx.disposeBag)
+        
+        toolBar.atButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            Haptico.selection()
+            let vc = ChatContactsController(selectType: .select)
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+            vc.didSelectContact = {
+                self.requestModel.at_list.append($0.id)
+                self.requestModel.at_list.removeDuplicates()
+                let atString =  "@\($0.first_name)\($0.last_name)"
+                self.richTextView.text.append(atString)
+                self.richTextView.text.append(" ")
+                self.richTextView.becomeFirstResponder()
+               
+                var replacingText = self.richTextView.text ?? ""
+                guard let replacingRange = self.richTextView.richTextStorage.mentionRanges.last else { return }
+                
+                self.content = (replacingText as NSString).replacingCharacters(in: replacingRange, with: "[@\($0.id)]")
+                
+                self.richTextView.richTextStorage.mentionRanges.dropLast().enumerated().forEach({ idx,rang in
+                    self.content = (self.content! as NSString).replacingCharacters(in: rang, with: "[@\(self.requestModel.at_list[idx])]")
+                })
+               
+                print(self.content)
+            }
+        }).disposed(by: rx.disposeBag)
+        
+    }
+    
+    func configNavBar() {
         self.navigation.bar.shadowImage = UIImage(color: R.color.backgroundColor()!, size: CGSize(width: kScreenWidth, height: 1))
         
         self.addLeftBarButtonItem(image: R.image.xmark())
@@ -203,186 +450,8 @@ class CreatePostViewController: BaseViewController {
         } else {
             self.navigation.item.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         }
-        
-        
-        
-        self.view.addSubview(scrollView)
-        scrollView.rx.didEndDragging.observeOn(MainScheduler.asyncInstance).subscribe(onNext:{ [weak self] _ in
-            self?.view.endEditing(true)
-        }).disposed(by: rx.disposeBag)
-        scrollView.frame = self.view.bounds
-        
-        scrollView.addSubview(postTypeButton)
-        postTypeButton.titleForNormal = "Public "
-        postTypeButton.imageForNormal = R.image.post_type_down()!
-        postTypeButton.titleLabel?.font = UIFont.sk.pingFangRegular(12)
-        postTypeButton.titleColorForNormal = R.color.theamColor()!
-        postTypeButton.borderColor = R.color.theamColor()!
-        postTypeButton.cornerRadius = 12
-        postTypeButton.borderWidth = 1
-        postTypeButton.frame = CGRect(x: 16, y:  16, width: 80, height: 24)
-        postTypeButton.sk.setImageTitleLayout(.imgRight)
-        postTypeButton.showsMenuAsPrimaryAction = true
-        
-        func remakeConstraints(type:PostType){
-            Haptico.selection()
-            self.postType = type
-            self.postTypeButton.titleForNormal = type.description + " "
-            self.postTypeButton.frame.size.width = type == .Public ? 80 : 180
-            
-        }
-        
-        var menuData: [(String, [(String, UIImage?)])] {
-            return [
-                ("PostType", [
-                    (title: "Public", image: nil),
-                    (title: "Visible only to yourself", image: nil),
-                    (title: "Visible only to followers", image: nil),
-                ]
-                )
-            ]
-        }
-        
-        let menu = UIMenu.map(data: menuData, handler: { [weak self] action in
-            guard let `self` = self else { return }
-            action.handleStateChange(self.postTypeButton, section: 0, isSingleChoose: true) { [weak self] in
-                guard let `self` = self else { return }
-                let index = self.postTypeButton.checkRow(by: 0)
-                switch  index {
-                case 0:
-                    remakeConstraints(type: .Public)
-                case 1:
-                    remakeConstraints(type: .OnlySelf)
-                case 2:
-                    remakeConstraints(type: .OnlyFans)
-                default:
-                    remakeConstraints(type: .Public)
-                }
-            }
-        })
-        postTypeButton.menu = menu
-        
-        
-        scrollView.addSubview(richTextView)
-        richTextView.placeholder = "What happend today?"
-        richTextView.textColor = R.color.textColor33()!
-        richTextView.font = UIFont.sk.pingFangRegular(15)
-        richTextView.placeholderFont = UIFont.sk.pingFangRegular(15)
-        richTextView.frame = CGRect(x: 16, y: postTypeButton.frame.maxY + 8, width: kScreenWidth - 32, height: 40)
-        richTextView.rx.didChange.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            self.updateScrollViewContentSize()
-        }).disposed(by: rx.disposeBag)
-        
-        
-        richTextView.becomeFirstResponder()
-        
-        
-        scrollView.addSubview(imageClvView)
-        imageClvView.frame = CGRect(x: 0, y: richTextView.frame.maxY + 16, width: kScreenWidth, height: 260)
-        
-        self.view.addSubview(toolBar)
-        toolBar.frame = CGRect(x: 0, y: kScreenHeight - toolBarH, width: kScreenWidth, height: toolBarH)
-        RxKeyboard.instance.visibleHeight.drive(onNext:{ [weak self] keyboardVisibleHeight in
-            guard let `self` = self else { return }
-            self.toolBar.frame.origin.y = kScreenHeight - keyboardVisibleHeight - self.toolBarH
-        }).disposed(by: rx.disposeBag)
-        
-        toolBar.imageButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            Haptico.selection()
-            
-            func presentController() {
-                var options = PickerOptionsInfo()
-                options.selectOptions = [.photo]
-                options.selectLimit  = 9
-                options.preselectAssets = self.postMedias.map({ $0.asset?.identifier ?? "" })
-                let vc = ImagePickerController(options: options, delegate: self)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
-            
-            if self.postMediaType == .Video {
-                self.showAlert(title: "Only supports uploading 1 video or 9 pictures. If you need to upload pictures, you need to delete the selected video.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
-                    if idx == 1 {
-                        self.postMedias.removeAll()
-                        
-                        self.updateScrollViewContentSize({
-                            presentController()
-                        })
-                        
-                    }
-                }
-               
-            } else {
-                presentController()
-            }
-        }).disposed(by: rx.disposeBag)
-        
-        
-        
-        toolBar.linkButton.rx.tap.subscribe(onNext:{ [weak self] in
-            Haptico.selection()
-            Toast.showWarning("Function under development")
-        }).disposed(by: rx.disposeBag)
-        
-        toolBar.videoButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            Haptico.selection()
-            
-            func presentController() {
-                var options = PickerOptionsInfo()
-                options.selectOptions = [.video]
-                options.selectLimit  = 1
-                
-                let vc = ImagePickerController(options: options, delegate: self)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
-            
-            
-            if self.postMediaType == .Image {
-                
-                self.showAlert(title: "Only supports uploading 1 video or 9 pictures. If you need to upload video, you need to delete the selected images.", message: nil,buttonTitles: ["Cancel","Confirm"],highlightedButtonIndex: 1) { idx in
-                    if idx == 1 {
-                        self.postMedias.removeAll()
-                        self.updateScrollViewContentSize({
-                            presentController()
-                        })
-                        
-                    }
-                }
-            } else {
-                presentController()
-            }
-            
-           
-            
-        }).disposed(by: rx.disposeBag)
-        
-        toolBar.moreButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            Haptico.selection()
-            self.addPost()
-        }).disposed(by: rx.disposeBag)
-        
-        toolBar.hastagButton.rx.tap.subscribe(onNext:{ [weak self] in
-            guard let `self` = self else { return }
-            Haptico.selection()
-            Toast.showWarning("Function under development")
-        }).disposed(by: rx.disposeBag)
-        
-        if let postModel = self.postModel {
-            quotepostView = PostQuoteView(frame: CGRect(x: 16, y: imageClvView.frame.maxY + (postMedias.count > 0 ? 16 : 0), width: kScreenWidth - 32, height: 0))
-            quotepostView?.postModel = postModel
-            scrollView.addSubview(quotepostView!)
-            quotepostView?.height = quotepostView?.viewHeight ?? 0
-            toolBar.isHidden = true
-        }
-        
-        self.updateScrollViewContentSize()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.shared.enableAutoToolbar  = false
@@ -449,9 +518,14 @@ class CreatePostViewController: BaseViewController {
                     images.append($0.image.compressionImageToBase64(200))
                 }
             } mainTask: {
-                let content = self.richTextView.text ?? ""
+                
                 let type = self.postType.rawValue
-                PostService.addPost(content: content,images: images,type: type).subscribe(onNext:{ model in
+               
+                self.requestModel.images = images
+                self.requestModel.type = type
+                self.requestModel.content = self.content
+                
+                PostService.addPost(model: self.requestModel).subscribe(onNext:{ model in
                     Toast.showSuccess("Posted successfully")
                     self.returnBack()
                     self.saveButton.stopAnimation()
@@ -543,7 +617,10 @@ class CreatePostViewController: BaseViewController {
             return Promise { resolver in
                 let content = self.richTextView.text ?? ""
                 let type = self.postType.rawValue
-                PostService.addPost(content: content,video: video ,type: type).subscribe(onNext:{ model in
+                self.requestModel.content = content
+                self.requestModel.video = video
+                self.requestModel.type = type
+                PostService.addPost(model: self.requestModel).subscribe(onNext:{ model in
                     Toast.showSuccess("Posted successfully")
                     self.returnBack()
                     self.saveButton.stopAnimation()

@@ -32,6 +32,7 @@ ${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework
 ${BUILT_PRODUCTS_DIR}/Permission/Permission.framework
 ${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
 ${BUILT_PRODUCTS_DIR}/R.swift/RswiftResources.framework
+${BUILT_PRODUCTS_DIR}/RichLabel/RichLabel.framework
 ${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
 ${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework
 ${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework

@@ -76,6 +76,7 @@ class BaseViewController: UIViewController {
         let notificationItem = UIBarButtonItem(customView: notificationButton)
         notificationButton.rx.tap.subscribe(onNext:{
 
+       
             let vc = NotificationController()
             self.navigationController?.pushViewController(vc)
             

@@ -102,6 +102,10 @@
 		4513F61A2BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F6192BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift */; };
 		4513F61D2BAD5A5C0080756F /* iMessageInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4513F61C2BAD5A5C0080756F /* iMessageInputBar.swift */; };
 		4519A4892A495A72007481A6 /* CalendarAddAttendanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */; };
+		451E5BBD2BE9D66600058867 /* RichTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451E5BBA2BE9D66600058867 /* RichTextStorage.swift */; };
+		451E5BBE2BE9D66600058867 /* RichTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451E5BBB2BE9D66600058867 /* RichTextView.swift */; };
+		451E5BBF2BE9D66600058867 /* RichTextViewDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451E5BBC2BE9D66600058867 /* RichTextViewDelegateHandler.swift */; };
+		451E5BC12BE9F82A00058867 /* AddPostRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451E5BC02BE9F82A00058867 /* AddPostRequestModel.swift */; };
 		452A7A202BAA7CA5009312F7 /* AdminDomainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A1F2BAA7CA4009312F7 /* AdminDomainController.swift */; };
 		452A7A222BAA8668009312F7 /* AdminDomainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A212BAA8668009312F7 /* AdminDomainCell.swift */; };
 		452A7A242BAAAF74009312F7 /* AdminAddDomainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */; };
@@ -342,6 +346,7 @@
 		45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */; };
 		45EBFAC52BD7876D00ABBCD2 /* PostMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EBFAC42BD7876D00ABBCD2 /* PostMessageCell.swift */; };
 		45EC1D982BE0809A0091FCD5 /* ChatRetweetAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EC1D972BE0809A0091FCD5 /* ChatRetweetAlertView.swift */; };
+		45EC1D9A2BE08E6B0091FCD5 /* ChatLocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EC1D992BE08E6B0091FCD5 /* ChatLocationSearchController.swift */; };
 		45F07C1C2BB10D770070813D /* String_IM_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C1B2BB10D770070813D /* String_IM_Extension.swift */; };
 		45F07C1F2BB10ECC0070813D /* JsonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C1E2BB10ECC0070813D /* JsonTool.swift */; };
 		45F07C212BB10FB80070813D /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C202BB10FB80070813D /* MessageHelper.swift */; };
@@ -354,7 +359,6 @@
 		45F07C342BB2760C0070813D /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C332BB2760C0070813D /* DataProvider.swift */; };
 		45F07C362BB2763F0070813D /* DataProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C352BB2763F0070813D /* DataProviderDelegate.swift */; };
 		45F07C3A2BB299B00070813D /* ChatViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C392BB299B00070813D /* ChatViewControllerBuilder.swift */; };
-		45FC5D222BB3F2AE00D0EDB3 /* OIMUIEmoji.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 45FC5D202BB3F2AE00D0EDB3 /* OIMUIEmoji.bundle */; };
 		45FC5D232BB3F2AE00D0EDB3 /* OIMUIResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 45FC5D212BB3F2AE00D0EDB3 /* OIMUIResource.bundle */; };
 		45FC5D252BB3F30A00D0EDB3 /* BundleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FC5D242BB3F30A00D0EDB3 /* BundleUtil.swift */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
@@ -497,6 +501,10 @@
 		4513F6192BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC_InputBarAccessoryViewDelegate.swift; sourceTree = "<group>"; };
 		4513F61C2BAD5A5C0080756F /* iMessageInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageInputBar.swift; sourceTree = "<group>"; };
 		4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAddAttendanceController.swift; sourceTree = "<group>"; };
+		451E5BBA2BE9D66600058867 /* RichTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextStorage.swift; sourceTree = "<group>"; };
+		451E5BBB2BE9D66600058867 /* RichTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextView.swift; sourceTree = "<group>"; };
+		451E5BBC2BE9D66600058867 /* RichTextViewDelegateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RichTextViewDelegateHandler.swift; sourceTree = "<group>"; };
+		451E5BC02BE9F82A00058867 /* AddPostRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostRequestModel.swift; sourceTree = "<group>"; };
 		452A7A1F2BAA7CA4009312F7 /* AdminDomainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDomainController.swift; sourceTree = "<group>"; };
 		452A7A212BAA8668009312F7 /* AdminDomainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDomainCell.swift; sourceTree = "<group>"; };
 		452A7A232BAAAF74009312F7 /* AdminAddDomainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddDomainController.swift; sourceTree = "<group>"; };
@@ -740,6 +748,7 @@
 		45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostToolBar.xib; sourceTree = "<group>"; };
 		45EBFAC42BD7876D00ABBCD2 /* PostMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageCell.swift; sourceTree = "<group>"; };
 		45EC1D972BE0809A0091FCD5 /* ChatRetweetAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRetweetAlertView.swift; sourceTree = "<group>"; };
+		45EC1D992BE08E6B0091FCD5 /* ChatLocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLocationSearchController.swift; sourceTree = "<group>"; };
 		45F07C1B2BB10D770070813D /* String_IM_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_IM_Extension.swift; sourceTree = "<group>"; };
 		45F07C1E2BB10ECC0070813D /* JsonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonTool.swift; sourceTree = "<group>"; };
 		45F07C202BB10FB80070813D /* MessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
@@ -752,7 +761,6 @@
 		45F07C332BB2760C0070813D /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		45F07C352BB2763F0070813D /* DataProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderDelegate.swift; sourceTree = "<group>"; };
 		45F07C392BB299B00070813D /* ChatViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerBuilder.swift; sourceTree = "<group>"; };
-		45FC5D202BB3F2AE00D0EDB3 /* OIMUIEmoji.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OIMUIEmoji.bundle; sourceTree = "<group>"; };
 		45FC5D212BB3F2AE00D0EDB3 /* OIMUIResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OIMUIResource.bundle; sourceTree = "<group>"; };
 		45FC5D242BB3F30A00D0EDB3 /* BundleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleUtil.swift; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -985,6 +993,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		451E5BB92BE9D1FA00058867 /* RichTextView */ = {
+			isa = PBXGroup;
+			children = (
+				451E5BBA2BE9D66600058867 /* RichTextStorage.swift */,
+				451E5BBB2BE9D66600058867 /* RichTextView.swift */,
+				451E5BBC2BE9D66600058867 /* RichTextViewDelegateHandler.swift */,
+			);
+			path = RichTextView;
+			sourceTree = "<group>";
+		};
 		452A7A1C2BAA773F009312F7 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -1162,6 +1180,7 @@
 				45005C582A57FB8900560E21 /* GroupUpdateRequestModel.swift */,
 				45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */,
 				458870DB2AE638AD00029353 /* AddUserExperienceRequestModel.swift */,
+				451E5BC02BE9F82A00058867 /* AddPostRequestModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -1371,6 +1390,7 @@
 		45920A9E2A26E045005871ED /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				451E5BB92BE9D1FA00058867 /* RichTextView */,
 				45920A9F2A26E045005871ED /* Toast */,
 				45920AA12A26E045005871ED /* AnimationRefresh */,
 				45920AA42A26E045005871ED /* LoaddingButton */,
@@ -1863,6 +1883,7 @@
 				45F07C332BB2760C0070813D /* DataProvider.swift */,
 				45F07C352BB2763F0070813D /* DataProviderDelegate.swift */,
 				45F07C392BB299B00070813D /* ChatViewControllerBuilder.swift */,
+				45EC1D992BE08E6B0091FCD5 /* ChatLocationSearchController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1881,7 +1902,6 @@
 		45FC5D1F2BB3F29300D0EDB3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				45FC5D202BB3F2AE00D0EDB3 /* OIMUIEmoji.bundle */,
 				45FC5D212BB3F2AE00D0EDB3 /* OIMUIResource.bundle */,
 			);
 			path = Resource;
@@ -1944,6 +1964,7 @@
 				7ADA8EE899883EEC9D8C8070 /* [CP] Embed Pods Frameworks */,
 				4564BE322A8329A700464AFA /* Embed Foundation Extensions */,
 				45DC86622BD5F12400CC32CB /* CopyFiles */,
+				35E7BA69A59AECE027EC5D60 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2022,7 +2043,6 @@
 				450BA6EB2A36A98F00764828 /* RegistAddAvatarView.xib in Resources */,
 				456BB0552B4E92D900BB7838 /* AdminEditStaffExpContainer.xib in Resources */,
 				4509DAA62B91BCA0003CE3F6 /* ForgetPwdContainer.xib in Resources */,
-				45FC5D222BB3F2AE00D0EDB3 /* OIMUIEmoji.bundle in Resources */,
 				45D4D9B62A3C2B7B00D7ED04 /* ConnectionItemCell.xib in Resources */,
 				457C508C2A38438800FCE8D0 /* HomeHeaderJobItemCell.xib in Resources */,
 				4549ECF42AB837E300EB9C4C /* PostDetailCommentFooterView.xib in Resources */,
@@ -2078,6 +2098,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		35E7BA69A59AECE027EC5D60 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wecyn/Pods-Wecyn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		450BA6BB2A31CCE000764828 /* ShellScript */ = {
@@ -2185,6 +2222,7 @@
 				45ACB1FE2BC6278200CEC091 /* ChatSendAddFriendRequestController.swift in Sources */,
 				450BA6BA2A31C76E00764828 /* ProfileSectionView.swift in Sources */,
 				45920AFC2A26E045005871ED /* BaseNavigationController.swift in Sources */,
+				451E5BC12BE9F82A00058867 /* AddPostRequestModel.swift in Sources */,
 				45ACB1FC2BC530D200CEC091 /* CustomContactMessageCell.swift in Sources */,
 				45920AEE2A26E045005871ED /* ScriptMessage.swift in Sources */,
 				458871042AFB7B0F00029353 /* AddNewBusinessCardController.swift in Sources */,
@@ -2195,6 +2233,7 @@
 				457C50982A38589200FCE8D0 /* AuthApi.swift in Sources */,
 				45005C7B2A5E388200560E21 /* MediaInserter.swift in Sources */,
 				45D0AF962B31A4F800C6FAFA /* MMNodeCell.swift in Sources */,
+				451E5BBE2BE9D66600058867 /* RichTextView.swift in Sources */,
 				45920AD02A26E045005871ED /* EmptyDataType.swift in Sources */,
 				4509DAA42B91BC97003CE3F6 /* ForgetPwdContainer.swift in Sources */,
 				45F07C2A2BB14AA20070813D /* ChatListController.swift in Sources */,
@@ -2308,6 +2347,7 @@
 				458870E62AE7BD2000029353 /* AddUserEducationExperienceView.swift in Sources */,
 				450F6CD52A6928220001AA1B /* CalendarMenuView.swift in Sources */,
 				45F07C212BB10FB80070813D /* MessageHelper.swift in Sources */,
+				45EC1D9A2BE08E6B0091FCD5 /* ChatLocationSearchController.swift in Sources */,
 				45920ACC2A26E045005871ED /* APIError.swift in Sources */,
 				45920AD72A26E045005871ED /* Device.swift in Sources */,
 				45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */,
@@ -2391,6 +2431,7 @@
 				45BBF52A2A4833B00018992C /* AddEventRequestModel.swift in Sources */,
 				454BA3802B8D72E5006B47BA /* NotificationController.swift in Sources */,
 				450F6CBF2A613AFC0001AA1B /* ExclusionDate.swift in Sources */,
+				451E5BBF2BE9D66600058867 /* RichTextViewDelegateHandler.swift in Sources */,
 				450BA6E92A36A97700764828 /* RegistAddAvatarView.swift in Sources */,
 				45C938252B46AA9000621BED /* AdminEditStaffController.swift in Sources */,
 				4513F6182BAD542B0080756F /* ChatVC_MessageLabelDelegate.swift in Sources */,
@@ -2413,6 +2454,7 @@
 				45C781F92A98A0FB00D4E721 /* ImageCompress+Builder.swift in Sources */,
 				458870E02AE66D7000029353 /* AddUserWorkExperienceView.swift in Sources */,
 				45381DFD2BC22A84007EE954 /* MCRecordHUD.swift in Sources */,
+				451E5BBD2BE9D66600058867 /* RichTextStorage.swift in Sources */,
 				456BB04B2B4D38E300BB7838 /* AdminAddRoomContainer.swift in Sources */,
 				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
 				45450CD22B2C41C400558C9D /* AdminRoomController.swift in Sources */,

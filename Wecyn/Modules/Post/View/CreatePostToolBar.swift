@@ -11,9 +11,8 @@ class CreatePostToolBar: UIView {
 
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var linkButton: UIButton!
-    @IBOutlet weak var hastagButton: UIButton!
+    @IBOutlet weak var atButton: UIButton!
     @IBOutlet weak var videoButton: UIButton!
-    @IBOutlet weak var emojiButton: UIButton!
     @IBOutlet weak var imageButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()

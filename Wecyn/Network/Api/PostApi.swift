@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 enum PostApi {
-    case addPost(_ content:String,_ images:[String]? = nil,_ video:String? = nil, _ type:Int = 1)
+    case addPost(_ model:AddPostRequestModel)
     case postList(_ userId:Int? = nil,_ lastPostId:Int? = nil)
     case postInfo(_ id:Int)
     case updatePostType(_ id:Int,_ type:Int)
@@ -72,8 +72,8 @@ extension PostApi: TargetType {
     }
     var task: Task {
         switch self{
-        case .addPost(let content,let images,let video,let type):
-            return requestParametersByPost(["content":content,"images":images,"video":video,"type":type])
+        case .addPost(let model):
+            return requestToTaskByPost(model)
         case .postList(let userId,let lastId):
             return requestParametersByGet(["user_id":userId,"last_id":lastId])
         case .updatePostType(let id,let type):

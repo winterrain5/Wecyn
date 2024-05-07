@@ -25,7 +25,7 @@ class RegistConfirmView: UIView {
     
     var registModel:RegistRequestModel? {
         didSet {
-            emailLabel.text = "Type in the code we sent to\n\(registModel?.email ?? ""). Edit Email"
+            emailLabel.text = "Type in the code we sent to\n\(registModel?.email ?? "")."
             emailLabel.sk.setSpecificTextColor("Edit Email", color: R.color.theamColor()!)
             emailLabel.sk.setSpecificTextUnderLine("Edit Email", color: R.color.theamColor()!)
         }

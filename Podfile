@@ -58,6 +58,11 @@ target 'Wecyn' do
   pod 'Localize-Swift', '~> 3.2'
   pod 'ZLPhotoBrowser', '4.3.0'
   pod 'MenuItemKit'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'Google-Maps-iOS-Utils'
+  pod 'RichLabel'
+  
     
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

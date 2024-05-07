@@ -10,14 +10,9 @@ import Foundation
 class PostService {
     
     /// 发布post
-    /// - Parameters:
-    ///   - content: 文字内容
-    ///   - images: 图片base64数组
-    ///   - video: 视频链接
-    ///   - type: 类型 1 公开  2 仅好友可见 3 仅自己可见
     /// - Returns: PostAddedModel
-    static func addPost(content:String,images:[String]? = nil,video:String? = nil ,type:Int = 1) -> Observable<PostListModel>{
-        let target = MultiTarget(PostApi.addPost(content,images,video,type))
+    static func addPost(model: AddPostRequestModel) -> Observable<PostListModel>{
+        let target = MultiTarget(PostApi.addPost(model))
         return APIProvider.rx.request(target).asObservable().mapObject(PostListModel.self)
     }
     
@@ -150,6 +145,17 @@ class PostListModel :BaseModel {
     var images: [String] = []
     var images_obj:[PostImageObject] = []
     var content: String = ""
+    var formatedContent: String {
+        var result = content
+        
+        at_list.forEach({ user in
+            let name = user.name.replacingOccurrences(of: " ", with: "")
+            result = result.replacingOccurrences(of: "[@\(user.id)]", with: " @\(name) ")
+        })
+        
+        return result
+    }
+    var at_list:[PostAtList] = []
     var like_count: Int = 0
     var id: Int = 0
     var comment_count: Int = 0
@@ -177,11 +183,11 @@ class PostListModel :BaseModel {
     }
     var liked:Bool = false
     var contentH:CGFloat {
-        let height = content.heightWithConstrainedWidth(width: kScreenWidth - 32, font: UIFont.sk.pingFangRegular(15))
+        let height = formatedContent.heightWithConstrainedWidth(width: kScreenWidth - 32, font: UIFont.sk.pingFangRegular(15))
         return height < 18 ? 18 : height
     }
     var sourceDataContentH:CGFloat {
-        let height = source_data?.content.heightWithConstrainedWidth(width: kScreenWidth - 64, font: UIFont.sk.pingFangRegular(12)) ?? 0
+        let height = source_data?.formatedContent.heightWithConstrainedWidth(width: kScreenWidth - 64, font: UIFont.sk.pingFangRegular(12)) ?? 0
         return (height < 16 ? 16 : height) + 44
     }
     var imgH:CGFloat {
@@ -228,7 +234,10 @@ class PostListModel :BaseModel {
     
     var posted:Bool = false
 }
-
+class PostAtList: BaseModel {
+    var id:Int = 0
+    var name:String = ""
+}
 class PostCommentModel :BaseModel {
     var like_count: Int = 0
     var id: Int = 0

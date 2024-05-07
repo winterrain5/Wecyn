@@ -79,14 +79,18 @@ class IMMessage:MessageType {
             
         case .card:
             
-            guard let name = messageInfo.cardElem?.nickname,let faceUrl = messageInfo.cardElem?.faceURL, let id = messageInfo.cardElem?.userID.int,let wid = messageInfo.cardElem?.ex  else { return nil }
+            guard let name = messageInfo.cardElem?.nickname,
+                  let faceUrl = messageInfo.cardElem?.faceURL,
+                  let id = messageInfo.cardElem?.userID.int,
+                  let wid = messageInfo.cardElem?.ex
+            else { return nil }
             let item = IMContactItem(displayName: name, faceUrl: faceUrl, id: id, wid: wid)
             let message = IMMessage(contact: item, user: sender, messageId: messageId, date: date)
             message.sendStatus = messageInfo.status
             return message
             
         case .revoke:
-        
+            
             let text:String
             if messageInfo.sendID == currendUser.senderId {
                 text = "你撤回了一条消息".innerLocalized()
@@ -98,7 +102,18 @@ class IMMessage:MessageType {
             let message = IMMessage(revokeItem: item, user: sender, messageId: messageId, date: date)
             message.sendStatus = messageInfo.status
             return message
-            
+        case .location:
+            guard let latitude = messageInfo.locationElem?.latitude,
+                  let longitude = messageInfo.locationElem?.longitude,
+                  let desc = messageInfo.locationElem?.desc
+            else { return nil }
+            let message = IMMessage(location: CLLocation(latitude: latitude, longitude: longitude), 
+                                    desc: desc,
+                                    user: sender,
+                                    messageId: messageId,
+                                    date: date)
+            message.sendStatus = messageInfo.status
+            return message
         case .friendAppApproved:
             return IMMessage(text: "我通过了您的好友验证请求，现在我们可以开始聊天了".innerLocalized(), user: sender, messageId: messageId, date: date)
             
@@ -153,8 +168,8 @@ class IMMessage:MessageType {
         self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
     }
     
-    convenience init(location: CLLocation, user: IMUser, messageId: String, date: Date) {
-        let locationItem = CoordinateItem(location: location)
+    convenience init(location: CLLocation,desc:String, user: IMUser, messageId: String, date: Date) {
+        let locationItem = CoordinateItem(location: location,desc: desc)
         self.init(kind: .location(locationItem), user: user, messageId: messageId, date: date)
     }
     
@@ -215,10 +230,12 @@ struct IMUser: SenderType, Equatable {
 
 struct CoordinateItem: LocationItem {
     var location: CLLocation
+    var desc: String
     var size: CGSize
     
-    init(location: CLLocation) {
+    init(location: CLLocation,desc:String) {
         self.location = location
+        self.desc = desc
         size = CGSize(width: MessageMaxHeight, height: MessageMaxHeight)
     }
 }
@@ -249,7 +266,7 @@ struct ImageMediaItem: MediaItem {
         placeholderImage = UIImage(imageLiteralResourceName: "image_message_placeholder")
     }
 }
- 
+
 struct LinkMediaItem: LinkItem {
     var text: String?
     

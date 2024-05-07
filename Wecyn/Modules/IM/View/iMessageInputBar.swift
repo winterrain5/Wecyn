@@ -18,6 +18,7 @@ enum CustomAttachment {
     case audio(url:String,duration:Int)
     case file(fileName:String,url:URL,ext:String,data:Data,sizeInByte:Int)
     case carte(name:String,avatar:String,id:Int,wid:String)
+    case location(latitude:Double,longitude:Double,detail:String,placeId:String)
 }
 
 // MARK: - CameraInputBarAccessoryViewDelegate
@@ -431,6 +432,16 @@ extension iMessageInputBar:AVAudioRecorderDelegate {
         UIViewController.sk.getTopVC()?.present(nav, animated: true)
     }
     
+    func showLocationVc() {
+        let vc = LocationSearchController()
+        vc.selectLocationComplete = { [weak self] in
+            self?.sendAttachments(attachments: [.location(latitude: $0.lagitude ?? 0, longitude: $0.longitude ?? 0,detail: $0.detail,placeId: $0.pid ?? "")])
+        }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        UIViewController.sk.getTopVC()?.present(nav, animated: true)
+    }
+    
 }
 extension iMessageInputBar:UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -478,6 +489,8 @@ extension iMessageInputBar: InputPadViewDelegate {
             selectUploadFileFromICouldDrive()
         case .carte:
             showContactsVc()
+        case .location:
+            showLocationVc()
         }
     }
     

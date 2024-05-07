@@ -6,13 +6,13 @@
 //
 
 import UIKit
-
+import RichLabel
 class PostQuoteView: UIView {
 
     var avatar = UIImageView()
     var nameLabel = UILabel()
     var postTimeLabel = UILabel()
-    var contentLabel = UILabel()
+    var contentLabel = RichLabel()
     var postModel:PostListModel? {
         didSet {
             guard let model = postModel else { return }
@@ -20,7 +20,7 @@ class PostQuoteView: UIView {
             avatar.kf.setImage(with: model.user.avatar.url)
             nameLabel.text = model.user.full_name
             postTimeLabel.text = model.post_time
-            contentLabel.text = model.content
+            contentLabel.text = model.formatedContent
             
             setNeedsLayout()
             layoutIfNeeded()
@@ -28,7 +28,7 @@ class PostQuoteView: UIView {
     }
     var viewHeight:CGFloat {
         guard let model = postModel else { return 0 }
-        let contentH = model.content.heightWithConstrainedWidth(width: self.width - 32, font: UIFont.sk.pingFangRegular(12))
+        let contentH = model.formatedContent.heightWithConstrainedWidth(width: self.width - 32, font: UIFont.sk.pingFangRegular(12))
         return (contentH < 16 ? 16 : contentH) + 44
     }
     
@@ -53,7 +53,10 @@ class PostQuoteView: UIView {
         contentLabel.textColor = R.color.textColor33()!
         contentLabel.font = UIFont.sk.pingFangRegular(12)
         contentLabel.numberOfLines = 0
- 
+        contentLabel.enabledTypes = [.mention, .hashtag, .url, .email]
+        contentLabel.customize { label in
+            label.mentionColor = .blue
+        }
         
         cornerRadius = 8
         borderColor = R.color.seperatorColor()

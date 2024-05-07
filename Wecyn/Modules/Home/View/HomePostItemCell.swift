@@ -10,6 +10,7 @@ import SKPhotoBrowser
 import AVFoundation
 import AVKit
 import Cache
+import RichLabel
 class HomePostItemCell: UITableViewCell {
     var userInfoView = HomePostUserInfoView()
     var footerView = HomePostFootToolView()
@@ -20,7 +21,7 @@ class HomePostItemCell: UITableViewCell {
             userInfoView.postModel = model
             footerView.postModel = model
             postQuoteView.postModel = model.source_data
-            contentLabel.text = model.content 
+            contentLabel.text = model.formatedContent
             
             imageClvView.reloadData()
             
@@ -39,7 +40,7 @@ class HomePostItemCell: UITableViewCell {
         view.delegate = self
         return view
     }()
-    var contentLabel = UILabel()
+    var contentLabel = RichLabel()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -56,7 +57,20 @@ class HomePostItemCell: UITableViewCell {
         contentLabel.skeletonTextLineHeight = .fixed(18)
         contentLabel.lastLineFillPercent = 75
         contentLabel.skeletonTextNumberOfLines = 4
-        
+        contentLabel.enabledTypes = [.mention, .hashtag, .url, .email]
+        contentLabel.customize { label in
+            label.mentionColor = .blue
+        }
+        contentLabel.handleMentionTap { [weak self] mention in
+            guard let `self` = self else { return }
+            guard let id = self.model?.at_list.first(where: {
+                let name = $0.name.replacingOccurrences(of: " ", with: "")
+                return name == mention
+            })?.id else { return }
+            
+            let vc = PostUserInfoController(userId: id)
+            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
+        }
         self.isSkeletonable = true
         contentView.isSkeletonable  = true
         contentView.subviews.forEach({ $0.isSkeletonable = true })

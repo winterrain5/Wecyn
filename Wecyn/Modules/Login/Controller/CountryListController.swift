@@ -176,7 +176,14 @@ class CountryListController: BaseTableController {
         if let lastSelectedModel = selectedCountry.value {
             lastSelectedModel.isSelected.toggle()
         }
-        let model = self.dataArray[indexPath.row] as! CountryModel
+        var datas:[Any] = []
+        if self.searchResult.count > 0 {
+            datas = self.searchResult
+        } else {
+            datas = self.dataArray
+        }
+        
+        let model = datas[indexPath.row] as! CountryModel
         model.isSelected.toggle()
         if model.isSelected {
             selectedCountry.accept(model)
@@ -189,7 +196,14 @@ class CountryListController: BaseTableController {
         if let lastSelectedModel = selectedCity.value {
             lastSelectedModel.isSelected.toggle()
         }
-        let model = self.dataArray[indexPath.row] as! CityModel
+        var datas:[Any] = []
+        if self.searchResult.count > 0 {
+            datas = self.searchResult
+        } else {
+            datas = self.dataArray
+        }
+        
+        let model = datas[indexPath.row] as! CityModel
         model.isSelected.toggle()
         if model.isSelected {
             selectedCity.accept(model)

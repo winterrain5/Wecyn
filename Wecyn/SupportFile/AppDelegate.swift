@@ -9,6 +9,10 @@ import UIKit
 import IQKeyboardManagerSwift
 import OpenIMSDK
 import Localize_Swift
+import GoogleMaps
+import GoogleMapsUtils
+import GooglePlaces
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
@@ -30,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Localize.setCurrentLanguage(getCurrentLanguage())
         
         IMController.shared.config()
+        
+        GMSServices.provideAPIKey(APIHost.share.mapApiKey)
+        GMSPlacesClient.provideAPIKey(APIHost.share.placeApiKey)
         
         let tokenModel = UserDefaults.sk.get(of: TokenModel.self, for: TokenModel.className)
         if tokenModel?.is_logined ?? false  {

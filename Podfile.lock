@@ -25,6 +25,31 @@ PODS:
   - EntryKit (0.8.0)
   - FSCalendar (2.8.4)
   - FYVideoCompressor (0.0.9)
+  - Google-Maps-iOS-Utils (4.1.0):
+    - Google-Maps-iOS-Utils/Clustering (= 4.1.0)
+    - Google-Maps-iOS-Utils/Geometry (= 4.1.0)
+    - Google-Maps-iOS-Utils/GeometryUtils (= 4.1.0)
+    - Google-Maps-iOS-Utils/Heatmap (= 4.1.0)
+    - Google-Maps-iOS-Utils/QuadTree (= 4.1.0)
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Clustering (4.1.0):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Geometry (4.1.0):
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/GeometryUtils (4.1.0):
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/Heatmap (4.1.0):
+    - Google-Maps-iOS-Utils/QuadTree
+    - GoogleMaps
+  - Google-Maps-iOS-Utils/QuadTree (4.1.0):
+    - GoogleMaps
+  - GoogleMaps (8.4.0):
+    - GoogleMaps/Maps (= 8.4.0)
+  - GoogleMaps/Base (8.4.0)
+  - GoogleMaps/Maps (8.4.0):
+    - GoogleMaps/Base
+  - GooglePlaces (8.5.0)
   - GPUImage (0.1.7)
   - HandyJSON (5.0.2)
   - ImagePickerSwift (0.3.1)
@@ -108,6 +133,7 @@ PODS:
   - PromiseKit/UIKit (6.18.1):
     - PromiseKit/CorePromise
   - R.swift (7.3.2)
+  - RichLabel (1.0.0)
   - RxCocoa (5.1.3):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -189,6 +215,9 @@ DEPENDENCIES:
   - EntryKit
   - FSCalendar
   - FYVideoCompressor
+  - Google-Maps-iOS-Utils
+  - GoogleMaps
+  - GooglePlaces
   - GPUImage
   - HandyJSON
   - ImagePickerSwift
@@ -212,6 +241,7 @@ DEPENDENCIES:
   - Permission/Photos
   - PromiseKit
   - R.swift
+  - RichLabel
   - RxCocoa
   - RxGesture
   - RxKeyboard
@@ -252,6 +282,9 @@ SPEC REPOS:
     - EntryKit
     - FSCalendar
     - FYVideoCompressor
+    - Google-Maps-iOS-Utils
+    - GoogleMaps
+    - GooglePlaces
     - GPUImage
     - HandyJSON
     - ImagePickerSwift
@@ -276,6 +309,7 @@ SPEC REPOS:
     - Permission
     - PromiseKit
     - R.swift
+    - RichLabel
     - RxCocoa
     - RxGesture
     - RxKeyboard
@@ -324,6 +358,9 @@ SPEC CHECKSUMS:
   EntryKit: eca0306497a948fa9c81ff665bf6895309c7d67e
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   FYVideoCompressor: 80e2a90bbc118044038b37b8442f23084c5698bf
+  Google-Maps-iOS-Utils: 3343332b18dfd5be8f1f44edd7d481ace3da4d9a
+  GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
+  GooglePlaces: 426efb69051e7b460e16300ba63598687d10fa1a
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   ImagePickerSwift: 0328d670660823ff33529b58be08c7a13b686758
@@ -348,6 +385,7 @@ SPEC CHECKSUMS:
   Permission: 4821359fb4d4367fb59aa16df38fbba5722ac842
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
+  RichLabel: c4560e1750201f10ab9041a2f31a762efdea1629
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
@@ -374,6 +412,6 @@ SPEC CHECKSUMS:
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
   ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: 1c0ee0f4087d4c3ade8c33641d6fe765aeadcadc
+PODFILE CHECKSUM: fa88c409f9c52f69a1fb87db5945953c81dc1a1a
 
 COCOAPODS: 1.11.2

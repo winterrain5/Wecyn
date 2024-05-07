@@ -312,7 +312,7 @@ class ChatViewController: MessagesViewController {
                                                                                       
     
     func deleteMessage(_ message:IMMessage,_ indexPath:IndexPath) {
-        let alert = UIAlertController(title: "确定删除该条消息？".innerLocalized(), message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "确定删除该条消息？".innerLocalized(), message: nil, preferredStyle: .alert)
         let action1 = UIAlertAction(title: "确定".innerLocalized(), style: .destructive) { _ in
             if message.sendStatus == .sendFailure {
                 self.revokeMessage(index: indexPath)
@@ -336,7 +336,7 @@ class ChatViewController: MessagesViewController {
     }
    
     func revokeMessage(_ message:IMMessage,_ indexPath:IndexPath) {
-        let alert = UIAlertController(title: "确定撤回该条消息？".innerLocalized(), message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "确定撤回该条消息？".innerLocalized(), message: nil, preferredStyle: .alert)
         let action1 = UIAlertAction(title: "确定".innerLocalized(), style: .destructive) { _ in
             
             if message.sentDate.distance(to: Date()) > 120 {

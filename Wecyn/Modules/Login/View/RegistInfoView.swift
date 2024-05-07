@@ -119,11 +119,15 @@ class RegistInfoView: UIView {
             self.nextButton.startAnimation()
             AuthService.signup(model: self.registModel).subscribe(onNext:{ model in
                 self.nextButton.stopAnimation()
+                if model.success == 1 {
+                    UserDefaults.sk.set(object: self.registModel, for: RegistRequestModel.className)
+                    
+                    let vc = RegistConfirmController(registModel: self.registModel)
+                    UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    Toast.showError(model.message)
+                }
                 
-                UserDefaults.sk.set(object: self.registModel, for: RegistRequestModel.className)
-                
-                let vc = RegistConfirmController(registModel: self.registModel)
-                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc, animated: true)
                 
             },onError: { e in
                 self.nextButton.stopAnimation()

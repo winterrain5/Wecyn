@@ -35,6 +35,8 @@
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string></string>
+		<string>comgooglemaps</string>
 		<string>googlegmail</string>
 		<string>ms-outlook</string>
 		<string>readdle-spark</string>

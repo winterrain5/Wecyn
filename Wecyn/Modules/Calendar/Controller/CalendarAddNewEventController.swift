@@ -741,7 +741,7 @@ class CalendarAddNewEventController: BaseTableController {
                 locModel = LocationModel(title: loc, detail: "")
             }
             let vc = LocationSearchController(editLocation: locModel)
-            let nav = BaseNavigationController(rootViewController: vc)
+            let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
             

@@ -12,6 +12,7 @@ public enum PadItemType: CaseIterable {
     case camera
     case file
     case carte
+    case location
 
     var name: String {
         switch self {
@@ -23,6 +24,8 @@ public enum PadItemType: CaseIterable {
             return "文件".innerLocalized()
         case .carte:
             return "名片".innerLocalized()
+        case .location:
+            return "位置".innerLocalized()
         }
     }
 
@@ -37,6 +40,8 @@ public enum PadItemType: CaseIterable {
             imageName = "inputbar_pad_file_icon"
         case .carte:
             imageName = "inputbar_pad_business_card_icon"
+        case .location:
+            imageName = "inputbar_pad_location_icon"
         }
         return UIImage(nameInBundle: imageName)
     }

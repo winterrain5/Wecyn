@@ -12,6 +12,9 @@ class APIHost: NSObject {
     
     static let share = APIHost()
     
+    var mapApiKey = "AIzaSyCRk-xGBzWrB2Ohus6niMeT1oG1yUZ_Hgo"
+    var placeApiKey = "AIzaSyCRk-xGBzWrB2Ohus6niMeT1oG1yUZ_Hgo"
+    
     var buildType: AppBuildType = .Dev
     
     enum AppBuildType: Int {

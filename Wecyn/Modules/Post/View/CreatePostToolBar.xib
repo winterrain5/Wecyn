@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,30 +16,30 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ClW-iv-hF8">
-                    <rect key="frame" x="0.0" y="0.0" width="496" height="79"/>
+                    <rect key="frame" x="0.0" y="0.0" width="496" height="45"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOg-ej-FLF">
-                            <rect key="frame" x="0.0" y="0.0" width="99" height="79"/>
+                            <rect key="frame" x="0.0" y="0.0" width="99" height="45"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="toolbar_icon_image"/>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHg-6f-wIT">
-                            <rect key="frame" x="99" y="0.0" width="99.5" height="79"/>
+                            <rect key="frame" x="99" y="0.0" width="99.5" height="45"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="video"/>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oem-gj-75U">
-                            <rect key="frame" x="198.5" y="0.0" width="99" height="79"/>
+                            <rect key="frame" x="198.5" y="0.0" width="99" height="45"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="toolbar_icon_at"/>
+                        </button>
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sS9-TD-f0k">
+                            <rect key="frame" x="297.5" y="0.0" width="99.5" height="45"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="toolbar_icon_hashtag"/>
                         </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sS9-TD-f0k">
-                            <rect key="frame" x="297.5" y="0.0" width="99.5" height="79"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="toolbar_link"/>
-                        </button>
                         <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dC-Lb-OFv">
-                            <rect key="frame" x="397" y="0.0" width="99" height="79"/>
+                            <rect key="frame" x="397" y="0.0" width="99" height="45"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="paperplane.fill"/>
                         </button>
@@ -58,11 +58,11 @@
                 <constraint firstItem="ClW-iv-hF8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EYr-HZ-OcS"/>
                 <constraint firstAttribute="trailing" secondItem="ClW-iv-hF8" secondAttribute="trailing" id="GjW-RF-lqg"/>
                 <constraint firstItem="ClW-iv-hF8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QH8-4q-4Wy"/>
-                <constraint firstAttribute="bottom" secondItem="ClW-iv-hF8" secondAttribute="bottom" id="dRb-1d-qoz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ClW-iv-hF8" secondAttribute="bottom" id="WOE-en-gO1"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="hastagButton" destination="oem-gj-75U" id="F32-dx-jvB"/>
+                <outlet property="atButton" destination="oem-gj-75U" id="38L-MQ-1aP"/>
                 <outlet property="imageButton" destination="eOg-ej-FLF" id="yUL-VK-IFJ"/>
                 <outlet property="linkButton" destination="sS9-TD-f0k" id="Vtx-EG-uKs"/>
                 <outlet property="moreButton" destination="2dC-Lb-OFv" id="5Xt-lK-Kep"/>
@@ -73,9 +73,9 @@
     </objects>
     <resources>
         <image name="paperplane.fill" width="20.5" height="21.5"/>
+        <image name="toolbar_icon_at" width="24" height="24"/>
         <image name="toolbar_icon_hashtag" width="24" height="24"/>
         <image name="toolbar_icon_image" width="25" height="25"/>
-        <image name="toolbar_link" width="24" height="24.5"/>
         <image name="video" width="24" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -105,7 +105,7 @@ extension ChatViewController:MessagesDisplayDelegate {
         LocationMessageSnapshotOptions(
             showsBuildings: true,
             showsPointsOfInterest: true,
-            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     }
     
     // MARK: - Audio Messages
