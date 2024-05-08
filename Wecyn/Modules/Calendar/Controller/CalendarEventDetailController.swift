@@ -325,8 +325,10 @@ class CalendarEventDetailController: BaseTableController {
         let model = models[indexPath.section][indexPath.row]
         if model.cellType == .Location {
             Haptico.selection()
-            let vc = MapViewController(location: model.model.location)
-            self.navigationController?.pushViewController(vc)
+            
+            guard let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(model.model.location.urlEncoded)") else { return }
+            let vc  = SFSafariViewController(url: url)
+            self.present(vc, animated: true)
         }
         if model.cellType == .Link {
             Haptico.selection()
@@ -389,6 +391,8 @@ class CalendarEventDetailController: BaseTableController {
 
             if $0.success == 1 {
                 Toast.showSuccess( "Successful operation")
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                
                 self.returnBack()
             } else {
                 Toast.showMessage($0.message)

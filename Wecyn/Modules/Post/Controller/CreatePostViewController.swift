@@ -129,7 +129,6 @@ class CreatePostViewController: BaseViewController {
     private var postModel:PostListModel?
     private var quotepostView:PostQuoteView?
     private let requestModel = AddPostRequestModel()
-    private lazy var content = self.richTextView.text
     private var postMediaType:PostMediaType = .None
     private var task: URLSessionUploadTask?
     
@@ -330,22 +329,12 @@ class CreatePostViewController: BaseViewController {
             self.present(nav, animated: true)
             vc.didSelectContact = {
                 self.requestModel.at_list.append($0.id)
-                self.requestModel.at_list.removeDuplicates()
                 let atString =  "@\($0.first_name)\($0.last_name)"
                 self.richTextView.text.append(atString)
                 self.richTextView.text.append(" ")
                 self.richTextView.becomeFirstResponder()
                
-                var replacingText = self.richTextView.text ?? ""
-                guard let replacingRange = self.richTextView.richTextStorage.mentionRanges.last else { return }
-                
-                self.content = (replacingText as NSString).replacingCharacters(in: replacingRange, with: "[@\($0.id)]")
-                
-                self.richTextView.richTextStorage.mentionRanges.dropLast().enumerated().forEach({ idx,rang in
-                    self.content = (self.content! as NSString).replacingCharacters(in: rang, with: "[@\(self.requestModel.at_list[idx])]")
-                })
-               
-                print(self.content)
+              
             }
         }).disposed(by: rx.disposeBag)
         
@@ -506,6 +495,16 @@ class CreatePostViewController: BaseViewController {
 
     }
     
+    func updateRequestModelValue() {
+        let replacingRange = self.richTextView.richTextStorage.mentionRanges.reversed()
+        var content = self.richTextView.text ?? ""
+        replacingRange.enumerated().forEach({ idx,rang in
+            content = (content as NSString).replacingCharacters(in: rang, with: "[@\(self.requestModel.at_list.reversed()[idx])]")
+        })
+        print(content)
+        self.requestModel.content = content
+        self.requestModel.at_list.removeDuplicates()
+    }
     
     func addPost() {
         Toast.showLoading()
@@ -523,7 +522,7 @@ class CreatePostViewController: BaseViewController {
                
                 self.requestModel.images = images
                 self.requestModel.type = type
-                self.requestModel.content = self.content
+                self.updateRequestModelValue()
                 
                 PostService.addPost(model: self.requestModel).subscribe(onNext:{ model in
                     Toast.showSuccess("Posted successfully")
@@ -615,11 +614,12 @@ class CreatePostViewController: BaseViewController {
         
         func addPost(video:String) ->  Promise<Void> {
             return Promise { resolver in
-                let content = self.richTextView.text ?? ""
+                
                 let type = self.postType.rawValue
-                self.requestModel.content = content
+                self.updateRequestModelValue()
                 self.requestModel.video = video
                 self.requestModel.type = type
+                
                 PostService.addPost(model: self.requestModel).subscribe(onNext:{ model in
                     Toast.showSuccess("Posted successfully")
                     self.returnBack()

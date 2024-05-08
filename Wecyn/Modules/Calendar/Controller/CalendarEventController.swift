@@ -478,6 +478,7 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
     func dropdownMenu(_ dropdownMenu: DropdownMenu, didSelectRowAt indexPath: IndexPath) {
         
         if dropdownMenu == self.roomMenu {
+            
             self.roomSelectIndexPath = indexPath
             
             let item = roomItems[indexPath.section].options[indexPath.row]

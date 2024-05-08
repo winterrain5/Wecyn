@@ -166,14 +166,14 @@ class PostListModel :BaseModel {
     var video: String = ""
     var video_thumbnail_image: UIImage? 
     var video_thumbnail_image_size: CGSize {
-        let size:CGSize = CGSize(width: kScreenWidth - 32, height: (kScreenWidth - 32) * 3 / 4)
+        var size:CGSize = CGSize(width: kScreenWidth - 32, height: (kScreenWidth - 32) * 3 / 4)
 //        guard let image = video_thumbnail_image else {
 //            return .zero
 //        }
 //        if image.size.width < (kScreenWidth - 32) {
-//            size = image.size
+//            size = video_thumbnail_image?.size ?? .zero
 //        } else {
-//            size = CGSize(width: kScreenWidth - 32, height: image.scaled(toWidth: kScreenWidth - 32)?.size.height ?? 0)
+//            size = video_thumbnail_image?.scaled(toWidth: kScreenWidth - 32)?.size ?? .zero
 //        }
         return size
     }

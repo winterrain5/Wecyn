@@ -389,7 +389,7 @@ class CalendarAddNewEventController: BaseTableController {
                     let alarmDate = date.addingTimeInterval(-min.double).addingTimeInterval(-8*60*60)
                     let dateComponents = DateComponents(year:alarmDate.year,month: alarmDate.month,day: alarmDate.day,hour: alarmDate.hour,minute: alarmDate.minute)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                    let request = UNNotificationRequest(identifier: date.toString(), content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request) { err in
                         DispatchQueue.main.async {
                             if (idx == (dates?.count ?? 0) - 1) { complete() }
@@ -408,7 +408,7 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 let dateComponents = DateComponents(year:alarmDate.year,month: alarmDate.month,day: alarmDate.day,hour: alarmDate.hour,minute: alarmDate.minute)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                let request = UNNotificationRequest(identifier: date.toString(), content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request) { err in
                     DispatchQueue.main.async {
                         complete()
