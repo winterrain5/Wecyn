@@ -24,6 +24,8 @@ DerivedData/
 *.generated.swift
 ## Obj-C/Swift specific
 *.hmap
+opencv2.framework
+PaddleOCR.framework
 
 ## App packaging
 *.ipa
