@@ -176,13 +176,14 @@ class PostMessageCell: MessageCollectionViewCell {
             let name = model.user.full_name
             let date = model.create_time
             let avatar = model.user.avatar
-            let content = model.content
+            let content = model.formatedContent
             if fromCurrentSender {
                 let topLabelAttr = NSMutableAttributedString(string: name)
                 topLabelAttr.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: name.count))
               
                 let bottomLabelAttr = NSMutableAttributedString(string: date)
                 bottomLabelAttr.addAttribute(.foregroundColor, value: UIColor.white.withAlphaComponent(0.8), range: NSRange(location: 0, length: date.count))
+                
                 
                 let contentLabelAttr = NSMutableAttributedString(string: content)
                 contentLabelAttr.addAttribute(.foregroundColor, value: UIColor.white.withAlphaComponent(0.8), range: NSRange(location: 0, length: content.count))
@@ -401,8 +402,8 @@ class PostMessageLayoutSizeCalculator: CellSizeCalculator {
                 return .zero
             }
             let maxWidth = cellMessageContainerWidth - cellTopLabelHorizontalPadding
-            let size = NSAttributedString(string: model.content).size(consideringWidth: maxWidth)
-            let height = ceil(size.height) >= 28 ? 40 : size.height
+            let size = NSAttributedString(string: model.formatedContent).size(consideringWidth: maxWidth)
+            let height = ceil(size.height) >= 28 ? 40 : 20.cgFloat
             return CGSize(width: maxWidth, height: height)
         }
         return .zero

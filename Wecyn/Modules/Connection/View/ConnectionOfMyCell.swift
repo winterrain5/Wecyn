@@ -25,6 +25,16 @@ class ConnectionOfMyCell: UITableViewCell {
             nameLabel.sk.setSpecificTextColor("(\(model.remark))", color: R.color.textColor77()!)
         }
     }
+    
+    var selectionMentionModel: FriendUserInfoModel? {
+        didSet {
+            guard let model = selectionMentionModel else { return }
+            imgView.kf.setImage(with: model.avatar.url,placeholder: R.image.proile_user()!)
+            nameLabel.text = model.remark.isEmpty ? model.full_name : "\(model.full_name) (\(model.remark))"
+            nameLabel.sk.setSpecificTextColor("(\(model.remark))", color: R.color.textColor77()!)
+        }
+     
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(imgView)

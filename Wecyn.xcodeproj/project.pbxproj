@@ -359,6 +359,7 @@
 		45F07C342BB2760C0070813D /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C332BB2760C0070813D /* DataProvider.swift */; };
 		45F07C362BB2763F0070813D /* DataProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C352BB2763F0070813D /* DataProviderDelegate.swift */; };
 		45F07C3A2BB299B00070813D /* ChatViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F07C392BB299B00070813D /* ChatViewControllerBuilder.swift */; };
+		45F6EEE52BECB06600E6339E /* PostSelectMentionUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6EEE42BECB06500E6339E /* PostSelectMentionUserController.swift */; };
 		45FC5D232BB3F2AE00D0EDB3 /* OIMUIResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 45FC5D212BB3F2AE00D0EDB3 /* OIMUIResource.bundle */; };
 		45FC5D252BB3F30A00D0EDB3 /* BundleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FC5D242BB3F30A00D0EDB3 /* BundleUtil.swift */; };
 		C6310719968D783250580AAC /* Pods_Wecyn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */; };
@@ -761,6 +762,7 @@
 		45F07C332BB2760C0070813D /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		45F07C352BB2763F0070813D /* DataProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderDelegate.swift; sourceTree = "<group>"; };
 		45F07C392BB299B00070813D /* ChatViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewControllerBuilder.swift; sourceTree = "<group>"; };
+		45F6EEE42BECB06500E6339E /* PostSelectMentionUserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostSelectMentionUserController.swift; sourceTree = "<group>"; };
 		45FC5D212BB3F2AE00D0EDB3 /* OIMUIResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OIMUIResource.bundle; sourceTree = "<group>"; };
 		45FC5D242BB3F30A00D0EDB3 /* BundleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleUtil.swift; sourceTree = "<group>"; };
 		5AEE29EE5807D6553F4C94D9 /* Pods_Wecyn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wecyn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1808,6 +1810,7 @@
 		45EAE8C82A8F1D3D00018C0D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45F6EEE42BECB06500E6339E /* PostSelectMentionUserController.swift */,
 				45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */,
 				45C999F32AB06C8D0017CDC3 /* PostTypeController.swift */,
 				45C999F52AB1C7C00017CDC3 /* PostUserInfoController.swift */,
@@ -2270,6 +2273,7 @@
 				45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */,
 				45005C782A5E384600560E21 /* EditorDemoController.swift in Sources */,
 				452A7A222BAA8668009312F7 /* AdminDomainCell.swift in Sources */,
+				45F6EEE52BECB06600E6339E /* PostSelectMentionUserController.swift in Sources */,
 				452A7AA92BAC1665009312F7 /* ChatViewController.swift in Sources */,
 				454BA3832B8D72FE006B47BA /* NotificationCell.swift in Sources */,
 				45920AFB2A26E045005871ED /* BaseTableController.swift in Sources */,

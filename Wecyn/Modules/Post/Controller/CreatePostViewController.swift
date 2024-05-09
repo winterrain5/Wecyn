@@ -323,7 +323,7 @@ class CreatePostViewController: BaseViewController {
         toolBar.atButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             Haptico.selection()
-            let vc = ChatContactsController(selectType: .select)
+            let vc = PostSelectMentionUserController()
             let nav = BaseNavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
