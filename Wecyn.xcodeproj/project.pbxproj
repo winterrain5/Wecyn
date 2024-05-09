@@ -2734,12 +2734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party/PaddleLite/lib",
-					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib/PaddleLite/lib",
-					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2804,12 +2799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/third-party/PaddleLite/lib",
-					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib/PaddleLite/lib",
-					"$(PROJECT_DIR)/Wecyn/Modules/NFC/OCR/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.terra.wecyn;
 				PRODUCT_NAME = "$(TARGET_NAME)";

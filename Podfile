@@ -28,7 +28,7 @@ target 'Wecyn' do
   pod 'NFCReaderWriter'
   pod 'SafeSFSymbols'
   pod 'GPUImage'
-
+  
   #UI
   pod 'IQKeyboardManagerSwift'
   pod 'DZNEmptyDataSet'
