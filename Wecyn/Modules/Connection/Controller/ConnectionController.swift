@@ -57,7 +57,7 @@ class ConnectionController: BaseViewController {
     }
     
     lazy var rightButton = UIButton().then { btn in
-        btn.imageForNormal = R.image.connection_search()
+        btn.imageForNormal = R.image.magnifyingglass()
     }
     
     var searchView:NavbarSearchView!
@@ -226,7 +226,7 @@ extension ConnectionController:JXPagingMainTableViewGestureDelegate {
 extension ConnectionController:JXSegmentedViewDelegate {
   func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = (index == 0)
-      rightButton.imageForNormal = index == 0 ? R.image.magnifyingglass()! : R.image.calendar_add()!
+      rightButton.imageForNormal = index == 0 ? R.image.magnifyingglass() : UIImage.plus?.tintImage(.black)
   }
 }
 

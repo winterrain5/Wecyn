@@ -78,13 +78,14 @@ class SettingController: BaseTableController {
         datas.append([logout])
     }
     func getTimezone() -> String {
+  
         let tz = TimeZone.current.secondsFromGMT() / 3600
         
         let name = TimeZone.current.identifier
         if tz > 0 {
-            return name + "\nGMT+\(tz)"
+            return name + "\nUTC+\(tz)"
         } else {
-            return name + "\nGMT-\(tz)"
+            return name + "\nUTC-\(tz)"
         }
         
     }

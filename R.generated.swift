@@ -1874,7 +1874,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 125 images.
+  /// This `_R.image` struct is generated, and contains static references to 124 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -1901,12 +1901,6 @@ struct _R {
 
     /// Image `calendar.day.timeline.left`.
     var calendarDayTimelineLeft: RswiftResources.ImageResource { .init(name: "calendar.day.timeline.left", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `calendar_add`.
-    var calendar_add: RswiftResources.ImageResource { .init(name: "calendar_add", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `calendar_calendar`.
-    var calendar_calendar: RswiftResources.ImageResource { .init(name: "calendar_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `calendar_filter`.
     var calendar_filter: RswiftResources.ImageResource { .init(name: "calendar_filter", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2063,6 +2057,9 @@ struct _R {
 
     /// Image `namecard_background`.
     var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `network`.
+    var network: RswiftResources.ImageResource { .init(name: "network", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `org_placeholder`.
     var org_placeholder: RswiftResources.ImageResource { .init(name: "org_placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

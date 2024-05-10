@@ -107,7 +107,7 @@ class ProfileAddEduExperienceController: BaseViewController {
             self.view.endEditing(true)
             let maxmumDate = self.requestModel.end_date?.date(withFormat: "MM-yyyy") ?? Date()
             DatePickerView(title: "Start Date", mode: .date,maximumDate: maxmumDate) { date in
-                let dateStr = date.toString(format: "MM-yyyy",isZero: false)
+                let dateStr = date.toString(format: "MM-yyyy")
                 self.durationStartRelay.accept(dateStr)
                 self.requestModel.start_date = dateStr
                 self.container.startButton.titleForNormal = dateStr
@@ -120,7 +120,7 @@ class ProfileAddEduExperienceController: BaseViewController {
             self.view.endEditing(true)
             let minimumDate = self.requestModel.start_date?.date(withFormat: "MM-yyyy")
             DatePickerView(title: "End Date", mode: .date,minimumDate: minimumDate,maximumDate: Date()) { date in
-                let dateStr = date.toString(format: "MM-yyyy",isZero: false)
+                let dateStr = date.toString(format: "MM-yyyy")
                 self.requestModel.end_date = dateStr
                 self.requestModel.is_current = 0
                 self.container.endButton.titleForNormal = dateStr

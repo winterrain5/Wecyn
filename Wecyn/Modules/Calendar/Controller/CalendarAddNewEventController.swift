@@ -46,6 +46,7 @@ enum AddEventType {
     case Repeat
     case PeopleLimit
     case Alarm
+    case TimeZoneConvert
 }
 
 class AddEventModel {
@@ -60,6 +61,8 @@ class AddEventModel {
     
     var color = ""
     var duplicate = ""
+    var timeZoneText = ""
+    var timeZoneConvertedText = ""
     var alarm = ""
     var room = ""
     
@@ -97,7 +100,8 @@ class CalendarAddNewEventController: BaseTableController {
     let Start = AddEventModel(img: R.image.clock(), placeholder: "Start Time", type: .Start)
     let End = AddEventModel(img: R.image.clockArrowCirclepath(), placeholder: "End Time", type: .End)
     let Duplicate = AddEventModel(img: R.image.repeat(), placeholder: "Repeat", type: .Repeat)
-    let Alarm = AddEventModel(img: R.image.alarm(), placeholder: "Remind me", type: .Alarm)
+    
+    let TimeZoneConvert = AddEventModel(img: R.image.network(), placeholder: "", type: .TimeZoneConvert)
     
     let Desc = AddEventModel(img: R.image.textQuote(), placeholder: "Description", type: .Description)
     let Remark = AddEventModel(img: R.image.line3Horizontal(), placeholder: "Remark", type: .Remark)
@@ -107,6 +111,7 @@ class CalendarAddNewEventController: BaseTableController {
     let EmailCc = AddEventModel(img: R.image.mailStack(), placeholder: "Email Cc", type: .EmailCc)
     let MeetingRoom = AddEventModel(img: R.image.house(), placeholder: "Room", type: .MeetingRoom)
     
+    let Alarm = AddEventModel(img: R.image.alarm(), placeholder: "Remind me", type: .Alarm)
     let Color = AddEventModel(img: R.image.tagFill(), placeholder: "Color", type: .Color)
     
     
@@ -203,6 +208,9 @@ class CalendarAddNewEventController: BaseTableController {
         let timeSection = [Start,End,Duplicate]
         models.append(timeSection)
         
+        TimeZoneConvert.timeZoneText = getTimezone()
+        models.append([TimeZoneConvert])
+        
         let descSection = [Desc,Remark]
         models.append(descSection)
         
@@ -217,6 +225,18 @@ class CalendarAddNewEventController: BaseTableController {
         models.append(tagSection)
         
         
+    }
+    
+    func getTimezone() -> String {
+        let tz = TimeZone.current.secondsFromGMT() / 3600
+        
+        let name = TimeZone.current.identifier
+        if tz > 0 {
+            return "(UTC+\(tz):00)" + " " + name
+        } else {
+            return "(UTC-\(tz):00)" + " " + name
+        }
+       
     }
     
     
@@ -398,7 +418,7 @@ class CalendarAddNewEventController: BaseTableController {
                     }
                 })
             } else {
-                guard let date = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue, isZero: false) else { return }
+                guard let date = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue) else { return }
                 let content = UNMutableNotificationContent()
                 content.title = self.Title.title ?? ""
                 content.body = self.Desc.desc ?? ""
@@ -626,7 +646,7 @@ class CalendarAddNewEventController: BaseTableController {
                            minimumDate: nil,
                            maximumDate: nil) { date in
                 
-                let dateStr = date.toString(isZero: false)
+                let dateStr = date.toString()
                 self.requestModel.start_time = dateStr
                 
                 self.Start.start_time = dateStr
@@ -644,7 +664,7 @@ class CalendarAddNewEventController: BaseTableController {
                            maximumDate: nil) { date in
                 
                 
-                let dateStr = date.toString(isZero: false)
+                let dateStr = date.toString()
                 self.requestModel.end_time = dateStr
                 
                 self.End.end_time = dateStr
@@ -777,6 +797,41 @@ class CalendarAddNewEventController: BaseTableController {
             }
             self.navigationController?.pushViewController(vc)
         }
+        if model.type == .TimeZoneConvert {
+            let vc  =  TimeZoneController()
+            vc.selectedTimezoneComplete = { [weak self] in
+                guard let `self` = self else { return }
+                guard
+                    let startDate = self.requestModel.start_time?
+                        .toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: $0.offset)
+                        .toString(format:DateFormat.ddMMyyyyHHmm.rawValue),
+                    let endDate = self.requestModel.end_time?
+                        .toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: $0.offset)
+                        .toString(format:DateFormat.ddMMyyyyHHmm.rawValue)
+                else { return }
+                self.TimeZoneConvert.timeZoneText = $0.text
+                self.TimeZoneConvert.timeZoneConvertedText =  startDate + " - " + endDate
+                self.reloadData()
+            }
+            let nav = BaseNavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 3 {
+            let sectionView = CalendarEventSectionView()
+            sectionView.label.text = "Time Zone Convert"
+            return sectionView
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 3 {
+            return 36
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -792,17 +847,25 @@ class CalendarAddNewEventController: BaseTableController {
             return sectionView
         }
         
+        if section == 3 {
+            let sectionView = CalendarEventSectionView()
+            sectionView.label.text = self.TimeZoneConvert.timeZoneConvertedText
+            return sectionView
+        }
         return nil
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 1, models[1][0].is_public == 1 {
-            return 40
+            return 36
         }
         if section == 2, self.rrule != nil {
-            return 40
+            return 36
         }
-        return 20
+        if section == 3 {
+           return self.TimeZoneConvert.timeZoneConvertedText.isEmpty ? 0 : 36
+        }
+        return 0
     }
     
 }
@@ -932,6 +995,8 @@ class AddEventArrowCell: UITableViewCell {
                 detailLabel.text = model.location
             case .MeetingRoom:
                 detailLabel.text = model.room
+            case .TimeZoneConvert:
+                detailLabel.text = model.timeZoneText
             default:
                 detailLabel.text = ""
             }
@@ -989,9 +1054,9 @@ class AddEventArrowCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(imgView.snp.right).offset(16)
-            make.top.bottom.equalToSuperview()
-            make.width.equalTo(88)
+            make.centerY.equalToSuperview()
         }
+        titleLabel.sizeToFit()
         
         detailLabel.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right).offset(6)

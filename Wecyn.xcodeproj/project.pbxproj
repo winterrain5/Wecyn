@@ -259,6 +259,7 @@
 		45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A10A482A31B02500726B66 /* ProfileHeaderView.swift */; };
 		45A10A4B2A31B03F00726B66 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */; };
 		45A13F5D2AD68BB2005A3993 /* CalendarFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13F5C2AD68BB2005A3993 /* CalendarFilterView.swift */; };
+		45A285122BEDAC1200F8CE7B /* TimeZoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A285112BEDAC1200F8CE7B /* TimeZoneController.swift */; };
 		45A7E5A12A71128F0002014D /* NFCNameCardEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */; };
 		45A7E5A32A7212040002014D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A22A7212030002014D /* MapViewController.swift */; };
 		45A7E5A72A7265610002014D /* UpdateUserInfoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */; };
@@ -665,6 +666,7 @@
 		45A10A482A31B02500726B66 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		45A10A4A2A31B03F00726B66 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		45A13F5C2AD68BB2005A3993 /* CalendarFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFilterView.swift; sourceTree = "<group>"; };
+		45A285112BEDAC1200F8CE7B /* TimeZoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneController.swift; sourceTree = "<group>"; };
 		45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNameCardEditController.swift; sourceTree = "<group>"; };
 		45A7E5A22A7212030002014D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		45A7E5A62A7265610002014D /* UpdateUserInfoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoRequestModel.swift; sourceTree = "<group>"; };
@@ -1781,6 +1783,7 @@
 				4564BE1C2A822B2200464AFA /* ColorPickerController.swift */,
 				4564BE362A83840500464AFA /* RoomPickerController.swift */,
 				45B643DF2A84863300C79D13 /* EmailCcAddController.swift */,
+				45A285112BEDAC1200F8CE7B /* TimeZoneController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2182,6 +2185,7 @@
 				45C999F62AB1C7C00017CDC3 /* PostUserInfoController.swift in Sources */,
 				456BB0492B4D36DD00BB7838 /* AdminAddRoomController.swift in Sources */,
 				45C999FA2AB1CBC80017CDC3 /* PostUserPostedController.swift in Sources */,
+				45A285122BEDAC1200F8CE7B /* TimeZoneController.swift in Sources */,
 				45C938092B3EB2C900621BED /* AdminStaffModel.swift in Sources */,
 				457133B92A4D0E81007B783A /* EventSearchViewController.swift in Sources */,
 				45A0E6242AB841FF003C5153 /* PostCommentCell.swift in Sources */,

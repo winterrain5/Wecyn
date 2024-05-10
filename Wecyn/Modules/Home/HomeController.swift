@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 class HomeController: BaseTableController {
     var lastId:Int = 0
     var createPostButton = UIButton()
@@ -48,6 +48,7 @@ class HomeController: BaseTableController {
         
         getNotificationCount()
         getIMNotification()
+        
         
     }
     

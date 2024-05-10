@@ -152,7 +152,7 @@ class PostListModel :BaseModel {
             let name = user.name.replacingOccurrences(of: " ", with: "")
             result = result.replacingOccurrences(of: "[@\(user.id)]", with: " @\(name) ")
         })
-        
+        result = result.replacingOccurrences(of: "  ", with: " ")
         return result
     }
     var at_list:[PostAtList] = []
