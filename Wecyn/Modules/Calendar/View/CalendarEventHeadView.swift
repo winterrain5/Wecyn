@@ -11,15 +11,17 @@ import FSCalendar
 class CalendarEventHeadView: UIView {
     
     
-    var calendar = FSCalendar()
+    var weekModeCalendar = FSCalendar()
+    var monthModeCalendar = FSCalendar()
     let changeScopButton = UIButton()
     var gregorian = NSCalendar(identifier: .gregorian)
-    var dateSelected:((Date)->())!
+    var dateSelected:((CalendarViewMode,Date)->())!
     var monthChanged:((Date)->())!
     var scopChanged:((CGFloat,FSCalendarScope)->())!
     var eventDates:[[EventListModel]] = [] {
         didSet {
-            calendar.reloadData()
+            weekModeCalendar.reloadData()
+            monthModeCalendar.reloadData()
         }
     }
     
@@ -27,37 +29,16 @@ class CalendarEventHeadView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        calendar.dataSource = self
-        calendar.delegate = self
-        
-        calendar.appearance.selectionColor = R.color.theamColor()
-        calendar.appearance.titleDefaultColor = R.color.textColor33()!
-        calendar.appearance.titleFont = UIFont.sk.pingFangRegular(14)
-        calendar.appearance.caseOptions = .weekdayUsesUpperCase
-        calendar.scope = .month
-        calendar.appearance.borderRadius = 0.2
-        calendar.placeholderType = .fillSixRows
-        calendar.headerHeight = 0
-        calendar.appearance.weekdayFont = UIFont.sk.pingFangRegular(14)
-        calendar.appearance.weekdayTextColor = R.color.textColor33()!
-        calendar.appearance.titlePlaceholderColor = UIColor(hexString: "dfdfdf")
-        calendar.appearance.titleTodayColor = R.color.textColor33()!
-        calendar.appearance.todayColor = .white
-        
-        calendar.firstWeekday = 1
-        calendar.register(FSCalendarCell.self, forCellReuseIdentifier: "FSCalendarCell")
-        calendar.locale = NSLocale.init(localeIdentifier: "en") as Locale
-        calendar.select(Date())
-    
-        self.addSubview(calendar)
-        
+       
+        configWeekModeCalendar()
+        configMonthModeCalendar()
       
         changeScopButton.imageForNormal = R.image.chevronCompactUp()!
         changeScopButton.imageForSelected = R.image.chevronCompactDown()!
         changeScopButton.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
             self.changeScopButton.isSelected.toggle()
-            if self.calendar.scope == .week {
+            if self.weekModeCalendar.scope == .week {
                 self.setCalendarScope(.month)
             } else {
                 self.setCalendarScope(.week)
@@ -69,19 +50,88 @@ class CalendarEventHeadView: UIView {
       
     }
     
+    func configWeekModeCalendar() {
+       
+        configCalendarDelegate(weekModeCalendar)
+        
+        configCalendarAppearance(weekModeCalendar)
+        
+        configCalendarOtherProperty(weekModeCalendar)
+        
+        weekModeCalendar.register(FSCalendarCell.self, forCellReuseIdentifier: "FSCalendarCell")
+        weekModeCalendar.scrollDirection = .horizontal
+        self.addSubview(weekModeCalendar)
+    }
+    
+    func configMonthModeCalendar() {
+        configCalendarDelegate(monthModeCalendar)
+        
+        configCalendarAppearance(monthModeCalendar)
+        monthModeCalendar.appearance.titleSelectionColor = .black
+        monthModeCalendar.appearance.titleTodayColor = .red
+        
+        configCalendarOtherProperty(monthModeCalendar)
+        
+        monthModeCalendar.register(MonthModeCalendarCell.self, forCellReuseIdentifier: "MonthModeCalendarCell")
+        monthModeCalendar.scrollDirection = .vertical
+        self.addSubview(monthModeCalendar)
+        monthModeCalendar.isHidden = true
+    }
+    
+    func configCalendarAppearance(_ calendar:FSCalendar) {
+        
+        calendar.appearance.selectionColor = R.color.theamColor()
+        calendar.appearance.titleDefaultColor = R.color.textColor33()!
+        calendar.appearance.titleFont = UIFont.sk.pingFangRegular(14)
+        calendar.appearance.caseOptions = .weekdayUsesUpperCase
+        calendar.appearance.weekdayFont = UIFont.sk.pingFangRegular(14)
+        calendar.appearance.weekdayTextColor = R.color.textColor33()!
+        calendar.appearance.titlePlaceholderColor = UIColor(hexString: "dfdfdf")
+        
+        if calendar == weekModeCalendar {
+            calendar.appearance.titleTodayColor = .white
+        } else {
+            calendar.appearance.titleTodayColor = .red
+        }
+    }
+    
+    func configCalendarDelegate(_ calendar:FSCalendar){
+        calendar.dataSource = self
+        calendar.delegate = self
+    }
+    
+    func configCalendarOtherProperty(_ calendar:FSCalendar) {
+        calendar.firstWeekday = 1
+        calendar.locale = Locale.current
+        calendar.select(Date())
+        calendar.scope = .month
+        calendar.appearance.borderRadius = 0.2
+        calendar.headerHeight = 0
+        
+        if calendar == weekModeCalendar {
+            calendar.placeholderType = .fillSixRows
+        } else {
+            calendar.placeholderType = .none
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        calendar.snp.remakeConstraints { make in
+        monthModeCalendar.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(kScreenHeight - kTabBarHeight - kNavBarHeight)
+        }
+        weekModeCalendar.snp.remakeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(self.calendarHeight)
         }
-        changeScopButton.snp.makeConstraints { make in
+        changeScopButton.snp.remakeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(calendar.snp.bottom)
+            make.top.equalTo(weekModeCalendar.snp.bottom)
             make.height.equalTo(20)
         }
        
@@ -93,30 +143,31 @@ class CalendarEventHeadView: UIView {
 extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalendarDelegateAppearance {
     
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
-        let cell = calendar.dequeueReusableCell(withIdentifier: "FSCalendarCell", for: date, at: position)
-        return cell
+        if calendar == weekModeCalendar {
+            let cell = calendar.dequeueReusableCell(withIdentifier: FSCalendarCell.className, for: date, at: position)
+            return cell
+        } else {
+            let cell = calendar.dequeueReusableCell(withIdentifier: MonthModeCalendarCell.className, for: date, at: position)
+            let monthModeCell = cell as! MonthModeCalendarCell
+            let models = eventDates.filter({
+                guard let startDate = $0.first?.start_date else { return false }
+                return date.month == startDate.month && date.day == startDate.day
+            }).first
+            
+            if let models = models {
+                monthModeCell.models = models
+            }
+            return cell
+        }
+     
     }
     
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let date = calendar.currentPage // 当前页的最后一天
-        print("currentPage:\(date)")
         monthChanged(date)
     }
     
-    //  func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-    //    if dataArray.map({ $0.date ?? Date() }).contains(date) {
-    //      return true
-    //    }
-    //    return false
-    //  }
-    
-    //  func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-    //    if dataArray.map({ $0.date ?? Date() }).contains(date) {
-    //      return R.color.black333()
-    //    }
-    //    return R.color.gray82()
-    //  }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         
@@ -144,7 +195,12 @@ extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        dateSelected(date)
+        if calendar == weekModeCalendar {
+            dateSelected(.schedule,date)
+        } else {
+            dateSelected(.month,date)
+        }
+        
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -152,16 +208,48 @@ extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalend
         UIView.animate(withDuration: 0.5) {
             self.setNeedsLayout()
             self.layoutIfNeeded()
-            self.scopChanged(bounds.size.height,self.calendar.scope)
+            self.scopChanged(bounds.size.height,self.weekModeCalendar.scope)
         }
        
     }
     
     func setCalendarScope(_ scope:FSCalendarScope) {
-        calendar.setScope(scope, animated: true)
+       
+        weekModeCalendar.setScope(scope, animated: true)
+        
     }
     
-    func setCalendarSelectDate(_ date:Date) {
-        calendar.select(date, scrollToDate: true)
+    func setCalendarMode(_ mode:CalendarViewMode) {
+        
+        if mode ==  .month {
+            monthModeCalendar.isHidden = false
+            monthModeCalendar.alpha = 1
+            weekModeCalendar.isHidden = true
+            changeScopButton.isHidden = true
+        } else  {
+            monthModeCalendar.isHidden = true
+            monthModeCalendar.alpha = 0
+            weekModeCalendar.isHidden = false
+            changeScopButton.isHidden = false
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        }
+    }
+    
+    
+    func setCalendarSelectDate(_ date:Date,mode:CalendarViewMode) {
+        if mode == .month {
+            monthModeCalendar.select(date, scrollToDate: false)
+        }
+        if mode == .schedule {
+            weekModeCalendar.select(date, scrollToDate: false)
+        }
+        if mode == .today {
+            monthModeCalendar.select(date, scrollToDate: true)
+            weekModeCalendar.select(date, scrollToDate: true)
+        }
+        
     }
 }

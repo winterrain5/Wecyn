@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 247 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 250 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -340,6 +340,13 @@ struct _R {
       ///
       /// Locales: en
       var 二维码名片: RswiftResources.StringResource { .init(key: "二维码名片", tableName: "Localizable", source: source, developmentValue: "QR code business card", comment: nil) }
+
+      /// en translation: Today
+      ///
+      /// Key: 今日
+      ///
+      /// Locales: en
+      var 今日: RswiftResources.StringResource { .init(key: "今日", tableName: "Localizable", source: source, developmentValue: "Today", comment: nil) }
 
       /// en translation: you 
       ///
@@ -1055,6 +1062,13 @@ struct _R {
       /// Locales: en
       var 日历: RswiftResources.StringResource { .init(key: "日历", tableName: "Localizable", source: source, developmentValue: "Calendar", comment: nil) }
 
+      /// en translation: Schedule
+      ///
+      /// Key: 日程
+      ///
+      /// Locales: en
+      var 日程: RswiftResources.StringResource { .init(key: "日程", tableName: "Localizable", source: source, developmentValue: "Schedule", comment: nil) }
+
       /// en translation: TimeZone
       ///
       /// Key: 时区
@@ -1159,6 +1173,13 @@ struct _R {
       ///
       /// Locales: en
       var 最近发布: RswiftResources.StringResource { .init(key: "最近发布", tableName: "Localizable", source: source, developmentValue: "Activity", comment: nil) }
+
+      /// en translation: Month
+      ///
+      /// Key: 月
+      ///
+      /// Locales: en
+      var 月: RswiftResources.StringResource { .init(key: "月", tableName: "Localizable", source: source, developmentValue: "Month", comment: nil) }
 
       /// en translation: Unread
       ///
@@ -1874,7 +1895,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 124 images.
+  /// This `_R.image` struct is generated, and contains static references to 125 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -2024,6 +2045,9 @@ struct _R {
 
     /// Image `keyboard.chevron.compact.down`.
     var keyboardChevronCompactDown: RswiftResources.ImageResource { .init(name: "keyboard.chevron.compact.down", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `lightbulb.min`.
+    var lightbulbMin: RswiftResources.ImageResource { .init(name: "lightbulb.min", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `like`.
     var like: RswiftResources.ImageResource { .init(name: "like", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

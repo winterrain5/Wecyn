@@ -19,9 +19,26 @@ enum DateFormat:String {
     case ddMMyyyy = "dd-MM-yyyy"
 }
 
+enum CalendarViewMode {
+    case today
+    case month
+    case schedule
+}
+
+struct CalendarViewModeItem  {
+    var mode: CalendarViewMode
+    var text: String
+    var image: UIImage
+    init(mode: CalendarViewMode, text: String, image: UIImage) {
+        self.mode = mode
+        self.text = text
+        self.image = image
+    }
+}
+
 var CalendarBelongUserId:Int = 0
 var CalendarBelongUserName:String = ""
-class CalendarEventController: BaseTableController,DropdownMenuDelegate {
+class CalendarEventController: BaseTableController {
     
     let headerView = CalendarEventHeadView()
     let requestModel = EventListRequestModel()
@@ -29,15 +46,17 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
     let userTitleView = CalendarNavBarUserView()
     let UserModel = UserDefaults.userModel
     var calendarChangeDate = Date()
-    let headerHeight = 215.cgFloat
+    var headerHeight = 75.cgFloat
     var isTaped:Bool = false
     var currentScope:FSCalendarScope = .week
     let monthLabel = UILabel()
     var isDataLoaded = false
     var latesMonth:Int = 0
     var isWidgetLinkId: Int? = nil
+    var lastContentOffsetY:CGFloat = 0
     
     let filterButton = UIButton()
+    let modeButton = UIButton()
     
     var roomItems:[UserRoomModel] = []
     var roomSelectIndexPath:IndexPath?
@@ -46,6 +65,10 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
     var assistantItems:[AssistantInfo] = []
     var assistantSelectIndex = 0
     var assistantMenu:DropdownMenu?
+    
+    var modeItems:[CalendarViewModeItem] = []
+    var modeSelectIndex = 1
+    var modeMenu:DropdownMenu?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
@@ -63,6 +86,10 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        configHeadView()
+        configNavBar()
+        
         if let selectAssistant = UserDefaults.sk.get(of: UserInfoModel.self, for: "selectAssistant") {
             CalendarBelongUserId = selectAssistant.id.int ?? 0
             CalendarBelongUserName = selectAssistant.full_name
@@ -75,10 +102,64 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
             self.requestModel.room_id = selectRoom.id
         }
    
-        
         requestModel.start_date = calendarChangeDate.toString()
         requestModel.current_user_id = CalendarBelongUserId
         
+        
+        CalendarMenuView.addMenu(originView: self.view)
+
+       
+    }
+    
+    func configHeadView() {
+        headerView.frame.origin = CGPoint(x: 0, y: kNavBarHeight)
+        headerView.size = CGSize(width: kScreenWidth, height: headerHeight)
+        self.view.addSubview(headerView)
+        headerView.dateSelected = { [weak self] in
+            guard let `self` = self else { return }
+            if $0 == .schedule {
+                self.isTaped = true
+                self.calendarChangeDate = $1
+                self.scrollToSection()
+            } else {
+                self.calendarChangeDate = $1
+                self.scrollToSection()
+                
+                self.modeSelectIndex = 1
+                self.modeButton.imageForNormal = R.image.calendarDayTimelineLeft()!.tintImage(.black)
+                if self.currentScope == .month {
+                    self.headerView.height = 215
+                } else {
+                    self.headerView.height = 75
+                }
+                self.tableView?.frame.origin.y = self.headerView.frame.maxY
+                self.tableView?.isHidden = false
+                
+                self.headerView.setCalendarMode(.schedule)
+                self.headerView.setCalendarSelectDate($1, mode: .schedule)
+            
+                self.createModeMenu()
+                
+            }
+          
+        }
+        
+        headerView.monthChanged = { [weak self] date in
+            guard let `self` = self else { return }
+            self.calendarChangeDate = date
+            self.monthLabel.text = date.toString(format: "MMM")
+            self.refreshData()
+        }
+        
+        headerView.scopChanged = { [weak self] height,scope in
+            self?.currentScope = scope
+            let totalH = height + 20
+            self?.headerView.frame.size.height = totalH
+            self?.tableView?.frame = CGRect(x: 0, y: kNavBarHeight + totalH, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - totalH)
+        }
+    }
+    
+    func configNavBar() {
         let searchButton = UIButton()
         searchButton.imageForNormal = R.image.magnifyingglass()
         searchButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
@@ -89,7 +170,6 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         let searchItem = UIBarButtonItem(customView: searchButton)
         
         
-        filterButton.showsMenuAsPrimaryAction = true
         filterButton.imageForNormal = R.image.calendar_filter()
         filterButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
@@ -99,9 +179,26 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         }).disposed(by: rx.disposeBag)
         let filterItem = UIBarButtonItem(customView: filterButton)
         
-        let fixItem = UIBarButtonItem.fixedSpace(width: 22)
         
-        self.navigation.item.rightBarButtonItems = [searchItem,fixItem,filterItem]
+        modeItems = [
+            CalendarViewModeItem(mode: .schedule, text: "今日".innerLocalized(), image: R.image.lightbulbMin()!),
+            CalendarViewModeItem(mode: .schedule, text: "日程".innerLocalized(), image: R.image.calendarDayTimelineLeft()!.tintImage(.black)),
+            CalendarViewModeItem(mode: .month, text: "月".innerLocalized(), image: R.image.calendar()!.tintImage(.black)),
+        ]
+        modeButton.imageForNormal = R.image.calendarDayTimelineLeft()?.tintImage(.black)
+        modeButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+            guard let `self` = self else { return }
+            Haptico.selection()
+            
+            self.createModeMenu()
+            self.modeMenu?.showMenu()
+            
+        }).disposed(by: rx.disposeBag)
+        let modeItem = UIBarButtonItem(customView: modeButton)
+        
+        let fixItem = UIBarButtonItem.fixedSpace(width: 16)
+        
+        self.navigation.item.rightBarButtonItems = [searchItem,fixItem,filterItem,fixItem,modeItem]
         
         
         
@@ -125,11 +222,14 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
             
         }).disposed(by: rx.disposeBag)
         
-        
-        
-        CalendarMenuView.addMenu(originView: self.view)
-
-       
+    }
+    
+    func createModeMenu() {
+        let items = self.modeItems.map({
+            DropdownItem(image:$0.image,title: $0.text,style: .default)
+        })
+        self.modeMenu = DropdownMenu(navigationController: self.navigationController!, items: items, selectedRow: self.modeSelectIndex)
+        self.modeMenu?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,6 +239,35 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         
         getAssistants()
         
+    }
+    
+    
+    override func createListView() {
+        super.createListView()
+        
+        registRefreshHeader()
+        
+        tableView?.separatorStyle = .singleLine
+        tableView?.separatorColor = R.color.seperatorColor()!
+        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  kTabBarHeight + 10, right: 0)
+        
+        tableView?.isSkeletonable = true
+        tableView?.register(nibWithCellClass: CaledarItemCell.self)
+        cellIdentifier = CaledarItemCell.className
+    }
+    
+    override func listViewFrame() -> CGRect {
+        return CGRect(x: 0, y: kNavBarHeight + headerHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - headerHeight)
+    }
+    
+  
+    deinit {
+        CalendarBelongUserId = 0
+        CalendarBelongUserName = ""
+    }
+    
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return -headerHeight * 0.5
     }
     
     override func refreshData() {
@@ -180,6 +309,9 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
                         }) ?? []
                         copyed.removeAll(where: { copymodel in
                             data.exdatesObject.contains(where: { copymodel.start_date?.day == $0?.day })
+                        })
+                        copyed.enumerated().forEach({
+                            $0.1.repeat_idx =  $0.0
                         })
                         datas.append(contentsOf: copyed)
                     } else {
@@ -339,50 +471,10 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         self.tableView?.scrollToRow(at: IndexPath(row: 0, section: Int(section)), at: .top, animated: animated)
     }
     
+    
+}
 
-    
-    override func createListView() {
-        super.createListView()
-        
-        registRefreshHeader()
-        
-        headerView.frame.origin = CGPoint(x: 0, y: kNavBarHeight)
-        headerView.size = CGSize(width: kScreenWidth, height: headerHeight)
-        self.view.addSubview(headerView)
-        headerView.dateSelected = { [weak self] date in
-            guard let `self` = self else { return }
-            self.isTaped = true
-            self.calendarChangeDate = date
-            self.scrollToSection()
-        }
-        
-        headerView.monthChanged = { [weak self] date in
-            guard let `self` = self else { return }
-            self.calendarChangeDate = date
-            self.monthLabel.text = date.toString(format: "MMM")
-            self.refreshData()
-        }
-        
-        headerView.scopChanged = { [weak self] height,scope in
-            self?.currentScope = scope
-            let totalH = height + 20
-            self?.headerView.frame.size.height = totalH
-            self?.tableView?.frame = CGRect(x: 0, y: kNavBarHeight + totalH, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - totalH)
-        }
-        
-        tableView?.separatorStyle = .singleLine
-        tableView?.separatorColor = R.color.seperatorColor()!
-        tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom:  kTabBarHeight + 10, right: 0)
-        
-        tableView?.isSkeletonable = true
-        tableView?.register(nibWithCellClass: CaledarItemCell.self)
-        cellIdentifier = CaledarItemCell.className
-    }
-    
-    override func listViewFrame() -> CGRect {
-        return CGRect(x: 0, y: kNavBarHeight + headerHeight, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - headerHeight)
-    }
-    
+extension CalendarEventController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.dataArray.count
     }
@@ -452,7 +544,6 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
         }
        
     }
-    var lastContentOffsetY:CGFloat = 0
 
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -466,15 +557,9 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
             self.headerView.setCalendarScope(.week)
         }
     }
-    deinit {
-        CalendarBelongUserId = 0
-        CalendarBelongUserName = ""
-    }
-    
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return -headerHeight * 0.5
-    }
-    
+}
+
+extension CalendarEventController: DropdownMenuDelegate {
     func dropdownMenu(_ dropdownMenu: DropdownMenu, didSelectRowAt indexPath: IndexPath) {
         
         if dropdownMenu == self.roomMenu {
@@ -483,6 +568,9 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
             
             let item = roomItems[indexPath.section].options[indexPath.row]
             self.requestModel.room_id = item.value
+            
+            self.isBeginLoad = true
+            self.refreshData()
         }
         
         if dropdownMenu == self.assistantMenu {
@@ -507,14 +595,45 @@ class CalendarEventController: BaseTableController,DropdownMenuDelegate {
                 }
                 
             }
+            
+            self.isBeginLoad = true
+            self.refreshData()
+        }
+        
+        if dropdownMenu == self.modeMenu {
+            self.modeSelectIndex = indexPath.row
+            let item = self.modeItems[indexPath.row]
+            
+            if indexPath.row == 0 {
+                self.headerView.setCalendarSelectDate(Date(),mode: item.mode)
+                return
+            }
+            
+          
+            var height:CGFloat = 0
+            if item.mode == .month {
+                
+                height = kScreenHeight - kNavBarHeight - kTabBarHeight
+                self.headerView.size = CGSize(width: kScreenWidth, height: height)
+                self.tableView?.isHidden = true
+                
+            } else {
+                
+                if self.currentScope == .month {
+                    self.headerView.height = 215
+                } else {
+                    self.headerView.height = 75
+                }
+                self.tableView?.frame.origin.y = self.headerView.frame.maxY
+                self.tableView?.isHidden = false
+            }
+            
+            self.modeButton.imageForNormal = item.image
+            self.headerView.setCalendarMode(item.mode)
+           
+            self.headerView.setCalendarSelectDate(self.calendarChangeDate, mode: item.mode)
         }
        
-        
-        
-        self.isBeginLoad = true
-        self.refreshData()
-   
-        
 
     }
 }

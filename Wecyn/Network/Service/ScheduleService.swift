@@ -356,6 +356,7 @@ class EventListModel: BaseModel {
     }
     
     var isParentData = false
+    var repeat_idx = 0
     var start_date:Date? {
         return start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)
     }
