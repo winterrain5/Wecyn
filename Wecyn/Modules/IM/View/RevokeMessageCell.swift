@@ -58,16 +58,24 @@ class RevokeMessageCell:MessageCollectionViewCell {
         let message = dataSource.messageForItem(at: indexPath, in: messagesCollectionView)
         
         if case MessageKind.custom(let custom) = message.kind,let revoke = custom as? RevokeItem {
-            cellLabel.text = revoke.title
+            if message.sentDate.distance(to: Date()) >= 120 {
+                cellLabel.text = revoke.title
+            } else {
+                cellLabel.text = (revoke.title ?? "") + " " + "重新编辑".innerLocalized()
+                cellLabel.sk.setSpecificTextColor("重新编辑".innerLocalized(), color: .blue)
+            }
+            
         }
         
 
     }
     
-    /// Handle `ContentView`'s tap gesture, return false when `ContentView` doesn't needs to handle gesture
-    func cellContentView(canHandle _: CGPoint) -> Bool {
-        false
+    /// Handle tap gesture on contentView and its subviews.
+    override func handleTapGesture(_ gesture: UIGestureRecognizer) {
+        delegate?.didTapMessage(in: self)
     }
+    
+    
 }
 class RevokeMessageLayoutSizeCalculator: CellSizeCalculator {
     // MARK: Lifecycle
@@ -85,9 +93,7 @@ class RevokeMessageLayoutSizeCalculator: CellSizeCalculator {
         self.messagesLayout.messagesDataSource
     }
     override func sizeForItem(at indexPath: IndexPath) -> CGSize {
-        let dataSource = messagesDataSource
-       
-       
+   
         return CGSize(
             width: messagesLayout.itemWidth,
             height: 40)

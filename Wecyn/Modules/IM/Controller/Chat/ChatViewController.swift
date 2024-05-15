@@ -347,7 +347,11 @@ class ChatViewController: MessagesViewController {
                 
                 let currendUser = IMController.shared.currentSender
                 let text = "你撤回了一条消息".innerLocalized()
-                let item = RevokeItem(title: text)
+                var originText: String = ""
+                if case MessageKind.text(let text) = message.kind {
+                    originText = text
+                }
+                let item = RevokeItem(title: text,originText: originText)
                 let message = IMMessage(revokeItem: item, user: currendUser, messageId: UUID().uuidString, date: Date())
                 
                 self.messageList[indexPath.section] = message

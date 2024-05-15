@@ -16,8 +16,16 @@ class MonthModeCalendarCell: FSCalendarCell {
             models.enumerated().forEach { idx,model in
                 
                 let view = MonthModelCalendarItemView()
+                if (model.is_repeat == 1) && model.repeat_idx == 0 {
+                    self.layer.zPosition = 10000
+                    contentView.clipsToBounds = false
+                    clipsToBounds = false
+                } else {
+                    contentView.clipsToBounds = true
+                    clipsToBounds = true
+                }
+
                 view.model = model
-                view.layer.zPosition = 100
                 titleView.addSubview(view)
             }
             setNeedsLayout()
@@ -26,7 +34,7 @@ class MonthModeCalendarCell: FSCalendarCell {
     }
     override init!(frame: CGRect) {
         super.init(frame: frame)
-        
+      
         contentView.removeSubviews()
         contentView.addSubview(titleLabel)
         
@@ -47,10 +55,20 @@ class MonthModeCalendarCell: FSCalendarCell {
             make.top.equalTo(titleLabel.snp.bottom)
         }
         let viewHeight = 20.cgFloat
-        let margin = 4.cgFloat
+        let margin = 2.cgFloat
         titleView.subviews.enumerated().forEach { idx,view in
-            let y = viewHeight * idx.cgFloat + margin
-            view.frame = CGRect(x: 0, y: y, width: self.width, height: viewHeight)
+            let y = ( viewHeight + margin ) * idx.cgFloat
+            let itemView = view as! MonthModelCalendarItemView
+            let text = itemView.model.title
+            let itemWidth = text.widthWithConstrainedWidth(height: 20, font: UIFont.systemFont(ofSize: 12))
+            let width:CGFloat
+            if idx == titleView.subviews.count - 1 {
+                width = self.width
+            } else {
+                width = (itemWidth >= self.width) ? self.width : itemWidth
+            }
+            
+            view.frame = CGRect(x: 0, y: y, width: width, height: viewHeight)
         }
     }
     
@@ -66,26 +84,27 @@ class MonthModelCalendarItemView: UIView {
     
     let label = UILabel().color(.white).font(UIFont.systemFont(ofSize: 12))
 
-    var model: EventListModel? {
+    var model: EventListModel = EventListModel() {
         didSet {
-            guard let model = model else { return }
-           
-            backgroundColor =  UIColor(hexString: EventColor.allColor[model.color])
-           
+        
+            backgroundColor =  UIColor(hexString: EventColor.allColor[model.color])?.withAlphaComponent(0.8)
+            
+            let text = model.title
             if model.isCrossDay {
                 if model.isCrossDayStart {
-                    label.text = model.title
+                    label.text = text
                 } else {
                     label.text = ""
                 }
             } else if model.is_repeat == 1 {
                 if model.repeat_idx == 0 {
-                    label.text = model.title
+                    layer.zPosition = 10000
+                    label.text = text
                 } else {
                     label.text = ""
                 }
             } else {
-                label.text = model.title
+                label.text = text
             }
         }
     }
@@ -94,6 +113,7 @@ class MonthModelCalendarItemView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        clipsToBounds = false
         addSubview(label)
         
     }
@@ -105,7 +125,7 @@ class MonthModelCalendarItemView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.left.top.bottom.equalToSuperview()
         }
     }
 }

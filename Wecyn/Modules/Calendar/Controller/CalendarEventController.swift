@@ -22,6 +22,8 @@ enum DateFormat:String {
 enum CalendarViewMode {
     case today
     case month
+    case threeDays
+    case week
     case schedule
 }
 
@@ -70,6 +72,7 @@ class CalendarEventController: BaseTableController {
     var modeSelectIndex = 1
     var modeMenu:DropdownMenu?
     
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.WidgetItemSelected, object: nil, queue: .main) { noti in
@@ -111,6 +114,7 @@ class CalendarEventController: BaseTableController {
        
     }
     
+    
     func configHeadView() {
         headerView.frame.origin = CGPoint(x: 0, y: kNavBarHeight)
         headerView.size = CGSize(width: kScreenWidth, height: headerHeight)
@@ -125,7 +129,6 @@ class CalendarEventController: BaseTableController {
                 self.calendarChangeDate = $1
                 self.scrollToSection()
                 
-                self.modeSelectIndex = 1
                 self.modeButton.imageForNormal = R.image.calendarDayTimelineLeft()!.tintImage(.black)
                 if self.currentScope == .month {
                     self.headerView.height = 215
@@ -137,8 +140,6 @@ class CalendarEventController: BaseTableController {
                 
                 self.headerView.setCalendarMode(.schedule)
                 self.headerView.setCalendarSelectDate($1, mode: .schedule)
-            
-                self.createModeMenu()
                 
             }
           
@@ -149,6 +150,9 @@ class CalendarEventController: BaseTableController {
             self.calendarChangeDate = date
             self.monthLabel.text = date.toString(format: "MMM")
             self.refreshData()
+            
+            self.modeSelectIndex = self.tableView!.isHidden ? 4 : 1
+            self.createModeMenu()
         }
         
         headerView.scopChanged = { [weak self] height,scope in
@@ -181,15 +185,16 @@ class CalendarEventController: BaseTableController {
         
         
         modeItems = [
-            CalendarViewModeItem(mode: .schedule, text: "今日".innerLocalized(), image: R.image.lightbulbMin()!),
-            CalendarViewModeItem(mode: .schedule, text: "日程".innerLocalized(), image: R.image.calendarDayTimelineLeft()!.tintImage(.black)),
+            CalendarViewModeItem(mode: .today, text: "今日".innerLocalized(), image: R.image.lightbulbMin()!),
+            CalendarViewModeItem(mode: .schedule, text: "列表".innerLocalized(), image: R.image.calendarDayTimelineLeft()!.tintImage(.black)),
+            CalendarViewModeItem(mode: .threeDays, text: "3日".innerLocalized(), image: R.image.threeSquare()!.tintImage(.black)),
+            CalendarViewModeItem(mode: .week, text: "周".innerLocalized(), image: R.image.sevenSquare()!.tintImage(.black)),
             CalendarViewModeItem(mode: .month, text: "月".innerLocalized(), image: R.image.calendar()!.tintImage(.black)),
         ]
         modeButton.imageForNormal = R.image.calendarDayTimelineLeft()?.tintImage(.black)
         modeButton.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
             guard let `self` = self else { return }
             Haptico.selection()
-            
             self.createModeMenu()
             self.modeMenu?.showMenu()
             
@@ -236,7 +241,7 @@ class CalendarEventController: BaseTableController {
         super.viewWillAppear(animated)
         latesMonth = 0
         refreshData()
-        
+        getUserInfo()
         getAssistants()
         
     }
@@ -271,12 +276,53 @@ class CalendarEventController: BaseTableController {
     }
     
     override func refreshData() {
-
-        getUserInfo()
         
-        if latesMonth == calendarChangeDate.month, isBeginLoad == false, self.isWidgetLinkId == nil {
+        func fetchDataForCalendarMode()  {
+            if latesMonth == calendarChangeDate.month, isBeginLoad == false, self.isWidgetLinkId == nil {
+                return
+            }
+            
+            guard let sd = calendarChangeDate.beginning(of: .month),let ed = sd.end(of: .month)?.adding(.day, value: 1),let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else {
+                return
+            }
+            
+            fetchData(sd: sd, ed: formatEd)
+        }
+        
+        if modeSelectIndex == 0 {
+            if let weekModeView = findWeekModeView()  {
+                let ed = calendarChangeDate.adding(.day, value: weekModeView.numberofDays)
+                guard let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else { return }
+              
+                fetchData(sd: calendarChangeDate, ed: formatEd)
+            } else {
+                fetchDataForCalendarMode()
+            }
+            
             return
         }
+     
+        if modeSelectIndex == 1 || modeSelectIndex == 4 {
+            fetchDataForCalendarMode()
+        }
+        
+        if modeSelectIndex  == 2 {
+            let ed = calendarChangeDate.adding(.day, value: 3)
+            guard let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else { return }
+          
+            fetchData(sd: calendarChangeDate, ed: formatEd)
+        }
+       
+        
+        if modeSelectIndex  == 3 {
+            let ed = calendarChangeDate.adding(.day, value: 7)
+            guard let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else { return }
+            
+            fetchData(sd: calendarChangeDate, ed: formatEd)
+        }
+    }
+    
+    func fetchData(sd:Date,ed:Date) {
         
         self.dataArray.removeAll()
         
@@ -284,12 +330,8 @@ class CalendarEventController: BaseTableController {
         
         let eventList = ScheduleService.eventList(model: requestModel)
         
-        guard let sd = calendarChangeDate.beginning(of: .month),let ed = sd.end(of: .month)?.adding(.day, value: 1),let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else {
-            return
-        }
-       
         requestModel.start_date = sd.toString(format: DateFormat.ddMMyyyy.rawValue)
-        requestModel.end_date = formatEd.toString(format: DateFormat.ddMMyyyy.rawValue)
+        requestModel.end_date = ed.toString(format: DateFormat.ddMMyyyy.rawValue)
         
         Logger.debug(requestModel.start_date,label: "startDate")
         Logger.debug(requestModel.end_date,label: "endDate")
@@ -308,7 +350,7 @@ class CalendarEventController: BaseTableController {
                             return model
                         }) ?? []
                         copyed.removeAll(where: { copymodel in
-                            data.exdatesObject.contains(where: { copymodel.start_date?.day == $0?.day })
+                            data.exdatesObject.contains(where: { copymodel.start_date?.day == $0.day })
                         })
                         copyed.enumerated().forEach({
                             $0.1.repeat_idx =  $0.0
@@ -323,7 +365,7 @@ class CalendarEventController: BaseTableController {
                             for i in 0..<count.int {
                                 guard let start_date = data.start_date,let end_date = data.end_date else { return }
                                 let startDate = start_date.adding(.day, value: i)
-                                let endDate = (i == count.int - 1) ? end_date : nil
+                                let endDate = end_date
                                 let model = data.copyed(startDate,endDate: endDate,isCrossDays: true)
                                 model.isCrossDayStart = i == 0
                                 model.isCrossDayEnd = i == (count.int - 1)
@@ -369,6 +411,10 @@ class CalendarEventController: BaseTableController {
                 
                 let eventDatas = self.dataArray as! [[EventListModel]]
                 self.headerView.eventDates = eventDatas
+                if let weekModeView = self.findWeekModeView() {
+                    weekModeView.initDate = self.calendarChangeDate
+                    weekModeView.models = eventDatas.flatMap({ $0 })
+                }
                 
                 self.endRefresh(self.dataArray.count, emptyString: "No Events")
                 
@@ -397,7 +443,6 @@ class CalendarEventController: BaseTableController {
             self.endRefresh(e.asAPIError.emptyDatatype,emptyString: e.asAPIError.errorInfo().message)
             self.hideSkeleton()
         }).disposed(by: rx.disposeBag)
-        
         
     }
     
@@ -604,21 +649,32 @@ extension CalendarEventController: DropdownMenuDelegate {
             self.modeSelectIndex = indexPath.row
             let item = self.modeItems[indexPath.row]
             
-            if indexPath.row == 0 {
+            if item.mode == .today {
+                if let weekModeView = findWeekModeView() {
+//                    weekModeView.calendarWeekView.
+                    self.calendarChangeDate = Date()
+                    self.refreshData()
+                    return
+                }
                 self.headerView.setCalendarSelectDate(Date(),mode: item.mode)
+                self.scrollToSection()
                 return
             }
             
           
-            var height:CGFloat = 0
+           
             if item.mode == .month {
-                
-                height = kScreenHeight - kNavBarHeight - kTabBarHeight
+                removeWeekModeView()
+                let height = kScreenHeight - kNavBarHeight - kTabBarHeight
                 self.headerView.size = CGSize(width: kScreenWidth, height: height)
                 self.tableView?.isHidden = true
                 
-            } else {
-                
+                self.headerView.setCalendarMode(item.mode)
+                self.headerView.setCalendarSelectDate(self.calendarChangeDate, mode: item.mode)
+            }
+            
+            if item.mode == .schedule {
+                removeWeekModeView()
                 if self.currentScope == .month {
                     self.headerView.height = 215
                 } else {
@@ -626,15 +682,64 @@ extension CalendarEventController: DropdownMenuDelegate {
                 }
                 self.tableView?.frame.origin.y = self.headerView.frame.maxY
                 self.tableView?.isHidden = false
+                
+                self.headerView.setCalendarMode(item.mode)
+                self.headerView.setCalendarSelectDate(self.calendarChangeDate, mode: item.mode)
+            }
+            
+            if item.mode == .threeDays {
+                
+                addWeekModeView(3)
+                
+            }
+            
+            if item.mode == .week  {
+                
+                addWeekModeView(7)
+         
             }
             
             self.modeButton.imageForNormal = item.image
-            self.headerView.setCalendarMode(item.mode)
-           
-            self.headerView.setCalendarSelectDate(self.calendarChangeDate, mode: item.mode)
         }
+        
        
 
+    }
+    
+    func addWeekModeView(_ numofdays:Int) {
+        removeWeekModeView()
+        let weekModeView = CalendarWeekModeView()
+        weekModeView.initDate = calendarChangeDate
+        weekModeView.numberofDays = numofdays
+        weekModeView.models = (self.dataArray as! [[EventListModel]]).flatMap({ $0 })
+        self.view.addSubview(weekModeView)
+        weekModeView.frame = CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight -  kNavBarHeight - kTabBarHeight)
+        weekModeView.pageDidChange =  { [weak self] in
+            guard let `self` = self else { return }
+            self.calendarChangeDate =  $0
+            self.monthLabel.text = $0.toString(format: "MMM")
+            self.refreshData()
+            if self.modeSelectIndex == 0 {
+                self.modeSelectIndex = numofdays == 3 ? 2 : 3
+                self.createModeMenu()
+            }
+        }
+    }
+    
+    func removeWeekModeView() {
+        self.view.subviews.forEach({
+            if $0 is CalendarWeekModeView {
+                $0.removeFromSuperview()
+            }
+        })
+    }
+    
+    func isWeekModeViewShowed() -> Bool {
+        return self.view.subviews.contains(where: { $0 is CalendarWeekModeView })
+    }
+    
+    func findWeekModeView() ->  CalendarWeekModeView? {
+        return self.view.subviews.filter({ $0 is CalendarWeekModeView }).first as? CalendarWeekModeView
     }
 }
 

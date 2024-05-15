@@ -149,6 +149,7 @@
 		454BA3802B8D72E5006B47BA /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA37F2B8D72E5006B47BA /* NotificationController.swift */; };
 		454BA3832B8D72FE006B47BA /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA3812B8D72FE006B47BA /* NotificationCell.swift */; };
 		454BA3842B8D72FE006B47BA /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 454BA3822B8D72FE006B47BA /* NotificationCell.xib */; };
+		455AA9F42BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
 		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
 		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
@@ -551,6 +552,7 @@
 		454BA37F2B8D72E5006B47BA /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		454BA3812B8D72FE006B47BA /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		454BA3822B8D72FE006B47BA /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekModeView.swift; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -1800,6 +1802,7 @@
 				450F6CD42A6928220001AA1B /* CalendarMenuView.swift */,
 				457C7DCF2A52976D002E50DF /* CalendarAssistantMenu.swift */,
 				45A285152BEF3D4700F8CE7B /* MonthModeCalendarCell.swift */,
+				455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2383,6 +2386,7 @@
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
 				456BB04F2B4E869B00BB7838 /* AdminSelectRoleController.swift in Sources */,
 				459C06592A36B9150066F85A /* ProfileInterestsItemsCell.swift in Sources */,
+				455AA9F42BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift in Sources */,
 				458970602A7794EA00344B93 /* Asyncs.swift in Sources */,
 				45C781FE2A98A0FB00D4E721 /* ImageCompress+ImageFormat.swift in Sources */,
 				450BA6E72A36A96800764828 /* RegistAddAvatarController.swift in Sources */,

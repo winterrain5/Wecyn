@@ -136,11 +136,13 @@ extension String {
         return result
     }
     
-    func toDate(format: String, locaIdentifier:String = LocaIdentifier) -> Date? {
+    func toDate(format: String, locaIdentifier:String = LocaIdentifier,isZero:Bool = false) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: locaIdentifier)
         dateFormatter.dateFormat = format
-        
+        if isZero {
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        }
         return dateFormatter.date(from: self)
     }
 

@@ -62,7 +62,7 @@ target 'Wecyn' do
   pod 'GooglePlaces'
   pod 'Google-Maps-iOS-Utils'
   pod 'RichLabel'
-  
+  pod 'JZCalendarWeekView'
     
   pod 'Permission/Camera'
   pod 'Permission/Microphone'

@@ -59,6 +59,7 @@ PODS:
   - IQKeyboardManagerSwift (6.5.12)
   - JXPagingView/Paging (2.1.2)
   - JXSegmentedView (1.3.0)
+  - JZCalendarWeekView (0.7.1)
   - Kingfisher (7.9.1)
   - KMPlaceholderTextView (1.4.0)
   - Localize-Swift (3.2.0):
@@ -224,6 +225,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JXPagingView/Paging
   - JXSegmentedView
+  - JZCalendarWeekView
   - Kingfisher
   - KMPlaceholderTextView
   - Localize-Swift (~> 3.2)
@@ -292,6 +294,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JXPagingView
     - JXSegmentedView
+    - JZCalendarWeekView
     - Kingfisher
     - KMPlaceholderTextView
     - Localize-Swift
@@ -368,6 +371,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
   JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
+  JZCalendarWeekView: 586a429ab3fbeef4f98d648ea6b801f57c5495cc
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
@@ -412,6 +416,6 @@ SPEC CHECKSUMS:
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
   ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: 6b591355ba5abf1db371920c930576b7cec6a870
+PODFILE CHECKSUM: 29a22a86c3c983ec154bfd4f8d27a2c1d8218761
 
 COCOAPODS: 1.11.2

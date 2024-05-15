@@ -328,8 +328,8 @@ class EventListModel: BaseModel {
     var is_repeat = 0
     var rrule_str = ""
     var exdates:[String] = []
-    var exdatesObject:[Date?] {
-        exdates.map({ $0.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)})
+    var exdatesObject:[Date] {
+        exdates.map({ $0.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue,isZero: true)}).compactMap({ $0 })
     }
     var color = 0
     

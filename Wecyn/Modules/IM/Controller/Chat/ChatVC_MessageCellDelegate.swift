@@ -37,7 +37,10 @@ extension ChatViewController: MessageCellDelegate {
             print("Failed to identify message when audio cell receive tap gesture")
             return
         }
-        
+        if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let revokeItem = custom as? RevokeItem,let originText = revokeItem.originText {
+            self.messageInputBar.inputTextView.text = originText
+            self.messageInputBar.inputTextView.becomeFirstResponder()
+        }
         if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let fileItem = custom as? FileItem,let url = fileItem.url {
             if url.isFileURL {
                 

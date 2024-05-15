@@ -99,6 +99,7 @@ class IMMessage:MessageType {
                 text = (messageInfo.senderNickname ?? "")  + "撤回了一条消息".innerLocalized()
             }
             let item = RevokeItem(title: text)
+            
             let message = IMMessage(revokeItem: item, user: sender, messageId: messageId, date: date)
             message.sendStatus = messageInfo.status
             return message
@@ -323,8 +324,10 @@ struct FileItem {
 
 struct RevokeItem {
     var title: String?
-    init(title: String? = nil) {
+    var originText: String?
+    init(title: String? = nil,originText: String? = nil) {
         self.title = title
+        self.originText = originText
     }
 }
 

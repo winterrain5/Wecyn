@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 250 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 251 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -1818,6 +1818,13 @@ struct _R {
       /// Locales: en
       var 邀请: RswiftResources.StringResource { .init(key: "邀请", tableName: "Localizable", source: source, developmentValue: "invited ", comment: nil) }
 
+      /// en translation: re-edit
+      ///
+      /// Key: 重新编辑
+      ///
+      /// Locales: en
+      var 重新编辑: RswiftResources.StringResource { .init(key: "重新编辑", tableName: "Localizable", source: source, developmentValue: "re-edit", comment: nil) }
+
       /// en translation: Burn time setting:
       ///
       /// Key: 阅后即焚时间设置
@@ -1895,7 +1902,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 125 images.
+  /// This `_R.image` struct is generated, and contains static references to 126 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -2193,6 +2200,9 @@ struct _R {
     /// Image `send`.
     var send: RswiftResources.ImageResource { .init(name: "send", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `seven.square`.
+    var sevenSquare: RswiftResources.ImageResource { .init(name: "seven.square", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `shared.with.you.slash`.
     var sharedWithYouSlash: RswiftResources.ImageResource { .init(name: "shared.with.you.slash", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -2207,9 +2217,6 @@ struct _R {
 
     /// Image `square.and.pencil.circle.fill`.
     var squareAndPencilCircleFill: RswiftResources.ImageResource { .init(name: "square.and.pencil.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
-    /// Image `square.fill.7`.
-    var squareFill7: RswiftResources.ImageResource { .init(name: "square.fill.7", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `switch.2`.
     var switch2: RswiftResources.ImageResource { .init(name: "switch.2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2234,6 +2241,9 @@ struct _R {
 
     /// Image `text.quote`.
     var textQuote: RswiftResources.ImageResource { .init(name: "text.quote", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `three.square`.
+    var threeSquare: RswiftResources.ImageResource { .init(name: "three.square", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `toolbar_icon_at`.
     var toolbar_icon_at: RswiftResources.ImageResource { .init(name: "toolbar_icon_at", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
