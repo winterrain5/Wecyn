@@ -292,6 +292,7 @@
 "登出" = "Logout";
 "版本号" = "Version";
 "你确定要登出吗？"  = "Are you sure you want to log out?";
+"定位到聊天位置" = "Locate the chat location";
 
 "日程" = "Schedule";
 "月" = "Month";

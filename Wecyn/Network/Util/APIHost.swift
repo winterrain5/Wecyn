@@ -15,11 +15,14 @@ class APIHost: NSObject {
     var mapApiKey = "AIzaSyCRk-xGBzWrB2Ohus6niMeT1oG1yUZ_Hgo"
     var placeApiKey = "AIzaSyCRk-xGBzWrB2Ohus6niMeT1oG1yUZ_Hgo"
     
-    var buildType: AppBuildType = .Dev
+    var buildType: AppBuildType = .Uat
     
-    enum AppBuildType: Int {
+      enum AppBuildType: Int {
+        // 开发环境
         case Dev
+        // 测试环境
         case Uat
+        // 生产环境
         case Release
     }
     

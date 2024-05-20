@@ -89,6 +89,16 @@ post_install do |installer|
         config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', 'DD_LEGACY_MACROS=1']
       end
     end
+    shell_script_path = "Pods/Target Support Files/#{target.name}/#{target.name}-frameworks.sh"
+    if File::exists?(shell_script_path)
+      shell_script_input_lines = File.readlines(shell_script_path)
+      shell_script_output_lines = shell_script_input_lines.map { |line| line.sub("source=\"$(readlink \"${source}\")\"", "source=\"$(readlink -f \"${source}\")\"") }
+      File.open(shell_script_path, 'w') do |f|
+        shell_script_output_lines.each do |line|
+          f.write line
+        end
+      end
+    end
     target.build_configurations.each do |config|
       config.build_settings["DEVELOPMENT_TEAM"] = "4F6LM54QKY"
       if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f <= 12.0
@@ -98,3 +108,5 @@ post_install do |installer|
     end
   end
 end
+
+

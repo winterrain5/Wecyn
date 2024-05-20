@@ -178,7 +178,8 @@ open class JZBaseWeekView: UIView {
         self.scrollableRange.endDate = scrollableRange?.endDate
         self.currentTimelineType = currentTimelineType
 
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
             // Check the screen orientation when initialisation
             JZWeekViewHelper.viewTransitionHandler(to: UIScreen.main.bounds.size, weekView: self, needRefresh: false)
             self.layoutSubviews()

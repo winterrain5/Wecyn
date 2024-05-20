@@ -150,6 +150,7 @@
 		454BA3832B8D72FE006B47BA /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA3812B8D72FE006B47BA /* NotificationCell.swift */; };
 		454BA3842B8D72FE006B47BA /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 454BA3822B8D72FE006B47BA /* NotificationCell.xib */; };
 		455AA9F42BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */; };
+		455AA9F62BF59F1400E7C0B3 /* ChatMessageSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455AA9F52BF59F1400E7C0B3 /* ChatMessageSearchController.swift */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
 		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
 		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
@@ -553,6 +554,7 @@
 		454BA3812B8D72FE006B47BA /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		454BA3822B8D72FE006B47BA /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekModeView.swift; sourceTree = "<group>"; };
+		455AA9F52BF59F1400E7C0B3 /* ChatMessageSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageSearchController.swift; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -1896,6 +1898,7 @@
 				45F07C352BB2763F0070813D /* DataProviderDelegate.swift */,
 				45F07C392BB299B00070813D /* ChatViewControllerBuilder.swift */,
 				45EC1D992BE08E6B0091FCD5 /* ChatLocationSearchController.swift */,
+				455AA9F52BF59F1400E7C0B3 /* ChatMessageSearchController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2214,6 +2217,7 @@
 				450B6C8C2A383D24008B0C4A /* HomeHeaderView.swift in Sources */,
 				450BA6DB2A330A2300764828 /* RegistProfileController.swift in Sources */,
 				45920AEC2A26E045005871ED /* WebBrowserController.swift in Sources */,
+				455AA9F62BF59F1400E7C0B3 /* ChatMessageSearchController.swift in Sources */,
 				45920ADB2A26E045005871ED /* NotifictionCenter+Name.swift in Sources */,
 				45381DF52BBA9551007EE954 /* PhotoHelper.swift in Sources */,
 				4513F61A2BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift in Sources */,

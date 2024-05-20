@@ -160,8 +160,9 @@ class CalendarMenuView: UIView {
         }
     }
     
-    static func addMenu(originView:UIView) {
+    static func addMenu(originView:UIView) -> CalendarMenuView{
         let menu = CalendarMenuView(originView: originView)
         originView.addSubview(menu)
+        return menu
     }
 }

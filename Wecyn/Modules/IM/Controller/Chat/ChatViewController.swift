@@ -167,6 +167,10 @@ class ChatViewController: MessagesViewController {
                     UIView.animate(withDuration: 0) {
                         self.messagesCollectionView.reloadData()
                     } completion: { flat in
+                        if let section = mgs.firstIndex(where: {  $0.isAnchor }) {
+                            self.messagesCollectionView.scrollToItem(at: IndexPath(item: 0, section: section), at: .bottom, animated: false)
+                            return
+                        }
                         self.messagesCollectionView.scrollToLastItem(animated: false)
                     }
                 }

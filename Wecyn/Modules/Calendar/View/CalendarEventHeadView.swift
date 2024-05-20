@@ -25,7 +25,7 @@ class CalendarEventHeadView: UIView {
         }
     }
     
-    var calendarHeight:CGFloat = 195
+    var calendarHeight:CGFloat = 175
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -68,7 +68,6 @@ class CalendarEventHeadView: UIView {
         
         configCalendarAppearance(monthModeCalendar)
         monthModeCalendar.appearance.titleSelectionColor = .black
-        monthModeCalendar.appearance.titleTodayColor = .red
         
         configCalendarOtherProperty(monthModeCalendar)
         
@@ -104,7 +103,7 @@ class CalendarEventHeadView: UIView {
         calendar.firstWeekday = 1
         calendar.locale = Locale.current
         calendar.select(Date())
-        calendar.scope = .month
+        
         calendar.appearance.borderRadius = 0.2
         calendar.headerHeight = 0
         
@@ -113,6 +112,7 @@ class CalendarEventHeadView: UIView {
         } else {
             calendar.placeholderType = .none
         }
+        calendar.scope = .month
     }
     
     required init?(coder: NSCoder) {
@@ -121,10 +121,8 @@ class CalendarEventHeadView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        monthModeCalendar.snp.makeConstraints { make in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(kScreenHeight - kTabBarHeight - kNavBarHeight)
-        }
+        monthModeCalendar.frame = CGRect(x: 0, y: 0, width: self.width, height: kScreenHeight - kTabBarHeight - kNavBarHeight)
+
         weekModeCalendar.snp.remakeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(self.calendarHeight)
@@ -204,12 +202,16 @@ extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalend
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        self.calendarHeight = bounds.size.height
-        UIView.animate(withDuration: 0.5) {
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-            self.scopChanged(bounds.size.height,self.weekModeCalendar.scope)
+       
+        if calendar == weekModeCalendar {
+            self.calendarHeight = bounds.size.height
+            UIView.animate(withDuration: 0.5) {
+                self.setNeedsLayout()
+                self.layoutIfNeeded()
+                self.scopChanged(bounds.size.height,self.weekModeCalendar.scope)
+            }
         }
+       
        
     }
     
@@ -224,32 +226,22 @@ extension CalendarEventHeadView:FSCalendarDataSource,FSCalendarDelegate,FSCalend
         if mode ==  .month {
             monthModeCalendar.isHidden = false
             monthModeCalendar.alpha = 1
+            
             weekModeCalendar.isHidden = true
             changeScopButton.isHidden = true
         } else  {
             monthModeCalendar.isHidden = true
             monthModeCalendar.alpha = 0
+            
             weekModeCalendar.isHidden = false
             changeScopButton.isHidden = false
         }
-        UIView.animate(withDuration: 0.5) {
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-        }
+     
     }
     
     
-    func setCalendarSelectDate(_ date:Date,mode:CalendarViewMode) {
-        if mode == .month {
-            monthModeCalendar.select(date, scrollToDate: false)
-        }
-        if mode == .schedule {
-            weekModeCalendar.select(date, scrollToDate: false)
-        }
-        if mode == .today {
-            monthModeCalendar.select(date, scrollToDate: true)
-            weekModeCalendar.select(date, scrollToDate: true)
-        }
-        
+    func setCalendarSelectDate(_ date:Date) {
+        monthModeCalendar.select(date, scrollToDate: true)
+        weekModeCalendar.select(date, scrollToDate: true)
     }
 }

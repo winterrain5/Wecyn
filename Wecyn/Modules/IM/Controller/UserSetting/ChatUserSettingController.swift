@@ -24,7 +24,7 @@ class ChatUserSettingController: BaseTableController {
         let chatSticky = conversation.isPinned
         let chatMute = (conversation.recvMsgOpt == .notReceive || conversation.recvMsgOpt == .notNotify)
         models = [
-            [ChatSettingModel(title:"查找聊天内容".innerLocalized(),hasArrow: true)],
+            [ChatSettingModel(title:"查找聊天内容".innerLocalized(),type:.search, hasArrow: true)],
             [ChatSettingModel(title:"消息免打扰".innerLocalized(),type:.mute,isOn: chatMute,hasSwitch: true),
              ChatSettingModel(title:"置顶聊天".innerLocalized(),type: .pin,isOn:chatSticky, hasSwitch:true)],
             [ChatSettingModel(title: "清空聊天记录".innerLocalized(),type: .clear)]
@@ -95,6 +95,10 @@ class ChatUserSettingController: BaseTableController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = models[indexPath.section][indexPath.row]
+        if model.type == .search {
+            let vc = ChatMessageSearchController(conversation: conversation)
+            self.navigationController?.pushViewController(vc)
+        }
         if model.type == .clear {
             let alert = UIAlertController(style: .actionSheet)
             alert.addAction(title: "清空聊天记录",style: .destructive) {[weak self] _ in

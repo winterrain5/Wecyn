@@ -495,6 +495,10 @@ class CreatePostViewController: BaseViewController {
 
     }
     
+    /// 更新请求模型的值
+    ///
+    /// 此函数会遍历富文本视图中的提及范围，并将提及内容替换为相应的用户名。
+    /// 替换完成后，将更新后的内容赋值给请求模型的 `content` 属性，并调用 `removeDuplicates` 方法去除 `at_list` 中的重复项。
     func updateRequestModelValue() {
         let replacingRange = self.richTextView.richTextStorage.mentionRanges.reversed()
         var content = self.richTextView.text ?? ""
@@ -505,7 +509,7 @@ class CreatePostViewController: BaseViewController {
         self.requestModel.content = content
         self.requestModel.at_list.removeDuplicates()
     }
-    
+
     func addPost() {
         Toast.showLoading()
         if self.postMediaType == .Video {
@@ -964,162 +968,4 @@ class CreatePostImageCell: UICollectionViewCell {
 }
 
 
-
-extension CreatePostViewController {
-    //    @objc func toggleLink() {
-    //        var linkTitle = ""
-    //        var linkURL: URL? = nil
-    //        var linkRange = richTextView.selectedRange
-    //        // Let's check if the current range already has a link assigned to it.
-    //        if let expandedRange = richTextView.linkFullRange(forRange: richTextView.selectedRange) {
-    //            linkRange = expandedRange
-    //            linkURL = richTextView.linkURL(forRange: expandedRange)
-    //        }
-    //        let target = richTextView.linkTarget(forRange: richTextView.selectedRange)
-    //        linkTitle = richTextView.attributedText.attributedSubstring(from: linkRange).string
-    //        let allowTextEdit = !richTextView.attributedText.containsAttachments(in: linkRange)
-    //        showLinkDialog(forURL: linkURL, text: linkTitle, target: target, range: linkRange, allowTextEdit: allowTextEdit)
-    //    }
-    
-    //    func showLinkDialog(forURL url: URL?, text: String?, target: String?, range: NSRange, allowTextEdit: Bool = true) {
-    //
-    //        let isInsertingNewLink = (url == nil)
-    //        var urlToUse = url
-    //
-    //        if isInsertingNewLink {
-    //            let pasteboard = UIPasteboard.general
-    //            if let pastedURL = pasteboard.value(forPasteboardType:String(kUTTypeURL)) as? URL {
-    //                urlToUse = pastedURL
-    //            }
-    //        }
-    //
-    //        let insertButtonTitle = isInsertingNewLink ? NSLocalizedString("Insert Link", comment:"Label action for inserting a link on the editor") : NSLocalizedString("Update Link", comment:"Label action for updating a link on the editor")
-    //        let removeButtonTitle = NSLocalizedString("Remove Link", comment:"Label action for removing a link from the editor");
-    //        let cancelButtonTitle = NSLocalizedString("Cancel", comment:"Cancel button")
-    //
-    //        let alertController = UIAlertController(title:insertButtonTitle,
-    //                                                message:nil,
-    //                                                preferredStyle:UIAlertController.Style.alert)
-    //        alertController.view.accessibilityIdentifier = "linkModal"
-    //
-    //        alertController.addTextField(configurationHandler: { [weak self]textField in
-    //            textField.clearButtonMode = UITextField.ViewMode.always;
-    //            textField.placeholder = NSLocalizedString("URL", comment:"URL text field placeholder");
-    //            textField.keyboardType = .URL
-    //            textField.textContentType = .URL
-    //            textField.text = urlToUse?.absoluteString
-    //
-    //            textField.addTarget(self,
-    //                                action:#selector(CreatePostViewController.alertTextFieldDidChange),
-    //                                for:UIControl.Event.editingChanged)
-    //
-    //            textField.accessibilityIdentifier = "linkModalURL"
-    //        })
-    //
-    //        if allowTextEdit {
-    //            alertController.addTextField(configurationHandler: { textField in
-    //                textField.clearButtonMode = UITextField.ViewMode.always
-    //                textField.placeholder = NSLocalizedString("Link Text", comment:"Link text field placeholder")
-    //                textField.isSecureTextEntry = false
-    //                textField.autocapitalizationType = UITextAutocapitalizationType.sentences
-    //                textField.autocorrectionType = UITextAutocorrectionType.default
-    //                textField.spellCheckingType = UITextSpellCheckingType.default
-    //
-    //                textField.text = text;
-    //
-    //                textField.accessibilityIdentifier = "linkModalText"
-    //
-    //            })
-    //        }
-    //
-    //        alertController.addTextField(configurationHandler: { textField in
-    //            textField.clearButtonMode = UITextField.ViewMode.always
-    //            textField.placeholder = NSLocalizedString("Target", comment:"Link text field placeholder")
-    //            textField.isSecureTextEntry = false
-    //            textField.autocapitalizationType = UITextAutocapitalizationType.sentences
-    //            textField.autocorrectionType = UITextAutocorrectionType.default
-    //            textField.spellCheckingType = UITextSpellCheckingType.default
-    //
-    //            textField.text = target;
-    //
-    //            textField.accessibilityIdentifier = "linkModalTarget"
-    //
-    //        })
-    //
-    //        let insertAction = UIAlertAction(title:insertButtonTitle,
-    //                                         style:UIAlertAction.Style.default,
-    //                                         handler:{ [weak self]action in
-    //
-    //            self?.richTextView.becomeFirstResponder()
-    //            guard let textFields = alertController.textFields else {
-    //                return
-    //            }
-    //            let linkURLField = textFields[0]
-    //            let linkTextField = textFields[1]
-    //            let linkTargetField = textFields[2]
-    //            let linkURLString = linkURLField.text
-    //            var linkTitle = linkTextField.text
-    //            let target = linkTargetField.text
-    //
-    //            if  linkTitle == nil  || linkTitle!.isEmpty {
-    //                linkTitle = linkURLString
-    //            }
-    //
-    //            guard
-    //                let urlString = linkURLString,
-    //                let url = URL(string:urlString)
-    //            else {
-    //                return
-    //            }
-    //            if allowTextEdit {
-    //                if let title = linkTitle {
-    //                    self?.richTextView.setLink(url, title: title, target: target, inRange: range)
-    //                }
-    //            } else {
-    //                self?.richTextView.setLink(url, target: target, inRange: range)
-    //            }
-    //        })
-    //
-    //        insertAction.accessibilityLabel = "insertLinkButton"
-    //
-    //        let removeAction = UIAlertAction(title:removeButtonTitle,
-    //                                         style:UIAlertAction.Style.destructive,
-    //                                         handler:{ [weak self] action in
-    //            self?.richTextView.becomeFirstResponder()
-    //            self?.richTextView.removeLink(inRange: range)
-    //        })
-    //
-    //        let cancelAction = UIAlertAction(title: cancelButtonTitle,
-    //                                         style:UIAlertAction.Style.cancel,
-    //                                         handler:{ [weak self]action in
-    //            self?.richTextView.becomeFirstResponder()
-    //        })
-    //
-    //        alertController.addAction(insertAction)
-    //        if !isInsertingNewLink {
-    //            alertController.addAction(removeAction)
-    //        }
-    //        alertController.addAction(cancelAction)
-    //
-    //        // Disabled until url is entered into field
-    //        if let text = alertController.textFields?.first?.text {
-    //            insertAction.isEnabled = !text.isEmpty
-    //        }
-    //
-    //        present(alertController, animated:true, completion:nil)
-    //    }
-    //
-    //
-    //    @objc func alertTextFieldDidChange(_ textField: UITextField) {
-    //        guard
-    //            let alertController = presentedViewController as? UIAlertController,
-    //            let urlFieldText = alertController.textFields?.first?.text,
-    //            let insertAction = alertController.actions.first
-    //        else {
-    //            return
-    //        }
-    //
-    //        insertAction.isEnabled = !urlFieldText.isEmpty
-    //    }
-}
 

@@ -8,6 +8,7 @@
 import UIKit
 
 enum Settingtype {
+    case search
     case pin
     case mute
     case clear

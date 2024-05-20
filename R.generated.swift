@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 251 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 252 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -704,6 +704,13 @@ struct _R {
       ///
       /// Locales: en
       var 女: RswiftResources.StringResource { .init(key: "女", tableName: "Localizable", source: source, developmentValue: "female", comment: nil) }
+
+      /// en translation: Locate the chat location
+      ///
+      /// Key: 定位到聊天位置
+      ///
+      /// Locales: en
+      var 定位到聊天位置: RswiftResources.StringResource { .init(key: "定位到聊天位置", tableName: "Localizable", source: source, developmentValue: "Locate the chat location", comment: nil) }
 
       /// en translation: The other party has turned on friend verification, and you are not his (her) friend yet, please send a friend verification request first, and the other party can only chat after the verification is passed.
       ///

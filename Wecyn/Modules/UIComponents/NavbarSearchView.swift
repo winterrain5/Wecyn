@@ -10,6 +10,7 @@ import UIKit
 class NavbarSearchView: UIView,UITextFieldDelegate {
     var leftImgView = UIImageView()
     var rightTf = UITextField()
+    
     var searching:((String)->())?
     var searchTextChanged:((String)->())?
     var beginSearch:(()->())?
@@ -83,7 +84,7 @@ class NavbarSearchView: UIView,UITextFieldDelegate {
       
         
         loadingView.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(16)
+            make.right.equalToSuperview().inset(36)
             make.width.height.equalTo(8)
             make.centerY.equalToSuperview()
         }

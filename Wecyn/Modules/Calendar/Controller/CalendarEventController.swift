@@ -48,9 +48,9 @@ class CalendarEventController: BaseTableController {
     let userTitleView = CalendarNavBarUserView()
     let UserModel = UserDefaults.userModel
     var calendarChangeDate = Date()
-    var headerHeight = 75.cgFloat
+    var headerHeight = 195.cgFloat
     var isTaped:Bool = false
-    var currentScope:FSCalendarScope = .week
+    var currentScope:FSCalendarScope = .month
     let monthLabel = UILabel()
     var isDataLoaded = false
     var latesMonth:Int = 0
@@ -72,7 +72,7 @@ class CalendarEventController: BaseTableController {
     var modeSelectIndex = 1
     var modeMenu:DropdownMenu?
     
-    
+    var menu:CalendarMenuView!
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name.WidgetItemSelected, object: nil, queue: .main) { noti in
@@ -109,7 +109,7 @@ class CalendarEventController: BaseTableController {
         requestModel.current_user_id = CalendarBelongUserId
         
         
-        CalendarMenuView.addMenu(originView: self.view)
+        self.menu = CalendarMenuView.addMenu(originView: self.view)
 
        
     }
@@ -121,26 +121,29 @@ class CalendarEventController: BaseTableController {
         self.view.addSubview(headerView)
         headerView.dateSelected = { [weak self] in
             guard let `self` = self else { return }
+            self.calendarChangeDate = $1
+            self.scrollToSection()
+            self.headerView.setCalendarSelectDate($1)
             if $0 == .schedule {
                 self.isTaped = true
-                self.calendarChangeDate = $1
-                self.scrollToSection()
             } else {
-                self.calendarChangeDate = $1
-                self.scrollToSection()
-                
+             
                 self.modeButton.imageForNormal = R.image.calendarDayTimelineLeft()!.tintImage(.black)
-                if self.currentScope == .month {
-                    self.headerView.height = 215
-                } else {
-                    self.headerView.height = 75
-                }
-                self.tableView?.frame.origin.y = self.headerView.frame.maxY
+               
                 self.tableView?.isHidden = false
+                if self.currentScope == .week {
+                    self.headerView.height = 75
+                } else {
+                    self.headerView.height = 195
+                }
+                self.tableView?.frame = CGRect(x: 0, y: kNavBarHeight + self.headerView.height, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - self.headerView.height)
                 
+                self.headerView.setCalendarScope(self.currentScope)
                 self.headerView.setCalendarMode(.schedule)
-                self.headerView.setCalendarSelectDate($1, mode: .schedule)
+               
                 
+                self.modeSelectIndex = 1
+                self.createModeMenu()
             }
           
         }
@@ -158,7 +161,7 @@ class CalendarEventController: BaseTableController {
         headerView.scopChanged = { [weak self] height,scope in
             self?.currentScope = scope
             let totalH = height + 20
-            self?.headerView.frame.size.height = totalH
+            self?.headerView.height = totalH
             self?.tableView?.frame = CGRect(x: 0, y: kNavBarHeight + totalH, width: kScreenWidth, height: kScreenHeight - kNavBarHeight - totalH)
         }
     }
@@ -650,13 +653,12 @@ extension CalendarEventController: DropdownMenuDelegate {
             let item = self.modeItems[indexPath.row]
             
             if item.mode == .today {
-                if let weekModeView = findWeekModeView() {
-//                    weekModeView.calendarWeekView.
+                if let _ = findWeekModeView() {
                     self.calendarChangeDate = Date()
                     self.refreshData()
                     return
                 }
-                self.headerView.setCalendarSelectDate(Date(),mode: item.mode)
+                self.headerView.setCalendarSelectDate(Date())
                 self.scrollToSection()
                 return
             }
@@ -668,23 +670,24 @@ extension CalendarEventController: DropdownMenuDelegate {
                 let height = kScreenHeight - kNavBarHeight - kTabBarHeight
                 self.headerView.size = CGSize(width: kScreenWidth, height: height)
                 self.tableView?.isHidden = true
-                
+                self.headerView.eventDates = self.dataArray as! [[EventListModel]]
                 self.headerView.setCalendarMode(item.mode)
-                self.headerView.setCalendarSelectDate(self.calendarChangeDate, mode: item.mode)
+                self.headerView.setCalendarSelectDate(self.calendarChangeDate)
             }
             
             if item.mode == .schedule {
                 removeWeekModeView()
                 if self.currentScope == .month {
-                    self.headerView.height = 215
+                    self.headerView.height = 195
                 } else {
                     self.headerView.height = 75
                 }
                 self.tableView?.frame.origin.y = self.headerView.frame.maxY
                 self.tableView?.isHidden = false
                 
+                self.headerView.eventDates = self.dataArray as! [[EventListModel]]
                 self.headerView.setCalendarMode(item.mode)
-                self.headerView.setCalendarSelectDate(self.calendarChangeDate, mode: item.mode)
+                self.headerView.setCalendarSelectDate(self.calendarChangeDate)
             }
             
             if item.mode == .threeDays {
@@ -713,6 +716,7 @@ extension CalendarEventController: DropdownMenuDelegate {
         weekModeView.numberofDays = numofdays
         weekModeView.models = (self.dataArray as! [[EventListModel]]).flatMap({ $0 })
         self.view.addSubview(weekModeView)
+        self.view.bringSubviewToFront(self.menu)
         weekModeView.frame = CGRect(x: 0, y: kNavBarHeight, width: kScreenWidth, height: kScreenHeight -  kNavBarHeight - kTabBarHeight)
         weekModeView.pageDidChange =  { [weak self] in
             guard let `self` = self else { return }
