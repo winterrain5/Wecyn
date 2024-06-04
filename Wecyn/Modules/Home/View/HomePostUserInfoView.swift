@@ -219,10 +219,11 @@ class HomePostUserInfoView: UIView {
     
     func cancelFollowUser() {
         guard let model = postModel else { return }
-        NetworkService.addFollow(userId: model.user.id).subscribe(onNext:{
+        NetworkService.cancelFollow(userId: model.user.id).subscribe(onNext:{
             if $0.success == 1 {
                 model.user.is_following = false
                 self.followHandler?(model)
+                Toast.showSuccess( "You unfollowed @\(model.user.full_name)")
             }
         }).disposed(by: rx.disposeBag)
     }

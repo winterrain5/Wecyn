@@ -44,8 +44,10 @@ class HomeController: BaseTableController {
             IMController.shared.login()
         }
         
+        NetworkService.friendList().subscribe(onNext:{
+            UserDefaults.sk.set(objects: $0, for: FriendListModel.className)
+        }).disposed(by: rx.disposeBag)
         refreshData()
-        
         getNotificationCount()
         getIMNotification()
         
@@ -194,9 +196,7 @@ class HomeController: BaseTableController {
             cell.model = dataArray[indexPath.row] as? PostListModel
         }
         cell.footerView.repostHandler = {[weak self] in
-            self?.dataArray.insert($0, at: 0)
-            self?.tableView?.insertRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
-            
+            self?.repost($0)
         }
         cell.footerView.likeHandler = { [weak self] in
             self?.updateRow($0)
@@ -209,14 +209,7 @@ class HomeController: BaseTableController {
        
         cell.userInfoView.followHandler = { [weak self] model in
             guard let `self` = self else { return }
-            if model.user.is_following {
-                self.updateRow(model)
-            } else {
-                var dataArray = (self.dataArray as! [PostListModel])
-                let _ = dataArray.removeAll(where: { $0.id == model.id })
-                self.dataArray = dataArray
-                self.tableView?.reloadData()
-            }
+            self.updateRow(model)
             
         }
         cell.userInfoView.updatePostType = { [weak self] in
@@ -239,6 +232,28 @@ class HomeController: BaseTableController {
         let item = (self.dataArray as! [PostListModel]).firstIndex(of: model) ?? 0
         self.dataArray.remove(at: item)
         self.tableView?.deleteRows(at: [IndexPath(item: item, section: 0)], with: .automatic)
+    }
+    
+    func repost(_ model:PostListModel) {
+        PostRepostTypeSheetView.display(isRepost: model.posted) { [weak self] in
+            guard let `self` = self else { return }
+            PostService.repost(id: model.id, content: "You reposted").subscribe(onNext:{
+                Toast.showSuccess( "You have reposted")
+                self.dataArray.insert($0, at: 0)
+                self.tableView?.insertRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
+            }).disposed(by: self.rx.disposeBag)
+        } quoteAction: {
+            let vc = CreatePostViewController(postModel: model)
+            let nav = BaseNavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            UIViewController.sk.getTopVC()?.present(nav, animated: true)
+            vc.addCompleteHandler = { [weak self] in
+                guard let `self` = self else { return }
+                self.dataArray.insert($0, at: 0)
+                self.tableView?.reloadData()
+                self.tableView?.scrollToTop(animated: false)
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

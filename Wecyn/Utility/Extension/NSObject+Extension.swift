@@ -136,13 +136,18 @@ extension String {
         return result
     }
     
-    func toDate(format: String, locaIdentifier:String = LocaIdentifier,isZero:Bool = false) -> Date? {
+    func toDate(format: String,
+                locaIdentifier:String = Locale.current.identifier,
+                isZero:Bool = false) -> Date? {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: locaIdentifier)
         dateFormatter.dateFormat = format
+        
         if isZero {
             dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         }
+        
         return dateFormatter.date(from: self)
     }
 
@@ -198,14 +203,21 @@ extension Date {
         return endOfMonth
     }
     
-    func toString(format: String = DateFormat.ddMMyyyyHHmm.rawValue, locaIdentifier:String = LocaIdentifier) -> String {
+    func toString(format: String = DateFormat.ddMMyyyyHHmm.rawValue,
+                  locaIdentifier:String = Locale.current.identifier,
+                  isZero: Bool = false) -> String {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale(identifier: locaIdentifier)
-
+        
+        if isZero {
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        }
+     
         return dateFormatter.string(from: self)
     }
+    
     
 
 }

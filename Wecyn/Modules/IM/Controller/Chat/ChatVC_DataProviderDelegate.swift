@@ -13,7 +13,15 @@ extension ChatViewController:DataProviderDelegate  {
         // message.sendID receiverId 一致
         let flag1 = (message.sendID == dataProvider.receiverId || message.sendID == IMController.shared.currentSender.senderId)
         if flag1 {
+            let friends:[FriendListModel] = UserDefaults.sk.get(for: FriendListModel.className)
+            if friends.count > 0 {
+                friends.forEach({ friend in
+                    if friend.id == message.sendID.int {
+                        message.senderFaceUrl = friend.avatar
+                    }
+                })
             
+            }
             guard let msg = IMMessage.build(messageInfo: message) else  { return }
             if let idx = self.messageList.firstIndex(where: { $0.messageId == message.clientMsgID }) {
                 let indexPath = IndexPath(item: 0, section: idx)
@@ -22,7 +30,6 @@ extension ChatViewController:DataProviderDelegate  {
             } else {
                 insertMessage(msg)
             }
-            
             
         }
         

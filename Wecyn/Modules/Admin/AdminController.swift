@@ -83,14 +83,14 @@ class AdminController: BaseViewController {
             self.loadData()
         }
         
-        let is_super = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_super ?? 0
-        if is_super == 1{
-            controllers = [AdminRoleController(),AdminDepartmentController(),AdminStaffController(),AdminRoomController(),AdminDomainController()]
-            titleDataSource.titles = ["Role","Department","Staff","Room","Domain"]
-        } else {
-            controllers = [AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
-            titleDataSource.titles = ["Department","Staff","Room"]
-        }
+//        let is_super = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_super ?? 0
+//        if is_super == 1{
+//            controllers = [AdminRoleController(),AdminDepartmentController(),AdminStaffController(),AdminRoomController(),AdminDomainController()]
+//            titleDataSource.titles = ["Role","Department","Staff","Room","Domain"]
+//        } else {
+//            controllers = [AdminDepartmentController(),AdminStaffController(),AdminRoomController()]
+//            titleDataSource.titles = ["Department","Staff","Room"]
+//        }
         
     }
     
@@ -102,7 +102,6 @@ class AdminController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        segmentedView.dataSource = titleDataSource
         segmentedView.listContainer = paggingView.listContainerView
         
         
@@ -149,10 +148,6 @@ class AdminController: BaseViewController {
             Toast.dismiss()
             self?.paggingView.mainTableView.mj_header?.endRefreshing()
         }
-        
-        if self.orgList.count == 0 {
-            getOrgList()
-        }
     }
     
     func getOrgList() {
@@ -174,6 +169,7 @@ class AdminController: BaseViewController {
                         let index = self.filterButton.checkRow(by: 0) ?? 0
                         Admin_Org_ID = self.orgList[index].id
                         self.navigation.item.title = self.orgList[index].name
+                        self.configControlers(roleId: self.orgList[index].role_id, permissions: self.orgList[index].permission)
                         self.loadData()
                     }
                 })
@@ -181,10 +177,48 @@ class AdminController: BaseViewController {
             }
             Admin_Org_ID = $0.first?.id ?? 0
             self.navigation.item.title = $0.first?.name
+            self.configControlers(roleId: $0.first?.role_id ?? 0, permissions: $0.first?.permission ?? [])
             self.loadData()
         },onError: { e in
             Toast.showError(e.asAPIError.errorInfo().message)
         }).disposed(by: rx.disposeBag)
+    }
+    
+    func configControlers(roleId:Int,permissions:[Int]) {
+        //            若role id!=1，则根据permission列表判断权限(0 无权限，1有权限)Department, Meeting Room, Staff, Name Card
+        //            若role id==1，则为Super Admin，拥有所有权限 (目前权限包括:Role, Domain, Department,Room, Staft; Name Cartd)
+                    
+        if roleId == 1{
+            self.controllers = [AdminRoleController(),AdminDepartmentController(),AdminRoomController(),AdminStaffController(),AdminDomainController()]
+            self.titleDataSource.titles = ["Role","Department","Room","Staff","Domain"]
+        } else {
+            self.titleDataSource.titles.removeAll()
+            if permissions.count == 4  {
+                
+                if permissions[0] == 1 {
+                    self.controllers.append(AdminDepartmentController())
+                    self.titleDataSource.titles.append("Department")
+                }
+                if permissions[1] == 1 {
+                    self.controllers.append(AdminRoomController())
+                    self.titleDataSource.titles.append("Room")
+                }
+                if permissions[2] == 1 {
+                    self.controllers.append(AdminStaffController())
+                    self.titleDataSource.titles.append("Staff")
+                }
+//                if permissions[3] == 1 {
+//                    self.controllers.append(BasePagingTableController())
+//                    self.titleDataSource.titles.append("Business card")
+//                }
+                
+            }
+        }
+        
+        segmentedView.dataSource = titleDataSource
+        paggingView.reloadData()
+        segmentedView.reloadData()
+        
     }
     
 }

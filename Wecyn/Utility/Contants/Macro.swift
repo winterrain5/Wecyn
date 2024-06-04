@@ -15,4 +15,3 @@ let DocumentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDir
 let CachePath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last! as String
 // 临时目录
 let TempPath = NSTemporaryDirectory() as String
-let LocaIdentifier = Locale.current.identifier

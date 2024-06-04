@@ -193,6 +193,7 @@
 		458970602A7794EA00344B93 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589705F2A7794EA00344B93 /* Asyncs.swift */; };
 		458970622A78DAA100344B93 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970612A78DAA100344B93 /* IMService.swift */; };
 		458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970632A7CDAB900344B93 /* LanguageSettingController.swift */; };
+		4591B1352C09773B0056DADA /* NotificationTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591B1342C09773B0056DADA /* NotificationTypeController.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
 		45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */; };
 		45920ACB2A26E045005871ED /* CacheProvider+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7D2A26E045005871ED /* CacheProvider+Extension.swift */; };
@@ -598,6 +599,7 @@
 		4589705F2A7794EA00344B93 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
 		458970612A78DAA100344B93 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		458970632A7CDAB900344B93 /* LanguageSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingController.swift; sourceTree = "<group>"; };
+		4591B1342C09773B0056DADA /* NotificationTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTypeController.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45920A7B2A26E045005871ED /* Cacheable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cacheable+Extension.swift"; sourceTree = "<group>"; };
 		45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+HandyJson.swift"; sourceTree = "<group>"; };
@@ -1111,6 +1113,7 @@
 			isa = PBXGroup;
 			children = (
 				454BA37F2B8D72E5006B47BA /* NotificationController.swift */,
+				4591B1342C09773B0056DADA /* NotificationTypeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2476,6 +2479,7 @@
 				45381DFD2BC22A84007EE954 /* MCRecordHUD.swift in Sources */,
 				451E5BBD2BE9D66600058867 /* RichTextStorage.swift in Sources */,
 				456BB04B2B4D38E300BB7838 /* AdminAddRoomContainer.swift in Sources */,
+				4591B1352C09773B0056DADA /* NotificationTypeController.swift in Sources */,
 				4536533E2A413F270026EC8D /* NetworkService.swift in Sources */,
 				45450CD22B2C41C400558C9D /* AdminRoomController.swift in Sources */,
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,

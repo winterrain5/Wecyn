@@ -236,6 +236,7 @@ class  AdminOrgModel: BaseModel {
     var name: String = ""
     var dept_id: Int = 0
     var avatar: String = ""
+    var permission:[Int]  = []
 }
 
 class AdminDepartmentModel :BaseModel {

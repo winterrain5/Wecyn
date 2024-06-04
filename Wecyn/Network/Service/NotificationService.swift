@@ -31,9 +31,10 @@ class NotificationModel:BaseModel {
 }
 
 
-class NotificationExtraModel :NSObject {
-       var id: Int = 0
-       var type: Int = 0
-
+class NotificationExtraModel :BaseModel {
+    var id: Int = 0
+    var event:EventListModel?
+    var user:UserInfoModel?
+    
 }
 

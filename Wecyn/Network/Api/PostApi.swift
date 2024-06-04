@@ -23,6 +23,7 @@ enum PostApi {
     case repost(_ id:Int,_ content:String,_ type:Int = 1)
     case getUploadVideoUrl
     case test
+    case getPostVisibleStatus(_ id:Int)
 }
 
 extension PostApi: TargetType {
@@ -56,6 +57,8 @@ extension PostApi: TargetType {
             return "/api/post/getUploadVideoUrl/"
         case .postInfo:
             return "/api/post/getPostInfo/"
+        case .getPostVisibleStatus:
+            return "/api/post/getPostVisibleStatus/"
         case .test:
             return "/api/test/imNotificationTest/"
         }
@@ -64,7 +67,7 @@ extension PostApi: TargetType {
         switch self{
         case .addPost,.addReply,.cancelLike,.setLike,.addComment,.repost:
             return .post
-        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl,.test,.postInfo:
+        case .postList,.feedList,.commentList,.likeShow,.likedList,.getUploadVideoUrl,.test,.postInfo,.getPostVisibleStatus:
             return .get
         case .updatePostType:
             return .put
@@ -102,6 +105,8 @@ extension PostApi: TargetType {
             return requestParametersByGet(["id":id])
         case .test:
             return requestParametersByGet(["is_online_only":1,"not_offline_push":1])
+        case .getPostVisibleStatus(let id):
+            return requestParametersByGet(["id":id])
         }
     }
 }

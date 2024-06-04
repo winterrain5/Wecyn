@@ -65,7 +65,7 @@ class MonthModeCalendarCell: FSCalendarCell {
             if idx == titleView.subviews.count - 1 {
                 width = self.width
             } else {
-                width = (itemWidth >= self.width) ? self.width : itemWidth
+                width = (itemWidth >= self.width) ? itemWidth : self.width
             }
             
             view.frame = CGRect(x: 0, y: y, width: width, height: viewHeight)
@@ -91,19 +91,17 @@ class MonthModelCalendarItemView: UIView {
             
             let text = model.title
             if model.isCrossDay {
+                clipsToBounds = false
                 if model.isCrossDayStart {
                     label.text = text
                 } else {
                     label.text = ""
                 }
             } else if model.is_repeat == 1 {
-                if model.repeat_idx == 0 {
-                    layer.zPosition = 10000
-                    label.text = text
-                } else {
-                    label.text = ""
-                }
+                clipsToBounds = true
+                label.text = text
             } else {
+                clipsToBounds = true
                 label.text = text
             }
         }

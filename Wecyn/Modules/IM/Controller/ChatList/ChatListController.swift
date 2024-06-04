@@ -67,9 +67,23 @@ class ChatListController: BaseTableController {
         
         
         
-        _viewModel.conversationsRelay.asObservable().subscribe(onNext:{ [weak self] in
+        _viewModel.conversationsRelay.asObservable().subscribe(onNext:{ [weak self] models in
             guard let `self` = self else { return }
-            self.conversations = $0
+            
+            let friends:[FriendListModel] = UserDefaults.sk.get(for: FriendListModel.className)
+            if friends.count > 0 {
+                models.forEach({ conversation in
+                    friends.forEach({ friend in
+                        if friend.id == conversation.userID?.int {
+                            conversation.faceURL = friend.avatar
+                        }
+                    })
+                })
+            
+            }
+            
+            
+            self.conversations = models
             self.conversations.removeFirst(where: { $0.conversationType == .notification })
             
             if conversations.filter({ $0.userID == IMController.shared.currentSender.senderId }).count == 0 {

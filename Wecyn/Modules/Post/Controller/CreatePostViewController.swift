@@ -37,9 +37,9 @@ enum PostType:Int {
         case .Public:
             return "Public"
         case .OnlyFans:
-            return "Visible only to yourself"
-        case .OnlySelf:
             return "Visible only to followers"
+        case .OnlySelf:
+            return "Visible only to yourself"
         }
     }
 }
@@ -692,8 +692,11 @@ class CreatePostViewController: BaseViewController {
     func repost() {
         PostService.repost(id: self.postModel?.id ?? 0, content: self.richTextView.text).subscribe(onNext:{ model in
             Toast.showSuccess( "You have reposted")
+            
+            self.returnBack()
             self.saveButton.stopAnimation()
             self.addCompleteHandler?(model)
+            
         },onError: { e in
             self.saveButton.stopAnimation()
             Toast.showError(e.asAPIError.errorInfo().message)

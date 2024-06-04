@@ -97,6 +97,12 @@ class PostService {
         let target = MultiTarget(PostApi.test)
         return APIProvider.rx.request(target).asObservable().mapStatus()
     }
+    
+    // 2 未关注（Post仅粉丝可见，但查看者未关注），3 不可查看（Post仅自己可见），4 Post已删除
+    static func getPostVisibleStatus(id:Int) -> Observable<Int>  {
+        let target = MultiTarget(PostApi.getPostVisibleStatus(id))
+        return APIProvider.rx.request(target).asObservable().mapDataValue()
+    }
 }
 
 class UploadVideoResponse:BaseModel {

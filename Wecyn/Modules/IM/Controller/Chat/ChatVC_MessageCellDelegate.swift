@@ -37,10 +37,13 @@ extension ChatViewController: MessageCellDelegate {
             print("Failed to identify message when audio cell receive tap gesture")
             return
         }
+        // 撤回消息
         if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let revokeItem = custom as? RevokeItem,let originText = revokeItem.originText {
             self.messageInputBar.inputTextView.text = originText
             self.messageInputBar.inputTextView.becomeFirstResponder()
         }
+        
+        // 文件消息
         if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let fileItem = custom as? FileItem,let url = fileItem.url {
             if url.isFileURL {
                 
@@ -49,19 +52,49 @@ extension ChatViewController: MessageCellDelegate {
             let vc  = SFSafariViewController(url: url)
             self.present(vc, animated: true)
         }
+        
+        // 联系人消息
         if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let contact = custom as? IMContactItem {
             let vc = ChatFriendDetailController(id: contact.id)
             self.navigationController?.pushViewController(vc)
         }
         
+        
+        // 帖子消息
         if case MessageKind.custom(let custom) = messageList[indexPath.section].kind,let content = (custom as? PostItem)?.content {
             guard let model = PostListModel.deserialize(from: JSON.init(parseJSON: content).dictionaryObject) else {
                 return
             }
-            let vc = PostDetailViewController(postId: model.id)
-            self.navigationController?.pushViewController(vc)
+            // 2 未关注（Post仅粉丝可见，但查看者未关注），3 不可查看（Post仅自己可见），4 Post已删除
+            PostService.getPostVisibleStatus(id: model.id).subscribe(onNext:{
+                if $0 == 1 {
+                    let vc = PostDetailViewController(postId: model.id)
+                    self.navigationController?.pushViewController(vc)
+                }
+                
+                func showAlert(title:String,message:String) {
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "确定".innerLocalized(), style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true)
+                }
+                if $0 == 2 {
+                    showAlert(title: "提示".innerLocalized(), message: "该帖子仅粉丝可见，请关注后查看".innerLocalized())
+                }
+                if $0 == 3 {
+                    showAlert(title: "提示".innerLocalized(), message: "该帖子仅发帖人可见".innerLocalized())
+                }
+                if $0 == 4 {
+                    showAlert(title: "提示".innerLocalized(), message: "该帖子已被删除".innerLocalized())
+                }
+                
+            },onError: { e in
+                Toast.showError(e.localizedDescription)
+            }).disposed(by: rx.disposeBag)
+           
         }
         
+        // 地理位置消息
         //https://www.google.com/maps/search/?api=1&query=47.5951518%2C-122.3316393&query_place_id=ChIJKxjxuaNqkFQR3CK6O1HNNqY
         // "{\"name\":\"泰鑫商务中心停车场\",\"place_id\":\"ChIJ-5D9bDm3yjURocnDun6cZYY\"}"
         if case MessageKind.location(let item) = messageList[indexPath.section].kind {

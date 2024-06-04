@@ -126,6 +126,8 @@ class CalendarAddNewEventController: BaseTableController {
     var alarmSelectIndex:Int = 1
     var selectRoom:UserRoomOptionModel?
     var addedEmails:[String] = []
+    var selectedTimeZone:TimeZoneItemModel!
+    var defaultTimeZone:TimeZoneItemModel!
     
     init(editEventModel: EventInfoModel? = nil) {
         self.editEventModel = editEventModel
@@ -173,6 +175,7 @@ class CalendarAddNewEventController: BaseTableController {
           
         }
         
+        configDefaultTimeZone()
         createAddEventModels()
         updateEditEventData()
         updateColorPlaceholder()
@@ -208,8 +211,10 @@ class CalendarAddNewEventController: BaseTableController {
         let timeSection = [Start,End,Duplicate]
         models.append(timeSection)
         
-        TimeZoneConvert.timeZoneText = getTimezone()
+       
+        TimeZoneConvert.timeZoneText = selectedTimeZone.text
         models.append([TimeZoneConvert])
+        
         
         let descSection = [Desc,Remark]
         models.append(descSection)
@@ -227,16 +232,21 @@ class CalendarAddNewEventController: BaseTableController {
         
     }
     
-    func getTimezone() -> String {
-        let tz = TimeZone.current.secondsFromGMT() / 3600
-        
+    func configDefaultTimeZone() {
+      
+        let seconds = TimeZone.current.secondsFromGMT()
         let name = TimeZone.current.identifier
-        if tz > 0 {
-            return "(UTC+\(tz):00)" + " " + name
+        let item = TimeZoneItemModel()
+        let offset = seconds / 3600
+        if offset >= 0 {
+            item.text = "(UTC+\(offset):00)" +  " " + name
         } else {
-            return "(UTC-\(tz):00)" + " " + name
+            item.text = "(UTC\(offset):00)" +  " " + name
         }
-       
+        item.identifier = name
+        item.offset = offset
+        self.defaultTimeZone = item
+        self.selectedTimeZone = item
     }
     
     
@@ -304,8 +314,9 @@ class CalendarAddNewEventController: BaseTableController {
         isEdit = !event.isCreateByiCS
         rrule = event.rruleObject
         
-      
+        updateEditTimeZone()
     }
+  
     
     func updateColorPlaceholder() {
 
@@ -651,6 +662,7 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self.Start.start_time = dateStr
                 self.reloadData()
+                self.updateTimezone()
                 
             }.show()
         }
@@ -669,6 +681,7 @@ class CalendarAddNewEventController: BaseTableController {
                 
                 self.End.end_time = dateStr
                 self.reloadData()
+                self.updateTimezone()
                 
             }.show()
         }
@@ -801,21 +814,60 @@ class CalendarAddNewEventController: BaseTableController {
             let vc  =  TimeZoneController()
             vc.selectedTimezoneComplete = { [weak self] in
                 guard let `self` = self else { return }
-                guard
-                    let startDate = self.requestModel.start_time?
-                        .toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: $0.offset)
-                        .toString(format:DateFormat.ddMMyyyyHHmm.rawValue),
-                    let endDate = self.requestModel.end_time?
-                        .toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: $0.offset)
-                        .toString(format:DateFormat.ddMMyyyyHHmm.rawValue)
-                else { return }
-                self.TimeZoneConvert.timeZoneText = $0.text
-                self.TimeZoneConvert.timeZoneConvertedText =  startDate + " - " + endDate
-                self.reloadData()
+                self.selectedTimeZone = $0
+                self.updateTimezone()
             }
             let nav = BaseNavigationController(rootViewController: vc)
             self.present(nav, animated: true)
         }
+    }
+    
+    func updateTimezone() {
+        var startDate = ""
+        var endDate = ""
+        if
+            let sd = self.requestModel.start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: -defaultTimeZone.offset).adding(.hour, value: selectedTimeZone.offset).toString() {
+            startDate = sd
+        }
+         if let ed = self.requestModel.end_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: -defaultTimeZone.offset).adding(.hour, value: selectedTimeZone.offset).toString() {
+             endDate = ed
+         }
+       
+        if startDate.isEmpty && endDate.isEmpty { return }
+        self.TimeZoneConvert.timeZoneText = selectedTimeZone.text
+        self.TimeZoneConvert.timeZoneConvertedText =  startDate + ((startDate.isEmpty || endDate.isEmpty) ? "" : " - ") + endDate
+        self.reloadData()
+    }
+    
+    func updateEditTimeZone() {
+        var startDate = ""
+        var endDate = ""
+        guard let event = editEventModel else { return }
+       
+        if event.is_repeat == 1{
+            if
+                let sd = event.repeat_start_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: -defaultTimeZone.offset).adding(.hour, value: selectedTimeZone.offset).toString() {
+                startDate = sd
+            }
+             if let ed = event.repeat_end_time?.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: -defaultTimeZone.offset).adding(.hour, value: selectedTimeZone.offset).toString() {
+                 endDate = ed
+             }
+        } else {
+            if
+                let sd = event.start_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: -defaultTimeZone.offset).adding(.hour, value: selectedTimeZone.offset).toString() {
+                startDate = sd
+            }
+             if let ed = event.end_time.toDate(format: DateFormat.ddMMyyyyHHmm.rawValue)?.adding(.hour, value: -defaultTimeZone.offset).adding(.hour, value: selectedTimeZone.offset).toString() {
+                 endDate = ed
+             }
+        }
+       
+       
+        if startDate.isEmpty && endDate.isEmpty { return }
+        self.TimeZoneConvert.timeZoneText = selectedTimeZone.text
+        self.TimeZoneConvert.timeZoneConvertedText =  startDate + ((startDate.isEmpty || endDate.isEmpty) ? "" : " - ") + endDate
+        self.reloadData()
+        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

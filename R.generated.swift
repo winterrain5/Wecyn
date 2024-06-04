@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 252 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 256 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -971,6 +971,13 @@ struct _R {
       /// Locales: en
       var 接收消息但不提示: RswiftResources.StringResource { .init(key: "接收消息但不提示", tableName: "Localizable", source: source, developmentValue: "Receive message but not notify", comment: nil) }
 
+      /// en translation: Notify
+      ///
+      /// Key: 提示
+      ///
+      /// Locales: en
+      var 提示: RswiftResources.StringResource { .init(key: "提示", tableName: "Localizable", source: source, developmentValue: "Notify", comment: nil) }
+
       /// en translation: Alert
       ///
       /// Key: 提醒
@@ -1678,6 +1685,27 @@ struct _R {
       /// Locales: en
       var 该公告会通知全部群成员是否发布: RswiftResources.StringResource { .init(key: "该公告会通知全部群成员，是否发布？", tableName: "Localizable", source: source, developmentValue: "The announcement will inform all group members. Do you want to publish it?", comment: nil) }
 
+      /// en translation: This post is only visible to the person who posted it
+      ///
+      /// Key: 该帖子仅发帖人可见
+      ///
+      /// Locales: en
+      var 该帖子仅发帖人可见: RswiftResources.StringResource { .init(key: "该帖子仅发帖人可见", tableName: "Localizable", source: source, developmentValue: "This post is only visible to the person who posted it", comment: nil) }
+
+      /// en translation: This post is only visible to fans, please follow and check it out
+      ///
+      /// Key: 该帖子仅粉丝可见，请关注后查看
+      ///
+      /// Locales: en
+      var 该帖子仅粉丝可见请关注后查看: RswiftResources.StringResource { .init(key: "该帖子仅粉丝可见，请关注后查看", tableName: "Localizable", source: source, developmentValue: "This post is only visible to fans, please follow and check it out", comment: nil) }
+
+      /// en translation: This post has been deleted
+      ///
+      /// Key: 该帖子已被删除
+      ///
+      /// Locales: en
+      var 该帖子已被删除: RswiftResources.StringResource { .init(key: "该帖子已被删除", tableName: "Localizable", source: source, developmentValue: "This post has been deleted", comment: nil) }
+
       /// en translation: The user has been set and cannot be added!
       ///
       /// Key: 该用户已设置不可添加！
@@ -1909,7 +1937,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 126 images.
+  /// This `_R.image` struct is generated, and contains static references to 130 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -2098,6 +2126,18 @@ struct _R {
 
     /// Image `network`.
     var network: RswiftResources.ImageResource { .init(name: "network", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `notification01`.
+    var notification01: RswiftResources.ImageResource { .init(name: "notification01", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `notification02`.
+    var notification02: RswiftResources.ImageResource { .init(name: "notification02", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `notification03`.
+    var notification03: RswiftResources.ImageResource { .init(name: "notification03", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `notification04`.
+    var notification04: RswiftResources.ImageResource { .init(name: "notification04", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `org_placeholder`.
     var org_placeholder: RswiftResources.ImageResource { .init(name: "org_placeholder", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }

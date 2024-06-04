@@ -293,6 +293,11 @@
 "版本号" = "Version";
 "你确定要登出吗？"  = "Are you sure you want to log out?";
 "定位到聊天位置" = "Locate the chat location";
+"该帖子仅粉丝可见，请关注后查看" = "This post is only visible to fans, please follow and check it out";
+"该帖子仅发帖人可见" = "This post is only visible to the person who posted it";
+"该帖子已被删除" = "This post has been deleted";
+"提示" = "Notify";
+"确定" = "Confirm";
 
 "日程" = "Schedule";
 "月" = "Month";

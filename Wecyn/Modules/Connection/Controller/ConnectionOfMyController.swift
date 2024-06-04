@@ -36,6 +36,7 @@ class ConnectionOfMyController: BasePagingTableController {
     func configData(models:[FriendListModel]) {
         self.showSkeleton()
         self.friends.removeAll()
+        UserDefaults.sk.set(objects: models, for: FriendListModel.className)
         if  models.count > 0 {
             var characters = models.map({ String( $0.first_name.first! ).uppercased() })
             self.sectionCharacters = characters.removeDuplicates().sorted(by: { $0 < $1 })

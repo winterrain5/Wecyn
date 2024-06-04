@@ -113,18 +113,7 @@ class HomePostFootToolView: UIView {
         
         guard let model = self.postModel else { return }
         Haptico.selection()
-        PostRepostTypeSheetView.display(isRepost: model.posted) {
-            PostService.repost(id: model.id, content: "You reposted").subscribe(onNext:{
-                Toast.showSuccess( "You have reposted")
-                self.repostHandler?($0)
-            }).disposed(by: self.rx.disposeBag)
-        } quoteAction: {
-            let vc = CreatePostViewController(postModel: model)
-            let nav = BaseNavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            UIViewController.sk.getTopVC()?.present(nav, animated: true)
-           
-        }
+        repostHandler?(model)
 
     }
     

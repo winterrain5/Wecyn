@@ -48,7 +48,7 @@ class NetworkService {
     static func friendList(id:Int? = nil) -> Observable<[FriendListModel]> {
         let target = MultiTarget(NetworkApi.friendList(id))
         return APIProvider.rx.request(target).asObservable().mapObjectArray(FriendListModel.self)
-        //                return FriendProvider.rx.cache.request(FriendApi.friendList(id)).asObservable().mapArray(FriendListModel.self)
+//                        return NetworkProvider.rx.cache.request(NetworkApi.friendList(id)).asObservable().mapObjectArray(FriendListModel.self)
     }
     
     /// 获取收到的好友申请列表
@@ -236,7 +236,7 @@ class FriendFollowModel: BaseModel {
     var is_my_follow:Bool = false
 }
 
-class FriendListModel: BaseModel {
+class FriendListModel: BaseModel, Codable {
     /*
      "id": int # 好友的user_id
      "fn": string # 好友的first_name

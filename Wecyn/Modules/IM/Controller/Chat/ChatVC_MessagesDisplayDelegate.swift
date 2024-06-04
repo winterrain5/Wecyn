@@ -8,6 +8,7 @@
 import Foundation
 import MessageKit
 import MapKit
+import Kingfisher
 // MARK: MessagesDisplayDelegate
 extension ChatViewController:MessagesDisplayDelegate {
     func textColor(for message: MessageType, at _: IndexPath, in _: MessagesCollectionView) -> UIColor {
@@ -42,8 +43,16 @@ extension ChatViewController:MessagesDisplayDelegate {
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at index: IndexPath, in _: MessagesCollectionView) {
         if messageList.count > 0 {
          
-            let avatar = Avatar(image: UIImage(nameInBundle: "ic_avatar_01"))
-            avatarView.set(avatar: avatar)
+//            let avatar = Avatar(image: )
+//            avatarView.set(avatar: avatar)
+            let url = messageList[index.section].user.faceUrl?.url
+            let placeholderImage = UIImage(nameInBundle: "ic_avatar_01")
+            KF.url(url)
+              .placeholder(placeholderImage)
+              .loadDiskFileSynchronously()
+              .cacheMemoryOnly()
+              .fade(duration: 0.25)
+              .set(to: avatarView)
         }
        
     }

@@ -158,9 +158,24 @@ class ChatViewController: MessagesViewController {
 
     
     func loadHistoryMessage() {
+   
+        
         DispatchQueue.global().async { [weak self] in
             guard let `self` = self else { return }
+            
             self.dataProvider.loadInitialMessages { mgs in
+                let friends:[FriendListModel] = UserDefaults.sk.get(for: FriendListModel.className)
+                if friends.count > 0 {
+                    mgs.forEach({ msg in
+                        friends.forEach({ friend in
+                            if friend.id == msg.sendID.int {
+                                msg.senderFaceUrl = friend.avatar
+                            }
+                        })
+                    })
+                
+                }
+                
                 let messages = mgs.map({ IMMessage.build(messageInfo: $0) }).compactMap({  $0 })
                 self.messageList = messages
                 DispatchQueue.main.async {
