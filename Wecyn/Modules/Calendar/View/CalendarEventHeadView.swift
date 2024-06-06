@@ -58,6 +58,8 @@ class CalendarEventHeadView: UIView {
         
         configCalendarOtherProperty(weekModeCalendar)
         
+        
+        weekModeCalendar.appearance.todayColor = R.color.theamColor()
         weekModeCalendar.register(FSCalendarCell.self, forCellReuseIdentifier: "FSCalendarCell")
         weekModeCalendar.scrollDirection = .horizontal
         self.addSubview(weekModeCalendar)
@@ -67,10 +69,13 @@ class CalendarEventHeadView: UIView {
         configCalendarDelegate(monthModeCalendar)
         
         configCalendarAppearance(monthModeCalendar)
-        monthModeCalendar.appearance.titleSelectionColor = .black
+       
         
         configCalendarOtherProperty(monthModeCalendar)
         
+        monthModeCalendar.appearance.titleSelectionColor = .black
+        monthModeCalendar.appearance.titleTodayColor = R.color.theamColor()
+        weekModeCalendar.appearance.todayColor = R.color.theamColor()?.withAlphaComponent(0.6)
         monthModeCalendar.register(MonthModeCalendarCell.self, forCellReuseIdentifier: "MonthModeCalendarCell")
         monthModeCalendar.scrollDirection = .vertical
         self.addSubview(monthModeCalendar)
@@ -86,12 +91,8 @@ class CalendarEventHeadView: UIView {
         calendar.appearance.weekdayFont = UIFont.sk.pingFangRegular(14)
         calendar.appearance.weekdayTextColor = R.color.textColor33()!
         calendar.appearance.titlePlaceholderColor = UIColor(hexString: "dfdfdf")
-        
-        if calendar == weekModeCalendar {
-            calendar.appearance.titleTodayColor = .white
-        } else {
-            calendar.appearance.titleTodayColor = .red
-        }
+          
+    
     }
     
     func configCalendarDelegate(_ calendar:FSCalendar){

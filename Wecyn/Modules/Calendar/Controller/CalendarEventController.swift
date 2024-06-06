@@ -294,10 +294,25 @@ class CalendarEventController: BaseTableController {
         
         if modeSelectIndex == 0 {
             if let weekModeView = findWeekModeView()  {
-                let ed = calendarChangeDate.adding(.day, value: weekModeView.numberofDays)
-                guard let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else { return }
+                let weekDay = calendarChangeDate.weekday // 3
+                if weekModeView.numberofDays == 7 {
+                    let ed = calendarChangeDate.adding(.day, value: weekModeView.numberofDays - weekDay)
+                    let sd = calendarChangeDate.adding(.day, value: -weekDay + 1)
+                    
+                    guard let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else { return }
+                    guard let formatsd = Date.init(year:sd.year,month: sd.month,day: sd.day,hour: 0,minute: 0,second: 0) else { return }
+                  
+                    fetchData(sd: formatsd, ed: formatEd)
+                    
+                } else {
+                    let ed = calendarChangeDate.adding(.day, value: 2)
+                    let sd = calendarChangeDate.adding(.day, value: -2)
+                    
+                    guard let formatEd = Date.init(year:ed.year,month: ed.month,day: ed.day,hour: 0,minute: 0,second: 0) else { return }
+                    guard let formatsd = Date.init(year:sd.year,month: sd.month,day: sd.day,hour: 0,minute: 0,second: 0) else { return }
+                    fetchData(sd: formatsd, ed: formatEd)
+                }
               
-                fetchData(sd: calendarChangeDate, ed: formatEd)
             } else {
                 fetchDataForCalendarMode()
             }
@@ -656,6 +671,7 @@ extension CalendarEventController: DropdownMenuDelegate {
                 if let _ = findWeekModeView() {
                     self.calendarChangeDate = Date()
                     self.refreshData()
+                    self.monthLabel.text = Date().toString(format: "MMM")
                     return
                 }
                 self.headerView.setCalendarSelectDate(Date())
