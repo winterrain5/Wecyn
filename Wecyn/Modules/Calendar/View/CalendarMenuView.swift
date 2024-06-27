@@ -163,6 +163,7 @@ class CalendarMenuView: UIView {
     static func addMenu(originView:UIView) -> CalendarMenuView{
         let menu = CalendarMenuView(originView: originView)
         originView.addSubview(menu)
+        menu.layer.zPosition = 10000
         return menu
     }
 }

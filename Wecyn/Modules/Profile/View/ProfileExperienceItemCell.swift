@@ -9,27 +9,33 @@ import UIKit
 
 class ProfileExperienceItemCell: UITableViewCell {
 
+    let shadowView = UIView()
     private let imgView = UIImageView()
     let moreButton = UIButton().then { button in
         button.imageForNormal = UIImage.ellipsis?.withTintColor(R.color.iconColor()!,renderingMode: .alwaysOriginal).scaled(toWidth: 18)
         button.contentHorizontalAlignment = .right
         button.showsMenuAsPrimaryAction  = true
+        button.isSkeletonable = true
     }
     private let jobLabel = UILabel().then { label in
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(13)
+        label.isSkeletonable = true
     }
     private let companyLabel =  UILabel().then { label in
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangSemibold(16)
+        label.isSkeletonable = true
     }
     private let timeLabel =  UILabel().then { label in
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
+        label.isSkeletonable = true
     }
     private let descLabel =  UILabel().then { label in
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
+        label.isSkeletonable = true
     }
     let certImgView = UIImageView()
     var certImgViewWH:CGFloat = 0
@@ -93,15 +99,27 @@ class ProfileExperienceItemCell: UITableViewCell {
     var applyForCertificationHandler:((UserExperienceInfoModel)->())?
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(imgView)
-        contentView.addSubview(moreButton)
-        contentView.addSubview(jobLabel)
-        contentView.addSubview(companyLabel)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(descLabel)
         
-        contentView.addSubview(certImgView)
+        shadowView.isSkeletonable = true
+        shadowView.backgroundColor = .white
+        contentView.addSubview(shadowView)
+        imgView.isSkeletonable = true
+        shadowView.addSubview(imgView)
+        shadowView.addSubview(moreButton)
+        shadowView.addSubview(jobLabel)
+        shadowView.addSubview(companyLabel)
+        shadowView.addSubview(timeLabel)
+        shadowView.addSubview(descLabel)
+        
+        certImgView.isSkeletonable = true
+        certImgView.isHiddenWhenSkeletonIsActive = true
+        shadowView.addSubview(certImgView)
         certImgView.contentMode = .left
+        
+        self.isSkeletonable = true
+        contentView.isSkeletonable = true
+        
+        
     }
     
     required init?(coder: NSCoder) {
@@ -110,6 +128,12 @@ class ProfileExperienceItemCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        shadowView.shadow(cornerRadius: 8, color: .black.withAlphaComponent(0.2), offset: CGSize(width: 0, height: 5), radius: 10, opacity: 1)
+        
+        shadowView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview().inset(16)
+        }
         
         imgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
@@ -156,7 +180,7 @@ class ProfileExperienceItemCell: UITableViewCell {
             make.left.equalTo(imgView.snp.right).offset(16)
             make.top.equalTo(timeLabel.snp.bottom).offset(2)
             make.right.equalToSuperview().inset(16)
-            make.bottom.greaterThanOrEqualToSuperview().inset(12)
+            make.bottom.greaterThanOrEqualToSuperview().inset(16)
         }
     }
 

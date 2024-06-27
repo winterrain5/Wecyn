@@ -30,20 +30,28 @@ class MainController: UITabBarController {
         let home = BaseNavigationController(rootViewController: HomeController())
         let connection = BaseNavigationController(rootViewController: ConnectionController())
         let calendar = BaseNavigationController(rootViewController: CalendarEventController())
-        let profile = BaseNavigationController(rootViewController: ProfileController())
+        let profile = BaseNavigationController(rootViewController: ProfileViewController())
+        let cards = BaseNavigationController(rootViewController: NFCNameCardController())
         let admin = BaseNavigationController(rootViewController: AdminController())
         func selectedImage(_ image: UIImage?) -> UIImage? {
             image?.withTintColor(R.color.theamColor()!).withRenderingMode(.alwaysOriginal)
         }
         
         home.tabBarItem = UITabBarItem.init(
-            title: "Home",
+            title: "Wecyn",
             image: R.image.tab_home(),
             selectedImage: selectedImage(R.image.tab_home()))
         connection.tabBarItem = UITabBarItem.init(
             title: "Connection",
             image: R.image.tab_book(),
             selectedImage: selectedImage(R.image.tab_book()))
+        
+        let card = R.image.tab_cards()?.scaled(toWidth: 24)
+        cards.tabBarItem = UITabBarItem.init(
+            title: "Cards",
+            image: card,
+            selectedImage: selectedImage(card))
+        
         
         calendar.tabBarItem = UITabBarItem.init(
             title: "Calendar",
@@ -60,13 +68,13 @@ class MainController: UITabBarController {
             image: R.image.tab_admin(),
             selectedImage: selectedImage(R.image.tab_admin()))
         
-        let is_admin = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_admin ?? 0
-        if is_admin == 1 {
-            self.viewControllers = [home,calendar,connection,profile,admin]
-        } else {
-            self.viewControllers = [home,calendar,connection,profile]
-        }
-        
+//        let is_admin = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.is_admin ?? 0
+//        if is_admin == 1 {
+//            self.viewControllers = [home,calendar,connection,profile,admin]
+//        } else {
+//            self.viewControllers = [home,calendar,connection,profile]
+//        }
+        self.viewControllers = [home,calendar,cards,connection,profile]
         configAppearance()
     }
     

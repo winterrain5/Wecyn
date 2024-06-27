@@ -14,15 +14,9 @@ class ProfileHeaderView: UIView {
     
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var jobTitleLabel: UILabel!
-    @IBOutlet weak var viewNamecardButton: UIButton!
     
-    @IBOutlet weak var viewCalendarButton: UIButton!
-    
-    @IBOutlet weak var addNewSectionButton: UIButton!
-    
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var rightArrowImageView: UIImageView!
     
     var uplodaImageComplete:(()->())?
     var userInfoModel: UserInfoModel? {
@@ -33,34 +27,14 @@ class ProfileHeaderView: UIView {
             jobTitleLabel.text = userInfoModel.headline
             userAvatarImageView.kf.setImage(with: userInfoModel.avatar.url)
             backImgView.kf.setImage(with: userInfoModel.cover.url)
+            backImgView.blur(withStyle: .light)
             
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        viewNamecardButton.titleForNormal = "名片".innerLocalized()
-        viewCalendarButton.titleForNormal = "日历".innerLocalized()
-        addNewSectionButton.titleForNormal = "new section"
-        
-        viewNamecardButton.rx.tap.subscribe(onNext: {
-            let vc = NFCNameCardController()
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
-        }).disposed(by: rx.disposeBag)
-        
-        viewCalendarButton.rx.tap.subscribe(onNext:{
-            let vc = CalendarEventController()
-            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
-        }).disposed(by: rx.disposeBag)
-        
-        addNewSectionButton.rx.tap.subscribe(onNext:{
-//            let vc = NFCController()
-//            UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
-        }).disposed(by: rx.disposeBag)
-        
-        [viewNamecardButton,viewCalendarButton,addNewSectionButton].forEach({
-            $0?.addShadow(cornerRadius: 5)
-        })
+        self.isSkeletonable = true
     }
     
     override func layoutSubviews() {
@@ -68,8 +42,6 @@ class ProfileHeaderView: UIView {
         
     }
     
-   
-  
    
 }
 

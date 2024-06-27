@@ -9,6 +9,9 @@ import UIKit
 import NFCReaderWriter
 import SafariServices
 import MessageUI
+import ImagePickerSwift
+import Photos
+
 enum NameCardDataType {
     case FirstName
     case LastName
@@ -38,6 +41,37 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     let namecardView = NFCNameCardView()
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
+    private lazy var _photoHelper: PhotoHelper = {
+        let v = PhotoHelper()
+        v.setConfigToPickBusinessCard()
+        v.didPhotoSelected = { [weak self, weak v] (images: [UIImage], assets: [PHAsset], _: Bool) in
+            guard let self else { return }
+            
+            for (index, asset) in assets.enumerated() {
+                switch asset.mediaType {
+                case .image:
+                    
+                    let vc = AddNewBusinessCardController(image: images[index])
+                    self.navigationController?.pushViewController(vc)
+                    
+                default:
+                    break
+                }
+            }
+        }
+
+        v.didCameraFinished = { [weak self] (photo: UIImage?, videoPath: URL?) in
+            guard let self else { return }
+            
+            if let photo {
+                let vc = AddNewBusinessCardController(image: photo)
+                self.navigationController?.pushViewController(vc)
+                
+            }
+        }
+        return v
+    }()
+    
     var datas:[NameCardModel] = []
     var id:Int? = nil
     var uuid:String? = nil
@@ -53,17 +87,37 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isSkeletonable = true
-        
-        self.addLeftBarButtonItem(image: R.image.xmarkCircleFill()!)
-        self.leftButtonDidClick = { [weak self] in
-            self?.navigationController?.popViewController()
-        }
-        
-        self.navigation.bar.alpha = 0
-        
     }
     
     func addBarItem() {
+        
+        self.navigation.bar.alpha = 0
+        
+        let scan = UIButton()
+        scan.imageForNormal = R.image.viewfinderCircleFill()
+        scan.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            
+            
+            let alert = UIAlertController.init(title: "Scan BusinessCard", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
+            
+            alert.addAction(title: "Camera",style: .destructive) { _ in
+                self.showImagePickerController(sourceType: .camera)
+            }
+            alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
+                self.showImagePickerController(sourceType: .photoLibrary)
+            }
+            
+            
+            alert.addAction(title: "Cancel",style: .cancel)
+            
+            alert.show()
+           
+            
+        
+        }).disposed(by: rx.disposeBag)
+        let scanItem = UIBarButtonItem(customView: scan)
+        self.navigation.item.leftBarButtonItem = scanItem
         
         let editButton = UIButton()
         let editItem = UIBarButtonItem(customView: editButton)
@@ -110,6 +164,13 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
         
         self.navigation.item.rightBarButtonItems = [editItem,fixItem2,shareItem]
+        
+        if  self.navigationController?.children.count ?? 0  > 1 {
+            self.addLeftBarButtonItem(image: R.image.xmarkCircleFill())
+            self.leftButtonDidClick = { [weak self] in
+                self?.returnBack()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -548,6 +609,17 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         return infos
     }
     
+    
+}
+
+extension NFCNameCardController {
+    func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
+        if case .camera = sourceType {
+            _photoHelper.presentCamera(byController: UIViewController.sk.getTopVC()!)
+        } else {
+            _photoHelper.presentPhotoLibrary(byController: UIViewController.sk.getTopVC()!)
+        }
+    }
     
 }
 extension NFCNameCardController: NFCReaderDelegate {

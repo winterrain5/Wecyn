@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let id = components.queryItems?.first?.value ?? ""
                 let uuid = components.queryItems?.last?.value ?? ""
                 let vc = NFCNameCardController(id: id.int,uuid: uuid)
-                window?.rootViewController?.navigationController?.pushViewController(vc)
+                UIViewController.sk.getTopVC()?.navigationController?.pushViewController(vc)
             }
             
         }

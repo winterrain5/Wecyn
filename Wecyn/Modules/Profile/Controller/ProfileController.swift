@@ -23,43 +23,14 @@ class ProfileController: BaseTableController {
     
    
     private var headerView = ProfileHeaderView.loadViewFromNib()
-    private let sectionTitleMap:[Int:String] = [0:"最近发布".innerLocalized(),1:"工作经历".innerLocalized(),2:"教育经历".innerLocalized()]
-    private let sectionTypes:[SectionType] = [.Activity,.Work,.Education]
+    private let sectionTitleMap:[(type:SectionType,title:String)] = [ (.Activity,"最近发布".innerLocalized()),(.Work,"工作经历".innerLocalized()),(.Education,"教育经历".innerLocalized())]
+    
     override var preferredStatusBarStyle: UIStatusBarStyle { self.ratio <= 0 ? .lightContent : .darkContent }
     var ratio:CGFloat = 0
     var userPosts:[PostListModel] =  []
     var workExperiences:[UserExperienceInfoModel] = []
     var eduExperiences:[UserExperienceInfoModel] = []
-    private lazy var _photoHelper: PhotoHelper = {
-        let v = PhotoHelper()
-        v.setConfigToPickBusinessCard()
-        v.didPhotoSelected = { [weak self, weak v] (images: [UIImage], assets: [PHAsset], _: Bool) in
-            guard let self else { return }
-            
-            for (index, asset) in assets.enumerated() {
-                switch asset.mediaType {
-                case .image:
-                    
-                    let vc = AddNewBusinessCardController(image: images[index])
-                    self.navigationController?.pushViewController(vc)
-                    
-                default:
-                    break
-                }
-            }
-        }
-
-        v.didCameraFinished = { [weak self] (photo: UIImage?, videoPath: URL?) in
-            guard let self else { return }
-            
-            if let photo {
-                let vc = AddNewBusinessCardController(image: photo)
-                self.navigationController?.pushViewController(vc)
-                
-            }
-        }
-        return v
-    }()
+    
     
     
     override func viewDidLoad() {
@@ -94,22 +65,7 @@ class ProfileController: BaseTableController {
         scan.imageForNormal = R.image.viewfinderCircleFill()
         scan.rx.tap.subscribe(onNext:{ [weak self] in
             guard let `self` = self else { return }
-            
-            
-            let alert = UIAlertController.init(title: "Scan BusinessCard", message: "Select photo from camera or photolibrary", preferredStyle: .actionSheet)
-            
-            alert.addAction(title: "Camera",style: .destructive) { _ in
-                self.showImagePickerController(sourceType: .camera)
-            }
-            alert.addAction(title: "PhotoLibrary",style: .destructive) { _ in
-                self.showImagePickerController(sourceType: .photoLibrary)
-            }
-            
-            
-            alert.addAction(title: "Cancel",style: .cancel)
-            
-            alert.show()
-           
+         
             
         
         }).disposed(by: rx.disposeBag)
@@ -123,7 +79,7 @@ class ProfileController: BaseTableController {
         configTableview(.grouped)
     
         self.tableView?.tableHeaderView = headerView
-        headerView.size = CGSize(width: kScreenWidth, height: 320)
+        headerView.size = CGSize(width: kScreenWidth, height: 244)
    
 
         self.tableView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kTabBarHeight + 10, right: 0)
@@ -209,9 +165,10 @@ class ProfileController: BaseTableController {
 
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return sectionTitleMap.count
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      
         if section == SectionType.Activity.rawValue {
             return self.userPosts.first == nil ? 0 : 1
         }
@@ -222,6 +179,7 @@ class ProfileController: BaseTableController {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      
         if indexPath.section == SectionType.Activity.rawValue {
             return self.userPosts.first?.cellHeight ?? 0
         }
@@ -320,7 +278,8 @@ class ProfileController: BaseTableController {
         return UITableViewCell()
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == SectionType.Activity.rawValue {
+       let tupple = sectionTitleMap[section]
+        if tupple.type == .Activity {
             if self.userPosts.first == nil {
                 let view = ProfileNoActivitySectionView()
                 view.createPostBtn.rx.tap.subscribe(onNext:{ [weak self] in
@@ -336,36 +295,31 @@ class ProfileController: BaseTableController {
                 }).disposed(by: self.rx.disposeBag)
                 return view
             }
-            if let title = sectionTitleMap[section] {
-                let sectionView = ProfileSectionView(title: title,type: sectionTypes[section])
-                return sectionView
-            }
+            let sectionView = ProfileSectionView(title: tupple.title,type: tupple.type)
+            return sectionView
         } else {
-            if let title = sectionTitleMap[section] {
-                let sectionView = ProfileSectionView(title: title,type: sectionTypes[section])
-                sectionView.profileAddDataHandler = { [weak self] type in
-                    switch type {
-                    case .Work:
-                        let vc = ProfileAddWorkExperienceController()
-                        vc.profileWorkDataUpdated = {  [weak self] in
-                            self?.getUserInfo()
-                        }
-                        self?.navigationController?.pushViewController(vc)
-                    case .Education:
-                        let vc = ProfileAddEduExperienceController()
-                        vc.profileEduDataUpdated = {  [weak self] in
-                            self?.getUserInfo()
-                        }
-                        self?.navigationController?.pushViewController(vc)
-                    default:
-                        print(type)
+            let sectionView = ProfileSectionView(title: tupple.title,type: tupple.type)
+            sectionView.profileAddDataHandler = { [weak self] type in
+                switch type {
+                case .Work:
+                    let vc = ProfileAddWorkExperienceController()
+                    vc.profileWorkDataUpdated = {  [weak self] in
+                        self?.getUserInfo()
                     }
+                    self?.navigationController?.pushViewController(vc)
+                case .Education:
+                    let vc = ProfileAddEduExperienceController()
+                    vc.profileEduDataUpdated = {  [weak self] in
+                        self?.getUserInfo()
+                    }
+                    self?.navigationController?.pushViewController(vc)
+                default:
+                    print(type)
                 }
-                return sectionView
             }
+            return sectionView
         }
         
-        return nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -440,13 +394,6 @@ class ProfileController: BaseTableController {
         
     }
     
-    private func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
-        if case .camera = sourceType {
-            _photoHelper.presentCamera(byController: UIViewController.sk.getTopVC()!)
-        } else {
-            _photoHelper.presentPhotoLibrary(byController: UIViewController.sk.getTopVC()!)
-        }
-    }
-    
+
    
 }

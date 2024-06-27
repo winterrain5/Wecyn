@@ -121,10 +121,13 @@ struct calendarEntryView : View {
         switch family {
         case .systemSmall:
             SmallCalendar(entry: entry, data:entry.datas.sorted(by: { $0.distance < $1.distance }).first)
+                .widgetBackground(Color.white)
         case .systemMedium:
             MediumCalendar(entry: entry)
+                .widgetBackground(Color.white)
         default:
             LargeCalendarView(entry: entry)
+                .widgetBackground(Color.white)
         }
         
     }
@@ -160,7 +163,8 @@ struct LargeCalendarView: View {
                    
             }
             Spacer()
-        }.padding()
+        }
+        .padding()
     }
 }
 
@@ -266,6 +270,20 @@ struct CalendarDateView: View {
         })
     }
 }
+
+extension View {
+    @ViewBuilder
+    func widgetBackground(_ backgroundView: some View) -> some View {
+        if #available(iOS 17.0, *) {
+            containerBackground(for: .widget) {
+                backgroundView
+            }
+        } else {
+            background(backgroundView)
+        }
+    }
+}
+
 
 func formatDate(format:String,date:Date) -> String {
     let dateFormatter = DateFormatter()

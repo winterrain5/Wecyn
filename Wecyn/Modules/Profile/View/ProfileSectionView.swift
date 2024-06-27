@@ -35,8 +35,8 @@ class ProfileSectionView: UIView {
         
         if type == .Activity {
             editButton.imageForNormal = R.image.chevronRight()?.scaled(toHeight: 12)
-            editButton.titleForNormal = "More"
-        } else {
+        }
+        else {
             editButton.imageForNormal = UIImage(.plus.circle).tintImage(R.color.iconColor()!)
             editButton.titleForNormal = ""
         }
@@ -54,8 +54,8 @@ class ProfileSectionView: UIView {
         
         editButton.titleColorForNormal = R.color.iconColor()
         editButton.titleLabel?.font = UIFont.sk.pingFangRegular(12)
-        editButton.sk.setImageTitleLayout(.imgRight,spacing: 4)
         editButton.contentHorizontalAlignment = .right
+    
         backgroundColor = .white
       
         
@@ -76,6 +76,7 @@ class ProfileSectionView: UIView {
         
         editButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
+            make.left.equalTo(titleLabel.snp.right).offset(16)
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(32)
         }

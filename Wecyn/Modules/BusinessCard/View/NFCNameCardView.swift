@@ -30,7 +30,7 @@ class NFCNameCardView: UIView {
             blurImageView.kf.setImage(with: model.cover.url,options: [.forceRefresh])
             //10.1.3.144:5173/card/a65ab2f2-e348-4e5b-b1cd-eeba7f644cd2
             let url = APIHost.share.WebpageUrl + "/card/\(model.uuid)"
-            qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: nil)
+            qrCodeImgView.image = UIImage.sk.QRImage(with: url, size: CGSize(width: 120, height: 120), logoSize: CGSize(width: 40, height: 40),logoImage: R.image.appicon()!,logoRoundCorner: 8)
             
             nameLabel.text = model.full_name
             

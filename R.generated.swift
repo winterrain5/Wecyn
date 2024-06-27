@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 256 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 257 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -851,6 +851,13 @@ struct _R {
       ///
       /// Locales: en
       var 我的信息: RswiftResources.StringResource { .init(key: "我的信息", tableName: "Localizable", source: source, developmentValue: "my info", comment: nil) }
+
+      /// en translation: Cards
+      ///
+      /// Key: 我的名片
+      ///
+      /// Locales: en
+      var 我的名片: RswiftResources.StringResource { .init(key: "我的名片", tableName: "Localizable", source: source, developmentValue: "Cards", comment: nil) }
 
       /// en translation: My friends
       ///
@@ -1937,7 +1944,7 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 130 images.
+  /// This `_R.image` struct is generated, and contains static references to 131 images.
   struct image {
     let bundle: Foundation.Bundle
 
@@ -1946,6 +1953,9 @@ struct _R {
 
     /// Image `appicon`.
     var appicon: RswiftResources.ImageResource { .init(name: "appicon", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `applelogo`.
+    var applelogo: RswiftResources.ImageResource { .init(name: "applelogo", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `arrow.up.message`.
     var arrowUpMessage: RswiftResources.ImageResource { .init(name: "arrow.up.message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2121,9 +2131,6 @@ struct _R {
     /// Image `message`.
     var message: RswiftResources.ImageResource { .init(name: "message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
-    /// Image `namecard_background`.
-    var namecard_background: RswiftResources.ImageResource { .init(name: "namecard_background", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
-
     /// Image `network`.
     var network: RswiftResources.ImageResource { .init(name: "network", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -2277,6 +2284,9 @@ struct _R {
     /// Image `tab_calendar`.
     var tab_calendar: RswiftResources.ImageResource { .init(name: "tab_calendar", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
+    /// Image `tab_cards`.
+    var tab_cards: RswiftResources.ImageResource { .init(name: "tab_cards", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
     /// Image `tab_home`.
     var tab_home: RswiftResources.ImageResource { .init(name: "tab_home", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
@@ -2332,14 +2342,18 @@ struct _R {
     var xmarkCircleFill: RswiftResources.ImageResource { .init(name: "xmark.circle.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
   }
 
-  /// This `_R.entitlements` struct is generated, and contains static references to 6 properties.
+  /// This `_R.entitlements` struct is generated, and contains static references to 7 properties.
   struct entitlements {
+    let comAppleDeveloperApplesignin = comAppleDeveloperApplesignin()
     let comAppleDeveloperAssociatedDomains = comAppleDeveloperAssociatedDomains()
     let comAppleDeveloperIcloudContainerIdentifiers = comAppleDeveloperIcloudContainerIdentifiers()
     let comAppleDeveloperIcloudServices = comAppleDeveloperIcloudServices()
     let comAppleDeveloperNfcReadersessionFormats = comAppleDeveloperNfcReadersessionFormats()
     let comAppleDeveloperUbiquityContainerIdentifiers = comAppleDeveloperUbiquityContainerIdentifiers()
     let comAppleSecurityApplicationGroups = comAppleSecurityApplicationGroups()
+    struct comAppleDeveloperApplesignin {
+      let `default`: String = "Default"
+    }
     struct comAppleDeveloperAssociatedDomains {
       let applinksWwwTerrabyteSg: String = "applinks:www.terrabyte.sg"
     }
@@ -2568,10 +2582,12 @@ struct _R {
       if UIKit.UIImage(named: "placeholder", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'placeholder' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'JobItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'JobItemCell', but couldn't be loaded.") }
+      if UIKit.UIImage(named: "applelogo", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'applelogo' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "google", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'google' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "password_invisible", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'password_invisible' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "password_visible", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'password_visible' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'LoginView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "label", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'label' is used in nib 'LoginView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'NotificationCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor22", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor22' is used in nib 'NotificationCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor77", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor77' is used in nib 'NotificationCell', but couldn't be loaded.") }
@@ -2584,8 +2600,9 @@ struct _R {
       if UIKit.UIColor(named: "SeperatorColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'SeperatorColor' is used in nib 'PostDetailCommentFooterView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor162C46", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor162C46' is used in nib 'PostDetailCommentFooterView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor74", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor74' is used in nib 'PostDetailCommentFooterView', but couldn't be loaded.") }
+      if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "chevron.forward") == nil { throw RswiftResources.ValidationError("[R.swift] System image named 'chevron.forward' is used in nib 'ProfileHeaderView', but couldn't be loaded.") } }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
-      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'ProfileHeaderView', but couldn't be loaded.") }
       if UIKit.UIImage(named: "proile_user", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'proile_user' is used in nib 'RegistAddAvatarView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistAddAvatarView', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'RegistConfirmView', but couldn't be loaded.") }

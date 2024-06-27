@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,7 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoginView" customModule="Wecyn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="545" height="902"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU2-dx-wuJ">
@@ -34,7 +35,7 @@ of your professional life</string>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PAw-sM-J7U">
-                    <rect key="frame" x="21" y="204" width="372" height="44"/>
+                    <rect key="frame" x="21" y="204" width="503" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="ff1-cC-zNA">
                             <userDefinedRuntimeAttributes>
@@ -60,7 +61,7 @@ of your professional life</string>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="erT-Jr-k7b">
-                    <rect key="frame" x="21" y="265" width="372" height="44"/>
+                    <rect key="frame" x="21" y="265" width="503" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="A8I-Ev-31f">
                             <userDefinedRuntimeAttributes>
@@ -86,7 +87,7 @@ of your professional life</string>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InB-4A-GUc">
-                    <rect key="frame" x="145.5" y="335" width="123" height="18"/>
+                    <rect key="frame" x="211" y="335" width="123" height="18"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -97,7 +98,7 @@ of your professional life</string>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9u0-PL-ToJ" customClass="LoadingButton" customModule="Wecyn" customModuleProvider="target">
-                    <rect key="frame" x="21" y="379" width="372" height="40"/>
+                    <rect key="frame" x="21" y="379" width="503" height="40"/>
                     <color key="backgroundColor" name="TheamColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Avo-0N-HmI">
@@ -114,8 +115,8 @@ of your professional life</string>
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJd-Xf-16J">
-                    <rect key="frame" x="199.5" y="445" width="15" height="19"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJd-Xf-16J">
+                    <rect key="frame" x="265" y="445" width="15" height="19"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                     <color key="textColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -125,22 +126,22 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIF-Wc-IkI">
-                    <rect key="frame" x="14" y="454" width="179.5" height="1"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIF-Wc-IkI">
+                    <rect key="frame" x="14" y="454" width="245" height="1"/>
                     <color key="backgroundColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="bfq-YS-IR3"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-cO-zEk">
-                    <rect key="frame" x="220.5" y="454" width="179.5" height="1"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-cO-zEk">
+                    <rect key="frame" x="286" y="454" width="245" height="1"/>
                     <color key="backgroundColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="zdF-Z0-1dv"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-x8-TAI">
-                    <rect key="frame" x="21" y="492" width="372" height="40"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-x8-TAI">
+                    <rect key="frame" x="21" y="492" width="503" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="yRs-GS-T78">
                             <userDefinedRuntimeAttributes>
@@ -152,12 +153,23 @@ of your professional life</string>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="    Continue with Google" image="google">
+                    <state key="normal" title="    Sign in with Google" image="google">
                         <color key="titleColor" name="TheamColor"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" name="TheamColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New to Wecyn? Join now!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qou-Ti-EVR">
-                    <rect key="frame" x="120" y="559" width="174" height="18"/>
+                    <rect key="frame" x="185.5" y="459" width="174" height="17.5"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -168,7 +180,7 @@ of your professional life</string>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeH-61-DNb">
-                    <rect key="frame" x="357" y="269" width="36" height="36"/>
+                    <rect key="frame" x="488" y="269" width="36" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="jqy-bd-QhA"/>
                         <constraint firstAttribute="width" constant="36" id="qcN-da-xzf"/>
@@ -176,6 +188,39 @@ of your professional life</string>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="password_invisible"/>
                     <state key="selected" image="password_visible"/>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Kv-bh-bXE">
+                    <rect key="frame" x="21" y="552" width="503" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="3kA-Ba-03a">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </constraint>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                    <color key="tintColor" name="label"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="    Sign in with Apple">
+                        <color key="titleColor" name="TheamColor"/>
+                        <imageReference key="image" image="applelogo" symbolScale="large"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" name="TheamColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="signInWithApple:" destination="iN0-l3-epB" eventType="touchUpInside" id="ipt-E2-IJo"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -185,13 +230,7 @@ of your professional life</string>
                 <constraint firstItem="gvh-cO-zEk" firstAttribute="leading" secondItem="DJd-Xf-16J" secondAttribute="trailing" constant="6" id="8hI-7y-rkg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9u0-PL-ToJ" secondAttribute="trailing" constant="21" id="9X6-xg-C3g"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gvh-cO-zEk" secondAttribute="trailing" constant="14" id="Cma-pd-Tsi"/>
-                <constraint firstItem="qou-Ti-EVR" firstAttribute="top" secondItem="ohO-x8-TAI" secondAttribute="bottom" constant="27" id="IEB-uR-tro">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
-                            <integer key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
+                <constraint firstItem="6Kv-bh-bXE" firstAttribute="leading" secondItem="ohO-x8-TAI" secondAttribute="leading" id="FAH-j8-XyU"/>
                 <constraint firstItem="InB-4A-GUc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="JSi-LD-wVs"/>
                 <constraint firstItem="9u0-PL-ToJ" firstAttribute="top" secondItem="InB-4A-GUc" secondAttribute="bottom" constant="26" id="LLI-Be-yNY">
                     <userDefinedRuntimeAttributes>
@@ -200,6 +239,7 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="6Kv-bh-bXE" firstAttribute="top" secondItem="ohO-x8-TAI" secondAttribute="bottom" constant="20" id="MHf-hz-a50"/>
                 <constraint firstItem="PAw-sM-J7U" firstAttribute="top" secondItem="EU2-dx-wuJ" secondAttribute="bottom" constant="35" id="NKK-4c-9oc">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="swiftyFitType">
@@ -238,6 +278,7 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="6Kv-bh-bXE" firstAttribute="trailing" secondItem="ohO-x8-TAI" secondAttribute="trailing" id="oI7-Ku-Hqc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ohO-x8-TAI" secondAttribute="trailing" constant="21" id="olq-uy-t2g"/>
                 <constraint firstItem="InB-4A-GUc" firstAttribute="top" secondItem="erT-Jr-k7b" secondAttribute="bottom" constant="26" id="q3d-94-POo">
                     <userDefinedRuntimeAttributes>
@@ -246,6 +287,7 @@ of your professional life</string>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="qou-Ti-EVR" firstAttribute="top" secondItem="9u0-PL-ToJ" secondAttribute="bottom" constant="40" id="r6m-NB-yTW"/>
                 <constraint firstItem="ohO-x8-TAI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="21" id="s3c-V3-cxG"/>
                 <constraint firstItem="DJd-Xf-16J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sUJ-dp-7uH"/>
                 <constraint firstItem="EU2-dx-wuJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="85" id="tTW-ar-chQ">
@@ -269,15 +311,19 @@ of your professional life</string>
                 <outlet property="titleLabel" destination="EU2-dx-wuJ" id="Jmu-Jm-0mG"/>
                 <outlet property="userNameTf" destination="PAw-sM-J7U" id="oXG-Bx-Wau"/>
             </connections>
-            <point key="canvasLocation" x="-133.33333333333334" y="-15.401785714285714"/>
+            <point key="canvasLocation" x="-38.405797101449281" y="-13.392857142857142"/>
         </view>
     </objects>
     <resources>
+        <image name="applelogo" width="25.5" height="32.5"/>
         <image name="google" width="15.5" height="18"/>
         <image name="password_invisible" width="24" height="24"/>
         <image name="password_visible" width="24" height="24"/>
         <namedColor name="TheamColor">
-            <color red="0.19599999487400055" green="0.66299998760223389" blue="0.63499999046325684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.19607843137254902" green="0.66274509803921566" blue="0.63529411764705879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="label">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

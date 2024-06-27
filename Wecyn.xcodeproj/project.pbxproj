@@ -346,6 +346,10 @@
 		45E85B132A3AB4FA00B820CD /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B122A3AB4FA00B820CD /* TokenModel.swift */; };
 		45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */; };
 		45E85B272A3B0A4200B820CD /* CaledarItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */; };
+		45E94A072C2D03C1009D4221 /* EduExpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E94A062C2D03C1009D4221 /* EduExpViewController.swift */; };
+		45E94A0A2C2D3497009D4221 /* BusinessCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E94A092C2D3497009D4221 /* BusinessCardController.swift */; };
+		45E99D712C2C0CFC00947880 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E99D702C2C0CFC00947880 /* ProfileViewController.swift */; };
+		45E99D732C2CF69000947880 /* WorkExpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E99D722C2CF69000947880 /* WorkExpViewController.swift */; };
 		45EAE8CA2A8F1D4B00018C0D /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */; };
 		45EAE8CD2A8F2B3F00018C0D /* CreatePostToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */; };
 		45EAE8CF2A8F2B4D00018C0D /* CreatePostToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */; };
@@ -754,6 +758,11 @@
 		45E85B122A3AB4FA00B820CD /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		45E85B242A3B0A4200B820CD /* CaledarItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaledarItemCell.swift; sourceTree = "<group>"; };
 		45E85B252A3B0A4200B820CD /* CaledarItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaledarItemCell.xib; sourceTree = "<group>"; };
+		45E94A062C2D03C1009D4221 /* EduExpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduExpViewController.swift; sourceTree = "<group>"; };
+		45E94A092C2D3497009D4221 /* BusinessCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardController.swift; sourceTree = "<group>"; };
+		45E99D6F2C2A630D00947880 /* WecynRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WecynRelease.entitlements; sourceTree = "<group>"; };
+		45E99D702C2C0CFC00947880 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		45E99D722C2CF69000947880 /* WorkExpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExpViewController.swift; sourceTree = "<group>"; };
 		45EAE8C92A8F1D4B00018C0D /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		45EAE8CC2A8F2B3F00018C0D /* CreatePostToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostToolBar.swift; sourceTree = "<group>"; };
 		45EAE8CE2A8F2B4D00018C0D /* CreatePostToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePostToolBar.xib; sourceTree = "<group>"; };
@@ -957,15 +966,13 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
-		450F6CD72A6E0FC00001AA1B /* NFC */ = {
+		450F6CD72A6E0FC00001AA1B /* BusinessCard */ = {
 			isa = PBXGroup;
 			children = (
+				45E94A082C2D346B009D4221 /* Controller */,
 				450F6CDC2A70A88F0001AA1B /* View */,
-				450F6CD82A6E0FDA0001AA1B /* NFCController.swift */,
-				450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */,
-				45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */,
 			);
-			path = NFC;
+			path = BusinessCard;
 			sourceTree = "<group>";
 		};
 		450F6CDC2A70A88F0001AA1B /* View */ = {
@@ -1269,6 +1276,7 @@
 		459209CE2A26D5F4005871ED /* Wecyn */ = {
 			isa = PBXGroup;
 			children = (
+				45E99D6F2C2A630D00947880 /* WecynRelease.entitlements */,
 				450F6CDB2A6E6BCC0001AA1B /* Wecyn.entitlements */,
 				45005C8C2A5E87FF00560E21 /* 3rdDepandence */,
 				45920ABF2A26E045005871ED /* Base */,
@@ -1338,7 +1346,7 @@
 				45E765BC2A31AB1B00BF6EEC /* Main */,
 				45450CC62B2C408A00558C9D /* Admin */,
 				45EAE8C72A8F1CEE00018C0D /* Post */,
-				450F6CD72A6E0FC00001AA1B /* NFC */,
+				450F6CD72A6E0FC00001AA1B /* BusinessCard */,
 				457C7D8E2A4D69F8002E50DF /* UIComponents */,
 				45E85B152A3AE1ED00B820CD /* Calendar */,
 				450BA6C02A32B8D000764828 /* Login */,
@@ -1542,9 +1550,12 @@
 		45A10A462A31B00F00726B66 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				45E765B12A31A97F00BF6EEC /* ProfileController.swift */,
+				45E99D702C2C0CFC00947880 /* ProfileViewController.swift */,
+				45E99D722C2CF69000947880 /* WorkExpViewController.swift */,
+				45E94A062C2D03C1009D4221 /* EduExpViewController.swift */,
 				45450CBC2B2AE8D300558C9D /* ApplyForCertificationController.swift */,
 				45E765B42A31A99400BF6EEC /* SettingController.swift */,
-				45E765B12A31A97F00BF6EEC /* ProfileController.swift */,
 				458970632A7CDAB900344B93 /* LanguageSettingController.swift */,
 				458870DD2AE66ACD00029353 /* ProfileAddWorkExperienceController.swift */,
 				458870E92AE7BE8400029353 /* ProfileAddEduExperienceController.swift */,
@@ -1780,9 +1791,9 @@
 			children = (
 				45005C852A5E395100560E21 /* RichText */,
 				450F6CD02A6909570001AA1B /* CalendarEventController.swift */,
+				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				45005C4D2A53B67D00560E21 /* EventSetAssistantsController.swift */,
 				457133B82A4D0E81007B783A /* EventSearchViewController.swift */,
-				4519A4882A495A72007481A6 /* CalendarAddAttendanceController.swift */,
 				45005C722A5D027C00560E21 /* CalendarAddNewEventController.swift */,
 				45005C8A2A5E86BD00560E21 /* CalendarEventRepeatController.swift */,
 				45005C8F2A5F95BD00560E21 /* CalendarEventSingelChooseController.swift */,
@@ -1810,6 +1821,17 @@
 				455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		45E94A082C2D346B009D4221 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				450F6CD82A6E0FDA0001AA1B /* NFCController.swift */,
+				450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */,
+				45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */,
+				45E94A092C2D3497009D4221 /* BusinessCardController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		45EAE8C72A8F1CEE00018C0D /* Post */ = {
@@ -2188,6 +2210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45C9380B2B3ECF6500621BED /* AdminStaffExpsController.swift in Sources */,
+				45E94A0A2C2D3497009D4221 /* BusinessCardController.swift in Sources */,
 				4513F6162BAD54140080756F /* ChatVC_MessageCellDelegate.swift in Sources */,
 				45A0E6392ABD7A06003C5153 /* HomePostUserInfoView.swift in Sources */,
 				4536533A2A4136BA0026EC8D /* UserInfoModel.swift in Sources */,
@@ -2331,6 +2354,7 @@
 				45F07C2F2BB25C6A0070813D /* ChatListCell.swift in Sources */,
 				45ADB2992A4038E800745F6F /* ConnectionOfMyController.swift in Sources */,
 				45A0E6472AC2C149003C5153 /* PostFollowUserCell.swift in Sources */,
+				45E94A072C2D03C1009D4221 /* EduExpViewController.swift in Sources */,
 				457C7D932A4D6A47002E50DF /* DatePickerView.swift in Sources */,
 				45920AE92A26E045005871ED /* CountDownButton.swift in Sources */,
 				45450CCC2B2C418200558C9D /* AdminRoleController.swift in Sources */,
@@ -2388,6 +2412,7 @@
 				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
 				45C999F82AB1C8A20017CDC3 /* PostUserHeaderController.swift in Sources */,
 				45381DEF2BB695D9007EE954 /* CommonApi.swift in Sources */,
+				45E99D732C2CF69000947880 /* WorkExpViewController.swift in Sources */,
 				456BB0462B4D0DCF00BB7838 /* AdminRoomCell.swift in Sources */,
 				45450CD02B2C41AE00558C9D /* AdminStaffController.swift in Sources */,
 				45005C822A5E38ED00560E21 /* AttachmentDetailsViewController.swift in Sources */,
@@ -2485,6 +2510,7 @@
 				45920ADD2A26E045005871ED /* NSObject+Extension.swift in Sources */,
 				454BA37E2B8D7192006B47BA /* NotificationService.swift in Sources */,
 				45005C922A5FC68F00560E21 /* CalendarEventRepeatUntilController.swift in Sources */,
+				45E99D712C2C0CFC00947880 /* ProfileViewController.swift in Sources */,
 				454BA37C2B8D70ED006B47BA /* NotificatonApi.swift in Sources */,
 				45450CC52B2C0E4500558C9D /* AdminService.swift in Sources */,
 			);
@@ -2780,7 +2806,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Wecyn/Wecyn.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Wecyn/WecynRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

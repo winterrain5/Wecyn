@@ -85,7 +85,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     var datas:[[BusinessCardModel]] = []
     var model:ScanCardModel?
     var image:UIImage!
-    var lange = "1"
+    var lang = "1"
     /// 1 gpt-4-1106-preview,2 gpt-3.5-turbo-0613,3 gpt-3.5-turbo-1106
     var ai_model = "2"
     var ocrText:String = ""
@@ -118,11 +118,18 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     }
     
     func imageOCRByBaidu() {
-        
+        Toast.showLoading()
         let scaledImage = image.scaledImage(1000) ?? image
         guard let preprocessedImage = scaledImage?.preprocessedImage() ?? scaledImage else { return }
-
-        let options:[AnyHashable:Any] = ["language_type":"CHN_ENG","detect_direction":"true"]
+        var lang_type = ""
+        if self.lang == "1" {
+            lang_type = "CHN"
+        } else if self.lang == "2" {
+            lang_type = "CHN_ENG"
+        } else {
+            lang_type = "auto_detect"
+        }
+        let options:[AnyHashable:Any] = ["language_type":lang_type,"detect_direction":"true"]
         AipOcrService.shard().detectTextAccurateBasic(from: preprocessedImage, withOptions: options) { result in
             
             guard let result = result else { return }
@@ -136,7 +143,10 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
             self.uploadBusinessCard()
             
         } failHandler: { error in
+            
+            Toast.dismiss()
             Toast.showError(error.debugDescription)
+            
         }
 
         
@@ -144,7 +154,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
     
     func uploadBusinessCard() {
         Toast.showLoading(withStatus: "Recognizing...")
-        NetworkService.scanCard(cardText:ocrText,lang: lange.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
+        NetworkService.scanCard(cardText:ocrText,lang: lang.int ?? 1,model: ai_model.int ?? 1).subscribe(onNext:{
             self.model = $0
             DispatchQueue.main.async {
                 Toast.dismiss()
@@ -176,7 +186,7 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
          */
         guard let model = self.model else { return }
         datas = [
-            [BusinessCardModel(label: "Lang", type: .Lang,value: lange)],
+            [BusinessCardModel(label: "Lang", type: .Lang,value: lang)],
             
             
             [BusinessCardModel(label: "Name",type: .Name,value: model.name)],
@@ -333,13 +343,13 @@ class AddNewBusinessCardController: BaseTableController, ImageEditorControllerDe
                 guard let `self` = self else { return }
                 
                 if model.type == .Lang {
-                    self.lange = model.value
+                    self.lang = model.value
                 } else {
                     self.ai_model = model.value
                 }
                 
                 self.tableView?.reloadData()
-                self.uploadBusinessCard()
+                self.imageOCRByBaidu()
                 
             }
             return cell

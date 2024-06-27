@@ -128,7 +128,6 @@
 "翻译" = "Translate";
 "已读" = "Readed";
 "未读" = "Unread";
-"名片" = "Carte";
 "图片" = "Image";
 "视频" = "Video";
 "文件" = "File";
@@ -252,7 +251,7 @@
 "[语音]" = "[Audio]";
 "[视频]" = "[Video]";
 "[文件]" = "[File]";
-"[名片]" = "[Carte]";
+"[名片]" = "[Card]";
 "[定位]" = "[Location]";
 "[自定义表情]" = "[Custom Expressions]";
 "[自定义消息]" = "[Custom Message]";
@@ -270,7 +269,7 @@
 "聊天记录已清除" = "Chat history cleareds";
 "重新编辑" = "re-edit";
 
-"名片" = "Carte";
+"名片" = "Card";
 "日历" = "Calendar";
 "添加新分区" = "add_new_section";
 
@@ -279,6 +278,7 @@
 "工作经历" = "Experience";
 "教育经历" = "Education";
 "兴趣爱好" = "Interests";
+"我的名片" = "Cards";
 
 "设置" = "Settings";
 "通知" = "Notification";

@@ -9,6 +9,8 @@ import PromiseKit
 import UIKit
 import Cache
 import RxSwift
+import AuthenticationServices
+
 class LoginView: UIView {
 
     @IBOutlet weak var passwordStateButton: UIButton!
@@ -22,6 +24,8 @@ class LoginView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSignInWithAppleStateChanged(noti:)), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
+        
         userNameTf.addShadow(cornerRadius: 11)
         passwordTf.addShadow(cornerRadius: 11)
    
@@ -29,9 +33,6 @@ class LoginView: UIView {
         forgetPwdLabel.sk.addBorderBottom(borderWidth: 1, borderColor: UIColor(hexString: "707070")!)
         
         signInButton.addShadow(cornerRadius: 20)
-        
-        googleLoginButton.cornerRadius = 20
-        googleLoginButton.sk.addBorder(borderWidth: 2, borderColor: R.color.theamColor()!)
 
         regitLabel.sk.setSpecificTextUnderLine("Join now!", color: R.color.theamColor()!)
         regitLabel.sk.setSpecificTextColor("Join now!", color: R.color.theamColor()!)
@@ -103,6 +104,25 @@ class LoginView: UIView {
         }).disposed(by: rx.disposeBag)
     }
     
+    @IBAction func signInWithApple(_ sender: Any) {
+        //不要使用let requests = [ASAuthorizationAppleIDProvider().createRequest(), ASAuthorizationPasswordProvider().createRequest()]
+//ASAuthorizationPasswordProvider().createRequest()在第一次用苹果登录授权的时候会报错ASAuthorizationErrorUnknown 1000
+        // 基于用户的Apple ID授权用户，生成用户授权请求的一种机制
+        let appleIDProvide = ASAuthorizationAppleIDProvider()
+        // 授权请求AppleID
+        let appIDRequest = appleIDProvide.createRequest()
+        // 在用户授权期间请求的联系信息
+        appIDRequest.requestedScopes = [.fullName,.email]
+        // 由ASAuthorizationAppleIDProvider创建的授权请求 管理授权请求的控制器
+        let authorizationController = ASAuthorizationController.init(authorizationRequests: [appIDRequest])
+        // 设置授权控制器通知授权请求的成功与失败的代理
+        authorizationController.delegate = self
+        // 设置提供 展示上下文的代理，在这个上下文中 系统可以展示授权界面给用户
+        authorizationController.presentationContextProvider = self
+        // 在控制器初始化期间启动授权流
+        authorizationController.performRequests()
+
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -162,5 +182,74 @@ class LoginView: UIView {
 
         }
     }
+    
+    @objc func handleSignInWithAppleStateChanged(noti:NotificationCenter) {
+        
+    }
 
+    deinit {
+        if #available(iOS 13.0, *) {
+            NotificationCenter.default.removeObserver(self, name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
+        }
+    }
+}
+
+
+extension LoginView: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+
+    func authorizationController(controller:ASAuthorizationController, didCompleteWithAuthorization authorization:ASAuthorization) {
+
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential{
+            
+            if authorization.credential.isKind(of: ASAuthorizationAppleIDCredential.classForCoder()) {
+                // 用户登录使用ASAuthorizationAppleIDCredential
+                let appleIDCredential = authorization.credential as! ASAuthorizationAppleIDCredential
+                let user = appleIDCredential.user
+                // 使用过授权的，可能获取不到以下三个参数
+                let familyName = appleIDCredential.fullName?.familyName ?? ""
+                let givenName = appleIDCredential.fullName?.givenName ?? ""
+                let email = appleIDCredential.email ?? ""
+                
+                let identityToken = appleIDCredential.identityToken ?? Data()
+                let authorizationCode = appleIDCredential.authorizationCode ?? Data()
+                // 用于判断当前登录的苹果账号是否是一个真实用户，取值有：unsupported、unknown、likelyReal
+                let realUserStatus = appleIDCredential.realUserStatus
+                
+                print("user:\n\(user)")
+                print("identityToken:\n\(identityToken)")
+                print("authorizationCode:\n\(authorizationCode)")
+                // 服务器验证需要使用的参数
+            }else if authorization.credential.isKind(of: ASPasswordCredential.classForCoder()) {
+                // 这个获取的是iCloud记录的账号密码，需要输入框支持iOS 12 记录账号密码的新特性，如果不支持，可以忽略
+                // Sign in using an existing iCloud Keychain credential.
+                // 用户登录使用现有的密码凭证
+                let passworCreddential = authorization.credential as! ASPasswordCredential
+                // 密码凭证对象的用户标识 用户的唯一标识
+                let user = passworCreddential.user
+                // 密码凭证对象的密码
+                let password = passworCreddential.password
+                print("password:\n\(password)")
+                
+            }else{
+                // "授权信息不符合"
+            }
+            
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        
+        if let e = error as? ASAuthorizationError {
+            Toast.showError(e.localizedDescription)
+        }
+
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return UIApplication.shared.keyWindow!
+    }
+    
+
+    
 }

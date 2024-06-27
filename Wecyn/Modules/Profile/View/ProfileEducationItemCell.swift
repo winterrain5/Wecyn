@@ -8,32 +8,37 @@
 import UIKit
 
 class ProfileEducationItemCell: UITableViewCell {
-
+    let shadowView = UIView()
     private let imgView = UIImageView()
     private let schoolLabel = UILabel().then { label in
         label.text = "Nanyang Polytechnic"
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangSemibold(16)
+        label.isSkeletonable = true
     }
     private let majorLabel =  UILabel().then { label in
         label.text = "High School Diploma, \nInteraction Design"
         label.numberOfLines = 1
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(13)
+        label.isSkeletonable = true
     }
     private let timeLabel =  UILabel().then { label in
         label.text = "2016-2019"
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
+        label.isSkeletonable = true
     }
     private let descLabel =  UILabel().then { label in
         label.textColor = R.color.textColor33()
         label.font = UIFont.sk.pingFangRegular(12)
+        label.isSkeletonable = true
     }
     let moreButton = UIButton().then { button in
         button.imageForNormal = UIImage.ellipsis?.withTintColor(R.color.iconColor()!,renderingMode: .alwaysOriginal).scaled(toWidth: 18)
         button.contentHorizontalAlignment = .right
         button.showsMenuAsPrimaryAction  = true
+        button.isSkeletonable = true
     }
     
     let certImgView = UIImageView()
@@ -99,14 +104,23 @@ class ProfileEducationItemCell: UITableViewCell {
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(imgView)
-        contentView.addSubview(schoolLabel)
-        contentView.addSubview(majorLabel)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(descLabel)
-        contentView.addSubview(moreButton)
-        contentView.addSubview(certImgView)
+        contentView.addSubview(shadowView)
+        shadowView.backgroundColor = .white
+        shadowView.addSubview(imgView)
+        shadowView.addSubview(schoolLabel)
+        shadowView.addSubview(majorLabel)
+        shadowView.addSubview(timeLabel)
+        shadowView.addSubview(descLabel)
+        shadowView.addSubview(moreButton)
+        shadowView.addSubview(certImgView)
         certImgView.contentMode = .left
+        
+        shadowView.isSkeletonable = true
+        imgView.isSkeletonable = true
+        certImgView.isSkeletonable = true
+        contentView.isSkeletonable = true
+        isSkeletonable = true
+        
         
     }
     
@@ -116,6 +130,13 @@ class ProfileEducationItemCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        
+        shadowView.shadow(cornerRadius: 8, color: .black.withAlphaComponent(0.2), offset: CGSize(width: 0, height: 5), radius: 10, opacity: 1)
+        
+        shadowView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview().inset(16)
+        }
         
         imgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
@@ -162,7 +183,7 @@ class ProfileEducationItemCell: UITableViewCell {
             make.left.equalTo(imgView.snp.right).offset(16)
             make.top.equalTo(timeLabel.snp.bottom).offset(2)
             make.right.equalToSuperview().inset(16)
-            make.bottom.greaterThanOrEqualToSuperview().inset(12)
+            make.bottom.greaterThanOrEqualToSuperview().inset(16)
         }
     }
 
