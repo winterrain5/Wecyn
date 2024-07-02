@@ -82,7 +82,7 @@ class EduExpViewController: BaseTableController {
                 Toast.showSuccess("successfully deleted")
                 let row = self.eduExperiences.firstIndex(of: model) ?? 0
                 let index = IndexPath(row: row, section: 0)
-                self.eduExperiences.removeAll(model)
+                self.eduExperiences.removeAll(where: { $0.id == model.id })
                 self.tableView?.deleteRows(at: [index], with: .none)
             } else {
                 Toast.showError($0.message)

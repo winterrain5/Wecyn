@@ -139,12 +139,12 @@ class ProfileController: BaseTableController {
                 if type == 1 {
                     let row = self.eduExperiences.firstIndex(of: model) ?? 0
                     let index = IndexPath(row: row, section: SectionType.Education.rawValue)
-                    self.eduExperiences.removeAll(model)
+                    self.eduExperiences.removeAll(where: { $0.id == model.id })
                     self.tableView?.deleteRows(at: [index], with: .none)
                 } else {
                     let row = self.workExperiences.firstIndex(of: model) ?? 0
                     let index = IndexPath(row: row, section: SectionType.Work.rawValue)
-                    self.workExperiences.removeAll(model)
+                    self.workExperiences.removeAll(where: { $0.id == model.id })
                     self.tableView?.deleteRows(at: [index], with: .none)
                 }
             } else {

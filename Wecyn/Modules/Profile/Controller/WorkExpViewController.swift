@@ -83,7 +83,7 @@ class WorkExpViewController: BaseTableController {
                 Toast.showSuccess("successfully deleted")
                 let row = self.workExperiences.firstIndex(of: model) ?? 0
                 let index = IndexPath(row: row, section: 0)
-                self.workExperiences.removeAll(model)
+                self.workExperiences.removeAll(where: { $0.id == model.id })
                 self.tableView?.deleteRows(at: [index], with: .none)
             } else {
                 Toast.showError($0.message)

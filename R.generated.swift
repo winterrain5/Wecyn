@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 257 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 273 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -313,6 +313,13 @@ struct _R {
       /// Locales: en
       var 不支持的消息类型: RswiftResources.StringResource { .init(key: "不支持的消息类型", tableName: "Localizable", source: source, developmentValue: "unsupported message type", comment: nil) }
 
+      /// en translation: Cannot send text message
+      ///
+      /// Key: 不能发送短信
+      ///
+      /// Locales: en
+      var 不能发送短信: RswiftResources.StringResource { .init(key: "不能发送短信", tableName: "Localizable", source: source, developmentValue: "Cannot send text message", comment: nil) }
+
       /// en translation: Communicate and collaborate with members
       ///
       /// Key: 与成员一起沟通协作
@@ -466,6 +473,20 @@ struct _R {
       ///
       /// Locales: en
       var 兴趣爱好: RswiftResources.StringResource { .init(key: "兴趣爱好", tableName: "Localizable", source: source, developmentValue: "Interests", comment: nil) }
+
+      /// en translation: Share
+      ///
+      /// Key: 分享
+      ///
+      /// Locales: en
+      var 分享: RswiftResources.StringResource { .init(key: "分享", tableName: "Localizable", source: source, developmentValue: "Share", comment: nil) }
+
+      /// en translation: SHARING
+      ///
+      /// Key: 分享名片
+      ///
+      /// Locales: en
+      var 分享名片: RswiftResources.StringResource { .init(key: "分享名片", tableName: "Localizable", source: source, developmentValue: "SHARING", comment: nil) }
 
       /// en translation: minutes
       ///
@@ -621,6 +642,13 @@ struct _R {
       /// Locales: en
       var 发送: RswiftResources.StringResource { .init(key: "发送", tableName: "Localizable", source: source, developmentValue: "Send", comment: nil) }
 
+      /// en translation: Send to
+      ///
+      /// Key: 发送给
+      ///
+      /// Locales: en
+      var 发送给: RswiftResources.StringResource { .init(key: "发送给", tableName: "Localizable", source: source, developmentValue: "Send to", comment: nil) }
+
       /// en translation: Cancel
       ///
       /// Key: 取消
@@ -705,6 +733,13 @@ struct _R {
       /// Locales: en
       var 女: RswiftResources.StringResource { .init(key: "女", tableName: "Localizable", source: source, developmentValue: "female", comment: nil) }
 
+      /// en translation: Name
+      ///
+      /// Key: 姓名
+      ///
+      /// Locales: en
+      var 姓名: RswiftResources.StringResource { .init(key: "姓名", tableName: "Localizable", source: source, developmentValue: "Name", comment: nil) }
+
       /// en translation: Locate the chat location
       ///
       /// Key: 定位到聊天位置
@@ -719,6 +754,13 @@ struct _R {
       /// Locales: en
       var 对方开启了朋友验证你还不是他她朋友请先发送朋友验证请求对方验证通过后才能聊天: RswiftResources.StringResource { .init(key: "对方开启了朋友验证，你还不是他（她）朋友，请先发送朋友验证请求，对方验证通过后才能聊天。", tableName: "Localizable", source: source, developmentValue: "The other party has turned on friend verification, and you are not his (her) friend yet, please send a friend verification request first, and the other party can only chat after the verification is passed.", comment: nil) }
 
+      /// en translation: Point your camera at the QR code.
+      ///
+      /// Key: 将相机对准二维码。
+      ///
+      /// Locales: en
+      var 将相机对准二维码: RswiftResources.StringResource { .init(key: "将相机对准二维码。", tableName: "Localizable", source: source, developmentValue: "Point your camera at the QR code.", comment: nil) }
+
       /// en translation: hours
       ///
       /// Key: 小时
@@ -732,6 +774,13 @@ struct _R {
       ///
       /// Locales: en
       var 屏蔽群消息: RswiftResources.StringResource { .init(key: "屏蔽群消息", tableName: "Localizable", source: source, developmentValue: "Not receive message any more", comment: nil) }
+
+      /// en translation: WORK CARD
+      ///
+      /// Key: 工作名片
+      ///
+      /// Locales: en
+      var 工作名片: RswiftResources.StringResource { .init(key: "工作名片", tableName: "Localizable", source: source, developmentValue: "WORK CARD", comment: nil) }
 
       /// en translation: Experience
       ///
@@ -880,12 +929,12 @@ struct _R {
       /// Locales: en
       var 我通过了您的好友验证请求现在我们可以开始聊天了: RswiftResources.StringResource { .init(key: "我通过了您的好友验证请求，现在我们可以开始聊天了", tableName: "Localizable", source: source, developmentValue: "I passed your friend verification request and now we can start chatting", comment: nil) }
 
-      /// en translation: phone number
+      /// en translation: Phone number
       ///
       /// Key: 手机号码
       ///
       /// Locales: en
-      var 手机号码: RswiftResources.StringResource { .init(key: "手机号码", tableName: "Localizable", source: source, developmentValue: "phone number", comment: nil) }
+      var 手机号码: RswiftResources.StringResource { .init(key: "手机号码", tableName: "Localizable", source: source, developmentValue: "Phone number", comment: nil) }
 
       /// en translation: phone on line
       ///
@@ -1419,6 +1468,13 @@ struct _R {
       /// Locales: en
       var 男: RswiftResources.StringResource { .init(key: "男", tableName: "Localizable", source: source, developmentValue: "male", comment: nil) }
 
+      /// en translation: Include a message(optional)
+      ///
+      /// Key: 留言（可选）
+      ///
+      /// Locales: en
+      var 留言可选: RswiftResources.StringResource { .init(key: "留言（可选）", tableName: "Localizable", source: source, developmentValue: "Include a message(optional)", comment: nil) }
+
       /// en translation: Logout
       ///
       /// Key: 登出
@@ -1432,6 +1488,34 @@ struct _R {
       ///
       /// Locales: en
       var 相册: RswiftResources.StringResource { .init(key: "相册", tableName: "Localizable", source: source, developmentValue: "Album", comment: nil) }
+
+      /// en translation: Send SMS Cancel
+      ///
+      /// Key: 短信发送取消
+      ///
+      /// Locales: en
+      var 短信发送取消: RswiftResources.StringResource { .init(key: "短信发送取消", tableName: "Localizable", source: source, developmentValue: "Send SMS Cancel", comment: nil) }
+
+      /// en translation: SMS failed to send
+      ///
+      /// Key: 短信发送失败
+      ///
+      /// Locales: en
+      var 短信发送失败: RswiftResources.StringResource { .init(key: "短信发送失败", tableName: "Localizable", source: source, developmentValue: "SMS failed to send", comment: nil) }
+
+      /// en translation: SMS saved
+      ///
+      /// Key: 短信已保存
+      ///
+      /// Locales: en
+      var 短信已保存: RswiftResources.StringResource { .init(key: "短信已保存", tableName: "Localizable", source: source, developmentValue: "SMS saved", comment: nil) }
+
+      /// en translation: SMS has been sent
+      ///
+      /// Key: 短信已发送
+      ///
+      /// Locales: en
+      var 短信已发送: RswiftResources.StringResource { .init(key: "短信已发送", tableName: "Localizable", source: source, developmentValue: "SMS has been sent", comment: nil) }
 
       /// en translation: Confirm
       ///
@@ -1832,12 +1916,12 @@ struct _R {
       /// Locales: en
       var 通知: RswiftResources.StringResource { .init(key: "通知", tableName: "Localizable", source: source, developmentValue: "Notification", comment: nil) }
 
-      /// en translation: Contact List
+      /// en translation: Contact
       ///
       /// Key: 通讯录
       ///
       /// Locales: en
-      var 通讯录: RswiftResources.StringResource { .init(key: "通讯录", tableName: "Localizable", source: source, developmentValue: "Contact List", comment: nil) }
+      var 通讯录: RswiftResources.StringResource { .init(key: "通讯录", tableName: "Localizable", source: source, developmentValue: "Contact", comment: nil) }
 
       /// en translation: Search and add by user ID number/mobile phone number/email/nickname
       ///
@@ -1853,12 +1937,40 @@ struct _R {
       /// Locales: en
       var 通过用户ID号搜索添加: RswiftResources.StringResource { .init(key: "通过用户ID号搜索添加", tableName: "Localizable", source: source, developmentValue: "Search and add an user by user ID number", comment: nil) }
 
+      /// en translation: Text your card
+      ///
+      /// Key: 通过短信发送
+      ///
+      /// Locales: en
+      var 通过短信发送: RswiftResources.StringResource { .init(key: "通过短信发送", tableName: "Localizable", source: source, developmentValue: "Text your card", comment: nil) }
+
+      /// en translation: Email your card
+      ///
+      /// Key: 通过邮箱发送
+      ///
+      /// Locales: en
+      var 通过邮箱发送: RswiftResources.StringResource { .init(key: "通过邮箱发送", tableName: "Localizable", source: source, developmentValue: "Email your card", comment: nil) }
+
       /// en translation: invited 
       ///
       /// Key: 邀请
       ///
       /// Locales: en
       var 邀请: RswiftResources.StringResource { .init(key: "邀请", tableName: "Localizable", source: source, developmentValue: "invited ", comment: nil) }
+
+      /// en translation: Email failed to send
+      ///
+      /// Key: 邮件发送失败
+      ///
+      /// Locales: en
+      var 邮件发送失败: RswiftResources.StringResource { .init(key: "邮件发送失败", tableName: "Localizable", source: source, developmentValue: "Email failed to send", comment: nil) }
+
+      /// en translation: Email has been sent
+      ///
+      /// Key: 邮件已发送
+      ///
+      /// Locales: en
+      var 邮件已发送: RswiftResources.StringResource { .init(key: "邮件已发送", tableName: "Localizable", source: source, developmentValue: "Email has been sent", comment: nil) }
 
       /// en translation: re-edit
       ///
@@ -1944,9 +2056,774 @@ struct _R {
     var unknownColor: RswiftResources.ColorResource { .init(name: "unknownColor", path: [], bundle: bundle) }
   }
 
-  /// This `_R.image` struct is generated, and contains static references to 131 images.
+  /// This `_R.image` struct is generated, and contains static references to 388 images.
   struct image {
     let bundle: Foundation.Bundle
+
+    /// Image `AC`.
+    var aC: RswiftResources.ImageResource { .init(name: "AC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AD`.
+    var aD: RswiftResources.ImageResource { .init(name: "AD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AE`.
+    var aE: RswiftResources.ImageResource { .init(name: "AE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AF`.
+    var aF: RswiftResources.ImageResource { .init(name: "AF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AG`.
+    var aG: RswiftResources.ImageResource { .init(name: "AG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AI`.
+    var aI: RswiftResources.ImageResource { .init(name: "AI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AL`.
+    var aL: RswiftResources.ImageResource { .init(name: "AL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AM`.
+    var aM: RswiftResources.ImageResource { .init(name: "AM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AN`.
+    var aN: RswiftResources.ImageResource { .init(name: "AN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AO`.
+    var aO: RswiftResources.ImageResource { .init(name: "AO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AQ`.
+    var aQ: RswiftResources.ImageResource { .init(name: "AQ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AR`.
+    var aR: RswiftResources.ImageResource { .init(name: "AR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AS`.
+    var aS: RswiftResources.ImageResource { .init(name: "AS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AT`.
+    var aT: RswiftResources.ImageResource { .init(name: "AT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AU`.
+    var aU: RswiftResources.ImageResource { .init(name: "AU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AW`.
+    var aW: RswiftResources.ImageResource { .init(name: "AW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AX`.
+    var aX: RswiftResources.ImageResource { .init(name: "AX", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `AZ`.
+    var aZ: RswiftResources.ImageResource { .init(name: "AZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BA`.
+    var bA: RswiftResources.ImageResource { .init(name: "BA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BB`.
+    var bB: RswiftResources.ImageResource { .init(name: "BB", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BD`.
+    var bD: RswiftResources.ImageResource { .init(name: "BD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BE`.
+    var bE: RswiftResources.ImageResource { .init(name: "BE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BF`.
+    var bF: RswiftResources.ImageResource { .init(name: "BF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BG`.
+    var bG: RswiftResources.ImageResource { .init(name: "BG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BH`.
+    var bH: RswiftResources.ImageResource { .init(name: "BH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BI`.
+    var bI: RswiftResources.ImageResource { .init(name: "BI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BJ`.
+    var bJ: RswiftResources.ImageResource { .init(name: "BJ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BL`.
+    var bL: RswiftResources.ImageResource { .init(name: "BL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BM`.
+    var bM: RswiftResources.ImageResource { .init(name: "BM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BN`.
+    var bN: RswiftResources.ImageResource { .init(name: "BN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BO`.
+    var bO: RswiftResources.ImageResource { .init(name: "BO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BQ`.
+    var bQ: RswiftResources.ImageResource { .init(name: "BQ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BR`.
+    var bR: RswiftResources.ImageResource { .init(name: "BR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BS`.
+    var bS: RswiftResources.ImageResource { .init(name: "BS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BT`.
+    var bT: RswiftResources.ImageResource { .init(name: "BT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BV`.
+    var bV: RswiftResources.ImageResource { .init(name: "BV", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BW`.
+    var bW: RswiftResources.ImageResource { .init(name: "BW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BY`.
+    var bY: RswiftResources.ImageResource { .init(name: "BY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `BZ`.
+    var bZ: RswiftResources.ImageResource { .init(name: "BZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CA`.
+    var cA: RswiftResources.ImageResource { .init(name: "CA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CC`.
+    var cC: RswiftResources.ImageResource { .init(name: "CC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CD`.
+    var cD: RswiftResources.ImageResource { .init(name: "CD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CF`.
+    var cF: RswiftResources.ImageResource { .init(name: "CF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CG`.
+    var cG: RswiftResources.ImageResource { .init(name: "CG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CH`.
+    var cH: RswiftResources.ImageResource { .init(name: "CH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CI`.
+    var cI: RswiftResources.ImageResource { .init(name: "CI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CK`.
+    var cK: RswiftResources.ImageResource { .init(name: "CK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CL`.
+    var cL: RswiftResources.ImageResource { .init(name: "CL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CM`.
+    var cM: RswiftResources.ImageResource { .init(name: "CM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CN`.
+    var cN: RswiftResources.ImageResource { .init(name: "CN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CO`.
+    var cO: RswiftResources.ImageResource { .init(name: "CO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CR`.
+    var cR: RswiftResources.ImageResource { .init(name: "CR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CU`.
+    var cU: RswiftResources.ImageResource { .init(name: "CU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CV`.
+    var cV: RswiftResources.ImageResource { .init(name: "CV", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CW`.
+    var cW: RswiftResources.ImageResource { .init(name: "CW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CX`.
+    var cX: RswiftResources.ImageResource { .init(name: "CX", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CY`.
+    var cY: RswiftResources.ImageResource { .init(name: "CY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `CZ`.
+    var cZ: RswiftResources.ImageResource { .init(name: "CZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `DE`.
+    var dE: RswiftResources.ImageResource { .init(name: "DE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `DJ`.
+    var dJ: RswiftResources.ImageResource { .init(name: "DJ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `DK`.
+    var dK: RswiftResources.ImageResource { .init(name: "DK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `DM`.
+    var dM: RswiftResources.ImageResource { .init(name: "DM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `DO`.
+    var dO: RswiftResources.ImageResource { .init(name: "DO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `DZ`.
+    var dZ: RswiftResources.ImageResource { .init(name: "DZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `EC`.
+    var eC: RswiftResources.ImageResource { .init(name: "EC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `EE`.
+    var eE: RswiftResources.ImageResource { .init(name: "EE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `EG`.
+    var eG: RswiftResources.ImageResource { .init(name: "EG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `EH`.
+    var eH: RswiftResources.ImageResource { .init(name: "EH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ER`.
+    var eR: RswiftResources.ImageResource { .init(name: "ER", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ES`.
+    var eS: RswiftResources.ImageResource { .init(name: "ES", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ET`.
+    var eT: RswiftResources.ImageResource { .init(name: "ET", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FI`.
+    var fI: RswiftResources.ImageResource { .init(name: "FI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FJ`.
+    var fJ: RswiftResources.ImageResource { .init(name: "FJ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FK`.
+    var fK: RswiftResources.ImageResource { .init(name: "FK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FM`.
+    var fM: RswiftResources.ImageResource { .init(name: "FM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FO`.
+    var fO: RswiftResources.ImageResource { .init(name: "FO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FR`.
+    var fR: RswiftResources.ImageResource { .init(name: "FR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `FX`.
+    var fX: RswiftResources.ImageResource { .init(name: "FX", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GA`.
+    var gA: RswiftResources.ImageResource { .init(name: "GA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GB`.
+    var gB: RswiftResources.ImageResource { .init(name: "GB", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GD`.
+    var gD: RswiftResources.ImageResource { .init(name: "GD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GE`.
+    var gE: RswiftResources.ImageResource { .init(name: "GE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GF`.
+    var gF: RswiftResources.ImageResource { .init(name: "GF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GG`.
+    var gG: RswiftResources.ImageResource { .init(name: "GG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GH`.
+    var gH: RswiftResources.ImageResource { .init(name: "GH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GI`.
+    var gI: RswiftResources.ImageResource { .init(name: "GI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GL`.
+    var gL: RswiftResources.ImageResource { .init(name: "GL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GM`.
+    var gM: RswiftResources.ImageResource { .init(name: "GM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GN`.
+    var gN: RswiftResources.ImageResource { .init(name: "GN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GP`.
+    var gP: RswiftResources.ImageResource { .init(name: "GP", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GQ`.
+    var gQ: RswiftResources.ImageResource { .init(name: "GQ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GR`.
+    var gR: RswiftResources.ImageResource { .init(name: "GR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GS`.
+    var gS: RswiftResources.ImageResource { .init(name: "GS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GT`.
+    var gT: RswiftResources.ImageResource { .init(name: "GT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GU`.
+    var gU: RswiftResources.ImageResource { .init(name: "GU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GW`.
+    var gW: RswiftResources.ImageResource { .init(name: "GW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `GY`.
+    var gY: RswiftResources.ImageResource { .init(name: "GY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `HK`.
+    var hK: RswiftResources.ImageResource { .init(name: "HK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `HM`.
+    var hM: RswiftResources.ImageResource { .init(name: "HM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `HN`.
+    var hN: RswiftResources.ImageResource { .init(name: "HN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `HR`.
+    var hR: RswiftResources.ImageResource { .init(name: "HR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `HT`.
+    var hT: RswiftResources.ImageResource { .init(name: "HT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `HU`.
+    var hU: RswiftResources.ImageResource { .init(name: "HU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ID`.
+    var iD: RswiftResources.ImageResource { .init(name: "ID", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IE`.
+    var iE: RswiftResources.ImageResource { .init(name: "IE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IL`.
+    var iL: RswiftResources.ImageResource { .init(name: "IL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IM`.
+    var iM: RswiftResources.ImageResource { .init(name: "IM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IN`.
+    var iN: RswiftResources.ImageResource { .init(name: "IN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IO`.
+    var iO: RswiftResources.ImageResource { .init(name: "IO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IQ`.
+    var iQ: RswiftResources.ImageResource { .init(name: "IQ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IR`.
+    var iR: RswiftResources.ImageResource { .init(name: "IR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IS`.
+    var iS: RswiftResources.ImageResource { .init(name: "IS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `IT`.
+    var iT: RswiftResources.ImageResource { .init(name: "IT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `JE`.
+    var jE: RswiftResources.ImageResource { .init(name: "JE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `JM`.
+    var jM: RswiftResources.ImageResource { .init(name: "JM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `JO`.
+    var jO: RswiftResources.ImageResource { .init(name: "JO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `JP`.
+    var jP: RswiftResources.ImageResource { .init(name: "JP", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KE`.
+    var kE: RswiftResources.ImageResource { .init(name: "KE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KG`.
+    var kG: RswiftResources.ImageResource { .init(name: "KG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KH`.
+    var kH: RswiftResources.ImageResource { .init(name: "KH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KI`.
+    var kI: RswiftResources.ImageResource { .init(name: "KI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KM`.
+    var kM: RswiftResources.ImageResource { .init(name: "KM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KN`.
+    var kN: RswiftResources.ImageResource { .init(name: "KN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KP`.
+    var kP: RswiftResources.ImageResource { .init(name: "KP", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KR`.
+    var kR: RswiftResources.ImageResource { .init(name: "KR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KW`.
+    var kW: RswiftResources.ImageResource { .init(name: "KW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KY`.
+    var kY: RswiftResources.ImageResource { .init(name: "KY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `KZ`.
+    var kZ: RswiftResources.ImageResource { .init(name: "KZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LA`.
+    var lA: RswiftResources.ImageResource { .init(name: "LA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LB`.
+    var lB: RswiftResources.ImageResource { .init(name: "LB", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LC`.
+    var lC: RswiftResources.ImageResource { .init(name: "LC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LI`.
+    var lI: RswiftResources.ImageResource { .init(name: "LI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LK`.
+    var lK: RswiftResources.ImageResource { .init(name: "LK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LR`.
+    var lR: RswiftResources.ImageResource { .init(name: "LR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LS`.
+    var lS: RswiftResources.ImageResource { .init(name: "LS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LT`.
+    var lT: RswiftResources.ImageResource { .init(name: "LT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LU`.
+    var lU: RswiftResources.ImageResource { .init(name: "LU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LV`.
+    var lV: RswiftResources.ImageResource { .init(name: "LV", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `LY`.
+    var lY: RswiftResources.ImageResource { .init(name: "LY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MA`.
+    var mA: RswiftResources.ImageResource { .init(name: "MA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MC`.
+    var mC: RswiftResources.ImageResource { .init(name: "MC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MD`.
+    var mD: RswiftResources.ImageResource { .init(name: "MD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ME`.
+    var mE: RswiftResources.ImageResource { .init(name: "ME", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MF`.
+    var mF: RswiftResources.ImageResource { .init(name: "MF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MG`.
+    var mG: RswiftResources.ImageResource { .init(name: "MG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MH`.
+    var mH: RswiftResources.ImageResource { .init(name: "MH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MK`.
+    var mK: RswiftResources.ImageResource { .init(name: "MK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ML`.
+    var mL: RswiftResources.ImageResource { .init(name: "ML", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MM`.
+    var mM: RswiftResources.ImageResource { .init(name: "MM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MN`.
+    var mN: RswiftResources.ImageResource { .init(name: "MN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MO`.
+    var mO: RswiftResources.ImageResource { .init(name: "MO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MP`.
+    var mP: RswiftResources.ImageResource { .init(name: "MP", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MQ`.
+    var mQ: RswiftResources.ImageResource { .init(name: "MQ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MR`.
+    var mR: RswiftResources.ImageResource { .init(name: "MR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MS`.
+    var mS: RswiftResources.ImageResource { .init(name: "MS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MT`.
+    var mT: RswiftResources.ImageResource { .init(name: "MT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MU`.
+    var mU: RswiftResources.ImageResource { .init(name: "MU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MV`.
+    var mV: RswiftResources.ImageResource { .init(name: "MV", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MW`.
+    var mW: RswiftResources.ImageResource { .init(name: "MW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MX`.
+    var mX: RswiftResources.ImageResource { .init(name: "MX", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MY`.
+    var mY: RswiftResources.ImageResource { .init(name: "MY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `MZ`.
+    var mZ: RswiftResources.ImageResource { .init(name: "MZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NA`.
+    var nA: RswiftResources.ImageResource { .init(name: "NA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NC`.
+    var nC: RswiftResources.ImageResource { .init(name: "NC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NE`.
+    var nE: RswiftResources.ImageResource { .init(name: "NE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NF`.
+    var nF: RswiftResources.ImageResource { .init(name: "NF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NG`.
+    var nG: RswiftResources.ImageResource { .init(name: "NG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NI`.
+    var nI: RswiftResources.ImageResource { .init(name: "NI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NL`.
+    var nL: RswiftResources.ImageResource { .init(name: "NL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NO`.
+    var nO: RswiftResources.ImageResource { .init(name: "NO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NP`.
+    var nP: RswiftResources.ImageResource { .init(name: "NP", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NR`.
+    var nR: RswiftResources.ImageResource { .init(name: "NR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NU`.
+    var nU: RswiftResources.ImageResource { .init(name: "NU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `NZ`.
+    var nZ: RswiftResources.ImageResource { .init(name: "NZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `OM`.
+    var oM: RswiftResources.ImageResource { .init(name: "OM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PA`.
+    var pA: RswiftResources.ImageResource { .init(name: "PA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PE`.
+    var pE: RswiftResources.ImageResource { .init(name: "PE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PF`.
+    var pF: RswiftResources.ImageResource { .init(name: "PF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PG`.
+    var pG: RswiftResources.ImageResource { .init(name: "PG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PH`.
+    var pH: RswiftResources.ImageResource { .init(name: "PH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PK`.
+    var pK: RswiftResources.ImageResource { .init(name: "PK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PL`.
+    var pL: RswiftResources.ImageResource { .init(name: "PL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PM`.
+    var pM: RswiftResources.ImageResource { .init(name: "PM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PN`.
+    var pN: RswiftResources.ImageResource { .init(name: "PN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PR`.
+    var pR: RswiftResources.ImageResource { .init(name: "PR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PS`.
+    var pS: RswiftResources.ImageResource { .init(name: "PS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PT`.
+    var pT: RswiftResources.ImageResource { .init(name: "PT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PW`.
+    var pW: RswiftResources.ImageResource { .init(name: "PW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `PY`.
+    var pY: RswiftResources.ImageResource { .init(name: "PY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `QA`.
+    var qA: RswiftResources.ImageResource { .init(name: "QA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `R2`.
+    var r2: RswiftResources.ImageResource { .init(name: "R2", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `RE`.
+    var rE: RswiftResources.ImageResource { .init(name: "RE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `RO`.
+    var rO: RswiftResources.ImageResource { .init(name: "RO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `RS`.
+    var rS: RswiftResources.ImageResource { .init(name: "RS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `RU`.
+    var rU: RswiftResources.ImageResource { .init(name: "RU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `RW`.
+    var rW: RswiftResources.ImageResource { .init(name: "RW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SA`.
+    var sA: RswiftResources.ImageResource { .init(name: "SA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SB`.
+    var sB: RswiftResources.ImageResource { .init(name: "SB", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SC`.
+    var sC: RswiftResources.ImageResource { .init(name: "SC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SD`.
+    var sD: RswiftResources.ImageResource { .init(name: "SD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SE`.
+    var sE: RswiftResources.ImageResource { .init(name: "SE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SG`.
+    var sG: RswiftResources.ImageResource { .init(name: "SG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SH`.
+    var sH: RswiftResources.ImageResource { .init(name: "SH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SI`.
+    var sI: RswiftResources.ImageResource { .init(name: "SI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SJ`.
+    var sJ: RswiftResources.ImageResource { .init(name: "SJ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SK`.
+    var sK: RswiftResources.ImageResource { .init(name: "SK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SL`.
+    var sL: RswiftResources.ImageResource { .init(name: "SL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SM`.
+    var sM: RswiftResources.ImageResource { .init(name: "SM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SN`.
+    var sN: RswiftResources.ImageResource { .init(name: "SN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SO`.
+    var sO: RswiftResources.ImageResource { .init(name: "SO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SR`.
+    var sR: RswiftResources.ImageResource { .init(name: "SR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SS`.
+    var sS: RswiftResources.ImageResource { .init(name: "SS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ST`.
+    var sT: RswiftResources.ImageResource { .init(name: "ST", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SV`.
+    var sV: RswiftResources.ImageResource { .init(name: "SV", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SX`.
+    var sX: RswiftResources.ImageResource { .init(name: "SX", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SY`.
+    var sY: RswiftResources.ImageResource { .init(name: "SY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `SZ`.
+    var sZ: RswiftResources.ImageResource { .init(name: "SZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TC`.
+    var tC: RswiftResources.ImageResource { .init(name: "TC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TD`.
+    var tD: RswiftResources.ImageResource { .init(name: "TD", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TF`.
+    var tF: RswiftResources.ImageResource { .init(name: "TF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TG`.
+    var tG: RswiftResources.ImageResource { .init(name: "TG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TH`.
+    var tH: RswiftResources.ImageResource { .init(name: "TH", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TJ`.
+    var tJ: RswiftResources.ImageResource { .init(name: "TJ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TK`.
+    var tK: RswiftResources.ImageResource { .init(name: "TK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TL`.
+    var tL: RswiftResources.ImageResource { .init(name: "TL", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TM`.
+    var tM: RswiftResources.ImageResource { .init(name: "TM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TN`.
+    var tN: RswiftResources.ImageResource { .init(name: "TN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TO`.
+    var tO: RswiftResources.ImageResource { .init(name: "TO", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TR`.
+    var tR: RswiftResources.ImageResource { .init(name: "TR", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TT`.
+    var tT: RswiftResources.ImageResource { .init(name: "TT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TV`.
+    var tV: RswiftResources.ImageResource { .init(name: "TV", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TW`.
+    var tW: RswiftResources.ImageResource { .init(name: "TW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `TZ`.
+    var tZ: RswiftResources.ImageResource { .init(name: "TZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `UA`.
+    var uA: RswiftResources.ImageResource { .init(name: "UA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `UG`.
+    var uG: RswiftResources.ImageResource { .init(name: "UG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `UM`.
+    var uM: RswiftResources.ImageResource { .init(name: "UM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `US`.
+    var uS: RswiftResources.ImageResource { .init(name: "US", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `UY`.
+    var uY: RswiftResources.ImageResource { .init(name: "UY", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `UZ`.
+    var uZ: RswiftResources.ImageResource { .init(name: "UZ", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VA`.
+    var vA: RswiftResources.ImageResource { .init(name: "VA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VC`.
+    var vC: RswiftResources.ImageResource { .init(name: "VC", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VE`.
+    var vE: RswiftResources.ImageResource { .init(name: "VE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VG`.
+    var vG: RswiftResources.ImageResource { .init(name: "VG", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VI`.
+    var vI: RswiftResources.ImageResource { .init(name: "VI", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VN`.
+    var vN: RswiftResources.ImageResource { .init(name: "VN", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `VU`.
+    var vU: RswiftResources.ImageResource { .init(name: "VU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `WF`.
+    var wF: RswiftResources.ImageResource { .init(name: "WF", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `WS`.
+    var wS: RswiftResources.ImageResource { .init(name: "WS", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `XK`.
+    var xK: RswiftResources.ImageResource { .init(name: "XK", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `YE`.
+    var yE: RswiftResources.ImageResource { .init(name: "YE", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `YT`.
+    var yT: RswiftResources.ImageResource { .init(name: "YT", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `YU`.
+    var yU: RswiftResources.ImageResource { .init(name: "YU", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ZA`.
+    var zA: RswiftResources.ImageResource { .init(name: "ZA", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ZM`.
+    var zM: RswiftResources.ImageResource { .init(name: "ZM", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `ZW`.
+    var zW: RswiftResources.ImageResource { .init(name: "ZW", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `alarm`.
     var alarm: RswiftResources.ImageResource { .init(name: "alarm", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -1959,6 +2836,9 @@ struct _R {
 
     /// Image `arrow.up.message`.
     var arrowUpMessage: RswiftResources.ImageResource { .init(name: "arrow.up.message", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `arrowtriangle.down.fill`.
+    var arrowtriangleDownFill: RswiftResources.ImageResource { .init(name: "arrowtriangle.down.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `attendace_delete`.
     var attendace_delete: RswiftResources.ImageResource { .init(name: "attendace_delete", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2172,6 +3052,9 @@ struct _R {
 
     /// Image `person.badge.plus`.
     var personBadgePlus: RswiftResources.ImageResource { .init(name: "person.badge.plus", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
+
+    /// Image `person.crop.square.fill`.
+    var personCropSquareFill: RswiftResources.ImageResource { .init(name: "person.crop.square.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
 
     /// Image `person.fill`.
     var personFill: RswiftResources.ImageResource { .init(name: "person.fill", path: [], bundle: bundle, locale: nil, onDemandResourceTags: nil) }
@@ -2394,7 +3277,7 @@ struct _R {
     var rruleJs: RswiftResources.FileResource { .init(name: "rrule", pathExtension: "js", bundle: bundle, locale: LocaleReference.none) }
   }
 
-  /// This `_R.nib` struct is generated, and contains static references to 34 nibs.
+  /// This `_R.nib` struct is generated, and contains static references to 35 nibs.
   struct nib {
     let bundle: Foundation.Bundle
 
@@ -2436,6 +3319,9 @@ struct _R {
 
     /// Nib `AdminStaffItemCell`.
     var adminStaffItemCell: RswiftResources.NibReference<AdminStaffItemCell> { .init(name: "AdminStaffItemCell", bundle: bundle) }
+
+    /// Nib `BusinessCardCell`.
+    var businessCardCell: RswiftResources.NibReference<BusinessCardCell> { .init(name: "BusinessCardCell", bundle: bundle) }
 
     /// Nib `CaledarItemCell`.
     var caledarItemCell: RswiftResources.NibReference<CaledarItemCell> { .init(name: "CaledarItemCell", bundle: bundle) }
@@ -2546,6 +3432,10 @@ struct _R {
       if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor33", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor33' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor77", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor77' is used in nib 'AdminStaffItemCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "BackgroundColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'BackgroundColor' is used in nib 'BusinessCardCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor22", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor22' is used in nib 'BusinessCardCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TextColor66", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor66' is used in nib 'BusinessCardCell', but couldn't be loaded.") }
+      if UIKit.UIColor(named: "TheamColor", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TheamColor' is used in nib 'BusinessCardCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "person.fill.checkmark", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'person.fill.checkmark' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIImage(named: "repeat", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Image named 'repeat' is used in nib 'CaledarItemCell', but couldn't be loaded.") }
       if UIKit.UIColor(named: "TextColor52", in: bundle, compatibleWith: nil) == nil { throw RswiftResources.ValidationError("[R.swift] Color named 'TextColor52' is used in nib 'CaledarItemCell', but couldn't be loaded.") }

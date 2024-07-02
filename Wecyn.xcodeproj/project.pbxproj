@@ -193,6 +193,8 @@
 		458970602A7794EA00344B93 /* Asyncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589705F2A7794EA00344B93 /* Asyncs.swift */; };
 		458970622A78DAA100344B93 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970612A78DAA100344B93 /* IMService.swift */; };
 		458970642A7CDABA00344B93 /* LanguageSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458970632A7CDAB900344B93 /* LanguageSettingController.swift */; };
+		458F570C2C2E49FC00966153 /* BusinessCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F570A2C2E49FC00966153 /* BusinessCardCell.swift */; };
+		458F570D2C2E49FC00966153 /* BusinessCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 458F570B2C2E49FC00966153 /* BusinessCardCell.xib */; };
 		4591B1352C09773B0056DADA /* NotificationTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591B1342C09773B0056DADA /* NotificationTypeController.swift */; };
 		45920AC92A26E045005871ED /* Cacheable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7B2A26E045005871ED /* Cacheable+Extension.swift */; };
 		45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45920A7C2A26E045005871ED /* ObservableType+HandyJson.swift */; };
@@ -337,6 +339,10 @@
 		45DC86642BD5F13E00CC32CB /* AipOcrSdk.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DC865C2BD5F07400CC32CB /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45DC86652BD5F13E00CC32CB /* IdcardQuality.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DC865D2BD5F07400CC32CB /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45DC86672BD5F17300CC32CB /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 45DC86662BD5F17200CC32CB /* aip.license */; };
+		45DE087E2C2E9B070060E7D6 /* BusinessCardShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DE087D2C2E9B070060E7D6 /* BusinessCardShareController.swift */; };
+		45DE08802C2E9C4B0060E7D6 /* BusinessCardShareByQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DE087F2C2E9C4B0060E7D6 /* BusinessCardShareByQRCodeView.swift */; };
+		45DE08822C2EA0100060E7D6 /* BusinessCardShareByEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DE08812C2EA0100060E7D6 /* BusinessCardShareByEmailView.swift */; };
+		45DE08842C2EA01D0060E7D6 /* BusinessCardShareByMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DE08832C2EA01D0060E7D6 /* BusinessCardShareByMessageView.swift */; };
 		45E765B22A31A97F00BF6EEC /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B12A31A97F00BF6EEC /* ProfileController.swift */; };
 		45E765B52A31A99400BF6EEC /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B42A31A99400BF6EEC /* SettingController.swift */; };
 		45E765B82A31A9EE00BF6EEC /* ConnectionUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E765B72A31A9EE00BF6EEC /* ConnectionUsersController.swift */; };
@@ -603,6 +609,8 @@
 		4589705F2A7794EA00344B93 /* Asyncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asyncs.swift; sourceTree = "<group>"; };
 		458970612A78DAA100344B93 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		458970632A7CDAB900344B93 /* LanguageSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingController.swift; sourceTree = "<group>"; };
+		458F570A2C2E49FC00966153 /* BusinessCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardCell.swift; sourceTree = "<group>"; };
+		458F570B2C2E49FC00966153 /* BusinessCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessCardCell.xib; sourceTree = "<group>"; };
 		4591B1342C09773B0056DADA /* NotificationTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTypeController.swift; sourceTree = "<group>"; };
 		459209CC2A26D5F4005871ED /* Wecyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wecyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45920A7B2A26E045005871ED /* Cacheable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cacheable+Extension.swift"; sourceTree = "<group>"; };
@@ -749,6 +757,10 @@
 		45DC865C2BD5F07400CC32CB /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		45DC865D2BD5F07400CC32CB /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
 		45DC86662BD5F17200CC32CB /* aip.license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aip.license; sourceTree = "<group>"; };
+		45DE087D2C2E9B070060E7D6 /* BusinessCardShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardShareController.swift; sourceTree = "<group>"; };
+		45DE087F2C2E9C4B0060E7D6 /* BusinessCardShareByQRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardShareByQRCodeView.swift; sourceTree = "<group>"; };
+		45DE08812C2EA0100060E7D6 /* BusinessCardShareByEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardShareByEmailView.swift; sourceTree = "<group>"; };
+		45DE08832C2EA01D0060E7D6 /* BusinessCardShareByMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardShareByMessageView.swift; sourceTree = "<group>"; };
 		45E765B12A31A97F00BF6EEC /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		45E765B42A31A99400BF6EEC /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		45E765B72A31A9EE00BF6EEC /* ConnectionUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionUsersController.swift; sourceTree = "<group>"; };
@@ -980,6 +992,11 @@
 			children = (
 				450F6CDD2A70AE6E0001AA1B /* NFCNameCardView.swift */,
 				45C781F02A9858FE00D4E721 /* NFCNameCardEditHeadView.swift */,
+				458F570A2C2E49FC00966153 /* BusinessCardCell.swift */,
+				458F570B2C2E49FC00966153 /* BusinessCardCell.xib */,
+				45DE087F2C2E9C4B0060E7D6 /* BusinessCardShareByQRCodeView.swift */,
+				45DE08812C2EA0100060E7D6 /* BusinessCardShareByEmailView.swift */,
+				45DE08832C2EA01D0060E7D6 /* BusinessCardShareByMessageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1830,6 +1847,7 @@
 				450F6CDF2A70AE8B0001AA1B /* NFCNameCardController.swift */,
 				45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */,
 				45E94A092C2D3497009D4221 /* BusinessCardController.swift */,
+				45DE087D2C2E9B070060E7D6 /* BusinessCardShareController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2045,6 +2063,8 @@
 				"zh-Hans",
 			);
 			mainGroup = 459209C32A26D5F4005871ED;
+			packageReferences = (
+			);
 			productRefGroup = 459209CD2A26D5F4005871ED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2069,6 +2089,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				454BA3842B8D72FE006B47BA /* NotificationCell.xib in Resources */,
+				458F570D2C2E49FC00966153 /* BusinessCardCell.xib in Resources */,
 				450BA6DF2A330B8400764828 /* RegistProfileView.xib in Resources */,
 				45A0E6252AB841FF003C5153 /* PostCommentCell.xib in Resources */,
 				456BB04D2B4D38F400BB7838 /* AdminAddRoomContainer.xib in Resources */,
@@ -2229,6 +2250,7 @@
 				457C509D2A38648300FCE8D0 /* CountryModel.swift in Sources */,
 				4513AD802BC28FA100A360B2 /* FileMessageCell.swift in Sources */,
 				45920AFA2A26E045005871ED /* BaseViewController.swift in Sources */,
+				45DE08822C2EA0100060E7D6 /* BusinessCardShareByEmailView.swift in Sources */,
 				45D591BA2BB4031100B6E673 /* ChatUserSettingController.swift in Sources */,
 				450BA6D52A32F05B00764828 /* RegistInfoController.swift in Sources */,
 				45A10A492A31B02500726B66 /* ProfileHeaderView.swift in Sources */,
@@ -2248,6 +2270,7 @@
 				45381DF52BBA9551007EE954 /* PhotoHelper.swift in Sources */,
 				4513F61A2BAD54420080756F /* ChatVC_InputBarAccessoryViewDelegate.swift in Sources */,
 				45A0E6312ABB06B6003C5153 /* PostCommentReplyController.swift in Sources */,
+				458F570C2C2E49FC00966153 /* BusinessCardCell.swift in Sources */,
 				45D0AF982B31A4F800C6FAFA /* MMNodeView.swift in Sources */,
 				456BB0532B4E92CE00BB7838 /* AdminEditStaffExpContainer.swift in Sources */,
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
@@ -2407,6 +2430,7 @@
 				45F07C362BB2763F0070813D /* DataProviderDelegate.swift in Sources */,
 				45A7E5A32A7212040002014D /* MapViewController.swift in Sources */,
 				45920AF02A26E045005871ED /* TapticEngine.swift in Sources */,
+				45DE08802C2E9C4B0060E7D6 /* BusinessCardShareByQRCodeView.swift in Sources */,
 				4513F6122BAD53CF0080756F /* ChatVC_MessagesLayoutDelegate.swift in Sources */,
 				45920AE52A26E045005871ED /* Toast.swift in Sources */,
 				45B643E02A84863300C79D13 /* EmailCcAddController.swift in Sources */,
@@ -2465,12 +2489,14 @@
 				450F6CC12A613AFC0001AA1B /* RecurrenceFrequency.swift in Sources */,
 				45ACB2032BC7BE6B00CEC091 /* RevokeMessageCell.swift in Sources */,
 				45ADB28F2A3FF00E00745F6F /* UserApi.swift in Sources */,
+				45DE087E2C2E9B070060E7D6 /* BusinessCardShareController.swift in Sources */,
 				45E85B262A3B0A4200B820CD /* CaledarItemCell.swift in Sources */,
 				458870EA2AE7BE8400029353 /* ProfileAddEduExperienceController.swift in Sources */,
 				45920AE12A26E045005871ED /* Permission+Extension.swift in Sources */,
 				4549ECEC2AB40AF900EB9C4C /* UIMenuExtension.swift in Sources */,
 				45005C4E2A53B67D00560E21 /* EventSetAssistantsController.swift in Sources */,
 				45920ACA2A26E045005871ED /* ObservableType+HandyJson.swift in Sources */,
+				45DE08842C2EA01D0060E7D6 /* BusinessCardShareByMessageView.swift in Sources */,
 				4549ECF02AB45B4400EB9C4C /* PostCommentToolBarView.swift in Sources */,
 				45EBFAC52BD7876D00ABBCD2 /* PostMessageCell.swift in Sources */,
 				450B6C882A380CC9008B0C4A /* JobSavedController.swift in Sources */,

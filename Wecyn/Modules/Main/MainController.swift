@@ -31,7 +31,7 @@ class MainController: UITabBarController {
         let connection = BaseNavigationController(rootViewController: ConnectionController())
         let calendar = BaseNavigationController(rootViewController: CalendarEventController())
         let profile = BaseNavigationController(rootViewController: ProfileViewController())
-        let cards = BaseNavigationController(rootViewController: NFCNameCardController())
+        let cards = BaseNavigationController(rootViewController: BusinessCardController())
         let admin = BaseNavigationController(rootViewController: AdminController())
         func selectedImage(_ image: UIImage?) -> UIImage? {
             image?.withTintColor(R.color.theamColor()!).withRenderingMode(.alwaysOriginal)

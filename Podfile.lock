@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.7.1)
+  - AnimatedCollectionViewLayout (1.1.0)
   - AnyImageKit (0.16.0):
     - AnyImageKit/Capture (= 0.16.0)
     - AnyImageKit/Core (= 0.16.0)
@@ -77,6 +78,7 @@ PODS:
     - InputBarAccessoryView (~> 5.5.0)
   - MJExtension (3.4.2)
   - MJRefresh (3.7.5)
+  - MMBAlertsPickers (1.1.93)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (14.0.0):
@@ -204,6 +206,7 @@ PODS:
   - ZLPhotoBrowser/Core (4.3.0)
 
 DEPENDENCIES:
+  - AnimatedCollectionViewLayout
   - AnyImageKit
   - BadgeControl
   - Cache (~> 6.0.0)
@@ -234,6 +237,7 @@ DEPENDENCIES:
   - MenuItemKit
   - MessageKit
   - MJRefresh
+  - MMBAlertsPickers
   - NFCReaderWriter
   - OpenIMSDK
   - ParallaxHeader
@@ -272,6 +276,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AnimatedCollectionViewLayout
     - AnyImageKit
     - BadgeControl
     - Cache
@@ -304,6 +309,7 @@ SPEC REPOS:
     - MessageKit
     - MJExtension
     - MJRefresh
+    - MMBAlertsPickers
     - Moya
     - NFCReaderWriter
     - OpenIMSDK
@@ -349,6 +355,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  AnimatedCollectionViewLayout: 0c1a38c4be115c525c887be183fc91ef65737c5d
   AnyImageKit: 5f30ce2cad2ffa9162c3e6d827ccb3a280553640
   BadgeControl: 67036e7f586930bba15084dbf89ebce7aa2f2bc2
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
@@ -381,6 +388,7 @@ SPEC CHECKSUMS:
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
   MJExtension: e97d164cb411aa9795cf576093a1fa208b4a8dd8
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  MMBAlertsPickers: d52d288114c7dad4e4f1282fb2b1f1189ccc117a
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NFCReaderWriter: b21965d1b3b8c53f7648f58f597b77a13f6ecdc5
   OpenIMSDK: 9050804353c52289d4eb02f4c69c19028c30849d
@@ -416,6 +424,6 @@ SPEC CHECKSUMS:
   WordPress-Editor-iOS: 9eb9f12f21a5209cb837908d81ffe1e31cb27345
   ZLPhotoBrowser: 7c5c3ea5e42428d26dc74a52fe821aa2a9274fa3
 
-PODFILE CHECKSUM: 64e603027f06af2045c69bc30755bf9c1ebf8e9f
+PODFILE CHECKSUM: 704c322519452640df619fbdde6fd78c3f69b8fd
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.2

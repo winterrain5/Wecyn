@@ -86,12 +86,13 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigation.bar.alpha = 0
         self.view.isSkeletonable = true
     }
     
     func addBarItem() {
         
-        self.navigation.bar.alpha = 0
+      
         
         let scan = UIButton()
         scan.imageForNormal = R.image.viewfinderCircleFill()
@@ -122,6 +123,7 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         let editButton = UIButton()
         let editItem = UIBarButtonItem(customView: editButton)
         editButton.rx.tap.subscribe(onNext:{ [weak self] in
+            Haptico.selection()
             let vc = NFCNameCardEditController()
             self?.navigationController?.pushViewController(vc)
             vc.updateComplete = {
@@ -135,31 +137,11 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
         let shareButton = UIButton()
         let shareItem = UIBarButtonItem(customView: shareButton)
         shareButton.imageForNormal = R.image.squareAndArrowUpCircleFill()
-        shareButton.showsMenuAsPrimaryAction = true
-        let action1 = UIAction(title:"Share url with others") { _ in
-            let uuid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.uuid ?? ""
-            let shareURLString = APIHost.share.WebpageUrl + "/card/\(uuid)"
-            guard let url = URL(string: shareURLString) else {
-                return
-            }
-            
-            let vc = VisualActivityViewController(url: url)
-            vc.previewLinkColor = .magenta
-            self.present(vc, animated: true)
-        }
-        let action2 = UIAction(title:"Share QR code") { _ in
-            let uuid = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.uuid ?? ""
-            let shareURLString = APIHost.share.WebpageUrl + "/card/\(uuid)"
-            guard let image = UIImage.sk.QRImage(with: shareURLString, size: CGSize(width: 120, height: 120), logoSize: nil) else {
-                return
-            }
-            let vc = VisualActivityViewController(image: image)
-            vc.previewImageSideLength = 40
-            self.present(vc, animated: true)
-        }
-        let menuItems = [action1,action2]
-        let menu = UIMenu(children: menuItems)
-        shareButton.menu = menu
+        shareButton.rx.tap.subscribe(onNext:{
+            Haptico.selection()
+            let vc = BusinessCardShareController()
+            UIViewController.sk.getTopVC()?.present(vc, animated: true)
+        }).disposed(by: rx.disposeBag)
         
         let fixItem2 = UIBarButtonItem.fixedSpace(width: 22)
         
@@ -319,6 +301,8 @@ class NFCNameCardController: BaseTableController,SFSafariViewControllerDelegate,
                 let vc = MFMailComposeViewController()
                 vc.mailComposeDelegate = self
                 vc.setToRecipients([data.value])//  接收邮件的邮箱
+                let email = UserDefaults.sk.get(of: UserInfoModel.self, for: UserInfoModel.className)?.email ?? ""
+                vc.setPreferredSendingEmailAddress(email)
                 vc.setSubject("")
                 vc.setMessageBody("", isHTML: false)
                 self.present(vc, animated: true)
