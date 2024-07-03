@@ -67,6 +67,10 @@ class ProfileViewController: BaseTableController {
         tableView?.isSkeletonable = true
         
         tableView?.tableHeaderView = headView
+        headView.rx.tapGesture().when(.recognized).subscribe(onNext:{ [weak self] _ in
+                let vc = NFCNameCardController()
+            self?.navigationController?.pushViewController(vc)
+        }).disposed(by: rx.disposeBag)
         headView.size = CGSize(width: kScreenWidth, height: 232)
         
         tableView?.backgroundColor = R.color.backgroundColor()

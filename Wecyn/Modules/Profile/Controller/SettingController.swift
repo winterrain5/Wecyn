@@ -16,6 +16,7 @@ enum SettingType {
     case Notification
     case Account
     case TimeZone
+    case Haptico
 }
 class SettingModel {
     
@@ -26,6 +27,7 @@ class SettingModel {
         self.title = title
         self.detail = detail
         self.type = type
+        
     }
 }
 
@@ -63,16 +65,19 @@ class SettingController: BaseTableController {
         let language = SettingModel(title: "语言".innerLocalized(), type: .Language,detail: getCurrentLanguage())
         let colorRemark = SettingModel(title: "颜色备注".innerLocalized(), type: .ColorRemark)
         let timezone = SettingModel(title: "时区".innerLocalized(), type: .TimeZone,detail: getTimezone())
-        datas.append([notification,language,colorRemark,timezone])
+        let haptico = SettingModel(title: "震动反馈".innerLocalized(), type: .Haptico)
+        datas.append([notification,language,colorRemark,timezone,haptico])
         
-        let account = SettingModel(title: "账户管理".innerLocalized(), type: .Account)
-        datas.append([account])
+//        let account = SettingModel(title: "账户管理".innerLocalized(), type: .Account)
+//        datas.append([account])
         
         let privacy = SettingModel(title: "隐私协议".innerLocalized(), type: .Privacy)
         let about = SettingModel(title: "关于Wecyn".innerLocalized(), type: .About)
         let contact = SettingModel(title: "联系我们".innerLocalized(), type: .Contact)
         
         datas.append([privacy,about,contact])
+        
+       
         
         let logout = SettingModel(title: "登出".innerLocalized(), type: .Logout)
         datas.append([logout])
@@ -110,6 +115,7 @@ class SettingController: BaseTableController {
         tableView?.backgroundColor = R.color.backgroundColor()
         tableView?.separatorColor = R.color.seperatorColor()
         tableView?.separatorStyle = .singleLine
+        tableView?.rowHeight = 52
         
         tableView?.tableFooterView = footerView
         footerView.size = CGSize(width: kScreenWidth, height: 120)
@@ -130,7 +136,7 @@ class SettingController: BaseTableController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Haptico.selection()
+        
         tableView.deselectRow(at: indexPath, animated: true)
         let model = datas[indexPath.section][indexPath.row]
         
@@ -195,12 +201,22 @@ class SettingController: BaseTableController {
 class SettingCell:UITableViewCell {
     var model:SettingModel! {
         didSet {
-            if model.type == .Logout {
+         
+            titleLabel.textAlignment = .left
+            accessoryType = .disclosureIndicator
+            switch model.type {
+            case .Logout:
                 titleLabel.textAlignment = .center
                 accessoryType = .none
-            } else {
-                titleLabel.textAlignment = .left
-                accessoryType = .disclosureIndicator
+                switchControl.isHidden = true
+            case .Haptico:
+                switchControl.isOn = UserDefaults.sk.value(for: UserdefaultKeys.HapticoEnableKey) as? Bool ?? false
+                switchControl.isHidden = false
+                
+                accessoryType = .none
+            default:
+                switchControl.isHidden = true
+                break
             }
             titleLabel.text = model.title
             detailLabel.text = model.detail
@@ -210,6 +226,7 @@ class SettingCell:UITableViewCell {
     }
     var titleLabel = UILabel()
     var detailLabel = UILabel()
+    var switchControl = UISwitch()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
@@ -221,13 +238,23 @@ class SettingCell:UITableViewCell {
         detailLabel.font = UIFont.sk.pingFangRegular(14)
         detailLabel.textAlignment = .right
         detailLabel.numberOfLines = 2
+        
+        contentView.addSubview(switchControl)
+        switchControl.rx.controlEvent(.valueChanged).subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+           
+            if self.model.type == .Haptico {
+                UserDefaults.sk.set(value: self.switchControl.isOn, for: UserdefaultKeys.HapticoEnableKey)
+            }
+            
+        }).disposed(by: rx.disposeBag)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -244,7 +271,12 @@ class SettingCell:UITableViewCell {
                 make.right.equalToSuperview().offset(-16)
                 make.centerY.equalToSuperview()
             }
+            switchControl.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-16)
+                make.centerY.equalToSuperview()
+            }
         }
+        
         
     }
 }

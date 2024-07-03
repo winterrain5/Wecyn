@@ -113,7 +113,7 @@ class ProfileEducationItemCell: UITableViewCell {
         shadowView.addSubview(descLabel)
         shadowView.addSubview(moreButton)
         shadowView.addSubview(certImgView)
-        certImgView.contentMode = .left
+        certImgView.contentMode = .scaleAspectFit
         
         shadowView.isSkeletonable = true
         imgView.isSkeletonable = true
@@ -132,10 +132,11 @@ class ProfileEducationItemCell: UITableViewCell {
         super.layoutSubviews()
         
         
-        shadowView.shadow(cornerRadius: 8, color: .black.withAlphaComponent(0.2), offset: CGSize(width: 0, height: 5), radius: 10, opacity: 1)
+        shadowView.shadow(cornerRadius: 8, color: .black.withAlphaComponent(0.1), offset: CGSize(width: 0, height: 5), radius: 8, opacity: 1)
         
         shadowView.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(8)
         }
         
         imgView.snp.makeConstraints { make in

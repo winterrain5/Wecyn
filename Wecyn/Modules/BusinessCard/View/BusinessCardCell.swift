@@ -39,6 +39,7 @@ class BusinessCardCell: UICollectionViewCell {
         super.layoutSubviews()
         
         shadow(cornerRadius: 16, color: .black.withAlphaComponent(0.2), offset: CGSize(width: 0, height: 2), radius: 10, opacity: 1)
+        shareButton.shadow(cornerRadius: 16, color: R.color.theamColor()!.withAlphaComponent(0.4), offset: CGSize(width: 10, height: 10), radius: 20, opacity: 1)
     }
 
 }

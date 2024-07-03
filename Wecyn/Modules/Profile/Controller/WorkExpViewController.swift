@@ -104,7 +104,7 @@ class WorkExpViewController: BaseTableController {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       
-        return 154
+        return 148
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: ProfileExperienceItemCell.self)

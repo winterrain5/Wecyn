@@ -327,8 +327,10 @@
 "不能发送短信" = "Cannot send text message";
 "邮件已发送" = "Email has been sent";
 "邮件发送失败" = "Email failed to send";
-
 "短信已发送" = "SMS has been sent";
 "短信发送取消" = "Send SMS Cancel";
 "短信已保存" = "SMS saved";
 "短信发送失败" = "SMS failed to send";
+"链接已拷贝" = "Link copied";
+"二维码已保存" =  "QR code has been saved";
+"震动反馈" = "Haptic Feedback";

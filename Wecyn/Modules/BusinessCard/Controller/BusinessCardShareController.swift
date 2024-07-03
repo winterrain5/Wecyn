@@ -55,11 +55,31 @@ class BusinessCardShareController: BaseViewController {
         
        
         
-        let indictor = UIView().backgroundColor(R.color.backgroundColor()!)
+        let indictor = UIView().backgroundColor(R.color.iconColor()!)
         view.addSubview(indictor)
         indictor.frame = CGRect(x: 0, y: 20, width: 32, height: 4)
         indictor.center.x = self.view.center.x
         indictor.cornerRadius = 2
+        
+        let moreButton = UIButton()
+        moreButton.imageForNormal = R.image.ellipsis()
+        moreButton.contentHorizontalAlignment = .right
+        view.addSubview(moreButton)
+        moreButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.centerY.equalTo(indictor.snp.centerY)
+            make.width.equalTo(60)
+            make.height.equalTo(30)
+        }
+        moreButton.rx.tap.subscribe(onNext:{ [weak self] in
+            guard let `self` = self else { return }
+            let vc = BusinessCardShareMoreOperationController()
+            if let sheet = vc.sheetPresentationController{
+                sheet.detents = [.medium()]
+            }
+            self.present(vc, animated: true)
+            
+        }).disposed(by: rx.disposeBag)
         
         let shareTitle = UILabel().color(.black).font(.systemFont(ofSize: 12, weight: .light))
         shareTitle.text = "分享名片".innerLocalized()

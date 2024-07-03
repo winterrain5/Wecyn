@@ -151,6 +151,8 @@
 		454BA3842B8D72FE006B47BA /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 454BA3822B8D72FE006B47BA /* NotificationCell.xib */; };
 		455AA9F42BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */; };
 		455AA9F62BF59F1400E7C0B3 /* ChatMessageSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455AA9F52BF59F1400E7C0B3 /* ChatMessageSearchController.swift */; };
+		455D4BF22C33E2280040EAED /* BusinessCardShareMoreOperationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455D4BF12C33E2280040EAED /* BusinessCardShareMoreOperationController.swift */; };
+		455D4BF42C34E8290040EAED /* UserdefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455D4BF32C34E8290040EAED /* UserdefaultKeys.swift */; };
 		4564BE1D2A822B2200464AFA /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564BE1C2A822B2200464AFA /* ColorPickerController.swift */; };
 		4564BE242A8329A300464AFA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE232A8329A300464AFA /* WidgetKit.framework */; };
 		4564BE262A8329A300464AFA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4564BE252A8329A300464AFA /* SwiftUI.framework */; };
@@ -566,6 +568,8 @@
 		454BA3822B8D72FE006B47BA /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		455AA9F32BF1F5BC00E7C0B3 /* CalendarWeekModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWeekModeView.swift; sourceTree = "<group>"; };
 		455AA9F52BF59F1400E7C0B3 /* ChatMessageSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageSearchController.swift; sourceTree = "<group>"; };
+		455D4BF12C33E2280040EAED /* BusinessCardShareMoreOperationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardShareMoreOperationController.swift; sourceTree = "<group>"; };
+		455D4BF32C34E8290040EAED /* UserdefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefaultKeys.swift; sourceTree = "<group>"; };
 		4564BE1C2A822B2200464AFA /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		4564BE222A8329A300464AFA /* calendarExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = calendarExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4564BE232A8329A300464AFA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -1406,6 +1410,7 @@
 				45920A8E2A26E045005871ED /* PKError.swift */,
 				45920A8F2A26E045005871ED /* Device.swift */,
 				45920A902A26E045005871ED /* AppKey.swift */,
+				455D4BF32C34E8290040EAED /* UserdefaultKeys.swift */,
 			);
 			path = Contants;
 			sourceTree = "<group>";
@@ -1848,6 +1853,7 @@
 				45A7E5A02A71128F0002014D /* NFCNameCardEditController.swift */,
 				45E94A092C2D3497009D4221 /* BusinessCardController.swift */,
 				45DE087D2C2E9B070060E7D6 /* BusinessCardShareController.swift */,
+				455D4BF12C33E2280040EAED /* BusinessCardShareMoreOperationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2276,6 +2282,7 @@
 				4549ECF22AB817F000EB9C4C /* PostDetailCommentFooterView.swift in Sources */,
 				4549ECEE2AB41CA000EB9C4C /* PostDetailViewController.swift in Sources */,
 				45F07C1C2BB10D770070813D /* String_IM_Extension.swift in Sources */,
+				455D4BF22C33E2280040EAED /* BusinessCardShareMoreOperationController.swift in Sources */,
 				458870E42AE67F0700029353 /* OrganizationSearchController.swift in Sources */,
 				45005C902A5F95BD00560E21 /* CalendarEventSingelChooseController.swift in Sources */,
 				450BA6C92A32B9C700764828 /* LoginView.swift in Sources */,
@@ -2317,6 +2324,7 @@
 				45920AE62A26E045005871ED /* RefreshAnimationFooter.swift in Sources */,
 				45D0AF9A2B31A4F800C6FAFA /* UIView+Utilities.swift in Sources */,
 				45C999F02AB05C7E0017CDC3 /* PostApi.swift in Sources */,
+				455D4BF42C34E8290040EAED /* UserdefaultKeys.swift in Sources */,
 				459C065B2A36BBED0066F85A /* ProfileEducationItemCell.swift in Sources */,
 				45920AEB2A26E045005871ED /* WebBrowser+MessageHandler.swift in Sources */,
 				45005C732A5D027D00560E21 /* CalendarAddNewEventController.swift in Sources */,

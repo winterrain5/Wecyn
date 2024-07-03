@@ -92,7 +92,7 @@ struct _R {
       let source: RswiftResources.StringResource.Source
     }
 
-    /// This `_R.string.localizable` struct is generated, and contains static references to 273 localization keys.
+    /// This `_R.string.localizable` struct is generated, and contains static references to 276 localization keys.
     struct localizable {
       let source: RswiftResources.StringResource.Source
 
@@ -347,6 +347,13 @@ struct _R {
       ///
       /// Locales: en
       var 二维码名片: RswiftResources.StringResource { .init(key: "二维码名片", tableName: "Localizable", source: source, developmentValue: "QR code business card", comment: nil) }
+
+      /// en translation: QR code has been saved
+      ///
+      /// Key: 二维码已保存
+      ///
+      /// Locales: en
+      var 二维码已保存: RswiftResources.StringResource { .init(key: "二维码已保存", tableName: "Localizable", source: source, developmentValue: "QR code has been saved", comment: nil) }
 
       /// en translation: Today
       ///
@@ -1979,6 +1986,13 @@ struct _R {
       /// Locales: en
       var 重新编辑: RswiftResources.StringResource { .init(key: "重新编辑", tableName: "Localizable", source: source, developmentValue: "re-edit", comment: nil) }
 
+      /// en translation: Link copied
+      ///
+      /// Key: 链接已拷贝
+      ///
+      /// Locales: en
+      var 链接已拷贝: RswiftResources.StringResource { .init(key: "链接已拷贝", tableName: "Localizable", source: source, developmentValue: "Link copied", comment: nil) }
+
       /// en translation: Burn time setting:
       ///
       /// Key: 阅后即焚时间设置
@@ -1992,6 +2006,13 @@ struct _R {
       ///
       /// Locales: en
       var 隐私协议: RswiftResources.StringResource { .init(key: "隐私协议", tableName: "Localizable", source: source, developmentValue: "Privacy Agreement", comment: nil) }
+
+      /// en translation: Haptic Feedback
+      ///
+      /// Key: 震动反馈
+      ///
+      /// Locales: en
+      var 震动反馈: RswiftResources.StringResource { .init(key: "震动反馈", tableName: "Localizable", source: source, developmentValue: "Haptic Feedback", comment: nil) }
 
       /// en translation: Media
       ///
